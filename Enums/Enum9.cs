@@ -1,0 +1,22 @@
+internal enum Enum9
+{
+	none,
+	current_area_currentrun,
+	current_run,
+	current_session,
+	current_session_abs,
+	account_total,
+	account_yesterday,
+	account_today,
+	hero_total,
+	hero_yesterday,
+	hero_today,
+	current_area_total,
+	account_total_curdiff,
+	account_yesterday_curdiff,
+	account_today_curdiff,
+	hero_total_curdiff,
+	hero_yesterday_curdiff,
+	hero_today_curdiff,
+	current_area_total_curdiff
+}

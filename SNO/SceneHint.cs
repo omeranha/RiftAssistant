@@ -1,0 +1,41 @@
+using System.Runtime.CompilerServices;
+using Plugins;
+
+namespace SNO;
+
+public class SceneHint : ISceneHint
+{
+	[CompilerGenerated]
+	private readonly string string_0;
+
+	[CompilerGenerated]
+	private IWorldCoordinate iworldCoordinate_0;
+
+	public string Hint
+	{
+		[CompilerGenerated]
+		get
+		{
+			return string_0;
+		}
+	}
+
+	public IWorldCoordinate FloorCoordinate
+	{
+		[CompilerGenerated]
+		get
+		{
+			return iworldCoordinate_0;
+		}
+		[CompilerGenerated]
+		set
+		{
+			iworldCoordinate_0 = value;
+		}
+	}
+
+	public SceneHint(string string_1)
+	{
+		string_0 = string_1;
+	}
+}

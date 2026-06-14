@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<PlatformTarget>x64</PlatformTarget>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		
+		<AssemblyName>RiftAssistant</AssemblyName>
+		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+		<UseWindowsForms>True</UseWindowsForms>
+		<ApplicationIcon>rift_assistant.ico</ApplicationIcon>
+		<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+		<RootNamespace>RiftAssistant</RootNamespace>
+		<LangVersion>latest</LangVersion>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+
+		<PublishSingleFile>true</PublishSingleFile>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PublishTrimmed>false</PublishTrimmed>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="rift_assistant.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
+		<PackageReference Include="SharpDX" Version="4.2.0" />
+		<PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
+		<PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
+		<PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
+		<PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+		<PackageReference Include="System.Management" Version="10.0.7" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Game\Settings\" />
+	</ItemGroup>
+</Project>
