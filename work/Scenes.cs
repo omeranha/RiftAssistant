@@ -9,11 +9,11 @@ namespace work;
 
 public sealed class Scenes
 {
-	private readonly Dictionary<uint, ISnoScene> dictionary_0 = new Dictionary<uint, ISnoScene>(3000);
+	private readonly Dictionary<uint, SnoScene> dictionary_0 = new Dictionary<uint, SnoScene>(3000);
 
-	public IEnumerable<ISnoScene> AllScenes => dictionary_0.Values;
+	public IEnumerable<SnoScene> AllScenes => dictionary_0.Values;
 
-	public ISnoScene GetScene(uint sno)
+	public SnoScene GetScene(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;
@@ -50,7 +50,7 @@ public sealed class Scenes
 				string[] array2 = text.Split('\t');
 				uint sno = uint.Parse(array2[0], CultureInfo.InvariantCulture);
 				string string_2 = array2[1];
-				ISnoScene scene = GetScene(sno);
+				SnoScene scene = GetScene(sno);
 				if (scene != null)
 				{
 					(scene as SnoScene).Hint = new SceneHint(string_2);

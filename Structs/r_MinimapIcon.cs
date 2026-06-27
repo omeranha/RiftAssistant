@@ -21,5 +21,5 @@ internal struct r_MinimapIcon
 	[FieldOffset(272)]
 	public uint uint_2;
 
-	public const int int_0 = 276;
+	public const int Size = 276;
 }

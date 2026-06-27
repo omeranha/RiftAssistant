@@ -20,13 +20,9 @@ internal class AppResources
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	internal static CultureInfo CultureInfo { get; set; }
 
-	internal static Bitmap AccountBoundAnchor => (Bitmap)ResourceManager.GetObject("account_bound_anchor", CultureInfo);
-
 	internal static Bitmap BuffFrame => (Bitmap)ResourceManager.GetObject("BuffFrame", CultureInfo);
 
 	internal static Bitmap DebuffFrame => (Bitmap)ResourceManager.GetObject("DebuffFrame", CultureInfo);
-
-	internal static Bitmap InventoryMaterials => (Bitmap)ResourceManager.GetObject("inventory_materials", CultureInfo);
 
 	internal static Bitmap SpawnDecoy => (Bitmap)ResourceManager.GetObject("itempassive_unique_ring_724_spawndecoy_x1", CultureInfo);
 }

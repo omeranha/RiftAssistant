@@ -3,7 +3,7 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoItemAffix : ISnoItemAffix
+public class SnoItemAffix
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -18,13 +18,13 @@ public class SnoItemAffix : ISnoItemAffix
 	private readonly uint uint_1;
 
 	[CompilerGenerated]
-	private readonly ISnoItemAffixGroup isnoItemAffixGroup_0;
+	private readonly SnoItemAffixGroup isnoItemAffixGroup_0;
 
 	[CompilerGenerated]
-	private readonly ISnoItemAffixGroup isnoItemAffixGroup_1;
+	private readonly SnoItemAffixGroup isnoItemAffixGroup_1;
 
 	[CompilerGenerated]
-	private ISnoItemMod[] isnoItemMod_0;
+	private SnoItemMod[] isnoItemMod_0;
 
 	[CompilerGenerated]
 	private readonly HeroClass heroClass_0;
@@ -68,7 +68,7 @@ public class SnoItemAffix : ISnoItemAffix
 		}
 	}
 
-	public ISnoItemAffixGroup SnoAffixGroup1
+	public SnoItemAffixGroup SnoAffixGroup1
 	{
 		[CompilerGenerated]
 		get
@@ -77,7 +77,7 @@ public class SnoItemAffix : ISnoItemAffix
 		}
 	}
 
-	public ISnoItemAffixGroup SnoAffixGroup2
+	public SnoItemAffixGroup SnoAffixGroup2
 	{
 		[CompilerGenerated]
 		get
@@ -86,7 +86,7 @@ public class SnoItemAffix : ISnoItemAffix
 		}
 	}
 
-	public ISnoItemMod[] Mods
+	public SnoItemMod[] Mods
 	{
 		[CompilerGenerated]
 		get
@@ -123,7 +123,7 @@ public class SnoItemAffix : ISnoItemAffix
 		}
 	}
 
-	internal SnoItemAffix(uint uint_2, string string_2, string string_3, uint uint_3, ISnoItemAffixGroup isnoItemAffixGroup_2, ISnoItemAffixGroup isnoItemAffixGroup_3, HeroClass heroClass_1, bool bool_1)
+	internal SnoItemAffix(uint uint_2, string string_2, string string_3, uint uint_3, SnoItemAffixGroup isnoItemAffixGroup_2, SnoItemAffixGroup isnoItemAffixGroup_3, HeroClass heroClass_1, bool bool_1)
 	{
 		uint_0 = uint_2;
 		string_0 = string_2;
@@ -138,8 +138,8 @@ public class SnoItemAffix : ISnoItemAffix
 	public override string ToString()
 	{
 		string text = NameLocalized;
-		ISnoItemMod[] mods = Mods;
-		foreach (ISnoItemMod snoItemMod in mods)
+		SnoItemMod[] mods = Mods;
+		foreach (SnoItemMod snoItemMod in mods)
 		{
 			text = text + " & " + snoItemMod.ToString();
 		}

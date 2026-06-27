@@ -11,7 +11,7 @@ public record struct CombatNumberEvent(long Id, double Value);
 
 internal class FloatingNumberManager
 {
-	public AllocationCache<r_FloatingNumber> FloatingNumberCache { get; } = new(ReadProcessMemory, 112);
+	public AllocationCache<r_FloatingNumber> FloatingNumberCache { get; } = new(112);
 
 	private readonly Class112<string, CombatNumberEvent> eventCache = [];
 	private readonly HashSet<string> ignoredEvents = [];
@@ -25,9 +25,6 @@ internal class FloatingNumberManager
 	private int lastGameTick;
 	private int lastDamageTick;
 	private int totalCombatTicks;
-
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_FloatingNumber struct13_0, int int_3, int int_4);
 
 	internal void Clear(Player player)
 	{
@@ -58,10 +55,10 @@ internal class FloatingNumberManager
 		FloatingNumberCache.Snapshot(CoreCollector.D3Memory.FloatingNumberAllocator);
 		bool isFirstTick = eventCache.Int32_0 == 0 && ignoredEvents.Count == 0;
 
-		IBuff conduitBuff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrified.Sno);
+		Buff conduitBuff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrified.Sno);
 		bool hasPylon = conduitBuff != null && conduitBuff.LastActive.ElapsedMilliseconds <= 3000;
 		if (!hasPylon) {
-			IBuff riftConduit = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrifiedTieredRift.Sno);
+			Buff riftConduit = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrifiedTieredRift.Sno);
 			hasPylon = riftConduit != null && riftConduit.LastActive.ElapsedMilliseconds <= 3000;
 		}
 

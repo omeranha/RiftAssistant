@@ -1,13 +1,14 @@
 using System;
 using System.Globalization;
 using Plugins;
+using SNO;
 using work;
 
 internal class AreaTracker
 {
 	public readonly RunTracker Run;
 
-	public readonly ISnoArea SnoArea;
+	public readonly SnoArea SnoArea;
 
 	public readonly DateTime StartTime;
 
@@ -27,7 +28,7 @@ internal class AreaTracker
 
 	public string AreaNameLocalized;
 
-	internal AreaTracker(RunTracker runTracker, ISnoArea snoArea, string areaNameLocalized, string areaSnoString)
+	internal AreaTracker(RunTracker runTracker, SnoArea snoArea, string areaNameLocalized, string areaSnoString)
 	{
 		Run = runTracker;
 		AreaNameLocalized = areaNameLocalized;

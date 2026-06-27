@@ -4,10 +4,10 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoItemMod : ISnoItemMod
+public class SnoItemMod
 {
 	[CompilerGenerated]
-	private readonly IAttribute iattribute_0;
+	private readonly AcdAttribute iattribute_0;
 
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -19,9 +19,9 @@ public class SnoItemMod : ISnoItemMod
 	private readonly float float_1;
 
 	[CompilerGenerated]
-	private readonly ISnoItemAffix isnoItemAffix_0;
+	private readonly SnoItemAffix isnoItemAffix_0;
 
-	public IAttribute Attribute
+	public AcdAttribute Attribute
 	{
 		[CompilerGenerated]
 		get
@@ -57,7 +57,7 @@ public class SnoItemMod : ISnoItemMod
 		}
 	}
 
-	public ISnoItemAffix Affix
+	public SnoItemAffix Affix
 	{
 		[CompilerGenerated]
 		get
@@ -66,7 +66,7 @@ public class SnoItemMod : ISnoItemMod
 		}
 	}
 
-	internal SnoItemMod(IAttribute iattribute_1, uint uint_1, float float_2, float float_3, ISnoItemAffix isnoItemAffix_1)
+	internal SnoItemMod(AcdAttribute iattribute_1, uint uint_1, float float_2, float float_3, SnoItemAffix isnoItemAffix_1)
 	{
 		iattribute_0 = iattribute_1;
 		uint_0 = uint_1;

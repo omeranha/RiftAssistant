@@ -12,6 +12,7 @@ internal static class Program
 
 	private static Thread inputThread;
 	private static Thread trayThread;
+	private static Thread collectThread;
 
 	[STAThread]
 	private static void Main()
@@ -26,6 +27,8 @@ internal static class Program
 			inputThread.Start();
 
 			Core.Init();
+			collectThread = new Thread(Core.CollectLoop) { IsBackground = true };
+			collectThread.Start();
 			Core.MainLoop();
 		} catch (Exception ex) {
 			Logger.LogException(ex.Message);

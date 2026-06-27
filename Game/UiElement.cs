@@ -9,7 +9,7 @@ using structs;
 using Plugins;
 using work;
 
-internal class UiElement : IUiElement
+public class UiElement
 {
 	public long long_0;
 
@@ -17,9 +17,9 @@ internal class UiElement : IUiElement
 
 	internal readonly int int_0;
 
-	internal IUiElement iuiElement_0;
+	internal UiElement iuiElement_0;
 
-	internal IUiElement iuiElement_1;
+	internal UiElement iuiElement_1;
 
 	public int int_1 = -1;
 
@@ -32,7 +32,7 @@ internal class UiElement : IUiElement
 	public float float_1;
 
 	[CompilerGenerated]
-	private readonly UiElementData class75_0 = new UiElementData();
+	private UiElementData class75_0 = new UiElementData();
 
 	[CompilerGenerated]
 	private readonly string string_0;
@@ -41,13 +41,16 @@ internal class UiElement : IUiElement
 	private bool bool_1;
 
 	[CompilerGenerated]
-	private IUiElement iuiElement_2;
+	private UiElement iuiElement_2;
 
 	internal UiElementData Class75_0
 	{
-		[CompilerGenerated]
 		get {
 			return class75_0;
+		}
+		set
+		{
+			class75_0 = value;
 		}
 	}
 
@@ -93,15 +96,15 @@ internal class UiElement : IUiElement
 		}
 	}
 
-	public float MinimapOffsetX => MR.Instance.ReadFloat(long_0 + 3216);
+	public float MinimapOffsetX => GameWindowManager.Read<float>(long_0 + 3216);
 
-	public float MinimapOffsetY => MR.Instance.ReadFloat(long_0 + 3220);
+	public float MinimapOffsetY => GameWindowManager.Read<float>(long_0 + 3220);
 
-	public uint LegendaryGemAcdId => MR.Instance.ReadUInt(long_0 + 3944);
+	public uint LegendaryGemAcdId => GameWindowManager.Read<uint>(long_0 + 3944);
 
-	public uint AcdId => MR.Instance.ReadUInt(long_0 + 3248);
+	public uint AcdId => GameWindowManager.Read<uint>(long_0 + 3248);
 
-	public IUiElement ReplacementWhenNotVisible
+	public UiElement ReplacementWhenNotVisible
 	{
 		[CompilerGenerated]
 		get {
@@ -113,7 +116,7 @@ internal class UiElement : IUiElement
 		}
 	}
 
-	public UiElement(string string_1, IUiElement iuiElement_3 = null, IUiElement iuiElement_4 = null)
+	public UiElement(string string_1, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
 	{
 		string_0 = string_1;
 		ulong_0 = smethod_0(string_1.ToLower(CultureInfo.InvariantCulture));
@@ -136,7 +139,7 @@ internal class UiElement : IUiElement
 	public string ReadText(Encoding encoding = null, bool removeColors = false)
 	{
 		if (Class75_0.UnknownPtr1 != 0L) {
-			string text = MR.Instance.ReadString(Class75_0.UnknownPtr1, 256, encoding ?? Encoding.ASCII, bool_0: false);
+			string text = GameWindowManager.ReadString(Class75_0.UnknownPtr1, 256, encoding ?? Encoding.ASCII, false);
 			if (text.Length > 1 && text.StartsWith("\0c", ignoreCase: false, CultureInfo.InvariantCulture)) {
 				int num = text.IndexOf('\0', 2);
 				if (num > -1) {
@@ -170,9 +173,9 @@ internal class UiElement : IUiElement
 	public string method_2(Encoding encoding_0 = null)
 	{
 		if (Class75_0.UnknownPtr2 != 0L) {
-			long num = MR.Instance.ReadAddress(Class75_0.UnknownPtr2 + 2656);
+			long num = GameWindowManager.Read<long>(Class75_0.UnknownPtr2 + 2656);
 			if (num != 0L) {
-				return MR.Instance.ReadString(num, 256, encoding_0 ?? Encoding.ASCII, bool_0: true);
+				return GameWindowManager.ReadString(num, 256, encoding_0 ?? Encoding.ASCII, true);
 			}
 		}
 		return null;
@@ -183,16 +186,13 @@ internal class UiElement : IUiElement
 		CoreCollector.UiElements.Resolve(this);
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_UIID struct23_0, int int_2, int int_3);
-
 	public unsafe void method_3(string string_1, List<string> list_0)
 	{
 		if (Class75_0.ChildCount <= 0 || Class75_0.ChildCount >= 10000) {
 			return;
 		}
 		r_UIID[] array = new r_UIID[Class75_0.ChildCount];
-		ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)Class75_0.ChildEntries, ref array[0], 536 * Class75_0.ChildCount, 0);
+		array = GameWindowManager.ReadArray<r_UIID>(Class75_0.ChildEntries, Class75_0.ChildCount);
 		for (int i = 0; i < Class75_0.ChildCount; i++) {
 			fixed (r_UIID* pUiid = &array[i]) {
 				sbyte* pName = pUiid->struct24_0;
@@ -211,18 +211,18 @@ internal class UiElement : IUiElement
 
 	internal string method_5(int int_2, UiElementData class75_1)
 	{
-		long num = MR.Instance.ReadAddress(Class75_0.ChildEntries + 536 * int_2 + 520);
-		MR.Instance.method_32(num, class75_1);
-		return MR.Instance.ReadString(Class75_0.ChildEntries + 536 * int_2 + 8, 512, Encoding.ASCII, bool_0: true);
+		long num = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * int_2 + 520);
+		class75_1 = GameWindowManager.Read<UiElementData>(num);
+		return GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * int_2 + 8, 512, Encoding.ASCII, true);
 	}
 
-	internal UiElementData method_6(string string_1, string string_2, out string string_3, Encoding encoding_0 = null)
+	internal UiElementData? method_6(string string_1, string string_2, out string string_3, Encoding encoding_0 = null)
 	{
 		int num = 0;
 		string text;
 		while (true) {
 			if (num < Class75_0.ChildCount) {
-				text = MR.Instance.ReadString(Class75_0.ChildEntries + 536 * num + 8, 512, encoding_0 ?? Encoding.ASCII, bool_0: true);
+				text = GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * num + 8, 512, encoding_0 ?? Encoding.ASCII, true);
 				if ((string_1 == null || text.StartsWith(string_1, StringComparison.InvariantCultureIgnoreCase)) && (string_2 == null || text.EndsWith(string_2, StringComparison.InvariantCultureIgnoreCase))) {
 					break;
 				}
@@ -232,9 +232,8 @@ internal class UiElement : IUiElement
 			string_3 = null;
 			return null;
 		}
-		long num2 = MR.Instance.ReadAddress(Class75_0.ChildEntries + 536 * num + 520);
-		UiElementData @class = new UiElementData();
-		MR.Instance.method_32(num2, @class);
+		long num2 = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * num + 520);
+		var @class = GameWindowManager.Read<UiElementData>(num2);
 		string_3 = text;
 		return @class;
 	}
@@ -244,9 +243,8 @@ internal class UiElement : IUiElement
 		var list = new List<(string Text, int Top, int Bottom)>();
 		UiElementData uiData = new();
 		for (int i = 0; i < Class75_0.ChildCount; i++) {
-			long address = MR.Instance.ReadAddress(Class75_0.ChildEntries + 536 * i + 520);
-			MR.Instance.method_32(address, uiData);
-
+			long address = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * i + 520);
+			uiData = GameWindowManager.Read<UiElementData>(address);
 			if (uiData.UnknownPtr1 == 0L) {
 				continue;
 			}
@@ -254,7 +252,7 @@ internal class UiElement : IUiElement
 			float windowHeightScale = (float)GameWindowManager.Window.Size.Height / 1200f;
 			float topF = Math.Min(2.1474836E+09f, Math.Max(-2.1474836E+09f, uiData.Top * windowHeightScale));
 			float bottomF = Math.Min(2.1474836E+09f, Math.Max(-2.1474836E+09f, (uiData.Bottom - 1f) * windowHeightScale));
-			string text = MR.Instance.ReadString(uiData.UnknownPtr1, 256, encoding ?? Encoding.ASCII, bool_0: true);
+			string text = GameWindowManager.ReadString(uiData.UnknownPtr1, 256, encoding ?? Encoding.ASCII, true);
 			list.Add((text, Convert.ToInt32(topF), Convert.ToInt32(bottomF)));
 		}
 		return list;

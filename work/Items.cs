@@ -11,37 +11,37 @@ namespace work;
 
 public sealed class Items
 {
-	private readonly Dictionary<uint, ISnoItem> dictionary_0 = new Dictionary<uint, ISnoItem>(3000);
+	private readonly Dictionary<uint, SnoItem> dictionary_0 = new Dictionary<uint, SnoItem>(3000);
 
-	private readonly Dictionary<uint, ISnoItemType> dictionary_1 = new Dictionary<uint, ISnoItemType>(200);
+	private readonly Dictionary<uint, SnoItemType> dictionary_1 = new Dictionary<uint, SnoItemType>(200);
 
-	private readonly Dictionary<string, ISnoItemType> dictionary_2 = new Dictionary<string, ISnoItemType>(200);
+	private readonly Dictionary<string, SnoItemType> dictionary_2 = new Dictionary<string, SnoItemType>(200);
 
-	private readonly Dictionary<uint, ISnoItemAffix> dictionary_3 = new Dictionary<uint, ISnoItemAffix>(6000);
+	private readonly Dictionary<uint, SnoItemAffix> dictionary_3 = new Dictionary<uint, SnoItemAffix>(6000);
 
-	private readonly Dictionary<uint, ISnoItemAffixGroup> dictionary_4 = new Dictionary<uint, ISnoItemAffixGroup>(500);
+	private readonly Dictionary<uint, SnoItemAffixGroup> dictionary_4 = new Dictionary<uint, SnoItemAffixGroup>(500);
 
-	public IEnumerable<ISnoItem> All => dictionary_0.Values;
+	public IEnumerable<SnoItem> All => dictionary_0.Values;
 
-	public ISnoItem GetBySno(uint sno)
+	public SnoItem GetBySno(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoItemType GetSnoItemType(uint sno)
+	public SnoItemType GetSnoItemType(uint sno)
 	{
 		dictionary_1.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoItemAffix GetSnoItemAffix(uint sno)
+	public SnoItemAffix GetSnoItemAffix(uint sno)
 	{
 		dictionary_3.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoItemAffixGroup GetSnoItemAffixGroup(uint sno)
+	public SnoItemAffixGroup GetSnoItemAffixGroup(uint sno)
 	{
 		dictionary_4.TryGetValue(sno, out var value);
 		return value;
@@ -63,8 +63,8 @@ public sealed class Items
 				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._itemtypenames, text);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._itemtypenames, text);
 				uint num2 = @class.method_8();
-				ISnoItemType isnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
-				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, isnoItemType_);
+				SnoItemType SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
+				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, SnoItemType_);
 				dictionary_1.Add(num, value);
 				dictionary_2.Add(text, value);
 			}
@@ -80,8 +80,8 @@ public sealed class Items
 				uint uint_ = class2.method_8();
 				uint num4 = class2.method_8();
 				uint num5 = class2.method_8();
-				ISnoItemAffixGroup snoItemAffixGroup = null;
-				ISnoItemAffixGroup snoItemAffixGroup2 = null;
+				SnoItemAffixGroup snoItemAffixGroup = null;
+				SnoItemAffixGroup snoItemAffixGroup2 = null;
 				if (num4 != 0)
 				{
 					snoItemAffixGroup = GetSnoItemAffixGroup(num4);
@@ -116,7 +116,7 @@ public sealed class Items
 					float float_2 = class2.method_14();
 					array[i] = new SnoItemMod(iattribute_, uint_2, float_, float_2, snoItemAffix);
 				}
-				ISnoItemMod[] mods = array;
+				SnoItemMod[] mods = array;
 				snoItemAffix.Mods = mods;
 			}
 		}
@@ -197,7 +197,7 @@ public sealed class Items
 			dictionary_0.Add(snoItem.Sno, snoItem);
 			if (num8 > 0)
 			{
-				ISnoItemAffixGroupLink[] affixGroups = new SnoItemAffixGroupLink[num8];
+				SnoItemAffixGroupLink[] affixGroups = new SnoItemAffixGroupLink[num8];
 				snoItem.AffixGroups = affixGroups;
 				for (int j = 0; j < num8; j++)
 				{
@@ -209,7 +209,7 @@ public sealed class Items
 					}
 					array3 = text2.Split('\t');
 					uint sno = uint.Parse(array3[1], CultureInfo.InvariantCulture);
-					ISnoItemAffixGroup snoItemAffixGroup3 = GetSnoItemAffixGroup(sno);
+					SnoItemAffixGroup snoItemAffixGroup3 = GetSnoItemAffixGroup(sno);
 					int int_15 = int.Parse(array3[2], CultureInfo.InvariantCulture);
 					int int_16 = int.Parse(array3[3], CultureInfo.InvariantCulture);
 					snoItem.AffixGroups[j] = new SnoItemAffixGroupLink(snoItemAffixGroup3, int_15, int_16);
@@ -219,7 +219,7 @@ public sealed class Items
 			{
 				continue;
 			}
-			ISnoItemMod[] mods = new SnoItemMod[num9];
+			SnoItemMod[] mods = new SnoItemMod[num9];
 			snoItem.Mods = mods;
 			for (int k = 0; k < num9; k++)
 			{
@@ -257,7 +257,7 @@ public sealed class Items
 				continue;
 			}
 			bool flag = false;
-			foreach (ISnoItem value3 in dictionary_0.Values)
+			foreach (SnoItem value3 in dictionary_0.Values)
 			{
 				if (value3.NameEnglish.Equals(text5, StringComparison.InvariantCultureIgnoreCase))
 				{
@@ -277,12 +277,12 @@ public sealed class Items
 			uint sno2 = class3.method_8();
 			uint sno3 = class3.method_8();
 			int num10 = class3.method_11();
-			ISnoItem bySno = GetBySno(sno2);
+			SnoItem bySno = GetBySno(sno2);
 			if (bySno.SocketedEffects == null)
 			{
-				bySno.SocketedEffects = new List<ISnoSocketedEffect>();
+				bySno.SocketedEffects = new List<SnoSocketedEffect>();
 			}
-			ISnoItemMod[] array5 = new ISnoItemMod[num10];
+			SnoItemMod[] array5 = new SnoItemMod[num10];
 			for (int l = 0; l < num10; l++)
 			{
 				int index = class3.method_11();

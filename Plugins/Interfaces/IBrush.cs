@@ -1,4 +1,5 @@
 using SharpDX.Direct2D1;
+using work;
 
 namespace Plugins;
 
@@ -18,7 +19,7 @@ public interface IBrush : ITransparent
 
 	void DrawLineWorld(float x1, float y1, float z1, float x2, float y2, float z2, float strokeWidthCorrection = 0f);
 
-	void DrawLineWorld(IWorldCoordinate wc1, IWorldCoordinate wc2, float strokeWidthCorrection = 0f);
+	void DrawLineWorld(WorldCoordinate wc1, WorldCoordinate wc2, float strokeWidthCorrection = 0f);
 
 	void DrawRectangle(System.Drawing.RectangleF rectangle);
 
@@ -28,7 +29,7 @@ public interface IBrush : ITransparent
 
 	void DrawRectangleGridFit(float x, float y, float w, float h);
 
-	void DrawWorldEllipse(float radius, int sectionCount, IWorldCoordinate coordinate);
+	void DrawWorldEllipse(float radius, int sectionCount, WorldCoordinate coordinate);
 
 	void DrawWorldEllipse(float radius, int sectionCount, float x, float y, float z);
 

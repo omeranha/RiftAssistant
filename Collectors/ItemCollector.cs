@@ -13,27 +13,27 @@ namespace collectors;
 
 internal class ItemCollector
 {
-	public readonly Class112<uint, IItem> class112_0 = new Class112<uint, IItem>();
+	public readonly Class112<uint, Item> class112_0 = new Class112<uint, Item>();
 
-	public readonly List<IItem> list_0 = new List<IItem>();
+	public readonly List<Item> list_0 = new List<Item>();
 
-	public readonly List<IItem> list_1 = new List<IItem>();
+	public readonly List<Item> list_1 = new List<Item>();
 
-	public IWorldCoordinate iworldCoordinate_0;
+	public WorldCoordinate iworldCoordinate_0;
 
-	public IItem iitem_0;
+	public Item Item_0;
 
 	public double double_0;
 
 	public double double_1;
 
-	public readonly List<IItem> list_2 = new List<IItem>();
+	public readonly List<Item> list_2 = new List<Item>();
 
-	public IItem iitem_1;
+	public Item Item_1;
 
-	public IItem iitem_2;
+	public Item Item_2;
 
-	public readonly List<IItem> list_3 = new List<IItem>();
+	public readonly List<Item> list_3 = new List<Item>();
 
 	public int int_0;
 
@@ -53,11 +53,11 @@ internal class ItemCollector
 
 	private static readonly List<r_AttributeEntry> list_6 = new List<r_AttributeEntry>();
 
-	public EventHandler<IItem> OnItemIdentified { get; set; }
+	public EventHandler<Item> OnItemIdentified { get; set; }
 
-	public EventHandler<EventArgs5> OnItemLocationChanged { get; set; }
+	public EventHandler<ItemLocationChanged> OnItemLocationChanged { get; set; }
 
-	public EventHandler<EventArgs6> OnItemPicked { get; set; }
+	public EventHandler<ItemLocationChanged> OnItemPicked { get; set; }
 
 	public EventHandler<LootGenerated> OnLootGenerated {  get; set; }
 
@@ -67,12 +67,12 @@ internal class ItemCollector
 			class112_1.Clear();
 		}
 		class112_0.Clear();
-		iitem_1 = null;
-		iitem_2 = null;
+		Item_1 = null;
+		Item_2 = null;
 		list_0.Clear();
 		list_1.Clear();
 		iworldCoordinate_0 = null;
-		iitem_0 = null;
+		Item_0 = null;
 		double_0 = 0.0;
 		double_1 = 0.0;
 		list_2.Clear();
@@ -109,7 +109,7 @@ internal class ItemCollector
 				continue;
 			}
 			Item item = class112_1[annId];
-			ISnoItem snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
+			SnoItem snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
 			if (snoItem == null || (itemLocation == ItemLocation.Floor && struct7_.PositionX == 0f && double.IsNaN(struct7_.PositionY))) {
 				continue;
 			}
@@ -170,10 +170,10 @@ internal class ItemCollector
 					continue;
 				}
 				if (item.SnoItem != null && (item.SnoItem.Sno == 483403932 || item.SnoItem.Sno == 3087229753u || item.SnoItem.Sno == 2050794135 || item.SnoItem.Sno == 113551449)) {
-					iitem_1 = item;
+					Item_1 = item;
 				}
 				if (item.SnoItem != null && (item.SnoItem.Sno == 1102953247 || item.SnoItem.Sno == 2029265596 || item.SnoItem.Sno == 2670343450u || item.SnoItem.Sno == 3336787100u)) {
-					iitem_2 = item;
+					Item_2 = item;
 				}
 			} else {
 				if (flag2 && (item.InventoryX != struct7_.ItemSlotX || item.InventoryY != struct7_.ItemSlotY)) {
@@ -185,11 +185,11 @@ internal class ItemCollector
 			uint uInt32_ = item.UInt32_0;
 			item.UInt32_0 = struct7_.SocketHostAcdId;
 			if (flag2 && uInt32_ != item.UInt32_0) {
-				IItem item2 = class112_0[uInt32_];
+				Item item2 = class112_0[uInt32_];
 				if (item2 != null && !list_5.Contains(item2)) {
 					list_5.Add(item2 as Item);
 				}
-				IItem item3 = class112_0[item.UInt32_0];
+				Item item3 = class112_0[item.UInt32_0];
 				if (item3 != null && !list_5.Contains(item3)) {
 					list_5.Add(item3 as Item);
 				}
@@ -233,8 +233,8 @@ internal class ItemCollector
 				if (itemLocation2 == ItemLocation.Floor && itemLocation == ItemLocation.Inventory) {
 					item.bool_10 = true;
 					try {
-						OnItemPicked?.Invoke(this, new EventArgs6 {
-							iitem_0 = item
+						OnItemPicked?.Invoke(this, new ItemLocationChanged {
+							Item = item
 						});
 					} catch (Exception exception_2) {
 						Logger.LogException(exception_2.Message);
@@ -242,10 +242,10 @@ internal class ItemCollector
 					continue;
 				}
 				try {
-					OnItemLocationChanged?.Invoke(this, new EventArgs5 {
-						iitem_0 = item,
-						itemLocation_0 = itemLocation2,
-						itemLocation_1 = itemLocation
+					OnItemLocationChanged?.Invoke(this, new ItemLocationChanged {
+						Item = item,
+						From = itemLocation2,
+						To = itemLocation
 					});
 				} catch (Exception exception_3) {
 					Logger.LogException(exception_3.Message);
@@ -281,12 +281,12 @@ internal class ItemCollector
 				}
 			}
 		}
-		foreach (IItem item5 in list_1.Where((IItem iitem_0) => iitem_0.Quality == ItemQuality.Legendary && iitem_0.SnoItem.Sno != 2603730171u)) {
+		foreach (Item item5 in list_1.Where((Item Item_0) => Item_0.Quality == ItemQuality.Legendary && Item_0.SnoItem.Sno != 2603730171u)) {
 			if (iworldCoordinate_0 == null || item5.CentralXyDistanceToMe < double_0) {
 				iworldCoordinate_0 = item5.FloorCoordinate;
 				double_0 = item5.CentralXyDistanceToMe;
 				double_1 = item5.ZDistanceToMeAbsolute;
-				iitem_0 = item5;
+				Item_0 = item5;
 			}
 		}
 		foreach (Item item6 in list_4.Concat(list_5)) {
@@ -297,7 +297,7 @@ internal class ItemCollector
 				item9.method_45();
 			}
 		}
-		foreach (IItem item10 in class112_0.IEnumerable_0) {
+		foreach (Item item10 in class112_0.IEnumerable_0) {
 			if (item10.Location != ItemLocation.Floor && item10.Location != ItemLocation.Merchant && item10.Location != ItemLocation.MerchantAvaibleItemsForPurchase && item10.Location != ItemLocation.MerchantBuyback) {
 				Item obj = item10 as Item;
 				if (obj != null && !obj.bool_12) {
@@ -307,7 +307,7 @@ internal class ItemCollector
 		}
 	}
 
-	private bool method_2(r_ACD struct7_0, Item class309_0, ISnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation_0)
+	private bool method_2(r_ACD struct7_0, Item class309_0, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation_0)
 	{
 		if (!method_3(class309_0, isnoItem_0)) {
 			Logger.LogException("can't read item stats");
@@ -333,7 +333,7 @@ internal class ItemCollector
 			}
 		} else if ((int)class309_0.Quality >= 3 && (int)class309_0.Quality <= 5 && class309_0.Affixes != null && (class309_0.RareName == null || bool_1)) {
 			if (class309_0.Affixes.Length == 1) {
-				ISnoItemAffix snoItemAffix = class309_0.Affixes[0];
+				SnoItemAffix snoItemAffix = class309_0.Affixes[0];
 				if (snoItemAffix.BaseAffixId != uint.MaxValue) {
 					snoItemAffix = SnoData.Items.GetSnoItemAffix(snoItemAffix.BaseAffixId);
 				}
@@ -344,11 +344,11 @@ internal class ItemCollector
 				}
 			}
 			if (class309_0.Affixes.Length == 2) {
-				ISnoItemAffix snoItemAffix2 = class309_0.Affixes[0];
+				SnoItemAffix snoItemAffix2 = class309_0.Affixes[0];
 				if (snoItemAffix2.BaseAffixId != uint.MaxValue) {
 					snoItemAffix2 = SnoData.Items.GetSnoItemAffix(snoItemAffix2.BaseAffixId);
 				}
-				ISnoItemAffix snoItemAffix3 = class309_0.Affixes[1];
+				SnoItemAffix snoItemAffix3 = class309_0.Affixes[1];
 				if (snoItemAffix3.BaseAffixId != uint.MaxValue) {
 					snoItemAffix3 = SnoData.Items.GetSnoItemAffix(snoItemAffix3.BaseAffixId);
 				}
@@ -365,7 +365,7 @@ internal class ItemCollector
 		return true;
 	}
 
-	private bool method_3(Item class309_0, ISnoItem isnoItem_0)
+	private bool method_3(Item class309_0, SnoItem isnoItem_0)
 	{
 		if (class309_0 == null) {
 			return false;
@@ -401,7 +401,7 @@ internal class ItemCollector
 			}
 			uint uint_0 = r_AttributeEntry2.uint_0 >> 12;
 			bool flag = false;
-			foreach (IAttributeProcessor item in acdAttribute.Processors.Where((IAttributeProcessor iattributeProcessor_0) => iattributeProcessor_0.Modifier == uint.MaxValue || iattributeProcessor_0.Modifier == uint_0)) {
+			foreach (AttributeProcessor item in acdAttribute.Processors.Where((AttributeProcessor iattributeProcessor_0) => iattributeProcessor_0.Modifier == uint.MaxValue || iattributeProcessor_0.Modifier == uint_0)) {
 				flag = true;
 				double val2 = ((acdAttribute.ValueType == AttributeValueType._int) ? ((double)r_AttributeEntry2.int_0) : ((double)r_AttributeEntry2.float_0));
 				double num11 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val2));
@@ -522,44 +522,44 @@ internal class ItemCollector
 		if (class309_0.Unidentified && !bool_1) {
 			return;
 		}
-		List<ISnoItemAffix> list = null;
-		for (long num = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].affix_list_ptr; num != 0L; num = MR.Instance.ReadAddress(num + IntPtr.Size * 2)) {
-			uint num2 = MR.Instance.ReadUInt(num);
+		List<SnoItemAffix> list = null;
+		for (long num = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].affix_list_ptr; num != 0L; num = GameWindowManager.Read<long>(num + IntPtr.Size * 2)) {
+			uint num2 = GameWindowManager.Read<uint>(num);
 			if (class309_0.EnchantedAffixOriginal != 0 && class309_0.EnchantedAffixOriginal == num2) {
 				num2 = class309_0.EnchantedAffixNew;
 			}
-			ISnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(num2);
+			SnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(num2);
 			if (snoItemAffix != null) {
-				(list ?? (list = new List<ISnoItemAffix>())).Add(snoItemAffix);
+				(list ?? (list = new List<SnoItemAffix>())).Add(snoItemAffix);
 				for (int i = 0; i < snoItemAffix.Mods.Length; i++) {
-					ISnoItemMod isnoItemMod_0 = snoItemAffix.Mods[i];
+					SnoItemMod isnoItemMod_0 = snoItemAffix.Mods[i];
 				}
 			}
 		}
 		if (class309_0.SnoItem.Mods != null) {
-			ISnoItemMod[] mods = class309_0.SnoItem.Mods;
-			foreach (ISnoItemMod isnoItemMod_1 in mods) {
+			SnoItemMod[] mods = class309_0.SnoItem.Mods;
+			foreach (SnoItemMod isnoItemMod_1 in mods) {
 			}
 		}
 		class309_0.Affixes = list?.ToArray();
 	}
 
-	public void method_6(IItem iitem_3)
+	public void method_6(Item Item_3)
 	{
-		if (!(iitem_3 is Item item)) {
+		if (!(Item_3 is Item item)) {
 			return;
 		}
-		CoreCollector.ACDCollector.SetIndexFromAcdId(iitem_3.AcdId);
+		CoreCollector.ACDCollector.SetIndexFromAcdId(Item_3.AcdId);
 		int num = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__JewelRank, 1048575u, 0);
 		if (num != 0) {
-			IItemStat itemStat = item.class112_0["jewel_rank"];
+			ItemStat itemStat = item.class112_0["jewel_rank"];
 			if (itemStat == null || itemStat.IntegerValue != num) {
 				item.class112_0["jewel_rank"] = new ItemStat("jewel_rank", num, num);
 			}
 		}
 	}
 
-	public IItem method_7(ISnoItem isnoItem_0, ItemQuality itemQuality_0, ItemLocation itemLocation_0, long long_0)
+	public Item method_7(SnoItem isnoItem_0, ItemQuality itemQuality_0, ItemLocation itemLocation_0, long long_0)
 	{
 		return new Item(0u, 0u, isnoItem_0) {
 			Quality = itemQuality_0,

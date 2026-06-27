@@ -11,7 +11,7 @@ internal struct r_World
 	[FieldOffset(16)]
 	public uint SWorldID;
 
-	public const int int_0 = 152;
+	public const int Size = 152;
 
 	[FieldOffset(148)]
 	public int dummy;

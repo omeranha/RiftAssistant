@@ -1,49 +1,50 @@
 using Plugins;
+using SNO;
 using work;
 
-internal class TextureController : ITextureController
+public class TextureController
 {
-	public ITexture EmptySocketTexture => GetTexture("GemSocket32");
+	public Texture EmptySocketTexture => GetTexture("GemSocket32");
 
-	public ITexture UnidTexture => GetTexture("ItemStatus_Unidentified");
+	public Texture UnidTexture => GetTexture("ItemStatus_Unidentified");
 
-	public ITexture KanaiCubeTexture => GetTexture("Marker_KanaisCube");
+	public Texture KanaiCubeTexture => GetTexture("Marker_KanaisCube");
 
-	public ITexture ButtonTextureGray => GetTexture(3253023435u);
+	public Texture ButtonTextureGray => GetTexture(3253023435u);
 
-	public ITexture ButtonTextureBlue => GetTexture(3834792285u);
+	public Texture ButtonTextureBlue => GetTexture(3834792285u);
 
-	public ITexture ButtonTextureOrange => GetTexture(1227300027u);
+	public Texture ButtonTextureOrange => GetTexture(1227300027u);
 
-	public ITexture BackgroundTextureOrange => GetTexture(2823360744u);
+	public Texture BackgroundTextureOrange => GetTexture(2823360744u);
 
-	public ITexture BackgroundTextureGreen => GetTexture(64720473u);
+	public Texture BackgroundTextureGreen => GetTexture(64720473u);
 
-	public ITexture BackgroundTextureYellow => GetTexture(2135735351u);
+	public Texture BackgroundTextureYellow => GetTexture(2135735351u);
 
-	public ITexture BackgroundTextureBlue => GetTexture(1753848494u);
+	public Texture BackgroundTextureBlue => GetTexture(1753848494u);
 
-	public ITexture Button2TextureGray => GetTexture(1889271890u);
+	public Texture Button2TextureGray => GetTexture(1889271890u);
 
-	public ITexture Button2TextureOrange => GetTexture(1780664260u);
+	public Texture Button2TextureOrange => GetTexture(1780664260u);
 
-	public ITexture Button2TextureBrown => GetTexture(2825893160u);
+	public Texture Button2TextureBrown => GetTexture(2825893160u);
 
-	public ITexture BuffFrameTexture => GetTexture("buff_frame");
+	public Texture BuffFrameTexture => GetTexture("buff_frame");
 
-	public ITexture DebuffFrameTexture => GetTexture("debuff_frame");
+	public Texture DebuffFrameTexture => GetTexture("debuff_frame");
 
-	public ITexture InventorySlotTexture => GetTexture("InventoryGrid_Slot");
+	public Texture InventorySlotTexture => GetTexture("InventoryGrid_Slot");
 
-	public ITexture InventoryLegendaryBackgroundSmall => GetTexture("Quality_Small_Inventory_Legendary");
+	public Texture InventoryLegendaryBackgroundSmall => GetTexture("Quality_Small_Inventory_Legendary");
 
-	public ITexture InventoryLegendaryBackgroundLarge => GetTexture("Quality_Large_Inventory_Legendary");
+	public Texture InventoryLegendaryBackgroundLarge => GetTexture("Quality_Large_Inventory_Legendary");
 
-	public ITexture InventorySetBackgroundSmall => GetTexture("Quality_Small_Inventory_Set");
+	public Texture InventorySetBackgroundSmall => GetTexture("Quality_Small_Inventory_Set");
 
-	public ITexture InventorySetBackgroundLarge => GetTexture("Quality_Large_Inventory_Set");
+	public Texture InventorySetBackgroundLarge => GetTexture("Quality_Large_Inventory_Set");
 
-	public ITexture GetItemBackgroundTexture(IItem item)
+	public Texture GetItemBackgroundTexture(Item item)
 	{
 		switch ((ItemCraftQuality)((item.SnoItem.CraftQuality == ItemCraftQuality.None) ? ((int)item.Quality) : ((int)item.SnoItem.CraftQuality)))
 		{
@@ -67,22 +68,22 @@ internal class TextureController : ITextureController
 		}
 	}
 
-	public ITexture GetTexture(string name)
+	public Texture GetTexture(string name)
 	{
 		return TextureManager.GetTextureByName(name);
 	}
 
-	public ITexture GetTexture(uint id)
+	public Texture GetTexture(uint id)
 	{
 		return TextureManager.GetTextureById(id);
 	}
 
-	public ITexture GetTexture(uint textureSno, int frameIndex)
+	public Texture GetTexture(uint textureSno, int frameIndex)
 	{
 		return TextureManager.GetTextureById(textureSno);
 	}
 
-	public ITexture GetItemTexture(ISnoItem snoItem)
+	public Texture GetItemTexture(SnoItem snoItem)
 	{
 		return TextureManager.GetItemTexture(snoItem, CoreCollector.LocalPlayer?.HeroClassDefinition?.HeroClass ?? HeroClass.Wizard, CoreCollector.LocalPlayer?.HeroIsMale ?? true);
 	}

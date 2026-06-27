@@ -4,7 +4,7 @@ using work;
 
 internal static class ItemUIExtensions
 {
-	public static RectangleF GetUIRectangle(this IItem item)
+	public static RectangleF GetUIRectangle(this Item item)
 	{
 		return item.Location switch
 		{
@@ -41,12 +41,12 @@ internal static class ItemUIExtensions
 		};
 	}
 
-	public static RectangleF GetInventoryRectangle(this IItem item)
+	public static RectangleF GetInventoryRectangle(this Item item)
 	{
 		return CalculateInventorySlotRect(item.InventoryX, item.InventoryY, item.SnoItem.ItemWidth, item.SnoItem.ItemHeight);
 	}
 
-	public static RectangleF GetStashRectangle(this IItem item)
+	public static RectangleF GetStashRectangle(this Item item)
 	{
 		return CalculateStashSlotRect(item.InventoryX, item.InventoryY, item.SnoItem.ItemWidth, item.SnoItem.ItemHeight);
 	}

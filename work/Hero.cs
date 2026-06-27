@@ -6,7 +6,7 @@ using SNO;
 
 namespace work;
 
-internal class Hero : IHero
+public class Hero
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -18,7 +18,7 @@ internal class Hero : IHero
 	private readonly string string_1;
 
 	[CompilerGenerated]
-	private readonly IHeroClassDefinition iheroClassDefinition_0;
+	private readonly HeroClassDefinition iheroClassDefinition_0;
 
 	[CompilerGenerated]
 	private readonly ulong ulong_0;
@@ -60,7 +60,7 @@ internal class Hero : IHero
 	private DateTime dateTime_1 = DateTime.MinValue;
 
 	[CompilerGenerated]
-	private ISnoQuestStep isnoQuestStep_0;
+	private SnoQuestStep isnoQuestStep_0;
 
 	public uint Id
 	{
@@ -89,7 +89,7 @@ internal class Hero : IHero
 		}
 	}
 
-	public IHeroClassDefinition ClassDefinition
+	public HeroClassDefinition ClassDefinition
 	{
 		[CompilerGenerated]
 		get
@@ -245,7 +245,7 @@ internal class Hero : IHero
 		}
 	}
 
-	public ISnoQuestStep QuestStep
+	public SnoQuestStep QuestStep
 	{
 		[CompilerGenerated]
 		get

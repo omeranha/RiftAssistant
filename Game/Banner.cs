@@ -1,10 +1,11 @@
 using Plugins;
+using work;
 
-internal class Banner(uint id, uint worldId, IWorldCoordinate worldCoordinate) : IBanner
+public class Banner(uint id, uint worldId, WorldCoordinate worldCoordinate)
 {
 	private readonly uint id = id;
 	private readonly uint worldId = worldId;
-	private readonly IWorldCoordinate worldCoordinate = worldCoordinate;
+	private readonly WorldCoordinate worldCoordinate = worldCoordinate;
 
 	public uint Id
 	{
@@ -22,7 +23,7 @@ internal class Banner(uint id, uint worldId, IWorldCoordinate worldCoordinate) :
 		}
 	}
 
-	public IWorldCoordinate FloorCoordinate
+	public WorldCoordinate FloorCoordinate
 	{
 		get
 		{

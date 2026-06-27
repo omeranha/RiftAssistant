@@ -5,13 +5,13 @@ using Plugins;
 
 namespace work;
 
-internal class DiabloWindow : IWindow
+public class DiabloWindow
 {
 	public string WindowTitle = "Diablo III";
 
 	public IntPtr Handle = IntPtr.Zero;
 
-	public Win32.User32.WINDOWPLACEMENT WindowPlacement;
+	public WINDOWPLACEMENT WindowPlacement;
 
 	public float WidescreenOffset { get; set; }
 
@@ -29,7 +29,7 @@ internal class DiabloWindow : IWindow
 
 	public int CursorY { get; set; }
 
-	public IWorldCoordinate Center => CoreCollector.LocalPlayer.FloorCoordinate;
+	public WorldCoordinate Center => CoreCollector.LocalPlayer.FloorCoordinate;
 
 	public Rectangle GroundRectangle => new(0, 0, GameWindowManager.Window.Size.Width, CoreCollector.D3Memory.IsUiHidden ? GameWindowManager.Window.Size.Height : Convert.ToInt32((double)CoreCollector.UiElements.class341_64.rectangleF_0.Y * 1.015));
 
@@ -47,17 +47,17 @@ internal class DiabloWindow : IWindow
 		return false;
 	}
 
-	public IScreenCoordinate CreateScreenCoordinate(float x, float y)
+	public ScreenCoordinate CreateScreenCoordinate(float x, float y)
 	{
 		return new ScreenCoordinate(x, y);
 	}
 
-	public IWorldCoordinate CreateWorldCoordinate(IWorldCoordinate source)
+	public WorldCoordinate CreateWorldCoordinate(WorldCoordinate source)
 	{
 		return CreateWorldCoordinate(source.X, source.Y, source.Z);
 	}
 
-	public IWorldCoordinate CreateWorldCoordinate(float worldX, float worldY, float worldZ)
+	public WorldCoordinate CreateWorldCoordinate(float worldX, float worldY, float worldZ)
 	{
 		return new WorldCoordinate(worldX, worldY, worldZ);
 	}
@@ -78,14 +78,14 @@ internal class DiabloWindow : IWindow
 		screenY = (1f - num6) / 2f * (float)Size.Height;
 	}
 
-	public IScreenCoordinate WorldToScreenCoordinate(float worldX, float worldY, float worldZ, bool raw = false, bool ultraPrecise = false)
+	public ScreenCoordinate WorldToScreenCoordinate(float worldX, float worldY, float worldZ, bool raw = false, bool ultraPrecise = false)
 	{
-		IScreenCoordinate screenCoordinate = CreateScreenCoordinate(0f, 0f);
+		ScreenCoordinate screenCoordinate = CreateScreenCoordinate(0f, 0f);
 		SetScreenCoordinate(screenCoordinate, worldX, worldY, worldZ, raw, ultraPrecise);
 		return screenCoordinate;
 	}
 
-	public void SetScreenCoordinate(IScreenCoordinate screenCoordinate, float worldX, float worldY, float worldZ, bool raw = false, bool ultraPrecise = false)
+	public void SetScreenCoordinate(ScreenCoordinate screenCoordinate, float worldX, float worldY, float worldZ, bool raw = false, bool ultraPrecise = false)
 	{
 		float num = worldX - Center.X;
 		float num2 = worldY - Center.Y;
@@ -118,7 +118,7 @@ internal class DiabloWindow : IWindow
 		screenCoordinate.Y = (1f - num6) / 2f * (float)Size.Height;
 	}
 
-	public bool CalculateMidPointByDistance(IWorldCoordinate targetCoordinate, float targetDistance, IWorldCoordinate midPoint)
+	public bool CalculateMidPointByDistance(WorldCoordinate targetCoordinate, float targetDistance, WorldCoordinate midPoint)
 	{
 		float num = targetCoordinate.X - Center.X;
 		float num2 = targetCoordinate.Y - Center.Y;
@@ -137,7 +137,7 @@ internal class DiabloWindow : IWindow
 		return false;
 	}
 
-	public IWorldCoordinate CalculateMidPointByRatio(IWorldCoordinate targetCoordinate, float ratio)
+	public WorldCoordinate CalculateMidPointByRatio(WorldCoordinate targetCoordinate, float ratio)
 	{
 		float num = targetCoordinate.X - Center.X;
 		float num2 = targetCoordinate.Y - Center.Y;

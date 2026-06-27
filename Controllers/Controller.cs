@@ -3,45 +3,45 @@ using System.Collections.Generic;
 using Plugins;
 using work;
 
-internal class Controller : IController
+public class Controller
 {
-	private readonly ITextureController textureController = new TextureController();
+	private readonly TextureController textureController = new TextureController();
 
-	private readonly IRenderController renderController = new RenderController();
+	private readonly RenderController renderController = new RenderController();
 
-	private readonly ISceneRevealController sceneRevealController = new SceneRevealController();
+	private readonly SceneRevealController sceneRevealController = new SceneRevealController();
 
-	private readonly IInventoryController inventoryController = new InventoryController();
+	private readonly InventoryController inventoryController = new InventoryController();
 
-	private readonly IQueueController queueController = new QueueController();
+	private readonly QueueController queueController = new QueueController();
 
-	private readonly IGameController gameController;
+	private readonly GameController gameController;
 
-	private readonly ISnoController snoController = new SnoController();
+	private readonly SnoController snoController = new SnoController();
 
-	private readonly ITrackerController trackerController = new TrackerController();
+	private readonly TrackerController trackerController = new TrackerController();
 
-	public ITextureController Texture => textureController;
+	public TextureController Texture => textureController;
 
-	public IRenderController Render => renderController;
+	public RenderController Render => renderController;
 
-	public ISceneRevealController SceneReveal => sceneRevealController;
+	public SceneRevealController SceneReveal => sceneRevealController;
 
-	public IInventoryController Inventory => inventoryController;
+	public InventoryController Inventory => inventoryController;
 
-	public IQueueController Queue => queueController;
+	public QueueController Queue => queueController;
 
-	public IWindow Window => GameWindowManager.Window;
+	public DiabloWindow Window => GameWindowManager.Window;
 
-	public IGameController Game => gameController;
+	public GameController Game => gameController;
 
-	public ISnoController Sno => snoController;
+	public SnoController Sno => snoController;
 
-	public ITrackerController Tracker => trackerController;
+	public TrackerController Tracker => trackerController;
 
 	public string BattleTag => CoreCollector.BattleTag;
 
-	public IEnumerable<IHero> AccountHeroes => CoreCollector.HeroCollector.HeroList;
+	public IEnumerable<Hero> AccountHeroes => CoreCollector.HeroCollector.HeroList;
 
 	public IEnumerable<IPlugin> AllPlugins => Core.PluginHandler.Plugins;
 
@@ -49,7 +49,7 @@ internal class Controller : IController
 
 	public Controller()
 	{
-		gameController = new GameController(this);
+		gameController = new GameController();
 	}
 
 	public T GetPlugin<T>() where T : class, IPlugin

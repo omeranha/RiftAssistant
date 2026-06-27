@@ -1,5 +1,3 @@
-namespace Plugins;
-
 public struct SnoPowerIcon
 {
 	public bool Exists;

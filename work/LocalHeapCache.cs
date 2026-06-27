@@ -7,25 +7,41 @@ namespace work;
 
 internal class LocalHeapCache
 {
-	private readonly r_MemoryManager memoryManager = new r_MemoryManager();
+	// Helper structures
+	private struct BlockEntry
+	{
+		public long Address;
+		public int Size;
+	}
 
-	private readonly r_LocalHeap localHeap = new r_LocalHeap();
+	private class SmallBlockGroup
+	{
+		public int Size;
+		public long[] Entries;
+		public int Count;
+	}
 
-	private readonly Dictionary<long, int> blockAddr_2_Size = new Dictionary<long, int>(500000);
-
+	private r_MemoryManager memoryManager = new();
+	private r_LocalHeap localHeap = new();
+	
+	// Use arrays instead of dictionaries to reduce overhead
+	private BlockEntry[] blockEntries = new BlockEntry[1000000]; // Pre-allocated array
+	private int blockEntriesCount = 0;
+	
 	private long smallblocksnode_address;
-
 	private int smallblocksnode_size;
-
 	private long[] smallblocksnode_data;
+	private long[] smallBlockBuffer = new long[1024];
+	
+	// Use arrays for small blocks by size instead of Dictionary<List<long>>
+	private SmallBlockGroup[] smallBlocksBySize = new SmallBlockGroup[100]; // Pre-allocated
+	private int smallBlocksBySizeCount = 0;
 
-	private readonly Dictionary<int, List<long>> smallBlocksBySize = new Dictionary<int, List<long>>(100);
+	private MainBlock[] mainBlocks = new MainBlock[30000];
+	private int mainBlocksCount = 0;
 
-	private readonly List<MainBlock> mainBlocks = new List<MainBlock>(30000);
-
-	public int MainBlocksCount => mainBlocks.Count;
-
-	public int SmallBlocksCount => smallBlocksBySize.Sum((KeyValuePair<int, List<long>> keyValuePair_0) => keyValuePair_0.Value.Count);
+	public int MainBlocksCount => mainBlocksCount;
+	public int SmallBlocksCount => smallBlocksBySize.Take(smallBlocksBySizeCount).Sum(g => g.Count);
 
 	public void ClearSmallBlocksCache()
 	{
@@ -34,98 +50,179 @@ internal class LocalHeapCache
 
 	public void Init(long long_2)
 	{
-		blockAddr_2_Size.Clear();
-		smallBlocksBySize.Clear();
-		mainBlocks.Clear();
-		long long_3 = MR.Instance.ReadAddress(long_2, bool_0: true);
-		MR.Instance.ReadMem(long_3, memoryManager, 104);
+		// Reset arrays instead of clearing dictionaries
+		blockEntriesCount = 0;
+		mainBlocksCount = 0;
+		smallBlocksBySizeCount = 0;
+		
+		long address = GameWindowManager.Read<long>(long_2, true);
+		memoryManager = GameWindowManager.Read<r_MemoryManager>(address);
 		if (memoryManager.IsInitialized != 1)
 		{
 			throw new Exception("validation failed: memory manager");
 		}
-		MR.Instance.ReadMem(memoryManager.PtrLocalHeap, localHeap, 112);
+		
+		localHeap = GameWindowManager.Read<r_LocalHeap>(memoryManager.PtrLocalHeap);
 		if (localHeap.FirstNodeAddress + localHeap.TotalSize != localHeap.LastNodeAddress)
 		{
 			throw new Exception("validation failed: local heap");
 		}
+		
 		long num = localHeap.FirstNodeAddress;
 		int num2 = 0;
 		uint uint_ = 0u;
 		int num3;
+		
 		for (; num <= localHeap.LastNodeAddress; num += 32 + num3)
 		{
-			Win32.ReadProcessMemoryUInt(MR.Instance.ProcessHandle, (IntPtr)(num + 24), ref uint_, 4, 0);
+			uint_ = GameWindowManager.Read<uint>(num + 24);
 			num3 = (int)(uint_ >> 1);
+			
 			if ((uint_ & 1) == 1)
 			{
 				long num4 = num + 32;
+				
 				if (num2 == 0)
 				{
 					smallblocksnode_address = num4;
 					smallblocksnode_size = num3;
 					smallblocksnode_data = new long[num3 / 8];
-					MR.Instance.ReadPointerArray_x64(num4, smallblocksnode_data, 0, num3 / 8);
+					GameWindowManager.ReadPointerArray(num4, smallblocksnode_data, 0, num3 / 8);
+					
 					int num7;
 					for (long num5 = 0L; num5 < num3; num5 += 32 + num7)
 					{
-						int num6 = (int)smallblocksnode_data[(int)(IntPtr)((num5 + 24) / 8)];
+						int num6 = (int)smallblocksnode_data[(int)((num5 + 24) / 8)];
 						num7 = num6 >>> 1;
+						
 						if ((num6 & 1) == 1)
 						{
 							long num8 = num4 + num5 + 32;
-							if (!smallBlocksBySize.TryGetValue(num7, out var value))
+							
+							// Find or create group for this size
+							int groupIndex = FindOrCreateSmallBlockGroup(num7);
+							SmallBlockGroup group = smallBlocksBySize[groupIndex];
+							
+							// Ensure capacity
+							if (group.Entries.Length <= group.Count)
 							{
-								List<long> list = (smallBlocksBySize[num7] = new List<long>());
-								value = list;
+								Array.Resize(ref group.Entries, Math.Max(group.Count + 1, group.Entries.Length * 2));
 							}
-							value.Add(num8);
-							blockAddr_2_Size[num8] = num7;
+							
+							group.Entries[group.Count] = num8;
+							group.Count++;
+							
+							// Add to block entries
+							if (blockEntries.Length <= blockEntriesCount)
+							{
+								Array.Resize(ref blockEntries, Math.Max(blockEntriesCount + 1, blockEntries.Length * 2));
+							}
+							blockEntries[blockEntriesCount++] = new BlockEntry { Address = num8, Size = num7 };
 						}
 					}
 				}
 				else
 				{
+					// Add main block
+					if (mainBlocks.Length <= mainBlocksCount)
+					{
+						Array.Resize(ref mainBlocks, Math.Max(mainBlocksCount + 1, mainBlocks.Length * 2));
+					}
+					
 					MainBlock mainBlock = new MainBlock
 					{
 						DataAddress = num4,
 						Size = num3
 					};
-					mainBlocks.Add(mainBlock);
-					blockAddr_2_Size[mainBlock.DataAddress] = num3;
+					mainBlocks[mainBlocksCount++] = mainBlock;
+					
+					// Add to block entries
+					if (blockEntries.Length <= blockEntriesCount)
+					{
+						Array.Resize(ref blockEntries, Math.Max(blockEntriesCount + 1, blockEntries.Length * 2));
+					}
+					blockEntries[blockEntriesCount++] = new BlockEntry { Address = num4, Size = num3 };
 				}
 			}
 			num2++;
 		}
 	}
 
+	private int FindOrCreateSmallBlockGroup(int size)
+	{
+		// Linear search for existing group
+		for (int i = 0; i < smallBlocksBySizeCount; i++)
+		{
+			if (smallBlocksBySize[i].Size == size)
+			{
+				return i;
+			}
+		}
+		
+		// Create new group
+		if (smallBlocksBySizeCount >= smallBlocksBySize.Length)
+		{
+			Array.Resize(ref smallBlocksBySize, Math.Max(smallBlocksBySizeCount + 1, smallBlocksBySize.Length * 2));
+		}
+		
+		int newIndex = smallBlocksBySizeCount++;
+		smallBlocksBySize[newIndex] = new SmallBlockGroup { Size = size, Entries = new long[8], Count = 0 };
+		return newIndex;
+	}
+
 	public IEnumerable<long> GetSmallBlocksWithSize(int int_1)
 	{
-		if (!smallBlocksBySize.TryGetValue(int_1, out var value))
+		for (int i = 0; i < smallBlocksBySizeCount; i++)
 		{
-			return Enumerable.Empty<long>();
+			if (smallBlocksBySize[i].Size == int_1)
+			{
+				var group = smallBlocksBySize[i];
+				for (int j = 0; j < group.Count; j++)
+				{
+					yield return group.Entries[j];
+				}
+				yield break;
+			}
 		}
-		return value;
+		yield break;
 	}
 
 	public IEnumerable<long> GetSmallBlocksWithSize_OrPlus0x20(int int_1)
 	{
-		return GetSmallBlocksWithSize(int_1).Concat(GetSmallBlocksWithSize(int_1 + 32));
+		foreach (long addr in GetSmallBlocksWithSize(int_1))
+		{
+			yield return addr;
+		}
+		
+		foreach (long addr in GetSmallBlocksWithSize(int_1 + 32))
+		{
+			yield return addr;
+		}
 	}
 
 	public IEnumerable<long> GetMainBlocksWithSize(int int_1)
 	{
-		return from class331_0 in mainBlocks
-			where class331_0.Size == int_1 || class331_0.Size == int_1 + 32
-			select class331_0.DataAddress;
+		for (int i = 0; i < mainBlocksCount; i++)
+		{
+			MainBlock block = mainBlocks[i];
+			if (block.Size == int_1 || block.Size == int_1 + 32)
+			{
+				yield return block.DataAddress;
+			}
+		}
 	}
 
 	public int GetSizeOfBlock(long long_2)
 	{
-		if (!blockAddr_2_Size.TryGetValue(long_2, out var value))
+		// Linear search through pre-allocated array
+		for (int i = 0; i < blockEntriesCount; i++)
 		{
-			return 0;
+			if (blockEntries[i].Address == long_2)
+			{
+				return blockEntries[i].Size;
+			}
 		}
-		return value;
+		return 0;
 	}
 
 	public int ReadInt32(long long_2, long long_3)
@@ -138,7 +235,7 @@ internal class LocalHeapCache
 				return (int)smallblocksnode_data[num / 8];
 			}
 		}
-		return MR.Instance.ReadInt32_x64(long_2 + long_3);
+		return GameWindowManager.Read<int>(long_2 + long_3);
 	}
 
 	public uint ReadUInt32(long long_2, long long_3)
@@ -151,7 +248,7 @@ internal class LocalHeapCache
 				return (uint)smallblocksnode_data[num / 8];
 			}
 		}
-		return MR.Instance.ReadUInt(long_2 + long_3);
+		return GameWindowManager.Read<uint>(long_2 + long_3);
 	}
 
 	public long ReadInt64(long long_2, long long_3)
@@ -164,14 +261,12 @@ internal class LocalHeapCache
 				return smallblocksnode_data[num / 8];
 			}
 		}
-		return MR.Instance.ReadAddress(long_2 + long_3);
+		return GameWindowManager.Read<long>(long_2 + long_3);
 	}
 
-	public long[] ReadBlockPointers(long long_2, int int_1)
+	public long[] ReadBlockPointers(long address, int size)
 	{
-		long[] array = new long[int_1 / 8];
-		MR.Instance.ReadMem(long_2, array, int_1);
-		return array;
+		return GameWindowManager.ReadArray<long>(address, size / sizeof(long));
 	}
 
 	public byte[] ReadToByteArray(long long_2, int int_1, int int_2 = 0)
@@ -186,7 +281,7 @@ internal class LocalHeapCache
 				return array;
 			}
 		}
-		return MR.Instance.method_30(long_2 + int_2, int_1);
+		return GameWindowManager.ReadBytes(long_2 + int_2, int_1);
 	}
 
 	public bool IsBlockSizeEqual_OrPlus0x20(int int_1, int int_2)
@@ -200,7 +295,7 @@ internal class LocalHeapCache
 
 	public bool VerifyBlock(long long_2, int int_1)
 	{
-		uint num = MR.Instance.ReadUInt(long_2 - 8);
+		uint num = GameWindowManager.Read<uint>(long_2 - 8);
 		if (int_1 == (int)(num >> 1))
 		{
 			return (num & 1) == 1;

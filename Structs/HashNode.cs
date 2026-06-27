@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal sealed class HashNode
+internal struct HashNode
 {
 	[FieldOffset(0)]
 	public long Next;

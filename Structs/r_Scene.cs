@@ -56,7 +56,7 @@ internal struct r_Scene
 	[FieldOffset(392)]
 	public float mesh_max_z;
 
-	public const int int_2 = 1976;
+	public const int Size = 1976;
 
 	[FieldOffset(1972)]
 	public int dummy;

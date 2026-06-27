@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
 using work;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-internal class RenderController : IRenderController
+public class RenderController
 {
 	private bool isRenderEnabled = true;
 
@@ -27,9 +28,9 @@ internal class RenderController : IRenderController
 		}
 	}
 
-	public IUiElement InGameBottomHudUiElement => CoreCollector.UiElements.class341_64;
+	public UiElement InGameBottomHudUiElement => CoreCollector.UiElements.class341_64;
 
-	public IUiElement MonsterHpBarUiElement
+	public UiElement MonsterHpBarUiElement
 	{
 		get {
 			if (CoreCollector.UiElements.class341_179.Visible) {
@@ -51,21 +52,21 @@ internal class RenderController : IRenderController
 		}
 	}
 
-	public IUiElement MinimapUiElement => CoreCollector.UiElements.class341_85;
+	public UiElement MinimapUiElement => CoreCollector.UiElements.class341_85;
 
-	public IUiElement NephalemRiftBarUiElement => CoreCollector.UiElements.class341_172;
+	public UiElement NephalemRiftBarUiElement => CoreCollector.UiElements.class341_172;
 
-	public IUiElement GreaterRiftBarUiElement => CoreCollector.UiElements.class341_173;
+	public UiElement GreaterRiftBarUiElement => CoreCollector.UiElements.class341_173;
 
-	public IUiElement ChallengeRiftBarUiElement => CoreCollector.UiElements.class341_174;
+	public UiElement ChallengeRiftBarUiElement => CoreCollector.UiElements.class341_174;
 
-	public IUiElement ChallengeRiftAheadPanelUiElement => CoreCollector.UiElements.class341_175;
+	public UiElement ChallengeRiftAheadPanelUiElement => CoreCollector.UiElements.class341_175;
 
-	public IUiElement ParagonLevelUpSplashTextUiElement => CoreCollector.UiElements.class341_90;
+	public UiElement ParagonLevelUpSplashTextUiElement => CoreCollector.UiElements.class341_90;
 
-	public IUiElement BuffBarExtendedBuffsUiElement => CoreCollector.UiElements.class341_128;
+	public UiElement BuffBarExtendedBuffsUiElement => CoreCollector.UiElements.class341_128;
 
-	public IEnumerable<IUiElement> BuffBarUiElements
+	public IEnumerable<UiElement> BuffBarUiElements
 	{
 		get {
 			string string_ = "Root.NormalLayer.buffs_backgroundScreen.buff_icon_wrapper.buff ";
@@ -78,21 +79,21 @@ internal class RenderController : IRenderController
 		}
 	}
 
-	public IUiElement WorldMapUiElement => CoreCollector.UiElements.class341_86;
+	public UiElement WorldMapUiElement => CoreCollector.UiElements.class341_86;
 
-	public IUiElement ActMapUiElement => CoreCollector.UiElements.class341_88;
+	public UiElement ActMapUiElement => CoreCollector.UiElements.class341_88;
 
-	public IUiElement SalvageTabButton => CoreCollector.UiElements.salvageTabButton;
+	public UiElement SalvageTabButton => CoreCollector.UiElements.salvageTabButton;
 
-	public IUiElement SalvageButton => CoreCollector.UiElements.salvageButton;
+	public UiElement SalvageButton => CoreCollector.UiElements.salvageButton;
 
-	public IUiElement SalvageNormal => CoreCollector.UiElements.salvageNormal;
+	public UiElement SalvageNormal => CoreCollector.UiElements.salvageNormal;
 
-	public IUiElement SalvageMagic => CoreCollector.UiElements.salvageMagic;
+	public UiElement SalvageMagic => CoreCollector.UiElements.salvageMagic;
 
-	public IUiElement SalvageRare => CoreCollector.UiElements.salvageRare;
+	public UiElement SalvageRare => CoreCollector.UiElements.salvageRare;
 
-	public IUiElement ChatOpened => CoreCollector.UiElements.chatOpened;
+	public UiElement ChatOpened => CoreCollector.UiElements.chatOpened;
 
 	public bool UiHidden => CoreCollector.D3Memory.IsUiHidden;
 
@@ -117,9 +118,9 @@ internal class RenderController : IRenderController
 		return transparent;
 	}
 
-	public IUiElement GetUiElement(string path)
+	public UiElement GetUiElement(string path)
 	{
-		IUiElement uiElement = null;
+		UiElement uiElement = null;
 		switch (path) {
 			case "*portrait-p3":
 				uiElement = CoreCollector.UiElements.class341_145[3];
@@ -151,12 +152,12 @@ internal class RenderController : IRenderController
 		return uiElement;
 	}
 
-	public IUiElement RegisterUiElement(string path, IUiElement collectOnlyWhenThisIsVisible, IUiElement collectOnlyWhenThisIsInvisible, float inflateXby = 0f, float inflateYby = 0f)
+	public UiElement RegisterUiElement(string path, UiElement collectOnlyWhenThisIsVisible, UiElement collectOnlyWhenThisIsInvisible, float inflateXby = 0f, float inflateYby = 0f)
 	{
 		return CoreCollector.UiElements.Register(path, collectOnlyWhenThisIsVisible, collectOnlyWhenThisIsInvisible, inflateXby, inflateYby);
 	}
 
-	public IUiElement GetPlayerSkillUiElement(ActionKey key)
+	public UiElement GetPlayerSkillUiElement(ActionKey key)
 	{
 		if (key == ActionKey.Heal) {
 			return CoreCollector.UiElements.class341_143;
@@ -206,35 +207,62 @@ internal class RenderController : IRenderController
 		var handle = GameWindowManager.Window.Handle;
 
 		try {
-			windowDC = Win32.User32.GetWindowDC(handle);
+			windowDC = GetWindowDC(handle);
 
-			Win32.RECT rect = default;
-			Win32.User32.GetWindowRect(handle, ref rect);
+			RECT rect = default;
+			GetWindowRect(handle, ref rect);
 
 			int width = rect.Right - rect.Left;
 			int height = rect.Bottom - rect.Top;
 
-			memDC = Win32.ScreenCapture.CreateCompatibleDC(windowDC);
-			hBitmap = Win32.ScreenCapture.CreateCompatibleBitmap(windowDC, width, height);
+			memDC = CreateCompatibleDC(windowDC);
+			hBitmap = CreateCompatibleBitmap(windowDC, width, height);
 
-			oldBitmap = Win32.ScreenCapture.SelectObject(memDC, hBitmap);
-			Win32.ScreenCapture.BitBlt(memDC, 0, 0, width, height, windowDC, 0, 0, 0x00CC0020); // SRCCOPY
+			oldBitmap = SelectObject(memDC, hBitmap);
+			BitBlt(memDC, 0, 0, width, height, windowDC, 0, 0, 0x00CC0020); // SRCCOPY
 			using System.Drawing.Bitmap bitmap = System.Drawing.Image.FromHbitmap(hBitmap);
 			Directory.CreateDirectory(Path.Combine(Program.AppDir, "screenshots"));
 			var path = Path.Combine(Program.AppDir, "screenshots", filePath);
 			bitmap.Save(path, ImageFormat.Png);
 		} finally {
 			if (oldBitmap != IntPtr.Zero)
-				Win32.ScreenCapture.SelectObject(memDC, oldBitmap);
+				SelectObject(memDC, oldBitmap);
 
 			if (hBitmap != IntPtr.Zero)
-				Win32.ScreenCapture.DeleteObject(hBitmap);
+				DeleteObject(hBitmap);
 
 			if (memDC != IntPtr.Zero)
-				Win32.ScreenCapture.DeleteDC(memDC);
+				DeleteDC(memDC);
 
 			if (windowDC != IntPtr.Zero)
-				Win32.User32.ReleaseDC(handle, windowDC);
+				ReleaseDC(handle, windowDC);
 		}
 	}
+
+	[DllImport("user32.dll")]
+	private static extern IntPtr GetWindowRect(IntPtr intptr_0, ref RECT rect);
+
+	[DllImport("gdi32.dll")]
+	private static extern bool BitBlt(IntPtr intptr_0, int int_2, int int_3, int int_4, int int_5, IntPtr intptr_1, int int_6, int int_7, int int_8);
+
+	[DllImport("gdi32.dll")]
+	private static extern IntPtr CreateCompatibleBitmap(IntPtr intptr_0, int int_2, int int_3);
+
+	[DllImport("gdi32.dll")]
+	private static extern IntPtr CreateCompatibleDC(IntPtr intptr_0);
+
+	[DllImport("gdi32.dll")]
+	private static extern bool DeleteDC(IntPtr intptr_0);
+
+	[DllImport("user32.dll")]
+	private static extern IntPtr GetWindowDC(IntPtr intptr_0);
+
+	[DllImport("user32.dll")]
+	private static extern IntPtr ReleaseDC(IntPtr intptr_0, IntPtr intptr_1);
+
+	[DllImport("gdi32.dll")]
+	private static extern bool DeleteObject(IntPtr intptr_0);
+
+	[DllImport("gdi32.dll")]
+	private static extern IntPtr SelectObject(IntPtr intptr_0, IntPtr intptr_1);
 }

@@ -2,15 +2,15 @@ using System.Globalization;
 using Plugins;
 using SNO;
 
-internal class ItemStat : IItemStat
+public class ItemStat
 {
 	public string Id { get; set; }
 
-	public IAttribute Attribute { get; set; }
+	public AcdAttribute Attribute { get; set; }
 
 	public uint Modifier { get; set; }
 
-	public IAttributeProcessor Processor { get; set; }
+	public AttributeProcessor Processor { get; set; }
 
 	public double DoubleValue { get; set; }
 
@@ -18,7 +18,7 @@ internal class ItemStat : IItemStat
 
 	public string StringValue { get; set; }
 
-	public ItemStat(IAttribute iattribute_1, uint uint_1, double double_1)
+	public ItemStat(AcdAttribute iattribute_1, uint uint_1, double double_1)
 	{
 		Processor = null;
 		Attribute = iattribute_1;
@@ -27,7 +27,7 @@ internal class ItemStat : IItemStat
 		Id = Attribute.Code + "#" + Modifier.ToString("D", CultureInfo.InvariantCulture);
 	}
 
-	public ItemStat(IAttribute iattribute_1, uint uint_1, double double_1, int int_0)
+	public ItemStat(AcdAttribute iattribute_1, uint uint_1, double double_1, int int_0)
 	{
 		Processor = null;
 		Attribute = iattribute_1;
@@ -67,7 +67,7 @@ internal class ItemStat : IItemStat
 		IntegerValue = null;
 	}
 
-	public ItemStat(IAttributeProcessor iattributeProcessor_1, double double_1, int int_0)
+	public ItemStat(AttributeProcessor iattributeProcessor_1, double double_1, int int_0)
 	{
 		Processor = iattributeProcessor_1;
 		Id = Processor.Code;

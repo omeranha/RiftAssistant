@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace structs;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal struct r_ArmorySet
+public struct r_ArmorySet
 {
 	[StructLayout(LayoutKind.Sequential, Size = 1)]
 	[CompilerGenerated]

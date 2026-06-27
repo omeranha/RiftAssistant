@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal class r_Allocator
+internal struct r_Allocator
 {
 	[FieldOffset(0)]
 	public int ElementSize;
@@ -23,5 +23,5 @@ internal class r_Allocator
 	[FieldOffset(40)]
 	public uint GoodFood;
 
-	public const int SizeOf = 48;
+	public const int Size = 48;
 }

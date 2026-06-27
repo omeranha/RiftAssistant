@@ -194,7 +194,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		return textLayout;
 	}
 
-	public void DrawText(string text, IScreenCoordinate coordinate, bool enableLayoutCache = true)
+	public void DrawText(string text, ScreenCoordinate coordinate, bool enableLayoutCache = true)
 	{
 		DrawText(text, coordinate.X, coordinate.Y, enableLayoutCache);
 	}
@@ -235,7 +235,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x, y, 2000f, 50f), brush.Value);
 	}
 
-	public void DrawText(TextLayout textLayout, IScreenCoordinate coordinate)
+	public void DrawText(TextLayout textLayout, ScreenCoordinate coordinate)
 	{
 		DrawText(textLayout, coordinate.X, coordinate.Y);
 	}

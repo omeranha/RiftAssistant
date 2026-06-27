@@ -20,7 +20,7 @@ internal class PlayerCollector
 	private Stopwatch stopwatch_1 = new();
 
 	[CompilerGenerated]
-	private readonly IPlayer[] iplayer_0 = new IPlayer[4];
+	private readonly Player[] iplayer_0 = new Player[4];
 
 	[CompilerGenerated]
 	private int int_0;
@@ -31,7 +31,7 @@ internal class PlayerCollector
 	[CompilerGenerated]
 	private bool bool_1;
 
-	public IPlayer[] PlayerSlots
+	public Player[] PlayerSlots
 	{
 		[CompilerGenerated]
 		get {
@@ -39,7 +39,7 @@ internal class PlayerCollector
 		}
 	}
 
-	public IEnumerable<IPlayer> PlayersInGame => PlayerSlots.Where((IPlayer iplayer_0) => iplayer_0.IsInGame && iplayer_0.SnoArea != null && iplayer_0.BattleTagAbovePortrait != null && iplayer_0.HeroClassDefinition != null);
+	public IEnumerable<Player> PlayersInGame => PlayerSlots.Where((Player iplayer_0) => iplayer_0.IsInGame && iplayer_0.SnoArea != null && iplayer_0.BattleTagAbovePortrait != null && iplayer_0.HeroClassDefinition != null);
 
 	public int NumberOfPlayersInGame
 	{
@@ -77,9 +77,6 @@ internal class PlayerCollector
 		}
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	public static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_PlayerData struct32_0, int int_1, int int_2);
-
 	public PlayerCollector()
 	{
 		for (int i = 0; i < PlayerSlots.Length; i++) {
@@ -90,7 +87,7 @@ internal class PlayerCollector
 	internal void method_0()
 	{
 		NumberOfPlayersInGame = 0;
-		IPlayer[] iPlayer_ = PlayerSlots;
+		Player[] iPlayer_ = PlayerSlots;
 		for (int i = 0; i < iPlayer_.Length; i++) {
 			Player obj = (Player)iPlayer_[i];
 			obj.long_6 = 0L;
@@ -124,7 +121,7 @@ internal class PlayerCollector
 					long num3 = CoreCollector.DAF.PlayerDataManagerAddress + D3Memory.Offset_PlayerDataManager_Elements + num2 * Constants.PlayerData_SizeOf;
 					bool isInGame = player.IsInGame;
 					uint heroId = player.HeroId;
-					ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)num3, ref player.RawPlayerData, Constants.PlayerData_SizeOf, 0);
+					player.RawPlayerData = GameWindowManager.Read<r_PlayerData>(num3, size: Constants.PlayerData_SizeOf);
 					player.CoordinateKnown = false;
 					if (player.IsInGame) {
 						player.Defense.HealthPct = player.RawPlayerData.LifePercentage * 100f;
@@ -168,7 +165,7 @@ internal class PlayerCollector
 						}
 						for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
 							Skill class2 = player.class386_0[(int)actionKey];
-							Plugins.ISnoPower snoPower = class2?.SnoPower;
+							SnoPower snoPower = class2?.SnoPower;
 							uint num5 = 0u;
 							int num6 = 0;
 							switch (actionKey) {
@@ -210,9 +207,9 @@ internal class PlayerCollector
 							uint* struct33_ = pData->struct33_0;
 							for (int i = 0; i < 4; i++) {
 								uint sno = struct33_[i];
-								Plugins.ISnoPower bySno = SnoData.Powers.GetBySno(sno);
-								if (player.isnoPower_0[i] != bySno) {
-									player.isnoPower_0[i] = bySno;
+								SnoPower bySno = SnoData.Powers.GetBySno(sno);
+								if (player.SnoPower_0[i] != bySno) {
+									player.SnoPower_0[i] = bySno;
 								}
 								if (bySno != null) {
 									player.list_2.Add(bySno);
@@ -264,7 +261,7 @@ internal class PlayerCollector
 						if (heroId2 != 0 && heroId2 != uint.MaxValue) {
 							if (heroId != heroId2) {
 								player.HeroId = heroId2;
-								IHero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.method_0(heroId2) : null));
+								Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.method_0(heroId2) : null));
 								if (hero != null) {
 									player.HeroName = hero.Name;
 									player.Int32_0 = hero.Season;
@@ -287,7 +284,7 @@ internal class PlayerCollector
 									return false;
 								}
 							}
-							Plugins.IHeroClassDefinition heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
+							HeroClassDefinition heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
 							if (heroClassByInternalIndex != null) {
 								player.HeroClassDefinition = heroClassByInternalIndex;
 								Custom.SetSnoAreaForPlayer(player);
@@ -337,7 +334,7 @@ internal class PlayerCollector
 											for (int l = 0; l < 512; l++) {
 												uint num9 = struct34_2[l];
 												if (num9 != uint.MaxValue) {
-													Plugins.ISnoItem bySno2 = SnoData.Items.GetBySno(num9);
+													SnoItem bySno2 = SnoData.Items.GetBySno(num9);
 													if (bySno2 != null) {
 														player.list_1.Add(bySno2);
 														player.dictionary_0[bySno2.NameLocalized] = bySno2;

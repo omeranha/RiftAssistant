@@ -1,7 +1,7 @@
 using Plugins;
 using SNO;
 
-internal class Shrine : MapObject, IActor, IShrine, IClickableActor
+public class Shrine : MapObject, IClickableActor
 {
 	public ShrineType Type { get; set; }
 

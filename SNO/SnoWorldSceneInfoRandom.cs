@@ -7,9 +7,9 @@ namespace SNO;
 public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 {
 	[CompilerGenerated]
-	private readonly List<ISnoScene> list_0 = new List<ISnoScene>();
+	private readonly List<SnoScene> list_0 = new List<SnoScene>();
 
-	public List<ISnoScene> SnoScenes
+	public List<SnoScene> SnoScenes
 	{
 		[CompilerGenerated]
 		get
@@ -18,7 +18,7 @@ public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 		}
 	}
 
-	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, ISnoArea isnoArea_1)
+	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
 		: base(float_6, float_7, float_8, float_9, isnoArea_1)
 	{
 	}

@@ -1,13 +1,13 @@
 using Plugins;
 using work;
 
-internal class TrackerController : ITrackerController
+public class TrackerController
 {
-	public IStatTracker Session => CoreCollector.class340_0;
+	public StatTracker Session => CoreCollector.class340_0;
 
-	public IStatTracker SessionAlwaysRunning => CoreCollector.class340_1;
+	public StatTracker SessionAlwaysRunning => CoreCollector.class340_1;
 
-	public IStatTracker CurrentAccountTotal
+	public StatTracker CurrentAccountTotal
 	{
 		get
 		{
@@ -19,7 +19,7 @@ internal class TrackerController : ITrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountLastMonth
+	public StatTracker CurrentAccountLastMonth
 	{
 		get
 		{
@@ -31,7 +31,7 @@ internal class TrackerController : ITrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountLastWeek
+	public StatTracker CurrentAccountLastWeek
 	{
 		get
 		{
@@ -43,7 +43,7 @@ internal class TrackerController : ITrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountYesterday
+	public StatTracker CurrentAccountYesterday
 	{
 		get
 		{
@@ -55,7 +55,7 @@ internal class TrackerController : ITrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountToday
+	public StatTracker CurrentAccountToday
 	{
 		get
 		{

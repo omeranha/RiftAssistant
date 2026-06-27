@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Plugins;
 
-internal class QueueController : IQueueController
+public class QueueController
 {
 	private readonly List<IQueueItem> list_0 = [];
 

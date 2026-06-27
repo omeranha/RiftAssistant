@@ -9,7 +9,7 @@ public sealed class ActorShrineTypeInfo
 	private readonly ShrineType shrineType_0;
 
 	[CompilerGenerated]
-	private readonly ISnoActor isnoActor_0;
+	private readonly SnoActor SnoActor_0;
 
 	public ShrineType Type
 	{
@@ -20,18 +20,18 @@ public sealed class ActorShrineTypeInfo
 		}
 	}
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoActor_0;
+			return SnoActor_0;
 		}
 	}
 
-	internal ActorShrineTypeInfo(ShrineType shrineType_1, ISnoActor isnoActor_1)
+	internal ActorShrineTypeInfo(ShrineType shrineType_1, SnoActor SnoActor_1)
 	{
 		shrineType_0 = shrineType_1;
-		isnoActor_0 = isnoActor_1;
+		SnoActor_0 = SnoActor_1;
 	}
 }

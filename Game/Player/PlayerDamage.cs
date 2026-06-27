@@ -1,6 +1,6 @@
 using Plugins;
 
-internal class PlayerDamage : IPlayerDamageInfo
+public class PlayerDamage
 {
 	public double TotalDamage { get; set; }
 

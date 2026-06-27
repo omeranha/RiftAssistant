@@ -70,7 +70,7 @@ internal static class CoreCollector
 
 	public static long CurrentRealTimeTicks;
 
-	public static IPlayer LocalPlayer;
+	public static Player LocalPlayer;
 
 	public static bool IsLoading;
 
@@ -82,7 +82,7 @@ internal static class CoreCollector
 
 	private static int int_0;
 
-	private static ISnoArea LastSnoArea;
+	private static SnoArea LastSnoArea;
 
 	public static SpecialArea specialArea_0;
 
@@ -122,11 +122,11 @@ internal static class CoreCollector
 
 	public static RunTracker class364_0;
 
-	public static IController Controller { get; set; }
+	public static Controller Controller { get; set; }
 
-	public static EventHandler<IPlayerSkill> OnTrueCooldown { get; set; }
+	public static EventHandler<Skill> OnTrueCooldown { get; set; }
 
-	public static EventHandler<IPlayerSkill> OnCooldown { get; set; }
+	public static EventHandler<Skill> OnCooldown { get; set; }
 
 	public static EventHandler OnNewArea { get; set; }
 
@@ -142,7 +142,7 @@ internal static class CoreCollector
 		}
 	}
 
-	public static EventHandler<ISnoArea> OnFalseNewArea { get; set; }
+	public static EventHandler<SnoArea> OnFalseNewArea { get; set; }
 
 	public static UiElements UiElements
 	{
@@ -240,11 +240,14 @@ internal static class CoreCollector
 
 	public static WaypointManager WaypointManager { get; } = new();
 
+	public static Portal[] portalsSnapshot;
+	public static IClickableActor[] NormalChestsSnapshot;
+	public static IClickableActor[] ResplendentChestsSnapshot;
+
 	static CoreCollector()
 	{
 		Magic_600DF00D = 1611526157u;
 		gameDifficulty_0 = GameDifficulty.unknown;
-		Actor.IWindow_0 = GameWindowManager.Window;
 		uiElements = new UiElements();
 		class335_0 = new FloatingNumberManager();
 		class376_0 = new QuestManager();
@@ -305,7 +308,7 @@ internal static class CoreCollector
 			class340_11 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total_" + gameDifficulty_0);
 			class340_12 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + gameDifficulty_0.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			class340_13 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + gameDifficulty_0.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			ISnoArea snoArea = LocalPlayer.SnoArea;
+			SnoArea snoArea = LocalPlayer.SnoArea;
 			if (snoArea == null) {
 				obj = null;
 			} else {
@@ -335,7 +338,7 @@ internal static class CoreCollector
 		Trackers.Clear();
 		return;
 	IL_03dd:
-		ISnoArea isnoArea_ = (ISnoArea)obj;
+		SnoArea isnoArea_ = (SnoArea)obj;
 		if (class364_0 == null) {
 			class364_0 = new RunTracker(isnoArea_);
 		} else {
@@ -395,15 +398,14 @@ internal static class CoreCollector
 	{
 		CurrentRealTimeTicks = DateTime.Now.Ticks;
 		try {
-			bool dafRescanned = false;
 			GameWindowManager.Window.CursorX = Cursor.Position.X - ((GameWindowManager.Window.Handle != IntPtr.Zero) ? GameWindowManager.Window.Offset.X : 0);
 			GameWindowManager.Window.CursorY = Cursor.Position.Y - ((GameWindowManager.Window.Handle != IntPtr.Zero) ? GameWindowManager.Window.Offset.Y : 0);
 			bool memoryValid = false;
-			if (GameWindowManager.Window.Handle != IntPtr.Zero && MR.Instance.IsValid()) {
+			if (GameWindowManager.Window.Handle != IntPtr.Zero && GameWindowManager.IsProcessValid()) {
 				DAF ??= new DAF();
-				dafRescanned = DAF.ObjectManagerAddress == 0 || DAF.IsScanRequired();
+				bool needsScan = DAF.ObjectManagerAddress == 0 || DAF.IsScanRequired();
 
-				if (memoryValid) {
+				if (needsScan) {
 					try {
 						DAF.Scan();
 					} catch (Exception ex) {
@@ -411,12 +413,13 @@ internal static class CoreCollector
 						Logger.Info("[ERROR] force daf scan due to exception: " + ex.Message);
 					}
 				}
-				if (dafRescanned = DAF.ObjectManagerAddress != 0) {
+
+				if (memoryValid = DAF.ObjectManagerAddress != 0) {
 					D3Memory.Update();
 				}
 			}
 
-			if (!dafRescanned) {
+			if (!memoryValid) {
 				GameStateValid = false;
 				CanReadMemory = false;
 				D3Memory.CommandLineArgs = null;
@@ -436,7 +439,7 @@ internal static class CoreCollector
 				Logger.LogException(ex.Message);
 			}
 
-			IHero hero = HeroCollector.HeroList.FirstOrDefault();
+			Hero hero = HeroCollector.HeroList.FirstOrDefault();
 			if (hero != null) {
 				BattleTag ??= hero.BattleTag;
 			} else {
@@ -495,6 +498,55 @@ internal static class CoreCollector
 					if (!ActorCollector.Collect()) {
 						return;
 					}
+
+					var player = CoreCollector.LocalPlayer;
+					var playerArea = player?.SnoArea;
+					var playerWorldId = player?.WorldId ?? 0;
+					var dict = CoreCollector.ActorCollector.Class112_1;
+					var temp = new List<Portal>();
+					bool isRift = playerArea != null && playerArea.Code.StartsWith("x1_lr_level_", StringComparison.InvariantCulture);
+					foreach (var kvp in dict)
+					{
+						var portal = kvp.Value;
+						if (portal == null)
+							continue;
+
+						if (playerArea == null || portal.TargetArea == null)
+							continue;
+
+						if (portal.WorldId != playerWorldId)
+							continue;
+
+						if (portal.ActorAvailable || !isRift)
+							temp.Add(portal);
+					}
+
+					portalsSnapshot = [.. temp];
+
+					var source = CoreCollector.ActorCollector.list_3;
+					var normals = new IClickableActor[source.Count];
+					var resplandecents = new IClickableActor[source.Count];
+					int normalsidx = 0;
+					int resplandecentsidx = 0;
+
+					for (int i = 0; i < source.Count; i++)
+					{
+						var actor = source[i];
+
+						if (actor.SnoActor.Kind == ActorKind.ChestNormal)
+						{
+							normals[normalsidx++] = (IClickableActor)actor;
+						}
+						else if (actor.SnoActor.Kind == ActorKind.Chest)
+						{
+							resplandecents[resplandecentsidx++] = (IClickableActor)actor;
+						}
+					}
+
+					Array.Resize(ref normals, normalsidx);
+					Array.Resize(ref resplandecents, resplandecentsidx);
+					NormalChestsSnapshot = normals;
+					ResplendentChestsSnapshot = resplandecents;
 				} catch (Exception ex) {
 					Logger.LogException(ex.Message);
 				}
@@ -505,7 +557,7 @@ internal static class CoreCollector
 				}
 
 				SceneCollector.GenerateSceneHints();
-				ISnoArea snoArea = LocalPlayer.SnoArea;
+				SnoArea snoArea = LocalPlayer.SnoArea;
 				bool_1 = false;
 				bool flag3 = !IsGameReady && stopwatch_0.ElapsedMilliseconds >= 3000;
 				if (int_0 != HeroCollector.Int32_0) {
@@ -562,7 +614,7 @@ internal static class CoreCollector
 					} catch (Exception exception_13) {
 						Logger.LogException(exception_13.Message);
 					}
-					IPlayer[] iPlayer_ = PlayerCollector.PlayerSlots;
+					Player[] iPlayer_ = PlayerCollector.PlayerSlots;
 					for (int i = 0; i < iPlayer_.Length; i++) {
 						Player obj = (Player)iPlayer_[i];
 						obj.long_6 = 0L;
@@ -580,9 +632,9 @@ internal static class CoreCollector
 				smethod_6();
 				if (IsGameReady) {
 					if (D3Memory.GameDifficulty < GameDifficulty.t1 && specialArea_0 == SpecialArea.None) {
-						IPlayer localPlayer = LocalPlayer;
+						Player localPlayer = LocalPlayer;
 						if (localPlayer == null || localPlayer.SnoArea?.Sno != 288482) {
-							IPlayer localPlayer2 = LocalPlayer;
+							Player localPlayer2 = LocalPlayer;
 							boolean_ = localPlayer2 != null && localPlayer2.SnoArea?.HostAreaSno == 288482;
 							goto IL_0bc6;
 						}
@@ -605,11 +657,11 @@ internal static class CoreCollector
 			} catch (Exception exception_14) {
 				Logger.LogException(exception_14.Message);
 			}
-			IPlayer[] iPlayer_2 = PlayerCollector.PlayerSlots;
+			Player[] iPlayer_2 = PlayerCollector.PlayerSlots;
 			for (int j = 0; j < iPlayer_2.Length; j++) {
 				Player class310_0 = (Player)iPlayer_2[j];
 				if (class310_0.IsDeadSafeCheck && class310_0.CoordinateKnown) {
-					HeadStone @class = ActorCollector.List_1.Find((IHeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == class310_0.AnnId) as HeadStone;
+					HeadStone @class = ActorCollector.List_1.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == class310_0.AnnId) as HeadStone;
 					if (@class != null) {
 						class310_0.HeadStone = @class;
 					}
@@ -633,7 +685,7 @@ internal static class CoreCollector
 				}
 			}
 			if (!UiElements.class341_56.Visible && !UiElements.class341_148.Visible && !UiElements.class341_156.Visible && !UiElements.class341_77.Visible) {
-				ISnoArea snoArea2 = LocalPlayer.SnoArea;
+				SnoArea snoArea2 = LocalPlayer.SnoArea;
 				if (snoArea2 != null && snoArea2.Type == AreaType.Normal && LocalPlayer.SnoArea.Sno != 405915) {
 					foreach (StatTracker item in Trackers) {
 						item.method_28();
@@ -674,7 +726,7 @@ internal static class CoreCollector
 				specialArea_0 = SpecialArea.UberFight;
 			}
 		} else {
-			IQuest quest = Class376_0.class112_1[337492u];
+			Quest quest = Class376_0.class112_1[337492u];
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 13 || quest.QuestStepId == 16 || quest.QuestStepId == 34)) {
 				specialArea_0 = SpecialArea.GreaterRift;
 			}
@@ -690,7 +742,7 @@ internal static class CoreCollector
 		}
 	}
 
-	public unsafe static PointF smethod_7(byte[] byte_0, int int_1, int int_2, ISnoPower isnoPower_0 = null, IPlayer iplayer_1 = null)
+	public unsafe static PointF smethod_7(byte[] byte_0, int int_1, int int_2, SnoPower SnoPower_0 = null, Player iplayer_1 = null)
 	{
 		if (int_2 == 0) {
 			return new PointF(0f, 0f);
@@ -775,10 +827,10 @@ internal static class CoreCollector
 											ACDCollector.SetIndexFromAcdId(iplayer_1.AcdId);
 											uint uint_ = 1048575u;
 											if (acdAttribute.Code.StartsWith("Rune_")) {
-												uint_ = isnoPower_0.Sno;
+												uint_ = SnoPower_0.Sno;
 											}
 											if (acdAttribute.Code.StartsWith("Buff_Icon_")) {
-												uint_ = isnoPower_0.Sno;
+												uint_ = SnoPower_0.Sno;
 											}
 											num7 = ACDCollector.method_7(acdAttribute, uint_);
 										} else {

@@ -2,17 +2,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Plugins;
+using SNO;
 
-internal class MonsterPack : IMonsterPack
+public class MonsterPack
 {
 	[CompilerGenerated]
 	private bool bool_0;
 
 	[CompilerGenerated]
-	private ISnoMonster isnoMonster_0;
+	private SnoMonster SnoMonster_0;
 
 	[CompilerGenerated]
-	private ISnoMonster isnoMonster_1;
+	private SnoMonster SnoMonster_1;
 
 	[CompilerGenerated]
 	private string string_0;
@@ -21,16 +22,16 @@ internal class MonsterPack : IMonsterPack
 	private string string_1;
 
 	[CompilerGenerated]
-	private List<ISnoMonsterAffix> list_0;
+	private List<SnoMonsterAffix> list_0;
 
 	[CompilerGenerated]
-	private readonly Class112<double, IMonster> class112_0 = new Class112<double, IMonster>();
+	private readonly Class112<double, Monster> class112_0 = new Class112<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Class112<double, IMonster> class112_1 = new Class112<double, IMonster>();
+	private readonly Class112<double, Monster> class112_1 = new Class112<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Class112<double, IMonster> class112_2 = new Class112<double, IMonster>();
+	private readonly Class112<double, Monster> class112_2 = new Class112<double, Monster>();
 
 	public Stopwatch LastActive { get; } = new Stopwatch();
 
@@ -48,39 +49,39 @@ internal class MonsterPack : IMonsterPack
 		}
 	}
 
-	public ISnoMonster LeadSnoMonster
+	public SnoMonster LeadSnoMonster
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoMonster_0;
+			return SnoMonster_0;
 		}
 		[CompilerGenerated]
 		set
 		{
-			isnoMonster_0 = value;
+			SnoMonster_0 = value;
 		}
 	}
 
-	public IEnumerable<ISnoMonsterAffix> AffixSnoList => List_0;
+	public IEnumerable<SnoMonsterAffix> AffixSnoList => List_0;
 
-	public IEnumerable<IMonster> MonstersAlive => Class112_0.IEnumerable_0;
+	public IEnumerable<Monster> MonstersAlive => Class112_0.IEnumerable_0;
 
-	public IEnumerable<IMonster> MonstersKilled => Class112_1.IEnumerable_0;
+	public IEnumerable<Monster> MonstersKilled => Class112_1.IEnumerable_0;
 
-	public IEnumerable<IMonster> MonstersUnknown => Class112_2.IEnumerable_0;
+	public IEnumerable<Monster> MonstersUnknown => Class112_2.IEnumerable_0;
 
-	public ISnoMonster MinionSnoMonster
+	public SnoMonster MinionSnoMonster
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoMonster_1;
+			return SnoMonster_1;
 		}
 		[CompilerGenerated]
 		set
 		{
-			isnoMonster_1 = value;
+			SnoMonster_1 = value;
 		}
 	}
 
@@ -112,7 +113,7 @@ internal class MonsterPack : IMonsterPack
 		}
 	}
 
-	public List<ISnoMonsterAffix> List_0
+	public List<SnoMonsterAffix> List_0
 	{
 		[CompilerGenerated]
 		get
@@ -126,7 +127,7 @@ internal class MonsterPack : IMonsterPack
 		}
 	}
 
-	public Class112<double, IMonster> Class112_0
+	public Class112<double, Monster> Class112_0
 	{
 		[CompilerGenerated]
 		get
@@ -135,7 +136,7 @@ internal class MonsterPack : IMonsterPack
 		}
 	}
 
-	public Class112<double, IMonster> Class112_1
+	public Class112<double, Monster> Class112_1
 	{
 		[CompilerGenerated]
 		get
@@ -144,7 +145,7 @@ internal class MonsterPack : IMonsterPack
 		}
 	}
 
-	public Class112<double, IMonster> Class112_2
+	public Class112<double, Monster> Class112_2
 	{
 		[CompilerGenerated]
 		get

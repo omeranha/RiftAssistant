@@ -7,27 +7,19 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using work;
 
-namespace work;
-
-internal static class Core
+public static class Core
 {
 	private static float OverlayFrameInterval => 1000f / Settings.OverlayFps;
-
-	private static int frameSkipper = 1;
-
-	private static int frameCounter;
-
-	private static int lastRenderTick = int.MinValue;
 
 	public static Settings Settings = new();
 
 	public static IReadOnlyList<Hotkey> HotkeyList;
 
-	public static PluginHandler PluginHandler;
+	internal static PluginHandler PluginHandler;
 
-	public static IController Controller { get; private set; }
+	public static Controller Controller { get; private set; }
 
 	public static SettingsMenu SettingsMenu { get; set; }
 
@@ -79,6 +71,7 @@ internal static class Core
 		PluginHandler.LoadPlugins();
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
+		CoreCollector.Update();
 	}
 
 	private static void ProcessLoot(object sender, LootGenerated e)
@@ -207,6 +200,14 @@ internal static class Core
 		}
 	}
 
+	public static void CollectLoop()
+	{
+		while (running) {
+			CoreCollector.Update();
+			Thread.Sleep(50);
+		}
+	}
+
 	public static void Update()
 	{
 		try {
@@ -214,9 +215,8 @@ internal static class Core
 				return;
 			}
 
-			CoreCollector.Update();
 			Overlay overlay = Overlay.Instance;
-			bool canRender = overlay.State != OverlayDisplayState.Hidden && GameWindowManager.Window.IsForeground && GameWindowManager.Window.WindowPlacement.showCmd != 2;
+			bool canRender = overlay.State != OverlayDisplayState.Hidden && GameWindowManager.Window.IsForeground;
 			if (!canRender) {
 				if (overlay.Frm.Visible) {
 					overlay.Frm.Visible = false;
@@ -224,29 +224,13 @@ internal static class Core
 				return;
 			}
 
-			long renderTick = CoreCollector.D3Memory.RenderTick;
-			if (renderTick == lastRenderTick) {
+			if (!overlay.Update()) {
 				return;
 			}
 
-			lastRenderTick = (int)renderTick;
-			if (frameSkipper > 1) {
-				frameCounter = (frameCounter + 1) % frameSkipper;
-				if (frameCounter != 0) {
-					return;
-				}
+			if (!overlay.Frm.Visible) {
+				overlay.Frm.Visible = true;
 			}
-
-			if (!overlay.Update() && frameSkipper > 1) {
-				frameCounter = (frameCounter + 1) % frameSkipper;
-			}
-
-			if (overlay.Frm.Visible) {
-				return;
-			}
-
-			overlay.Frm.Visible = true;
-			GameWindowManager.Window.IsForeground = Win32.User32.GetForegroundWindow() == GameWindowManager.Window.Handle;
 		} catch (Exception ex) {
 			Logger.LogException(ex.Message);
 		}
@@ -267,5 +251,32 @@ internal static class Core
 		Clear();
 		TrayIconManager.Dispose();
 		Environment.Exit(0);
+	}
+
+	public static void Measure(string name, Action action)
+	{
+		long start = Stopwatch.GetTimestamp();
+
+		action();
+
+		double ms = (Stopwatch.GetTimestamp() - start) * 1000.0 / Stopwatch.Frequency;
+
+		if (ms > 10)
+			Logger.Info($"{name}: {ms:F2} ms");
+	}
+
+	public static T Measure<T>(string name, Func<T> func)
+	{
+		long start = Stopwatch.GetTimestamp();
+
+		T result = func();
+
+		double ms = (Stopwatch.GetTimestamp() - start) * 1000.0 / Stopwatch.Frequency;
+
+		if (ms > 10) {
+			Logger.Info($"{name}: {ms:F2} ms");
+		}
+
+		return result;
 	}
 }

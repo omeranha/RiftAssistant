@@ -6,7 +6,7 @@ using Plugins;
 using work;
 using SharpDX.Mathematics.Interop;
 
-internal class Texture : ITransparent, ITexture
+public class Texture : ITransparent
 {
 	[CompilerGenerated]
 	private float opacity;

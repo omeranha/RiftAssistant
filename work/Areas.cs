@@ -11,11 +11,11 @@ namespace work;
 public sealed class Areas
 {
 	[CompilerGenerated]
-	private readonly ISnoAct[] isnoAct_0 = new ISnoAct[5];
+	private readonly SnoAct[] isnoAct_0 = new SnoAct[5];
 
-	private readonly Dictionary<uint, ISnoArea> dictionary_0 = new Dictionary<uint, ISnoArea>(500);
+	private readonly Dictionary<uint, SnoArea> dictionary_0 = new Dictionary<uint, SnoArea>(500);
 
-	public ISnoAct[] AllActs
+	public SnoAct[] AllActs
 	{
 		[CompilerGenerated]
 		get
@@ -24,9 +24,9 @@ public sealed class Areas
 		}
 	}
 
-	public IEnumerable<ISnoArea> AllAreas => dictionary_0.Values;
+	public IEnumerable<SnoArea> AllAreas => dictionary_0.Values;
 
-	public ISnoArea GetSnoArea(uint sno)
+	public SnoArea GetSnoArea(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;

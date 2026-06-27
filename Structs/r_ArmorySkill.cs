@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace structs;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal struct r_ArmorySkill
+public struct r_ArmorySkill
 {
 	[FieldOffset(0)]
 	public uint uint_0;

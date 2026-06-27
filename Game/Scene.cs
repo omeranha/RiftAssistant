@@ -1,11 +1,12 @@
 using System.Globalization;
 using Plugins;
+using SNO;
 
-internal class Scene : IScene
+public class Scene
 {
-	public ISnoScene SnoScene { get; set; }
+	public SnoScene SnoScene { get; set; }
 
-	public ISnoArea SnoArea { get; set; }
+	public SnoArea SnoArea { get; set; }
 
 	public uint WorldSno { get; set; }
 
@@ -31,7 +32,7 @@ internal class Scene : IScene
 
 	public uint UInt32_0 { get; set; }
 
-	public Scene(ISnoScene isnoScene_1, ISnoArea isnoArea_1, uint uint_4, uint uint_5, uint uint_6, float float_7, float float_8, float float_9, float float_10, float float_11)
+	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint uint_4, uint uint_5, uint uint_6, float float_7, float float_8, float float_9, float float_10, float float_11)
 	{
 		SnoScene = isnoScene_1;
 		SnoArea = isnoArea_1;

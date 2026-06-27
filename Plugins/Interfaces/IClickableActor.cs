@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace Plugins;
 
-public interface IClickableActor : IActor
+public interface IClickableActor
 {
 	Stopwatch FirstClicked { get; }
 

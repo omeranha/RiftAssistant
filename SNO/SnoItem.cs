@@ -6,32 +6,13 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoItem : ISnoItem
+public sealed class SnoItem
 {
-	[Serializable]
-	[CompilerGenerated]
-	private sealed class Class4
-	{
-		public static readonly Class4 class4_0;
-
-		//public static Predicate<ISnoItemMod> predicate_0;
-
-		static Class4()
-		{
-			class4_0 = new Class4();
-		}
-
-		internal bool method_0(ISnoItemMod isnoItemMod_0)
-		{
-			return isnoItemMod_0.Attribute?.Code == "Item_Power_Passive";
-		}
-	}
-
 	[CompilerGenerated]
 	private readonly uint uint_0;
 
 	[CompilerGenerated]
-	private readonly ISnoActor isnoActor_0;
+	private readonly SnoActor SnoActor_0;
 
 	[CompilerGenerated]
 	private readonly ItemKind itemKind_0;
@@ -73,7 +54,7 @@ public sealed class SnoItem : ISnoItem
 	private readonly ItemLocation itemLocation_1 = ItemLocation.Floor;
 
 	[CompilerGenerated]
-	private readonly ISnoItemType isnoItemType_0;
+	private readonly SnoItemType SnoItemType_0;
 
 	[CompilerGenerated]
 	private readonly int int_3;
@@ -97,13 +78,13 @@ public sealed class SnoItem : ISnoItem
 	private readonly ItemCraftQuality itemCraftQuality_0;
 
 	[CompilerGenerated]
-	private ISnoItemMod[] isnoItemMod_0;
+	private SnoItemMod[] isnoItemMod_0;
 
 	[CompilerGenerated]
-	private ISnoItemAffixGroupLink[] isnoItemAffixGroupLink_0;
+	private SnoItemAffixGroupLink[] isnoItemAffixGroupLink_0;
 
 	[CompilerGenerated]
-	private List<ISnoSocketedEffect> list_0;
+	private List<SnoSocketedEffect> list_0;
 
 	[CompilerGenerated]
 	private bool bool_0;
@@ -132,26 +113,23 @@ public sealed class SnoItem : ISnoItem
 	public uint Sno
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return uint_0;
 		}
 	}
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		[CompilerGenerated]
-		get
-		{
-			return isnoActor_0;
+		get {
+			return SnoActor_0;
 		}
 	}
 
 	public ItemKind Kind
-	{ 
+	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return itemKind_0;
 		}
 	}
@@ -159,8 +137,7 @@ public sealed class SnoItem : ISnoItem
 	public uint PrefixStringSno
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return uint_1;
 		}
 	}
@@ -168,8 +145,7 @@ public sealed class SnoItem : ISnoItem
 	public uint SuffixStringSno
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return uint_2;
 		}
 	}
@@ -177,8 +153,7 @@ public sealed class SnoItem : ISnoItem
 	public int Level
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_0;
 		}
 	}
@@ -186,8 +161,7 @@ public sealed class SnoItem : ISnoItem
 	public int ItemWidth
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_1;
 		}
 	}
@@ -195,8 +169,7 @@ public sealed class SnoItem : ISnoItem
 	public int ItemHeight
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_2;
 		}
 	}
@@ -204,8 +177,7 @@ public sealed class SnoItem : ISnoItem
 	public string Code
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return string_0;
 		}
 	}
@@ -213,8 +185,7 @@ public sealed class SnoItem : ISnoItem
 	public string NameLocalized
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return string_1;
 		}
 	}
@@ -222,8 +193,7 @@ public sealed class SnoItem : ISnoItem
 	public string NameEnglish
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return string_2;
 		}
 	}
@@ -231,8 +201,7 @@ public sealed class SnoItem : ISnoItem
 	public string MainGroupCode
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return string_3;
 		}
 	}
@@ -240,8 +209,7 @@ public sealed class SnoItem : ISnoItem
 	public string[] GroupCodes
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return string_4;
 		}
 	}
@@ -249,8 +217,7 @@ public sealed class SnoItem : ISnoItem
 	public ItemLocation UsedLocation1
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return itemLocation_0;
 		}
 	}
@@ -258,26 +225,23 @@ public sealed class SnoItem : ISnoItem
 	public ItemLocation UsedLocation2
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return itemLocation_1;
 		}
 	}
 
-	public ISnoItemType SnoItemType
+	public SnoItemType SnoItemType
 	{
 		[CompilerGenerated]
-		get
-		{
-			return isnoItemType_0;
+		get {
+			return SnoItemType_0;
 		}
 	}
 
 	public int StackSize
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_3;
 		}
 	}
@@ -285,8 +249,7 @@ public sealed class SnoItem : ISnoItem
 	public int GoldPrice
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_4;
 		}
 	}
@@ -294,8 +257,7 @@ public sealed class SnoItem : ISnoItem
 	public int UnsocketPrice
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_5;
 		}
 	}
@@ -303,8 +265,7 @@ public sealed class SnoItem : ISnoItem
 	public int RequiredLevel
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_6;
 		}
 	}
@@ -312,8 +273,7 @@ public sealed class SnoItem : ISnoItem
 	public uint BaseItemSno
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return uint_3;
 		}
 	}
@@ -321,8 +281,7 @@ public sealed class SnoItem : ISnoItem
 	public uint SetItemBonusesSno
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return uint_4;
 		}
 	}
@@ -330,50 +289,43 @@ public sealed class SnoItem : ISnoItem
 	public ItemCraftQuality CraftQuality
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return itemCraftQuality_0;
 		}
 	}
 
-	public ISnoItemMod[] Mods
+	public SnoItemMod[] Mods
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return isnoItemMod_0;
 		}
 		[CompilerGenerated]
-		set
-		{
+		set {
 			isnoItemMod_0 = value;
 		}
 	}
 
-	public ISnoItemAffixGroupLink[] AffixGroups
+	public SnoItemAffixGroupLink[] AffixGroups
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return isnoItemAffixGroupLink_0;
 		}
 		[CompilerGenerated]
-		set
-		{
+		set {
 			isnoItemAffixGroupLink_0 = value;
 		}
 	}
 
-	public List<ISnoSocketedEffect> SocketedEffects
+	public List<SnoSocketedEffect> SocketedEffects
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return list_0;
 		}
 		[CompilerGenerated]
-		set
-		{
+		set {
 			list_0 = value;
 		}
 	}
@@ -381,13 +333,11 @@ public sealed class SnoItem : ISnoItem
 	public bool CanKanaiCube
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return bool_0;
 		}
 		[CompilerGenerated]
-		set
-		{
+		set {
 			bool_0 = value;
 		}
 	}
@@ -395,8 +345,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropWeight
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_7;
 		}
 	}
@@ -404,8 +353,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartDemonHunter
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_8;
 		}
 	}
@@ -413,8 +361,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartBarbarian
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_9;
 		}
 	}
@@ -422,8 +369,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartWizard
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_10;
 		}
 	}
@@ -431,8 +377,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartWitchDoctor
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_11;
 		}
 	}
@@ -440,8 +385,7 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartMonk
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_12;
 		}
 	}
@@ -449,21 +393,17 @@ public sealed class SnoItem : ISnoItem
 	public int DropSmartCrusader
 	{
 		[CompilerGenerated]
-		get
-		{
+		get {
 			return int_13;
 		}
 	}
 
-	public ISnoPower LegendaryPower
+	public SnoPower LegendaryPower
 	{
-		get
-		{
-			if (Mods != null)
-			{
-				ISnoItemMod snoItemMod = Array.Find(Mods, (ISnoItemMod isnoItemMod_0) => isnoItemMod_0.Attribute?.Code == "Item_Power_Passive");
-				if (snoItemMod != null)
-				{
+		get {
+			if (Mods != null) {
+				SnoItemMod snoItemMod = Array.Find(Mods, (SnoItemMod isnoItemMod_0) => isnoItemMod_0.Attribute?.Code == "Item_Power_Passive");
+				if (snoItemMod != null) {
 					return SnoData.Powers.GetBySno(snoItemMod.Modifier);
 				}
 			}
@@ -473,12 +413,12 @@ public sealed class SnoItem : ISnoItem
 
 	public bool IsEthereal => Code.StartsWith("P71_Ethereal");
 
-	internal SnoItem(uint uint_5, uint uint_6, uint uint_7, ISnoActor isnoActor_1, uint uint_8, uint uint_9, int int_14, ISnoItemType isnoItemType_1, int int_15, int int_16, int int_17, int int_18, int int_19, int int_20, string string_5, string string_6, string string_7, string string_8, string[] string_9, ItemLocation itemLocation_2, ItemLocation itemLocation_3, int int_21, int int_22, int int_23, int int_24, int int_25, int int_26, int int_27, ItemCraftQuality itemCraftQuality_1)
+	internal SnoItem(uint uint_5, uint uint_6, uint uint_7, SnoActor SnoActor_1, uint uint_8, uint uint_9, int int_14, SnoItemType SnoItemType_1, int int_15, int int_16, int int_17, int int_18, int int_19, int int_20, string string_5, string string_6, string string_7, string string_8, string[] string_9, ItemLocation itemLocation_2, ItemLocation itemLocation_3, int int_21, int int_22, int int_23, int int_24, int int_25, int int_26, int int_27, ItemCraftQuality itemCraftQuality_1)
 	{
 		uint_0 = uint_5;
 		uint_3 = uint_6;
 		uint_4 = uint_7;
-		isnoActor_0 = isnoActor_1;
+		SnoActor_0 = SnoActor_1;
 		uint_1 = uint_8;
 		uint_2 = uint_9;
 		int_0 = int_14;
@@ -489,7 +429,7 @@ public sealed class SnoItem : ISnoItem
 		string_2 = string_7;
 		string_3 = string_8;
 		string_4 = string_9;
-		isnoItemType_0 = isnoItemType_1;
+		SnoItemType_0 = SnoItemType_1;
 		int_3 = int_15;
 		int_4 = int_16;
 		int_5 = int_17;
@@ -505,87 +445,65 @@ public sealed class SnoItem : ISnoItem
 		int_13 = int_27;
 		itemCraftQuality_0 = itemCraftQuality_1;
 		itemKind_0 = ItemKind.loot;
-		switch (Sno)
-		{
-		case 126259831u:
-			itemKind_0 = ItemKind.goldcoin;
-			break;
-		case 2603730171u:
-			itemKind_0 = ItemKind.loot;
-			break;
-		default:
-			if (MainGroupCode != null)
-			{
-				if (MainGroupCode == "potion")
-				{
-					itemKind_0 = ItemKind.potion;
+		switch (Sno) {
+			case 126259831u:
+				itemKind_0 = ItemKind.goldcoin;
+				break;
+			case 2603730171u:
+				itemKind_0 = ItemKind.loot;
+				break;
+			default:
+				if (MainGroupCode != null) {
+					if (MainGroupCode == "potion") {
+						itemKind_0 = ItemKind.potion;
+					}
+					if (MainGroupCode == "uber") {
+						itemKind_0 = ItemKind.uberstuff;
+					}
+					if (MainGroupCode == "gems") {
+						itemKind_0 = ItemKind.gem;
+					}
+					if (MainGroupCode == "consumable") {
+						itemKind_0 = ItemKind.craft;
+					}
+					if (MainGroupCode == "craftmats") {
+						itemKind_0 = ItemKind.craft;
+					}
+					if (MainGroupCode == "crafttomes") {
+						itemKind_0 = ItemKind.craft;
+					}
+					if (MainGroupCode == "craftpages") {
+						itemKind_0 = ItemKind.craft;
+					}
+					if (MainGroupCode == "plans") {
+						itemKind_0 = ItemKind.craft;
+					}
+					if (MainGroupCode == "gold") {
+						itemKind_0 = ItemKind.goldcoin;
+					}
+					if (MainGroupCode == "healthglobe") {
+						itemKind_0 = ItemKind.healthglobe;
+					}
+					if (MainGroupCode == "powerglobe") {
+						itemKind_0 = ItemKind.powerglobe;
+					}
+					if (MainGroupCode == "rift_orb") {
+						itemKind_0 = ItemKind.rift_orb;
+					}
 				}
-				if (MainGroupCode == "uber")
-				{
-					itemKind_0 = ItemKind.uberstuff;
-				}
-				if (MainGroupCode == "gems")
-				{
-					itemKind_0 = ItemKind.gem;
-				}
-				if (MainGroupCode == "consumable")
-				{
-					itemKind_0 = ItemKind.craft;
-				}
-				if (MainGroupCode == "craftmats")
-				{
-					itemKind_0 = ItemKind.craft;
-				}
-				if (MainGroupCode == "crafttomes")
-				{
-					itemKind_0 = ItemKind.craft;
-				}
-				if (MainGroupCode == "craftpages")
-				{
-					itemKind_0 = ItemKind.craft;
-				}
-				if (MainGroupCode == "plans")
-				{
-					itemKind_0 = ItemKind.craft;
-				}
-				if (MainGroupCode == "gold")
-				{
-					itemKind_0 = ItemKind.goldcoin;
-				}
-				if (MainGroupCode == "healthglobe")
-				{
-					itemKind_0 = ItemKind.healthglobe;
-				}
-				if (MainGroupCode == "powerglobe")
-				{
-					itemKind_0 = ItemKind.powerglobe;
-				}
-				if (MainGroupCode == "rift_orb")
-				{
-					itemKind_0 = ItemKind.rift_orb;
-				}
-			}
-			break;
+				break;
 		}
-		if (SnoItemType.Code == "Book")
-		{
+		if (SnoItemType.Code == "Book") {
 			itemKind_0 = ItemKind.book;
 		}
 	}
 
 	public bool HasGroupCode(string code)
 	{
-		if (GroupCodes != null)
-		{
+		if (GroupCodes != null) {
 			return Array.BinarySearch(GroupCodes, code) >= 0;
 		}
 		return false;
-	}
-
-	bool ISnoItem.HasGroupCode(string code)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in HasGroupCode
-		return this.HasGroupCode(code);
 	}
 
 	public override string ToString()

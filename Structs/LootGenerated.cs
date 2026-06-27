@@ -3,7 +3,7 @@ using Plugins;
 
 internal class LootGenerated : EventArgs
 {
-	public IItem item;
+	public Item item;
 
 	public bool gambled;
 }

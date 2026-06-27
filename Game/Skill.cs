@@ -3,21 +3,21 @@ using Plugins;
 using SNO;
 using work;
 
-internal class Skill : IPlayerSkill
+public class Skill
 {
 	private readonly Player player;
 
-	public IPlayer Player => player;
+	public Player Player => player;
 
-	public ISnoPower SnoPower { get; set; }
+	public SnoPower SnoPower { get; set; }
 
 	public byte Rune { get; set; }
 
 	public ActionKey Key { get; set; }
 
-	public ISnoPower OverrideSnoPower { get; set; }
+	public SnoPower OverrideSnoPower { get; set; }
 
-	public ISnoPower CurrentSnoPower
+	public SnoPower CurrentSnoPower
 	{
 		get {
 			if (player.bool_13 && this != player.Powers.HealthPotionSkill) {
@@ -92,7 +92,7 @@ internal class Skill : IPlayerSkill
 
 	public bool BuffIsActive => player.Powers.GetBuff(SnoPower.Sno)?.Active ?? false;
 
-	public IBuff Buff => player.Powers.GetBuff(SnoPower.Sno);
+	public Buff Buff => player.Powers.GetBuff(SnoPower.Sno);
 
 	public int Charges
 	{
@@ -115,7 +115,7 @@ internal class Skill : IPlayerSkill
 
 	public Vk Keybind { get; set; } = Vk.None;
 
-	public Skill(Player player, ISnoPower snoPower, byte rune, ActionKey actionKey)
+	public Skill(Player player, SnoPower snoPower, byte rune, ActionKey actionKey)
 	{
 		this.player = player;
 		this.SnoPower = snoPower;
@@ -179,7 +179,7 @@ internal class Skill : IPlayerSkill
 		if (Player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
 			num4 = 1f - 0.8f * (1f - num4);
 		}
-		IBuff buff = Player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
+		Buff buff = Player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
 		if (buff != null && buff.Active && buff != null && buff.IconCounts[2] > 0) {
 			num4 = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - num4);
 		}

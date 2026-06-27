@@ -4,12 +4,12 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoItemAffixGroup : ISnoItemAffixGroup
+public class SnoItemAffixGroup
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
 
-	private readonly List<ISnoItemAffix> list_0 = new List<ISnoItemAffix>();
+	private readonly List<SnoItemAffix> list_0 = new List<SnoItemAffix>();
 
 	public uint Id
 	{
@@ -20,7 +20,7 @@ public class SnoItemAffixGroup : ISnoItemAffixGroup
 		}
 	}
 
-	public IEnumerable<ISnoItemAffix> Affixes => list_0;
+	public IEnumerable<SnoItemAffix> Affixes => list_0;
 
 	internal SnoItemAffixGroup(uint uint_1)
 	{
@@ -32,20 +32,8 @@ public class SnoItemAffixGroup : ISnoItemAffixGroup
 		return Id + " (" + list_0[0].Mods[0].Attribute.Code + ")";
 	}
 
-	string ISnoItemAffixGroup.ToString()
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in ToString
-		return this.ToString();
-	}
-
-	public void AddAffix(ISnoItemAffix affix)
+	public void AddAffix(SnoItemAffix affix)
 	{
 		list_0.Add(affix);
-	}
-
-	void ISnoItemAffixGroup.AddAffix(ISnoItemAffix affix)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in AddAffix
-		this.AddAffix(affix);
 	}
 }

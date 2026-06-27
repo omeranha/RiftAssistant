@@ -22,9 +22,6 @@
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	</PropertyGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="rift_assistant.ico" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
 		<PackageReference Include="SharpDX" Version="4.2.0" />
 		<PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
@@ -32,8 +29,5 @@
 		<PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
 		<PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
 		<PackageReference Include="System.Management" Version="10.0.7" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Game\Settings\" />
 	</ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoActor : ISnoActor
+public sealed class SnoActor
 {
 	[CompilerGenerated]
 	private readonly ActorSnoEnum actorSnoEnum_0;

@@ -19,7 +19,7 @@ internal class ACDCollector
 	private int int_0;
 
 	[CompilerGenerated]
-	private readonly AllocationCache<r_AttributeEntry> class352_0 = new AllocationCache<r_AttributeEntry>(ReadProcessMemory, 16);
+	private readonly AllocationCache<r_AttributeEntry> class352_0 = new AllocationCache<r_AttributeEntry>(16);
 
 	public int AcdIndexCur;
 
@@ -74,27 +74,20 @@ internal class ACDCollector
 		}
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_AttributeEntry struct8_0, int int_2, int int_3);
-
-	[DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory", SetLastError = true)]
-	internal static extern bool ReadProcessMemory_1(IntPtr intptr_0, IntPtr intptr_1, ref r_ACD struct7_1, int int_2, int int_3);
-
 	internal void Collect()
 	{
-		int num = CoreCollector.D3Memory.ACDContainer.MaxIndex + 1;
-		if (Buffer_ACDs == null || Buffer_ACDs.Length <= CoreCollector.D3Memory.ACDContainer.MaxIndex)
-		{
-			Buffer_ACDs = new r_ACD[num];
+		int remaining = CoreCollector.D3Memory.ACDContainer.MaxIndex + 1;
+		if (Buffer_ACDs == null || Buffer_ACDs.Length <= CoreCollector.D3Memory.ACDContainer.MaxIndex) {
+			Buffer_ACDs = new r_ACD[remaining];
 		}
-		int num2 = 0;
-		for (int i = 0; i < CoreCollector.D3Memory.ACDContainer.BlockCount; i++)
-		{
-			long num3 = CoreCollector.D3Memory.ACDContainer.BlockPointers[i];
-			int num4 = Math.Min(CoreCollector.D3Memory.ACDContainer.BlocksItemCapacity, num);
-			ReadProcessMemory_1(MR.Instance.ProcessHandle, (IntPtr)num3, ref Buffer_ACDs[num2], Constants.ACD_SizeOf * num4, 0);
-			num -= num4;
-			num2 += num4;
+
+		int offset = 0;
+		for (int i = 0; i < CoreCollector.D3Memory.ACDContainer.BlockCount; i++) {
+			long address = CoreCollector.D3Memory.ACDContainer.BlockPointers[i];
+			int count = Math.Min(CoreCollector.D3Memory.ACDContainer.BlocksItemCapacity, remaining);
+			GameWindowManager.ReadIntoArray(address, Buffer_ACDs, offset, count);
+			remaining -= count;
+			offset += count;
 		}
 		AttributeAllocationCache.Snapshot(CoreCollector.D3Memory.AttribAllocator);
 	}
@@ -120,14 +113,14 @@ internal class ACDCollector
 	public void method_3(out AnimSnoEnum animSnoEnum_0, out AcdAnimationState acdAnimationState_0)
 	{
 		long ptr_animation_info = Buffer_ACDs[AcdIndexCur].ptr_animation_info;
-		animSnoEnum_0 = (AnimSnoEnum)MR.Instance.ReadInt32_x64(ptr_animation_info + 4);
-		acdAnimationState_0 = (AcdAnimationState)MR.Instance.ReadInt32_x64(ptr_animation_info + 216);
+		animSnoEnum_0 = (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
+		acdAnimationState_0 = (AcdAnimationState)GameWindowManager.Read<int>(ptr_animation_info + 216);
 	}
 
 	public AnimSnoEnum method_4()
 	{
 		long ptr_animation_info = Buffer_ACDs[AcdIndexCur].ptr_animation_info;
-		return (AnimSnoEnum)MR.Instance.ReadInt32_x64(ptr_animation_info + 4);
+		return (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
 	}
 
 	public bool method_5()
@@ -147,8 +140,8 @@ internal class ACDCollector
 			if (CoreCollector.D3Memory.FastAttribGroupContainer.BlockCount > 0 && CoreCollector.D3Memory.FastAttribGroupContainer.BlockCount > fastAttribGroupID / CoreCollector.D3Memory.FastAttribGroupContainer.BlocksItemCapacity)
 			{
 				long num = CoreCollector.D3Memory.FastAttribGroupContainer.ElementAt(fastAttribGroupID);
-				AttributeMapFlags = MR.Instance.ReadInt32_x64(num + 4);
-				long long_ = (((AttributeMapFlags & 4) != 0) ? MR.Instance.ReadAddress(num + 16) : (num + 24));
+				AttributeMapFlags = GameWindowManager.Read<int>(num + 4);
+				long long_ = (((AttributeMapFlags & 4) != 0) ? GameWindowManager.Read<long>(num + 16) : (num + 24));
 				AttributeMap.method_0(long_);
 				if (AttributeMap.bool_0)
 				{
@@ -162,7 +155,7 @@ internal class ACDCollector
 		return false;
 	}
 
-	public float method_7(IAttribute iattribute_0, uint uint_0, float float_0 = -1f)
+	public float method_7(AcdAttribute iattribute_0, uint uint_0, float float_0 = -1f)
 	{
 		if (!attributeMapUpdated)
 		{
@@ -193,7 +186,7 @@ internal class ACDCollector
 		return float_0;
 	}
 
-	public double method_8(IAttribute iattribute_0, uint uint_0, double double_0 = -1.0)
+	public double method_8(AcdAttribute iattribute_0, uint uint_0, double double_0 = -1.0)
 	{
 		if (!attributeMapUpdated)
 		{

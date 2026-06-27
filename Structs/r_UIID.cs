@@ -26,7 +26,7 @@ internal struct r_UIID
 	[FieldOffset(528)]
 	public long long_1;
 
-	public const int int_0 = 536;
+	public const int Size = 536;
 
 	public const int int_1 = 520;
 }

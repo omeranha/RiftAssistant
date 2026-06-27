@@ -34,7 +34,7 @@ public sealed class Worlds
 			for (int i = 1; i < array2.Length; i++)
 			{
 				uint sno = uint.Parse(array2[i], CultureInfo.InvariantCulture);
-				ISnoArea snoArea = SnoData.Areas.GetSnoArea(sno);
+				SnoArea snoArea = SnoData.Areas.GetSnoArea(sno);
 				snoWorld.SnoAreas.Add(snoArea);
 				(snoArea as SnoArea).SnoWorld = snoWorld;
 			}
@@ -56,11 +56,11 @@ public sealed class Worlds
 				float float_3 = float.Parse(array2[2], CultureInfo.InvariantCulture);
 				float float_4 = float.Parse(array2[3], CultureInfo.InvariantCulture);
 				uint sno2 = uint.Parse(array2[4], CultureInfo.InvariantCulture);
-				ISnoArea snoArea2 = SnoData.Areas.GetSnoArea(sno2);
+				SnoArea snoArea2 = SnoData.Areas.GetSnoArea(sno2);
 				if (array2.Length == 6)
 				{
 					uint sno3 = uint.Parse(array2[5], CultureInfo.InvariantCulture);
-					ISnoScene scene = SnoData.Scenes.GetScene(sno3);
+					SnoScene scene = SnoData.Scenes.GetScene(sno3);
 					SnoWorldSceneInfoStatic item = new SnoWorldSceneInfoStatic(float_, float_2, float_3, float_4, snoArea2, scene);
 					snoWorld.SceneInfos.Add(item);
 					continue;
@@ -70,7 +70,7 @@ public sealed class Worlds
 				for (int k = 5; k < array2.Length; k++)
 				{
 					uint sno4 = uint.Parse(array2[k], CultureInfo.InvariantCulture);
-					ISnoScene scene2 = SnoData.Scenes.GetScene(sno4);
+					SnoScene scene2 = SnoData.Scenes.GetScene(sno4);
 					snoWorldSceneInfoRandom.SnoScenes.Add(scene2);
 				}
 			}

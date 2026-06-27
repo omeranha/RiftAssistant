@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Plugins;
+using SNO;
 
-internal class Monster(uint uint_7, uint uint_8, ISnoActor isnoActor_1, ISnoMonster isnoMonster_1) : Actor(uint_7, uint_8, isnoActor_1), IActor, IMonster
+public class Monster(uint uint_7, uint uint_8, SnoActor SnoActor_1, SnoMonster SnoMonster_1) : Actor(uint_7, uint_8, SnoActor_1)
 {
-	public ISnoMonster SnoMonster { get; set; } = isnoMonster_1;
+	public SnoMonster SnoMonster { get; set; } = SnoMonster_1;
 
 	public uint UInt32_0 => SnoMonster?.Sno ?? 0;
 
-	public IMonsterPack Pack { get; set; }
+	public MonsterPack Pack { get; set; }
 
 	public double MaxHealth { get; set; }
 
@@ -69,5 +70,5 @@ internal class Monster(uint uint_7, uint uint_8, ISnoActor isnoActor_1, ISnoMons
 
 	public bool IsAlive => CurHealth >= 0.30000001192092896;
 
-	public List<ISnoMonsterAffix> AffixSnoList {  get; set; }
+	public List<SnoMonsterAffix> AffixSnoList {  get; set; }
 }

@@ -18,5 +18,5 @@ internal struct r_Map
 
 	public const int Offset_Buckets = 28;
 
-	public const int int_4 = 32;
+	public const int Size = 32;
 }

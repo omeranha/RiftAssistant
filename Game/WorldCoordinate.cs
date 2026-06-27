@@ -5,9 +5,9 @@ using Plugins;
 
 namespace work;
 
-internal class WorldCoordinate : IWorldCoordinate
+public class WorldCoordinate
 {
-	public IWindow Window => GameWindowManager.Window;
+	public DiabloWindow Window => GameWindowManager.Window;
 
 	public float X { get; private set; }
 
@@ -34,7 +34,7 @@ internal class WorldCoordinate : IWorldCoordinate
 		Z = float_5;
 	}
 
-	public float XYDistanceTo(IWorldCoordinate otherCoordinate)
+	public float XYDistanceTo(WorldCoordinate otherCoordinate)
 	{
 		float num = otherCoordinate.X - X;
 		float num2 = otherCoordinate.Y - Y;
@@ -56,7 +56,7 @@ internal class WorldCoordinate : IWorldCoordinate
 		return (float)Math.Sqrt(num * num + num2 * num2 + num3 * num3);
 	}
 
-	public float XYZDistanceTo(IWorldCoordinate otherWorldCoordinate)
+	public float XYZDistanceTo(WorldCoordinate otherWorldCoordinate)
 	{
 		float num = otherWorldCoordinate.X - X;
 		float num2 = otherWorldCoordinate.Y - Y;
@@ -86,26 +86,26 @@ internal class WorldCoordinate : IWorldCoordinate
 		Z = z;
 	}
 
-	public void Set(IWorldCoordinate otherCoordinate)
+	public void Set(WorldCoordinate otherCoordinate)
 	{
 		X = otherCoordinate.X;
 		Y = otherCoordinate.Y;
 		Z = otherCoordinate.Z;
 	}
 
-	public void Add(IWorldCoordinate otherCoordinate)
+	public void Add(WorldCoordinate otherCoordinate)
 	{
 		X += otherCoordinate.X;
 		Y += otherCoordinate.Y;
 		Z += otherCoordinate.Z;
 	}
 
-	public IWorldCoordinate Offset(float x, float y, float z)
+	public WorldCoordinate Offset(float x, float y, float z)
 	{
 		return Window.CreateWorldCoordinate(X + x, Y + y, Z + z);
 	}
 
-	public bool Equals(IWorldCoordinate otherWorldCoordinate)
+	public bool Equals(WorldCoordinate otherWorldCoordinate)
 	{
 		if (otherWorldCoordinate.X == X && otherWorldCoordinate.Y == Y)
 		{
@@ -114,17 +114,17 @@ internal class WorldCoordinate : IWorldCoordinate
 		return false;
 	}
 
-	public float ZDiffTo(IWorldCoordinate wc)
+	public float ZDiffTo(WorldCoordinate wc)
 	{
 		return Math.Abs(wc.Z - Z);
 	}
 
-	public IScreenCoordinate ToScreenCoordinate(bool raw = false, bool precise = false)
+	public ScreenCoordinate ToScreenCoordinate(bool raw = false, bool precise = false)
 	{
 		return Window.WorldToScreenCoordinate(X, Y, Z, raw, precise);
 	}
 
-	public void SetScreenCoordinate(IScreenCoordinate sc, bool raw = false, bool precise = false)
+	public void SetScreenCoordinate(ScreenCoordinate sc, bool raw = false, bool precise = false)
 	{
 		Window.SetScreenCoordinate(sc, X, Y, Z, raw, precise);
 	}

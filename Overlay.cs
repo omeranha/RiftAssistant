@@ -39,7 +39,7 @@ internal class Overlay
 
 	public static Overlay Instance;
 
-	private readonly IController controller;
+	private readonly Controller controller;
 
 	public readonly Form Frm;
 
@@ -299,9 +299,9 @@ internal class Overlay
 		}
 	}
 
-	public Overlay(IController icontroller_1)
+	public Overlay(Controller controller)
 	{
-		controller = icontroller_1;
+		this.controller = controller;
 		Instance = this;
 		Frm = new FormOverlay();
 		Frm.SetBounds(0, 0, 0, 0);

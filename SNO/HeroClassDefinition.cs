@@ -4,7 +4,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class HeroClassDefinition : IHeroClassDefinition
+public sealed class HeroClassDefinition
 {
 	[CompilerGenerated]
 	private readonly HeroClass heroClass_0;

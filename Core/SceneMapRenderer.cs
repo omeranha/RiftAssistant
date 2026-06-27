@@ -78,8 +78,8 @@ internal class SceneMapRenderer
 
 	private bool CalculateMapBounds(out float minX, out float maxX, out float minY, out float maxY)
 	{
-		IEnumerable<IScene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
-		ISnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
+		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
+		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
 		bool mapUpdated = false;
 
 		minX = float.MaxValue;
@@ -116,7 +116,7 @@ internal class SceneMapRenderer
 		}
 
 		if (activeScenes != null) {
-			foreach (IScene scene in activeScenes) {
+			foreach (Scene scene in activeScenes) {
 				if (scene.SnoArea == null || !(scene.SnoArea.AreaGroupInWorld != currentArea.AreaGroupInWorld)) {
 					if (scene.PosX < minX) minX = scene.PosX;
 					if (scene.PosY < minY) minY = scene.PosY;
@@ -176,8 +176,8 @@ internal class SceneMapRenderer
 			DisposeTextures();
 		}
 
-		IEnumerable<IScene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
-		ISnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
+		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
+		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
 
 		int bitmapWidth = Convert.ToInt32((maxX - minX) * currentZoom);
 		int bitmapHeight = Convert.ToInt32((maxY - minY) * currentZoom);
@@ -187,7 +187,7 @@ internal class SceneMapRenderer
 			using System.Drawing.Bitmap giantMapBitmap = new System.Drawing.Bitmap(bitmapWidth, bitmapHeight);
 			using (Graphics graphics = Graphics.FromImage(giantMapBitmap)) {
 				if (!CoreCollector.IsInTown) {
-					foreach (IScene scene in activeScenes) {
+					foreach (Scene scene in activeScenes) {
 						if (scene.SnoArea == null || !(scene.SnoArea.AreaGroupInWorld != currentArea.AreaGroupInWorld)) {
 							float offsetX = maxX - scene.PosX;
 							float offsetY = scene.PosY - minY;
@@ -210,7 +210,7 @@ internal class SceneMapRenderer
 
 						if (!renderedSceneCache.Contains(cacheKey)) {
 							if (sceneInfo is SnoWorldSceneInfoStatic) {
-								ISnoScene snoScene = (sceneInfo as SnoWorldSceneInfoStatic).SnoScene;
+								SnoScene snoScene = (sceneInfo as SnoWorldSceneInfoStatic).SnoScene;
 								DrawScene(offsetX, offsetY, sceneInfo.W, sceneInfo.H, snoScene as SnoScene, graphics);
 								renderedSceneCache.Add(cacheKey);
 							} else if (Overlay.Instance.mapMode_0 != MapMode.PermaMap) {

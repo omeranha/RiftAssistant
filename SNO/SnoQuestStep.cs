@@ -3,10 +3,10 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoQuestStep : ISnoQuestStep
+public class SnoQuestStep
 {
 	[CompilerGenerated]
-	private readonly ISnoQuest isnoQuest_0;
+	private readonly SnoQuest isnoQuest_0;
 
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -29,7 +29,7 @@ public class SnoQuestStep : ISnoQuestStep
 	[CompilerGenerated]
 	private readonly string string_5;
 
-	public ISnoQuest SnoQuest
+	public SnoQuest SnoQuest
 	{
 		[CompilerGenerated]
 		get
@@ -101,7 +101,7 @@ public class SnoQuestStep : ISnoQuestStep
 		}
 	}
 
-	internal SnoQuestStep(ISnoQuest isnoQuest_1, uint uint_1, string string_6, string string_7, string string_8, string string_9, string string_10, string string_11)
+	internal SnoQuestStep(SnoQuest isnoQuest_1, uint uint_1, string string_6, string string_7, string string_8, string string_9, string string_10, string string_11)
 	{
 		isnoQuest_0 = isnoQuest_1;
 		uint_0 = uint_1;

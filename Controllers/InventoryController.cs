@@ -4,7 +4,7 @@ using Plugins;
 using SNO;
 using work;
 
-internal class InventoryController : IInventoryController
+public class InventoryController
 {
 	public int MaxStashPageCount => CoreCollector.UiElements.class341_8.Length;
 
@@ -16,19 +16,19 @@ internal class InventoryController : IInventoryController
 
 	public int HoveredStashTabIndex => CoreCollector.UiElements.GetInactiveStashTab();
 
-	public IEnumerable<IItem> ItemsInStash => CoreCollector.ItemCollector.list_0;
+	public Item[] ItemsInStash => [.. CoreCollector.ItemCollector.list_0];
 
-	public IEnumerable<IItem> ItemsInInventory => CoreCollector.ItemCollector.list_2;
+	public Item[] ItemsInInventory => [.. CoreCollector.ItemCollector.list_2];
 
-	public IUiElement StashMainUiElement => CoreCollector.UiElements.class341_9;
+	public UiElement StashMainUiElement => CoreCollector.UiElements.class341_9;
 
-	public IUiElement InventoryMainUiElement => CoreCollector.UiElements.class341_11;
+	public UiElement InventoryMainUiElement => CoreCollector.UiElements.class341_11;
 
-	public IUiElement InventoryItemsUiElement => CoreCollector.UiElements.class341_13;
+	public UiElement InventoryItemsUiElement => CoreCollector.UiElements.class341_13;
 
-	public IUiElement FollowerMainUiElement => CoreCollector.UiElements.class341_15;
+	public UiElement FollowerMainUiElement => CoreCollector.UiElements.class341_15;
 
-	public IItem HoveredItem
+	public Item HoveredItem
 	{
 		get
 		{
@@ -45,17 +45,17 @@ internal class InventoryController : IInventoryController
 		return CoreCollector.ItemCollector.int_1[tabIndex + pageIndex * MaxStashTabCountPerPage];
 	}
 
-	public IUiElement GetStashPageUiElement(int index)
+	public UiElement GetStashPageUiElement(int index)
 	{
 		return CoreCollector.UiElements.class341_8[index];
 	}
 
-	public IUiElement GetStashTabUiElement(int index)
+	public UiElement GetStashTabUiElement(int index)
 	{
 		return CoreCollector.UiElements.class341_7[index];
 	}
 
-	public IUiElement GetEquippedItemUiElement(ItemLocation location)
+	public UiElement GetEquippedItemUiElement(ItemLocation location)
 	{
 		return location switch
 		{
@@ -90,7 +90,7 @@ internal class InventoryController : IInventoryController
 		};
 	}
 
-	public RectangleF GetItemRect(IItem item)
+	public RectangleF GetItemRect(Item item)
 	{
 		return item.GetUIRectangle();
 	}
@@ -105,17 +105,17 @@ internal class InventoryController : IInventoryController
 		return ItemUIExtensions.CalculateInventorySlotRect(x, y, width, height);
 	}
 
-	public ISnoItem GetSnoItem(uint sno)
+	public SnoItem GetSnoItem(uint sno)
 	{
 		return SnoData.Items.GetBySno(sno);
 	}
 
-	public IUiElement GetHoveredItemMainUiElement()
+	public UiElement GetHoveredItemMainUiElement()
 	{
 		return CoreCollector.UiElements.class341_68;
 	}
 
-	public IUiElement GetHoveredItemTopUiElement()
+	public UiElement GetHoveredItemTopUiElement()
 	{
 		return CoreCollector.UiElements.class341_69;
 	}

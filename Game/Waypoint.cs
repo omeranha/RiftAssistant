@@ -1,15 +1,16 @@
 using System.Drawing;
 using Plugins;
+using SNO;
 
-internal class Waypoint(ISnoArea snoArea, BountyAct bountyAct, PointF pointF) : IWaypoint
+public class Waypoint(SnoArea snoArea, BountyAct bountyAct, PointF pointF)
 {
-	private ISnoArea snoArea = snoArea;
+	private SnoArea snoArea = snoArea;
 
 	private BountyAct bountyAct = bountyAct;
 
 	private PointF pointF = pointF;
 
-	public ISnoArea TargetSnoArea
+	public SnoArea TargetSnoArea
 	{
 		get
 		{

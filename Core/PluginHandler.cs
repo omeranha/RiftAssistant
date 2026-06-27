@@ -17,7 +17,7 @@ using work;
 
 internal class PluginHandler
 {
-	private readonly IController controller;
+	private readonly Controller controller;
 	private AssemblyLoadContext loadContext;
 	private WeakReference loadContextReference;
 	private readonly Lock pluginLock = new();
@@ -28,7 +28,7 @@ internal class PluginHandler
 	public bool Reloaded { get; private set; } = false;
 	public bool Errored { get; private set; } = false;
 
-	internal PluginHandler(IController controller)
+	internal PluginHandler(Controller controller)
 	{
 		this.controller = controller;
 		references = [.. AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
@@ -47,16 +47,16 @@ internal class PluginHandler
 
 		var items = CoreCollector.ItemCollector;
 		items.OnItemIdentified += (_, item) => Dispatch<IItemIdentifiedHandler>(h => h.OnItemIdentified(item));
-		items.OnItemLocationChanged += (_, e) => Dispatch<IItemLocationChangedHandler>(h => h.OnItemLocationChanged(e.iitem_0, e.itemLocation_0, e.itemLocation_1));
+		items.OnItemLocationChanged += (_, e) => Dispatch<IItemLocationChangedHandler>(h => h.OnItemLocationChanged(e.Item, e.From, e.To));
 		items.OnLootGenerated += (_, e) => Dispatch<ILootGeneratedHandler>(h => h.OnLootGenerated(e.item, e.gambled));
-		items.OnItemPicked += (_, e) => Dispatch<IItemPickedHandler>(h => h.OnItemPicked(e.iitem_0));
+		items.OnItemPicked += (_, e) => Dispatch<IItemPickedHandler>(h => h.OnItemPicked(e.Item));
 
 		var actors = CoreCollector.ActorCollector;
 		actors.onMonsterKilled += (_, monster) => Dispatch<IMonsterKilledHandler>(h => h.OnMonsterKilled(monster));
 		actors.OnPortalFound += (_, portal) => Dispatch<IPortalFoundHandler>(h => h.OnPortalFound(portal));
 		CoreCollector.OnCooldown += (_, skill) => Dispatch<ISkillCooldownHandler>(h => h.OnCooldown(skill, false));
 		CoreCollector.OnTrueCooldown += (_, skill) => Dispatch<ISkillCooldownHandler>(h => h.OnCooldown(skill, true));
-		CoreCollector.UiElements.ChatChanged += (_, e) => Dispatch<IChatLineChangedHandler>(h => h.OnChatLineChanged(e.string_0, e.string_1));
+		CoreCollector.UiElements.ChatChanged += (_, e) => Dispatch<IChatLineChangedHandler>(h => h.OnChatLineChanged(e.Current, e.Previous));
 	}
 
 	internal void LoadPlugins(bool reloading = false)
@@ -139,7 +139,7 @@ internal class PluginHandler
 			}
 
 			combinedSource.Append(typeof(IPlugin).Assembly.ManifestModule.ModuleVersionId);
-			combinedSource.Append(typeof(IController).Assembly.ManifestModule.ModuleVersionId);
+			combinedSource.Append(typeof(Controller).Assembly.ManifestModule.ModuleVersionId);
 
 			if (sources.Count == 0) return false;
 
@@ -241,7 +241,7 @@ internal class PluginHandler
 		}
 
 		try {
-			plugin.Load(controller);
+			plugin.Load();
 			return plugin;
 		} catch (Exception ex) {
 			Logger.Info($"[ERROR] loading plugin {name} {ex.Message}");

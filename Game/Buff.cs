@@ -2,13 +2,13 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Plugins;
 
-internal class Buff : IBuff
+public class Buff
 {
 	[CompilerGenerated]
-	private readonly IPlayer iplayer_0;
+	private readonly Player iplayer_0;
 
 	[CompilerGenerated]
-	private readonly ISnoPower isnoPower_0;
+	private readonly SnoPower SnoPower_0;
 
 	[CompilerGenerated]
 	private bool bool_0;
@@ -22,7 +22,7 @@ internal class Buff : IBuff
 	[CompilerGenerated]
 	private readonly double[] double_1 = new double[32];
 
-	public IPlayer Player
+	public Player Player
 	{
 		[CompilerGenerated]
 		get
@@ -31,12 +31,12 @@ internal class Buff : IBuff
 		}
 	}
 
-	public ISnoPower SnoPower
+	public SnoPower SnoPower
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoPower_0;
+			return SnoPower_0;
 		}
 	}
 
@@ -85,9 +85,9 @@ internal class Buff : IBuff
 		}
 	}
 
-	public Buff(IPlayer iplayer_1, ISnoPower isnoPower_1)
+	public Buff(Player iplayer_1, SnoPower SnoPower_1)
 	{
 		iplayer_0 = iplayer_1;
-		isnoPower_0 = isnoPower_1;
+		SnoPower_0 = SnoPower_1;
 	}
 }

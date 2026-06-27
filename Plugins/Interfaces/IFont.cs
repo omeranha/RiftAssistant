@@ -1,4 +1,5 @@
 using SharpDX.DirectWrite;
+using work;
 
 namespace Plugins;
 
@@ -12,7 +13,7 @@ public interface IFont : ITransparent
 
 	bool HeavyShadow { get; set; }
 
-	void DrawText(string text, IScreenCoordinate coordinate, bool enableLayoutCache = true);
+	void DrawText(string text, ScreenCoordinate coordinate, bool enableLayoutCache = true);
 
 	void DrawText(string text, float x, float y, bool enableLayoutCache = true);
 
@@ -22,7 +23,7 @@ public interface IFont : ITransparent
 
 	void DrawText(TextLayout textLayout, float x, float y);
 
-	void DrawText(TextLayout textLayout, IScreenCoordinate coordinate);
+	void DrawText(TextLayout textLayout, ScreenCoordinate coordinate);
 
 	void SetMaxSize(int maxWidth, int maxHeight);
 

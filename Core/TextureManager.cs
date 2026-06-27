@@ -20,12 +20,12 @@ internal static class TextureManager
 
 	private static readonly Dictionary<uint, long> sceneSnoToLastAccessTicks = [];
 
-	public static Texture GetItemTexture(ISnoItem snoItem)
+	public static Texture GetItemTexture(SnoItem snoItem)
 	{
 		return GetItemTexture(snoItem, HeroClass.Wizard, isFemale: true);
 	}
 
-	public static Texture GetItemTexture(ISnoItem snoItem, HeroClass heroClass, bool isFemale)
+	public static Texture GetItemTexture(SnoItem snoItem, HeroClass heroClass, bool isFemale)
 	{
 		uint[] textureMap = snoItem.SnoActor.TextureMap;
 		if (textureMap == null) {
@@ -72,12 +72,6 @@ internal static class TextureManager
 		}
 
 		switch (textureId) {
-			case 214874095u: {
-					Bitmap bitmap_1 = AppResources.InventoryMaterials;
-					Texture class3 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(bitmap_1)), 0, 0, bitmap_1.Width, bitmap_1.Height);
-					textureIdToTexture[textureId] = class3;
-					return class3;
-				}
 			case 2078949389u: {
 					Bitmap bitmap_0 = AppResources.BuffFrame;
 					Texture class2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(bitmap_0, bool_0: true)), 0, 0, bitmap_0.Width, bitmap_0.Height);

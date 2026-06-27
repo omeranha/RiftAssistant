@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using Plugins;
 
-internal class SceneRevealController : ISceneRevealController
+public class SceneRevealController
 {
 	[CompilerGenerated]
 	private bool bool_0;

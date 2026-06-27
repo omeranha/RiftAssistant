@@ -4,13 +4,13 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoWorld : ISnoWorld
+public sealed class SnoWorld
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
 
 	[CompilerGenerated]
-	private readonly List<ISnoArea> list_0 = new List<ISnoArea>();
+	private readonly List<SnoArea> list_0 = new List<SnoArea>();
 
 	public List<SnoWorldSceneInfo> SceneInfos = new List<SnoWorldSceneInfo>();
 
@@ -23,7 +23,7 @@ public sealed class SnoWorld : ISnoWorld
 		}
 	}
 
-	public List<ISnoArea> SnoAreas
+	public List<SnoArea> SnoAreas
 	{
 		[CompilerGenerated]
 		get

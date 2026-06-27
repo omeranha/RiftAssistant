@@ -137,7 +137,7 @@ internal struct r_Quest
 	[FieldOffset(172)]
 	public uint uint_39;
 
-	public const int int_3 = 376;
+	public const int Size = 376;
 
 	[FieldOffset(372)]
 	public int int_4;

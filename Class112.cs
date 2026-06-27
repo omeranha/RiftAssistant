@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-internal class Class112<T, U> : IEnumerable<KeyValuePair<T, U>>, IEnumerable
+public class Class112<T, U> : IEnumerable<KeyValuePair<T, U>>, IEnumerable
 {
 	private readonly Dictionary<T, U> dictionary_0;
 

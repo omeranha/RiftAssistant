@@ -3,24 +3,24 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoSocketedEffect : ISnoSocketedEffect
+public class SnoSocketedEffect
 {
 	[CompilerGenerated]
-	private readonly ISnoItemType isnoItemType_0;
+	private readonly SnoItemType SnoItemType_0;
 
 	[CompilerGenerated]
-	private readonly ISnoItemMod[] isnoItemMod_0;
+	private readonly SnoItemMod[] isnoItemMod_0;
 
-	public ISnoItemType SnoItemType
+	public SnoItemType SnoItemType
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoItemType_0;
+			return SnoItemType_0;
 		}
 	}
 
-	public ISnoItemMod[] Mods
+	public SnoItemMod[] Mods
 	{
 		[CompilerGenerated]
 		get
@@ -29,9 +29,9 @@ public class SnoSocketedEffect : ISnoSocketedEffect
 		}
 	}
 
-	internal SnoSocketedEffect(ISnoItemType isnoItemType_1, ISnoItemMod[] isnoItemMod_1)
+	internal SnoSocketedEffect(SnoItemType SnoItemType_1, SnoItemMod[] isnoItemMod_1)
 	{
-		isnoItemType_0 = isnoItemType_1;
+		SnoItemType_0 = SnoItemType_1;
 		isnoItemMod_0 = isnoItemMod_1;
 	}
 }

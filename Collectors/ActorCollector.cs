@@ -18,13 +18,13 @@ internal class ActorCollector
 	private readonly Class112<uint, Actor> class112_0 = new Class112<uint, Actor>(1000);
 
 	[CompilerGenerated]
-	private IMonster imonster_0;
+	private Monster imonster_0;
 
 	[CompilerGenerated]
-	private IMonster imonster_1;
+	private Monster imonster_1;
 
 	[CompilerGenerated]
-	private IActor iactor_0;
+	private Actor iactor_0;
 
 	[CompilerGenerated]
 	private readonly bool[] bool_0 = new bool[5];
@@ -38,13 +38,13 @@ internal class ActorCollector
 
 	public FollowerClass followerClass_0;
 
-	public List<IMonster> list_0 = new List<IMonster>();
+	public List<Monster> list_0 = new List<Monster>();
 
-	public List<IMonster> list_1 = new List<IMonster>();
+	public List<Monster> list_1 = new List<Monster>();
 
-	public List<IMonsterPack> list_2 = new List<IMonsterPack>();
+	public List<MonsterPack> list_2 = new List<MonsterPack>();
 
-	public List<IActor> list_3 = new List<IActor>(1000);
+	public List<Actor> list_3 = new List<Actor>(1000);
 
 	[CompilerGenerated]
 	private int int_2;
@@ -62,34 +62,34 @@ internal class ActorCollector
 	private bool bool_3;
 
 	[CompilerGenerated]
-	private readonly Class112<SkillEffectType, List<ISkillEffect>> class112_1 = new Class112<SkillEffectType, List<ISkillEffect>>();
+	private readonly Class112<SkillEffectType, List<SkillEffect>> class112_1 = new Class112<SkillEffectType, List<SkillEffect>>();
 
 	[CompilerGenerated]
-	private readonly Class112<uint, IPortal> class112_2 = new Class112<uint, IPortal>();
+	private readonly Class112<uint, Portal> class112_2 = new Class112<uint, Portal>();
 
 	[CompilerGenerated]
-	private readonly List<IShrine> list_4 = new List<IShrine>();
+	private readonly List<Shrine> list_4 = new List<Shrine>();
 
 	[CompilerGenerated]
-	private readonly List<IHeadStone> list_5 = new List<IHeadStone>();
+	private readonly List<HeadStone> list_5 = new List<HeadStone>();
 
 	[CompilerGenerated]
 	private readonly List<IClickableActor> list_6 = new List<IClickableActor>();
 
 	[CompilerGenerated]
-	private readonly ITownBanner[] itownBanner_0 = new ITownBanner[4];
+	private readonly TownBanner[] itownBanner_0 = new TownBanner[4];
 
 	[CompilerGenerated]
-	private IActor iactor_1;
+	private Actor iactor_1;
 
 	[CompilerGenerated]
-	private IActor iactor_2;
+	private Actor iactor_2;
 
 	[CompilerGenerated]
-	private IActor iactor_3;
+	private Actor iactor_3;
 
 	[CompilerGenerated]
-	private IWorldCoordinate iworldCoordinate_0;
+	private WorldCoordinate iworldCoordinate_0;
 
 	[CompilerGenerated]
 	private int int_3;
@@ -97,7 +97,7 @@ internal class ActorCollector
 	[CompilerGenerated]
 	private r_Actor[] struct6_0;
 
-	public IMonster IMonster_0
+	public Monster IMonster_0
 	{
 		[CompilerGenerated]
 		get {
@@ -109,7 +109,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IMonster IMonster_1
+	public Monster IMonster_1
 	{
 		[CompilerGenerated]
 		get {
@@ -121,7 +121,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IActor IActor_0
+	public Actor IActor_0
 	{
 		[CompilerGenerated]
 		get {
@@ -135,9 +135,9 @@ internal class ActorCollector
 
 	public EventHandler EventHandler_0 { get; set; }
 
-	public EventHandler<IMonster> onMonsterKilled { get; set; }
+	public EventHandler<Monster> onMonsterKilled { get; set; }
 
-	public EventHandler<IPortal> OnPortalFound { get; set; }
+	public EventHandler<Portal> OnPortalFound { get; set; }
 
 	public bool[] Boolean_0
 	{
@@ -219,7 +219,7 @@ internal class ActorCollector
 		}
 	}
 
-	public Class112<SkillEffectType, List<ISkillEffect>> Class112_0
+	public Class112<SkillEffectType, List<SkillEffect>> Class112_0
 	{
 		[CompilerGenerated]
 		get {
@@ -227,7 +227,7 @@ internal class ActorCollector
 		}
 	}
 
-	public Class112<uint, IPortal> Class112_1
+	public Class112<uint, Portal> Class112_1
 	{
 		[CompilerGenerated]
 		get {
@@ -235,7 +235,7 @@ internal class ActorCollector
 		}
 	}
 
-	public List<IShrine> List_0
+	public List<Shrine> List_0
 	{
 		[CompilerGenerated]
 		get {
@@ -243,7 +243,7 @@ internal class ActorCollector
 		}
 	}
 
-	public List<IHeadStone> List_1
+	public List<HeadStone> List_1
 	{
 		[CompilerGenerated]
 		get {
@@ -259,7 +259,7 @@ internal class ActorCollector
 		}
 	}
 
-	public ITownBanner[] ITownBanner_0
+	public TownBanner[] ITownBanner_0
 	{
 		[CompilerGenerated]
 		get {
@@ -267,7 +267,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IActor IActor_1
+	public Actor IActor_1
 	{
 		[CompilerGenerated]
 		get {
@@ -279,7 +279,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IActor IActor_2
+	public Actor IActor_2
 	{
 		[CompilerGenerated]
 		get {
@@ -291,7 +291,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IActor IActor_3
+	public Actor IActor_3
 	{
 		[CompilerGenerated]
 		get {
@@ -303,7 +303,7 @@ internal class ActorCollector
 		}
 	}
 
-	public IWorldCoordinate IWorldCoordinate_0
+	public WorldCoordinate IWorldCoordinate_0
 	{
 		[CompilerGenerated]
 		get {
@@ -339,9 +339,6 @@ internal class ActorCollector
 		}
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	internal static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_Actor struct6_1, int int_4, int int_5);
-
 	internal void method_0()
 	{
 		class112_0.Clear();
@@ -358,7 +355,7 @@ internal class ActorCollector
 		list_3.Clear();
 		list_0.Clear();
 		list_1.Clear();
-		foreach (List<ISkillEffect> item in Class112_0.IEnumerable_0) {
+		foreach (List<SkillEffect> item in Class112_0.IEnumerable_0) {
 			item.Clear();
 		}
 		if (bool_4) {
@@ -396,7 +393,7 @@ internal class ActorCollector
 		for (int i = 0; i < CoreCollector.D3Memory.ActorContainer.BlockCount; i++) {
 			long num3 = CoreCollector.D3Memory.ActorContainer.BlockPointers[i];
 			int num4 = Math.Min(CoreCollector.D3Memory.ActorContainer.BlocksItemCapacity, num);
-			ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)num3, ref BufferActors[num2], Constants.Actor_SizeOf * num4, 0);
+			BufferActors = GameWindowManager.ReadArray<r_Actor>(num3, num4);
 			num -= num4;
 			num2 += num4;
 		}
@@ -435,7 +432,7 @@ internal class ActorCollector
 						(@class.Pack as MonsterPack)?.Class112_1.Set(@class.MaxHealth, @class);
 					}
 					if (CoreCollector.LocalPlayer.SnoArea != null) {
-						ISnoMonster snoMonster = @class.SnoMonster;
+						SnoMonster snoMonster = @class.SnoMonster;
 						if (snoMonster != null && snoMonster.Priority == MonsterPriority.keywarden) {
 							stopwatch_0.Restart();
 							Int32_0 = CoreCollector.LocalPlayer.SnoArea.Act;
@@ -465,7 +462,7 @@ internal class ActorCollector
 					continue;
 				}
 				Actor actor2 = class112_0[gparam_];
-				ISnoActor snoActor;
+				SnoActor snoActor;
 				if (actor2 == null) {
 					snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 					if (snoActor != null) {
@@ -505,7 +502,7 @@ internal class ActorCollector
 				uint sSceneID_Encrypted;
 				uint sWorldID_Encrypted;
 				if (snoActor.Kind == ActorKind.Player) {
-					if (!(Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (IPlayer iplayer_0) => iplayer_0.AcdId == acdid) is Player player)) {
+					if (!(Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player iplayer_0) => iplayer_0.AcdId == acdid) is Player player)) {
 						continue;
 					}
 					player.list_0.Clear();
@@ -547,7 +544,7 @@ internal class ActorCollector
 				}
 				bool flag2 = false;
 				Monster class2 = null;
-				ISnoMonster snoMonster2 = null;
+				SnoMonster snoMonster2 = null;
 				if (actor2 == null) {
 					snoMonster2 = SnoData.Monsters.GetMonster(actorSnoEnum);
 					if (snoMonster2 != null) {
@@ -574,7 +571,7 @@ internal class ActorCollector
 					bool num9 = actor2 == null || !(actor2?.SnoActor.IsStatic ?? false);
 					uint num10 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u);
 					if (actor2 == null) {
-						actor2 = method_4(gizmoType_0: (GizmoType)struct7_.GizmoType, uint_0: acdid, uint_1: annId, isnoActor_0: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
+						actor2 = method_4(gizmoType_0: (GizmoType)struct7_.GizmoType, uint_0: acdid, uint_1: annId, SnoActor_0: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
 						actor2.CreatedAtInGameTick = ptr->CreationTick;
 						class112_0.Set(gparam_, actor2);
 					}
@@ -623,7 +620,7 @@ internal class ActorCollector
 							}
 						}
 						if (CoreCollector.LocalPlayer.SnoArea != null) {
-							ISnoMonster snoMonster3 = class2.SnoMonster;
+							SnoMonster snoMonster3 = class2.SnoMonster;
 							if (snoMonster3 != null && snoMonster3.Priority == MonsterPriority.keywarden) {
 								stopwatch_0.Restart();
 								Int32_0 = CoreCollector.LocalPlayer.SnoArea.Act;
@@ -744,12 +741,12 @@ internal class ActorCollector
 			return false;
 		}
 		foreach (MonsterPack item7 in list_2) {
-			foreach (IMonster item8 in item7.Class112_0.IEnumerable_0) {
+			foreach (Monster item8 in item7.Class112_0.IEnumerable_0) {
 				item7.Class112_2.Set(item8.MaxHealth, item8);
 			}
 			item7.Class112_0.Clear();
 		}
-		list_0.Sort((IMonster imonster_0, IMonster imonster_1) => -((int)imonster_0.Rarity).CompareTo((int)imonster_1.Rarity));
+		list_0.Sort((Monster imonster_0, Monster imonster_1) => -((int)imonster_0.Rarity).CompareTo((int)imonster_1.Rarity));
 		foreach (Monster Monster_0 in list_0) {
 			if (Monster_0.Pack != null) {
 				(Monster_0.Pack as MonsterPack)?.Class112_2.Remove(Monster_0.MaxHealth);
@@ -769,12 +766,12 @@ internal class ActorCollector
 					if (Monster_0.SummonerAcdDynamicId != 0) {
 						continue;
 					}
-					string string_0 = string.Concat(Monster_0.AffixSnoList.Select((ISnoMonsterAffix isnoMonsterAffix_0) => isnoMonsterAffix_0.NameLocalized));
-					MonsterPack monsterPack2 = list_2.Find((IMonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_1 == string_0 && imonsterPack_0.MinionSnoMonster == Monster_0.SnoMonster) as MonsterPack;
+					string string_0 = string.Concat(Monster_0.AffixSnoList.Select((SnoMonsterAffix SnoMonsterAffix_0) => SnoMonsterAffix_0.NameLocalized));
+					MonsterPack monsterPack2 = list_2.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_1 == string_0 && imonsterPack_0.MinionSnoMonster == Monster_0.SnoMonster) as MonsterPack;
 					if (monsterPack2 == null) {
 						foreach (MonsterPack item9 in list_2) {
 							bool flag5 = true;
-							foreach (ISnoMonsterAffix item10 in Monster_0.AffixSnoList) {
+							foreach (SnoMonsterAffix item10 in Monster_0.AffixSnoList) {
 								if (!item9.List_0.Contains(item10)) {
 									flag5 = false;
 									break;
@@ -800,8 +797,8 @@ internal class ActorCollector
 					monsterPack2.LastActive.Restart();
 					Monster_0.Pack = monsterPack2;
 				} else {
-					string string_1 = string.Concat(Monster_0.AffixSnoList.Select((ISnoMonsterAffix isnoMonsterAffix_0) => isnoMonsterAffix_0.NameLocalized));
-					MonsterPack monsterPack4 = list_2.Find((IMonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_0 == string_1 && imonsterPack_0.LeadSnoMonster == Monster_0.SnoMonster) as MonsterPack;
+					string string_1 = string.Concat(Monster_0.AffixSnoList.Select((SnoMonsterAffix SnoMonsterAffix_0) => SnoMonsterAffix_0.NameLocalized));
+					MonsterPack monsterPack4 = list_2.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_0 == string_1 && imonsterPack_0.LeadSnoMonster == Monster_0.SnoMonster) as MonsterPack;
 					if (monsterPack4 == null) {
 						monsterPack4 = new MonsterPack {
 							List_0 = Monster_0.AffixSnoList.ToList(),
@@ -828,8 +825,8 @@ internal class ActorCollector
 				list_2.RemoveAt(num12);
 			}
 		}
-		foreach (IActor item11 in list_3.Where((IActor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
-			foreach (IMonster item12 in list_1) {
+		foreach (Actor item11 in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
+			foreach (Monster item12 in list_1) {
 				if (item12.SummonerAcdDynamicId == item11.SummonerId) {
 					(item12 as Monster).IsQuestMonster = true;
 				}
@@ -845,59 +842,59 @@ internal class ActorCollector
 
 	private static void smethod_0(r_ACD struct7_0, Monster Monster_0)
 	{
-		List<ISnoMonsterAffix> list = Monster_0.AffixSnoList;
+		List<SnoMonsterAffix> list = Monster_0.AffixSnoList;
 		list?.Clear();
-		ISnoMonsterAffix monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_0);
+		SnoMonsterAffix monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_0);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_1);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_2);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_3);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_4);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_5);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_6);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_7);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<ISnoMonsterAffix>())).Add(monsterAffix);
+			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
 		if (list != null) {
-			list.Sort((ISnoMonsterAffix isnoMonsterAffix_0, ISnoMonsterAffix isnoMonsterAffix_1) => isnoMonsterAffix_0.NameLocalized.CompareTo(isnoMonsterAffix_1.NameLocalized));
+			list.Sort((SnoMonsterAffix SnoMonsterAffix_0, SnoMonsterAffix SnoMonsterAffix_1) => SnoMonsterAffix_0.NameLocalized.CompareTo(SnoMonsterAffix_1.NameLocalized));
 			Monster_0.AffixSnoList = list;
 		}
 	}
 
-	private Actor method_4(uint uint_0, uint uint_1, ISnoActor isnoActor_0, GizmoType gizmoType_0, uint uint_2)
+	private Actor method_4(uint uint_0, uint uint_1, SnoActor SnoActor_0, GizmoType gizmoType_0, uint uint_2)
 	{
-		if (isnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && isnoActor_0.Sno != ActorSnoEnum._x1_westm_bridge && isnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
-			if (isnoActor_0.Sno == ActorSnoEnum._a3dun_keep_bridge) {
+		if (SnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && SnoActor_0.Sno != ActorSnoEnum._x1_westm_bridge && SnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
+			if (SnoActor_0.Sno == ActorSnoEnum._a3dun_keep_bridge) {
 				return null;
 			}
-			if (isnoActor_0.Sno == ActorSnoEnum._caout_target_dummy) {
+			if (SnoActor_0.Sno == ActorSnoEnum._caout_target_dummy) {
 				return null;
 			}
-			if (isnoActor_0.Sno == ActorSnoEnum._trdun_crypt_skeleton_king_throne_parts) {
+			if (SnoActor_0.Sno == ActorSnoEnum._trdun_crypt_skeleton_king_throne_parts) {
 				return null;
 			}
-			SkillEffectRule skillEffectRule = SnoData.Actors.GetSkillEffectRule(isnoActor_0.Sno);
+			SkillEffectRule skillEffectRule = SnoData.Actors.GetSkillEffectRule(SnoActor_0.Sno);
 			if (skillEffectRule != null) {
 				if ((skillEffectRule.Type == SkillEffectType.fetish || skillEffectRule.Type == SkillEffectType.zombiedog || skillEffectRule.Type == SkillEffectType.gargantuan || skillEffectRule.Type == SkillEffectType.sentry || skillEffectRule.Type == SkillEffectType.hydra) && uint_2 != CoreCollector.LocalPlayer.SummonerId) {
 					return null;
@@ -922,97 +919,97 @@ internal class ActorCollector
 						return null;
 					}
 				}
-				return new SkillEffect(uint_0, uint_1, isnoActor_0, skillEffectRule);
+				return new SkillEffect(uint_0, uint_1, SnoActor_0, skillEffectRule);
 			}
-			ActorShrineTypeInfo actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(isnoActor_0.Sno);
+			ActorShrineTypeInfo actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(SnoActor_0.Sno);
 			if (actorShrineTypeInfo != null) {
 				return new Shrine(uint_0, uint_1, actorShrineTypeInfo);
 			}
-			if (isnoActor_0.Kind == ActorKind.Gold) {
+			if (SnoActor_0.Kind == ActorKind.Gold) {
 				uint value = Convert.ToUInt32(CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gold, 1048575u, 0.0));
-				return new Actor(uint_0, uint_1, isnoActor_0) {
+				return new Actor(uint_0, uint_1, SnoActor_0) {
 					Amount = value
 				};
 			}
-			if (isnoActor_0.Kind == ActorKind.QuestActivate) {
-				return new MapObject(uint_0, uint_1, isnoActor_0) {
+			if (SnoActor_0.Kind == ActorKind.QuestActivate) {
+				return new MapObject(uint_0, uint_1, SnoActor_0) {
 					SummonerId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoner_id, 1048575u, 0u)
 				};
 			}
-			if (isnoActor_0.Kind == ActorKind.HealthGlobe) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.HealthGlobe) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.PowerGlobe) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.PowerGlobe) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.RiftOrb) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.RiftOrb) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.Stash) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.Stash) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.KanaiCube) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.KanaiCube) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.Waypoint) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.Waypoint) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind == ActorKind.BookOfCain) {
-				return new Actor(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind == ActorKind.BookOfCain) {
+				return new Actor(uint_0, uint_1, SnoActor_0);
 			}
-			if (isnoActor_0.Kind != ActorKind.Portal && gizmoType_0 != GizmoType.Portal) {
-				if (isnoActor_0.Kind == ActorKind.Chest) {
-					return new MapObject(uint_0, uint_1, isnoActor_0);
+			if (SnoActor_0.Kind != ActorKind.Portal && gizmoType_0 != GizmoType.Portal) {
+				if (SnoActor_0.Kind == ActorKind.Chest) {
+					return new MapObject(uint_0, uint_1, SnoActor_0);
 				}
-				if (isnoActor_0.Kind == ActorKind.CursedEvent) {
-					return new MapObject(uint_0, uint_1, isnoActor_0);
+				if (SnoActor_0.Kind == ActorKind.CursedEvent) {
+					return new MapObject(uint_0, uint_1, SnoActor_0);
 				}
-				if (isnoActor_0.Kind == ActorKind.ChestNormal) {
-					return new MapObject(uint_0, uint_1, isnoActor_0);
+				if (SnoActor_0.Kind == ActorKind.ChestNormal) {
+					return new MapObject(uint_0, uint_1, SnoActor_0);
 				}
-				if (isnoActor_0.Kind != ActorKind.Obstacle && gizmoType_0 != GizmoType.BreakableDoor && gizmoType_0 != GizmoType.BreakableChest) {
-					if (isnoActor_0.Kind == ActorKind.ArmorRack) {
-						return new MapObject(uint_0, uint_1, isnoActor_0);
+				if (SnoActor_0.Kind != ActorKind.Obstacle && gizmoType_0 != GizmoType.BreakableDoor && gizmoType_0 != GizmoType.BreakableChest) {
+					if (SnoActor_0.Kind == ActorKind.ArmorRack) {
+						return new MapObject(uint_0, uint_1, SnoActor_0);
 					}
-					if (isnoActor_0.Kind == ActorKind.WeaponRack) {
-						return new MapObject(uint_0, uint_1, isnoActor_0);
+					if (SnoActor_0.Kind == ActorKind.WeaponRack) {
+						return new MapObject(uint_0, uint_1, SnoActor_0);
 					}
 					switch (gizmoType_0) {
 						case GizmoType.Door:
-							return new Door(uint_0, uint_1, isnoActor_0);
+							return new Door(uint_0, uint_1, SnoActor_0);
 						case GizmoType.Headstone: {
 								uint uint_3 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
-								IPlayer iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (IPlayer player) => player.IsInGame && player.AnnId == uint_3);
-								return new HeadStone(uint_0, uint_1, isnoActor_0, uint_3, iplayer_);
+								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uint_3);
+								return new HeadStone(uint_0, uint_1, SnoActor_0, uint_3, iplayer_);
 							}
 						default:
-							if (isnoActor_0.Kind == ActorKind.DeadBody) {
-								return new MapObject(uint_0, uint_1, isnoActor_0);
+							if (SnoActor_0.Kind == ActorKind.DeadBody) {
+								return new MapObject(uint_0, uint_1, SnoActor_0);
 							}
-							if (isnoActor_0.Kind == ActorKind.Banner) {
-								return new TownBanner(uint_0, uint_1, isnoActor_0);
+							if (SnoActor_0.Kind == ActorKind.Banner) {
+								return new TownBanner(uint_0, uint_1, SnoActor_0);
 							}
-							if (isnoActor_0.Kind == ActorKind.NoWalk) {
-								return new Actor(uint_0, uint_1, isnoActor_0);
+							if (SnoActor_0.Kind == ActorKind.NoWalk) {
+								return new Actor(uint_0, uint_1, SnoActor_0);
 							}
 							return gizmoType_0 switch {
-								GizmoType.Chest => new MapObject(uint_0, uint_1, isnoActor_0),
-								GizmoType.LoreChest => new MapObject(uint_0, uint_1, isnoActor_0),
+								GizmoType.Chest => new MapObject(uint_0, uint_1, SnoActor_0),
+								GizmoType.LoreChest => new MapObject(uint_0, uint_1, SnoActor_0),
 								_ => null,
 							};
 					}
 				}
-				return new MonsterObstacle(uint_0, uint_1, isnoActor_0);
+				return new MonsterObstacle(uint_0, uint_1, SnoActor_0);
 			}
-			ISnoArea snoArea = null;
+			SnoArea snoArea = null;
 			long ptr_portal_info = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].ptr_portal_info;
 			uint uint_4 = 0u;
 			if (ptr_portal_info != 0L) {
-				uint_4 = MR.Instance.ReadUInt(ptr_portal_info);
-				uint sno = MR.Instance.ReadUInt(ptr_portal_info + 8);
+				uint_4 = GameWindowManager.Read<uint>(ptr_portal_info);
+				uint sno = GameWindowManager.Read<uint>(ptr_portal_info + 8);
 				snoArea = SnoData.Areas.GetSnoArea(sno);
 			}
-			Portal @class = new(uint_0, uint_1, isnoActor_0, snoArea, uint_4);
+			Portal @class = new(uint_0, uint_1, SnoActor_0, snoArea, uint_4);
 			if (snoArea != null) {
 				try {
 					OnPortalFound?.Invoke(this, @class);
@@ -1022,7 +1019,7 @@ internal class ActorCollector
 			}
 			return @class;
 		}
-		return new Door(uint_0, uint_1, isnoActor_0);
+		return new Door(uint_0, uint_1, SnoActor_0);
 	}
 
 	private bool method_5(Actor class299_0)
@@ -1043,9 +1040,9 @@ internal class ActorCollector
 			return false;
 		}
 		if (class299_0 is SkillEffect @class) {
-			List<ISkillEffect> list = Class112_0[@class.SkillEffectRule.Type];
+			List<SkillEffect> list = Class112_0[@class.SkillEffectRule.Type];
 			if (list == null) {
-				list = new List<ISkillEffect>();
+				list = new List<SkillEffect>();
 				Class112_0.Set(@class.SkillEffectRule.Type, list);
 			}
 			list.Add(@class);
@@ -1131,10 +1128,10 @@ internal class ActorCollector
 		class299_0.Scene = CoreCollector.SceneCollector.method_1(class299_0.WorldId, uint_1);
 	}
 
-	public IActor method_6(ActorSnoEnum actorSnoEnum_0)
+	public Actor method_6(ActorSnoEnum actorSnoEnum_0)
 	{
-		IActor actor = null;
-		foreach (IActor item in list_3.Where((IActor iactor_0) => iactor_0.SnoActor.Sno == actorSnoEnum_0)) {
+		Actor actor = null;
+		foreach (Actor item in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Sno == actorSnoEnum_0)) {
 			if (actor == null || item.CentralXyDistanceToMe < actor.CentralXyDistanceToMe) {
 				actor = item;
 			}
@@ -1157,7 +1154,7 @@ internal class ActorCollector
 			item2.CooldownStartTick = 0;
 			item2.CooldownFinishTick = 0;
 		}
-		foreach (IBuff value in class310_0.powerSno2buff.Values) {
+		foreach (Buff value in class310_0.powerSno2buff.Values) {
 			(value as Buff).Active = false;
 		}
 		class310_0.ParagonPointsAvailableTotal = 0;
@@ -1404,7 +1401,7 @@ internal class ActorCollector
 
 					case "Power_Cooldown_Start":
 						if (num14 > 0) {
-							ISnoPower bySno3 = SnoData.Powers.GetBySno(num13);
+							SnoPower bySno3 = SnoData.Powers.GetBySno(num13);
 
 							if (bySno3 != null && class310_0.Powers.GetUsedSkill(bySno3) is Skill class3) {
 								class3.CooldownStartTick = num14;
@@ -1580,7 +1577,7 @@ internal class ActorCollector
 
 					case "Skill_From_Item":
 						if (num14 == 1) {
-							ISnoPower bySno2 = SnoData.Powers.GetBySno(num13);
+							SnoPower bySno2 = SnoData.Powers.GetBySno(num13);
 
 							if (bySno2 != null) {
 								class310_0.list_2.Add(bySno2);
@@ -2022,7 +2019,7 @@ internal class ActorCollector
 
 					case "Power_Cooldown":
 						if (num14 > 0) {
-							ISnoPower bySno = SnoData.Powers.GetBySno(num13);
+							SnoPower bySno = SnoData.Powers.GetBySno(num13);
 
 							if (bySno != null && class310_0.Powers.GetUsedSkill(bySno) is Skill @class) {
 								@class.CooldownFinishTick = num14;
@@ -2152,7 +2149,7 @@ internal class ActorCollector
 		if (class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
 			class310_0.Stats.ResourceCostReduction = 1f - 0.8f * (1f - class310_0.Stats.ResourceCostReduction);
 		}
-		IBuff buff = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
+		Buff buff = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
 		if (buff != null && buff.Active && buff != null && buff.IconCounts[2] > 0) {
 			class310_0.Stats.ResourceCostReduction = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - class310_0.Stats.ResourceCostReduction);
 		}
@@ -2217,14 +2214,14 @@ internal class ActorCollector
 		if (class310_0.Defense.AverageDamageReductionFromType > 0f) {
 			num19 *= 1f - class310_0.Defense.AverageDamageReductionFromType;
 		}
-		if (class310_0.list_2.Any((ISnoPower isnoPower_0) => isnoPower_0.Sno == 217968)) {
+		if (class310_0.list_2.Any((SnoPower SnoPower_0) => SnoPower_0.Sno == 217968)) {
 			num19 *= 0.85f;
 		}
-		IPlayerSkill epiphany = class310_0.Powers.UsedMonkPowers.Epiphany;
+		Skill epiphany = class310_0.Powers.UsedMonkPowers.Epiphany;
 		if (epiphany != null && epiphany.BuffIsActive && epiphany.Rune == 0) {
 			num19 *= 0.5f;
 		}
-		IBuff buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
+		Buff buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
 		if (buff2 != null && buff2.Active) {
 			num19 *= 0.75f;
 		}
@@ -2243,7 +2240,7 @@ internal class ActorCollector
 		buff2 = class310_0.Powers.GetBuff("P4_ItemPassive_Unique_Ring_014");
 		if (buff2 != null && buff2.Active) {
 			int num20 = 0;
-			foreach (IItem item4 in CoreCollector.ItemCollector.class112_0.IEnumerable_0) {
+			foreach (Item item4 in CoreCollector.ItemCollector.class112_0.IEnumerable_0) {
 				if (item4.Location >= ItemLocation.Head && item4.Location <= ItemLocation.Neck && item4.AncientRank > 0) {
 					num20++;
 				}
@@ -2253,7 +2250,7 @@ internal class ActorCollector
 				class310_0.Offense.PlainDamageBonuses.Add((buff2.SnoPower, item));
 			}
 		}
-		IPlayerSkill callOfTheAncients = CoreCollector.LocalPlayer.Powers.UsedBarbarianPowers.CallOfTheAncients;
+		Skill callOfTheAncients = CoreCollector.LocalPlayer.Powers.UsedBarbarianPowers.CallOfTheAncients;
 		if (callOfTheAncients != null && callOfTheAncients.BuffIsActive && callOfTheAncients.Rune == 4) {
 			num19 *= 0.5f;
 		}
@@ -2320,7 +2317,7 @@ internal class ActorCollector
 			}
 		}
 		for (int num29 = 0; num29 < class310_0.list_3.Count; num29++) {
-			IPlayerSkill playerSkill = class310_0.list_3[num29];
+			Skill playerSkill = class310_0.list_3[num29];
 			if (!playerSkill.IsOnCooldown && playerSkill.CurrentSnoPower != null) {
 				try {
 					CoreCollector.OnTrueCooldown?.Invoke(class310_0, playerSkill);
@@ -2359,7 +2356,7 @@ internal class ActorCollector
 	{
 		Buff buff = class310_0.Powers.GetBuff(uint_0) as Buff;
 		if (buff == null) {
-			ISnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}
@@ -2379,9 +2376,9 @@ internal class ActorCollector
 	internal static void smethod_6(Player class310_0, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(CoreCollector.D3Memory.GameTick - int_4) / 60.0) : 0.0);
-		IBuff buff = class310_0.Powers.GetBuff(uint_0);
+		Buff buff = class310_0.Powers.GetBuff(uint_0);
 		if (buff == null) {
-			ISnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}
@@ -2396,9 +2393,9 @@ internal class ActorCollector
 	internal static void smethod_7(Player class310_0, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(int_4 - CoreCollector.D3Memory.GameTick) / 60.0) : 0.0);
-		IBuff buff = class310_0.Powers.GetBuff(uint_0);
+		Buff buff = class310_0.Powers.GetBuff(uint_0);
 		if (buff == null) {
-			ISnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}

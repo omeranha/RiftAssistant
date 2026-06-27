@@ -4,10 +4,10 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoItemAffixGroupLink : ISnoItemAffixGroupLink
+public class SnoItemAffixGroupLink
 {
 	[CompilerGenerated]
-	private readonly ISnoItemAffixGroup isnoItemAffixGroup_0;
+	private readonly SnoItemAffixGroup isnoItemAffixGroup_0;
 
 	[CompilerGenerated]
 	private readonly int int_0;
@@ -15,7 +15,7 @@ public class SnoItemAffixGroupLink : ISnoItemAffixGroupLink
 	[CompilerGenerated]
 	private readonly int int_1;
 
-	public ISnoItemAffixGroup Group
+	public SnoItemAffixGroup Group
 	{
 		[CompilerGenerated]
 		get
@@ -42,7 +42,7 @@ public class SnoItemAffixGroupLink : ISnoItemAffixGroupLink
 		}
 	}
 
-	internal SnoItemAffixGroupLink(ISnoItemAffixGroup isnoItemAffixGroup_1, int int_2, int int_3)
+	internal SnoItemAffixGroupLink(SnoItemAffixGroup isnoItemAffixGroup_1, int int_2, int int_3)
 	{
 		isnoItemAffixGroup_0 = isnoItemAffixGroup_1;
 		int_0 = int_2;

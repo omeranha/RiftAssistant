@@ -1,15 +1,16 @@
 using System.Runtime.CompilerServices;
 using Plugins;
+using work;
 
 namespace SNO;
 
-public class SceneHint : ISceneHint
+public class SceneHint
 {
 	[CompilerGenerated]
 	private readonly string string_0;
 
 	[CompilerGenerated]
-	private IWorldCoordinate iworldCoordinate_0;
+	private WorldCoordinate iworldCoordinate_0;
 
 	public string Hint
 	{
@@ -20,7 +21,7 @@ public class SceneHint : ISceneHint
 		}
 	}
 
-	public IWorldCoordinate FloorCoordinate
+	public WorldCoordinate FloorCoordinate
 	{
 		[CompilerGenerated]
 		get

@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal sealed class VideoSettings
+internal struct VideoSettings
 {
 	[FieldOffset(0)]
 	public bool bool_0;
@@ -123,5 +123,5 @@ internal sealed class VideoSettings
 	[FieldOffset(156)]
 	public float float_2;
 
-	public static int int_25 = 160;
+	public static int Size = 160;
 }

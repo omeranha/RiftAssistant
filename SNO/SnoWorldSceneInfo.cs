@@ -25,7 +25,7 @@ public class SnoWorldSceneInfo
 	private readonly float float_5;
 
 	[CompilerGenerated]
-	private readonly ISnoArea isnoArea_0;
+	private readonly SnoArea isnoArea_0;
 
 	[CompilerGenerated]
 	private readonly string string_0;
@@ -84,7 +84,7 @@ public class SnoWorldSceneInfo
 		}
 	}
 
-	public ISnoArea SnoArea
+	public SnoArea SnoArea
 	{
 		[CompilerGenerated]
 		get
@@ -102,7 +102,7 @@ public class SnoWorldSceneInfo
 		}
 	}
 
-	internal SnoWorldSceneInfo(float float_6, float float_7, float float_8, float float_9, ISnoArea isnoArea_1)
+	internal SnoWorldSceneInfo(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
 	{
 		float_0 = float_6;
 		float_1 = float_7;

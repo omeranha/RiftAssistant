@@ -3,9 +3,9 @@ using Plugins;
 
 namespace work;
 
-internal class ScreenCoordinate : IScreenCoordinate
+public class ScreenCoordinate
 {
-	public IWindow Window => GameWindowManager.Window;
+	public DiabloWindow Window => GameWindowManager.Window;
 
 	public float X { get; set; }
 
@@ -28,7 +28,7 @@ internal class ScreenCoordinate : IScreenCoordinate
 		return X.ToString("F0") + ":" + Y.ToString("F0");
 	}
 
-	public IScreenCoordinate Offset(float ox, float oy)
+	public ScreenCoordinate Offset(float ox, float oy)
 	{
 		return Window.CreateScreenCoordinate(X + ox, Y + oy);
 	}
@@ -40,7 +40,7 @@ internal class ScreenCoordinate : IScreenCoordinate
 		return (float)Math.Sqrt(num * num + num2 * num2);
 	}
 
-	public IWorldCoordinate ToWorldCoordinate()
+	public WorldCoordinate ToWorldCoordinate()
 	{
 		double num = (X * 2f / (float)Window.Size.Width - 1f) * Window.Aspect;
 		double num2 = 1f - Y * 2f / (float)Window.Size.Height;

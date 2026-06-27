@@ -44,11 +44,11 @@ internal static class AddressList
 		AttributeOrdersPri = 0L;
 		AttributeOrdersSec = 0L;
 		UiIsHiddenFlagAddress = 24072844L;
-		long_8 = HotkeysAddress - Class73.int_4 - VideoSettings.int_25;
-		long_9 = HotkeysAddress - Class73.int_4;
+		long_8 = HotkeysAddress - Class73.Size - VideoSettings.Size;
+		long_9 = HotkeysAddress - Class73.Size;
 		long_10 = HotkeysAddress + 1152;
-		long_11 = HotkeysAddress + 1152 + Class71.int_2;
-		ScreenSettingsAddress = HotkeysAddress + 1152 + Class71.int_2 + Class72.int_1;
+		long_11 = HotkeysAddress + 1152 + Class71.Size;
+		ScreenSettingsAddress = HotkeysAddress + 1152 + Class71.Size + Class72.Size;
 		long_13 = 0L;
 		long_14 = 8L;
 		long_15 = 24L;

@@ -1,6 +1,6 @@
 using Plugins;
 
-internal class PlayerStats : IPlayerStatInfo
+public class PlayerStats
 {
 	public float ResourceMaxArcane { get; set; }
 

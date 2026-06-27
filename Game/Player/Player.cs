@@ -7,7 +7,7 @@ using SNO;
 using work;
 using System.Diagnostics;
 
-internal class Player : Actor, IActor, IPlayer
+public class Player : Actor
 {
 	[CompilerGenerated]
 	private uint uint_7;
@@ -27,7 +27,7 @@ internal class Player : Actor, IActor, IPlayer
 	private uint uint_8;
 
 	[CompilerGenerated]
-	private IHero ihero_0;
+	private Hero ihero_0;
 
 	[CompilerGenerated]
 	private string string_0;
@@ -48,33 +48,33 @@ internal class Player : Actor, IActor, IPlayer
 	private string string_1;
 
 	[CompilerGenerated]
-	private IHeroClassDefinition iheroClassDefinition_0;
+	private HeroClassDefinition iheroClassDefinition_0;
 
 	[CompilerGenerated]
-	private ISnoArea isnoArea_0;
+	private SnoArea isnoArea_0;
 
 	[CompilerGenerated]
-	private readonly IPlayerDefenseInfo iplayerDefenseInfo_0;
+	private readonly PlayerDefense iplayerDefenseInfo_0;
 
 	[CompilerGenerated]
-	private readonly IPlayerOffenseInfo iplayerOffenseInfo_0 = new PlayerOffense();
+	private readonly PlayerOffense iplayerOffenseInfo_0 = new PlayerOffense();
 
 	[CompilerGenerated]
-	private readonly IPlayerDamageInfo iplayerDamageInfo_0 = new PlayerDamage();
+	private readonly PlayerDamage iplayerDamageInfo_0 = new PlayerDamage();
 
 	[CompilerGenerated]
-	private readonly IPlayerStatInfo iplayerStatInfo_0 = new PlayerStats();
+	private readonly PlayerStats iplayerStatInfo_0 = new PlayerStats();
 
 	[CompilerGenerated]
-	private readonly IPlayerMaterialInfo iplayerMaterialInfo_0;
+	private readonly PlayerMaterialInfo iplayerMaterialInfo_0;
 
 	[CompilerGenerated]
-	private readonly IPlayerPowerInfo iplayerPowerInfo_0;
+	private readonly PlayerPowerInfo iplayerPowerInfo_0;
 
-	public r_PlayerData RawPlayerData;
+	internal r_PlayerData RawPlayerData;
 
 	[CompilerGenerated]
-	private readonly IPlayerArmorySet[] iplayerArmorySet_0;
+	private readonly PlayerArmorySet[] iplayerArmorySet_0;
 
 	[CompilerGenerated]
 	private AnimSnoEnum animSnoEnum_0;
@@ -85,20 +85,20 @@ internal class Player : Actor, IActor, IPlayer
 	internal long long_0;
 
 	[CompilerGenerated]
-	private ISnoItem isnoItem_0;
+	private SnoItem isnoItem_0;
 
 	[CompilerGenerated]
-	private ISnoItem isnoItem_1;
+	private SnoItem isnoItem_1;
 
 	[CompilerGenerated]
-	private ISnoItem isnoItem_2;
+	private SnoItem isnoItem_2;
 
 	[CompilerGenerated]
-	private ISnoItem isnoItem_3;
+	private SnoItem isnoItem_3;
 
-	internal List<ISnoItem> list_1 = new List<ISnoItem>();
+	internal List<SnoItem> list_1 = new List<SnoItem>();
 
-	internal Dictionary<string, ISnoItem> dictionary_0 = new Dictionary<string, ISnoItem>();
+	internal Dictionary<string, SnoItem> dictionary_0 = new Dictionary<string, SnoItem>();
 
 	internal ulong ulong_0;
 
@@ -106,9 +106,9 @@ internal class Player : Actor, IActor, IPlayer
 
 	internal readonly Skill[] class386_0 = new Skill[6];
 
-	internal readonly ISnoPower[] isnoPower_0 = new ISnoPower[4];
+	internal readonly SnoPower[] SnoPower_0 = new SnoPower[4];
 
-	internal readonly List<ISnoPower> list_2 = new List<ISnoPower>();
+	internal readonly List<SnoPower> list_2 = new List<SnoPower>();
 
 	internal readonly Stopwatch iwatch_1 = new();
 
@@ -153,11 +153,11 @@ internal class Player : Actor, IActor, IPlayer
 
 	internal long long_6;
 
-	internal List<IPlayerSkill> list_3 = new List<IPlayerSkill>(30);
+	internal List<Skill> list_3 = new List<Skill>(30);
 
-	internal readonly Dictionary<string, IBuff> dictionary_1 = new Dictionary<string, IBuff>(30);
+	internal readonly Dictionary<string, Buff> dictionary_1 = new Dictionary<string, Buff>(30);
 
-	internal readonly Dictionary<uint, IBuff> powerSno2buff = new Dictionary<uint, IBuff>(30);
+	internal readonly Dictionary<uint, Buff> powerSno2buff = new Dictionary<uint, Buff>(30);
 
 	[CompilerGenerated]
 	private int int_6;
@@ -172,7 +172,7 @@ internal class Player : Actor, IActor, IPlayer
 	private bool bool_15;
 
 	[CompilerGenerated]
-	private IHeadStone iheadStone_0;
+	private HeadStone iheadStone_0;
 
 	internal Dictionary<uint, int> dictionary_3 = new Dictionary<uint, int>();
 
@@ -305,7 +305,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IHero Hero
+	public Hero Hero
 	{
 		[CompilerGenerated]
 		get
@@ -403,7 +403,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IHeroClassDefinition HeroClassDefinition
+	public HeroClassDefinition HeroClassDefinition
 	{
 		[CompilerGenerated]
 		get
@@ -417,7 +417,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public ISnoArea SnoArea
+	public SnoArea SnoArea
 	{
 		[CompilerGenerated]
 		get
@@ -431,7 +431,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerDefenseInfo Defense
+	public PlayerDefense Defense
 	{
 		[CompilerGenerated]
 		get
@@ -440,7 +440,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerOffenseInfo Offense
+	public PlayerOffense Offense
 	{
 		[CompilerGenerated]
 		get
@@ -449,7 +449,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerDamageInfo Damage
+	public PlayerDamage Damage
 	{
 		[CompilerGenerated]
 		get
@@ -458,7 +458,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerStatInfo Stats
+	public PlayerStats Stats
 	{
 		[CompilerGenerated]
 		get
@@ -467,7 +467,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerMaterialInfo Materials
+	public PlayerMaterialInfo Materials
 	{
 		[CompilerGenerated]
 		get
@@ -476,7 +476,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerPowerInfo Powers
+	public PlayerPowerInfo Powers
 	{
 		[CompilerGenerated]
 		get
@@ -485,7 +485,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IPlayerArmorySet[] ArmorySets
+	public PlayerArmorySet[] ArmorySets
 	{
 		[CompilerGenerated]
 		get
@@ -522,7 +522,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public ISnoItem CubeSnoItem1
+	public SnoItem CubeSnoItem1
 	{
 		[CompilerGenerated]
 		get
@@ -536,7 +536,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public ISnoItem CubeSnoItem2
+	public SnoItem CubeSnoItem2
 	{
 		[CompilerGenerated]
 		get
@@ -550,7 +550,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public ISnoItem CubeSnoItem3
+	public SnoItem CubeSnoItem3
 	{
 		[CompilerGenerated]
 		get
@@ -564,7 +564,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public ISnoItem CubeSnoItem4
+	public SnoItem CubeSnoItem4
 	{
 		[CompilerGenerated]
 		get
@@ -578,7 +578,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IEnumerable<ISnoItem> CubedItems => list_1;
+	public IEnumerable<SnoItem> CubedItems => list_1;
 
 	public uint CurrentLevelNormal
 	{
@@ -790,7 +790,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IHeadStone HeadStone
+	public HeadStone HeadStone
 	{
 		[CompilerGenerated]
 		get
@@ -913,7 +913,7 @@ internal class Player : Actor, IActor, IPlayer
 		}
 	}
 
-	public IUiElement PortraitUiElement => CoreCollector.UiElements.class341_145[PortraitIndex];
+	public UiElement PortraitUiElement => CoreCollector.UiElements.class341_145[PortraitIndex];
 
 	public Player(int int_14) : base(0u, 0u, null)
 	{
@@ -921,7 +921,7 @@ internal class Player : Actor, IActor, IPlayer
 		iplayerDefenseInfo_0 = new PlayerDefense(this);
 		iplayerPowerInfo_0 = new PlayerPowerInfo(this);
 		iplayerMaterialInfo_0 = new PlayerMaterialInfo(this);
-		IPlayerArmorySet[] array =
+		PlayerArmorySet[] array =
 		[
 			new PlayerArmorySet(this, 0),
 			new PlayerArmorySet(this, 1),
@@ -1065,7 +1065,7 @@ internal class Player : Actor, IActor, IPlayer
 		if (iwatch_1.ElapsedMilliseconds > 2000)
 		{
 			iwatch_1.Restart();
-			foreach (IBuff value in powerSno2buff.Values)
+			foreach (Buff value in powerSno2buff.Values)
 			{
 				Array.Clear(value.TimeElapsedSeconds, 0, value.TimeElapsedSeconds.Length);
 				Array.Clear(value.TimeLeftSeconds, 0, value.TimeLeftSeconds.Length);
@@ -1096,15 +1096,9 @@ internal class Player : Actor, IActor, IPlayer
 		base.WorldId = 0u;
 	}
 
-	public bool IsCubed(ISnoItem snoItem)
+	public bool IsCubed(SnoItem snoItem)
 	{
 		return dictionary_0.ContainsKey(snoItem.NameLocalized);
-	}
-
-	bool IPlayer.IsCubed(ISnoItem snoItem)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in IsCubed
-		return this.IsCubed(snoItem);
 	}
 
 	public int GetSetItemCount(uint setId)
@@ -1114,7 +1108,7 @@ internal class Player : Actor, IActor, IPlayer
 			return 0;
 		}
 		int num = 0;
-		foreach (IItem item in CoreCollector.ItemCollector.class112_0.IEnumerable_0)
+		foreach (Item item in CoreCollector.ItemCollector.class112_0.IEnumerable_0)
 		{
 			ItemLocation location = item.Location;
 			if (location == ItemLocation.Bracers || location == ItemLocation.Shoulders || location == ItemLocation.Head || location == ItemLocation.Neck || location == ItemLocation.Torso || location == ItemLocation.Feet || location == ItemLocation.Hands || location == ItemLocation.LeftRing || location == ItemLocation.RightRing || location == ItemLocation.Waist || location == ItemLocation.Legs || location == ItemLocation.LeftHand || location == ItemLocation.RightHand)
@@ -1134,13 +1128,7 @@ internal class Player : Actor, IActor, IPlayer
 		return num;
 	}
 
-	int IPlayer.GetSetItemCount(uint setId)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetSetItemCount
-		return this.GetSetItemCount(setId);
-	}
-
-	public float GetPowerTagValue(ISnoPower snoPower, uint tagId)
+	public float GetPowerTagValue(SnoPower snoPower, uint tagId)
 	{
 		ulong key = ((ulong)snoPower.Sno << 32) + tagId;
 		int? tagFormula = SnoData.Powers.GetTagFormula(0, key);
@@ -1150,11 +1138,5 @@ internal class Player : Actor, IActor, IPlayer
 		}
 		byte b = SnoData.Powers.FormulaData[tagFormula.Value];
 		return CoreCollector.smethod_7(SnoData.Powers.FormulaData, tagFormula.Value + 1, b, snoPower, this).X;
-	}
-
-	float IPlayer.GetPowerTagValue(ISnoPower snoPower, uint tagId)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetPowerTagValue
-		return this.GetPowerTagValue(snoPower, tagId);
 	}
 }

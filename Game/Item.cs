@@ -6,10 +6,10 @@ using Plugins;
 using SNO;
 using work;
 
-internal class Item : Actor, IActor, IItem
+public class Item : Actor
 {
 	[CompilerGenerated]
-	private readonly ISnoItem isnoItem_0;
+	private readonly SnoItem isnoItem_0;
 
 	[CompilerGenerated]
 	private ItemQuality itemQuality_0;
@@ -38,10 +38,10 @@ internal class Item : Actor, IActor, IItem
 	public bool bool_10;
 
 	[CompilerGenerated]
-	private ISnoItemAffix[] isnoItemAffix_0;
+	private SnoItemAffix[] isnoItemAffix_0;
 
 	[CompilerGenerated]
-	private IItem[] iitem_0;
+	private Item[] iitem_0;
 
 	[CompilerGenerated]
 	private double double_3;
@@ -57,7 +57,7 @@ internal class Item : Actor, IActor, IItem
 	[CompilerGenerated]
 	private string string_1;
 
-	public readonly Class112<string, IItemStat> class112_0 = new Class112<string, IItemStat>();
+	public readonly Class112<string, ItemStat> class112_0 = new Class112<string, ItemStat>();
 
 	[CompilerGenerated]
 	private uint uint_8;
@@ -71,7 +71,7 @@ internal class Item : Actor, IActor, IItem
 	[CompilerGenerated]
 	private long long_0 = 1L;
 
-	public ISnoItem SnoItem
+	public SnoItem SnoItem
 	{
 		[CompilerGenerated]
 		get
@@ -182,7 +182,7 @@ internal class Item : Actor, IActor, IItem
 		}
 	}
 
-	public IItem SocketedInto => CoreCollector.ItemCollector.class112_0[UInt32_0];
+	public Item SocketedInto => CoreCollector.ItemCollector.class112_0[UInt32_0];
 
 	public int InventoryX
 	{
@@ -226,7 +226,7 @@ internal class Item : Actor, IActor, IItem
 		}
 	}
 
-	public ISnoItemAffix[] Affixes
+	public SnoItemAffix[] Affixes
 	{
 		[CompilerGenerated]
 		get
@@ -240,7 +240,7 @@ internal class Item : Actor, IActor, IItem
 		}
 	}
 
-	public IItem[] ItemsInSocket
+	public Item[] ItemsInSocket
 	{
 		[CompilerGenerated]
 		get
@@ -296,7 +296,7 @@ internal class Item : Actor, IActor, IItem
 		}
 	}
 
-	public IEnumerable<IItemStat> StatList => class112_0.IEnumerable_0;
+	public IEnumerable<ItemStat> StatList => class112_0.IEnumerable_0;
 
 	public uint EnchantedAffixOriginal
 	{
@@ -462,21 +462,21 @@ internal class Item : Actor, IActor, IItem
 
 	public int SocketCount => method_47("sock");
 
-	public Item(uint uint_10, uint uint_11, ISnoItem isnoItem_1)
+	public Item(uint uint_10, uint uint_11, SnoItem isnoItem_1)
 		: base(uint_10, uint_11, isnoItem_1.SnoActor)
 	{
 		isnoItem_0 = isnoItem_1;
 	}
 
-	public ISnoSocketedEffect GetSocketedEffect()
+	public SnoSocketedEffect GetSocketedEffect()
 	{
 		if (SnoItem.SocketedEffects == null)
 		{
 			return null;
 		}
-		ISnoSocketedEffect snoSocketedEffect = null;
-		ISnoSocketedEffect snoSocketedEffect2 = null;
-		foreach (ISnoSocketedEffect socketedEffect in SnoItem.SocketedEffects)
+		SnoSocketedEffect snoSocketedEffect = null;
+		SnoSocketedEffect snoSocketedEffect2 = null;
+		foreach (SnoSocketedEffect socketedEffect in SnoItem.SocketedEffects)
 		{
 			if (socketedEffect.SnoItemType == null)
 			{
@@ -510,7 +510,7 @@ internal class Item : Actor, IActor, IItem
 			(Unidentified ? 1 : 0).ToString("D", CultureInfo.InvariantCulture),
 			null
 		};
-		ISnoItemAffix[] affixes = Affixes;
+		SnoItemAffix[] affixes = Affixes;
 		obj[6] = ((affixes != null) ? affixes.Length : 0).ToString("D", CultureInfo.InvariantCulture);
 		ItemUniqueId = string.Concat(obj);
 		if (ItemsInSocket != null)
@@ -528,14 +528,14 @@ internal class Item : Actor, IActor, IItem
 		return class112_0["Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture)]?.IntegerValue.Value ?? 0;
 	}
 
-	public void method_46(IItemStat iitemStat_0)
+	public void method_46(ItemStat iitemStat_0)
 	{
 		class112_0.Set(iitemStat_0.Id, iitemStat_0);
 	}
 
 	public int method_47(string string_2, int int_5 = 0)
 	{
-		IItemStat itemStat = class112_0[string_2];
+		ItemStat itemStat = class112_0[string_2];
 		if (itemStat == null)
 		{
 			return int_5;
@@ -545,7 +545,7 @@ internal class Item : Actor, IActor, IItem
 
 	public uint method_48(string string_2, uint uint_10 = 0u)
 	{
-		IItemStat itemStat = class112_0[string_2];
+		ItemStat itemStat = class112_0[string_2];
 		if (itemStat == null)
 		{
 			return uint_10;

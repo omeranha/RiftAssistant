@@ -124,7 +124,7 @@ internal class RenderBrush : ITransparent, IDisposable, IBrush
 		}
 	}
 
-	public void DrawLineWorld(IWorldCoordinate wc1, IWorldCoordinate wc2, float strokeWidthCorrection = 0f)
+	public void DrawLineWorld(WorldCoordinate wc1, WorldCoordinate wc2, float strokeWidthCorrection = 0f)
 	{
 		DrawLineWorld(wc1.X, wc1.Y, wc1.Z, wc2.X, wc2.Y, wc2.Z, strokeWidthCorrection);
 	}
@@ -155,7 +155,7 @@ internal class RenderBrush : ITransparent, IDisposable, IBrush
 		}
 	}
 
-	public void DrawWorldEllipse(float radius, int sectionCount, IWorldCoordinate coordinate)
+	public void DrawWorldEllipse(float radius, int sectionCount, WorldCoordinate coordinate)
 	{
 		DrawWorldEllipse(radius, sectionCount, coordinate.X, coordinate.Y, coordinate.Z);
 	}

@@ -5,7 +5,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoQuest : ISnoQuest
+public sealed class SnoQuest
 {
 	[CompilerGenerated]
 	private readonly string string_0;
@@ -26,7 +26,7 @@ public sealed class SnoQuest : ISnoQuest
 	private readonly string string_4;
 
 	[CompilerGenerated]
-	private readonly ISnoAct isnoAct_0;
+	private readonly SnoAct isnoAct_0;
 
 	[CompilerGenerated]
 	private readonly QuestType questType_0;
@@ -50,9 +50,9 @@ public sealed class SnoQuest : ISnoQuest
 	private readonly BountyType bountyType_0;
 
 	[CompilerGenerated]
-	private readonly ISnoArea isnoArea_0;
+	private readonly SnoArea isnoArea_0;
 
-	private readonly Dictionary<uint, ISnoQuestStep> dictionary_0 = new Dictionary<uint, ISnoQuestStep>();
+	private readonly Dictionary<uint, SnoQuestStep> dictionary_0 = [];
 
 	public string Code
 	{
@@ -108,7 +108,7 @@ public sealed class SnoQuest : ISnoQuest
 		}
 	}
 
-	public ISnoAct SnoAct
+	public SnoAct SnoAct
 	{
 		[CompilerGenerated]
 		get
@@ -180,7 +180,7 @@ public sealed class SnoQuest : ISnoQuest
 		}
 	}
 
-	public ISnoArea BountySnoArea
+	public SnoArea BountySnoArea
 	{
 		[CompilerGenerated]
 		get
@@ -189,21 +189,15 @@ public sealed class SnoQuest : ISnoQuest
 		}
 	}
 
-	public IEnumerable<ISnoQuestStep> Steps => dictionary_0.Values;
+	public IEnumerable<SnoQuestStep> Steps => dictionary_0.Values;
 
-	public ISnoQuestStep GetStep(uint stepId)
+	public SnoQuestStep GetStep(uint stepId)
 	{
 		dictionary_0.TryGetValue(stepId, out var value);
 		return value;
 	}
 
-	ISnoQuestStep ISnoQuest.GetStep(uint stepId)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetStep
-		return this.GetStep(stepId);
-	}
-
-	internal SnoQuest(string string_7, uint uint_1, ISnoAct isnoAct_1, string string_8, string string_9, string string_10, string string_11, QuestType questType_1, QuestEventType questEventType_1, int int_1, string string_12, string string_13, BountyAct bountyAct_1, BountyType bountyType_1, ISnoArea isnoArea_1)
+	internal SnoQuest(string string_7, uint uint_1, SnoAct isnoAct_1, string string_8, string string_9, string string_10, string string_11, QuestType questType_1, QuestEventType questEventType_1, int int_1, string string_12, string string_13, BountyAct bountyAct_1, BountyType bountyType_1, SnoArea isnoArea_1)
 	{
 		string_0 = string_7;
 		uint_0 = uint_1;
@@ -222,7 +216,7 @@ public sealed class SnoQuest : ISnoQuest
 		string_6 = string_13;
 	}
 
-	internal void method_0(ISnoQuestStep isnoQuestStep_0)
+	internal void method_0(SnoQuestStep isnoQuestStep_0)
 	{
 		dictionary_0.Add(isnoQuestStep_0.Id, isnoQuestStep_0);
 	}

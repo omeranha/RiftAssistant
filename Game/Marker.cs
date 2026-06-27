@@ -1,13 +1,14 @@
 using Plugins;
 using SNO;
+using work;
 
-internal class Marker(string id, uint worldId, ISnoQuest snoQuest, ISnoActor snoActor, IWorldCoordinate worldCoordinate, uint textureSno, int textureFrameIndex) : IMarker
+public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActor, WorldCoordinate worldCoordinate, uint textureSno, int textureFrameIndex)
 {
 	private readonly string id = id;
-	private ISnoActor snoActor = snoActor;
-	private readonly ISnoQuest snoQuest = snoQuest;
+	private SnoActor snoActor = snoActor;
+	private readonly SnoQuest snoQuest = snoQuest;
 	private readonly uint worldId = worldId;
-	private readonly IWorldCoordinate worldCoordinate = worldCoordinate;
+	private readonly WorldCoordinate worldCoordinate = worldCoordinate;
 	private uint textureSno = textureSno;
 	private int textureFrameIndex = textureFrameIndex;
 	private bool isPylon;
@@ -22,7 +23,7 @@ internal class Marker(string id, uint worldId, ISnoQuest snoQuest, ISnoActor sno
 		}
 	}
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		get {
 			return snoActor;
@@ -32,7 +33,7 @@ internal class Marker(string id, uint worldId, ISnoQuest snoQuest, ISnoActor sno
 		}
 	}
 
-	public ISnoQuest SnoQuest
+	public SnoQuest SnoQuest
 	{
 		get {
 			return snoQuest;
@@ -46,7 +47,7 @@ internal class Marker(string id, uint worldId, ISnoQuest snoQuest, ISnoActor sno
 		}
 	}
 
-	public IWorldCoordinate FloorCoordinate
+	public WorldCoordinate FloorCoordinate
 	{
 		get {
 			return worldCoordinate;

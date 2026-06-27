@@ -4,13 +4,12 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using structs;
 using Plugins;
+using work;
+using SNO;
 
-internal class Actor : IActor
+public class Actor
 {
 	internal List<r_AttributeEntry> list_0 = new List<r_AttributeEntry>();
-
-	[CompilerGenerated]
-	private static IWindow iwindow_0;
 
 	[CompilerGenerated]
 	private int int_0;
@@ -25,10 +24,10 @@ internal class Actor : IActor
 	private uint uint_1;
 
 	[CompilerGenerated]
-	private ISnoWorld isnoWorld_0;
+	private SnoWorld isnoWorld_0;
 
 	[CompilerGenerated]
-	private IScene iscene_0;
+	private Scene iscene_0;
 
 	[CompilerGenerated]
 	private uint uint_2;
@@ -37,13 +36,13 @@ internal class Actor : IActor
 	private uint uint_3;
 
 	[CompilerGenerated]
-	private ISnoActor isnoActor_0;
+	private SnoActor SnoActor_0;
 
 	[CompilerGenerated]
-	private readonly IWorldCoordinate iworldCoordinate_0;
+	private readonly WorldCoordinate iworldCoordinate_0;
 
 	[CompilerGenerated]
-	private readonly IWorldCoordinate iworldCoordinate_1;
+	private readonly WorldCoordinate iworldCoordinate_1;
 
 	[CompilerGenerated]
 	private float float_0;
@@ -51,7 +50,7 @@ internal class Actor : IActor
 	[CompilerGenerated]
 	private float float_1;
 
-	private readonly IScreenCoordinate iscreenCoordinate_0;
+	private readonly ScreenCoordinate ScreenCoordinate_0;
 
 	private bool bool_0;
 
@@ -96,20 +95,6 @@ internal class Actor : IActor
 
 	[CompilerGenerated]
 	private uint uint_6;
-
-	public static IWindow IWindow_0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iwindow_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iwindow_0 = value;
-		}
-	}
 
 	public int CreatedAtInGameTick
 	{
@@ -167,7 +152,7 @@ internal class Actor : IActor
 		}
 	}
 
-	public ISnoWorld SnoWorld
+	public SnoWorld SnoWorld
 	{
 		[CompilerGenerated]
 		get
@@ -181,7 +166,7 @@ internal class Actor : IActor
 		}
 	}
 
-	public IScene Scene
+	public Scene Scene
 	{
 		[CompilerGenerated]
 		get
@@ -223,21 +208,21 @@ internal class Actor : IActor
 		}
 	}
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoActor_0;
+			return SnoActor_0;
 		}
 		[CompilerGenerated]
 		set
 		{
-			isnoActor_0 = value;
+			SnoActor_0 = value;
 		}
 	}
 
-	public IWorldCoordinate CollisionCoordinate
+	public WorldCoordinate CollisionCoordinate
 	{
 		[CompilerGenerated]
 		get
@@ -246,7 +231,7 @@ internal class Actor : IActor
 		}
 	}
 
-	public IWorldCoordinate FloorCoordinate
+	public WorldCoordinate FloorCoordinate
 	{
 		[CompilerGenerated]
 		get
@@ -491,26 +476,26 @@ internal class Actor : IActor
 		}
 	}
 
-	public IScreenCoordinate ScreenCoordinate
+	public ScreenCoordinate ScreenCoordinate
 	{
 		get
 		{
 			if (!bool_0)
 			{
-				CollisionCoordinate.SetScreenCoordinate(iscreenCoordinate_0, raw: true);
+				CollisionCoordinate.SetScreenCoordinate(ScreenCoordinate_0, raw: true);
 			}
-			return iscreenCoordinate_0;
+			return ScreenCoordinate_0;
 		}
 	}
 
-	public Actor(uint uint_7, uint uint_8, ISnoActor isnoActor_1)
+	public Actor(uint uint_7, uint uint_8, SnoActor SnoActor_1)
 	{
 		AcdId = uint_7;
 		AnnId = uint_8;
-		SnoActor = isnoActor_1;
-		iworldCoordinate_0 = IWindow_0.CreateWorldCoordinate(0f, 0f, 0f);
-		iworldCoordinate_1 = IWindow_0.CreateWorldCoordinate(0f, 0f, 0f);
-		iscreenCoordinate_0 = IWindow_0.CreateScreenCoordinate(0f, 0f);
+		SnoActor = SnoActor_1;
+		iworldCoordinate_0 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+		iworldCoordinate_1 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+		ScreenCoordinate_0 = GameWindowManager.Window.CreateScreenCoordinate(0f, 0f);
 	}
 
 	public void method_24(float float_3, float float_4, float float_5)
@@ -533,9 +518,9 @@ internal class Actor : IActor
 	public void method_25()
 	{
 		bool_0 = false;
-		CentralXyDistanceToMe = FloorCoordinate.XYDistanceTo(IWindow_0.Center);
+		CentralXyDistanceToMe = FloorCoordinate.XYDistanceTo(GameWindowManager.Window.Center);
 		NormalizedXyDistanceToMe = CentralXyDistanceToMe - (double)RadiusBottom;
-		ZDistanceToMeAbsolute = Math.Abs(IWindow_0.Center.Z - FloorCoordinate.Z);
+		ZDistanceToMeAbsolute = Math.Abs(GameWindowManager.Window.Center.Z - FloorCoordinate.Z);
 		IsOnScreen = CollisionCoordinate.IsOnScreen() || FloorCoordinate.IsOnScreen();
 	}
 
@@ -553,7 +538,7 @@ internal class Actor : IActor
 		AcdId = uint_7;
 	}
 
-	public double GetAttributeValue(IAttribute attribute, uint modifier, double defaultValue = -1.0)
+	public double GetAttributeValue(AcdAttribute attribute, uint modifier, double defaultValue = -1.0)
 	{
 		uint id = attribute.GetId(modifier);
 		foreach (r_AttributeEntry item in list_0)
@@ -566,7 +551,7 @@ internal class Actor : IActor
 		return defaultValue;
 	}
 
-	public int GetAttributeValueAsInt(IAttribute attribute, uint modifier, int defaultValue = int.MaxValue)
+	public int GetAttributeValueAsInt(AcdAttribute attribute, uint modifier, int defaultValue = int.MaxValue)
 	{
 		uint id = attribute.GetId(modifier);
 		foreach (r_AttributeEntry item in list_0)
@@ -579,7 +564,7 @@ internal class Actor : IActor
 		return defaultValue;
 	}
 
-	public uint GetAttributeValueAsUInt(IAttribute attribute, uint modifier, uint defaultValue = uint.MaxValue)
+	public uint GetAttributeValueAsUInt(AcdAttribute attribute, uint modifier, uint defaultValue = uint.MaxValue)
 	{
 		uint id = attribute.GetId(modifier);
 		foreach (r_AttributeEntry item in list_0)

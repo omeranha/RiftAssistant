@@ -7,7 +7,7 @@ using Plugins;
 using SNO;
 using System.Diagnostics;
 
-internal class StatTracker : IStatTracker, IStatTrackerCore
+public class StatTracker
 {
 	[CompilerGenerated]
 	private readonly string string_0;
@@ -16,7 +16,7 @@ internal class StatTracker : IStatTracker, IStatTrackerCore
 	private string string_1;
 
 	[CompilerGenerated]
-	private ISnoArea isnoArea_0;
+	private SnoArea isnoArea_0;
 
 	[CompilerGenerated]
 	private bool bool_0;
@@ -111,7 +111,7 @@ internal class StatTracker : IStatTracker, IStatTrackerCore
 		}
 	}
 
-	public ISnoArea SnoArea
+	public SnoArea SnoArea
 	{
 		[CompilerGenerated]
 		get

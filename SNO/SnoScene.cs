@@ -6,7 +6,7 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoScene : ISnoScene
+public class SnoScene
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -15,7 +15,7 @@ public class SnoScene : ISnoScene
 	private readonly string string_0;
 
 	[CompilerGenerated]
-	private ISceneHint isceneHint_0;
+	private SceneHint SceneHint_0;
 
 	public readonly int NavCellBinPosition;
 
@@ -55,17 +55,17 @@ public class SnoScene : ISnoScene
 		}
 	}
 
-	public ISceneHint Hint
+	public SceneHint Hint
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isceneHint_0;
+			return SceneHint_0;
 		}
 		[CompilerGenerated]
 		set
 		{
-			isceneHint_0 = value;
+			SceneHint_0 = value;
 		}
 	}
 

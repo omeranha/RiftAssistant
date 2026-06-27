@@ -10,14 +10,11 @@ using work;
 
 internal class WaypointManager
 {
-	public Dictionary<ulong, IWaypoint> MapWaypoints { get; internal set; } = new(80);
+	public Dictionary<ulong, Waypoint> MapWaypoints { get; internal set; } = new(80);
 
 	private r_Waypoint[] waypoints;
 	private readonly Stopwatch stopwatch = new();
 	private int delay;
-
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, ref r_Waypoint lpBuffer, int nSize, int lpNumberOfBytesRead);
 
 	internal void Clear()
 	{
@@ -32,15 +29,15 @@ internal class WaypointManager
 		}
 
 		stopwatch.Restart();
-		var dictionary = new Dictionary<ulong, IWaypoint>(MapWaypoints.Count);
-		long num = MR.Instance.ReadAddress(CoreCollector.D3Memory.WaypointManagerAddress);
-		int num2 = MR.Instance.ReadInt32_x64(CoreCollector.D3Memory.WaypointManagerAddress + 8);
+		var dictionary = new Dictionary<ulong, Waypoint>(MapWaypoints.Count);
+		long num = GameWindowManager.Read<long>(CoreCollector.D3Memory.WaypointManagerAddress);
+		int num2 = GameWindowManager.Read<int>(CoreCollector.D3Memory.WaypointManagerAddress + 8);
 		if (num2 > 0 && num2 < 1000) {
 			if (waypoints == null || waypoints.Length != num2) {
 				waypoints = new r_Waypoint[num2];
 			}
 
-			ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)num, ref waypoints[0], r_Waypoint.int_2 * num2, 0);
+			waypoints = GameWindowManager.ReadArray<r_Waypoint>(num, num2);
 			for (int i = 0; i < num2; i++) {
 				ref r_Waypoint r_Waypoint2 = ref waypoints[i];
 				uint uint_ = r_Waypoint2.uint_1;
@@ -49,7 +46,7 @@ internal class WaypointManager
 
 				uint num3 = (uint_ << 10) + r_Waypoint2.uint_0;
 				if (!MapWaypoints.TryGetValue(num3, out var value) || value == null) {
-					ISnoArea snoArea = SnoData.Areas.GetSnoArea(uint_);
+					SnoArea snoArea = SnoData.Areas.GetSnoArea(uint_);
 					if (snoArea == null) continue;
 
 					value = new Waypoint(snoArea, (BountyAct)r_Waypoint2.uint_0, new PointF(r_Waypoint2.int_0, r_Waypoint2.int_1));

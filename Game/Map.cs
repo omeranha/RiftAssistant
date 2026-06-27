@@ -22,7 +22,7 @@ internal class Map
 	[CompilerGenerated]
 	private int int_2;
 
-	private readonly r_Map[] struct16_0 = new r_Map[1];
+	private r_Map[] struct16_0 = new r_Map[1];
 
 	public readonly Allocator class351_0;
 
@@ -63,9 +63,6 @@ internal class Map
 		}
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_Map struct16_1, int int_3, int int_4);
-
 	public void method_0(long long_3)
 	{
 		Int64_0 = long_3;
@@ -73,7 +70,7 @@ internal class Map
 		long_1 = long_3 + 28;
 		if (bool_0)
 		{
-			ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)long_3, ref struct16_0[0], 32, 0);
+			struct16_0[0] = GameWindowManager.Read<r_Map>(long_3);
 			Int32_0 = struct16_0[0].MaxIndex;
 			int_1 = struct16_0[0].Mask;
 			if (Int32_0 < -1 || Int32_0 > int_0)
@@ -96,7 +93,7 @@ internal class Map
 		}
 		if (Int32_0 > -1)
 		{
-			MR.Instance.ReadMem(long_1, long_2, (Int32_0 + 1) * 8);
+			long_2 = GameWindowManager.ReadArray<long>(long_1, Int32_0 + 1);
 		}
 	}
 
@@ -108,6 +105,6 @@ internal class Map
 		{
 			return long_2[num2];
 		}
-		return MR.Instance.ReadAddress(long_1 + num2 * 8);
+		return GameWindowManager.Read<long>(long_1 + num2 * 8);
 	}
 }

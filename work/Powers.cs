@@ -13,9 +13,9 @@ public sealed class Powers
 	[CompilerGenerated]
 	private readonly byte[] byte_0;
 
-	private readonly Dictionary<uint, ISnoPower> dictionary_0 = [];
+	private readonly Dictionary<uint, SnoPower> dictionary_0 = [];
 
-	private readonly Dictionary<string, ISnoPower> dictionary_1 = [];
+	private readonly Dictionary<string, SnoPower> dictionary_1 = [];
 
 	private readonly Dictionary<ulong, (int, uint)>[] dictionary_2 =
 	[
@@ -50,15 +50,15 @@ public sealed class Powers
 		}
 	}
 
-	public IEnumerable<ISnoPower> All => dictionary_1.Values;
+	public IEnumerable<SnoPower> All => dictionary_1.Values;
 
-	public ISnoPower GetBySno(uint sno)
+	public SnoPower GetBySno(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoPower GetByCode(string code)
+	public SnoPower GetByCode(string code)
 	{
 		dictionary_1.TryGetValue(code, out var value);
 		return value;
@@ -246,7 +246,7 @@ public sealed class Powers
 			if (!text5.StartsWith("//", ignoreCase: false, CultureInfo.InvariantCulture) && !string.IsNullOrEmpty(text5))
 			{
 				string[] array3 = text5.Split('\t');
-				ISnoPower bySno = GetBySno(uint.Parse(array3[0]));
+				SnoPower bySno = GetBySno(uint.Parse(array3[0]));
 				if (bySno != null)
 				{
 					int num8 = int.Parse(array3[1]);
@@ -268,7 +268,7 @@ public sealed class Powers
 			if (!text6.StartsWith("//", ignoreCase: false, CultureInfo.InvariantCulture) && !string.IsNullOrEmpty(text6))
 			{
 				string[] array4 = text6.Split('\t');
-				ISnoPower bySno2 = GetBySno(uint.Parse(array4[0]));
+				SnoPower bySno2 = GetBySno(uint.Parse(array4[0]));
 				int num9 = int.Parse(array4[1]);
 				bySno2.IconIndexes[num9] = int.Parse(array4[2]);
 			}

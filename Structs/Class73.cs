@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal sealed class Class73
+internal struct Class73
 {
 	[FieldOffset(0)]
 	public float float_0;
@@ -57,5 +57,5 @@ internal sealed class Class73
 	[FieldOffset(76)]
 	public int int_3;
 
-	public static int int_4 = 80;
+	public static int Size = 80;
 }

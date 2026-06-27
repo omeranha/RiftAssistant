@@ -35,5 +35,5 @@ internal struct r_ExpandableContainer
 	[FieldOffset(360)]
 	public int Bits;
 
-	public const int sizeOf = 364;
+	public const int Size = 364;
 }

@@ -130,9 +130,9 @@ internal static unsafe class RawInput
 		var k = raw->data.keyboard;
 		int vk = NormalizeVk(k.VKey, k.Flags);
 		bool down = k.Message == WM_KEYDOWN || k.Message == WM_SYSKEYDOWN;
-		bool shift = Win32.IsKeyDown(Vk.LSHIFT) || Win32.IsKeyDown(Vk.RSHIFT);
-		bool ctrl = Win32.IsKeyDown(Vk.LCONTROL) || Win32.IsKeyDown(Vk.RCONTROL);
-		bool alt = Win32.IsKeyDown(Vk.LMENU) || Win32.IsKeyDown(Vk.RMENU);
+		bool shift = IsKeyDown(Vk.LSHIFT) || IsKeyDown(Vk.RSHIFT);
+		bool ctrl = IsKeyDown(Vk.LCONTROL) || IsKeyDown(Vk.RCONTROL);
+		bool alt = IsKeyDown(Vk.LMENU) || IsKeyDown(Vk.RMENU);
 		events.Enqueue(new InputEvent((Vk)vk, down, shift, ctrl, alt));
 	}
 
@@ -299,4 +299,9 @@ internal static unsafe class RawInput
 
 	[DllImport("kernel32.dll")]
 	private static extern uint GetCurrentThreadId();
+
+	[DllImport("user32.dll", SetLastError = true)]
+	private static extern uint GetAsyncKeyState(int vKey);
+
+	private static bool IsKeyDown(Vk vk) => (GetAsyncKeyState((int)vk) & 0x8000) != 0;
 }

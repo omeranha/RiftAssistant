@@ -5,7 +5,7 @@ using Plugins;
 
 namespace SNO;
 
-public class SnoAct : ISnoAct
+public class SnoAct
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -14,10 +14,10 @@ public class SnoAct : ISnoAct
 	private readonly int int_0;
 
 	[CompilerGenerated]
-	private readonly List<ISnoQuest> list_0 = new List<ISnoQuest>();
+	private readonly List<SnoQuest> list_0 = new List<SnoQuest>();
 
 	[CompilerGenerated]
-	private readonly List<ISnoQuest> list_1 = new List<ISnoQuest>();
+	private readonly List<SnoQuest> list_1 = new List<SnoQuest>();
 
 	[CompilerGenerated]
 	private readonly List<SnoActWaypoint> list_2 = new List<SnoActWaypoint>();
@@ -40,7 +40,7 @@ public class SnoAct : ISnoAct
 		}
 	}
 
-	public List<ISnoQuest> MainQuests
+	public List<SnoQuest> MainQuests
 	{
 		[CompilerGenerated]
 		get
@@ -49,7 +49,7 @@ public class SnoAct : ISnoAct
 		}
 	}
 
-	public List<ISnoQuest> Bounties
+	public List<SnoQuest> Bounties
 	{
 		[CompilerGenerated]
 		get

@@ -18,7 +18,7 @@ internal class ModuleConditionEvaluator
 
 	private RectangleF? mouseFarRect;
 
-	private readonly ISnoPower[] requiredBuffPowers;
+	private readonly SnoPower[] requiredBuffPowers;
 
 	private readonly int[] requiredBuffStacks;
 
@@ -36,7 +36,7 @@ internal class ModuleConditionEvaluator
 		string activeBuffsStr = conditions.ActiveBuffs;
 		if (activeBuffsStr != null) {
 			string[] buffsArray = activeBuffsStr.Split(',');
-			requiredBuffPowers = new ISnoPower[buffsArray.Length];
+			requiredBuffPowers = new SnoPower[buffsArray.Length];
 			requiredBuffStacks = new int[buffsArray.Length];
 
 			for (int i = 0; i < buffsArray.Length; i++) {
@@ -143,8 +143,8 @@ internal class ModuleConditionEvaluator
 		if (requiredBuffPowers != null) {
 			bool flag = false;
 			for (int i = 0; i < requiredBuffPowers.Length; i++) {
-				ISnoPower snoPower = requiredBuffPowers[i];
-				IBuff buff = CoreCollector.LocalPlayer.Powers.GetBuff(snoPower.Sno);
+				SnoPower snoPower = requiredBuffPowers[i];
+				Buff buff = CoreCollector.LocalPlayer.Powers.GetBuff(snoPower.Sno);
 				if (buff != null && buff.Active) {
 					int num = requiredBuffStacks[i];
 					if (num == -1 || buff.IconCounts[num] >= 1) {

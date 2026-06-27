@@ -386,7 +386,7 @@ internal class UiElements
 	private readonly Dictionary<string, UiElement> rootElements = new(StringComparer.Ordinal);
 	private readonly Dictionary<string, UiElement> conditionalElements = new(StringComparer.Ordinal);
 
-	private readonly HashNode nodeBuffer = new();
+	private HashNode nodeBuffer = new();
 
 	private Stopwatch refreshTimer = new();
 
@@ -395,7 +395,7 @@ internal class UiElements
 	private long[] buckets;
 	private string lastChat;
 
-	public EventHandler<EventArgs9> ChatChanged;
+	public EventHandler<ChatChanged> ChatChanged;
 
 	public int RefreshIntervalMs { get; set; }
 
@@ -409,18 +409,18 @@ internal class UiElements
 	{
 		if (!force && RefreshIntervalMs > 0 && refreshTimer.ElapsedMilliseconds < RefreshIntervalMs) return;
 
-		long uiManager = MR.Instance.ReadAddress(CoreCollector.D3Memory.UIManagerAddress);
+		long uiManager = GameWindowManager.Read<long>(CoreCollector.D3Memory.UIManagerAddress);
 		long bucketTable = uiManager + 16;
-		long bucketPtr = MR.Instance.ReadAddress(bucketTable);
-		bucketCount = MR.Instance.ReadInt32_x64(bucketTable + 8);
+		long bucketPtr = GameWindowManager.Read<long>(bucketTable);
+		bucketCount = GameWindowManager.Read<int>(bucketTable + 8);
 		if ((uint)bucketCount is 0 or >= MaxUiElements) return;
 
 		refreshTimer.Restart();
 
 		if (buckets == null || buckets.Length != bucketCount) buckets = new long[bucketCount];
 
-		uiHash = MR.Instance.ReadInt32_x64(uiManager);
-		MR.Instance.ReadMem(bucketPtr, buckets, bucketCount * sizeof(long));
+		uiHash = GameWindowManager.Read<int>(uiManager);
+		buckets = GameWindowManager.ReadArray<long>(bucketPtr, bucketCount);
 
 		foreach (var element in rootElements.Values) {
 			element.Refresh();
@@ -439,7 +439,7 @@ internal class UiElements
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	private static bool IsVisible(IUiElement element)
+	private static bool IsVisible(UiElement element)
 	{
 		if (element == null) return true;
 
@@ -483,9 +483,9 @@ internal class UiElements
 		string current = ReadChat(stripFormatting);
 		if (current == lastChat) return;
 
-		ChatChanged?.Invoke(this, new EventArgs9 {
-			string_0 = current,
-			string_1 = lastChat
+		ChatChanged?.Invoke(this, new ChatChanged {
+			Current = current,
+			Previous = lastChat
 		});
 		lastChat = current;
 	}
@@ -498,8 +498,8 @@ internal class UiElements
 			long current = buckets[i];
 			int depth = 0;
 			while (current != 0 && depth++ < 100) {
-				MR.Instance.ReadMem(current, node, 24);
-				string path = MR.Instance.ReadString(node.Value + 56, 512, Encoding.ASCII, true);
+				node = GameWindowManager.Read<HashNode>(current);
+				string path = GameWindowManager.ReadString(node.Value + 56, 512, Encoding.ASCII, true);
 				result.Add(CreateTemporary(path));
 				current = node.Next;
 			}
@@ -508,7 +508,7 @@ internal class UiElements
 		return result;
 	}
 
-	public UiElement Register(string path, IUiElement requiredVisible = null, IUiElement requiredHidden = null, float paddingX = 0f, float paddingY = 0f) {
+	public UiElement Register(string path, UiElement requiredVisible = null, UiElement requiredHidden = null, float paddingX = 0f, float paddingY = 0f) {
 		if (all.TryGetValue(path, out var existing)) return existing;
 
 		var element = new UiElement(path, requiredVisible, requiredHidden) {
@@ -608,7 +608,7 @@ internal class UiElements
 
 			if (entry.UnknownPtr1 == 0) continue;
 
-			string text = MR.Instance.ReadString(entry.UnknownPtr1, 1024, Encoding.UTF8, false);
+			string text = GameWindowManager.ReadString(entry.UnknownPtr1, 1024, Encoding.UTF8, false);
 			return SanitizeChat(text, stripFormatting);
 		}
 
@@ -674,16 +674,11 @@ internal class UiElements
 		long current = buckets[element.int_1];
 		int depth = 0;
 
-		while (current != 0 &&
-			   depth++ < MaxChainDepth &&
-			   MR.Instance.ReadMem(current, nodeBuffer, 24)) {
+		while (current != 0 && depth++ < MaxChainDepth) {
+			nodeBuffer = GameWindowManager.Read<HashNode>(current);
 			if (nodeBuffer.Key == element.ulong_0) {
 				element.long_0 = nodeBuffer.Value;
-
-				MR.Instance.ReadMem(
-					element.long_0,
-					element.Class75_0,
-					2696);
+				element.Class75_0 = GameWindowManager.Read<UiElementData>(element.long_0);
 
 				if (element.Class75_0.Id == element.ulong_0) {
 					element.bool_0 = true;

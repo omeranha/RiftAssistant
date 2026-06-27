@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Plugins;
+using SNO;
 using work;
 
 internal class RunTracker
@@ -39,7 +40,7 @@ internal class RunTracker
 
 	public readonly StringBuilder LogBuilder = new();
 
-	internal RunTracker(ISnoArea initialArea)
+	internal RunTracker(SnoArea initialArea)
 	{
 		StartTime = DateTime.Now;
 		StartGameTick = CoreCollector.D3Memory.GameTick;
@@ -55,7 +56,7 @@ internal class RunTracker
 		UpdateCurrentArea(initialArea);
 	}
 
-	internal void UpdateCurrentArea(ISnoArea isnoArea_0)
+	internal void UpdateCurrentArea(SnoArea isnoArea_0)
 	{
 		if (CurrentArea != null) {
 			CurrentArea.AreaStats.Stop();

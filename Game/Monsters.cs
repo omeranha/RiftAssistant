@@ -11,36 +11,36 @@ namespace work;
 public sealed class Monsters
 {
 	[CompilerGenerated]
-	private readonly ISnoMonster isnoMonster_0;
+	private readonly SnoMonster SnoMonster_0;
 
-	private readonly Dictionary<uint, ISnoMonsterAffix> dictionary_0 = new Dictionary<uint, ISnoMonsterAffix>(100);
+	private readonly Dictionary<uint, SnoMonsterAffix> dictionary_0 = new Dictionary<uint, SnoMonsterAffix>(100);
 
-	private readonly Dictionary<ActorSnoEnum, ISnoMonster> dictionary_1 = new Dictionary<ActorSnoEnum, ISnoMonster>(3000);
+	private readonly Dictionary<ActorSnoEnum, SnoMonster> dictionary_1 = new Dictionary<ActorSnoEnum, SnoMonster>(3000);
 
-	private readonly Dictionary<uint, ISnoMonster> dictionary_2 = new Dictionary<uint, ISnoMonster>(3000);
+	private readonly Dictionary<uint, SnoMonster> dictionary_2 = new Dictionary<uint, SnoMonster>(3000);
 
-	public ISnoMonster SnoMonsterObstacle
+	public SnoMonster SnoMonsterObstacle
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoMonster_0;
+			return SnoMonster_0;
 		}
 	}
 
-	public ISnoMonster GetMonster(ActorSnoEnum sno)
+	public SnoMonster GetMonster(ActorSnoEnum sno)
 	{
 		dictionary_1.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoMonsterAffix GetMonsterAffix(uint sno)
+	public SnoMonsterAffix GetMonsterAffix(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ISnoMonster GetMonsterByStringId(uint stringId)
+	public SnoMonster GetMonsterByStringId(uint stringId)
 	{
 		dictionary_2.TryGetValue(stringId, out var value);
 		return value;
@@ -96,6 +96,6 @@ public sealed class Monsters
 			}
 		}
 		SnoActor snoActor_ = new SnoActor((ActorSnoEnum)0u, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-monster-obstacle", "dummyactor-monster-obstacle", "dummyactor-monster-obstacle");
-		isnoMonster_0 = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
+		SnoMonster_0 = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
 	}
 }

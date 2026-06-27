@@ -3,10 +3,10 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoMonster : ISnoMonster
+public sealed class SnoMonster
 {
 	[CompilerGenerated]
-	private readonly ISnoActor isnoActor_0;
+	private readonly SnoActor SnoActor_0;
 
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -29,12 +29,12 @@ public sealed class SnoMonster : ISnoMonster
 	[CompilerGenerated]
 	private readonly float float_0;
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoActor_0;
+			return SnoActor_0;
 		}
 	}
 
@@ -103,7 +103,7 @@ public sealed class SnoMonster : ISnoMonster
 
 	internal SnoMonster(SnoActor snoActor_0, uint uint_1, string string_3, string string_4, string string_5, MonsterPriority monsterPriority_1, bool bool_1, float float_1)
 	{
-		isnoActor_0 = snoActor_0;
+		SnoActor_0 = snoActor_0;
 		uint_0 = uint_1;
 		string_0 = string_3;
 		string_1 = string_4;

@@ -3,7 +3,7 @@ using Plugins;
 
 namespace work;
 
-internal class PlayerMaterialInfo : IPlayerMaterialInfo
+public class PlayerMaterialInfo
 {
 	public Player Class310_0 { get; }
 

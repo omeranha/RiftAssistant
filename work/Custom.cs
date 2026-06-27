@@ -6,55 +6,21 @@ namespace work;
 
 public static class Custom
 {
-	internal sealed class UnknownSnoArea : ISnoArea
+	internal sealed class UnknownSnoArea : SnoArea
 	{
 		private readonly uint _id;
 
-		public uint Sno => uint.MaxValue;
-
-		public string Code => string.Empty;
-
-		public string NameLocalized => "!! Missing area name !!";
-
-		public string NameEnglish => NameLocalized;
-
-		public AreaType Type => AreaType.Normal;
-
-		public bool IsRandom => false;
-
-		public bool IsTown => false;
-
-		public int Act => 0;
-
-		public string AreaGroupInWorld => string.Empty;
-
-		public ISnoWorld SnoWorld => null;
-
-		public uint HostAreaSno => 0u;
-
-		public ISnoArea HostSnoArea => null;
-
-		internal UnknownSnoArea(uint id = uint.MaxValue)
+		internal UnknownSnoArea(uint id = uint.MaxValue) : base(id, string.Empty, 0, "!! Missing area name !!", "!! Missing area name !!", AreaType.Normal, false, string.Empty, false, 0)
 		{
 			_id = id;
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is UnknownSnoArea unknownSnoArea)
-			{
-				return _id == unknownSnoArea._id;
-			}
-			return false;
-		}
+		public override bool Equals(object obj) => obj is UnknownSnoArea other && _id == other._id;
 
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
+		public override int GetHashCode() => _id.GetHashCode();
 	}
 
-	internal static readonly ISnoArea dummy_snoarea_unknown;
+	internal static readonly SnoArea dummy_snoarea_unknown;
 
 	internal static uint GetAreaSno(Player player)
 	{
@@ -64,7 +30,7 @@ public static class Custom
 			long int64_ = CoreCollector.DAF.LevelAreaAddress;
 			if (int64_ != 0L)
 			{
-				num = MR.Instance.ReadUInt(int64_ + Constants.LevelArea_AreaSno_Offset);
+				num = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
 			}
 		}
 		return num;
@@ -83,7 +49,7 @@ public static class Custom
 			long int64_ = CoreCollector.DAF.LevelAreaAddress;
 			if (int64_ != 0L)
 			{
-				num = MR.Instance.ReadUInt(int64_ + Constants.LevelArea_AreaSno_Offset);
+				num = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
 			}
 			player.SnoArea = SnoData.Areas.GetSnoArea(num);
 			return;

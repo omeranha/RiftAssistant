@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal class r_Block
+internal struct r_Block
 {
 	[FieldOffset(0)]
 	public long NextNodePtr;
@@ -27,5 +27,5 @@ internal class r_Block
 	[FieldOffset(68)]
 	public int GoodFood;
 
-	public const int SizeOf = 72;
+	public const int Size = 72;
 }

@@ -5,7 +5,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class AttributeProcessor : IAttributeProcessor
+public sealed class AttributeProcessor
 {
 	[CompilerGenerated]
 	private readonly byte byte_0;
@@ -14,7 +14,7 @@ public sealed class AttributeProcessor : IAttributeProcessor
 	private readonly string string_0;
 
 	[CompilerGenerated]
-	private readonly IAttribute iattribute_0;
+	private readonly AcdAttribute iattribute_0;
 
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -43,7 +43,7 @@ public sealed class AttributeProcessor : IAttributeProcessor
 		}
 	}
 
-	public IAttribute Attribute
+	public AcdAttribute Attribute
 	{
 		[CompilerGenerated]
 		get
@@ -79,7 +79,7 @@ public sealed class AttributeProcessor : IAttributeProcessor
 		}
 	}
 
-	internal AttributeProcessor(byte byte_1, string string_1, IAttribute iattribute_1, uint uint_1, double? nullable_1, int int_1)
+	internal AttributeProcessor(byte byte_1, string string_1, AcdAttribute iattribute_1, uint uint_1, double? nullable_1, int int_1)
 	{
 		byte_0 = byte_1;
 		string_0 = string_1;
@@ -123,12 +123,6 @@ public sealed class AttributeProcessor : IAttributeProcessor
 		return dv;
 	}
 
-	double IAttributeProcessor.ProcessDouble(double dv)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in ProcessDouble
-		return this.ProcessDouble(dv);
-	}
-
 	public int ProcessInt(int iv)
 	{
 		if (Attribute.ValueType == AttributeValueType._float)
@@ -148,11 +142,5 @@ public sealed class AttributeProcessor : IAttributeProcessor
 			iv = 1;
 		}
 		return iv;
-	}
-
-	int IAttributeProcessor.ProcessInt(int iv)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in ProcessInt
-		return this.ProcessInt(iv);
 	}
 }

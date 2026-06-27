@@ -1,7 +1,8 @@
 using System.Diagnostics;
 using Plugins;
+using SNO;
 
-internal class MapObject : Actor, IActor, IClickableActor
+public class MapObject : Actor, IClickableActor
 {
 	public Stopwatch FirstClicked {  get; set; }
 
@@ -9,7 +10,7 @@ internal class MapObject : Actor, IActor, IClickableActor
 
 	public bool? ShouldBeClicked { get; set; }
 
-	public MapObject(uint uint_7, uint uint_8, ISnoActor isnoActor_1) : base(uint_7, uint_8, isnoActor_1)
+	public MapObject(uint uint_7, uint uint_8, SnoActor SnoActor_1) : base(uint_7, uint_8, SnoActor_1)
 	{
 		IsClickable = true;
 	}

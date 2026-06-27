@@ -792,7 +792,7 @@ internal class D3Memory
 
 	public string ReadGameServerIP()
 	{
-		string text = MR.Instance.ReadString(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_GameServerAddress, 128, Encoding.ASCII, bool_0: true);
+		string text = GameWindowManager.ReadString(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_GameServerAddress, 128, Encoding.ASCII, true);
 		if (!text.Contains(":")) {
 			return text;
 		}
@@ -801,18 +801,18 @@ internal class D3Memory
 
 	public void Update()
 	{
-		int num = MR.Instance.ReadInt32_x64(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_InGameFlag);
+		int num = GameWindowManager.Read<int>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_InGameFlag);
 		ObjectManager_GameState_HasValue = num == 1 || num == 6;
 		GameState_Value_IsChallengeRiftGame = num == 6;
-		IsUiHidden = (MR.Instance.ReadInt32_x64(AddressList.UiIsHiddenFlagAddress, bool_0: true) & 0x400000) != 0;
-		RenderTick = MR.Instance.ReadInt32_x64(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_RenderTick);
+		IsUiHidden = (GameWindowManager.Read<int>(AddressList.UiIsHiddenFlagAddress, true) & 0x400000) != 0;
+		RenderTick = GameWindowManager.Read<int>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_RenderTick);
 		if (!isOnPTR.HasValue) {
-			CheckIsOnPTR(MR.Instance.Process);
+			CheckIsOnPTR(GameWindowManager.Process);
 		}
 		if (string.IsNullOrEmpty(ServerGateway)) {
 			ReadGameServerIP();
 			if (CoreCollector.DAF.RealmAddress != 0L) {
-				ServerGateway = MR.Instance.ReadString(CoreCollector.DAF.RealmAddress + CoreCollector.DAF.Offset_Realm_ServerGateway, 65, Encoding.UTF8, bool_0: true);
+				ServerGateway = GameWindowManager.ReadString(CoreCollector.DAF.RealmAddress + CoreCollector.DAF.Offset_Realm_ServerGateway, 65, Encoding.UTF8, true);
 				if (!ServerGateway.Contains(".")) {
 					ServerGateway = null;
 				} else if (!string.IsNullOrEmpty(ServerGateway)) {
@@ -823,36 +823,36 @@ internal class D3Memory
 			}
 		}
 		if (ObjectManager_GameState_HasValue) {
-			GameState_LoadingScreenEnabled_Value = MR.Instance.ReadInt32_x64(CoreCollector.DAF.GameStateAddress + Offset_GameState_LoadingScreenEnabled);
-			GameState_Paused_Value = MR.Instance.ReadInt32_x64(CoreCollector.DAF.GameStateAddress + Offset_GameState_IsGamePaused);
-			GameState_RiftProgressAccumulated_Value = MR.Instance.ReadFloat(CoreCollector.DAF.GameStateAddress + Offset_GameState_RiftProgressAccumulated);
+			GameState_LoadingScreenEnabled_Value = GameWindowManager.Read<int>(CoreCollector.DAF.GameStateAddress + Offset_GameState_LoadingScreenEnabled);
+			GameState_Paused_Value = GameWindowManager.Read<int>(CoreCollector.DAF.GameStateAddress + Offset_GameState_IsGamePaused);
+			GameState_RiftProgressAccumulated_Value = GameWindowManager.Read<float>(CoreCollector.DAF.GameStateAddress + Offset_GameState_RiftProgressAccumulated);
 			if (float.IsNaN(GameState_RiftProgressAccumulated_Value)) {
 				GameState_RiftProgressAccumulated_Value = 0f;
 			}
 			if (GameState_RiftProgressAccumulated_Value > MaxQuestProgress) {
 				GameState_RiftProgressAccumulated_Value = MaxQuestProgress;
 			}
-			long num2 = MR.Instance.ReadAddress(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_TimedEvents);
-			long num3 = MR.Instance.ReadAddress(num2);
+			long num2 = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_TimedEvents);
+			long num3 = GameWindowManager.Read<long>(num2);
 			int num4 = 0;
 			while (num3 != 0L && num3 != uint.MaxValue && num4 < 1000) {
-				if (MR.Instance.ReadInt32_x64(num3) != 382698) {
+				if (GameWindowManager.Read<int>(num3) != 382698) {
 					num4++;
-					num3 = MR.Instance.ReadAddress(num3 + 16);
+					num3 = GameWindowManager.Read<long>(num3 + 16);
 					continue;
 				}
-				CurrentTimedEventStartTick = MR.Instance.ReadInt32_x64(num3 + 4);
-				CurrentTimedEventEndTick = MR.Instance.ReadInt32_x64(num3 + 8);
-				CurrentTimedEventEndTickMod = MR.Instance.ReadInt32_x64(num3 + 12);
+				CurrentTimedEventStartTick = GameWindowManager.Read<int>(num3 + 4);
+				CurrentTimedEventEndTick = GameWindowManager.Read<int>(num3 + 8);
+				CurrentTimedEventEndTickMod = GameWindowManager.Read<int>(num3 + 12);
 				break;
 			}
 		}
 		ObjectManagerStorageAddress = CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Storage;
-		LocalPlayerIndex = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_Player_LocalPlayerIndex);
+		LocalPlayerIndex = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_Player_LocalPlayerIndex);
 		if (ObjectManager_GameState_HasValue) {
-			ActMapCurrentAct = (BountyAct)MR.Instance.ReadInt32_x64(AddressList.SelectedActOnMap, bool_0: true);
-			GameDifficulty = (GameDifficulty)MR.Instance.ReadInt32_x64(ObjectManagerStorageAddress + Offset_Storage_GameDifficulty);
-			int num5 = MR.Instance.ReadInt32_x64(ObjectManagerStorageAddress + Offset_Storage_GameTick);
+			ActMapCurrentAct = (BountyAct)GameWindowManager.Read<int>(AddressList.SelectedActOnMap, true);
+			GameDifficulty = (GameDifficulty)GameWindowManager.Read<int>(ObjectManagerStorageAddress + Offset_Storage_GameDifficulty);
+			int num5 = GameWindowManager.Read<int>(ObjectManagerStorageAddress + Offset_Storage_GameTick);
 			if (GameState_Paused_Value == 0) {
 				if (int_44 == num5 && stopwatch_0 != null) {
 					GameTick = num5 + (int)Math.Floor((double)stopwatch_0.ElapsedMilliseconds * 60.0 / 1000.0);
@@ -866,10 +866,10 @@ internal class D3Memory
 				int_44 = num5;
 				stopwatch_0.Restart();
 			}
-			int num6 = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Free);
-			int num7 = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Head);
-			int num8 = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Tail);
-			int num9 = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Used);
+			int num6 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Free);
+			int num7 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Head);
+			int num8 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Tail);
+			int num9 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Used);
 			if (num9 > 0 && (int_45 != num7 || int_46 != num8)) {
 				int_45 = num7;
 				int_46 = num8;
@@ -878,7 +878,7 @@ internal class D3Memory
 				int num11 = 0;
 				while (num10 != int_46 && num11 < 100) {
 					num11++;
-					int num12 = MR.Instance.ReadInt32_x64(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Buffer + num10 * 4);
+					int num12 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Buffer + num10 * 4);
 					AverageLatency += num12;
 					num10 = (num10 + 1) % (num9 + num6);
 					if (num10 == num8) {
@@ -892,23 +892,23 @@ internal class D3Memory
 			GameTick = 1;
 			GameDifficulty = GameDifficulty.unknown;
 		}
-		long num13 = MR.Instance.ReadAddress(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Actors);
-		long num14 = MR.Instance.ReadAddress(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Worlds);
-		long num15 = MR.Instance.ReadAddress(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Scenes);
-		long num16 = MR.Instance.ReadAddress(ObjectManagerStorageAddress + Offset_Storage_FastAttrib);
-		long num17 = MR.Instance.ReadAddress(num16 + Offset_FastAttrib_FastAttribGroups);
+		long num13 = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Actors);
+		long num14 = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Worlds);
+		long num15 = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Scenes);
+		long num16 = GameWindowManager.Read<long>(ObjectManagerStorageAddress + Offset_Storage_FastAttrib);
+		long num17 = GameWindowManager.Read<long>(num16 + Offset_FastAttrib_FastAttribGroups);
 		AttribAllocator.Snapshot(num16 + Offset_FastAttrib_BucketAllocator1);
-		long num18 = MR.Instance.ReadAddress(CoreCollector.DAF.AcdManagerAddress + CoreCollector.DAF.AcdManager_ACDs_Offset);
+		long num18 = GameWindowManager.Read<long>(CoreCollector.DAF.AcdManagerAddress + CoreCollector.DAF.AcdManager_ACDs_Offset);
 		ACDContainer.Snapshot(num18);
 		ActorContainer.Snapshot(num13);
 		FastAttribGroupContainer.Snapshot(num17);
 		WorldContainer.Snapshot(num14);
 		SceneContainer.Snapshot(num15);
-		UIManagerAddress = MR.Instance.ReadAddress(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_UIManager);
-		QuestManagerAddress = MR.Instance.ReadAddress(ObjectManagerStorageAddress + Offset_Storage_QuestManager);
-		WaypointManagerAddress = MR.Instance.ReadAddress(ObjectManagerStorageAddress + Offset_Storage_WaypointManager);
-		SelectedActor1_AcdId = MR.Instance.ReadUInt(UIManagerAddress + Offset_UIManager_SelectedActor1);
-		SelectedActor2_AcdId = MR.Instance.ReadUInt(UIManagerAddress + Offset_UIManager_SelectedActor2);
+		UIManagerAddress = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_UIManager);
+		QuestManagerAddress = GameWindowManager.Read<long>(ObjectManagerStorageAddress + Offset_Storage_QuestManager);
+		WaypointManagerAddress = GameWindowManager.Read<long>(ObjectManagerStorageAddress + Offset_Storage_WaypointManager);
+		SelectedActor1_AcdId = GameWindowManager.Read<uint>(UIManagerAddress + Offset_UIManager_SelectedActor1);
+		SelectedActor2_AcdId = GameWindowManager.Read<uint>(UIManagerAddress + Offset_UIManager_SelectedActor2);
 	}
 
 	private void CheckIsOnPTR(Process process_0)
@@ -934,7 +934,7 @@ internal class D3Memory
 		}
 	}
 
-	private string method_5(IPlayer iplayer_0)
+	private string method_5(Player iplayer_0)
 	{
 		string[] obj = new string[12]
 		{
@@ -951,7 +951,7 @@ internal class D3Memory
 			", Area=",
 			null
 		};
-		ISnoArea snoArea = iplayer_0.SnoArea;
+		SnoArea snoArea = iplayer_0.SnoArea;
 		object obj2;
 		if (snoArea == null) {
 			obj2 = null;
@@ -990,7 +990,7 @@ internal class D3Memory
 			", AreaName=",
 			null
 		};
-		ISnoArea snoArea = SnoData.Areas.GetSnoArea(struct22_0.LevelAreaSNO);
+		SnoArea snoArea = SnoData.Areas.GetSnoArea(struct22_0.LevelAreaSNO);
 		object obj2;
 		if (snoArea == null) {
 			obj2 = null;
@@ -1077,9 +1077,6 @@ internal class D3Memory
 		return text + "\tno acd data???";
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_AttributeEntry struct8_0, int int_47, int int_48);
-
 	private string method_9(r_ACD struct7_0)
 	{
 		if (struct7_0.AcdId == uint.MaxValue) {
@@ -1165,7 +1162,7 @@ internal class D3Memory
 		return "\tAcdId=0x" + struct6_0.AcdIdEncrypted.ToString("X8") + ", DecryptedAcdId=0x" + acdIdEncrypted.ToString("X8") + ", ActorId=0x" + struct6_0.ActorId.ToString("X8");
 	}
 
-	private string method_11<T>(AllocationCache<T> class352_0) where T : struct
+	private string method_11<T>(AllocationCache<T> class352_0) where T : unmanaged
 	{
 		string text = "\tArrayCount=" + class352_0.int_1 + ";";
 		if (class352_0.class354_0 != null) {

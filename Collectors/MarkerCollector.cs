@@ -21,11 +21,11 @@ internal class MarkerCollector
 
 	private readonly Allocator class351_0 = new Allocator(2048, "IconAllocator");
 
-	private readonly AllocationCache<r_MarkerEntry> class352_0 = new AllocationCache<r_MarkerEntry>(ReadProcessMemory, Constants.MarkerEntry_SizeOf);
+	private readonly AllocationCache<r_MarkerEntry> class352_0 = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
 
-	private readonly AllocationCache<r_MarkerEntry> class352_1 = new AllocationCache<r_MarkerEntry>(ReadProcessMemory, Constants.MarkerEntry_SizeOf);
+	private readonly AllocationCache<r_MarkerEntry> class352_1 = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
 
-	private readonly AllocationCache<r_Trickle> trickleReader = new AllocationCache<r_Trickle>(ReadProcessMemory_1, Constants.Trickle_SizeOf);
+	private readonly AllocationCache<r_Trickle> trickleReader = new AllocationCache<r_Trickle>(Constants.Trickle_SizeOf);
 
 	private readonly Class112<string, Banner> class112_0 = new Class112<string, Banner>();
 
@@ -37,42 +37,33 @@ internal class MarkerCollector
 
 	private readonly Class112<string, Marker> class112_4 = new Class112<string, Marker>();
 
-	public List<IMarker> list_0 = new List<IMarker>();
+	public List<Marker> list_0 = new List<Marker>();
 
 	private readonly List<Marker> list_1 = new List<Marker>();
 
-	public List<IBanner> list_2 = new List<IBanner>();
+	public List<Banner> list_2 = new List<Banner>();
 
-	public IWorldCoordinate iworldCoordinate_0;
+	public WorldCoordinate iworldCoordinate_0;
 
-	public readonly IWorldCoordinate iworldCoordinate_1 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_1 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public readonly IWorldCoordinate iworldCoordinate_2 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_2 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public readonly IWorldCoordinate iworldCoordinate_3 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_3 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public readonly IWorldCoordinate iworldCoordinate_4 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_4 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public readonly IWorldCoordinate iworldCoordinate_5 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_5 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public readonly IWorldCoordinate iworldCoordinate_6 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
+	public readonly WorldCoordinate iworldCoordinate_6 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
 
-	public IWorldCoordinate iworldCoordinate_7;
+	public WorldCoordinate iworldCoordinate_7;
 
-	public IWorldCoordinate iworldCoordinate_8;
+	public WorldCoordinate iworldCoordinate_8;
 
-	private readonly r_MinimapIcon[] struct19_0 = new r_MinimapIcon[256];
+	private r_MinimapIcon[] struct19_0 = new r_MinimapIcon[256];
 
-	private readonly AreaContainer class66_0 = new AreaContainer();
-
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_MarkerEntry struct18_0, int int_0, int int_1);
-
-	[DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory", SetLastError = true)]
-	private static extern bool ReadProcessMemory_1(IntPtr intptr_0, IntPtr intptr_1, ref r_Trickle struct9_0, int int_0, int int_1);
-
-	[DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory", SetLastError = true)]
-	private static extern bool ReadProcessMemory_2(IntPtr intptr_0, IntPtr intptr_1, ref r_MinimapIcon struct19_1, int int_0, int int_1);
+	private AreaContainer class66_0 = new AreaContainer();
 
 	internal void Collect()
 	{
@@ -82,7 +73,7 @@ internal class MarkerCollector
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return;
 		}
-		MR.Instance.ReadMem(CoreCollector.DAF.LevelAreaAddress, class66_0, 24);
+		class66_0 = GameWindowManager.Read<AreaContainer>(CoreCollector.DAF.LevelAreaAddress);
 		class357_0.method_0(class66_0.PrimaryAreaPtr);
 		class357_1.method_0(class66_0.SecondaryAreaPtr);
 		if (class357_0.class351_0.RawAllocator.ElementSize != 88) {
@@ -118,16 +109,16 @@ internal class MarkerCollector
 				continue;
 			}
 			if (item.struct17_0.uint_3 != uint.MaxValue) {
-				IQuest quest = CoreCollector.Class376_0.class112_1[item.struct17_0.uint_3];
+				Quest quest = CoreCollector.Class376_0.class112_1[item.struct17_0.uint_3];
 				if (quest != null && quest.State == QuestState.completed) {
 					continue;
 				}
 			}
 			Marker @class = class112_1[text];
 			if (@class == null) {
-				ISnoQuest isnoQuest_ = ((item.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item.struct17_0.uint_3) : null);
-				SnoActor isnoActor_ = ((item.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item.struct17_0.uint_2) : null);
-				@class = new Marker(text, item.struct17_0.struct37_0.WorldId, isnoQuest_, isnoActor_, GameWindowManager.Window.CreateWorldCoordinate(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z), item.struct17_0.struct15_0.TextureSno, item.struct17_0.struct15_0.FrameIndex);
+				SnoQuest isnoQuest_ = ((item.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item.struct17_0.uint_3) : null);
+				SnoActor SnoActor_ = ((item.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item.struct17_0.uint_2) : null);
+				@class = new Marker(text, item.struct17_0.struct37_0.WorldId, isnoQuest_, SnoActor_, GameWindowManager.Window.CreateWorldCoordinate(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z), item.struct17_0.struct15_0.TextureSno, item.struct17_0.struct15_0.FrameIndex);
 				class112_1.Set(text, @class);
 			} else {
 				@class.FloorCoordinate.Set(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z);
@@ -157,16 +148,16 @@ internal class MarkerCollector
 						continue;
 					}
 					if (item2.struct17_0.uint_3 != uint.MaxValue) {
-						IQuest quest2 = CoreCollector.Class376_0.class112_1[item2.struct17_0.uint_3];
+						Quest quest2 = CoreCollector.Class376_0.class112_1[item2.struct17_0.uint_3];
 						if (quest2 != null && quest2.State == QuestState.completed) {
 							continue;
 						}
 					}
 					Marker class2 = class112_1[text2];
 					if (class2 == null) {
-						ISnoQuest isnoQuest_2 = ((item2.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item2.struct17_0.uint_3) : null);
-						SnoActor isnoActor_2 = ((item2.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item2.struct17_0.uint_2) : null);
-						class2 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, isnoQuest_2, isnoActor_2, GameWindowManager.Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
+						SnoQuest isnoQuest_2 = ((item2.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item2.struct17_0.uint_3) : null);
+						SnoActor SnoActor_2 = ((item2.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item2.struct17_0.uint_2) : null);
+						class2 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, isnoQuest_2, SnoActor_2, GameWindowManager.Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
 						class112_1.Set(text2, class2);
 					} else {
 						class2.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
@@ -187,73 +178,73 @@ internal class MarkerCollector
 					}
 					continue;
 				}
-				SnoActor isnoActor_3 = null;
+				SnoActor SnoActor_3 = null;
 				bool value = false;
 				bool value2 = false;
 				bool? flag = null;
 				switch (item2.struct17_0.struct15_0.TextureSno) {
 					case 226820u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
 						value2 = true;
 						break;
 					case 218235u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
 						value2 = true;
 						break;
 					case 451494u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
 						value = true;
 						flag = false;
 						break;
 					case 451493u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
 						value = true;
 						flag = false;
 						break;
 					case 451504u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
 						value = true;
 						flag = false;
 						break;
 					case 451503u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
 						value = true;
 						flag = false;
 						break;
 					case 455276u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
 						value = true;
 						flag = true;
 						break;
 					case 455277u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
 						value = true;
 						flag = true;
 						break;
 					case 455278u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
 						value = true;
 						flag = true;
 						break;
 					case 455279u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
 						value = true;
 						flag = true;
 						break;
 					case 455280u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
 						value = true;
 						flag = true;
 						break;
 					case 451508u:
-						isnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
+						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
 						value = true;
 						flag = false;
 						break;
 				}
 				Marker class3 = class112_1[text2];
 				if (class3 == null) {
-					class3 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, isnoActor_3, GameWindowManager.Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
+					class3 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, SnoActor_3, GameWindowManager.Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
 					class112_1.Set(text2, class3);
 				} else {
 					class3.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
@@ -283,8 +274,8 @@ internal class MarkerCollector
 				}
 			}
 		}
-		long num10 = MR.Instance.ReadAddress(CoreCollector.DAF.TrickleManagerAddress + AddressList.long_14);
-		long address = MR.Instance.ReadAddress(num10 + AddressList.long_15);
+		long num10 = GameWindowManager.Read<long>(CoreCollector.DAF.TrickleManagerAddress + AddressList.long_14);
+		long address = GameWindowManager.Read<long>(num10 + AddressList.long_15);
 		class351_0.Snapshot(address);
 		if (class351_0.RawAllocator.ElementSize != Constants.Trickle_SizeOf) {
 			Trace.WriteLine("icon struct size mismatch!");
@@ -318,7 +309,7 @@ internal class MarkerCollector
 				array3[num14] = item3.WorldPlace.Z.ToString("F0", CultureInfo.InvariantCulture);
 				string text3 = string.Concat(array3);
 				if (item3.StringListSno == 61539) {
-					ISnoMonster monsterByStringId = SnoData.Monsters.GetMonsterByStringId(item3.StringLabelHandle);
+					SnoMonster monsterByStringId = SnoData.Monsters.GetMonsterByStringId(item3.StringLabelHandle);
 					if (monsterByStringId != null && monsterByStringId.SnoActor.Code.StartsWith("x1_lr_boss", ignoreCase: true, CultureInfo.InvariantCulture)) {
 						Marker class5 = class112_2[text3];
 						if (class5 == null) {
@@ -419,7 +410,8 @@ internal class MarkerCollector
 		list_0.AddRange(class112_4.IEnumerable_0.Where((Marker Marker_0) => Marker_0.WorldId == CoreCollector.LocalPlayer.WorldId));
 		if (CoreCollector.UiElements.class341_85.Visible) {
 			long num19 = CoreCollector.UiElements.class341_85.long_0 + 3252;
-			ReadProcessMemory_2(MR.Instance.ProcessHandle, (IntPtr)num19, ref struct19_0[0], 276 * struct19_0.Length, 0);
+			struct19_0 = GameWindowManager.ReadArray<r_MinimapIcon>(num19, struct19_0.Length);
+
 			int count = CoreCollector.ActorCollector.list_1.Count;
 			for (int num20 = 0; num20 < struct19_0.Length; num20++) {
 				uint uint_ = struct19_0[num20].uint_0;
@@ -427,7 +419,7 @@ internal class MarkerCollector
 					continue;
 				}
 				for (int num21 = 0; num21 < count; num21++) {
-					IMonster monster = CoreCollector.ActorCollector.list_1[num21];
+					Monster monster = CoreCollector.ActorCollector.list_1[num21];
 					if (monster.AcdId == uint_) {
 						(monster as Monster).IsQuestMonster = true;
 						break;
@@ -435,8 +427,8 @@ internal class MarkerCollector
 				}
 			}
 		}
-		IPlayer[] iPlayer_ = CoreCollector.PlayerCollector.PlayerSlots;
-		foreach (IPlayer player in iPlayer_) {
+		Player[] iPlayer_ = CoreCollector.PlayerCollector.PlayerSlots;
+		foreach (Player player in iPlayer_) {
 			if (player.IsInGame && !player.HasValidActor) {
 				TrySetPlayerPositionFromTrickle(player as Player);
 			}
@@ -466,7 +458,7 @@ internal class MarkerCollector
 				ActorCollector.smethod_2(player, item.WorldPlace.WorldId, 0u);
 				player.method_25();
 				player.CoordinateKnown = true;
-				if (!player.IsMe && player.SnoArea != null && player.SnoArea.Sno == Custom.dummy_snoarea_unknown.Sno && CoreCollector.LocalPlayer.SnoArea != null && CoreCollector.LocalPlayer.SnoArea.Sno != Custom.dummy_snoarea_unknown.Sno) {
+				if (!player.IsMe && player.SnoArea != null && CoreCollector.LocalPlayer.SnoArea != null) {
 					player.SnoArea = CoreCollector.LocalPlayer.SnoArea;
 				}
 			}

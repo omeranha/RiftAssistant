@@ -54,14 +54,14 @@ internal class ModulePortraitPlayerStats : Module
 			method_2();
 		}
 		float num2 = 0f;
-		foreach (IPlayer item in CoreCollector.PlayerCollector.PlayersInGame) {
+		foreach (Player item in CoreCollector.PlayerCollector.PlayersInGame) {
 			_ = item.Damage.CurrentDps;
 			if (item.HasValidActor && item.Defense.EhpMax > num2) {
 				num2 = item.Defense.EhpMax;
 			}
 		}
 		_ = GameWindowManager.Window.Size.Height / 400;
-		foreach (IPlayer item2 in CoreCollector.PlayerCollector.PlayersInGame) {
+		foreach (Player item2 in CoreCollector.PlayerCollector.PlayersInGame) {
 			if (!item2.IsMe) {
 				num++;
 			}
@@ -154,7 +154,7 @@ internal class ModulePortraitPlayerStats : Module
 		array[0, 9] = renderFont.GetTextLayout("RCR");
 		array[0, 10] = renderFont.GetTextLayout("Area");
 		int num = 0;
-		foreach (IPlayer item in CoreCollector.PlayerCollector.PlayersInGame) {
+		foreach (Player item in CoreCollector.PlayerCollector.PlayersInGame) {
 			if (!item.IsMe) {
 				num++;
 			}

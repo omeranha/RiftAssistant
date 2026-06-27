@@ -17,7 +17,7 @@ internal class HeroCollector
 	private EventHandler eventHandler_0;
 
 	[CompilerGenerated]
-	private IHero ihero_0;
+	private Hero ihero_0;
 
 	public const int season_number_dontuse = -1;
 
@@ -26,7 +26,7 @@ internal class HeroCollector
 
 	private readonly r_Hero[] buffer = new r_Hero[1];
 
-	private readonly Dictionary<uint, IHero> dictionary_0 = new Dictionary<uint, IHero>();
+	private readonly Dictionary<uint, Hero> dictionary_0 = new Dictionary<uint, Hero>();
 
 	public EventHandler OnHeroesCollected
 	{
@@ -42,7 +42,7 @@ internal class HeroCollector
 		}
 	}
 
-	public IHero IHero_0
+	public Hero IHero_0
 	{
 		[CompilerGenerated]
 		get
@@ -70,12 +70,9 @@ internal class HeroCollector
 		}
 	}
 
-	public IEnumerable<IHero> HeroList => dictionary_0.Values;
+	public IEnumerable<Hero> HeroList => dictionary_0.Values;
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	public static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_Hero struct14_1, int int_2, int int_3);
-
-	public IHero method_0(uint uint_0)
+	public Hero method_0(uint uint_0)
 	{
 		dictionary_0.TryGetValue(uint_0, out var value);
 		return value;
@@ -84,10 +81,10 @@ internal class HeroCollector
 	internal void Collect()
 	{
 		long int64_ = CoreCollector.DAF.BattleNetClientAddress;
-		long num = MR.Instance.ReadAddress(int64_ + 312);
-		long num2 = MR.Instance.ReadAddress(int64_ + 320);
-		long long_ = MR.Instance.ReadAddress(int64_ + 336) + 136;
-		uint num3 = MR.Instance.ReadUInt(num2 + 200);
+		long num = GameWindowManager.Read<long>(int64_ + 312);
+		long num2 = GameWindowManager.Read<long>(int64_ + 320);
+		long long_ = GameWindowManager.Read<long>(int64_ + 336) + 136;
+		uint num3 = GameWindowManager.Read<uint>(num2 + 200);
 		if (num3 == 0)
 		{
 			dictionary_0.Clear();
@@ -95,20 +92,20 @@ internal class HeroCollector
 			IHero_0 = null;
 			return;
 		}
-		int num4 = MR.Instance.ReadInt32_x64(num + 104);
-		long num5 = MR.Instance.ReadAddress(num + 96);
-		int num6 = MR.Instance.ReadInt32_x64(num + 88);
-		Int32_0 = MR.Instance.ReadInt32_x64(long_);
+		int num4 = GameWindowManager.Read<int>(num + 104);
+		long num5 = GameWindowManager.Read<long>(num + 96);
+		int num6 = GameWindowManager.Read<int>(num + 88);
+		Int32_0 = GameWindowManager.Read<int>(long_);
 		if (num4 > 0)
 		{
 			for (int i = 0; i < num6; i++)
 			{
-				long num7 = MR.Instance.ReadAddress(num5 + i * 8);
+				long num7 = GameWindowManager.Read<long>(num5 + i * 8);
 				int num8 = 0;
 				while (num7 != 0L && num8 < 1000)
 				{
 					num8++;
-					ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)num7, ref buffer[0], Constants.Hero_SizeOf, 0);
+					buffer[0] = GameWindowManager.Read<r_Hero>(num7);
 					method_3(ref buffer[0]);
 					num7 = buffer[0].long_0;
 				}
@@ -147,12 +144,12 @@ internal class HeroCollector
 			Hero hero = method_0(uint_) as Hero;
 			if (hero == null)
 			{
-				string text = MR.Instance.ReadString(struct14_1.long_3, 64, Encoding.UTF8, bool_0: true);
+				string text = GameWindowManager.ReadString(struct14_1.long_3, 64, Encoding.UTF8, true);
 				if (string.IsNullOrEmpty(text))
 				{
 					return;
 				}
-				string string_ = MR.Instance.ReadString(struct14_1.long_2, 64, Encoding.UTF8, bool_0: true);
+				string string_ = GameWindowManager.ReadString(struct14_1.long_2, 64, Encoding.UTF8, true);
 				bool bool_ = (struct14_1.int_3 & 1) == 1;
 				bool bool_2 = (struct14_1.int_3 & 2) == 0;
 				bool bool_3 = struct14_1.season > 0 && struct14_1.season == Constants.CurrentSeasonNumber;
@@ -175,9 +172,9 @@ internal class HeroCollector
 		}
 	}
 
-	public IHero method_4()
+	public Hero method_4()
 	{
-		IPlayer localPlayer = CoreCollector.LocalPlayer;
+		Player localPlayer = CoreCollector.LocalPlayer;
 		object obj;
 		if (localPlayer == null)
 		{
@@ -191,9 +188,9 @@ internal class HeroCollector
 				goto IL_0053;
 			}
 		}
-		obj = IHero_0 ?? dictionary_0.Values.OrderByDescending((IHero ihero_0) => ihero_0.LastPlayed).FirstOrDefault();
+		obj = IHero_0 ?? dictionary_0.Values.OrderByDescending((Hero ihero_0) => ihero_0.LastPlayed).FirstOrDefault();
 		goto IL_0053;
 		IL_0053:
-		return (IHero)obj;
+		return (Hero)obj;
 	}
 }

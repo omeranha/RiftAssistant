@@ -13,36 +13,40 @@ internal class GameSettingsManager
 
 	public WindowMode WindowMode;
 
-	private readonly FrameRateSettings frameRateSettings = new();
+	private FrameRateSettings frameRateSettings = new();
 
-	private readonly Class71 class71_0 = new();
+	private Class71 class71_0 = new();
 
-	private readonly VideoSettings videoSettings = new();
+	private VideoSettings videoSettings = new();
 
-	private readonly Class72 class72_0 = new();
+	private Class72 class72_0 = new();
 
-	private readonly Class73 class73_0 = new();
+	private Class73 class73_0 = new();
 
-	public readonly (InputBind Primary, InputBind Secondary)[] Keybinds = new (InputBind, InputBind)[75];
+	public (InputBind Primary, InputBind Secondary)[] Keybinds = new (InputBind, InputBind)[75];
 
 	internal void Refresh()
 	{
 		var hotkeys = new int[300];
-		MR.Instance.ReadMem(AddressList.HotkeysAddress, hotkeys, hotkeys.Length * 4, bool_0: true);
+		hotkeys = GameWindowManager.ReadArray<int>(AddressList.HotkeysAddress, hotkeys.Length, true);
 		for (int i = 0; i < hotkeys.Length - 3; i += 4) {
 			var key1 = new InputBind((KeyBinding)hotkeys[i], (Modifier)hotkeys[i + 1]);
 			var key2 = new InputBind((KeyBinding)hotkeys[i + 2], (Modifier)hotkeys[i + 3]);
 			Keybinds[i / 4] = (key1, key2);
 		}
-		MR.Instance.ReadMem(AddressList.ScreenSettingsAddress, frameRateSettings, FrameRateSettings.Size, bool_0: true);
+		frameRateSettings = GameWindowManager.Read<FrameRateSettings>(AddressList.ScreenSettingsAddress, true);
 		IsForegroundFpsEnabled = frameRateSettings.ForegroundLimitEnabled;
 		IsBackgroundFpsEnabled = frameRateSettings.BackgroundLimitEnabled;
-		MR.Instance.ReadMem(AddressList.long_10, class71_0, Class71.int_2, bool_0: true);
-		MR.Instance.ReadMem(AddressList.long_8, videoSettings, VideoSettings.int_25, bool_0: true);
+
+		class71_0 = GameWindowManager.Read<Class71>(AddressList.long_10, true);
+
+		videoSettings = GameWindowManager.Read<VideoSettings>(AddressList.long_8, true);
 		IsFullscreen = videoSettings.bool_1;
 		WindowMode = ((videoSettings.int_12 == 0) ? WindowMode.Windowed : videoSettings.windowMode_0);
-		MR.Instance.ReadMem(AddressList.long_11, class72_0, Class72.int_1, bool_0: true);
-		MR.Instance.ReadMem(AddressList.long_9, class73_0, Class73.int_4, bool_0: true);
+
+		class72_0 = GameWindowManager.Read<Class72>(AddressList.long_11, true);
+
+		class73_0 = GameWindowManager.Read<Class73>(AddressList.long_9, true);
 	}
 
 	public static Vk ToVk(KeyBinding keyBinding)

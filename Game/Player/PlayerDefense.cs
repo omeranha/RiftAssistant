@@ -1,9 +1,9 @@
 using System;
 using Plugins;
 
-internal class PlayerDefense(IPlayer player) : IPlayerDefenseInfo
+public class PlayerDefense(Player player)
 {
-	private readonly IPlayer player = player;
+	private readonly Player player = player;
 
 	public float EhpCur { get; set; }
 

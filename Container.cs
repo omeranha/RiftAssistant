@@ -67,12 +67,9 @@ internal class Container
 		_maxAllowedIndex = short_2;
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_Container struct11_1, int int_0, int int_1);
-
 	public void Snapshot(long long_1)
 	{
-		ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)long_1, ref buffer[0], 304, 0);
+		buffer[0] = GameWindowManager.Read<r_Container>(long_1);
 		DataAddress = buffer[0].DataAddress;
 		MaxIndex = (short)buffer[0].MaxIndex;
 		if (MaxIndex == short.MaxValue)

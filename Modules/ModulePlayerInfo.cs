@@ -65,7 +65,7 @@ internal class ModulePlayerInfo : Module
 		base.Dispose();
 	}
 
-	public void Draw(IPlayer iplayer_0)
+	public void Draw(Player iplayer_0)
 	{
 		bool flag = Overlay.Instance.mapMode_0 != MapMode.Map;
 		if (!vmethod_0(flag)) {
@@ -79,7 +79,7 @@ internal class ModulePlayerInfo : Module
 			int num2 = Convert.ToInt32(Math.Round(2f / 75f * (float)GameWindowManager.Window.Size.Height));
 			for (int i = 0; i < 6; i++) {
 				int num3 = ((i <= 3) ? (i + 2) : (i - 4));
-				IPlayerSkill playerSkill = iplayer_0.Powers.SkillSlots[num3];
+				Skill playerSkill = iplayer_0.Powers.SkillSlots[num3];
 				if (playerSkill == null || !playerSkill.IsOnCooldown) {
 					continue;
 				}
@@ -109,6 +109,8 @@ internal class ModulePlayerInfo : Module
 		}
 		if (showResourcesBar) {
 			float float_ = iplayer_0.RadiusScaled * num + 0.6f;
+			if (iplayer_0?.HeroClassDefinition == null) return;
+
 			switch (iplayer_0.HeroClassDefinition.HeroClass) {
 				case HeroClass.DemonHunter:
 					DrawArcBar(iplayer_0, float_, 50, 90f, -11f / 72f, bool_9: false, hatredFill, barBackground, iplayer_0.Stats.ResourceMaxPri, iplayer_0.Stats.ResourceCurPri);
@@ -136,7 +138,7 @@ internal class ModulePlayerInfo : Module
 		}
 	}
 
-	private Geometry GetArcGeometry(IPlayer iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, int int_3, bool bool_10)
+	private Geometry GetArcGeometry(Player iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, int int_3, bool bool_10)
 	{
 		string gparam_ = float_1.ToString(CultureInfo.InvariantCulture) + "_" + int_2.ToString(CultureInfo.InvariantCulture) + "_" + float_2.ToString(CultureInfo.InvariantCulture) + "_" + float_3.ToString(CultureInfo.InvariantCulture) + "_" + bool_9.ToString(CultureInfo.InvariantCulture) + "_" + int_3.ToString(CultureInfo.InvariantCulture) + "\t" + bool_10.ToString(CultureInfo.InvariantCulture);
 		geometryCache.TryGetValue(gparam_, out var geometry);
@@ -185,7 +187,7 @@ internal class ModulePlayerInfo : Module
 		return pathGeometry;
 	}
 
-	private void DrawArcBar(IPlayer iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, RenderBrush class219_23, RenderBrush class219_24, float float_4, float float_5)
+	private void DrawArcBar(Player iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, RenderBrush class219_23, RenderBrush class219_24, float float_4, float float_5)
 	{
 		if (float_4 <= 0f || int_2 <= 1) {
 			return;

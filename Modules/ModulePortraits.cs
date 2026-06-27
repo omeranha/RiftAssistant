@@ -15,7 +15,7 @@ internal class ModulePortraits : Module
 			return;
 		}
 		int num = 0;
-		foreach (IPlayer item in CoreCollector.PlayerCollector.PlayersInGame) {
+		foreach (Player item in CoreCollector.PlayerCollector.PlayersInGame) {
 			if (!item.IsMe) {
 				num++;
 			}
@@ -31,7 +31,7 @@ internal class ModulePortraits : Module
 		}
 	}
 
-	private void method_2(float float_1, float float_2, ITexture itexture_0, ITexture itexture_1, ITexture itexture_2)
+	private void method_2(float float_1, float float_2, Texture itexture_0, Texture itexture_1, Texture itexture_2)
 	{
 		float num = (float)GameWindowManager.Window.Size.Height * 0.143f;
 		float num2 = itexture_0.Width / itexture_0.Height * num;

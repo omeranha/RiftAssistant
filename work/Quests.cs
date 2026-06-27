@@ -8,11 +8,11 @@ namespace work;
 
 public sealed class Quests
 {
-	private readonly Dictionary<uint, ISnoQuest> dictionary_0 = new Dictionary<uint, ISnoQuest>(500);
+	private readonly Dictionary<uint, SnoQuest> dictionary_0 = new Dictionary<uint, SnoQuest>(500);
 
-	public IEnumerable<ISnoQuest> All => dictionary_0.Values;
+	public IEnumerable<SnoQuest> All => dictionary_0.Values;
 
-	public ISnoQuest GetQuest(uint sno)
+	public SnoQuest GetQuest(uint sno)
 	{
 		dictionary_0.TryGetValue(sno, out var value);
 		return value;
@@ -57,7 +57,7 @@ public sealed class Quests
 			int int_ = int.Parse(array2[8]);
 			BountyAct bountyAct_ = BountyAct.None;
 			BountyType bountyType_ = BountyType.None;
-			ISnoArea isnoArea_ = null;
+			SnoArea isnoArea_ = null;
 			if (questType == QuestType.Bounty)
 			{
 				array2 = array[num].Split('\t');
@@ -67,7 +67,7 @@ public sealed class Quests
 				isnoArea_ = SnoData.Areas.GetSnoArea(uint.Parse(array2[2], CultureInfo.InvariantCulture));
 				num++;
 			}
-			ISnoAct snoAct = ((num4 > 0) ? SnoData.Areas.AllActs[num4 - 1] : null);
+			SnoAct snoAct = ((num4 > 0) ? SnoData.Areas.AllActs[num4 - 1] : null);
 			SnoQuest snoQuest = new SnoQuest(string_, num2, snoAct, stringByCode, stringByCodeEnglish, stringByCode2, stringByCodeEnglish2, questType, questEventType_, int_, stringByCode3, stringByCodeEnglish3, bountyAct_, bountyType_, isnoArea_);
 			if (snoAct != null)
 			{

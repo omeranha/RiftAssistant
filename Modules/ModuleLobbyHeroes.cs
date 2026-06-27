@@ -11,7 +11,7 @@ using work;
 
 internal class ModuleLobbyHeroes : Module
 {
-	public IHero ihero_0;
+	public Hero ihero_0;
 
 	internal StatTracker class340_0;
 
@@ -109,7 +109,7 @@ internal class ModuleLobbyHeroes : Module
 			class340_9 = null;
 			return;
 		}
-		List<IHero> list = CoreCollector.HeroCollector.HeroList.OrderByDescending((IHero ihero_0) => ihero_0.PlayedSeconds).ToList();
+		List<Hero> list = CoreCollector.HeroCollector.HeroList.OrderByDescending((Hero ihero_0) => ihero_0.PlayedSeconds).ToList();
 		int num = GameWindowManager.Window.Size.Height / 20;
 		int num2 = num;
 		float num3 = (float)num * 1.289f;
@@ -119,7 +119,7 @@ internal class ModuleLobbyHeroes : Module
 		string[] array2 = new string[list.Count];
 		for (int num5 = 0; num5 < list.Count; num5++)
 		{
-			IHero hero = list[num5];
+			Hero hero = list[num5];
 			string text = hero.Name;
 			if ((hero.Flags & 8) == 8)
 			{
@@ -133,10 +133,10 @@ internal class ModuleLobbyHeroes : Module
 		float num7 = num6;
 		float num8 = 2f;
 		float num9 = (float)GameWindowManager.Window.Size.Height / 100f;
-		IHero hero2 = null;
+		Hero hero2 = null;
 		for (int num10 = 0; num10 < list.Count; num10++)
 		{
-			IHero hero3 = list[num10];
+			Hero hero3 = list[num10];
 			RectangleF rectangle = new RectangleF(num7 + (array[num10].Metrics.Width - (float)num) / 2f, 0f, num, num);
 			bool num11 = rectangle.Contains(GameWindowManager.Window.CursorX, GameWindowManager.Window.CursorY);
 			if (num11)

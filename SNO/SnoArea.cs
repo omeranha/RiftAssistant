@@ -1,10 +1,12 @@
+using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Plugins;
+using work;
 
 namespace SNO;
 
-public sealed class SnoArea : ISnoArea
+public class SnoArea
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;
@@ -34,7 +36,7 @@ public sealed class SnoArea : ISnoArea
 	private readonly string string_3 = "";
 
 	[CompilerGenerated]
-	private ISnoWorld isnoWorld_0;
+	private SnoWorld isnoWorld_0;
 
 	[CompilerGenerated]
 	private readonly uint uint_1;
@@ -120,7 +122,7 @@ public sealed class SnoArea : ISnoArea
 		}
 	}
 
-	public ISnoWorld SnoWorld
+	public SnoWorld SnoWorld
 	{
 		[CompilerGenerated]
 		get
@@ -143,7 +145,7 @@ public sealed class SnoArea : ISnoArea
 		}
 	}
 
-	public ISnoArea HostSnoArea => null;
+	public SnoArea HostSnoArea => null;
 
 	internal SnoArea(uint uint_2, string string_4, int int_1, string string_5, string string_6, AreaType areaType_1, bool bool_2, string string_7, bool bool_3, uint uint_3)
 	{

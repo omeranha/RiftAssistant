@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Plugins;
 
-internal class PlayerOffense : IPlayerOffenseInfo
+public class PlayerOffense
 {
 	public bool MainHandIsActive { get; set; }
 
@@ -31,7 +31,7 @@ internal class PlayerOffense : IPlayerOffenseInfo
 
 	public float BonusToElitesBase { get; set; }
 
-	public List<(ISnoPower, float)> PlainDamageBonuses { get; set; } = [];
+	public List<(SnoPower, float)> PlainDamageBonuses { get; set; } = [];
 
 	public float WeaponDamageMinPhysicalMainHand { get; set; }
 

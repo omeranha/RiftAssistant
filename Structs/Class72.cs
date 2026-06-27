@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
-internal sealed class Class72
+internal struct Class72
 {
 	[FieldOffset(0)]
 	public bool bool_0;
@@ -39,5 +39,5 @@ internal sealed class Class72
 	[FieldOffset(44)]
 	public bool bool_10;
 
-	public static int int_1 = 48;
+	public static int Size = 48;
 }

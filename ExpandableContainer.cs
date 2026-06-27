@@ -114,12 +114,9 @@ internal class ExpandableContainer
 		int_0 = int_3;
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_ExpandableContainer struct10_1, int int_3, int int_4);
-
 	public void Snapshot(long long_1)
 	{
-		ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)long_1, ref buffer[0], 364, 0);
+		buffer[0] = GameWindowManager.Read<r_ExpandableContainer>(long_1);
 		long allocator_PtrItems = buffer[0]._Allocator_PtrItems;
 		MaxIndex = (short)buffer[0].MaxIndex;
 		if (MaxIndex == short.MaxValue)
@@ -145,7 +142,7 @@ internal class ExpandableContainer
 			{
 				BlockPointers = new long[BlockCount];
 			}
-			MR.Instance.ReadMem(allocator_PtrItems, BlockPointers, BlockCount * 8);
+			BlockPointers = GameWindowManager.ReadArray<long>(allocator_PtrItems, BlockCount);
 			IsValid = true;
 		}
 		else

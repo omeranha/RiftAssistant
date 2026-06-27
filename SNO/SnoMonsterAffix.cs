@@ -3,7 +3,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SnoMonsterAffix : ISnoMonsterAffix
+public sealed class SnoMonsterAffix
 {
 	[CompilerGenerated]
 	private readonly uint uint_0;

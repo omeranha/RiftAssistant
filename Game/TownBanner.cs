@@ -1,14 +1,15 @@
 using Plugins;
+using SNO;
 
-internal class TownBanner : Actor, IActor, ITownBanner
+public class TownBanner : Actor
 {
 	public int Index { get; set; }
 
 	public bool Usable { get; set; }
 
-	public TownBanner(uint uint_7, uint uint_8, ISnoActor isnoActor_1) : base(uint_7, uint_8, isnoActor_1)
+	public TownBanner(uint uint_7, uint uint_8, SnoActor SnoActor_1) : base(uint_7, uint_8, SnoActor_1)
 	{
-		switch (isnoActor_1.Sno)
+		switch (SnoActor_1.Sno)
 		{
 		case ActorSnoEnum._banner_player_1:
 		case ActorSnoEnum._banner_player_1_act2:

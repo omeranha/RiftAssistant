@@ -4,6520 +4,6520 @@ using SNO;
 
 namespace SNO;
 
-internal class SnoPowerList : ISnoPowerList
+public class SnoPowerList
 {
-	private readonly Dictionary<HeroClass, List<ISnoPower>> dictionary_0 = new Dictionary<HeroClass, List<ISnoPower>>();
+	private readonly Dictionary<HeroClass, List<SnoPower>> dictionary_0 = new Dictionary<HeroClass, List<SnoPower>>();
 
-	private readonly List<ISnoPower> list_0 = new List<ISnoPower>();
+	private readonly List<SnoPower> list_0 = new List<SnoPower>();
 
-	private readonly List<ISnoPower> list_1 = new List<ISnoPower>();
+	private readonly List<SnoPower> list_1 = new List<SnoPower>();
 
-	public ISnoPower Barbarian_AncientSpear { get; }
+	public SnoPower Barbarian_AncientSpear { get; }
 
-	public ISnoPower Barbarian_Avalanche { get; }
+	public SnoPower Barbarian_Avalanche { get; }
 
-	public ISnoPower Barbarian_Bash { get; }
+	public SnoPower Barbarian_Bash { get; }
 
-	public ISnoPower Barbarian_BattleRage { get; }
+	public SnoPower Barbarian_BattleRage { get; }
 
-	public ISnoPower Barbarian_CallOfTheAncients { get; }
+	public SnoPower Barbarian_CallOfTheAncients { get; }
 
-	public ISnoPower Barbarian_Cleave { get; }
+	public SnoPower Barbarian_Cleave { get; }
 
-	public ISnoPower Barbarian_Earthquake { get; }
+	public SnoPower Barbarian_Earthquake { get; }
 
-	public ISnoPower Barbarian_Frenzy { get; }
+	public SnoPower Barbarian_Frenzy { get; }
 
-	public ISnoPower Barbarian_FuriousCharge { get; }
+	public SnoPower Barbarian_FuriousCharge { get; }
 
-	public ISnoPower Barbarian_GroundStomp { get; }
+	public SnoPower Barbarian_GroundStomp { get; }
 
-	public ISnoPower Barbarian_HammerOfTheAncients { get; }
+	public SnoPower Barbarian_HammerOfTheAncients { get; }
 
-	public ISnoPower Barbarian_IgnorePain { get; }
+	public SnoPower Barbarian_IgnorePain { get; }
 
-	public ISnoPower Barbarian_Leap { get; }
+	public SnoPower Barbarian_Leap { get; }
 
-	public ISnoPower Barbarian_Overpower { get; }
+	public SnoPower Barbarian_Overpower { get; }
 
-	public ISnoPower Barbarian_Rend { get; }
+	public SnoPower Barbarian_Rend { get; }
 
-	public ISnoPower Barbarian_Revenge { get; }
+	public SnoPower Barbarian_Revenge { get; }
 
-	public ISnoPower Barbarian_SeismicSlam { get; }
+	public SnoPower Barbarian_SeismicSlam { get; }
 
-	public ISnoPower Barbarian_Sprint { get; }
+	public SnoPower Barbarian_Sprint { get; }
 
-	public ISnoPower Barbarian_ThreateningShout { get; }
+	public SnoPower Barbarian_ThreateningShout { get; }
 
-	public ISnoPower Barbarian_WarCry { get; }
+	public SnoPower Barbarian_WarCry { get; }
 
-	public ISnoPower Barbarian_WeaponThrow { get; }
+	public SnoPower Barbarian_WeaponThrow { get; }
 
-	public ISnoPower Barbarian_Whirlwind { get; }
+	public SnoPower Barbarian_Whirlwind { get; }
 
-	public ISnoPower Barbarian_WrathOfTheBerserker { get; }
+	public SnoPower Barbarian_WrathOfTheBerserker { get; }
 
-	public ISnoPower Barbarian_Passive_Animosity { get; }
+	public SnoPower Barbarian_Passive_Animosity { get; }
 
-	public ISnoPower Barbarian_Passive_BerserkerRage { get; }
+	public SnoPower Barbarian_Passive_BerserkerRage { get; }
 
-	public ISnoPower Barbarian_Passive_Bloodthirst { get; }
+	public SnoPower Barbarian_Passive_Bloodthirst { get; }
 
-	public ISnoPower Barbarian_Passive_BoonOfBulKathos { get; }
+	public SnoPower Barbarian_Passive_BoonOfBulKathos { get; }
 
-	public ISnoPower Barbarian_Passive_Brawler { get; }
+	public SnoPower Barbarian_Passive_Brawler { get; }
 
-	public ISnoPower Barbarian_Passive_EarthenMight { get; }
+	public SnoPower Barbarian_Passive_EarthenMight { get; }
 
-	public ISnoPower Barbarian_Passive_InspiringPresence { get; }
+	public SnoPower Barbarian_Passive_InspiringPresence { get; }
 
-	public ISnoPower Barbarian_Passive_Juggernaut { get; }
+	public SnoPower Barbarian_Passive_Juggernaut { get; }
 
-	public ISnoPower Barbarian_Passive_NervesOfSteel { get; }
+	public SnoPower Barbarian_Passive_NervesOfSteel { get; }
 
-	public ISnoPower Barbarian_Passive_NoEscape { get; }
+	public SnoPower Barbarian_Passive_NoEscape { get; }
 
-	public ISnoPower Barbarian_Passive_PoundOfFlesh { get; }
+	public SnoPower Barbarian_Passive_PoundOfFlesh { get; }
 
-	public ISnoPower Barbarian_Passive_Rampage { get; }
+	public SnoPower Barbarian_Passive_Rampage { get; }
 
-	public ISnoPower Barbarian_Passive_Relentless { get; }
+	public SnoPower Barbarian_Passive_Relentless { get; }
 
-	public ISnoPower Barbarian_Passive_Ruthless { get; }
+	public SnoPower Barbarian_Passive_Ruthless { get; }
 
-	public ISnoPower Barbarian_Passive_Superstition { get; }
+	public SnoPower Barbarian_Passive_Superstition { get; }
 
-	public ISnoPower Barbarian_Passive_SwordAndBoard { get; }
+	public SnoPower Barbarian_Passive_SwordAndBoard { get; }
 
-	public ISnoPower Barbarian_Passive_ToughAsNails { get; }
+	public SnoPower Barbarian_Passive_ToughAsNails { get; }
 
-	public ISnoPower Barbarian_Passive_Unforgiving { get; }
+	public SnoPower Barbarian_Passive_Unforgiving { get; }
 
-	public ISnoPower Barbarian_Passive_WeaponsMaster { get; }
+	public SnoPower Barbarian_Passive_WeaponsMaster { get; }
 
-	public ISnoPower Crusader_AkaratsChampion { get; }
+	public SnoPower Crusader_AkaratsChampion { get; }
 
-	public ISnoPower Crusader_BlessedHammer { get; }
+	public SnoPower Crusader_BlessedHammer { get; }
 
-	public ISnoPower Crusader_BlessedShield { get; }
+	public SnoPower Crusader_BlessedShield { get; }
 
-	public ISnoPower Crusader_Bombardment { get; }
+	public SnoPower Crusader_Bombardment { get; }
 
-	public ISnoPower Crusader_Condemn { get; }
+	public SnoPower Crusader_Condemn { get; }
 
-	public ISnoPower Crusader_Consecration { get; }
+	public SnoPower Crusader_Consecration { get; }
 
-	public ISnoPower Crusader_CrushingResolve { get; }
+	public SnoPower Crusader_CrushingResolve { get; }
 
-	public ISnoPower Crusader_FallingSword { get; }
+	public SnoPower Crusader_FallingSword { get; }
 
-	public ISnoPower Crusader_FistOfTheHeavens { get; }
+	public SnoPower Crusader_FistOfTheHeavens { get; }
 
-	public ISnoPower Crusader_HeavensFury { get; }
+	public SnoPower Crusader_HeavensFury { get; }
 
-	public ISnoPower Crusader_IronSkin { get; }
+	public SnoPower Crusader_IronSkin { get; }
 
-	public ISnoPower Crusader_Judgment { get; }
+	public SnoPower Crusader_Judgment { get; }
 
-	public ISnoPower Crusader_Justice { get; }
+	public SnoPower Crusader_Justice { get; }
 
-	public ISnoPower Crusader_LawsOfHope { get; }
+	public SnoPower Crusader_LawsOfHope { get; }
 
-	public ISnoPower Crusader_LawsOfJustice { get; }
+	public SnoPower Crusader_LawsOfJustice { get; }
 
-	public ISnoPower Crusader_LawsOfValor { get; }
+	public SnoPower Crusader_LawsOfValor { get; }
 
-	public ISnoPower Crusader_Phalanx { get; }
+	public SnoPower Crusader_Phalanx { get; }
 
-	public ISnoPower Crusader_Provoke { get; }
+	public SnoPower Crusader_Provoke { get; }
 
-	public ISnoPower Crusader_Punish { get; }
+	public SnoPower Crusader_Punish { get; }
 
-	public ISnoPower Crusader_ShieldBash { get; }
+	public SnoPower Crusader_ShieldBash { get; }
 
-	public ISnoPower Crusader_ShieldGlare { get; }
+	public SnoPower Crusader_ShieldGlare { get; }
 
-	public ISnoPower Crusader_Slash { get; }
+	public SnoPower Crusader_Slash { get; }
 
-	public ISnoPower Crusader_Smite { get; }
+	public SnoPower Crusader_Smite { get; }
 
-	public ISnoPower Crusader_SteedCharge { get; }
+	public SnoPower Crusader_SteedCharge { get; }
 
-	public ISnoPower Crusader_SweepAttack { get; }
+	public SnoPower Crusader_SweepAttack { get; }
 
-	public ISnoPower Crusader_Passive_Blunt { get; }
+	public SnoPower Crusader_Passive_Blunt { get; }
 
-	public ISnoPower Crusader_Passive_DivineFortress { get; }
+	public SnoPower Crusader_Passive_DivineFortress { get; }
 
-	public ISnoPower Crusader_Passive_Fanaticism { get; }
+	public SnoPower Crusader_Passive_Fanaticism { get; }
 
-	public ISnoPower Crusader_Passive_Fervor { get; }
+	public SnoPower Crusader_Passive_Fervor { get; }
 
-	public ISnoPower Crusader_Passive_Finery { get; }
+	public SnoPower Crusader_Passive_Finery { get; }
 
-	public ISnoPower Crusader_Passive_HeavenlyStrength { get; }
+	public SnoPower Crusader_Passive_HeavenlyStrength { get; }
 
-	public ISnoPower Crusader_Passive_HoldYourGround { get; }
+	public SnoPower Crusader_Passive_HoldYourGround { get; }
 
-	public ISnoPower Crusader_Passive_HolyCause { get; }
+	public SnoPower Crusader_Passive_HolyCause { get; }
 
-	public ISnoPower Crusader_Passive_Indestructible { get; }
+	public SnoPower Crusader_Passive_Indestructible { get; }
 
-	public ISnoPower Crusader_Passive_Insurmountable { get; }
+	public SnoPower Crusader_Passive_Insurmountable { get; }
 
-	public ISnoPower Crusader_Passive_IronMaiden { get; }
+	public SnoPower Crusader_Passive_IronMaiden { get; }
 
-	public ISnoPower Crusader_Passive_LongArmOfTheLaw { get; }
+	public SnoPower Crusader_Passive_LongArmOfTheLaw { get; }
 
-	public ISnoPower Crusader_Passive_LordCommander { get; }
+	public SnoPower Crusader_Passive_LordCommander { get; }
 
-	public ISnoPower Crusader_Passive_Renewal { get; }
+	public SnoPower Crusader_Passive_Renewal { get; }
 
-	public ISnoPower Crusader_Passive_Righteousness { get; }
+	public SnoPower Crusader_Passive_Righteousness { get; }
 
-	public ISnoPower Crusader_Passive_ToweringShield { get; }
+	public SnoPower Crusader_Passive_ToweringShield { get; }
 
-	public ISnoPower Crusader_Passive_Vigilant { get; }
+	public SnoPower Crusader_Passive_Vigilant { get; }
 
-	public ISnoPower Crusader_Passive_Wrathful { get; }
+	public SnoPower Crusader_Passive_Wrathful { get; }
 
-	public ISnoPower DemonHunter_Bolas { get; }
+	public SnoPower DemonHunter_Bolas { get; }
 
-	public ISnoPower DemonHunter_Caltrops { get; }
+	public SnoPower DemonHunter_Caltrops { get; }
 
-	public ISnoPower DemonHunter_Chakram { get; }
+	public SnoPower DemonHunter_Chakram { get; }
 
-	public ISnoPower DemonHunter_ClusterArrow { get; }
+	public SnoPower DemonHunter_ClusterArrow { get; }
 
-	public ISnoPower DemonHunter_Companion { get; }
+	public SnoPower DemonHunter_Companion { get; }
 
-	public ISnoPower DemonHunter_ElementalArrow { get; }
+	public SnoPower DemonHunter_ElementalArrow { get; }
 
-	public ISnoPower DemonHunter_EntanglingShot { get; }
+	public SnoPower DemonHunter_EntanglingShot { get; }
 
-	public ISnoPower DemonHunter_EvasiveFire { get; }
+	public SnoPower DemonHunter_EvasiveFire { get; }
 
-	public ISnoPower DemonHunter_FanOfKnives { get; }
+	public SnoPower DemonHunter_FanOfKnives { get; }
 
-	public ISnoPower DemonHunter_Grenades { get; }
+	public SnoPower DemonHunter_Grenades { get; }
 
-	public ISnoPower DemonHunter_HungeringArrow { get; }
+	public SnoPower DemonHunter_HungeringArrow { get; }
 
-	public ISnoPower DemonHunter_Impale { get; }
+	public SnoPower DemonHunter_Impale { get; }
 
-	public ISnoPower DemonHunter_MarkedForDeath { get; }
+	public SnoPower DemonHunter_MarkedForDeath { get; }
 
-	public ISnoPower DemonHunter_Multishot { get; }
+	public SnoPower DemonHunter_Multishot { get; }
 
-	public ISnoPower DemonHunter_Preparation { get; }
+	public SnoPower DemonHunter_Preparation { get; }
 
-	public ISnoPower DemonHunter_RainOfVengeance { get; }
+	public SnoPower DemonHunter_RainOfVengeance { get; }
 
-	public ISnoPower DemonHunter_RapidFire { get; }
+	public SnoPower DemonHunter_RapidFire { get; }
 
-	public ISnoPower DemonHunter_Sentry { get; }
+	public SnoPower DemonHunter_Sentry { get; }
 
-	public ISnoPower DemonHunter_ShadowPower { get; }
+	public SnoPower DemonHunter_ShadowPower { get; }
 
-	public ISnoPower DemonHunter_SmokeScreen { get; }
+	public SnoPower DemonHunter_SmokeScreen { get; }
 
-	public ISnoPower DemonHunter_SpikeTrap { get; }
+	public SnoPower DemonHunter_SpikeTrap { get; }
 
-	public ISnoPower DemonHunter_Strafe { get; }
+	public SnoPower DemonHunter_Strafe { get; }
 
-	public ISnoPower DemonHunter_Vault { get; }
+	public SnoPower DemonHunter_Vault { get; }
 
-	public ISnoPower DemonHunter_Vengeance { get; }
+	public SnoPower DemonHunter_Vengeance { get; }
 
-	public ISnoPower DemonHunter_Passive_Ambush { get; }
+	public SnoPower DemonHunter_Passive_Ambush { get; }
 
-	public ISnoPower DemonHunter_Passive_Archery { get; }
+	public SnoPower DemonHunter_Passive_Archery { get; }
 
-	public ISnoPower DemonHunter_Passive_Awareness { get; }
+	public SnoPower DemonHunter_Passive_Awareness { get; }
 
-	public ISnoPower DemonHunter_Passive_Ballistics { get; }
+	public SnoPower DemonHunter_Passive_Ballistics { get; }
 
-	public ISnoPower DemonHunter_Passive_Brooding { get; }
+	public SnoPower DemonHunter_Passive_Brooding { get; }
 
-	public ISnoPower DemonHunter_Passive_CompanionPassiveEffect { get; }
+	public SnoPower DemonHunter_Passive_CompanionPassiveEffect { get; }
 
-	public ISnoPower DemonHunter_Passive_CullTheWeak { get; }
+	public SnoPower DemonHunter_Passive_CullTheWeak { get; }
 
-	public ISnoPower DemonHunter_Passive_CustomEngineering { get; }
+	public SnoPower DemonHunter_Passive_CustomEngineering { get; }
 
-	public ISnoPower DemonHunter_Passive_Grenadier { get; }
+	public SnoPower DemonHunter_Passive_Grenadier { get; }
 
-	public ISnoPower DemonHunter_Passive_HotPursuit { get; }
+	public SnoPower DemonHunter_Passive_HotPursuit { get; }
 
-	public ISnoPower DemonHunter_Passive_Leech { get; }
+	public SnoPower DemonHunter_Passive_Leech { get; }
 
-	public ISnoPower DemonHunter_Passive_NightStalker { get; }
+	public SnoPower DemonHunter_Passive_NightStalker { get; }
 
-	public ISnoPower DemonHunter_Passive_NumbingTraps { get; }
+	public SnoPower DemonHunter_Passive_NumbingTraps { get; }
 
-	public ISnoPower DemonHunter_Passive_Perfectionist { get; }
+	public SnoPower DemonHunter_Passive_Perfectionist { get; }
 
-	public ISnoPower DemonHunter_Passive_PreparationPassiveEffect { get; }
+	public SnoPower DemonHunter_Passive_PreparationPassiveEffect { get; }
 
-	public ISnoPower DemonHunter_Passive_Sharpshooter { get; }
+	public SnoPower DemonHunter_Passive_Sharpshooter { get; }
 
-	public ISnoPower DemonHunter_Passive_SingleOut { get; }
+	public SnoPower DemonHunter_Passive_SingleOut { get; }
 
-	public ISnoPower DemonHunter_Passive_SteadyAim { get; }
+	public SnoPower DemonHunter_Passive_SteadyAim { get; }
 
-	public ISnoPower DemonHunter_Passive_TacticalAdvantage { get; }
+	public SnoPower DemonHunter_Passive_TacticalAdvantage { get; }
 
-	public ISnoPower DemonHunter_Passive_ThrillOfTheHunt { get; }
+	public SnoPower DemonHunter_Passive_ThrillOfTheHunt { get; }
 
-	public ISnoPower DemonHunter_Passive_VengeancePassiveEffect { get; }
+	public SnoPower DemonHunter_Passive_VengeancePassiveEffect { get; }
 
-	public ISnoPower Monk_BlindingFlash { get; }
+	public SnoPower Monk_BlindingFlash { get; }
 
-	public ISnoPower Monk_BreathOfHeaven { get; }
+	public SnoPower Monk_BreathOfHeaven { get; }
 
-	public ISnoPower Monk_CripplingWave { get; }
+	public SnoPower Monk_CripplingWave { get; }
 
-	public ISnoPower Monk_CycloneStrike { get; }
+	public SnoPower Monk_CycloneStrike { get; }
 
-	public ISnoPower Monk_DashingStrike { get; }
+	public SnoPower Monk_DashingStrike { get; }
 
-	public ISnoPower Monk_DeadlyReach { get; }
+	public SnoPower Monk_DeadlyReach { get; }
 
-	public ISnoPower Monk_Epiphany { get; }
+	public SnoPower Monk_Epiphany { get; }
 
-	public ISnoPower Monk_ExplodingPalm { get; }
+	public SnoPower Monk_ExplodingPalm { get; }
 
-	public ISnoPower Monk_FistsOfThunder { get; }
+	public SnoPower Monk_FistsOfThunder { get; }
 
-	public ISnoPower Monk_InnerSanctuary { get; }
+	public SnoPower Monk_InnerSanctuary { get; }
 
-	public ISnoPower Monk_LashingTailKick { get; }
+	public SnoPower Monk_LashingTailKick { get; }
 
-	public ISnoPower Monk_MantraOfConviction { get; }
+	public SnoPower Monk_MantraOfConviction { get; }
 
-	public ISnoPower Monk_MantraOfHealing { get; }
+	public SnoPower Monk_MantraOfHealing { get; }
 
-	public ISnoPower Monk_MantraOfRetribution { get; }
+	public SnoPower Monk_MantraOfRetribution { get; }
 
-	public ISnoPower Monk_MantraOfSalvation { get; }
+	public SnoPower Monk_MantraOfSalvation { get; }
 
-	public ISnoPower Monk_MysticAlly { get; }
+	public SnoPower Monk_MysticAlly { get; }
 
-	public ISnoPower Monk_Serenity { get; }
+	public SnoPower Monk_Serenity { get; }
 
-	public ISnoPower Monk_SevenSidedStrike { get; }
+	public SnoPower Monk_SevenSidedStrike { get; }
 
-	public ISnoPower Monk_SweepingWind { get; }
+	public SnoPower Monk_SweepingWind { get; }
 
-	public ISnoPower Monk_TempestRush { get; }
+	public SnoPower Monk_TempestRush { get; }
 
-	public ISnoPower Monk_WaveOfLight { get; }
+	public SnoPower Monk_WaveOfLight { get; }
 
-	public ISnoPower Monk_WayOfTheHundredFists { get; }
+	public SnoPower Monk_WayOfTheHundredFists { get; }
 
-	public ISnoPower Monk_Passive_Alacrity { get; }
+	public SnoPower Monk_Passive_Alacrity { get; }
 
-	public ISnoPower Monk_Passive_BeaconOfYtar { get; }
+	public SnoPower Monk_Passive_BeaconOfYtar { get; }
 
-	public ISnoPower Monk_Passive_ChantOfResonance { get; }
+	public SnoPower Monk_Passive_ChantOfResonance { get; }
 
-	public ISnoPower Monk_Passive_CombinationStrike { get; }
+	public SnoPower Monk_Passive_CombinationStrike { get; }
 
-	public ISnoPower Monk_Passive_Determination { get; }
+	public SnoPower Monk_Passive_Determination { get; }
 
-	public ISnoPower Monk_Passive_ExaltedSoul { get; }
+	public SnoPower Monk_Passive_ExaltedSoul { get; }
 
-	public ISnoPower Monk_Passive_FleetFooted { get; }
+	public SnoPower Monk_Passive_FleetFooted { get; }
 
-	public ISnoPower Monk_Passive_Harmony { get; }
+	public SnoPower Monk_Passive_Harmony { get; }
 
-	public ISnoPower Monk_Passive_MantraOfConvictionV2 { get; }
+	public SnoPower Monk_Passive_MantraOfConvictionV2 { get; }
 
-	public ISnoPower Monk_Passive_MantraOfEvasionV2 { get; }
+	public SnoPower Monk_Passive_MantraOfEvasionV2 { get; }
 
-	public ISnoPower Monk_Passive_MantraOfHealingV2 { get; }
+	public SnoPower Monk_Passive_MantraOfHealingV2 { get; }
 
-	public ISnoPower Monk_Passive_MantraOfRetributionV2 { get; }
+	public SnoPower Monk_Passive_MantraOfRetributionV2 { get; }
 
-	public ISnoPower Monk_Passive_Momentum { get; }
+	public SnoPower Monk_Passive_Momentum { get; }
 
-	public ISnoPower Monk_Passive_MythicRhythm { get; }
+	public SnoPower Monk_Passive_MythicRhythm { get; }
 
-	public ISnoPower Monk_Passive_NearDeathExperience { get; }
+	public SnoPower Monk_Passive_NearDeathExperience { get; }
 
-	public ISnoPower Monk_Passive_RelentlessAssault { get; }
+	public SnoPower Monk_Passive_RelentlessAssault { get; }
 
-	public ISnoPower Monk_Passive_Resolve { get; }
+	public SnoPower Monk_Passive_Resolve { get; }
 
-	public ISnoPower Monk_Passive_SeizeTheInitiative { get; }
+	public SnoPower Monk_Passive_SeizeTheInitiative { get; }
 
-	public ISnoPower Monk_Passive_SixthSense { get; }
+	public SnoPower Monk_Passive_SixthSense { get; }
 
-	public ISnoPower Monk_Passive_TheGuardiansPath { get; }
+	public SnoPower Monk_Passive_TheGuardiansPath { get; }
 
-	public ISnoPower Monk_Passive_Transcendence { get; }
+	public SnoPower Monk_Passive_Transcendence { get; }
 
-	public ISnoPower Monk_Passive_Unity { get; }
+	public SnoPower Monk_Passive_Unity { get; }
 
-	public ISnoPower Necromancer_ArmyOfTheDead { get; }
+	public SnoPower Necromancer_ArmyOfTheDead { get; }
 
-	public ISnoPower Necromancer_BloodRush { get; }
+	public SnoPower Necromancer_BloodRush { get; }
 
-	public ISnoPower Necromancer_BoneArmor { get; }
+	public SnoPower Necromancer_BoneArmor { get; }
 
-	public ISnoPower Necromancer_BoneSpear { get; }
+	public SnoPower Necromancer_BoneSpear { get; }
 
-	public ISnoPower Necromancer_BoneSpikes { get; }
+	public SnoPower Necromancer_BoneSpikes { get; }
 
-	public ISnoPower Necromancer_BoneSpirit { get; }
+	public SnoPower Necromancer_BoneSpirit { get; }
 
-	public ISnoPower Necromancer_CommandGolem { get; }
+	public SnoPower Necromancer_CommandGolem { get; }
 
-	public ISnoPower Necromancer_CommandSkeletons { get; }
+	public SnoPower Necromancer_CommandSkeletons { get; }
 
-	public ISnoPower Necromancer_CorpseExplosion { get; }
+	public SnoPower Necromancer_CorpseExplosion { get; }
 
-	public ISnoPower Necromancer_CorpseLance { get; }
+	public SnoPower Necromancer_CorpseLance { get; }
 
-	public ISnoPower Necromancer_DeathNova { get; }
+	public SnoPower Necromancer_DeathNova { get; }
 
-	public ISnoPower Necromancer_Decrepify { get; }
+	public SnoPower Necromancer_Decrepify { get; }
 
-	public ISnoPower Necromancer_Devour { get; }
+	public SnoPower Necromancer_Devour { get; }
 
-	public ISnoPower Necromancer_Frailty { get; }
+	public SnoPower Necromancer_Frailty { get; }
 
-	public ISnoPower Necromancer_GrimScythe { get; }
+	public SnoPower Necromancer_GrimScythe { get; }
 
-	public ISnoPower Necromancer_LandOfTheDead { get; }
+	public SnoPower Necromancer_LandOfTheDead { get; }
 
-	public ISnoPower Necromancer_Leech { get; }
+	public SnoPower Necromancer_Leech { get; }
 
-	public ISnoPower Necromancer_Revive { get; }
+	public SnoPower Necromancer_Revive { get; }
 
-	public ISnoPower Necromancer_Simulacrum { get; }
+	public SnoPower Necromancer_Simulacrum { get; }
 
-	public ISnoPower Necromancer_SiphonBlood { get; }
+	public SnoPower Necromancer_SiphonBlood { get; }
 
-	public ISnoPower Necromancer_SkeletalMage { get; }
+	public SnoPower Necromancer_SkeletalMage { get; }
 
-	public ISnoPower Necromancer_Passive_AberrantAnimator { get; }
+	public SnoPower Necromancer_Passive_AberrantAnimator { get; }
 
-	public ISnoPower Necromancer_Passive_BloodForBlood { get; }
+	public SnoPower Necromancer_Passive_BloodForBlood { get; }
 
-	public ISnoPower Necromancer_Passive_BloodIsPower { get; }
+	public SnoPower Necromancer_Passive_BloodIsPower { get; }
 
-	public ISnoPower Necromancer_Passive_BonePrison { get; }
+	public SnoPower Necromancer_Passive_BonePrison { get; }
 
-	public ISnoPower Necromancer_Passive_CommanderOfTheRisenDead { get; }
+	public SnoPower Necromancer_Passive_CommanderOfTheRisenDead { get; }
 
-	public ISnoPower Necromancer_Passive_DarkReaping { get; }
+	public SnoPower Necromancer_Passive_DarkReaping { get; }
 
-	public ISnoPower Necromancer_Passive_DecrepifyPassiveEffect { get; }
+	public SnoPower Necromancer_Passive_DecrepifyPassiveEffect { get; }
 
-	public ISnoPower Necromancer_Passive_DrawLife { get; }
+	public SnoPower Necromancer_Passive_DrawLife { get; }
 
-	public ISnoPower Necromancer_Passive_EternalTorment { get; }
+	public SnoPower Necromancer_Passive_EternalTorment { get; }
 
-	public ISnoPower Necromancer_Passive_ExtendedServitude { get; }
+	public SnoPower Necromancer_Passive_ExtendedServitude { get; }
 
-	public ISnoPower Necromancer_Passive_FinalService { get; }
+	public SnoPower Necromancer_Passive_FinalService { get; }
 
-	public ISnoPower Necromancer_Passive_FrailtyPassiveEffect { get; }
+	public SnoPower Necromancer_Passive_FrailtyPassiveEffect { get; }
 
-	public ISnoPower Necromancer_Passive_FueledByDeath { get; }
+	public SnoPower Necromancer_Passive_FueledByDeath { get; }
 
-	public ISnoPower Necromancer_Passive_GrislyTribute { get; }
+	public SnoPower Necromancer_Passive_GrislyTribute { get; }
 
-	public ISnoPower Necromancer_Passive_LeechPassiveEffect { get; }
+	public SnoPower Necromancer_Passive_LeechPassiveEffect { get; }
 
-	public ISnoPower Necromancer_Passive_LifeFromDeath { get; }
+	public SnoPower Necromancer_Passive_LifeFromDeath { get; }
 
-	public ISnoPower Necromancer_Passive_OverwhelmingEssence { get; }
+	public SnoPower Necromancer_Passive_OverwhelmingEssence { get; }
 
-	public ISnoPower Necromancer_Passive_RathmasShield { get; }
+	public SnoPower Necromancer_Passive_RathmasShield { get; }
 
-	public ISnoPower Necromancer_Passive_RigorMortis { get; }
+	public SnoPower Necromancer_Passive_RigorMortis { get; }
 
-	public ISnoPower Necromancer_Passive_Serration { get; }
+	public SnoPower Necromancer_Passive_Serration { get; }
 
-	public ISnoPower Necromancer_Passive_SpreadingMalediction { get; }
+	public SnoPower Necromancer_Passive_SpreadingMalediction { get; }
 
-	public ISnoPower Necromancer_Passive_StandAlone { get; }
+	public SnoPower Necromancer_Passive_StandAlone { get; }
 
-	public ISnoPower Necromancer_Passive_SwiftHarvesting { get; }
+	public SnoPower Necromancer_Passive_SwiftHarvesting { get; }
 
-	public ISnoPower WitchDoctor_AcidCloud { get; }
+	public SnoPower WitchDoctor_AcidCloud { get; }
 
-	public ISnoPower WitchDoctor_BigBadVoodoo { get; }
+	public SnoPower WitchDoctor_BigBadVoodoo { get; }
 
-	public ISnoPower WitchDoctor_CorpseSpider { get; }
+	public SnoPower WitchDoctor_CorpseSpider { get; }
 
-	public ISnoPower WitchDoctor_FetishArmy { get; }
+	public SnoPower WitchDoctor_FetishArmy { get; }
 
-	public ISnoPower WitchDoctor_Firebats { get; }
+	public SnoPower WitchDoctor_Firebats { get; }
 
-	public ISnoPower WitchDoctor_Firebomb { get; }
+	public SnoPower WitchDoctor_Firebomb { get; }
 
-	public ISnoPower WitchDoctor_Gargantuan { get; }
+	public SnoPower WitchDoctor_Gargantuan { get; }
 
-	public ISnoPower WitchDoctor_GraspOfTheDead { get; }
+	public SnoPower WitchDoctor_GraspOfTheDead { get; }
 
-	public ISnoPower WitchDoctor_Haunt { get; }
+	public SnoPower WitchDoctor_Haunt { get; }
 
-	public ISnoPower WitchDoctor_Hex { get; }
+	public SnoPower WitchDoctor_Hex { get; }
 
-	public ISnoPower WitchDoctor_Horrify { get; }
+	public SnoPower WitchDoctor_Horrify { get; }
 
-	public ISnoPower WitchDoctor_LocustSwarm { get; }
+	public SnoPower WitchDoctor_LocustSwarm { get; }
 
-	public ISnoPower WitchDoctor_MassConfusion { get; }
+	public SnoPower WitchDoctor_MassConfusion { get; }
 
-	public ISnoPower WitchDoctor_Piranhas { get; }
+	public SnoPower WitchDoctor_Piranhas { get; }
 
-	public ISnoPower WitchDoctor_PlagueOfToads { get; }
+	public SnoPower WitchDoctor_PlagueOfToads { get; }
 
-	public ISnoPower WitchDoctor_PoisonDart { get; }
+	public SnoPower WitchDoctor_PoisonDart { get; }
 
-	public ISnoPower WitchDoctor_Sacrifice { get; }
+	public SnoPower WitchDoctor_Sacrifice { get; }
 
-	public ISnoPower WitchDoctor_SoulHarvest { get; }
+	public SnoPower WitchDoctor_SoulHarvest { get; }
 
-	public ISnoPower WitchDoctor_SpiritBarrage { get; }
+	public SnoPower WitchDoctor_SpiritBarrage { get; }
 
-	public ISnoPower WitchDoctor_SpiritWalk { get; }
+	public SnoPower WitchDoctor_SpiritWalk { get; }
 
-	public ISnoPower WitchDoctor_SummonZombieDog { get; }
+	public SnoPower WitchDoctor_SummonZombieDog { get; }
 
-	public ISnoPower WitchDoctor_WallOfDeath { get; }
+	public SnoPower WitchDoctor_WallOfDeath { get; }
 
-	public ISnoPower WitchDoctor_ZombieCharger { get; }
+	public SnoPower WitchDoctor_ZombieCharger { get; }
 
-	public ISnoPower WitchDoctor_Passive_BadMedicine { get; }
+	public SnoPower WitchDoctor_Passive_BadMedicine { get; }
 
-	public ISnoPower WitchDoctor_Passive_BloodRitual { get; }
+	public SnoPower WitchDoctor_Passive_BloodRitual { get; }
 
-	public ISnoPower WitchDoctor_Passive_CircleOfLife { get; }
+	public SnoPower WitchDoctor_Passive_CircleOfLife { get; }
 
-	public ISnoPower WitchDoctor_Passive_ConfidenceRitual { get; }
+	public SnoPower WitchDoctor_Passive_ConfidenceRitual { get; }
 
-	public ISnoPower WitchDoctor_Passive_CreepingDeath { get; }
+	public SnoPower WitchDoctor_Passive_CreepingDeath { get; }
 
-	public ISnoPower WitchDoctor_Passive_FetishSycophants { get; }
+	public SnoPower WitchDoctor_Passive_FetishSycophants { get; }
 
-	public ISnoPower WitchDoctor_Passive_FierceLoyalty { get; }
+	public SnoPower WitchDoctor_Passive_FierceLoyalty { get; }
 
-	public ISnoPower WitchDoctor_Passive_GraveInjustice { get; }
+	public SnoPower WitchDoctor_Passive_GraveInjustice { get; }
 
-	public ISnoPower WitchDoctor_Passive_GruesomeFeast { get; }
+	public SnoPower WitchDoctor_Passive_GruesomeFeast { get; }
 
-	public ISnoPower WitchDoctor_Passive_JungleFortitude { get; }
+	public SnoPower WitchDoctor_Passive_JungleFortitude { get; }
 
-	public ISnoPower WitchDoctor_Passive_MidnightFeast { get; }
+	public SnoPower WitchDoctor_Passive_MidnightFeast { get; }
 
-	public ISnoPower WitchDoctor_Passive_PierceTheVeil { get; }
+	public SnoPower WitchDoctor_Passive_PierceTheVeil { get; }
 
-	public ISnoPower WitchDoctor_Passive_RushOfEssence { get; }
+	public SnoPower WitchDoctor_Passive_RushOfEssence { get; }
 
-	public ISnoPower WitchDoctor_Passive_SpiritualAttunement { get; }
+	public SnoPower WitchDoctor_Passive_SpiritualAttunement { get; }
 
-	public ISnoPower WitchDoctor_Passive_SpiritVessel { get; }
+	public SnoPower WitchDoctor_Passive_SpiritVessel { get; }
 
-	public ISnoPower WitchDoctor_Passive_SwamplandAttunement { get; }
+	public SnoPower WitchDoctor_Passive_SwamplandAttunement { get; }
 
-	public ISnoPower WitchDoctor_Passive_TraitZombieDogSpawner { get; }
+	public SnoPower WitchDoctor_Passive_TraitZombieDogSpawner { get; }
 
-	public ISnoPower WitchDoctor_Passive_TribalRites { get; }
+	public SnoPower WitchDoctor_Passive_TribalRites { get; }
 
-	public ISnoPower WitchDoctor_Passive_VisionQuest { get; }
+	public SnoPower WitchDoctor_Passive_VisionQuest { get; }
 
-	public ISnoPower WitchDoctor_Passive_ZombieHandler { get; }
+	public SnoPower WitchDoctor_Passive_ZombieHandler { get; }
 
-	public ISnoPower Wizard_ArcaneOrb { get; }
+	public SnoPower Wizard_ArcaneOrb { get; }
 
-	public ISnoPower Wizard_ArcaneTorrent { get; }
+	public SnoPower Wizard_ArcaneTorrent { get; }
 
-	public ISnoPower Wizard_Archon { get; }
+	public SnoPower Wizard_Archon { get; }
 
-	public ISnoPower Wizard_ArchonArcaneBlast { get; }
+	public SnoPower Wizard_ArchonArcaneBlast { get; }
 
-	public ISnoPower Wizard_ArchonArcaneBlastCold { get; }
+	public SnoPower Wizard_ArchonArcaneBlastCold { get; }
 
-	public ISnoPower Wizard_ArchonArcaneBlastFire { get; }
+	public SnoPower Wizard_ArchonArcaneBlastFire { get; }
 
-	public ISnoPower Wizard_ArchonArcaneBlastLightning { get; }
+	public SnoPower Wizard_ArchonArcaneBlastLightning { get; }
 
-	public ISnoPower Wizard_ArchonArcaneStrike { get; }
+	public SnoPower Wizard_ArchonArcaneStrike { get; }
 
-	public ISnoPower Wizard_ArchonArcaneStrikeCold { get; }
+	public SnoPower Wizard_ArchonArcaneStrikeCold { get; }
 
-	public ISnoPower Wizard_ArchonArcaneStrikeFire { get; }
+	public SnoPower Wizard_ArchonArcaneStrikeFire { get; }
 
-	public ISnoPower Wizard_ArchonArcaneStrikeLightning { get; }
+	public SnoPower Wizard_ArchonArcaneStrikeLightning { get; }
 
-	public ISnoPower Wizard_ArchonCancel { get; }
+	public SnoPower Wizard_ArchonCancel { get; }
 
-	public ISnoPower Wizard_ArchonDisintegrationWave { get; }
+	public SnoPower Wizard_ArchonDisintegrationWave { get; }
 
-	public ISnoPower Wizard_ArchonDisintegrationWaveCold { get; }
+	public SnoPower Wizard_ArchonDisintegrationWaveCold { get; }
 
-	public ISnoPower Wizard_ArchonDisintegrationWaveFire { get; }
+	public SnoPower Wizard_ArchonDisintegrationWaveFire { get; }
 
-	public ISnoPower Wizard_ArchonDisintegrationWaveLightning { get; }
+	public SnoPower Wizard_ArchonDisintegrationWaveLightning { get; }
 
-	public ISnoPower Wizard_ArchonSlowTime { get; }
+	public SnoPower Wizard_ArchonSlowTime { get; }
 
-	public ISnoPower Wizard_ArchonTeleport { get; }
+	public SnoPower Wizard_ArchonTeleport { get; }
 
-	public ISnoPower Wizard_BlackHole { get; }
+	public SnoPower Wizard_BlackHole { get; }
 
-	public ISnoPower Wizard_Blizzard { get; }
+	public SnoPower Wizard_Blizzard { get; }
 
-	public ISnoPower Wizard_DiamondSkin { get; }
+	public SnoPower Wizard_DiamondSkin { get; }
 
-	public ISnoPower Wizard_Disintegrate { get; }
+	public SnoPower Wizard_Disintegrate { get; }
 
-	public ISnoPower Wizard_Electrocute { get; }
+	public SnoPower Wizard_Electrocute { get; }
 
-	public ISnoPower Wizard_EnergyArmor { get; }
+	public SnoPower Wizard_EnergyArmor { get; }
 
-	public ISnoPower Wizard_EnergyTwister { get; }
+	public SnoPower Wizard_EnergyTwister { get; }
 
-	public ISnoPower Wizard_ExplosiveBlast { get; }
+	public SnoPower Wizard_ExplosiveBlast { get; }
 
-	public ISnoPower Wizard_Familiar { get; }
+	public SnoPower Wizard_Familiar { get; }
 
-	public ISnoPower Wizard_FrostNova { get; }
+	public SnoPower Wizard_FrostNova { get; }
 
-	public ISnoPower Wizard_Hydra { get; }
+	public SnoPower Wizard_Hydra { get; }
 
-	public ISnoPower Wizard_IceArmor { get; }
+	public SnoPower Wizard_IceArmor { get; }
 
-	public ISnoPower Wizard_MagicMissile { get; }
+	public SnoPower Wizard_MagicMissile { get; }
 
-	public ISnoPower Wizard_MagicWeapon { get; }
+	public SnoPower Wizard_MagicWeapon { get; }
 
-	public ISnoPower Wizard_Meteor { get; }
+	public SnoPower Wizard_Meteor { get; }
 
-	public ISnoPower Wizard_MirrorImage { get; }
+	public SnoPower Wizard_MirrorImage { get; }
 
-	public ISnoPower Wizard_RayOfFrost { get; }
+	public SnoPower Wizard_RayOfFrost { get; }
 
-	public ISnoPower Wizard_ShockPulse { get; }
+	public SnoPower Wizard_ShockPulse { get; }
 
-	public ISnoPower Wizard_SlowTime { get; }
+	public SnoPower Wizard_SlowTime { get; }
 
-	public ISnoPower Wizard_SpectralBlade { get; }
+	public SnoPower Wizard_SpectralBlade { get; }
 
-	public ISnoPower Wizard_StormArmor { get; }
+	public SnoPower Wizard_StormArmor { get; }
 
-	public ISnoPower Wizard_Teleport { get; }
+	public SnoPower Wizard_Teleport { get; }
 
-	public ISnoPower Wizard_WaveOfForce { get; }
+	public SnoPower Wizard_WaveOfForce { get; }
 
-	public ISnoPower Wizard_Passive_ArcaneDynamo { get; }
+	public SnoPower Wizard_Passive_ArcaneDynamo { get; }
 
-	public ISnoPower Wizard_Passive_AstralPresence { get; }
+	public SnoPower Wizard_Passive_AstralPresence { get; }
 
-	public ISnoPower Wizard_Passive_Audacity { get; }
+	public SnoPower Wizard_Passive_Audacity { get; }
 
-	public ISnoPower Wizard_Passive_Blur { get; }
+	public SnoPower Wizard_Passive_Blur { get; }
 
-	public ISnoPower Wizard_Passive_ColdBlooded { get; }
+	public SnoPower Wizard_Passive_ColdBlooded { get; }
 
-	public ISnoPower Wizard_Passive_Conflagration { get; }
+	public SnoPower Wizard_Passive_Conflagration { get; }
 
-	public ISnoPower Wizard_Passive_Dominance { get; }
+	public SnoPower Wizard_Passive_Dominance { get; }
 
-	public ISnoPower Wizard_Passive_ElementalExposure { get; }
+	public SnoPower Wizard_Passive_ElementalExposure { get; }
 
-	public ISnoPower Wizard_Passive_Evocation { get; }
+	public SnoPower Wizard_Passive_Evocation { get; }
 
-	public ISnoPower Wizard_Passive_GalvanizingWard { get; }
+	public SnoPower Wizard_Passive_GalvanizingWard { get; }
 
-	public ISnoPower Wizard_Passive_GlassCannon { get; }
+	public SnoPower Wizard_Passive_GlassCannon { get; }
 
-	public ISnoPower Wizard_Passive_Illusionist { get; }
+	public SnoPower Wizard_Passive_Illusionist { get; }
 
-	public ISnoPower Wizard_Passive_Paralysis { get; }
+	public SnoPower Wizard_Passive_Paralysis { get; }
 
-	public ISnoPower Wizard_Passive_PowerHungry { get; }
+	public SnoPower Wizard_Passive_PowerHungry { get; }
 
-	public ISnoPower Wizard_Passive_Prodigy { get; }
+	public SnoPower Wizard_Passive_Prodigy { get; }
 
-	public ISnoPower Wizard_Passive_TemporalFlux { get; }
+	public SnoPower Wizard_Passive_TemporalFlux { get; }
 
-	public ISnoPower Wizard_Passive_UnstableAnomaly { get; }
+	public SnoPower Wizard_Passive_UnstableAnomaly { get; }
 
-	public ISnoPower Wizard_Passive_UnwaveringWill { get; }
+	public SnoPower Wizard_Passive_UnwaveringWill { get; }
 
-	public ISnoPower BaneOfThePowerfulPrimary => SnoData.Powers.GetBySno(383014u);
+	public SnoPower BaneOfThePowerfulPrimary => SnoData.Powers.GetBySno(383014u);
 
-	public ISnoPower BaneOfThePowerfulSecondary => SnoData.Powers.GetBySno(451157u);
+	public SnoPower BaneOfThePowerfulSecondary => SnoData.Powers.GetBySno(451157u);
 
-	public ISnoPower BaneOfTheStrickenPrimary => SnoData.Powers.GetBySno(428348u);
+	public SnoPower BaneOfTheStrickenPrimary => SnoData.Powers.GetBySno(428348u);
 
-	public ISnoPower BaneOfTheStrickenSecondary => SnoData.Powers.GetBySno(428349u);
+	public SnoPower BaneOfTheStrickenSecondary => SnoData.Powers.GetBySno(428349u);
 
-	public ISnoPower BaneOfTheTrappedPrimary => SnoData.Powers.GetBySno(403456u);
+	public SnoPower BaneOfTheTrappedPrimary => SnoData.Powers.GetBySno(403456u);
 
-	public ISnoPower BaneOfTheTrappedSecondary => SnoData.Powers.GetBySno(403457u);
+	public SnoPower BaneOfTheTrappedSecondary => SnoData.Powers.GetBySno(403457u);
 
-	public ISnoPower BoonOfTheHoarderPrimary => SnoData.Powers.GetBySno(403470u);
+	public SnoPower BoonOfTheHoarderPrimary => SnoData.Powers.GetBySno(403470u);
 
-	public ISnoPower BoonOfTheHoarderSecondary => SnoData.Powers.GetBySno(403784u);
+	public SnoPower BoonOfTheHoarderSecondary => SnoData.Powers.GetBySno(403784u);
 
-	public ISnoPower BoyarskysChipPrimary => SnoData.Powers.GetBySno(428352u);
+	public SnoPower BoyarskysChipPrimary => SnoData.Powers.GetBySno(428352u);
 
-	public ISnoPower BoyarskysChipSecondary => SnoData.Powers.GetBySno(428353u);
+	public SnoPower BoyarskysChipSecondary => SnoData.Powers.GetBySno(428353u);
 
-	public ISnoPower EnforcerPrimary => SnoData.Powers.GetBySno(403466u);
+	public SnoPower EnforcerPrimary => SnoData.Powers.GetBySno(403466u);
 
-	public ISnoPower EnforcerSecondary => SnoData.Powers.GetBySno(403472u);
+	public SnoPower EnforcerSecondary => SnoData.Powers.GetBySno(403472u);
 
-	public ISnoPower EsotericAlterationPrimary => SnoData.Powers.GetBySno(428029u);
+	public SnoPower EsotericAlterationPrimary => SnoData.Powers.GetBySno(428029u);
 
-	public ISnoPower EsotericAlterationSecondary => SnoData.Powers.GetBySno(428030u);
+	public SnoPower EsotericAlterationSecondary => SnoData.Powers.GetBySno(428030u);
 
-	public ISnoPower GemOfEasePrimary => SnoData.Powers.GetBySno(403459u);
+	public SnoPower GemOfEasePrimary => SnoData.Powers.GetBySno(403459u);
 
-	public ISnoPower GemOfEaseSecondary => SnoData.Powers.GetBySno(428691u);
+	public SnoPower GemOfEaseSecondary => SnoData.Powers.GetBySno(428691u);
 
-	public ISnoPower GemOfEfficaciousToxinPrimary => SnoData.Powers.GetBySno(403461u);
+	public SnoPower GemOfEfficaciousToxinPrimary => SnoData.Powers.GetBySno(403461u);
 
-	public ISnoPower GemOfEfficaciousToxinSecondary => SnoData.Powers.GetBySno(403556u);
+	public SnoPower GemOfEfficaciousToxinSecondary => SnoData.Powers.GetBySno(403556u);
 
-	public ISnoPower GogokOfSwiftnessPrimary => SnoData.Powers.GetBySno(403464u);
+	public SnoPower GogokOfSwiftnessPrimary => SnoData.Powers.GetBySno(403464u);
 
-	public ISnoPower GogokOfSwiftnessSecondary => SnoData.Powers.GetBySno(403524u);
+	public SnoPower GogokOfSwiftnessSecondary => SnoData.Powers.GetBySno(403524u);
 
-	public ISnoPower IceblinkPrimary => SnoData.Powers.GetBySno(428354u);
+	public SnoPower IceblinkPrimary => SnoData.Powers.GetBySno(428354u);
 
-	public ISnoPower IceblinkSecondary => SnoData.Powers.GetBySno(428356u);
+	public SnoPower IceblinkSecondary => SnoData.Powers.GetBySno(428356u);
 
-	public ISnoPower InvigoratingGemstonePrimary => SnoData.Powers.GetBySno(403465u);
+	public SnoPower InvigoratingGemstonePrimary => SnoData.Powers.GetBySno(403465u);
 
-	public ISnoPower InvigoratingGemstoneSecondary => SnoData.Powers.GetBySno(403624u);
+	public SnoPower InvigoratingGemstoneSecondary => SnoData.Powers.GetBySno(403624u);
 
-	public ISnoPower LegacyOfDreamsPrimary => SnoData.Powers.GetBySno(483319u);
+	public SnoPower LegacyOfDreamsPrimary => SnoData.Powers.GetBySno(483319u);
 
-	public ISnoPower LegacyOfDreamsSecondary => SnoData.Powers.GetBySno(483320u);
+	public SnoPower LegacyOfDreamsSecondary => SnoData.Powers.GetBySno(483320u);
 
-	public ISnoPower MirinaeTeardropOfTheStarweaverPrimary => SnoData.Powers.GetBySno(403463u);
+	public SnoPower MirinaeTeardropOfTheStarweaverPrimary => SnoData.Powers.GetBySno(403463u);
 
-	public ISnoPower MirinaeTeardropOfTheStarweaverSecondary => SnoData.Powers.GetBySno(403620u);
+	public SnoPower MirinaeTeardropOfTheStarweaverSecondary => SnoData.Powers.GetBySno(403620u);
 
-	public ISnoPower MoltenWildebeestsGizzardPrimary => SnoData.Powers.GetBySno(428031u);
+	public SnoPower MoltenWildebeestsGizzardPrimary => SnoData.Powers.GetBySno(428031u);
 
-	public ISnoPower MoltenWildebeestsGizzardSecondary => SnoData.Powers.GetBySno(428032u);
+	public SnoPower MoltenWildebeestsGizzardSecondary => SnoData.Powers.GetBySno(428032u);
 
-	public ISnoPower MoratoriumPrimary => SnoData.Powers.GetBySno(403467u);
+	public SnoPower MoratoriumPrimary => SnoData.Powers.GetBySno(403467u);
 
-	public ISnoPower MoratoriumSecondary => SnoData.Powers.GetBySno(403687u);
+	public SnoPower MoratoriumSecondary => SnoData.Powers.GetBySno(403687u);
 
-	public ISnoPower MutilationGuardPrimary => SnoData.Powers.GetBySno(428350u);
+	public SnoPower MutilationGuardPrimary => SnoData.Powers.GetBySno(428350u);
 
-	public ISnoPower MutilationGuardSecondary => SnoData.Powers.GetBySno(428351u);
+	public SnoPower MutilationGuardSecondary => SnoData.Powers.GetBySno(428351u);
 
-	public ISnoPower PainEnhancerPrimary => SnoData.Powers.GetBySno(403462u);
+	public SnoPower PainEnhancerPrimary => SnoData.Powers.GetBySno(403462u);
 
-	public ISnoPower PainEnhancerSecondary => SnoData.Powers.GetBySno(403600u);
+	public SnoPower PainEnhancerSecondary => SnoData.Powers.GetBySno(403600u);
 
-	public ISnoPower RedSoulShardPrimary => SnoData.Powers.GetBySno(454736u);
+	public SnoPower RedSoulShardPrimary => SnoData.Powers.GetBySno(454736u);
 
-	public ISnoPower RedSoulShardSecondary => SnoData.Powers.GetBySno(454737u);
+	public SnoPower RedSoulShardSecondary => SnoData.Powers.GetBySno(454737u);
 
-	public ISnoPower SimplicitysStrengthPrimary => SnoData.Powers.GetBySno(403469u);
+	public SnoPower SimplicitysStrengthPrimary => SnoData.Powers.GetBySno(403469u);
 
-	public ISnoPower SimplicitysStrengthSecondary => SnoData.Powers.GetBySno(403473u);
+	public SnoPower SimplicitysStrengthSecondary => SnoData.Powers.GetBySno(403473u);
 
-	public ISnoPower TaegukPrimary => SnoData.Powers.GetBySno(403471u);
+	public SnoPower TaegukPrimary => SnoData.Powers.GetBySno(403471u);
 
-	public ISnoPower TaegukSecondary => SnoData.Powers.GetBySno(403785u);
+	public SnoPower TaegukSecondary => SnoData.Powers.GetBySno(403785u);
 
-	public ISnoPower WreathOfLightningPrimary => SnoData.Powers.GetBySno(403460u);
+	public SnoPower WreathOfLightningPrimary => SnoData.Powers.GetBySno(403460u);
 
-	public ISnoPower WreathOfLightningSecondary => SnoData.Powers.GetBySno(403560u);
+	public SnoPower WreathOfLightningSecondary => SnoData.Powers.GetBySno(403560u);
 
-	public ISnoPower ZeisStoneOfVengeancePrimary => SnoData.Powers.GetBySno(403468u);
+	public SnoPower ZeisStoneOfVengeancePrimary => SnoData.Powers.GetBySno(403468u);
 
-	public ISnoPower ZeisStoneOfVengeanceSecondary => SnoData.Powers.GetBySno(403727u);
+	public SnoPower ZeisStoneOfVengeanceSecondary => SnoData.Powers.GetBySno(403727u);
 
-	public ISnoPower AetherWalker => SnoData.Powers.GetBySno(397788u);
+	public SnoPower AetherWalker => SnoData.Powers.GetBySno(397788u);
 
-	public ISnoPower AhavarionSpearOfLycander => SnoData.Powers.GetBySno(318868u);
+	public SnoPower AhavarionSpearOfLycander => SnoData.Powers.GetBySno(318868u);
 
-	public ISnoPower AkaratsAwakening => SnoData.Powers.GetBySno(318888u);
+	public SnoPower AkaratsAwakening => SnoData.Powers.GetBySno(318888u);
 
-	public ISnoPower AkkhansAddendum => SnoData.Powers.GetBySno(445943u);
+	public SnoPower AkkhansAddendum => SnoData.Powers.GetBySno(445943u);
 
-	public ISnoPower AkkhansLeniency => SnoData.Powers.GetBySno(488910u);
+	public SnoPower AkkhansLeniency => SnoData.Powers.GetBySno(488910u);
 
-	public ISnoPower AkkhansManacles => SnoData.Powers.GetBySno(446008u);
+	public SnoPower AkkhansManacles => SnoData.Powers.GetBySno(446008u);
 
-	public ISnoPower AmbosPride => SnoData.Powers.GetBySno(483675u);
+	public SnoPower AmbosPride => SnoData.Powers.GetBySno(483675u);
 
-	public ISnoPower AncestorsGrace => SnoData.Powers.GetBySno(318378u);
+	public SnoPower AncestorsGrace => SnoData.Powers.GetBySno(318378u);
 
-	public ISnoPower AncientParthanDefenders => SnoData.Powers.GetBySno(318770u);
+	public SnoPower AncientParthanDefenders => SnoData.Powers.GetBySno(318770u);
 
-	public ISnoPower AndarielsVisage => SnoData.Powers.GetBySno(434034u);
+	public SnoPower AndarielsVisage => SnoData.Powers.GetBySno(434034u);
 
-	public ISnoPower AnessaziEdge => SnoData.Powers.GetBySno(318720u);
+	public SnoPower AnessaziEdge => SnoData.Powers.GetBySno(318720u);
 
-	public ISnoPower AngelHairBraid => SnoData.Powers.GetBySno(402415u);
+	public SnoPower AngelHairBraid => SnoData.Powers.GetBySno(402415u);
 
-	public ISnoPower AquilaCuirass => SnoData.Powers.GetBySno(449064u);
+	public SnoPower AquilaCuirass => SnoData.Powers.GetBySno(449064u);
 
-	public ISnoPower ArchmagesVicalyke => SnoData.Powers.GetBySno(318777u);
+	public SnoPower ArchmagesVicalyke => SnoData.Powers.GetBySno(318777u);
 
-	public ISnoPower Arcstone => SnoData.Powers.GetBySno(359598u);
+	public SnoPower Arcstone => SnoData.Powers.GetBySno(359598u);
 
-	public ISnoPower ArmorOfTheKindRegent => SnoData.Powers.GetBySno(318892u);
+	public SnoPower ArmorOfTheKindRegent => SnoData.Powers.GetBySno(318892u);
 
-	public ISnoPower ArreatsLaw => SnoData.Powers.GetBySno(486951u);
+	public SnoPower ArreatsLaw => SnoData.Powers.GetBySno(486951u);
 
-	public ISnoPower ArthefsSparkOfLife => SnoData.Powers.GetBySno(318757u);
+	public SnoPower ArthefsSparkOfLife => SnoData.Powers.GetBySno(318757u);
 
-	public ISnoPower AshnagarrsBloodBracer => SnoData.Powers.GetBySno(449043u);
+	public SnoPower AshnagarrsBloodBracer => SnoData.Powers.GetBySno(449043u);
 
-	public ISnoPower AugustinesPanacea => SnoData.Powers.GetBySno(451169u);
+	public SnoPower AugustinesPanacea => SnoData.Powers.GetBySno(451169u);
 
-	public ISnoPower Azurewrath => SnoData.Powers.GetBySno(441723u);
+	public SnoPower Azurewrath => SnoData.Powers.GetBySno(441723u);
 
-	public ISnoPower BakuliJungleWraps => SnoData.Powers.GetBySno(451163u);
+	public SnoPower BakuliJungleWraps => SnoData.Powers.GetBySno(451163u);
 
-	public ISnoPower Balance => SnoData.Powers.GetBySno(478475u);
+	public SnoPower Balance => SnoData.Powers.GetBySno(478475u);
 
-	public ISnoPower BalefulRemnant => SnoData.Powers.GetBySno(359545u);
+	public SnoPower BalefulRemnant => SnoData.Powers.GetBySno(359545u);
 
-	public ISnoPower BandOfHollowWhispers => SnoData.Powers.GetBySno(364345u);
+	public SnoPower BandOfHollowWhispers => SnoData.Powers.GetBySno(364345u);
 
-	public ISnoPower BandOfMight => SnoData.Powers.GetBySno(447060u);
+	public SnoPower BandOfMight => SnoData.Powers.GetBySno(447060u);
 
-	public ISnoPower BandOfTheRueChambers => SnoData.Powers.GetBySno(318434u);
+	public SnoPower BandOfTheRueChambers => SnoData.Powers.GetBySno(318434u);
 
-	public ISnoPower BastionsRevered => SnoData.Powers.GetBySno(484244u);
+	public SnoPower BastionsRevered => SnoData.Powers.GetBySno(484244u);
 
-	public ISnoPower BeckonSail => SnoData.Powers.GetBySno(318420u);
+	public SnoPower BeckonSail => SnoData.Powers.GetBySno(318420u);
 
-	public ISnoPower BeltOfTheTrove => SnoData.Powers.GetBySno(484602u);
+	public SnoPower BeltOfTheTrove => SnoData.Powers.GetBySno(484602u);
 
-	public ISnoPower BeltOfTranscendence => SnoData.Powers.GetBySno(430671u);
+	public SnoPower BeltOfTranscendence => SnoData.Powers.GetBySno(430671u);
 
-	public ISnoPower BindingOfTheLost => SnoData.Powers.GetBySno(440598u);
+	public SnoPower BindingOfTheLost => SnoData.Powers.GetBySno(440598u);
 
-	public ISnoPower BindingsOfTheLesserGods => SnoData.Powers.GetBySno(485725u);
+	public SnoPower BindingsOfTheLesserGods => SnoData.Powers.GetBySno(485725u);
 
-	public ISnoPower Blackfeather => SnoData.Powers.GetBySno(318882u);
+	public SnoPower Blackfeather => SnoData.Powers.GetBySno(318882u);
 
-	public ISnoPower BladeOfProphecy => SnoData.Powers.GetBySno(478476u);
+	public SnoPower BladeOfProphecy => SnoData.Powers.GetBySno(478476u);
 
-	public ISnoPower BladeOfTheTribes => SnoData.Powers.GetBySno(484604u);
+	public SnoPower BladeOfTheTribes => SnoData.Powers.GetBySno(484604u);
 
-	public ISnoPower BladeOfTheWarlord => SnoData.Powers.GetBySno(447375u);
+	public SnoPower BladeOfTheWarlord => SnoData.Powers.GetBySno(447375u);
 
-	public ISnoPower BlessedOfHaull => SnoData.Powers.GetBySno(430681u);
+	public SnoPower BlessedOfHaull => SnoData.Powers.GetBySno(430681u);
 
-	public ISnoPower BloodBrother => SnoData.Powers.GetBySno(402456u);
+	public SnoPower BloodBrother => SnoData.Powers.GetBySno(402456u);
 
-	public ISnoPower BloodsongMail => SnoData.Powers.GetBySno(476585u);
+	public SnoPower BloodsongMail => SnoData.Powers.GetBySno(476585u);
 
-	public ISnoPower BloodtideBlade => SnoData.Powers.GetBySno(475251u);
+	public SnoPower BloodtideBlade => SnoData.Powers.GetBySno(475251u);
 
-	public ISnoPower BombardiersRucksack => SnoData.Powers.GetBySno(486306u);
+	public SnoPower BombardiersRucksack => SnoData.Powers.GetBySno(486306u);
 
-	public ISnoPower BondsOfCLena => SnoData.Powers.GetBySno(485504u);
+	public SnoPower BondsOfCLena => SnoData.Powers.GetBySno(485504u);
 
-	public ISnoPower BoneRinger => SnoData.Powers.GetBySno(476584u);
+	public SnoPower BoneRinger => SnoData.Powers.GetBySno(476584u);
 
-	public ISnoPower BottomlessPotionOfAmplification => SnoData.Powers.GetBySno(434626u);
+	public SnoPower BottomlessPotionOfAmplification => SnoData.Powers.GetBySno(434626u);
 
-	public ISnoPower BottomlessPotionOfChaos => SnoData.Powers.GetBySno(451310u);
+	public SnoPower BottomlessPotionOfChaos => SnoData.Powers.GetBySno(451310u);
 
-	public ISnoPower BottomlessPotionOfFear => SnoData.Powers.GetBySno(428812u);
+	public SnoPower BottomlessPotionOfFear => SnoData.Powers.GetBySno(428812u);
 
-	public ISnoPower BottomlessPotionOfKulleAid => SnoData.Powers.GetBySno(344094u);
+	public SnoPower BottomlessPotionOfKulleAid => SnoData.Powers.GetBySno(344094u);
 
-	public ISnoPower BottomlessPotionOfRejuvenation => SnoData.Powers.GetBySno(433021u);
+	public SnoPower BottomlessPotionOfRejuvenation => SnoData.Powers.GetBySno(433021u);
 
-	public ISnoPower BottomlessPotionOfTheUnfettered => SnoData.Powers.GetBySno(483315u);
+	public SnoPower BottomlessPotionOfTheUnfettered => SnoData.Powers.GetBySno(483315u);
 
-	public ISnoPower BovineBardiche => SnoData.Powers.GetBySno(318382u);
+	public SnoPower BovineBardiche => SnoData.Powers.GetBySno(318382u);
 
-	public ISnoPower BracerOfFury => SnoData.Powers.GetBySno(446162u);
+	public SnoPower BracerOfFury => SnoData.Powers.GetBySno(446162u);
 
-	public ISnoPower BracersOfDestruction => SnoData.Powers.GetBySno(483847u);
+	public SnoPower BracersOfDestruction => SnoData.Powers.GetBySno(483847u);
 
-	public ISnoPower BracersOfTheFirstMen => SnoData.Powers.GetBySno(441279u);
+	public SnoPower BracersOfTheFirstMen => SnoData.Powers.GetBySno(441279u);
 
-	public ISnoPower BriggsWrath => SnoData.Powers.GetBySno(475252u);
+	public SnoPower BriggsWrath => SnoData.Powers.GetBySno(475252u);
 
-	public ISnoPower BrokenCrown => SnoData.Powers.GetBySno(423231u);
+	public SnoPower BrokenCrown => SnoData.Powers.GetBySno(423231u);
 
-	public ISnoPower BrokenPromises => SnoData.Powers.GetBySno(402462u);
+	public SnoPower BrokenPromises => SnoData.Powers.GetBySno(402462u);
 
-	public ISnoPower BrynersJourney => SnoData.Powers.GetBySno(475245u);
+	public SnoPower BrynersJourney => SnoData.Powers.GetBySno(475245u);
 
-	public ISnoPower BulKathossWeddingBand => SnoData.Powers.GetBySno(364340u);
+	public SnoPower BulKathossWeddingBand => SnoData.Powers.GetBySno(364340u);
 
-	public ISnoPower BurizaDoKyanon => SnoData.Powers.GetBySno(374344u);
+	public SnoPower BurizaDoKyanon => SnoData.Powers.GetBySno(374344u);
 
-	public ISnoPower ButchersCarver => SnoData.Powers.GetBySno(246118u);
+	public SnoPower ButchersCarver => SnoData.Powers.GetBySno(246118u);
 
-	public ISnoPower Calamity => SnoData.Powers.GetBySno(318360u);
+	public SnoPower Calamity => SnoData.Powers.GetBySno(318360u);
 
-	public ISnoPower CamsRebuttal => SnoData.Powers.GetBySno(318358u);
+	public SnoPower CamsRebuttal => SnoData.Powers.GetBySno(318358u);
 
-	public ISnoPower CapeOfTheDarkNight => SnoData.Powers.GetBySno(318421u);
+	public SnoPower CapeOfTheDarkNight => SnoData.Powers.GetBySno(318421u);
 
-	public ISnoPower Carnevil => SnoData.Powers.GetBySno(483481u);
+	public SnoPower Carnevil => SnoData.Powers.GetBySno(483481u);
 
-	public ISnoPower CesarsMemento => SnoData.Powers.GetBySno(449031u);
+	public SnoPower CesarsMemento => SnoData.Powers.GetBySno(449031u);
 
-	public ISnoPower Chaingmail => SnoData.Powers.GetBySno(318798u);
+	public SnoPower Chaingmail => SnoData.Powers.GetBySno(318798u);
 
-	public ISnoPower ChainOfShadows => SnoData.Powers.GetBySno(445266u);
+	public SnoPower ChainOfShadows => SnoData.Powers.GetBySno(445266u);
 
-	public ISnoPower ChanonBolter => SnoData.Powers.GetBySno(488010u);
+	public SnoPower ChanonBolter => SnoData.Powers.GetBySno(488010u);
 
-	public ISnoPower ChilaniksChain => SnoData.Powers.GetBySno(318821u);
+	public SnoPower ChilaniksChain => SnoData.Powers.GetBySno(318821u);
 
-	public ISnoPower Cindercoat => SnoData.Powers.GetBySno(318790u);
+	public SnoPower Cindercoat => SnoData.Powers.GetBySno(318790u);
 
-	public ISnoPower CircleOfNailujsEvol => SnoData.Powers.GetBySno(475247u);
+	public SnoPower CircleOfNailujsEvol => SnoData.Powers.GetBySno(475247u);
 
-	public ISnoPower Cluckeye => SnoData.Powers.GetBySno(488809u);
+	public SnoPower Cluckeye => SnoData.Powers.GetBySno(488809u);
 
-	public ISnoPower CoilsOfTheFirstSpider => SnoData.Powers.GetBySno(440790u);
+	public SnoPower CoilsOfTheFirstSpider => SnoData.Powers.GetBySno(440790u);
 
-	public ISnoPower ConventionOfElements => SnoData.Powers.GetBySno(430674u);
+	public SnoPower ConventionOfElements => SnoData.Powers.GetBySno(430674u);
 
-	public ISnoPower CordOfTheSherma => SnoData.Powers.GetBySno(434008u);
+	public SnoPower CordOfTheSherma => SnoData.Powers.GetBySno(434008u);
 
-	public ISnoPower CorpsewhisperPauldrons => SnoData.Powers.GetBySno(476580u);
+	public SnoPower CorpsewhisperPauldrons => SnoData.Powers.GetBySno(476580u);
 
-	public ISnoPower CorruptedAshbringer => SnoData.Powers.GetBySno(402455u);
+	public SnoPower CorruptedAshbringer => SnoData.Powers.GetBySno(402455u);
 
-	public ISnoPower CountessJuliasCameo => SnoData.Powers.GetBySno(318381u);
+	public SnoPower CountessJuliasCameo => SnoData.Powers.GetBySno(318381u);
 
-	public ISnoPower CrashingRain => SnoData.Powers.GetBySno(359554u);
+	public SnoPower CrashingRain => SnoData.Powers.GetBySno(359554u);
 
-	public ISnoPower CrownOfThePrimus => SnoData.Powers.GetBySno(487653u);
+	public SnoPower CrownOfThePrimus => SnoData.Powers.GetBySno(487653u);
 
-	public ISnoPower CrystalFist => SnoData.Powers.GetBySno(451170u);
+	public SnoPower CrystalFist => SnoData.Powers.GetBySno(451170u);
 
-	public ISnoPower CusterianWristguards => SnoData.Powers.GetBySno(359557u);
+	public SnoPower CusterianWristguards => SnoData.Powers.GetBySno(359557u);
 
-	public ISnoPower DanettasRevenge => SnoData.Powers.GetBySno(318813u);
+	public SnoPower DanettasRevenge => SnoData.Powers.GetBySno(318813u);
 
-	public ISnoPower DanettasSpite => SnoData.Powers.GetBySno(318348u);
+	public SnoPower DanettasSpite => SnoData.Powers.GetBySno(318348u);
 
-	public ISnoPower Darklight => SnoData.Powers.GetBySno(483790u);
+	public SnoPower Darklight => SnoData.Powers.GetBySno(483790u);
 
-	public ISnoPower DarkMagesShade => SnoData.Powers.GetBySno(318788u);
+	public SnoPower DarkMagesShade => SnoData.Powers.GetBySno(318788u);
 
-	public ISnoPower Dawn => SnoData.Powers.GetBySno(446146u);
+	public SnoPower Dawn => SnoData.Powers.GetBySno(446146u);
 
-	public ISnoPower DaynteesBinding => SnoData.Powers.GetBySno(478534u);
+	public SnoPower DaynteesBinding => SnoData.Powers.GetBySno(478534u);
 
-	public ISnoPower DeadlyRebirth => SnoData.Powers.GetBySno(318808u);
+	public SnoPower DeadlyRebirth => SnoData.Powers.GetBySno(318808u);
 
-	public ISnoPower DeadMansLegacy => SnoData.Powers.GetBySno(478486u);
+	public SnoPower DeadMansLegacy => SnoData.Powers.GetBySno(478486u);
 
-	public ISnoPower DeathseersCowl => SnoData.Powers.GetBySno(318857u);
+	public SnoPower DeathseersCowl => SnoData.Powers.GetBySno(318857u);
 
-	public ISnoPower DeathWatchMantle => SnoData.Powers.GetBySno(434005u);
+	public SnoPower DeathWatchMantle => SnoData.Powers.GetBySno(434005u);
 
-	public ISnoPower Deathwish => SnoData.Powers.GetBySno(449063u);
+	public SnoPower Deathwish => SnoData.Powers.GetBySno(449063u);
 
-	public ISnoPower DefenderOfWestmarch => SnoData.Powers.GetBySno(434004u);
+	public SnoPower DefenderOfWestmarch => SnoData.Powers.GetBySno(434004u);
 
-	public ISnoPower DefilerCuisses => SnoData.Powers.GetBySno(485506u);
+	public SnoPower DefilerCuisses => SnoData.Powers.GetBySno(485506u);
 
-	public ISnoPower DemonMachine => SnoData.Powers.GetBySno(364332u);
+	public SnoPower DemonMachine => SnoData.Powers.GetBySno(364332u);
 
-	public ISnoPower Denial => SnoData.Powers.GetBySno(435016u);
+	public SnoPower Denial => SnoData.Powers.GetBySno(435016u);
 
-	public ISnoPower DepthDiggers => SnoData.Powers.GetBySno(402416u);
+	public SnoPower DepthDiggers => SnoData.Powers.GetBySno(402416u);
 
-	public ISnoPower DishonoredLegacy => SnoData.Powers.GetBySno(441294u);
+	public SnoPower DishonoredLegacy => SnoData.Powers.GetBySno(441294u);
 
-	public ISnoPower DovuEnergyTrap => SnoData.Powers.GetBySno(318867u);
+	public SnoPower DovuEnergyTrap => SnoData.Powers.GetBySno(318867u);
 
-	public ISnoPower DrakonsLesson => SnoData.Powers.GetBySno(430678u);
+	public SnoPower DrakonsLesson => SnoData.Powers.GetBySno(430678u);
 
-	public ISnoPower DreadIron => SnoData.Powers.GetBySno(430679u);
+	public SnoPower DreadIron => SnoData.Powers.GetBySno(430679u);
 
-	public ISnoPower EberliCharo => SnoData.Powers.GetBySno(318853u);
+	public SnoPower EberliCharo => SnoData.Powers.GetBySno(318853u);
 
-	public ISnoPower EchoingFury => SnoData.Powers.GetBySno(483518u);
+	public SnoPower EchoingFury => SnoData.Powers.GetBySno(483518u);
 
-	public ISnoPower ElusiveRing => SnoData.Powers.GetBySno(446187u);
+	public SnoPower ElusiveRing => SnoData.Powers.GetBySno(446187u);
 
-	public ISnoPower EmimeisDuffel => SnoData.Powers.GetBySno(484294u);
+	public SnoPower EmimeisDuffel => SnoData.Powers.GetBySno(484294u);
 
-	public ISnoPower EnchantingFavor => SnoData.Powers.GetBySno(318835u);
+	public SnoPower EnchantingFavor => SnoData.Powers.GetBySno(318835u);
 
-	public ISnoPower EtchedSigil => SnoData.Powers.GetBySno(484596u);
+	public SnoPower EtchedSigil => SnoData.Powers.GetBySno(484596u);
 
-	public ISnoPower EternalUnion => SnoData.Powers.GetBySno(487798u);
+	public SnoPower EternalUnion => SnoData.Powers.GetBySno(487798u);
 
-	public ISnoPower Eunjangdo => SnoData.Powers.GetBySno(402457u);
+	public SnoPower Eunjangdo => SnoData.Powers.GetBySno(402457u);
 
-	public ISnoPower EyeOfPeshkov => SnoData.Powers.GetBySno(318431u);
+	public SnoPower EyeOfPeshkov => SnoData.Powers.GetBySno(318431u);
 
-	public ISnoPower FaithfulMemory => SnoData.Powers.GetBySno(454927u);
+	public SnoPower FaithfulMemory => SnoData.Powers.GetBySno(454927u);
 
-	public ISnoPower FateOfTheFell => SnoData.Powers.GetBySno(478478u);
+	public SnoPower FateOfTheFell => SnoData.Powers.GetBySno(478478u);
 
-	public ISnoPower FatesVow => SnoData.Powers.GetBySno(478508u);
+	public SnoPower FatesVow => SnoData.Powers.GetBySno(478508u);
 
-	public ISnoPower FazulasImprobableChain => SnoData.Powers.GetBySno(437854u);
+	public SnoPower FazulasImprobableChain => SnoData.Powers.GetBySno(437854u);
 
-	public ISnoPower FireWalkers => SnoData.Powers.GetBySno(434010u);
+	public SnoPower FireWalkers => SnoData.Powers.GetBySno(434010u);
 
-	public ISnoPower FjordCutter => SnoData.Powers.GetBySno(483848u);
+	public SnoPower FjordCutter => SnoData.Powers.GetBySno(483848u);
 
-	public ISnoPower FlailOfTheAscended => SnoData.Powers.GetBySno(451164u);
+	public SnoPower FlailOfTheAscended => SnoData.Powers.GetBySno(451164u);
 
-	public ISnoPower Fleshrake => SnoData.Powers.GetBySno(451168u);
+	public SnoPower Fleshrake => SnoData.Powers.GetBySno(451168u);
 
-	public ISnoPower FlyingDragon => SnoData.Powers.GetBySno(246562u);
+	public SnoPower FlyingDragon => SnoData.Powers.GetBySno(246562u);
 
-	public ISnoPower FortressBallista => SnoData.Powers.GetBySno(447816u);
+	public SnoPower FortressBallista => SnoData.Powers.GetBySno(447816u);
 
-	public ISnoPower FragmentOfDestiny => SnoData.Powers.GetBySno(484599u);
+	public SnoPower FragmentOfDestiny => SnoData.Powers.GetBySno(484599u);
 
-	public ISnoPower FreezeOfDeflection => SnoData.Powers.GetBySno(318816u);
+	public SnoPower FreezeOfDeflection => SnoData.Powers.GetBySno(318816u);
 
-	public ISnoPower Frostburn => SnoData.Powers.GetBySno(451167u);
+	public SnoPower Frostburn => SnoData.Powers.GetBySno(451167u);
 
-	public ISnoPower FrydehrsWrath => SnoData.Powers.GetBySno(478477u);
+	public SnoPower FrydehrsWrath => SnoData.Powers.GetBySno(478477u);
 
-	public ISnoPower Fulminator => SnoData.Powers.GetBySno(441681u);
+	public SnoPower Fulminator => SnoData.Powers.GetBySno(441681u);
 
-	public ISnoPower FuneraryPick => SnoData.Powers.GetBySno(487651u);
+	public SnoPower FuneraryPick => SnoData.Powers.GetBySno(487651u);
 
-	public ISnoPower FuryOfTheAncients => SnoData.Powers.GetBySno(483849u);
+	public SnoPower FuryOfTheAncients => SnoData.Powers.GetBySno(483849u);
 
-	public ISnoPower FuryOfTheVanishedPeak => SnoData.Powers.GetBySno(478489u);
+	public SnoPower FuryOfTheVanishedPeak => SnoData.Powers.GetBySno(478489u);
 
-	public ISnoPower GabrielsVambraces => SnoData.Powers.GetBySno(436521u);
+	public SnoPower GabrielsVambraces => SnoData.Powers.GetBySno(436521u);
 
-	public ISnoPower GazingDemise => SnoData.Powers.GetBySno(484270u);
+	public SnoPower GazingDemise => SnoData.Powers.GetBySno(484270u);
 
-	public ISnoPower GelmindorsMarrowGuards => SnoData.Powers.GetBySno(484588u);
+	public SnoPower GelmindorsMarrowGuards => SnoData.Powers.GetBySno(484588u);
 
-	public ISnoPower Genzaniku => SnoData.Powers.GetBySno(364311u);
+	public SnoPower Genzaniku => SnoData.Powers.GetBySno(364311u);
 
-	public ISnoPower GestureOfOrpheus => SnoData.Powers.GetBySno(318376u);
+	public SnoPower GestureOfOrpheus => SnoData.Powers.GetBySno(318376u);
 
-	public ISnoPower GirdleOfGiants => SnoData.Powers.GetBySno(451237u);
+	public SnoPower GirdleOfGiants => SnoData.Powers.GetBySno(451237u);
 
-	public ISnoPower GladiatorGauntlets => SnoData.Powers.GetBySno(318799u);
+	public SnoPower GladiatorGauntlets => SnoData.Powers.GetBySno(318799u);
 
-	public ISnoPower GoldenFlense => SnoData.Powers.GetBySno(478537u);
+	public SnoPower GoldenFlense => SnoData.Powers.GetBySno(478537u);
 
-	public ISnoPower Goldskin => SnoData.Powers.GetBySno(246515u);
+	public SnoPower Goldskin => SnoData.Powers.GetBySno(246515u);
 
-	public ISnoPower Goldwrap => SnoData.Powers.GetBySno(318875u);
+	public SnoPower Goldwrap => SnoData.Powers.GetBySno(318875u);
 
-	public ISnoPower GolemskinBreeches => SnoData.Powers.GetBySno(478510u);
+	public SnoPower GolemskinBreeches => SnoData.Powers.GetBySno(478510u);
 
-	public ISnoPower GraspsOfEssence => SnoData.Powers.GetBySno(484310u);
+	public SnoPower GraspsOfEssence => SnoData.Powers.GetBySno(484310u);
 
-	public ISnoPower GuardOfJohanna => SnoData.Powers.GetBySno(436481u);
+	public SnoPower GuardOfJohanna => SnoData.Powers.GetBySno(436481u);
 
-	public ISnoPower GungdoGear => SnoData.Powers.GetBySno(484605u);
+	public SnoPower GungdoGear => SnoData.Powers.GetBySno(484605u);
 
-	public ISnoPower GyanaNaKashu => SnoData.Powers.GetBySno(318426u);
+	public SnoPower GyanaNaKashu => SnoData.Powers.GetBySno(318426u);
 
-	public ISnoPower GyrfalconsFoote => SnoData.Powers.GetBySno(478513u);
+	public SnoPower GyrfalconsFoote => SnoData.Powers.GetBySno(478513u);
 
-	public ISnoPower Hack => SnoData.Powers.GetBySno(318869u);
+	public SnoPower Hack => SnoData.Powers.GetBySno(318869u);
 
-	public ISnoPower HallowedBulwark => SnoData.Powers.GetBySno(318887u);
+	public SnoPower HallowedBulwark => SnoData.Powers.GetBySno(318887u);
 
-	public ISnoPower HaloOfArlyse => SnoData.Powers.GetBySno(429648u);
+	public SnoPower HaloOfArlyse => SnoData.Powers.GetBySno(429648u);
 
-	public ISnoPower HaloOfKarini => SnoData.Powers.GetBySno(478538u);
+	public SnoPower HaloOfKarini => SnoData.Powers.GetBySno(478538u);
 
-	public ISnoPower HammerJammers => SnoData.Powers.GetBySno(446502u);
+	public SnoPower HammerJammers => SnoData.Powers.GetBySno(446502u);
 
-	public ISnoPower HandOfTheProphet => SnoData.Powers.GetBySno(318377u);
+	public SnoPower HandOfTheProphet => SnoData.Powers.GetBySno(318377u);
 
-	public ISnoPower HarringtonWaistguard => SnoData.Powers.GetBySno(318881u);
+	public SnoPower HarringtonWaistguard => SnoData.Powers.GetBySno(318881u);
 
-	public ISnoPower HauntedVisions => SnoData.Powers.GetBySno(484309u);
+	public SnoPower HauntedVisions => SnoData.Powers.GetBySno(484309u);
 
-	public ISnoPower HauntingGirdle => SnoData.Powers.GetBySno(434966u);
+	public SnoPower HauntingGirdle => SnoData.Powers.GetBySno(434966u);
 
-	public ISnoPower HauntOfVaxo => SnoData.Powers.GetBySno(318782u);
+	public SnoPower HauntOfVaxo => SnoData.Powers.GetBySno(318782u);
 
-	public ISnoPower HeartOfIron => SnoData.Powers.GetBySno(446615u);
+	public SnoPower HeartOfIron => SnoData.Powers.GetBySno(446615u);
 
-	public ISnoPower HellcatWaistguard => SnoData.Powers.GetBySno(454934u);
+	public SnoPower HellcatWaistguard => SnoData.Powers.GetBySno(454934u);
 
-	public ISnoPower Hellrack => SnoData.Powers.GetBySno(247577u);
+	public SnoPower Hellrack => SnoData.Powers.GetBySno(247577u);
 
-	public ISnoPower Hellskull => SnoData.Powers.GetBySno(318891u);
+	public SnoPower Hellskull => SnoData.Powers.GetBySno(318891u);
 
-	public ISnoPower HenrisPerquisition => SnoData.Powers.GetBySno(440457u);
+	public SnoPower HenrisPerquisition => SnoData.Powers.GetBySno(440457u);
 
-	public ISnoPower HergbrashsBinding => SnoData.Powers.GetBySno(449048u);
+	public SnoPower HergbrashsBinding => SnoData.Powers.GetBySno(449048u);
 
-	public ISnoPower HexingPantsOfMrYan => SnoData.Powers.GetBySno(318817u);
+	public SnoPower HexingPantsOfMrYan => SnoData.Powers.GetBySno(318817u);
 
-	public ISnoPower HillenbrandsTrainingSword => SnoData.Powers.GetBySno(359604u);
+	public SnoPower HillenbrandsTrainingSword => SnoData.Powers.GetBySno(359604u);
 
-	public ISnoPower HolyPointShot => SnoData.Powers.GetBySno(484313u);
+	public SnoPower HolyPointShot => SnoData.Powers.GetBySno(484313u);
 
-	public ISnoPower HomingPads => SnoData.Powers.GetBySno(318801u);
+	public SnoPower HomingPads => SnoData.Powers.GetBySno(318801u);
 
-	public ISnoPower Homunculus => SnoData.Powers.GetBySno(374670u);
+	public SnoPower Homunculus => SnoData.Powers.GetBySno(374670u);
 
-	public ISnoPower HuntersWrath => SnoData.Powers.GetBySno(440743u);
+	public SnoPower HuntersWrath => SnoData.Powers.GetBySno(440743u);
 
-	public ISnoPower HwojWrap => SnoData.Powers.GetBySno(318800u);
+	public SnoPower HwojWrap => SnoData.Powers.GetBySno(318800u);
 
-	public ISnoPower IceClimbers => SnoData.Powers.GetBySno(318741u);
+	public SnoPower IceClimbers => SnoData.Powers.GetBySno(318741u);
 
-	public ISnoPower IncenseTorchOfTheGrandTemple => SnoData.Powers.GetBySno(478473u);
+	public SnoPower IncenseTorchOfTheGrandTemple => SnoData.Powers.GetBySno(478473u);
 
-	public ISnoPower Ingeom => SnoData.Powers.GetBySno(402458u);
+	public SnoPower Ingeom => SnoData.Powers.GetBySno(402458u);
 
-	public ISnoPower InviolableFaith => SnoData.Powers.GetBySno(318894u);
+	public SnoPower InviolableFaith => SnoData.Powers.GetBySno(318894u);
 
-	public ISnoPower IronRose => SnoData.Powers.GetBySno(487652u);
+	public SnoPower IronRose => SnoData.Powers.GetBySno(487652u);
 
-	public ISnoPower IrontoeMudsputters => SnoData.Powers.GetBySno(318877u);
+	public SnoPower IrontoeMudsputters => SnoData.Powers.GetBySno(318877u);
 
-	public ISnoPower IvoryTower => SnoData.Powers.GetBySno(430683u);
+	public SnoPower IvoryTower => SnoData.Powers.GetBySno(430683u);
 
-	public ISnoPower JacesHammerOfVigilance => SnoData.Powers.GetBySno(318851u);
+	public SnoPower JacesHammerOfVigilance => SnoData.Powers.GetBySno(318851u);
 
-	public ISnoPower JangsEnvelopment => SnoData.Powers.GetBySno(318795u);
+	public SnoPower JangsEnvelopment => SnoData.Powers.GetBySno(318795u);
 
-	public ISnoPower Jawbreaker => SnoData.Powers.GetBySno(318432u);
+	public SnoPower Jawbreaker => SnoData.Powers.GetBySno(318432u);
 
-	public ISnoPower Jekangbord => SnoData.Powers.GetBySno(478514u);
+	public SnoPower Jekangbord => SnoData.Powers.GetBySno(478514u);
 
-	public ISnoPower JeramsBracers => SnoData.Powers.GetBySno(441278u);
+	public SnoPower JeramsBracers => SnoData.Powers.GetBySno(441278u);
 
-	public ISnoPower JohannasArgument => SnoData.Powers.GetBySno(436430u);
+	public SnoPower JohannasArgument => SnoData.Powers.GetBySno(436430u);
 
-	public ISnoPower JusticeLantern => SnoData.Powers.GetBySno(446565u);
+	public SnoPower JusticeLantern => SnoData.Powers.GetBySno(446565u);
 
-	public ISnoPower JustiniansMercy => SnoData.Powers.GetBySno(318895u);
+	public SnoPower JustiniansMercy => SnoData.Powers.GetBySno(318895u);
 
-	public ISnoPower KarleisPoint => SnoData.Powers.GetBySno(478484u);
+	public SnoPower KarleisPoint => SnoData.Powers.GetBySno(478484u);
 
-	public ISnoPower KassarsRetribution => SnoData.Powers.GetBySno(359538u);
+	public SnoPower KassarsRetribution => SnoData.Powers.GetBySno(359538u);
 
-	public ISnoPower KekegisUnbreakableSpirit => SnoData.Powers.GetBySno(318751u);
+	public SnoPower KekegisUnbreakableSpirit => SnoData.Powers.GetBySno(318751u);
 
-	public ISnoPower KhassettsCordOfRighteousness => SnoData.Powers.GetBySno(451238u);
+	public SnoPower KhassettsCordOfRighteousness => SnoData.Powers.GetBySno(451238u);
 
-	public ISnoPower KmarTenclip => SnoData.Powers.GetBySno(318423u);
+	public SnoPower KmarTenclip => SnoData.Powers.GetBySno(318423u);
 
-	public ISnoPower KredesFlame => SnoData.Powers.GetBySno(318865u);
+	public SnoPower KredesFlame => SnoData.Powers.GetBySno(318865u);
 
-	public ISnoPower KrelmsBuffBelt => SnoData.Powers.GetBySno(359602u);
+	public SnoPower KrelmsBuffBelt => SnoData.Powers.GetBySno(359602u);
 
-	public ISnoPower KrelmsBuffBracers => SnoData.Powers.GetBySno(359591u);
+	public SnoPower KrelmsBuffBracers => SnoData.Powers.GetBySno(359591u);
 
-	public ISnoPower Kridershot => SnoData.Powers.GetBySno(318379u);
+	public SnoPower Kridershot => SnoData.Powers.GetBySno(318379u);
 
-	public ISnoPower KrysbinsSentence => SnoData.Powers.GetBySno(475241u);
+	public SnoPower KrysbinsSentence => SnoData.Powers.GetBySno(475241u);
 
-	public ISnoPower KymbosGold => SnoData.Powers.GetBySno(359597u);
+	public SnoPower KymbosGold => SnoData.Powers.GetBySno(359597u);
 
-	public ISnoPower KyoshirosBlade => SnoData.Powers.GetBySno(447368u);
+	public SnoPower KyoshirosBlade => SnoData.Powers.GetBySno(447368u);
 
-	public ISnoPower KyoshirosSoul => SnoData.Powers.GetBySno(447130u);
+	public SnoPower KyoshirosSoul => SnoData.Powers.GetBySno(447130u);
 
-	public ISnoPower LakumbasOrnament => SnoData.Powers.GetBySno(486131u);
+	public SnoPower LakumbasOrnament => SnoData.Powers.GetBySno(486131u);
 
-	public ISnoPower Lamentation => SnoData.Powers.GetBySno(483792u);
+	public SnoPower Lamentation => SnoData.Powers.GetBySno(483792u);
 
-	public ISnoPower LastBreath => SnoData.Powers.GetBySno(447030u);
+	public SnoPower LastBreath => SnoData.Powers.GetBySno(447030u);
 
-	public ISnoPower LefebvresSoliloquy => SnoData.Powers.GetBySno(449236u);
+	public SnoPower LefebvresSoliloquy => SnoData.Powers.GetBySno(449236u);
 
-	public ISnoPower LegersDisdain => SnoData.Powers.GetBySno(476696u);
+	public SnoPower LegersDisdain => SnoData.Powers.GetBySno(476696u);
 
-	public ISnoPower LeonineBowOfHashir => SnoData.Powers.GetBySno(484293u);
+	public SnoPower LeonineBowOfHashir => SnoData.Powers.GetBySno(484293u);
 
-	public ISnoPower LiannasWings => SnoData.Powers.GetBySno(447696u);
+	public SnoPower LiannasWings => SnoData.Powers.GetBySno(447696u);
 
-	public ISnoPower LightOfGrace => SnoData.Powers.GetBySno(318855u);
+	public SnoPower LightOfGrace => SnoData.Powers.GetBySno(318855u);
 
-	public ISnoPower LionsClaw => SnoData.Powers.GetBySno(402451u);
+	public SnoPower LionsClaw => SnoData.Powers.GetBySno(402451u);
 
-	public ISnoPower LordGreenstonesFan => SnoData.Powers.GetBySno(445274u);
+	public SnoPower LordGreenstonesFan => SnoData.Powers.GetBySno(445274u);
 
-	public ISnoPower LornellesSunstone => SnoData.Powers.GetBySno(475244u);
+	public SnoPower LornellesSunstone => SnoData.Powers.GetBySno(475244u);
 
-	public ISnoPower LostTime => SnoData.Powers.GetBySno(476684u);
+	public SnoPower LostTime => SnoData.Powers.GetBySno(476684u);
 
-	public ISnoPower LutSocks => SnoData.Powers.GetBySno(318810u);
+	public SnoPower LutSocks => SnoData.Powers.GetBySno(318810u);
 
-	public ISnoPower MadawcsSorrow => SnoData.Powers.GetBySno(318744u);
+	public SnoPower MadawcsSorrow => SnoData.Powers.GetBySno(318744u);
 
-	public ISnoPower Madstone => SnoData.Powers.GetBySno(402540u);
+	public SnoPower Madstone => SnoData.Powers.GetBySno(402540u);
 
-	public ISnoPower Magefist => SnoData.Powers.GetBySno(451166u);
+	public SnoPower Magefist => SnoData.Powers.GetBySno(451166u);
 
-	public ISnoPower MalothsFocus => SnoData.Powers.GetBySno(246780u);
+	public SnoPower MalothsFocus => SnoData.Powers.GetBySno(246780u);
 
-	public ISnoPower MaltoriusPetrifiedSpike => SnoData.Powers.GetBySno(475246u);
+	public SnoPower MaltoriusPetrifiedSpike => SnoData.Powers.GetBySno(475246u);
 
-	public ISnoPower ManaldHeal => SnoData.Powers.GetBySno(454930u);
+	public SnoPower ManaldHeal => SnoData.Powers.GetBySno(454930u);
 
-	public ISnoPower Manticore => SnoData.Powers.GetBySno(478483u);
+	public SnoPower Manticore => SnoData.Powers.GetBySno(478483u);
 
-	public ISnoPower MantleOfChanneling => SnoData.Powers.GetBySno(446640u);
+	public SnoPower MantleOfChanneling => SnoData.Powers.GetBySno(446640u);
 
-	public ISnoPower MarasKaleidoscope => SnoData.Powers.GetBySno(318719u);
+	public SnoPower MarasKaleidoscope => SnoData.Powers.GetBySno(318719u);
 
-	public ISnoPower MaskOfJeram => SnoData.Powers.GetBySno(318411u);
+	public SnoPower MaskOfJeram => SnoData.Powers.GetBySno(318411u);
 
-	public ISnoPower MaskOfScarletDeath => SnoData.Powers.GetBySno(476581u);
+	public SnoPower MaskOfScarletDeath => SnoData.Powers.GetBySno(476581u);
 
-	public ISnoPower Maximus => SnoData.Powers.GetBySno(364317u);
+	public SnoPower Maximus => SnoData.Powers.GetBySno(364317u);
 
-	public ISnoPower MesserschmidtsReaver => SnoData.Powers.GetBySno(483522u);
+	public SnoPower MesserschmidtsReaver => SnoData.Powers.GetBySno(483522u);
 
-	public ISnoPower Mirrorball => SnoData.Powers.GetBySno(487928u);
+	public SnoPower Mirrorball => SnoData.Powers.GetBySno(487928u);
 
-	public ISnoPower MoonlightWard => SnoData.Powers.GetBySno(364343u);
+	public SnoPower MoonlightWard => SnoData.Powers.GetBySno(364343u);
 
-	public ISnoPower MordullusPromise => SnoData.Powers.GetBySno(447029u);
+	public SnoPower MordullusPromise => SnoData.Powers.GetBySno(447029u);
 
-	public ISnoPower MoribundGauntlets => SnoData.Powers.GetBySno(476589u);
+	public SnoPower MoribundGauntlets => SnoData.Powers.GetBySno(476589u);
 
-	public ISnoPower MorticksBrace => SnoData.Powers.GetBySno(430135u);
+	public SnoPower MorticksBrace => SnoData.Powers.GetBySno(430135u);
 
-	public ISnoPower MykensBallOfHate => SnoData.Powers.GetBySno(318775u);
+	public SnoPower MykensBallOfHate => SnoData.Powers.GetBySno(318775u);
 
-	public ISnoPower Nagelring => SnoData.Powers.GetBySno(402460u);
+	public SnoPower Nagelring => SnoData.Powers.GetBySno(402460u);
 
-	public ISnoPower NayrsBlackDeath => SnoData.Powers.GetBySno(476587u);
+	public SnoPower NayrsBlackDeath => SnoData.Powers.GetBySno(476587u);
 
-	public ISnoPower NemesisBracers => SnoData.Powers.GetBySno(318820u);
+	public SnoPower NemesisBracers => SnoData.Powers.GetBySno(318820u);
 
-	public ISnoPower NilfursBoast => SnoData.Powers.GetBySno(478554u);
+	public SnoPower NilfursBoast => SnoData.Powers.GetBySno(478554u);
 
-	public ISnoPower Oathkeeper => SnoData.Powers.GetBySno(447372u);
+	public SnoPower Oathkeeper => SnoData.Powers.GetBySno(447372u);
 
-	public ISnoPower ObsidianRingOfTheZodiac => SnoData.Powers.GetBySno(402459u);
+	public SnoPower ObsidianRingOfTheZodiac => SnoData.Powers.GetBySno(402459u);
 
-	public ISnoPower OculusRing => SnoData.Powers.GetBySno(402461u);
+	public SnoPower OculusRing => SnoData.Powers.GetBySno(402461u);
 
-	public ISnoPower OdynSon => SnoData.Powers.GetBySno(364325u);
+	public SnoPower OdynSon => SnoData.Powers.GetBySno(364325u);
 
-	public ISnoPower OdysseysEnd => SnoData.Powers.GetBySno(484297u);
+	public SnoPower OdysseysEnd => SnoData.Powers.GetBySno(484297u);
 
-	public ISnoPower Omnislash => SnoData.Powers.GetBySno(430682u);
+	public SnoPower Omnislash => SnoData.Powers.GetBySno(430682u);
 
-	public ISnoPower OmrynsChain => SnoData.Powers.GetBySno(423229u);
+	public SnoPower OmrynsChain => SnoData.Powers.GetBySno(423229u);
 
-	public ISnoPower OrbOfInfiniteDepth => SnoData.Powers.GetBySno(478481u);
+	public SnoPower OrbOfInfiniteDepth => SnoData.Powers.GetBySno(478481u);
 
-	public ISnoPower PigSticker => SnoData.Powers.GetBySno(245836u);
+	public SnoPower PigSticker => SnoData.Powers.GetBySno(245836u);
 
-	public ISnoPower PintosPride => SnoData.Powers.GetBySno(447295u);
+	public SnoPower PintosPride => SnoData.Powers.GetBySno(447295u);
 
-	public ISnoPower PoxFaulds => SnoData.Powers.GetBySno(434009u);
+	public SnoPower PoxFaulds => SnoData.Powers.GetBySno(434009u);
 
-	public ISnoPower PrideOfCassius => SnoData.Powers.GetBySno(318419u);
+	public SnoPower PrideOfCassius => SnoData.Powers.GetBySno(318419u);
 
-	public ISnoPower PrimordialSoul => SnoData.Powers.GetBySno(448998u);
+	public SnoPower PrimordialSoul => SnoData.Powers.GetBySno(448998u);
 
-	public ISnoPower PromiseOfGlory => SnoData.Powers.GetBySno(318871u);
+	public SnoPower PromiseOfGlory => SnoData.Powers.GetBySno(318871u);
 
-	public ISnoPower PusSpitter => SnoData.Powers.GetBySno(364335u);
+	public SnoPower PusSpitter => SnoData.Powers.GetBySno(364335u);
 
-	public ISnoPower PuzzleRing => SnoData.Powers.GetBySno(318375u);
+	public SnoPower PuzzleRing => SnoData.Powers.GetBySno(318375u);
 
-	public ISnoPower Quetzalcoatl => SnoData.Powers.GetBySno(318796u);
+	public SnoPower Quetzalcoatl => SnoData.Powers.GetBySno(318796u);
 
-	public ISnoPower RabidStrike => SnoData.Powers.GetBySno(486099u);
+	public SnoPower RabidStrike => SnoData.Powers.GetBySno(486099u);
 
-	public ISnoPower RakoffsGlassOfLife => SnoData.Powers.GetBySno(318410u);
+	public SnoPower RakoffsGlassOfLife => SnoData.Powers.GetBySno(318410u);
 
-	public ISnoPower RanslorsFolly => SnoData.Powers.GetBySno(478491u);
+	public SnoPower RanslorsFolly => SnoData.Powers.GetBySno(478491u);
 
-	public ISnoPower RazethsVolition => SnoData.Powers.GetBySno(484311u);
+	public SnoPower RazethsVolition => SnoData.Powers.GetBySno(484311u);
 
-	public ISnoPower RazorStrop => SnoData.Powers.GetBySno(318241u);
+	public SnoPower RazorStrop => SnoData.Powers.GetBySno(318241u);
 
-	public ISnoPower RechelsRingOfLarceny => SnoData.Powers.GetBySno(318870u);
+	public SnoPower RechelsRingOfLarceny => SnoData.Powers.GetBySno(318870u);
 
-	public ISnoPower ReilenasShadowhook => SnoData.Powers.GetBySno(475253u);
+	public SnoPower ReilenasShadowhook => SnoData.Powers.GetBySno(475253u);
 
-	public ISnoPower RelicOfAkarat => SnoData.Powers.GetBySno(318377u);
+	public SnoPower RelicOfAkarat => SnoData.Powers.GetBySno(318377u);
 
-	public ISnoPower Remorseless => SnoData.Powers.GetBySno(483793u);
+	public SnoPower Remorseless => SnoData.Powers.GetBySno(483793u);
 
-	public ISnoPower RequiemCereplate => SnoData.Powers.GetBySno(476579u);
+	public SnoPower RequiemCereplate => SnoData.Powers.GetBySno(476579u);
 
-	public ISnoPower RhenhoFlayer => SnoData.Powers.GetBySno(318812u);
+	public SnoPower RhenhoFlayer => SnoData.Powers.GetBySno(318812u);
 
-	public ISnoPower RibaldEtchings => SnoData.Powers.GetBySno(318377u);
+	public SnoPower RibaldEtchings => SnoData.Powers.GetBySno(318377u);
 
-	public ISnoPower Rimeheart => SnoData.Powers.GetBySno(318864u);
+	public SnoPower Rimeheart => SnoData.Powers.GetBySno(318864u);
 
-	public ISnoPower RingOfEmptiness => SnoData.Powers.GetBySno(445694u);
+	public SnoPower RingOfEmptiness => SnoData.Powers.GetBySno(445694u);
 
-	public ISnoPower RiveraDancers => SnoData.Powers.GetBySno(447043u);
+	public SnoPower RiveraDancers => SnoData.Powers.GetBySno(447043u);
 
-	public ISnoPower RogarsHugeStone => SnoData.Powers.GetBySno(318861u);
+	public SnoPower RogarsHugeStone => SnoData.Powers.GetBySno(318861u);
 
-	public ISnoPower SacredHarness => SnoData.Powers.GetBySno(440434u);
+	public SnoPower SacredHarness => SnoData.Powers.GetBySno(440434u);
 
-	public ISnoPower SacredHarvester => SnoData.Powers.GetBySno(410217u);
+	public SnoPower SacredHarvester => SnoData.Powers.GetBySno(410217u);
 
-	public ISnoPower SaffronWrap => SnoData.Powers.GetBySno(454918u);
+	public SnoPower SaffronWrap => SnoData.Powers.GetBySno(454918u);
 
-	public ISnoPower SashOfKnives => SnoData.Powers.GetBySno(434038u);
+	public SnoPower SashOfKnives => SnoData.Powers.GetBySno(434038u);
 
-	public ISnoPower Scarbringer => SnoData.Powers.GetBySno(478474u);
+	public SnoPower Scarbringer => SnoData.Powers.GetBySno(478474u);
 
-	public ISnoPower SchaefersHammer => SnoData.Powers.GetBySno(434033u);
+	public SnoPower SchaefersHammer => SnoData.Powers.GetBySno(434033u);
 
-	public ISnoPower Scourge => SnoData.Powers.GetBySno(364321u);
+	public SnoPower Scourge => SnoData.Powers.GetBySno(364321u);
 
-	public ISnoPower Scrimshaw => SnoData.Powers.GetBySno(484603u);
+	public SnoPower Scrimshaw => SnoData.Powers.GetBySno(484603u);
 
-	public ISnoPower ScytheOfTheCycle => SnoData.Powers.GetBySno(476586u);
+	public SnoPower ScytheOfTheCycle => SnoData.Powers.GetBySno(476586u);
 
-	public ISnoPower SeborsNightmare => SnoData.Powers.GetBySno(434039u);
+	public SnoPower SeborsNightmare => SnoData.Powers.GetBySno(434039u);
 
-	public ISnoPower SerpentsSparker => SnoData.Powers.GetBySno(484117u);
+	public SnoPower SerpentsSparker => SnoData.Powers.GetBySno(484117u);
 
-	public ISnoPower Sever => SnoData.Powers.GetBySno(249967u);
+	public SnoPower Sever => SnoData.Powers.GetBySno(249967u);
 
-	public ISnoPower ShardOfHate => SnoData.Powers.GetBySno(359587u);
+	public SnoPower ShardOfHate => SnoData.Powers.GetBySno(359587u);
 
-	public ISnoPower ShieldOfFury => SnoData.Powers.GetBySno(446142u);
+	public SnoPower ShieldOfFury => SnoData.Powers.GetBySno(446142u);
 
-	public ISnoPower ShiMizusHaori => SnoData.Powers.GetBySno(318779u);
+	public SnoPower ShiMizusHaori => SnoData.Powers.GetBySno(318779u);
 
-	public ISnoPower ShukranisTriumph => SnoData.Powers.GetBySno(486132u);
+	public SnoPower ShukranisTriumph => SnoData.Powers.GetBySno(486132u);
 
-	public ISnoPower SinSeekers => SnoData.Powers.GetBySno(483505u);
+	public SnoPower SinSeekers => SnoData.Powers.GetBySno(483505u);
 
-	public ISnoPower SkeletonKey => SnoData.Powers.GetBySno(318835u);
+	public SnoPower SkeletonKey => SnoData.Powers.GetBySno(318835u);
 
-	public ISnoPower SkularsSalvation => SnoData.Powers.GetBySno(486949u);
+	public SnoPower SkularsSalvation => SnoData.Powers.GetBySno(486949u);
 
-	public ISnoPower SkullGrasp => SnoData.Powers.GetBySno(451160u);
+	public SnoPower SkullGrasp => SnoData.Powers.GetBySno(451160u);
 
-	public ISnoPower SkullOfResonance => SnoData.Powers.GetBySno(318773u);
+	public SnoPower SkullOfResonance => SnoData.Powers.GetBySno(318773u);
 
-	public ISnoPower Skycutter => SnoData.Powers.GetBySno(364315u);
+	public SnoPower Skycutter => SnoData.Powers.GetBySno(364315u);
 
-	public ISnoPower SkySplitter => SnoData.Powers.GetBySno(433993u);
+	public SnoPower SkySplitter => SnoData.Powers.GetBySno(433993u);
 
-	public ISnoPower Skywarden => SnoData.Powers.GetBySno(359550u);
+	public SnoPower Skywarden => SnoData.Powers.GetBySno(359550u);
 
-	public ISnoPower SlipkasLetterOpener => SnoData.Powers.GetBySno(359604u);
+	public SnoPower SlipkasLetterOpener => SnoData.Powers.GetBySno(359604u);
 
-	public ISnoPower SloraksMadness => SnoData.Powers.GetBySno(248686u);
+	public SnoPower SloraksMadness => SnoData.Powers.GetBySno(248686u);
 
-	public ISnoPower SmokingThurible => SnoData.Powers.GetBySno(318835u);
+	public SnoPower SmokingThurible => SnoData.Powers.GetBySno(318835u);
 
-	public ISnoPower Solanium => SnoData.Powers.GetBySno(318873u);
+	public SnoPower Solanium => SnoData.Powers.GetBySno(318873u);
 
-	public ISnoPower SpauldersOfZakara => SnoData.Powers.GetBySno(318858u);
+	public SnoPower SpauldersOfZakara => SnoData.Powers.GetBySno(318858u);
 
-	public ISnoPower SpearOfJairo => SnoData.Powers.GetBySno(475254u);
+	public SnoPower SpearOfJairo => SnoData.Powers.GetBySno(475254u);
 
-	public ISnoPower SpinesOfSeethingHatred => SnoData.Powers.GetBySno(359606u);
+	public SnoPower SpinesOfSeethingHatred => SnoData.Powers.GetBySno(359606u);
 
-	public ISnoPower SpiritGuards => SnoData.Powers.GetBySno(430289u);
+	public SnoPower SpiritGuards => SnoData.Powers.GetBySno(430289u);
 
-	public ISnoPower SquirtsNecklace => SnoData.Powers.GetBySno(483552u);
+	public SnoPower SquirtsNecklace => SnoData.Powers.GetBySno(483552u);
 
-	public ISnoPower StaffOfChiroptera => SnoData.Powers.GetBySno(478487u);
+	public SnoPower StaffOfChiroptera => SnoData.Powers.GetBySno(478487u);
 
-	public ISnoPower StalgardsDecimator => SnoData.Powers.GetBySno(318412u);
+	public SnoPower StalgardsDecimator => SnoData.Powers.GetBySno(318412u);
 
-	public ISnoPower Standoff => SnoData.Powers.GetBySno(446592u);
+	public SnoPower Standoff => SnoData.Powers.GetBySno(446592u);
 
-	public ISnoPower StArchewsGage => SnoData.Powers.GetBySno(434007u);
+	public SnoPower StArchewsGage => SnoData.Powers.GetBySno(434007u);
 
-	public ISnoPower Starfire => SnoData.Powers.GetBySno(451242u);
+	public SnoPower Starfire => SnoData.Powers.GetBySno(451242u);
 
-	public ISnoPower StarmetalKukri => SnoData.Powers.GetBySno(318724u);
+	public SnoPower StarmetalKukri => SnoData.Powers.GetBySno(318724u);
 
-	public ISnoPower SteuartsGreaves => SnoData.Powers.GetBySno(475243u);
+	public SnoPower SteuartsGreaves => SnoData.Powers.GetBySno(475243u);
 
-	public ISnoPower StoneGauntlets => SnoData.Powers.GetBySno(483519u);
+	public SnoPower StoneGauntlets => SnoData.Powers.GetBySno(483519u);
 
-	public ISnoPower StoneOfJordan => SnoData.Powers.GetBySno(484282u);
+	public SnoPower StoneOfJordan => SnoData.Powers.GetBySno(484282u);
 
-	public ISnoPower StormCrow => SnoData.Powers.GetBySno(364338u);
+	public SnoPower StormCrow => SnoData.Powers.GetBySno(364338u);
 
-	public ISnoPower StringOfEars => SnoData.Powers.GetBySno(446541u);
+	public SnoPower StringOfEars => SnoData.Powers.GetBySno(446541u);
 
-	public ISnoPower StrongarmBracers => SnoData.Powers.GetBySno(318772u);
+	public SnoPower StrongarmBracers => SnoData.Powers.GetBySno(318772u);
 
-	public ISnoPower SublimeConviction => SnoData.Powers.GetBySno(318890u);
+	public SnoPower SublimeConviction => SnoData.Powers.GetBySno(318890u);
 
-	public ISnoPower SuWongDiviner => SnoData.Powers.GetBySno(442478u);
+	public SnoPower SuWongDiviner => SnoData.Powers.GetBySno(442478u);
 
-	public ISnoPower SwampLandWaders => SnoData.Powers.GetBySno(451161u);
+	public SnoPower SwampLandWaders => SnoData.Powers.GetBySno(451161u);
 
-	public ISnoPower Swiftmount => SnoData.Powers.GetBySno(359537u);
+	public SnoPower Swiftmount => SnoData.Powers.GetBySno(359537u);
 
-	public ISnoPower SwordOfIllWill => SnoData.Powers.GetBySno(446641u);
+	public SnoPower SwordOfIllWill => SnoData.Powers.GetBySno(446641u);
 
-	public ISnoPower TalismanOfAranoch => SnoData.Powers.GetBySno(318715u);
+	public SnoPower TalismanOfAranoch => SnoData.Powers.GetBySno(318715u);
 
-	public ISnoPower TaskerandTheo => SnoData.Powers.GetBySno(318731u);
+	public SnoPower TaskerandTheo => SnoData.Powers.GetBySno(318731u);
 
-	public ISnoPower TheBarber => SnoData.Powers.GetBySno(454932u);
+	public SnoPower TheBarber => SnoData.Powers.GetBySno(454932u);
 
-	public ISnoPower TheBurningAxeOfSankis => SnoData.Powers.GetBySno(246113u);
+	public SnoPower TheBurningAxeOfSankis => SnoData.Powers.GetBySno(246113u);
 
-	public ISnoPower TheButchersSickle => SnoData.Powers.GetBySno(248484u);
+	public SnoPower TheButchersSickle => SnoData.Powers.GetBySno(248484u);
 
-	public ISnoPower TheCloakOfTheGarwulf => SnoData.Powers.GetBySno(318300u);
+	public SnoPower TheCloakOfTheGarwulf => SnoData.Powers.GetBySno(318300u);
 
-	public ISnoPower TheCrudestBoots => SnoData.Powers.GetBySno(485724u);
+	public SnoPower TheCrudestBoots => SnoData.Powers.GetBySno(485724u);
 
-	public ISnoPower TheDaggerOfDarts => SnoData.Powers.GetBySno(483400u);
+	public SnoPower TheDaggerOfDarts => SnoData.Powers.GetBySno(483400u);
 
-	public ISnoPower TheDemonsDemise => SnoData.Powers.GetBySno(488008u);
+	public SnoPower TheDemonsDemise => SnoData.Powers.GetBySno(488008u);
 
-	public ISnoPower TheEssOfJohan => SnoData.Powers.GetBySno(318759u);
+	public SnoPower TheEssOfJohan => SnoData.Powers.GetBySno(318759u);
 
-	public ISnoPower TheExecutioner => SnoData.Powers.GetBySno(483516u);
+	public SnoPower TheExecutioner => SnoData.Powers.GetBySno(483516u);
 
-	public ISnoPower TheFinalWitness => SnoData.Powers.GetBySno(318884u);
+	public SnoPower TheFinalWitness => SnoData.Powers.GetBySno(318884u);
 
-	public ISnoPower TheFistOfAzTurrasq => SnoData.Powers.GetBySno(318433u);
+	public SnoPower TheFistOfAzTurrasq => SnoData.Powers.GetBySno(318433u);
 
-	public ISnoPower TheFlavorOfTime => SnoData.Powers.GetBySno(483515u);
+	public SnoPower TheFlavorOfTime => SnoData.Powers.GetBySno(483515u);
 
-	public ISnoPower TheFlowOfEternity => SnoData.Powers.GetBySno(451162u);
+	public SnoPower TheFlowOfEternity => SnoData.Powers.GetBySno(451162u);
 
-	public ISnoPower TheFurnace => SnoData.Powers.GetBySno(318753u);
+	public SnoPower TheFurnace => SnoData.Powers.GetBySno(318753u);
 
-	public ISnoPower TheGavelOfJudgment => SnoData.Powers.GetBySno(478490u);
+	public SnoPower TheGavelOfJudgment => SnoData.Powers.GetBySno(478490u);
 
-	public ISnoPower TheGidbinn => SnoData.Powers.GetBySno(364316u);
+	public SnoPower TheGidbinn => SnoData.Powers.GetBySno(364316u);
 
-	public ISnoPower TheGrandVizier => SnoData.Powers.GetBySno(478553u);
+	public SnoPower TheGrandVizier => SnoData.Powers.GetBySno(478553u);
 
-	public ISnoPower TheGrinReaper => SnoData.Powers.GetBySno(251572u);
+	public SnoPower TheGrinReaper => SnoData.Powers.GetBySno(251572u);
 
-	public ISnoPower TheJohnstone => SnoData.Powers.GetBySno(476583u);
+	public SnoPower TheJohnstone => SnoData.Powers.GetBySno(476583u);
 
-	public ISnoPower TheLawsOfSeph => SnoData.Powers.GetBySno(318428u);
+	public SnoPower TheLawsOfSeph => SnoData.Powers.GetBySno(318428u);
 
-	public ISnoPower TheMagistrate => SnoData.Powers.GetBySno(484116u);
+	public SnoPower TheMagistrate => SnoData.Powers.GetBySno(484116u);
 
-	public ISnoPower TheMindsEye => SnoData.Powers.GetBySno(318824u);
+	public SnoPower TheMindsEye => SnoData.Powers.GetBySno(318824u);
 
-	public ISnoPower TheMortalDrama => SnoData.Powers.GetBySno(484601u);
+	public SnoPower TheMortalDrama => SnoData.Powers.GetBySno(484601u);
 
-	public ISnoPower TheNinthCirriSatchel => SnoData.Powers.GetBySno(484295u);
+	public SnoPower TheNinthCirriSatchel => SnoData.Powers.GetBySno(484295u);
 
-	public ISnoPower TheOculus => SnoData.Powers.GetBySno(374308u);
+	public SnoPower TheOculus => SnoData.Powers.GetBySno(374308u);
 
-	public ISnoPower ThePaddle => SnoData.Powers.GetBySno(247777u);
+	public SnoPower ThePaddle => SnoData.Powers.GetBySno(247777u);
 
-	public ISnoPower TheRavensWing => SnoData.Powers.GetBySno(375037u);
+	public SnoPower TheRavensWing => SnoData.Powers.GetBySno(375037u);
 
-	public ISnoPower TheShameOfDelsere => SnoData.Powers.GetBySno(445427u);
+	public SnoPower TheShameOfDelsere => SnoData.Powers.GetBySno(445427u);
 
-	public ISnoPower TheShortMansFinger => SnoData.Powers.GetBySno(478488u);
+	public SnoPower TheShortMansFinger => SnoData.Powers.GetBySno(478488u);
 
-	public ISnoPower TheSmolderingCore => SnoData.Powers.GetBySno(487677u);
+	public SnoPower TheSmolderingCore => SnoData.Powers.GetBySno(487677u);
 
-	public ISnoPower TheSpiderQueensGrasp => SnoData.Powers.GetBySno(486133u);
+	public SnoPower TheSpiderQueensGrasp => SnoData.Powers.GetBySno(486133u);
 
-	public ISnoPower TheStarOfAzkaranth => SnoData.Powers.GetBySno(318716u);
+	public SnoPower TheStarOfAzkaranth => SnoData.Powers.GetBySno(318716u);
 
-	public ISnoPower TheSwami => SnoData.Powers.GetBySno(440336u);
+	public SnoPower TheSwami => SnoData.Powers.GetBySno(440336u);
 
-	public ISnoPower TheTallMansFinger => SnoData.Powers.GetBySno(318806u);
+	public SnoPower TheTallMansFinger => SnoData.Powers.GetBySno(318806u);
 
-	public ISnoPower TheThreeHundredthSpear => SnoData.Powers.GetBySno(487304u);
+	public SnoPower TheThreeHundredthSpear => SnoData.Powers.GetBySno(487304u);
 
-	public ISnoPower TheTormentor => SnoData.Powers.GetBySno(247572u);
+	public SnoPower TheTormentor => SnoData.Powers.GetBySno(247572u);
 
-	public ISnoPower TheTwistedSword => SnoData.Powers.GetBySno(484709u);
+	public SnoPower TheTwistedSword => SnoData.Powers.GetBySno(484709u);
 
-	public ISnoPower TheUndisputedChampion => SnoData.Powers.GetBySno(484245u);
+	public SnoPower TheUndisputedChampion => SnoData.Powers.GetBySno(484245u);
 
-	public ISnoPower ThingOfTheDeep => SnoData.Powers.GetBySno(446359u);
+	public SnoPower ThingOfTheDeep => SnoData.Powers.GetBySno(446359u);
 
-	public ISnoPower ThunderfuryBlessedBladeOfTheWindseeker => SnoData.Powers.GetBySno(318763u);
+	public SnoPower ThunderfuryBlessedBladeOfTheWindseeker => SnoData.Powers.GetBySno(318763u);
 
-	public ISnoPower ThundergodsVigor => SnoData.Powers.GetBySno(364341u);
+	public SnoPower ThundergodsVigor => SnoData.Powers.GetBySno(364341u);
 
-	public ISnoPower TiklandianVisage => SnoData.Powers.GetBySno(318774u);
+	public SnoPower TiklandianVisage => SnoData.Powers.GetBySno(318774u);
 
-	public ISnoPower TragOulCoils => SnoData.Powers.GetBySno(488009u);
+	public SnoPower TragOulCoils => SnoData.Powers.GetBySno(488009u);
 
-	public ISnoPower TragOulsCorrodedFang => SnoData.Powers.GetBySno(475250u);
+	public SnoPower TragOulsCorrodedFang => SnoData.Powers.GetBySno(475250u);
 
-	public ISnoPower Triumvirate => SnoData.Powers.GetBySno(434849u);
+	public SnoPower Triumvirate => SnoData.Powers.GetBySno(434849u);
 
-	public ISnoPower TzoKrinsGaze => SnoData.Powers.GetBySno(318811u);
+	public SnoPower TzoKrinsGaze => SnoData.Powers.GetBySno(318811u);
 
-	public ISnoPower UhkapianSerpent => SnoData.Powers.GetBySno(318721u);
+	public SnoPower UhkapianSerpent => SnoData.Powers.GetBySno(318721u);
 
-	public ISnoPower Unity => SnoData.Powers.GetBySno(318769u);
+	public SnoPower Unity => SnoData.Powers.GetBySno(318769u);
 
-	public ISnoPower UnrelentingPhalanx => SnoData.Powers.GetBySno(402444u);
+	public SnoPower UnrelentingPhalanx => SnoData.Powers.GetBySno(402444u);
 
-	public ISnoPower UnstableScepter => SnoData.Powers.GetBySno(478479u);
+	public SnoPower UnstableScepter => SnoData.Powers.GetBySno(478479u);
 
-	public ISnoPower UrsuasTroddenEffigy => SnoData.Powers.GetBySno(484655u);
+	public SnoPower UrsuasTroddenEffigy => SnoData.Powers.GetBySno(484655u);
 
-	public ISnoPower VadimsSurge => SnoData.Powers.GetBySno(359604u);
+	public SnoPower VadimsSurge => SnoData.Powers.GetBySno(359604u);
 
-	public ISnoPower VallasBequest => SnoData.Powers.GetBySno(436472u);
+	public SnoPower VallasBequest => SnoData.Powers.GetBySno(436472u);
 
-	public ISnoPower ValtheksRebuke => SnoData.Powers.GetBySno(484597u);
+	public SnoPower ValtheksRebuke => SnoData.Powers.GetBySno(484597u);
 
-	public ISnoPower VambracesOfSescheron => SnoData.Powers.GetBySno(447839u);
+	public SnoPower VambracesOfSescheron => SnoData.Powers.GetBySno(447839u);
 
-	public ISnoPower VelvetCamaral => SnoData.Powers.GetBySno(318740u);
+	public SnoPower VelvetCamaral => SnoData.Powers.GetBySno(318740u);
 
-	public ISnoPower VengefulWind => SnoData.Powers.GetBySno(483791u);
+	public SnoPower VengefulWind => SnoData.Powers.GetBySno(483791u);
 
-	public ISnoPower Vigilance => SnoData.Powers.GetBySno(367008u);
+	public SnoPower Vigilance => SnoData.Powers.GetBySno(367008u);
 
-	public ISnoPower VileHive => SnoData.Powers.GetBySno(445765u);
+	public SnoPower VileHive => SnoData.Powers.GetBySno(445765u);
 
-	public ISnoPower VileWard => SnoData.Powers.GetBySno(397783u);
+	public SnoPower VileWard => SnoData.Powers.GetBySno(397783u);
 
-	public ISnoPower VisageOfGiyua => SnoData.Powers.GetBySno(318385u);
+	public SnoPower VisageOfGiyua => SnoData.Powers.GetBySno(318385u);
 
-	public ISnoPower VisageOfGunes => SnoData.Powers.GetBySno(446655u);
+	public SnoPower VisageOfGunes => SnoData.Powers.GetBySno(446655u);
 
-	public ISnoPower VoosJuicer => SnoData.Powers.GetBySno(446969u);
+	public SnoPower VoosJuicer => SnoData.Powers.GetBySno(446969u);
 
-	public ISnoPower VoToyiasSpiker => SnoData.Powers.GetBySno(318886u);
+	public SnoPower VoToyiasSpiker => SnoData.Powers.GetBySno(318886u);
 
-	public ISnoPower WandOfWoh => SnoData.Powers.GetBySno(478480u);
+	public SnoPower WandOfWoh => SnoData.Powers.GetBySno(478480u);
 
-	public ISnoPower WarhelmOfKassar => SnoData.Powers.GetBySno(449049u);
+	public SnoPower WarhelmOfKassar => SnoData.Powers.GetBySno(449049u);
 
-	public ISnoPower WarstaffOfGeneralQuang => SnoData.Powers.GetBySno(318430u);
+	public SnoPower WarstaffOfGeneralQuang => SnoData.Powers.GetBySno(318430u);
 
-	public ISnoPower WarzechianArmguards => SnoData.Powers.GetBySno(318771u);
+	public SnoPower WarzechianArmguards => SnoData.Powers.GetBySno(318771u);
 
-	public ISnoPower WilkensReach => SnoData.Powers.GetBySno(447843u);
+	public SnoPower WilkensReach => SnoData.Powers.GetBySno(447843u);
 
-	public ISnoPower WinterFlurry => SnoData.Powers.GetBySno(484598u);
+	public SnoPower WinterFlurry => SnoData.Powers.GetBySno(484598u);
 
-	public ISnoPower WisdomOfKalan => SnoData.Powers.GetBySno(476686u);
+	public SnoPower WisdomOfKalan => SnoData.Powers.GetBySno(476686u);
 
-	public ISnoPower Wizardspike => SnoData.Powers.GetBySno(484600u);
+	public SnoPower Wizardspike => SnoData.Powers.GetBySno(484600u);
 
-	public ISnoPower WojahnniAssaulter => SnoData.Powers.GetBySno(483506u);
+	public SnoPower WojahnniAssaulter => SnoData.Powers.GetBySno(483506u);
 
-	public ISnoPower WonKhimLau => SnoData.Powers.GetBySno(484106u);
+	public SnoPower WonKhimLau => SnoData.Powers.GetBySno(484106u);
 
-	public ISnoPower Wormwood => SnoData.Powers.GetBySno(423238u);
+	public SnoPower Wormwood => SnoData.Powers.GetBySno(423238u);
 
-	public ISnoPower WrapsOfClarity => SnoData.Powers.GetBySno(441517u);
+	public SnoPower WrapsOfClarity => SnoData.Powers.GetBySno(441517u);
 
-	public ISnoPower Wyrdward => SnoData.Powers.GetBySno(434036u);
+	public SnoPower Wyrdward => SnoData.Powers.GetBySno(434036u);
 
-	public ISnoPower XephirianAmulet => SnoData.Powers.GetBySno(318718u);
+	public SnoPower XephirianAmulet => SnoData.Powers.GetBySno(318718u);
 
-	public ISnoPower YangsRecurve => SnoData.Powers.GetBySno(478485u);
+	public SnoPower YangsRecurve => SnoData.Powers.GetBySno(478485u);
 
-	public ISnoPower ZoeysSecret => SnoData.Powers.GetBySno(446639u);
+	public SnoPower ZoeysSecret => SnoData.Powers.GetBySno(446639u);
 
-	public ISnoPower Generic_1000MonsterFightMeteor { get; }
+	public SnoPower Generic_1000MonsterFightMeteor { get; }
 
-	public ISnoPower Generic_a1dunLeorBigFireGrate { get; }
+	public SnoPower Generic_a1dunLeorBigFireGrate { get; }
 
-	public ISnoPower Generic_a1dunLeorFireGutterfire { get; }
+	public SnoPower Generic_a1dunLeorFireGutterfire { get; }
 
-	public ISnoPower Generic_a1dunLeorHallwayBladeTrap { get; }
+	public SnoPower Generic_a1dunLeorHallwayBladeTrap { get; }
 
-	public ISnoPower Generic_a1dunleoricfireTrench { get; }
+	public SnoPower Generic_a1dunleoricfireTrench { get; }
 
-	public ISnoPower Generic_a1dunleoricfireTrench01 { get; }
+	public SnoPower Generic_a1dunleoricfireTrench01 { get; }
 
-	public ISnoPower Generic_a1dunleoricfireTrench02 { get; }
+	public SnoPower Generic_a1dunleoricfireTrench02 { get; }
 
-	public ISnoPower Generic_a2dunAqdActWoodPlatformDamage { get; }
+	public SnoPower Generic_a2dunAqdActWoodPlatformDamage { get; }
 
-	public ISnoPower Generic_a2dunCaveGoatmenDroppingLogTrapattack { get; }
+	public SnoPower Generic_a2dunCaveGoatmenDroppingLogTrapattack { get; }
 
-	public ISnoPower Generic_a2dunCaveLarva { get; }
+	public SnoPower Generic_a2dunCaveLarva { get; }
 
-	public ISnoPower Generic_a2dunCaveLarvaAOE { get; }
+	public SnoPower Generic_a2dunCaveLarvaAOE { get; }
 
-	public ISnoPower Generic_a2dunCaveSlimeGeyserA { get; }
+	public SnoPower Generic_a2dunCaveSlimeGeyserA { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerColdspawnAttack { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerColdspawnAttack { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerFire { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerFire { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerFirespawnAttack { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerFirespawnAttack { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerIceNova { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerIceNova { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerLightningpewpew { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerLightningpewpew { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerLightningspawnAttack { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerLightningspawnAttack { get; }
 
-	public ISnoPower Generic_a2dunZoltTeslaTowerPoisonspawnAttack { get; }
+	public SnoPower Generic_a2dunZoltTeslaTowerPoisonspawnAttack { get; }
 
-	public ISnoPower Generic_A2EvacuationBelialBomb { get; }
+	public SnoPower Generic_A2EvacuationBelialBomb { get; }
 
-	public ISnoPower Generic_a3battlefielddemonicforge { get; }
+	public SnoPower Generic_a3battlefielddemonicforge { get; }
 
-	public ISnoPower Generic_A3BattlefieldDemonMineAOE { get; }
+	public SnoPower Generic_A3BattlefieldDemonMineAOE { get; }
 
-	public ISnoPower Generic_a3dunbastionKeepGuardFireAtNothing { get; }
+	public SnoPower Generic_a3dunbastionKeepGuardFireAtNothing { get; }
 
-	public ISnoPower Generic_a3duncraterDemonClawBombA { get; }
+	public SnoPower Generic_a3duncraterDemonClawBombA { get; }
 
-	public ISnoPower Generic_a3dunCraterDemonClawBombAtrigger { get; }
+	public SnoPower Generic_a3dunCraterDemonClawBombAtrigger { get; }
 
-	public ISnoPower Generic_a3duncraterDemonGroundTrapGasChamber { get; }
+	public SnoPower Generic_a3duncraterDemonGroundTrapGasChamber { get; }
 
-	public ISnoPower Generic_a3duncraterDemonGroundTrapGasChamberFireOnly { get; }
+	public SnoPower Generic_a3duncraterDemonGroundTrapGasChamberFireOnly { get; }
 
-	public ISnoPower Generic_a3dunKeepBarrelStackShortDamage { get; }
+	public SnoPower Generic_a3dunKeepBarrelStackShortDamage { get; }
 
-	public ISnoPower Generic_a3dunKeepExplodingBarrelStunpower { get; }
+	public SnoPower Generic_a3dunKeepExplodingBarrelStunpower { get; }
 
-	public ISnoPower Generic_a3dunkeepfireTrench01 { get; }
+	public SnoPower Generic_a3dunkeepfireTrench01 { get; }
 
-	public ISnoPower Generic_a3dunkeepfireTrench02 { get; }
+	public SnoPower Generic_a3dunkeepfireTrench02 { get; }
 
-	public ISnoPower Generic_A3IntroCatapultAttack { get; }
+	public SnoPower Generic_A3IntroCatapultAttack { get; }
 
-	public ISnoPower Generic_a4dunGardenCorruptionMine { get; }
+	public SnoPower Generic_a4dunGardenCorruptionMine { get; }
 
-	public ISnoPower Generic_a4dunHeavenHellRiftFallingRocksA { get; }
+	public SnoPower Generic_a4dunHeavenHellRiftFallingRocksA { get; }
 
-	public ISnoPower Generic_a4dunHeavenHellRiftFallingRocksB { get; }
+	public SnoPower Generic_a4dunHeavenHellRiftFallingRocksB { get; }
 
-	public ISnoPower Generic_a4DunHellFissure { get; }
+	public SnoPower Generic_a4DunHellFissure { get; }
 
-	public ISnoPower Generic_a4dunSpireCorruptionGeyser { get; }
+	public SnoPower Generic_a4dunSpireCorruptionGeyser { get; }
 
-	public ISnoPower Generic_a4dunspirefirewall { get; }
+	public SnoPower Generic_a4dunspirefirewall { get; }
 
-	public ISnoPower Generic_a4dunspireSpikeTrap { get; }
+	public SnoPower Generic_a4dunspireSpikeTrap { get; }
 
-	public ISnoPower Generic_ActorDisabledBuff { get; }
+	public SnoPower Generic_ActorDisabledBuff { get; }
 
-	public ISnoPower Generic_ActorGhostedBuff { get; }
+	public SnoPower Generic_ActorGhostedBuff { get; }
 
-	public ISnoPower Generic_ActorInTownBuff { get; }
+	public SnoPower Generic_ActorInTownBuff { get; }
 
-	public ISnoPower Generic_ActorInvulBuff { get; }
+	public SnoPower Generic_ActorInvulBuff { get; }
 
-	public ISnoPower Generic_ActorLoadingBuff { get; }
+	public SnoPower Generic_ActorLoadingBuff { get; }
 
-	public ISnoPower Generic_Adriaevent47blast { get; }
+	public SnoPower Generic_Adriaevent47blast { get; }
 
-	public ISnoPower Generic_Adriaevent47projectile { get; }
+	public SnoPower Generic_Adriaevent47projectile { get; }
 
-	public ISnoPower Generic_AIBackpedal { get; }
+	public SnoPower Generic_AIBackpedal { get; }
 
-	public ISnoPower Generic_AIBackpedalOneShotThroughActors { get; }
+	public SnoPower Generic_AIBackpedalOneShotThroughActors { get; }
 
-	public ISnoPower Generic_AICircle { get; }
+	public SnoPower Generic_AICircle { get; }
 
-	public ISnoPower Generic_AICircleLong { get; }
+	public SnoPower Generic_AICircleLong { get; }
 
-	public ISnoPower Generic_AICircleStrafe { get; }
+	public SnoPower Generic_AICircleStrafe { get; }
 
-	public ISnoPower Generic_AICircleStrafeShort { get; }
+	public SnoPower Generic_AICircleStrafeShort { get; }
 
-	public ISnoPower Generic_AIClose { get; }
+	public SnoPower Generic_AIClose { get; }
 
-	public ISnoPower Generic_AICloseFar { get; }
+	public SnoPower Generic_AICloseFar { get; }
 
-	public ISnoPower Generic_AICloseFarther { get; }
+	public SnoPower Generic_AICloseFarther { get; }
 
-	public ISnoPower Generic_AICloseLong { get; }
+	public SnoPower Generic_AICloseLong { get; }
 
-	public ISnoPower Generic_AIEscortFollow { get; }
+	public SnoPower Generic_AIEscortFollow { get; }
 
-	public ISnoPower Generic_AIEvadeBuff { get; }
+	public SnoPower Generic_AIEvadeBuff { get; }
 
-	public ISnoPower Generic_AIFollow { get; }
+	public SnoPower Generic_AIFollow { get; }
 
-	public ISnoPower Generic_AIFollowClose { get; }
+	public SnoPower Generic_AIFollowClose { get; }
 
-	public ISnoPower Generic_AIFollowMeleeLead { get; }
+	public SnoPower Generic_AIFollowMeleeLead { get; }
 
-	public ISnoPower Generic_AIFollowMeleeLeadPet { get; }
+	public SnoPower Generic_AIFollowMeleeLeadPet { get; }
 
-	public ISnoPower Generic_AIFollowMeleeLeadPetFar { get; }
+	public SnoPower Generic_AIFollowMeleeLeadPetFar { get; }
 
-	public ISnoPower Generic_AIFollowPath { get; }
+	public SnoPower Generic_AIFollowPath { get; }
 
-	public ISnoPower Generic_AIFollowWithWalk { get; }
+	public SnoPower Generic_AIFollowWithWalk { get; }
 
-	public ISnoPower Generic_AIFollowWithWalkFar { get; }
+	public SnoPower Generic_AIFollowWithWalkFar { get; }
 
-	public ISnoPower Generic_AIFollowWithWalkNatural { get; }
+	public SnoPower Generic_AIFollowWithWalkNatural { get; }
 
-	public ISnoPower Generic_AIIdle { get; }
+	public SnoPower Generic_AIIdle { get; }
 
-	public ISnoPower Generic_AIIdleLong { get; }
+	public SnoPower Generic_AIIdleLong { get; }
 
-	public ISnoPower Generic_AIIdleShort { get; }
+	public SnoPower Generic_AIIdleShort { get; }
 
-	public ISnoPower Generic_AIOrbit { get; }
+	public SnoPower Generic_AIOrbit { get; }
 
-	public ISnoPower Generic_AIReturnToGuardObject { get; }
+	public SnoPower Generic_AIReturnToGuardObject { get; }
 
-	public ISnoPower Generic_AIReturnToPath { get; }
+	public SnoPower Generic_AIReturnToPath { get; }
 
-	public ISnoPower Generic_AIRunAway { get; }
+	public SnoPower Generic_AIRunAway { get; }
 
-	public ISnoPower Generic_AIRunAwayLong { get; }
+	public SnoPower Generic_AIRunAwayLong { get; }
 
-	public ISnoPower Generic_AIRunAwayShort { get; }
+	public SnoPower Generic_AIRunAwayShort { get; }
 
-	public ISnoPower Generic_AIRunAwayShortV2 { get; }
+	public SnoPower Generic_AIRunAwayShortV2 { get; }
 
-	public ISnoPower Generic_AIRunInFront { get; }
+	public SnoPower Generic_AIRunInFront { get; }
 
-	public ISnoPower Generic_AIRunInFrontGuaranteed { get; }
+	public SnoPower Generic_AIRunInFrontGuaranteed { get; }
 
-	public ISnoPower Generic_AIRunNearby { get; }
+	public SnoPower Generic_AIRunNearby { get; }
 
-	public ISnoPower Generic_AIRunNearbyGloam { get; }
+	public SnoPower Generic_AIRunNearbyGloam { get; }
 
-	public ISnoPower Generic_AIRunNearbyLong { get; }
+	public SnoPower Generic_AIRunNearbyLong { get; }
 
-	public ISnoPower Generic_AIRunNearbyShort { get; }
+	public SnoPower Generic_AIRunNearbyShort { get; }
 
-	public ISnoPower Generic_AIRunTo { get; }
+	public SnoPower Generic_AIRunTo { get; }
 
-	public ISnoPower Generic_AIRunToGuaranteed { get; }
+	public SnoPower Generic_AIRunToGuaranteed { get; }
 
-	public ISnoPower Generic_AIRunToGuaranteedSpider { get; }
+	public SnoPower Generic_AIRunToGuaranteedSpider { get; }
 
-	public ISnoPower Generic_AISprintInFrontGuaranteed { get; }
+	public SnoPower Generic_AISprintInFrontGuaranteed { get; }
 
-	public ISnoPower Generic_AISprintTo { get; }
+	public SnoPower Generic_AISprintTo { get; }
 
-	public ISnoPower Generic_AISprintToGuaranteed { get; }
+	public SnoPower Generic_AISprintToGuaranteed { get; }
 
-	public ISnoPower Generic_AIStrafe { get; }
+	public SnoPower Generic_AIStrafe { get; }
 
-	public ISnoPower Generic_AITownWalkToGuaranteed { get; }
+	public SnoPower Generic_AITownWalkToGuaranteed { get; }
 
-	public ISnoPower Generic_AIWalkInFront { get; }
+	public SnoPower Generic_AIWalkInFront { get; }
 
-	public ISnoPower Generic_AIWalkInFrontGuaranteed { get; }
+	public SnoPower Generic_AIWalkInFrontGuaranteed { get; }
 
-	public ISnoPower Generic_AIWalkTo { get; }
+	public SnoPower Generic_AIWalkTo { get; }
 
-	public ISnoPower Generic_AIWalkToGuaranteed { get; }
+	public SnoPower Generic_AIWalkToGuaranteed { get; }
 
-	public ISnoPower Generic_AIWander { get; }
+	public SnoPower Generic_AIWander { get; }
 
-	public ISnoPower Generic_AIWanderLong { get; }
+	public SnoPower Generic_AIWanderLong { get; }
 
-	public ISnoPower Generic_AIWanderMinion { get; }
+	public SnoPower Generic_AIWanderMinion { get; }
 
-	public ISnoPower Generic_AIWanderRun { get; }
+	public SnoPower Generic_AIWanderRun { get; }
 
-	public ISnoPower Generic_AIWandersuperLong { get; }
+	public SnoPower Generic_AIWandersuperLong { get; }
 
-	public ISnoPower Generic_AIWarnOthers { get; }
+	public SnoPower Generic_AIWarnOthers { get; }
 
-	public ISnoPower Generic_AncientSpearKnockback { get; }
+	public SnoPower Generic_AncientSpearKnockback { get; }
 
-	public ISnoPower Generic_AngelCorruptPiercingDash { get; }
+	public SnoPower Generic_AngelCorruptPiercingDash { get; }
 
-	public ISnoPower Generic_AnniversaryBuffEXPMF { get; }
+	public SnoPower Generic_AnniversaryBuffEXPMF { get; }
 
-	public ISnoPower Generic_AxeBadData { get; }
+	public SnoPower Generic_AxeBadData { get; }
 
-	public ISnoPower Generic_AxeOperateGizmo { get; }
+	public SnoPower Generic_AxeOperateGizmo { get; }
 
-	public ISnoPower Generic_AxeOperateNPC { get; }
+	public SnoPower Generic_AxeOperateNPC { get; }
 
-	public ISnoPower Generic_AzmodanAODDamage { get; }
+	public SnoPower Generic_AzmodanAODDamage { get; }
 
-	public ISnoPower Generic_AzmodanFallingCorpses { get; }
+	public SnoPower Generic_AzmodanFallingCorpses { get; }
 
-	public ISnoPower Generic_AzmodanGlobeOfAnnihilation { get; }
+	public SnoPower Generic_AzmodanGlobeOfAnnihilation { get; }
 
-	public ISnoPower Generic_AzmodanLaserAttack { get; }
+	public SnoPower Generic_AzmodanLaserAttack { get; }
 
-	public ISnoPower Generic_AzmodanMelee { get; }
+	public SnoPower Generic_AzmodanMelee { get; }
 
-	public ISnoPower Generic_AzmodanonDeath { get; }
+	public SnoPower Generic_AzmodanonDeath { get; }
 
-	public ISnoPower Generic_AzmodanPhase3Channel { get; }
+	public SnoPower Generic_AzmodanPhase3Channel { get; }
 
-	public ISnoPower Generic_AzmodanTaunt { get; }
+	public SnoPower Generic_AzmodanTaunt { get; }
 
-	public ISnoPower Generic_AzmodanTurning { get; }
+	public SnoPower Generic_AzmodanTurning { get; }
 
-	public ISnoPower Generic_BannerDrop { get; }
+	public SnoPower Generic_BannerDrop { get; }
 
-	public ISnoPower Generic_BannerDropPVP { get; }
+	public SnoPower Generic_BannerDropPVP { get; }
 
-	public ISnoPower Generic_BanterCooldown { get; }
+	public SnoPower Generic_BanterCooldown { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsBasicMelee { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsBasicMelee { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsCleave { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsCleave { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsFuriousCharge { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsFuriousCharge { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsLeap { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsLeap { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsSeismicSlam { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsSeismicSlam { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsWeaponThrow { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsWeaponThrow { get; }
 
-	public ISnoPower Generic_BarbarianCallOfTheAncientsWhirlwind { get; }
+	public SnoPower Generic_BarbarianCallOfTheAncientsWhirlwind { get; }
 
-	public ISnoPower Generic_BarbarianGroundStompEffect { get; }
+	public SnoPower Generic_BarbarianGroundStompEffect { get; }
 
-	public ISnoPower Generic_BarbarianLeapOLD { get; }
+	public SnoPower Generic_BarbarianLeapOLD { get; }
 
-	public ISnoPower Generic_BarbarianOverpowerCowKing { get; }
+	public SnoPower Generic_BarbarianOverpowerCowKing { get; }
 
-	public ISnoPower Generic_BarbarianRevengeBuff { get; }
+	public SnoPower Generic_BarbarianRevengeBuff { get; }
 
-	public ISnoPower Generic_BarbarianWhirlwindDustDevilsPassability { get; }
+	public SnoPower Generic_BarbarianWhirlwindDustDevilsPassability { get; }
 
-	public ISnoPower Generic_BareHandedPassive { get; }
+	public SnoPower Generic_BareHandedPassive { get; }
 
-	public ISnoPower Generic_BarrelExplodeInstant { get; }
+	public SnoPower Generic_BarrelExplodeInstant { get; }
 
-	public ISnoPower Generic_BeastCharge { get; }
+	public SnoPower Generic_BeastCharge { get; }
 
-	public ISnoPower Generic_BeastWeaponMeleeInstant { get; }
+	public SnoPower Generic_BeastWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_BelialArmProxy { get; }
+	public SnoPower Generic_BelialArmProxy { get; }
 
-	public ISnoPower Generic_BelialGroundPound { get; }
+	public SnoPower Generic_BelialGroundPound { get; }
 
-	public ISnoPower Generic_BelialLightningBreath { get; }
+	public SnoPower Generic_BelialLightningBreath { get; }
 
-	public ISnoPower Generic_BelialLightningStrikeEnrage { get; }
+	public SnoPower Generic_BelialLightningStrikeEnrage { get; }
 
-	public ISnoPower Generic_BelialLightningStrikev2 { get; }
+	public SnoPower Generic_BelialLightningStrikev2 { get; }
 
-	public ISnoPower Generic_BelialMelee { get; }
+	public SnoPower Generic_BelialMelee { get; }
 
-	public ISnoPower Generic_BelialMeleeReach { get; }
+	public SnoPower Generic_BelialMeleeReach { get; }
 
-	public ISnoPower Generic_BelialPhase3Buff { get; }
+	public SnoPower Generic_BelialPhase3Buff { get; }
 
-	public ISnoPower Generic_BelialRangedAttack { get; }
+	public SnoPower Generic_BelialRangedAttack { get; }
 
-	public ISnoPower Generic_BelialSprint { get; }
+	public SnoPower Generic_BelialSprint { get; }
 
-	public ISnoPower Generic_BelialSprintAway { get; }
+	public SnoPower Generic_BelialSprintAway { get; }
 
-	public ISnoPower Generic_BigRedCharge { get; }
+	public SnoPower Generic_BigRedCharge { get; }
 
-	public ISnoPower Generic_BigRedFireBreath { get; }
+	public SnoPower Generic_BigRedFireBreath { get; }
 
-	public ISnoPower Generic_BlockChance10 { get; }
+	public SnoPower Generic_BlockChance10 { get; }
 
-	public ISnoPower Generic_BodyGuardTeleport { get; }
+	public SnoPower Generic_BodyGuardTeleport { get; }
 
-	public ISnoPower Generic_BoneTurretMortarCast { get; }
+	public SnoPower Generic_BoneTurretMortarCast { get; }
 
-	public ISnoPower Generic_BountyGroundsBurrowOut { get; }
+	public SnoPower Generic_BountyGroundsBurrowOut { get; }
 
-	public ISnoPower Generic_BrickhouseArmShields { get; }
+	public SnoPower Generic_BrickhouseArmShields { get; }
 
-	public ISnoPower Generic_BrickhouseDestructionSetup { get; }
+	public SnoPower Generic_BrickhouseDestructionSetup { get; }
 
-	public ISnoPower Generic_BrickhouseEnrage { get; }
+	public SnoPower Generic_BrickhouseEnrage { get; }
 
-	public ISnoPower Generic_BrickhouseSlam { get; }
+	public SnoPower Generic_BrickhouseSlam { get; }
 
-	public ISnoPower Generic_BugWingsBuff { get; }
+	public SnoPower Generic_BugWingsBuff { get; }
 
-	public ISnoPower Generic_BurrowIn { get; }
+	public SnoPower Generic_BurrowIn { get; }
 
-	public ISnoPower Generic_BurrowInHidden { get; }
+	public SnoPower Generic_BurrowInHidden { get; }
 
-	public ISnoPower Generic_BurrowInSetup { get; }
+	public SnoPower Generic_BurrowInSetup { get; }
 
-	public ISnoPower Generic_BurrowInSetup2HSwing { get; }
+	public SnoPower Generic_BurrowInSetup2HSwing { get; }
 
-	public ISnoPower Generic_BurrowInSetupHidden { get; }
+	public SnoPower Generic_BurrowInSetupHidden { get; }
 
-	public ISnoPower Generic_BurrowInSetupStaff { get; }
+	public SnoPower Generic_BurrowInSetupStaff { get; }
 
-	public ISnoPower Generic_BurrowOut { get; }
+	public SnoPower Generic_BurrowOut { get; }
 
-	public ISnoPower Generic_BurrowOutNoFacing { get; }
+	public SnoPower Generic_BurrowOutNoFacing { get; }
 
-	public ISnoPower Generic_BurrowOutSetup { get; }
+	public SnoPower Generic_BurrowOutSetup { get; }
 
-	public ISnoPower Generic_BurrowStartBuff { get; }
+	public SnoPower Generic_BurrowStartBuff { get; }
 
-	public ISnoPower Generic_ButcherDamagingFire { get; }
+	public SnoPower Generic_ButcherDamagingFire { get; }
 
-	public ISnoPower Generic_ButcherFloorPanelFire { get; }
+	public SnoPower Generic_ButcherFloorPanelFire { get; }
 
-	public ISnoPower Generic_ButcherFrenzy { get; }
+	public SnoPower Generic_ButcherFrenzy { get; }
 
-	public ISnoPower Generic_ButcherFrenzyCustomLRBoss { get; }
+	public SnoPower Generic_ButcherFrenzyCustomLRBoss { get; }
 
-	public ISnoPower Generic_ButcherGrapplingHook { get; }
+	public SnoPower Generic_ButcherGrapplingHook { get; }
 
-	public ISnoPower Generic_ButcherOnDeath { get; }
+	public SnoPower Generic_ButcherOnDeath { get; }
 
-	public ISnoPower Generic_ButcherSlam { get; }
+	public SnoPower Generic_ButcherSlam { get; }
 
-	public ISnoPower Generic_ButcherSmash { get; }
+	public SnoPower Generic_ButcherSmash { get; }
 
-	public ISnoPower Generic_ButcherSpears { get; }
+	public SnoPower Generic_ButcherSpears { get; }
 
-	public ISnoPower Generic_ButcherTargetRanged { get; }
+	public SnoPower Generic_ButcherTargetRanged { get; }
 
-	public ISnoPower Generic_CainIntroSwing { get; }
+	public SnoPower Generic_CainIntroSwing { get; }
 
-	public ISnoPower Generic_CaldeumPoisonLaser { get; }
+	public SnoPower Generic_CaldeumPoisonLaser { get; }
 
-	public ISnoPower Generic_CalldownGrenade { get; }
+	public SnoPower Generic_CalldownGrenade { get; }
 
-	public ISnoPower Generic_CalloutCooldown { get; }
+	public SnoPower Generic_CalloutCooldown { get; }
 
-	public ISnoPower Generic_CameraFocusBuff { get; }
+	public SnoPower Generic_CameraFocusBuff { get; }
 
-	public ISnoPower Generic_CameraFocusPetBuff { get; }
+	public SnoPower Generic_CameraFocusPetBuff { get; }
 
-	public ISnoPower Generic_CannotDieDuringBuff { get; }
+	public SnoPower Generic_CannotDieDuringBuff { get; }
 
-	public ISnoPower Generic_caOutBoneYardsCollapsingBonesDamage { get; }
+	public SnoPower Generic_caOutBoneYardsCollapsingBonesDamage { get; }
 
-	public ISnoPower Generic_caOutOasisAttackPlantattack { get; }
+	public SnoPower Generic_caOutOasisAttackPlantattack { get; }
 
-	public ISnoPower Generic_CatapultAttack { get; }
+	public SnoPower Generic_CatapultAttack { get; }
 
-	public ISnoPower Generic_ChampionClone { get; }
+	public SnoPower Generic_ChampionClone { get; }
 
-	public ISnoPower Generic_ChampionTeleport { get; }
+	public SnoPower Generic_ChampionTeleport { get; }
 
-	public ISnoPower Generic_CleanupSummonsOnDeath { get; }
+	public SnoPower Generic_CleanupSummonsOnDeath { get; }
 
-	public ISnoPower Generic_CollectorsEditionBuff { get; }
+	public SnoPower Generic_CollectorsEditionBuff { get; }
 
-	public ISnoPower Generic_CommunityBuffLegacyOfNightmares { get; }
+	public SnoPower Generic_CommunityBuffLegacyOfNightmares { get; }
 
-	public ISnoPower Generic_CommunityBuffPandemonium { get; }
+	public SnoPower Generic_CommunityBuffPandemonium { get; }
 
-	public ISnoPower Generic_CommunityBuffShadowClones { get; }
+	public SnoPower Generic_CommunityBuffShadowClones { get; }
 
-	public ISnoPower Generic_CommunityBuffTriunesWill { get; }
+	public SnoPower Generic_CommunityBuffTriunesWill { get; }
 
-	public ISnoPower Generic_CommunityEventBuffEXPMF { get; }
+	public SnoPower Generic_CommunityEventBuffEXPMF { get; }
 
-	public ISnoPower Generic_CompanionBuff { get; }
+	public SnoPower Generic_CompanionBuff { get; }
 
-	public ISnoPower Generic_ConsolePowerGlobe { get; }
+	public SnoPower Generic_ConsolePowerGlobe { get; }
 
-	public ISnoPower Generic_ConsumablePotionBuffs { get; }
+	public SnoPower Generic_ConsumablePotionBuffs { get; }
 
-	public ISnoPower Generic_Cooldown { get; }
+	public SnoPower Generic_Cooldown { get; }
 
-	public ISnoPower Generic_CopiedVisualEffectsBuff { get; }
+	public SnoPower Generic_CopiedVisualEffectsBuff { get; }
 
-	public ISnoPower Generic_CoreEliteDropPod { get; }
+	public SnoPower Generic_CoreEliteDropPod { get; }
 
-	public ISnoPower Generic_CoreEliteDropPodBegin { get; }
+	public SnoPower Generic_CoreEliteDropPodBegin { get; }
 
-	public ISnoPower Generic_CoreElitePodSetUp { get; }
+	public SnoPower Generic_CoreElitePodSetUp { get; }
 
-	public ISnoPower Generic_CorpulentExplode { get; }
+	public SnoPower Generic_CorpulentExplode { get; }
 
-	public ISnoPower Generic_CorruptAngelSpectralStrike { get; }
+	public SnoPower Generic_CorruptAngelSpectralStrike { get; }
 
-	public ISnoPower Generic_CosmeticSpectralHoundBuff { get; }
+	public SnoPower Generic_CosmeticSpectralHoundBuff { get; }
 
-	public ISnoPower Generic_CreepMobCreeperAttack { get; }
+	public SnoPower Generic_CreepMobCreeperAttack { get; }
 
-	public ISnoPower Generic_CreepMobKnockback { get; }
+	public SnoPower Generic_CreepMobKnockback { get; }
 
-	public ISnoPower Generic_CreepMobKnockbackLR { get; }
+	public SnoPower Generic_CreepMobKnockbackLR { get; }
 
-	public ISnoPower Generic_CreepMobRangedArmAttack { get; }
+	public SnoPower Generic_CreepMobRangedArmAttack { get; }
 
-	public ISnoPower Generic_CritDebuffCold { get; }
+	public SnoPower Generic_CritDebuffCold { get; }
 
-	public ISnoPower Generic_CryptChildEat { get; }
+	public SnoPower Generic_CryptChildEat { get; }
 
-	public ISnoPower Generic_CryptChildLeapOut { get; }
+	public SnoPower Generic_CryptChildLeapOut { get; }
 
-	public ISnoPower Generic_CryptChildLeapOutBuff { get; }
+	public SnoPower Generic_CryptChildLeapOutBuff { get; }
 
-	public ISnoPower Generic_DamageAttribute { get; }
+	public SnoPower Generic_DamageAttribute { get; }
 
-	public ISnoPower Generic_DeathBroBoneCage { get; }
+	public SnoPower Generic_DeathBroBoneCage { get; }
 
-	public ISnoPower Generic_DeathBroSummonSkeletons { get; }
+	public SnoPower Generic_DeathBroSummonSkeletons { get; }
 
-	public ISnoPower Generic_DeathBroTeleport { get; }
+	public SnoPower Generic_DeathBroTeleport { get; }
 
-	public ISnoPower Generic_DebuffBleed { get; }
+	public SnoPower Generic_DebuffBleed { get; }
 
-	public ISnoPower Generic_DebuffBlind { get; }
+	public SnoPower Generic_DebuffBlind { get; }
 
-	public ISnoPower Generic_DebuffCharmed { get; }
+	public SnoPower Generic_DebuffCharmed { get; }
 
-	public ISnoPower Generic_DebuffChilled { get; }
+	public SnoPower Generic_DebuffChilled { get; }
 
-	public ISnoPower Generic_DebuffFeared { get; }
+	public SnoPower Generic_DebuffFeared { get; }
 
-	public ISnoPower Generic_DebuffFireDamageProc { get; }
+	public SnoPower Generic_DebuffFireDamageProc { get; }
 
-	public ISnoPower Generic_DebuffForceGripped { get; }
+	public SnoPower Generic_DebuffForceGripped { get; }
 
-	public ISnoPower Generic_DebuffPoisonDamageProc { get; }
+	public SnoPower Generic_DebuffPoisonDamageProc { get; }
 
-	public ISnoPower Generic_DebuffRooted { get; }
+	public SnoPower Generic_DebuffRooted { get; }
 
-	public ISnoPower Generic_DebuffSlowed { get; }
+	public SnoPower Generic_DebuffSlowed { get; }
 
-	public ISnoPower Generic_DebuffStunned { get; }
+	public SnoPower Generic_DebuffStunned { get; }
 
-	public ISnoPower Generic_DeleteSelfAnim { get; }
+	public SnoPower Generic_DeleteSelfAnim { get; }
 
-	public ISnoPower Generic_demonFlyerdropBomb { get; }
+	public SnoPower Generic_demonFlyerdropBomb { get; }
 
-	public ISnoPower Generic_DemonFlyerFireBreath { get; }
+	public SnoPower Generic_DemonFlyerFireBreath { get; }
 
-	public ISnoPower Generic_DemonFlyerProjectile { get; }
+	public SnoPower Generic_DemonFlyerProjectile { get; }
 
-	public ISnoPower Generic_demonFlyersnatch { get; }
+	public SnoPower Generic_demonFlyersnatch { get; }
 
-	public ISnoPower Generic_DemonHunterBallistaV3 { get; }
+	public SnoPower Generic_DemonHunterBallistaV3 { get; }
 
-	public ISnoPower Generic_DemonHunterCompanion { get; }
+	public SnoPower Generic_DemonHunterCompanion { get; }
 
-	public ISnoPower Generic_DemonHunterEvasiveFireFlip { get; }
+	public SnoPower Generic_DemonHunterEvasiveFireFlip { get; }
 
-	public ISnoPower Generic_DemonHunterSentryTurretAttack { get; }
+	public SnoPower Generic_DemonHunterSentryTurretAttack { get; }
 
-	public ISnoPower Generic_DemonTrooperLeapOut { get; }
+	public SnoPower Generic_DemonTrooperLeapOut { get; }
 
-	public ISnoPower Generic_DervishWhirlwind { get; }
+	public SnoPower Generic_DervishWhirlwind { get; }
 
-	public ISnoPower Generic_DervishWhirlwindMortarPrototype { get; }
+	public SnoPower Generic_DervishWhirlwindMortarPrototype { get; }
 
-	public ISnoPower Generic_DespairMeleeCleave { get; }
+	public SnoPower Generic_DespairMeleeCleave { get; }
 
-	public ISnoPower Generic_DespairMeleeCleaveEnrage { get; }
+	public SnoPower Generic_DespairMeleeCleaveEnrage { get; }
 
-	public ISnoPower Generic_DespairSummonMinion { get; }
+	public SnoPower Generic_DespairSummonMinion { get; }
 
-	public ISnoPower Generic_DespairTeleport { get; }
+	public SnoPower Generic_DespairTeleport { get; }
 
-	public ISnoPower Generic_DespairTeleportAway { get; }
+	public SnoPower Generic_DespairTeleportAway { get; }
 
-	public ISnoPower Generic_DespairVolley { get; }
+	public SnoPower Generic_DespairVolley { get; }
 
-	public ISnoPower Generic_DespairVolleyLRBoss { get; }
+	public SnoPower Generic_DespairVolleyLRBoss { get; }
 
-	public ISnoPower Generic_DestructableObjectAOE { get; }
+	public SnoPower Generic_DestructableObjectAOE { get; }
 
-	public ISnoPower Generic_DestructableObjectChandelierAOE { get; }
+	public SnoPower Generic_DestructableObjectChandelierAOE { get; }
 
-	public ISnoPower Generic_DestructableObjectChandelierAOEHoist { get; }
+	public SnoPower Generic_DestructableObjectChandelierAOEHoist { get; }
 
-	public ISnoPower Generic_DestructionStreakBuffRunSpeed { get; }
+	public SnoPower Generic_DestructionStreakBuffRunSpeed { get; }
 
-	public ISnoPower Generic_DHCompanionChargeAttack { get; }
+	public SnoPower Generic_DHCompanionChargeAttack { get; }
 
-	public ISnoPower Generic_DHCompanionMeleeAttack { get; }
+	public SnoPower Generic_DHCompanionMeleeAttack { get; }
 
-	public ISnoPower Generic_DHrainofArrowsshadowBeastbombDrop { get; }
+	public SnoPower Generic_DHrainofArrowsshadowBeastbombDrop { get; }
 
-	public ISnoPower Generic_DiabloCharge { get; }
+	public SnoPower Generic_DiabloCharge { get; }
 
-	public ISnoPower Generic_DiabloClawRip { get; }
+	public SnoPower Generic_DiabloClawRip { get; }
 
-	public ISnoPower Generic_DiabloClawRipUber { get; }
+	public SnoPower Generic_DiabloClawRipUber { get; }
 
-	public ISnoPower Generic_DiabloCorruptionShield { get; }
+	public SnoPower Generic_DiabloCorruptionShield { get; }
 
-	public ISnoPower Generic_DiabloCurseOfAnguish { get; }
+	public SnoPower Generic_DiabloCurseOfAnguish { get; }
 
-	public ISnoPower Generic_DiabloCurseOfDestruction { get; }
+	public SnoPower Generic_DiabloCurseOfDestruction { get; }
 
-	public ISnoPower Generic_DiabloCurseOfHate { get; }
+	public SnoPower Generic_DiabloCurseOfHate { get; }
 
-	public ISnoPower Generic_DiabloCurseOfPain { get; }
+	public SnoPower Generic_DiabloCurseOfPain { get; }
 
-	public ISnoPower Generic_DiabloExpandingFireRing { get; }
+	public SnoPower Generic_DiabloExpandingFireRing { get; }
 
-	public ISnoPower Generic_DiabloExpandingFireRingUber { get; }
+	public SnoPower Generic_DiabloExpandingFireRingUber { get; }
 
-	public ISnoPower Generic_DiabloFireMeteor { get; }
+	public SnoPower Generic_DiabloFireMeteor { get; }
 
-	public ISnoPower Generic_DiabloGetHit { get; }
+	public SnoPower Generic_DiabloGetHit { get; }
 
-	public ISnoPower Generic_DiabloHellSpikes { get; }
+	public SnoPower Generic_DiabloHellSpikes { get; }
 
-	public ISnoPower Generic_DiabloLightningBreath { get; }
+	public SnoPower Generic_DiabloLightningBreath { get; }
 
-	public ISnoPower Generic_DiabloLightningBreathLRTerrorDemon { get; }
+	public SnoPower Generic_DiabloLightningBreathLRTerrorDemon { get; }
 
-	public ISnoPower Generic_DiabloLightningBreathLRTerrorDemonClone { get; }
+	public SnoPower Generic_DiabloLightningBreathLRTerrorDemonClone { get; }
 
-	public ISnoPower Generic_DiabloLightningBreathTurretMB313 { get; }
+	public SnoPower Generic_DiabloLightningBreathTurretMB313 { get; }
 
-	public ISnoPower Generic_DiabloLightningBreathUber { get; }
+	public SnoPower Generic_DiabloLightningBreathUber { get; }
 
-	public ISnoPower Generic_DiabloLightningBreathv2 { get; }
+	public SnoPower Generic_DiabloLightningBreathv2 { get; }
 
-	public ISnoPower Generic_DiabloPhase1Buff { get; }
+	public SnoPower Generic_DiabloPhase1Buff { get; }
 
-	public ISnoPower Generic_DiabloPhase2Buff { get; }
+	public SnoPower Generic_DiabloPhase2Buff { get; }
 
-	public ISnoPower Generic_DiabloPhase3Buff { get; }
+	public SnoPower Generic_DiabloPhase3Buff { get; }
 
-	public ISnoPower Generic_DiabloRingOfFire { get; }
+	public SnoPower Generic_DiabloRingOfFire { get; }
 
-	public ISnoPower Generic_DiabloRingOfFireUber { get; }
+	public SnoPower Generic_DiabloRingOfFireUber { get; }
 
-	public ISnoPower Generic_DiabloShadowClones { get; }
+	public SnoPower Generic_DiabloShadowClones { get; }
 
-	public ISnoPower Generic_DiabloShadowVanish { get; }
+	public SnoPower Generic_DiabloShadowVanish { get; }
 
-	public ISnoPower Generic_DiabloShadowVanishCharge { get; }
+	public SnoPower Generic_DiabloShadowVanishCharge { get; }
 
-	public ISnoPower Generic_DiabloShadowVanishGrab { get; }
+	public SnoPower Generic_DiabloShadowVanishGrab { get; }
 
-	public ISnoPower Generic_DiabloSmashPunyDestructible { get; }
+	public SnoPower Generic_DiabloSmashPunyDestructible { get; }
 
-	public ISnoPower Generic_DiabloStompAndStun { get; }
+	public SnoPower Generic_DiabloStompAndStun { get; }
 
-	public ISnoPower Generic_DiabloStompAndStunMB313 { get; }
+	public SnoPower Generic_DiabloStompAndStunMB313 { get; }
 
-	public ISnoPower Generic_DiabloTeleport { get; }
+	public SnoPower Generic_DiabloTeleport { get; }
 
-	public ISnoPower Generic_DisableGetHitBuffInfinite { get; }
+	public SnoPower Generic_DisableGetHitBuffInfinite { get; }
 
-	public ISnoPower Generic_DisablePowerBuffInfinite { get; }
+	public SnoPower Generic_DisablePowerBuffInfinite { get; }
 
-	public ISnoPower Generic_DOTDebuff { get; }
+	public SnoPower Generic_DOTDebuff { get; }
 
-	public ISnoPower Generic_DrinkHealthPotion { get; }
+	public SnoPower Generic_DrinkHealthPotion { get; }
 
-	public ISnoPower Generic_DualWieldBuff { get; }
+	public SnoPower Generic_DualWieldBuff { get; }
 
-	public ISnoPower Generic_DualWieldScripted { get; }
+	public SnoPower Generic_DualWieldScripted { get; }
 
-	public ISnoPower Generic_DualWieldScriptedRemove { get; }
+	public SnoPower Generic_DualWieldScriptedRemove { get; }
 
-	public ISnoPower Generic_DuelBuff { get; }
+	public SnoPower Generic_DuelBuff { get; }
 
-	public ISnoPower Generic_DuelDefeatBuff { get; }
+	public SnoPower Generic_DuelDefeatBuff { get; }
 
-	public ISnoPower Generic_EasterEggWorldBuff { get; }
+	public SnoPower Generic_EasterEggWorldBuff { get; }
 
-	public ISnoPower Generic_EatCorpse { get; }
+	public SnoPower Generic_EatCorpse { get; }
 
-	public ISnoPower Generic_ElectricEelElectricBurst { get; }
+	public SnoPower Generic_ElectricEelElectricBurst { get; }
 
-	public ISnoPower Generic_ElectricEelLeapOut { get; }
+	public SnoPower Generic_ElectricEelLeapOut { get; }
 
-	public ISnoPower Generic_EmoteAttack { get; }
+	public SnoPower Generic_EmoteAttack { get; }
 
-	public ISnoPower Generic_EmoteBye { get; }
+	public SnoPower Generic_EmoteBye { get; }
 
-	public ISnoPower Generic_EmoteDance { get; }
+	public SnoPower Generic_EmoteDance { get; }
 
-	public ISnoPower Generic_EmoteDie { get; }
+	public SnoPower Generic_EmoteDie { get; }
 
-	public ISnoPower Generic_EmoteFollow { get; }
+	public SnoPower Generic_EmoteFollow { get; }
 
-	public ISnoPower Generic_EmoteGive { get; }
+	public SnoPower Generic_EmoteGive { get; }
 
-	public ISnoPower Generic_EmoteGo { get; }
+	public SnoPower Generic_EmoteGo { get; }
 
-	public ISnoPower Generic_EmoteHelp { get; }
+	public SnoPower Generic_EmoteHelp { get; }
 
-	public ISnoPower Generic_EmoteHold { get; }
+	public SnoPower Generic_EmoteHold { get; }
 
-	public ISnoPower Generic_EmoteLaugh { get; }
+	public SnoPower Generic_EmoteLaugh { get; }
 
-	public ISnoPower Generic_EmoteNo { get; }
+	public SnoPower Generic_EmoteNo { get; }
 
-	public ISnoPower Generic_EmoteRetreat { get; }
+	public SnoPower Generic_EmoteRetreat { get; }
 
-	public ISnoPower Generic_EmoteRun { get; }
+	public SnoPower Generic_EmoteRun { get; }
 
-	public ISnoPower Generic_EmoteSorry { get; }
+	public SnoPower Generic_EmoteSorry { get; }
 
-	public ISnoPower Generic_EmoteStay { get; }
+	public SnoPower Generic_EmoteStay { get; }
 
-	public ISnoPower Generic_EmoteTakeObjective { get; }
+	public SnoPower Generic_EmoteTakeObjective { get; }
 
-	public ISnoPower Generic_EmoteThanks { get; }
+	public SnoPower Generic_EmoteThanks { get; }
 
-	public ISnoPower Generic_EmoteWait { get; }
+	public SnoPower Generic_EmoteWait { get; }
 
-	public ISnoPower Generic_EmoteYes { get; }
+	public SnoPower Generic_EmoteYes { get; }
 
-	public ISnoPower Generic_EnchantressAmplifyElemental { get; }
+	public SnoPower Generic_EnchantressAmplifyElemental { get; }
 
-	public ISnoPower Generic_EnchantressArcaneOrb { get; }
+	public SnoPower Generic_EnchantressArcaneOrb { get; }
 
-	public ISnoPower Generic_EnchantressCharm { get; }
+	public SnoPower Generic_EnchantressCharm { get; }
 
-	public ISnoPower Generic_EnchantressCheatDeath { get; }
+	public SnoPower Generic_EnchantressCheatDeath { get; }
 
-	public ISnoPower Generic_EnchantressCheatDeathPassive { get; }
+	public SnoPower Generic_EnchantressCheatDeathPassive { get; }
 
-	public ISnoPower Generic_EnchantressCombinedShield { get; }
+	public SnoPower Generic_EnchantressCombinedShield { get; }
 
-	public ISnoPower Generic_EnchantressCooldownReduction { get; }
+	public SnoPower Generic_EnchantressCooldownReduction { get; }
 
-	public ISnoPower Generic_EnchantressCripple { get; }
+	public SnoPower Generic_EnchantressCripple { get; }
 
-	public ISnoPower Generic_EnchantressDisorient { get; }
+	public SnoPower Generic_EnchantressDisorient { get; }
 
-	public ISnoPower Generic_EnchantressFocusedMind { get; }
+	public SnoPower Generic_EnchantressFocusedMind { get; }
 
-	public ISnoPower Generic_EnchantressMassCharm { get; }
+	public SnoPower Generic_EnchantressMassCharm { get; }
 
-	public ISnoPower Generic_EnchantressMeleeInstant { get; }
+	public SnoPower Generic_EnchantressMeleeInstant { get; }
 
-	public ISnoPower Generic_EnchantressRunAway { get; }
+	public SnoPower Generic_EnchantressRunAway { get; }
 
-	public ISnoPower Generic_EnchantressScorchedEarth { get; }
+	public SnoPower Generic_EnchantressScorchedEarth { get; }
 
-	public ISnoPower Generic_EnterRecallPortal { get; }
+	public SnoPower Generic_EnterRecallPortal { get; }
 
-	public ISnoPower Generic_EnterStoneOfRecall { get; }
+	public SnoPower Generic_EnterStoneOfRecall { get; }
 
-	public ISnoPower Generic_EnvironmentKillBuffResourceRegen { get; }
+	public SnoPower Generic_EnvironmentKillBuffResourceRegen { get; }
 
-	public ISnoPower Generic_EquippedLegendaryPower { get; }
+	public SnoPower Generic_EquippedLegendaryPower { get; }
 
-	public ISnoPower Generic_EscortingBuff { get; }
+	public SnoPower Generic_EscortingBuff { get; }
 
-	public ISnoPower Generic_ExitRecallPortal { get; }
+	public SnoPower Generic_ExitRecallPortal { get; }
 
-	public ISnoPower Generic_ExitStoneOfRecall { get; }
+	public SnoPower Generic_ExitStoneOfRecall { get; }
 
-	public ISnoPower Generic_FallenChampionLeaderShout { get; }
+	public SnoPower Generic_FallenChampionLeaderShout { get; }
 
-	public ISnoPower Generic_FallenChampionPowerHit { get; }
+	public SnoPower Generic_FallenChampionPowerHit { get; }
 
-	public ISnoPower Generic_FallenGruntShout { get; }
+	public SnoPower Generic_FallenGruntShout { get; }
 
-	public ISnoPower Generic_FallenLunaticAggroA { get; }
+	public SnoPower Generic_FallenLunaticAggroA { get; }
 
-	public ISnoPower Generic_FallenLunaticAggroB { get; }
+	public SnoPower Generic_FallenLunaticAggroB { get; }
 
-	public ISnoPower Generic_FallenLunaticAggroC { get; }
+	public SnoPower Generic_FallenLunaticAggroC { get; }
 
-	public ISnoPower Generic_FallenLunaticAggroD { get; }
+	public SnoPower Generic_FallenLunaticAggroD { get; }
 
-	public ISnoPower Generic_FallenLunaticSuicide { get; }
+	public SnoPower Generic_FallenLunaticSuicide { get; }
 
-	public ISnoPower Generic_FallenLunaticSuicideRingSummon { get; }
+	public SnoPower Generic_FallenLunaticSuicideRingSummon { get; }
 
-	public ISnoPower Generic_FallenShamanProjectile { get; }
+	public SnoPower Generic_FallenShamanProjectile { get; }
 
-	public ISnoPower Generic_FallenShamanProjectileLR { get; }
+	public SnoPower Generic_FallenShamanProjectileLR { get; }
 
-	public ISnoPower Generic_FallingSwordCheckPathPassability { get; }
+	public SnoPower Generic_FallingSwordCheckPathPassability { get; }
 
-	public ISnoPower Generic_FastMummyDiseaseCloud { get; }
+	public SnoPower Generic_FastMummyDiseaseCloud { get; }
 
-	public ISnoPower Generic_FrenzyAffix { get; }
+	public SnoPower Generic_FrenzyAffix { get; }
 
-	public ISnoPower Generic_GenericArrowProjectile { get; }
+	public SnoPower Generic_GenericArrowProjectile { get; }
 
-	public ISnoPower Generic_GenericSetCannotBeAddedToAITargetList { get; }
+	public SnoPower Generic_GenericSetCannotBeAddedToAITargetList { get; }
 
-	public ISnoPower Generic_GenericSetDoesFakeDamage { get; }
+	public SnoPower Generic_GenericSetDoesFakeDamage { get; }
 
-	public ISnoPower Generic_GenericSetInvisible { get; }
+	public SnoPower Generic_GenericSetInvisible { get; }
 
-	public ISnoPower Generic_GenericSetInvulnerable { get; }
+	public SnoPower Generic_GenericSetInvulnerable { get; }
 
-	public ISnoPower Generic_GenericSetObserver { get; }
+	public SnoPower Generic_GenericSetObserver { get; }
 
-	public ISnoPower Generic_GenericSetTakesNoDamage { get; }
+	public SnoPower Generic_GenericSetTakesNoDamage { get; }
 
-	public ISnoPower Generic_GenericSetUntargetable { get; }
+	public SnoPower Generic_GenericSetUntargetable { get; }
 
-	public ISnoPower Generic_GenericTaunt { get; }
+	public SnoPower Generic_GenericTaunt { get; }
 
-	public ISnoPower Generic_GhostAUniqueHouse1000UndeadSlow { get; }
+	public SnoPower Generic_GhostAUniqueHouse1000UndeadSlow { get; }
 
-	public ISnoPower Generic_GhostMeleeDrain { get; }
+	public SnoPower Generic_GhostMeleeDrain { get; }
 
-	public ISnoPower Generic_GhostSoulSiphon { get; }
+	public SnoPower Generic_GhostSoulSiphon { get; }
 
-	public ISnoPower Generic_GhostWalkThroughWalls { get; }
+	public SnoPower Generic_GhostWalkThroughWalls { get; }
 
-	public ISnoPower Generic_Gizmoa3dunrmptOilVatAAttack { get; }
+	public SnoPower Generic_Gizmoa3dunrmptOilVatAAttack { get; }
 
-	public ISnoPower Generic_GizmoOperatePortalWithAnimation { get; }
+	public SnoPower Generic_GizmoOperatePortalWithAnimation { get; }
 
-	public ISnoPower Generic_gkillElitePack { get; }
+	public SnoPower Generic_gkillElitePack { get; }
 
-	public ISnoPower Generic_glevelUp { get; }
+	public SnoPower Generic_glevelUp { get; }
 
-	public ISnoPower Generic_glevelUpAA { get; }
+	public SnoPower Generic_glevelUpAA { get; }
 
-	public ISnoPower Generic_GluttonyBreathAttack { get; }
+	public SnoPower Generic_GluttonyBreathAttack { get; }
 
-	public ISnoPower Generic_GluttonyGasCloud { get; }
+	public SnoPower Generic_GluttonyGasCloud { get; }
 
-	public ISnoPower Generic_GluttonyGasCloudLRBoss { get; }
+	public SnoPower Generic_GluttonyGasCloudLRBoss { get; }
 
-	public ISnoPower Generic_GluttonyLoogiespawn { get; }
+	public SnoPower Generic_GluttonyLoogiespawn { get; }
 
-	public ISnoPower Generic_GluttonyOnDeath { get; }
+	public SnoPower Generic_GluttonyOnDeath { get; }
 
-	public ISnoPower Generic_GoatmanColdShield { get; }
+	public SnoPower Generic_GoatmanColdShield { get; }
 
-	public ISnoPower Generic_GoatmanDrumsBeating { get; }
+	public SnoPower Generic_GoatmanDrumsBeating { get; }
 
-	public ISnoPower Generic_GoatmanIceball { get; }
+	public SnoPower Generic_GoatmanIceball { get; }
 
-	public ISnoPower Generic_GoatmanLightningShield { get; }
+	public SnoPower Generic_GoatmanLightningShield { get; }
 
-	public ISnoPower Generic_GoatmanMoonclanRangedProjectile { get; }
+	public SnoPower Generic_GoatmanMoonclanRangedProjectile { get; }
 
-	public ISnoPower Generic_GoatmanShamanEmpower { get; }
+	public SnoPower Generic_GoatmanShamanEmpower { get; }
 
-	public ISnoPower Generic_GoatmanShamanLightningbolt { get; }
+	public SnoPower Generic_GoatmanShamanLightningbolt { get; }
 
-	public ISnoPower Generic_GoatMutantEnrage { get; }
+	public SnoPower Generic_GoatMutantEnrage { get; }
 
-	public ISnoPower Generic_GoatMutantGroundSmash { get; }
+	public SnoPower Generic_GoatMutantGroundSmash { get; }
 
-	public ISnoPower Generic_GoatMutantRangedProjectile { get; }
+	public SnoPower Generic_GoatMutantRangedProjectile { get; }
 
-	public ISnoPower Generic_GoatMutantShamanBlast { get; }
+	public SnoPower Generic_GoatMutantShamanBlast { get; }
 
-	public ISnoPower Generic_GoblinAffixTeleporter { get; }
+	public SnoPower Generic_GoblinAffixTeleporter { get; }
 
-	public ISnoPower Generic_gparagonBuff { get; }
+	public SnoPower Generic_gparagonBuff { get; }
 
-	public ISnoPower Generic_GraveDiggerKnockbackAttack { get; }
+	public SnoPower Generic_GraveDiggerKnockbackAttack { get; }
 
-	public ISnoPower Generic_graveDiggerwardenrangedAttack { get; }
+	public SnoPower Generic_graveDiggerwardenrangedAttack { get; }
 
-	public ISnoPower Generic_GraveRobberDodgeLeft { get; }
+	public SnoPower Generic_GraveRobberDodgeLeft { get; }
 
-	public ISnoPower Generic_GraveRobberDodgeRight { get; }
+	public SnoPower Generic_GraveRobberDodgeRight { get; }
 
-	public ISnoPower Generic_graveRobberProjectile { get; }
+	public SnoPower Generic_graveRobberProjectile { get; }
 
-	public ISnoPower Generic_GreedStompAndStun { get; }
+	public SnoPower Generic_GreedStompAndStun { get; }
 
-	public ISnoPower Generic_HealingWellHeal { get; }
+	public SnoPower Generic_HealingWellHeal { get; }
 
-	public ISnoPower Generic_Hearth { get; }
+	public SnoPower Generic_Hearth { get; }
 
-	public ISnoPower Generic_HearthFinish { get; }
+	public SnoPower Generic_HearthFinish { get; }
 
-	public ISnoPower Generic_HellPortalSummoningMachineActivate { get; }
+	public SnoPower Generic_HellPortalSummoningMachineActivate { get; }
 
-	public ISnoPower Generic_HelperArcherProjectile { get; }
+	public SnoPower Generic_HelperArcherProjectile { get; }
 
-	public ISnoPower Generic_HirelingCalloutBattleCry { get; }
+	public SnoPower Generic_HirelingCalloutBattleCry { get; }
 
-	public ISnoPower Generic_HirelingCalloutBattleFinished { get; }
+	public SnoPower Generic_HirelingCalloutBattleFinished { get; }
 
-	public ISnoPower Generic_HirelingDismiss { get; }
+	public SnoPower Generic_HirelingDismiss { get; }
 
-	public ISnoPower Generic_HirelingDismissBuff { get; }
+	public SnoPower Generic_HirelingDismissBuff { get; }
 
-	public ISnoPower Generic_HirelingDismissBuffRemove { get; }
+	public SnoPower Generic_HirelingDismissBuffRemove { get; }
 
-	public ISnoPower Generic_HirelingMageMagicMissile { get; }
+	public SnoPower Generic_HirelingMageMagicMissile { get; }
 
-	public ISnoPower Generic_HoodedNightmareBoneArmor { get; }
+	public SnoPower Generic_HoodedNightmareBoneArmor { get; }
 
-	public ISnoPower Generic_HoodedNightmareCurses { get; }
+	public SnoPower Generic_HoodedNightmareCurses { get; }
 
-	public ISnoPower Generic_HoodedNightmareGatewayToHell { get; }
+	public SnoPower Generic_HoodedNightmareGatewayToHell { get; }
 
-	public ISnoPower Generic_HoodedNightmareLightningOfUnlife { get; }
+	public SnoPower Generic_HoodedNightmareLightningOfUnlife { get; }
 
-	public ISnoPower Generic_IdentifyAllWithCast { get; }
+	public SnoPower Generic_IdentifyAllWithCast { get; }
 
-	public ISnoPower Generic_IdentifyWithCast { get; }
+	public SnoPower Generic_IdentifyWithCast { get; }
 
-	public ISnoPower Generic_IdentifyWithCastLegendary { get; }
+	public SnoPower Generic_IdentifyWithCastLegendary { get; }
 
-	public ISnoPower Generic_IGRBuffEXP { get; }
+	public SnoPower Generic_IGRBuffEXP { get; }
 
-	public ISnoPower Generic_ImmuneToFearDuringBuff { get; }
+	public SnoPower Generic_ImmuneToFearDuringBuff { get; }
 
-	public ISnoPower Generic_ImmuneToRootDuringBuff { get; }
+	public SnoPower Generic_ImmuneToRootDuringBuff { get; }
 
-	public ISnoPower Generic_ImmuneToSnareDuringBuff { get; }
+	public SnoPower Generic_ImmuneToSnareDuringBuff { get; }
 
-	public ISnoPower Generic_ImmuneToStunDuringBuff { get; }
+	public SnoPower Generic_ImmuneToStunDuringBuff { get; }
 
-	public ISnoPower Generic_InteractCrouching { get; }
+	public SnoPower Generic_InteractCrouching { get; }
 
-	public ISnoPower Generic_InteractNormal { get; }
+	public SnoPower Generic_InteractNormal { get; }
 
-	public ISnoPower Generic_InvisibileDuringBuff { get; }
+	public SnoPower Generic_InvisibileDuringBuff { get; }
 
-	public ISnoPower Generic_InvulnerableDuringBuff { get; }
+	public SnoPower Generic_InvulnerableDuringBuff { get; }
 
-	public ISnoPower Generic_ItemPassiveSetBonusChantodo { get; }
+	public SnoPower Generic_ItemPassiveSetBonusChantodo { get; }
 
-	public ISnoPower Generic_itemPassiveUniqueAmulet001 { get; }
+	public SnoPower Generic_itemPassiveUniqueAmulet001 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueBelt016p2 { get; }
+	public SnoPower Generic_ItemPassiveUniqueBelt016p2 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueDagger006 { get; }
+	public SnoPower Generic_ItemPassiveUniqueDagger006 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueDagger011x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueDagger011x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueFist010 { get; }
+	public SnoPower Generic_ItemPassiveUniqueFist010 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueFist010x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueFist010x1 { get; }
 
-	public ISnoPower Generic_itemPassiveUniqueMace1H009 { get; }
+	public SnoPower Generic_itemPassiveUniqueMace1H009 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMace2H006 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMace2H006 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMighty1H011 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMighty1H011 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMighty1H011x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMighty1H011x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMojo010 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMojo010 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMojo010x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMojo010x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueMojo010x1tooltipDummy1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueMojo010x1tooltipDummy1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniquePotion01x1 { get; }
+	public SnoPower Generic_ItemPassiveUniquePotion01x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniquePotion02x1 { get; }
+	public SnoPower Generic_ItemPassiveUniquePotion02x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniquePotion03x1 { get; }
+	public SnoPower Generic_ItemPassiveUniquePotion03x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing015 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing015 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing015x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing015x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing024 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing024 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing500p2 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing500p2 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing502x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing502x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing503x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing503x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing506x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing506x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing511x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing511x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing512x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing512x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing513AIPickupx1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing513AIPickupx1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing518x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing518x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing522x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing522x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing524x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing524x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing529x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing529x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing535x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing535x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing542x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing542x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing543x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing543x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing546x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing546x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing553x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing553x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing556x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing556x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing561x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing561x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing563x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing563x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing564x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing564x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing566x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing566x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing567x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing567x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing570x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing570x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing572x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing572x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing573x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing573x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing574x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing574x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing578x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing578x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing580x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing580x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing582x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing582x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing583x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing583x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing584x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing584x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing585x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing585x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing586x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing586x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing596x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing596x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing597p2 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing597p2 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing598x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing598x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing599x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing599x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing601x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing601x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing603x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing603x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing605x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing605x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing621x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing621x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing625x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing625x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing627x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing627x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing632x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing632x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing633x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing633x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing636x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing636x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing637x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing637x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing640x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing640x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing641x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing641x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing650x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing650x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing652x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing652x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing654x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing654x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing657x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing657x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing659x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing659x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing661x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing661x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing666x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing666x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing676x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing676x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing678x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing678x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing680x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing680x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing681p2 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing681p2 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing682x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing682x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing683x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing683x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing684x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing684x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing689x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing689x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing693x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing693x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing702x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing702x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing710x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing710x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing711x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing711x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing713x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing713x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing714x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing714x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing715x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing715x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing716x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing716x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing717x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing717x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing718x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing718x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing719x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing719x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing720x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing720x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing721x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing721x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing722x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing722x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing723x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing723x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing724SpawnDecoyx1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing724SpawnDecoyx1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing724x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing724x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing725x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing725x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing726x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing726x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing727x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing727x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing728x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing728x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing729x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing729x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing730x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing730x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing731x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing731x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing732x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing732x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing733x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing733x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing734x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing734x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing735x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing735x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing736x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing736x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing737x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing737x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing738x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing738x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing740x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing740x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing743x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing743x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing746x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing746x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing752x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing752x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing756x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing756x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing757x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing757x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing758x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing758x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing760x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing760x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing763x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing763x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing764x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing764x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing765x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing765x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing766x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing766x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing767x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing767x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing768x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing768x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing769x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing769x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing770x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing770x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing771x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing771x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing772x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing772x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing773x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing773x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing774x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing774x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing775x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing775x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing776x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing776x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing777x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing777x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing778x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing778x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing779x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing779x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing780x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing780x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing781x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing781x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing782x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing782x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing783x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing783x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing784x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing784x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing785x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing785x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing786x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing786x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing787x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing787x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing788x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing788x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing789x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing789x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing790x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing790x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing791x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing791x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing792x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing792x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing793x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing793x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing794x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing794x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing795x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing795x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing796x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing796x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing797x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing797x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing798x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing798x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing799x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing799x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing800x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing800x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing801x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing801x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing802x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing802x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing803x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing803x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing804x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing804x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing805x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing805x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing806x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing806x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing807x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing807x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing808x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing808x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing809x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing809x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing810x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing810x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing811x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing811x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing812x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing812x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing813x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing813x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing814x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing814x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing815x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing815x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing816x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing816x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing817x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing817x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing818x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing818x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing819x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing819x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing820x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing820x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing821x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing821x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing822x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing822x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing823x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing823x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing824x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing824x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing825x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing825x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing826x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing826x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing827x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing827x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing828x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing828x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing829x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing829x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing830x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing830x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing831x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing831x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing832x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing832x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing833x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing833x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing834x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing834x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing835x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing835x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing836x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing836x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing837x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing837x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing838x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing838x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing839x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing839x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing840x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing840x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing841x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing841x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing842x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing842x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing843x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing843x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing844x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing844x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing845x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing845x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing846x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing846x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing847x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing847x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing848x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing848x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing849x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing849x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing850x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing850x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing851x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing851x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing852x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing852x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing853x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing853x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing854x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing854x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing855x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing855x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing856x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing856x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing857x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing857x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing858x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing858x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing859x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing859x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing860x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing860x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing861x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing861x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing862x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing862x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing863x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing863x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing864x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing864x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing865x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing865x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing866x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing866x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing867x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing867x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing868x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing868x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing869x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing869x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing870x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing870x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing871x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing871x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing872x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing872x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing873x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing873x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing874x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing874x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing875x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing875x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing876x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing876x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing877x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing877x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing878x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing878x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing879x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing879x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing880x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing880x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing899x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing899x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing900x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing900x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing901x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing901x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing902x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing902x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing904x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing904x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing910x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing910x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing913x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing913x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing914x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing914x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing924x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing924x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing925x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing925x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing926x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing926x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing927x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing927x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing928x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing928x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing929x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing929x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing930x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing930x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing931x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing931x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing932x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing932x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing933x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing933x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing934x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing934x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing935x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing935x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing936x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing936x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing937x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing937x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing938x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing938x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing939x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing939x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing940x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing940x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing941x1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing941x1 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRing999 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRing999 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueRingHellfirex1 { get; }
+	public SnoPower Generic_ItemPassiveUniqueRingHellfirex1 { get; }
 
-	public ISnoPower Generic_itemPassiveUniqueShield011 { get; }
+	public SnoPower Generic_itemPassiveUniqueShield011 { get; }
 
-	public ISnoPower Generic_ItemPassiveUniqueShoulder009 { get; }
+	public SnoPower Generic_ItemPassiveUniqueShoulder009 { get; }
 
-	public ISnoPower Generic_itemPassiveUniqueWizardHat004p2 { get; }
+	public SnoPower Generic_itemPassiveUniqueWizardHat004p2 { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25Barbarian { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25Barbarian { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25Crusader { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25Crusader { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25DemonHunter { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25DemonHunter { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25Monk { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25Monk { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25Necromancer { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25Necromancer { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25WitchDoctor { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25WitchDoctor { get; }
 
-	public ISnoPower Generic_ItemPassivex1Amuletnormunique25Wizard { get; }
+	public SnoPower Generic_ItemPassivex1Amuletnormunique25Wizard { get; }
 
-	public ISnoPower Generic_IzualCharge { get; }
+	public SnoPower Generic_IzualCharge { get; }
 
-	public ISnoPower Generic_IzualFrostNova { get; }
+	public SnoPower Generic_IzualFrostNova { get; }
 
-	public ISnoPower Generic_IzualFrozenCast { get; }
+	public SnoPower Generic_IzualFrozenCast { get; }
 
-	public ISnoPower Generic_KillActor { get; }
+	public SnoPower Generic_KillActor { get; }
 
-	public ISnoPower Generic_Knockback { get; }
+	public SnoPower Generic_Knockback { get; }
 
-	public ISnoPower Generic_KnockbackNoLandingAnim { get; }
+	public SnoPower Generic_KnockbackNoLandingAnim { get; }
 
-	public ISnoPower Generic_KnockbackOverObstacles { get; }
+	public SnoPower Generic_KnockbackOverObstacles { get; }
 
-	public ISnoPower Generic_KnockbackThroughOwnedByTeam { get; }
+	public SnoPower Generic_KnockbackThroughOwnedByTeam { get; }
 
-	public ISnoPower Generic_Knockdown { get; }
+	public SnoPower Generic_Knockdown { get; }
 
-	public ISnoPower Generic_LacuniBurrowIn { get; }
+	public SnoPower Generic_LacuniBurrowIn { get; }
 
-	public ISnoPower Generic_LacuniBurrowOut { get; }
+	public SnoPower Generic_LacuniBurrowOut { get; }
 
-	public ISnoPower Generic_LacuniCombo { get; }
+	public SnoPower Generic_LacuniCombo { get; }
 
-	public ISnoPower Generic_LacuniLeap { get; }
+	public SnoPower Generic_LacuniLeap { get; }
 
-	public ISnoPower Generic_LacuniLob { get; }
+	public SnoPower Generic_LacuniLob { get; }
 
-	public ISnoPower Generic_LacuniMaleDoubleSwing { get; }
+	public SnoPower Generic_LacuniMaleDoubleSwing { get; }
 
-	public ISnoPower Generic_Laugh { get; }
+	public SnoPower Generic_Laugh { get; }
 
-	public ISnoPower Generic_LaughSkeletonKing { get; }
+	public SnoPower Generic_LaughSkeletonKing { get; }
 
-	public ISnoPower Generic_LeahHulkOut { get; }
+	public SnoPower Generic_LeahHulkOut { get; }
 
-	public ISnoPower Generic_LeahVortex { get; }
+	public SnoPower Generic_LeahVortex { get; }
 
-	public ISnoPower Generic_LeahVortexAgain { get; }
+	public SnoPower Generic_LeahVortexAgain { get; }
 
-	public ISnoPower Generic_LostSoulsPrototypeV2 { get; }
+	public SnoPower Generic_LostSoulsPrototypeV2 { get; }
 
-	public ISnoPower Generic_LRBossCollapseCeiling { get; }
+	public SnoPower Generic_LRBossCollapseCeiling { get; }
 
-	public ISnoPower Generic_LRBossFast { get; }
+	public SnoPower Generic_LRBossFast { get; }
 
-	public ISnoPower Generic_LRBossIzualCharge { get; }
+	public SnoPower Generic_LRBossIzualCharge { get; }
 
-	public ISnoPower Generic_LRBossPathBlockedTeleport { get; }
+	public SnoPower Generic_LRBossPathBlockedTeleport { get; }
 
-	public ISnoPower Generic_LRBossSprint { get; }
+	public SnoPower Generic_LRBossSprint { get; }
 
-	public ISnoPower Generic_LSp4SeaMonsterSpawnCrabs { get; }
+	public SnoPower Generic_LSp4SeaMonsterSpawnCrabs { get; }
 
-	public ISnoPower Generic_MaghdaMark { get; }
+	public SnoPower Generic_MaghdaMark { get; }
 
-	public ISnoPower Generic_MaghdaMothDust { get; }
+	public SnoPower Generic_MaghdaMothDust { get; }
 
-	public ISnoPower Generic_MaghdaPortalCreateCinematic { get; }
+	public SnoPower Generic_MaghdaPortalCreateCinematic { get; }
 
-	public ISnoPower Generic_MaghdaProjectile { get; }
+	public SnoPower Generic_MaghdaProjectile { get; }
 
-	public ISnoPower Generic_MaghdaPunish { get; }
+	public SnoPower Generic_MaghdaPunish { get; }
 
-	public ISnoPower Generic_MaghdaPunishCinematic { get; }
+	public SnoPower Generic_MaghdaPunishCinematic { get; }
 
-	public ISnoPower Generic_MaghdaSummonBeserker { get; }
+	public SnoPower Generic_MaghdaSummonBeserker { get; }
 
-	public ISnoPower Generic_MaghdaTeleport { get; }
+	public SnoPower Generic_MaghdaTeleport { get; }
 
-	public ISnoPower Generic_MagicPaintingSummonSkeleton { get; }
+	public SnoPower Generic_MagicPaintingSummonSkeleton { get; }
 
-	public ISnoPower Generic_MalletDemonPowerHit { get; }
+	public SnoPower Generic_MalletDemonPowerHit { get; }
 
-	public ISnoPower Generic_ManualWalk { get; }
+	public SnoPower Generic_ManualWalk { get; }
 
-	public ISnoPower Generic_MastaBlastaCombinedDismountRider { get; }
+	public SnoPower Generic_MastaBlastaCombinedDismountRider { get; }
 
-	public ISnoPower Generic_MastaBlastaCombinedLobbedShot { get; }
+	public SnoPower Generic_MastaBlastaCombinedLobbedShot { get; }
 
-	public ISnoPower Generic_MastaBlastaRiderAlphaStrike { get; }
+	public SnoPower Generic_MastaBlastaRiderAlphaStrike { get; }
 
-	public ISnoPower Generic_MastaBlastaRiderCombine { get; }
+	public SnoPower Generic_MastaBlastaRiderCombine { get; }
 
-	public ISnoPower Generic_MastaBlastaRiderLeap { get; }
+	public SnoPower Generic_MastaBlastaRiderLeap { get; }
 
-	public ISnoPower Generic_MastaBlastaRiderLobbedShot { get; }
+	public SnoPower Generic_MastaBlastaRiderLobbedShot { get; }
 
-	public ISnoPower Generic_MastaBlastaRiderLobbedShotLR { get; }
+	public SnoPower Generic_MastaBlastaRiderLobbedShotLR { get; }
 
-	public ISnoPower Generic_MastaBlastaSteedCombine { get; }
+	public SnoPower Generic_MastaBlastaSteedCombine { get; }
 
-	public ISnoPower Generic_MastaBlastaSteedDrainAttack { get; }
+	public SnoPower Generic_MastaBlastaSteedDrainAttack { get; }
 
-	public ISnoPower Generic_MastaBlastaSteedStomp { get; }
+	public SnoPower Generic_MastaBlastaSteedStomp { get; }
 
-	public ISnoPower Generic_MistressOfPainAscend { get; }
+	public SnoPower Generic_MistressOfPainAscend { get; }
 
-	public ISnoPower Generic_MistressOfPainDescend { get; }
+	public SnoPower Generic_MistressOfPainDescend { get; }
 
-	public ISnoPower Generic_MistressOfPainPainBolts { get; }
+	public SnoPower Generic_MistressOfPainPainBolts { get; }
 
-	public ISnoPower Generic_MistressOfPainPainBoltsLR { get; }
+	public SnoPower Generic_MistressOfPainPainBoltsLR { get; }
 
-	public ISnoPower Generic_MistressOfPainSpiderlingExplode { get; }
+	public SnoPower Generic_MistressOfPainSpiderlingExplode { get; }
 
-	public ISnoPower Generic_MistressOfPainSummonSpiders { get; }
+	public SnoPower Generic_MistressOfPainSummonSpiders { get; }
 
-	public ISnoPower Generic_MistressOfPainSummonSpidersAirborne { get; }
+	public SnoPower Generic_MistressOfPainSummonSpidersAirborne { get; }
 
-	public ISnoPower Generic_MistressOfPainTeleportToThrone { get; }
+	public SnoPower Generic_MistressOfPainTeleportToThrone { get; }
 
-	public ISnoPower Generic_MistressOfPainWebPatch { get; }
+	public SnoPower Generic_MistressOfPainWebPatch { get; }
 
-	public ISnoPower Generic_MonkLashingTailKickHandOfYtarPassability { get; }
+	public SnoPower Generic_MonkLashingTailKickHandOfYtarPassability { get; }
 
-	public ISnoPower Generic_MonkLethalDecoyTaunt { get; }
+	public SnoPower Generic_MonkLethalDecoyTaunt { get; }
 
-	public ISnoPower Generic_MonkMysticAllyPetRuneAKick { get; }
+	public SnoPower Generic_MonkMysticAllyPetRuneAKick { get; }
 
-	public ISnoPower Generic_MonkMysticAllyPetRuneBWaveAttackFast { get; }
+	public SnoPower Generic_MonkMysticAllyPetRuneBWaveAttackFast { get; }
 
-	public ISnoPower Generic_MonkMysticAllyPetRuneCGroundPunch { get; }
+	public SnoPower Generic_MonkMysticAllyPetRuneCGroundPunch { get; }
 
-	public ISnoPower Generic_MonkMysticAllyPetRuneDAOEAttack { get; }
+	public SnoPower Generic_MonkMysticAllyPetRuneDAOEAttack { get; }
 
-	public ISnoPower Generic_MonkMysticAllyPetWeaponMeleeInstant { get; }
+	public SnoPower Generic_MonkMysticAllyPetWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_MonkResistAura { get; }
+	public SnoPower Generic_MonkResistAura { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCArcane { get; }
+	public SnoPower Generic_MonkResistAuraRuneCArcane { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCCold { get; }
+	public SnoPower Generic_MonkResistAuraRuneCCold { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCFire { get; }
+	public SnoPower Generic_MonkResistAuraRuneCFire { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCHoly { get; }
+	public SnoPower Generic_MonkResistAuraRuneCHoly { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCLightning { get; }
+	public SnoPower Generic_MonkResistAuraRuneCLightning { get; }
 
-	public ISnoPower Generic_MonkResistAuraRuneCPoison { get; }
+	public SnoPower Generic_MonkResistAuraRuneCPoison { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchanted { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchanted { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchantedCast { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchantedCast { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchantedCastNoTarget { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchantedCastNoTarget { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchantedChampion { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchantedChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchantedMinion { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchantedMinion { get; }
 
-	public ISnoPower Generic_MonsterAffixArcaneEnchantedNewPetBasic { get; }
+	public SnoPower Generic_MonsterAffixArcaneEnchantedNewPetBasic { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerArcaneEnchanted { get; }
+	public SnoPower Generic_MonsterAffixAvengerArcaneEnchanted { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerArcaneEnchantedCast { get; }
+	public SnoPower Generic_MonsterAffixAvengerArcaneEnchantedCast { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerArcaneEnchantedNewPetBasic { get; }
+	public SnoPower Generic_MonsterAffixAvengerArcaneEnchantedNewPetBasic { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerBuff { get; }
+	public SnoPower Generic_MonsterAffixAvengerBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerChampion { get; }
+	public SnoPower Generic_MonsterAffixAvengerChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerMortar { get; }
+	public SnoPower Generic_MonsterAffixAvengerMortar { get; }
 
-	public ISnoPower Generic_MonsterAffixAvengerMortarCast { get; }
+	public SnoPower Generic_MonsterAffixAvengerMortarCast { get; }
 
-	public ISnoPower Generic_MonsterAffixBallista { get; }
+	public SnoPower Generic_MonsterAffixBallista { get; }
 
-	public ISnoPower Generic_MonsterAffixChampionBuff { get; }
+	public SnoPower Generic_MonsterAffixChampionBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixDesecrator { get; }
+	public SnoPower Generic_MonsterAffixDesecrator { get; }
 
-	public ISnoPower Generic_MonsterAffixDesecratorBuff { get; }
+	public SnoPower Generic_MonsterAffixDesecratorBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixDesecratorBuffChampion { get; }
+	public SnoPower Generic_MonsterAffixDesecratorBuffChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixDesecratorCast { get; }
+	public SnoPower Generic_MonsterAffixDesecratorCast { get; }
 
-	public ISnoPower Generic_MonsterAffixDieTogether { get; }
+	public SnoPower Generic_MonsterAffixDieTogether { get; }
 
-	public ISnoPower Generic_MonsterAffixElectrified { get; }
+	public SnoPower Generic_MonsterAffixElectrified { get; }
 
-	public ISnoPower Generic_MonsterAffixElectrifiedLRBossCustom { get; }
+	public SnoPower Generic_MonsterAffixElectrifiedLRBossCustom { get; }
 
-	public ISnoPower Generic_MonsterAffixElectrifiedMinion { get; }
+	public SnoPower Generic_MonsterAffixElectrifiedMinion { get; }
 
-	public ISnoPower Generic_MonsterAffixExtraHealth { get; }
+	public SnoPower Generic_MonsterAffixExtraHealth { get; }
 
-	public ISnoPower Generic_MonsterAffixFast { get; }
+	public SnoPower Generic_MonsterAffixFast { get; }
 
-	public ISnoPower Generic_MonsterAffixFrozen { get; }
+	public SnoPower Generic_MonsterAffixFrozen { get; }
 
-	public ISnoPower Generic_MonsterAffixFrozenCast { get; }
+	public SnoPower Generic_MonsterAffixFrozenCast { get; }
 
-	public ISnoPower Generic_MonsterAffixFrozenRare { get; }
+	public SnoPower Generic_MonsterAffixFrozenRare { get; }
 
-	public ISnoPower Generic_MonsterAffixHealing { get; }
+	public SnoPower Generic_MonsterAffixHealing { get; }
 
-	public ISnoPower Generic_MonsterAffixHealthlink { get; }
+	public SnoPower Generic_MonsterAffixHealthlink { get; }
 
-	public ISnoPower Generic_MonsterAffixIllusionist { get; }
+	public SnoPower Generic_MonsterAffixIllusionist { get; }
 
-	public ISnoPower Generic_MonsterAffixIllusionistCast { get; }
+	public SnoPower Generic_MonsterAffixIllusionistCast { get; }
 
-	public ISnoPower Generic_MonsterAffixJailer { get; }
+	public SnoPower Generic_MonsterAffixJailer { get; }
 
-	public ISnoPower Generic_MonsterAffixJailerCast { get; }
+	public SnoPower Generic_MonsterAffixJailerCast { get; }
 
-	public ISnoPower Generic_MonsterAffixJailerChampion { get; }
+	public SnoPower Generic_MonsterAffixJailerChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixJuggernaut { get; }
+	public SnoPower Generic_MonsterAffixJuggernaut { get; }
 
-	public ISnoPower Generic_MonsterAffixKnockback { get; }
+	public SnoPower Generic_MonsterAffixKnockback { get; }
 
-	public ISnoPower Generic_MonsterAffixLinked { get; }
+	public SnoPower Generic_MonsterAffixLinked { get; }
 
-	public ISnoPower Generic_MonsterAffixMissileDampening { get; }
+	public SnoPower Generic_MonsterAffixMissileDampening { get; }
 
-	public ISnoPower Generic_MonsterAffixMissileDampeningCast { get; }
+	public SnoPower Generic_MonsterAffixMissileDampeningCast { get; }
 
-	public ISnoPower Generic_MonsterAffixMolten { get; }
+	public SnoPower Generic_MonsterAffixMolten { get; }
 
-	public ISnoPower Generic_MonsterAffixMoltenMinion { get; }
+	public SnoPower Generic_MonsterAffixMoltenMinion { get; }
 
-	public ISnoPower Generic_MonsterAffixMortar { get; }
+	public SnoPower Generic_MonsterAffixMortar { get; }
 
-	public ISnoPower Generic_MonsterAffixMortarCast { get; }
+	public SnoPower Generic_MonsterAffixMortarCast { get; }
 
-	public ISnoPower Generic_MonsterAffixNightmarish { get; }
+	public SnoPower Generic_MonsterAffixNightmarish { get; }
 
-	public ISnoPower Generic_MonsterAffixPheonix { get; }
+	public SnoPower Generic_MonsterAffixPheonix { get; }
 
-	public ISnoPower Generic_MonsterAffixPlagued { get; }
+	public SnoPower Generic_MonsterAffixPlagued { get; }
 
-	public ISnoPower Generic_MonsterAffixPlaguedCast { get; }
+	public SnoPower Generic_MonsterAffixPlaguedCast { get; }
 
-	public ISnoPower Generic_MonsterAffixPuppetmaster { get; }
+	public SnoPower Generic_MonsterAffixPuppetmaster { get; }
 
-	public ISnoPower Generic_MonsterAffixPuppetmasterMinion { get; }
+	public SnoPower Generic_MonsterAffixPuppetmasterMinion { get; }
 
-	public ISnoPower Generic_MonsterAffixReflectsDamage { get; }
+	public SnoPower Generic_MonsterAffixReflectsDamage { get; }
 
-	public ISnoPower Generic_MonsterAffixReflectsDamageCast { get; }
+	public SnoPower Generic_MonsterAffixReflectsDamageCast { get; }
 
-	public ISnoPower Generic_MonsterAffixShielding { get; }
+	public SnoPower Generic_MonsterAffixShielding { get; }
 
-	public ISnoPower Generic_MonsterAffixShieldingCast { get; }
+	public SnoPower Generic_MonsterAffixShieldingCast { get; }
 
-	public ISnoPower Generic_MonsterAffixTeleporterBuff { get; }
+	public SnoPower Generic_MonsterAffixTeleporterBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixTeleporterCast { get; }
+	public SnoPower Generic_MonsterAffixTeleporterCast { get; }
 
-	public ISnoPower Generic_MonsterAffixThunderstormBuff { get; }
+	public SnoPower Generic_MonsterAffixThunderstormBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixThunderstormBuffChampion { get; }
+	public SnoPower Generic_MonsterAffixThunderstormBuffChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixThunderstormCast { get; }
+	public SnoPower Generic_MonsterAffixThunderstormCast { get; }
 
-	public ISnoPower Generic_MonsterAffixVampiric { get; }
+	public SnoPower Generic_MonsterAffixVampiric { get; }
 
-	public ISnoPower Generic_MonsterAffixVortexBuff { get; }
+	public SnoPower Generic_MonsterAffixVortexBuff { get; }
 
-	public ISnoPower Generic_MonsterAffixVortexBuffChampion { get; }
+	public SnoPower Generic_MonsterAffixVortexBuffChampion { get; }
 
-	public ISnoPower Generic_MonsterAffixVortexCast { get; }
+	public SnoPower Generic_MonsterAffixVortexCast { get; }
 
-	public ISnoPower Generic_MonsterAffixWaller { get; }
+	public SnoPower Generic_MonsterAffixWaller { get; }
 
-	public ISnoPower Generic_MonsterAffixWallerCast { get; }
+	public SnoPower Generic_MonsterAffixWallerCast { get; }
 
-	public ISnoPower Generic_MonsterAffixWallerRare { get; }
+	public SnoPower Generic_MonsterAffixWallerRare { get; }
 
-	public ISnoPower Generic_MonsterAffixWallerRareCast { get; }
+	public SnoPower Generic_MonsterAffixWallerRareCast { get; }
 
-	public ISnoPower Generic_MonsterPoisonMeleeAttack { get; }
+	public SnoPower Generic_MonsterPoisonMeleeAttack { get; }
 
-	public ISnoPower Generic_MonsterRangedProjectile { get; }
+	public SnoPower Generic_MonsterRangedProjectile { get; }
 
-	public ISnoPower Generic_MonsterSpellProjectile { get; }
+	public SnoPower Generic_MonsterSpellProjectile { get; }
 
-	public ISnoPower Generic_MorluSpellcasterBreathOfFire { get; }
+	public SnoPower Generic_MorluSpellcasterBreathOfFire { get; }
 
-	public ISnoPower Generic_MorluSpellcasterBreathOfFrost { get; }
+	public SnoPower Generic_MorluSpellcasterBreathOfFrost { get; }
 
-	public ISnoPower Generic_MorluSpellcasterMeteor { get; }
+	public SnoPower Generic_MorluSpellcasterMeteor { get; }
 
-	public ISnoPower Generic_MorluSpellcasterMeteorGraspOfTheDeadPrototype { get; }
+	public SnoPower Generic_MorluSpellcasterMeteorGraspOfTheDeadPrototype { get; }
 
-	public ISnoPower Generic_MorluSpellcasterShift { get; }
+	public SnoPower Generic_MorluSpellcasterShift { get; }
 
-	public ISnoPower Generic_MorluSpellcasterShiftNoCooldownCold { get; }
+	public SnoPower Generic_MorluSpellcasterShiftNoCooldownCold { get; }
 
-	public ISnoPower Generic_MultiplayerBuff { get; }
+	public SnoPower Generic_MultiplayerBuff { get; }
 
-	public ISnoPower Generic_NPCLookAt { get; }
+	public SnoPower Generic_NPCLookAt { get; }
 
-	public ISnoPower Generic_OasisRockslideADamage { get; }
+	public SnoPower Generic_OasisRockslideADamage { get; }
 
-	public ISnoPower Generic_OnDeathArcane { get; }
+	public SnoPower Generic_OnDeathArcane { get; }
 
-	public ISnoPower Generic_OnDeathCold { get; }
+	public SnoPower Generic_OnDeathCold { get; }
 
-	public ISnoPower Generic_OnDeathFire { get; }
+	public SnoPower Generic_OnDeathFire { get; }
 
-	public ISnoPower Generic_OnDeathLightning { get; }
+	public SnoPower Generic_OnDeathLightning { get; }
 
-	public ISnoPower Generic_OnDeathPoison { get; }
+	public SnoPower Generic_OnDeathPoison { get; }
 
-	public ISnoPower Generic_OperateHelperAttach { get; }
+	public SnoPower Generic_OperateHelperAttach { get; }
 
-	public ISnoPower Generic_p1GreedCharge { get; }
+	public SnoPower Generic_p1GreedCharge { get; }
 
-	public ISnoPower Generic_p1GreedChargeLong { get; }
+	public SnoPower Generic_p1GreedChargeLong { get; }
 
-	public ISnoPower Generic_p1GreedChargeNoLOS { get; }
+	public SnoPower Generic_p1GreedChargeNoLOS { get; }
 
-	public ISnoPower Generic_p1GreedGoblinKnockback { get; }
+	public SnoPower Generic_p1GreedGoblinKnockback { get; }
 
-	public ISnoPower Generic_p1GreedGoldenMeteorShower { get; }
+	public SnoPower Generic_p1GreedGoldenMeteorShower { get; }
 
-	public ISnoPower Generic_p1GreedGoldSpawner { get; }
+	public SnoPower Generic_p1GreedGoldSpawner { get; }
 
-	public ISnoPower Generic_p1GreedMinionPassiveLifetimeBuff { get; }
+	public SnoPower Generic_p1GreedMinionPassiveLifetimeBuff { get; }
 
-	public ISnoPower Generic_p1GreedPassiveGoblinSpawnertest { get; }
+	public SnoPower Generic_p1GreedPassiveGoblinSpawnertest { get; }
 
-	public ISnoPower Generic_p1GreedPassiveLifetimeBuff { get; }
+	public SnoPower Generic_p1GreedPassiveLifetimeBuff { get; }
 
-	public ISnoPower Generic_p1GreedShockwave { get; }
+	public SnoPower Generic_p1GreedShockwave { get; }
 
-	public ISnoPower Generic_p1GreedSpawnMinion { get; }
+	public SnoPower Generic_p1GreedSpawnMinion { get; }
 
-	public ISnoPower Generic_p1GreedUltimateMeteorShower { get; }
+	public SnoPower Generic_p1GreedUltimateMeteorShower { get; }
 
-	public ISnoPower Generic_p1TieredRiftSpawnNPC { get; }
+	public SnoPower Generic_p1TieredRiftSpawnNPC { get; }
 
-	public ISnoPower Generic_p1TreasureGoblinOnDeathAnniversaryPortal { get; }
+	public SnoPower Generic_p1TreasureGoblinOnDeathAnniversaryPortal { get; }
 
-	public ISnoPower Generic_p1TreasureGoblinOnDeathGreedPortal { get; }
+	public SnoPower Generic_p1TreasureGoblinOnDeathGreedPortal { get; }
 
-	public ISnoPower Generic_p1TreasureGoblinOnDeathWhimsyshirePortal { get; }
+	public SnoPower Generic_p1TreasureGoblinOnDeathWhimsyshirePortal { get; }
 
-	public ISnoPower Generic_p2FallenLunaticAggroring { get; }
+	public SnoPower Generic_p2FallenLunaticAggroring { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing002 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing002 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing005 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing005 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing051 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing051 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing053 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing053 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing055 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing055 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing056 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing056 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing057 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing057 { get; }
 
-	public ISnoPower Generic_P2SpecialGoblinRiftSpawn { get; }
+	public SnoPower Generic_P2SpecialGoblinRiftSpawn { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing009 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing009 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing011 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing011 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing013 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing013 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing014 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing014 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing015 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing015 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing016 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing016 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing017 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing017 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing018 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing018 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing019 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing019 { get; }
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing020 { get; }
+	public SnoPower Generic_P42ItemPassiveUniqueRing020 { get; }
 
-	public ISnoPower Generic_p42ItemPassiveUniqueRing945 { get; }
+	public SnoPower Generic_p42ItemPassiveUniqueRing945 { get; }
 
-	public ISnoPower Generic_p43ADBarrelExplode { get; }
+	public SnoPower Generic_p43ADBarrelExplode { get; }
 
-	public ISnoPower Generic_p43ADEventAnvilOfFury { get; }
+	public SnoPower Generic_p43ADEventAnvilOfFury { get; }
 
-	public ISnoPower Generic_p43ADTrapArrow { get; }
+	public SnoPower Generic_p43ADTrapArrow { get; }
 
-	public ISnoPower Generic_p43d1ButcherMeleeBasic { get; }
+	public SnoPower Generic_p43d1ButcherMeleeBasic { get; }
 
-	public ISnoPower Generic_p43d1DiabloClawRip { get; }
+	public SnoPower Generic_p43d1DiabloClawRip { get; }
 
-	public ISnoPower Generic_p43d1fastMummyMelee { get; }
+	public SnoPower Generic_p43d1fastMummyMelee { get; }
 
-	public ISnoPower Generic_p43d1fastMummyStealth { get; }
+	public SnoPower Generic_p43d1fastMummyStealth { get; }
 
-	public ISnoPower Generic_p43d1FleshPitFlyerBlink { get; }
+	public SnoPower Generic_p43d1FleshPitFlyerBlink { get; }
 
-	public ISnoPower Generic_p43d1GorehoundAcidSpit { get; }
+	public SnoPower Generic_p43d1GorehoundAcidSpit { get; }
 
-	public ISnoPower Generic_p43d1MageFlash { get; }
+	public SnoPower Generic_p43d1MageFlash { get; }
 
-	public ISnoPower Generic_p43d1MageTeleport { get; }
+	public SnoPower Generic_p43d1MageTeleport { get; }
 
-	public ISnoPower Generic_p43d1TerrorDemonLightningBreath { get; }
+	public SnoPower Generic_p43d1TerrorDemonLightningBreath { get; }
 
-	public ISnoPower Generic_p43d1ZoltunKulleFieryBoulder { get; }
+	public SnoPower Generic_p43d1ZoltunKulleFieryBoulder { get; }
 
-	public ISnoPower Generic_p43d1ZoltunKulleTeleport { get; }
+	public SnoPower Generic_p43d1ZoltunKulleTeleport { get; }
 
-	public ISnoPower Generic_p43d1ZombieSkinnyMelee { get; }
+	public SnoPower Generic_p43d1ZombieSkinnyMelee { get; }
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing007 { get; }
+	public SnoPower Generic_P43ItemPassiveUniqueRing007 { get; }
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing008 { get; }
+	public SnoPower Generic_P43ItemPassiveUniqueRing008 { get; }
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing009 { get; }
+	public SnoPower Generic_P43ItemPassiveUniqueRing009 { get; }
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P43ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P4CrabMotherEnrage { get; }
+	public SnoPower Generic_P4CrabMotherEnrage { get; }
 
-	public ISnoPower Generic_P4DemonFlyerFireBreath { get; }
+	public SnoPower Generic_P4DemonFlyerFireBreath { get; }
 
-	public ISnoPower Generic_p4demonTrooperSpecialMelee { get; }
+	public SnoPower Generic_p4demonTrooperSpecialMelee { get; }
 
-	public ISnoPower Generic_P4ForestMysteriousHermitArcaneFireball { get; }
+	public SnoPower Generic_P4ForestMysteriousHermitArcaneFireball { get; }
 
-	public ISnoPower Generic_P4ForestMysteriousHermitArcaneFireball_ { get; }
+	public SnoPower Generic_P4ForestMysteriousHermitArcaneFireball_ { get; }
 
-	public ISnoPower Generic_P4ForestMysteriousHermitArcaneFlameWall_ { get; }
+	public SnoPower Generic_P4ForestMysteriousHermitArcaneFlameWall_ { get; }
 
-	public ISnoPower Generic_p4ForestMysteriousHermitBoomerangBlade { get; }
+	public SnoPower Generic_p4ForestMysteriousHermitBoomerangBlade { get; }
 
-	public ISnoPower Generic_p4ForestMysteriousHermitProjectile { get; }
+	public SnoPower Generic_p4ForestMysteriousHermitProjectile { get; }
 
-	public ISnoPower Generic_p4ForestMysteriousHermitTeleportIllusion { get; }
+	public SnoPower Generic_p4ForestMysteriousHermitTeleportIllusion { get; }
 
-	public ISnoPower Generic_P4ForestMysteriousManSpiritForm { get; }
+	public SnoPower Generic_P4ForestMysteriousManSpiritForm { get; }
 
-	public ISnoPower Generic_P4ForestMysteriousManSpiritSetup { get; }
+	public SnoPower Generic_P4ForestMysteriousManSpiritSetup { get; }
 
-	public ISnoPower Generic_p4GoatmanFireball { get; }
+	public SnoPower Generic_p4GoatmanFireball { get; }
 
-	public ISnoPower Generic_p4IceGoatmanRangedChargedShot { get; }
+	public SnoPower Generic_p4IceGoatmanRangedChargedShot { get; }
 
-	public ISnoPower Generic_p4IcePorcupineBackpedalShot { get; }
+	public SnoPower Generic_p4IcePorcupineBackpedalShot { get; }
 
-	public ISnoPower Generic_p4IcePorcupineJumpBack { get; }
+	public SnoPower Generic_p4IcePorcupineJumpBack { get; }
 
-	public ISnoPower Generic_p4IcePorcupineNova { get; }
+	public SnoPower Generic_p4IcePorcupineNova { get; }
 
-	public ISnoPower Generic_p4IcePorcupineShot { get; }
+	public SnoPower Generic_p4IcePorcupineShot { get; }
 
-	public ISnoPower Generic_p4ItemPassiveUniqueRing024KKG { get; }
+	public SnoPower Generic_p4ItemPassiveUniqueRing024KKG { get; }
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing043SpawnDecoy { get; }
+	public SnoPower Generic_P4ItemPassiveUniqueRing043SpawnDecoy { get; }
 
-	public ISnoPower Generic_p4LRBossFedExCharge { get; }
+	public SnoPower Generic_p4LRBossFedExCharge { get; }
 
-	public ISnoPower Generic_p4LRBossSpawnBoneTurrets { get; }
+	public SnoPower Generic_p4LRBossSpawnBoneTurrets { get; }
 
-	public ISnoPower Generic_p4LRTerrorDemonWall { get; }
+	public SnoPower Generic_p4LRTerrorDemonWall { get; }
 
-	public ISnoPower Generic_p4MaggotSuicideProgressiveFreeze { get; }
+	public SnoPower Generic_p4MaggotSuicideProgressiveFreeze { get; }
 
-	public ISnoPower Generic_P4MermaidHydra { get; }
+	public SnoPower Generic_P4MermaidHydra { get; }
 
-	public ISnoPower Generic_p4MoleRatCharge { get; }
+	public SnoPower Generic_p4MoleRatCharge { get; }
 
-	public ISnoPower Generic_p4rathostteleport { get; }
+	public SnoPower Generic_p4rathostteleport { get; }
 
-	public ISnoPower Generic_p4RatKingDoubleSwing { get; }
+	public SnoPower Generic_p4RatKingDoubleSwing { get; }
 
-	public ISnoPower Generic_p4RatKingLifetimeBuffPlagued { get; }
+	public SnoPower Generic_p4RatKingLifetimeBuffPlagued { get; }
 
-	public ISnoPower Generic_p4RatKingRatBallMonsterSetup { get; }
+	public SnoPower Generic_p4RatKingRatBallMonsterSetup { get; }
 
-	public ISnoPower Generic_p4RatKingSummonRatBallMonster { get; }
+	public SnoPower Generic_p4RatKingSummonRatBallMonster { get; }
 
-	public ISnoPower Generic_p4RatKingSummonRatVolcano { get; }
+	public SnoPower Generic_p4RatKingSummonRatVolcano { get; }
 
-	public ISnoPower Generic_p4RatKingThunderdome { get; }
+	public SnoPower Generic_p4RatKingThunderdome { get; }
 
-	public ISnoPower Generic_p4RatKingWaspRain { get; }
+	public SnoPower Generic_p4RatKingWaspRain { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianBurrowOut { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianBurrowOut { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianCombatRoll { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianCombatRoll { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianFuriousCharge { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianFuriousCharge { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianGroundstomp { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianGroundstomp { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianHammerOfTheAncients { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianHammerOfTheAncients { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianIntroFear { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianIntroFear { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianLeapQuake { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianLeapQuake { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianShout { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianShout { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianSummon { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianSummon { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianWeaponThrow { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianWeaponThrow { get; }
 
-	public ISnoPower Generic_P4RuinsCannibalBarbarianWhirlwind { get; }
+	public SnoPower Generic_P4RuinsCannibalBarbarianWhirlwind { get; }
 
-	public ISnoPower Generic_p4ruinsfrostEventTheZiggurat { get; }
+	public SnoPower Generic_p4ruinsfrostEventTheZiggurat { get; }
 
-	public ISnoPower Generic_P4RuinsFrostTrapSwingingBlade { get; }
+	public SnoPower Generic_P4RuinsFrostTrapSwingingBlade { get; }
 
-	public ISnoPower Generic_P4SacrificeMonsterBreakableNova { get; }
+	public SnoPower Generic_P4SacrificeMonsterBreakableNova { get; }
 
-	public ISnoPower Generic_P4SacrificeMonsterEnrage { get; }
+	public SnoPower Generic_P4SacrificeMonsterEnrage { get; }
 
-	public ISnoPower Generic_P4SandWaspProjectile { get; }
+	public SnoPower Generic_P4SandWaspProjectile { get; }
 
-	public ISnoPower Generic_p4SasquatchGorillaPound { get; }
+	public SnoPower Generic_p4SasquatchGorillaPound { get; }
 
-	public ISnoPower Generic_p4SasquatchRockPunchKnockback { get; }
+	public SnoPower Generic_p4SasquatchRockPunchKnockback { get; }
 
-	public ISnoPower Generic_p4SasquatchSpikeLine { get; }
+	public SnoPower Generic_p4SasquatchSpikeLine { get; }
 
-	public ISnoPower Generic_p4SasquatchTriplePunch { get; }
+	public SnoPower Generic_p4SasquatchTriplePunch { get; }
 
-	public ISnoPower Generic_p4ScavengerSpawnerADeath { get; }
+	public SnoPower Generic_p4ScavengerSpawnerADeath { get; }
 
-	public ISnoPower Generic_p4ScorpionBugHoverProjectile { get; }
+	public SnoPower Generic_p4ScorpionBugHoverProjectile { get; }
 
-	public ISnoPower Generic_p4SeaMonsterSpawnCrabs { get; }
+	public SnoPower Generic_p4SeaMonsterSpawnCrabs { get; }
 
-	public ISnoPower Generic_p4SetDungBarbKingsEnmy { get; }
+	public SnoPower Generic_p4SetDungBarbKingsEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungBarbKingsPly { get; }
+	public SnoPower Generic_p4SetDungBarbKingsPly { get; }
 
-	public ISnoPower Generic_p4SetDungBarbMightEnmy { get; }
+	public SnoPower Generic_p4SetDungBarbMightEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungBarbMightPly { get; }
+	public SnoPower Generic_p4SetDungBarbMightPly { get; }
 
-	public ISnoPower Generic_p4SetDungBarbRaekorEnmy { get; }
+	public SnoPower Generic_p4SetDungBarbRaekorEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungBarbRaekorPly { get; }
+	public SnoPower Generic_p4SetDungBarbRaekorPly { get; }
 
-	public ISnoPower Generic_p4SetDungBarbWastesEnmy { get; }
+	public SnoPower Generic_p4SetDungBarbWastesEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungBarbWastesPly { get; }
+	public SnoPower Generic_p4SetDungBarbWastesPly { get; }
 
-	public ISnoPower Generic_p4SetDungCruAkkhanEnmy { get; }
+	public SnoPower Generic_p4SetDungCruAkkhanEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungCruAkkhanPly { get; }
+	public SnoPower Generic_p4SetDungCruAkkhanPly { get; }
 
-	public ISnoPower Generic_p4SetDungCruRolandEnmy { get; }
+	public SnoPower Generic_p4SetDungCruRolandEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungCruRolandPly { get; }
+	public SnoPower Generic_p4SetDungCruRolandPly { get; }
 
-	public ISnoPower Generic_p4SetDungCruSeekerEnmy { get; }
+	public SnoPower Generic_p4SetDungCruSeekerEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungCruSeekerPly { get; }
+	public SnoPower Generic_p4SetDungCruSeekerPly { get; }
 
-	public ISnoPower Generic_p4SetDungCruThornsEnmy { get; }
+	public SnoPower Generic_p4SetDungCruThornsEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungCruThornsPly { get; }
+	public SnoPower Generic_p4SetDungCruThornsPly { get; }
 
-	public ISnoPower Generic_p4SetDungDeathBarbKings { get; }
+	public SnoPower Generic_p4SetDungDeathBarbKings { get; }
 
-	public ISnoPower Generic_p4SetDungDeathBarbMight { get; }
+	public SnoPower Generic_p4SetDungDeathBarbMight { get; }
 
-	public ISnoPower Generic_p4SetDungDeathBarbRaekor { get; }
+	public SnoPower Generic_p4SetDungDeathBarbRaekor { get; }
 
-	public ISnoPower Generic_p4SetDungDeathBarbWastes { get; }
+	public SnoPower Generic_p4SetDungDeathBarbWastes { get; }
 
-	public ISnoPower Generic_p4SetDungDeathCruAkkhan { get; }
+	public SnoPower Generic_p4SetDungDeathCruAkkhan { get; }
 
-	public ISnoPower Generic_p4SetDungDeathCruRoland { get; }
+	public SnoPower Generic_p4SetDungDeathCruRoland { get; }
 
-	public ISnoPower Generic_p4SetDungDeathCruSeeker { get; }
+	public SnoPower Generic_p4SetDungDeathCruSeeker { get; }
 
-	public ISnoPower Generic_p4SetDungDeathCruThorns { get; }
+	public SnoPower Generic_p4SetDungDeathCruThorns { get; }
 
-	public ISnoPower Generic_p4SetDungDeathDHEss { get; }
+	public SnoPower Generic_p4SetDungDeathDHEss { get; }
 
-	public ISnoPower Generic_p4SetDungDeathDHMar { get; }
+	public SnoPower Generic_p4SetDungDeathDHMar { get; }
 
-	public ISnoPower Generic_p4SetDungDeathDHNat { get; }
+	public SnoPower Generic_p4SetDungDeathDHNat { get; }
 
-	public ISnoPower Generic_p4SetDungDeathDHShadow { get; }
+	public SnoPower Generic_p4SetDungDeathDHShadow { get; }
 
-	public ISnoPower Generic_p4SetDungDeathMonkInnas { get; }
+	public SnoPower Generic_p4SetDungDeathMonkInnas { get; }
 
-	public ISnoPower Generic_p4SetDungDeathMonkStorms { get; }
+	public SnoPower Generic_p4SetDungDeathMonkStorms { get; }
 
-	public ISnoPower Generic_p4SetDungDeathMonkSunwuko { get; }
+	public SnoPower Generic_p4SetDungDeathMonkSunwuko { get; }
 
-	public ISnoPower Generic_p4SetDungDeathMonkUliana { get; }
+	public SnoPower Generic_p4SetDungDeathMonkUliana { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWDHaunt { get; }
+	public SnoPower Generic_p4SetDungDeathWDHaunt { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWDJade { get; }
+	public SnoPower Generic_p4SetDungDeathWDJade { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWDSpider { get; }
+	public SnoPower Generic_p4SetDungDeathWDSpider { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWDTooth { get; }
+	public SnoPower Generic_p4SetDungDeathWDTooth { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWizFirebird { get; }
+	public SnoPower Generic_p4SetDungDeathWizFirebird { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWizOpus { get; }
+	public SnoPower Generic_p4SetDungDeathWizOpus { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWizRasha { get; }
+	public SnoPower Generic_p4SetDungDeathWizRasha { get; }
 
-	public ISnoPower Generic_p4SetDungDeathWizVyr { get; }
+	public SnoPower Generic_p4SetDungDeathWizVyr { get; }
 
-	public ISnoPower Generic_p4SetDungDHEssEnmy { get; }
+	public SnoPower Generic_p4SetDungDHEssEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungDHEssPly { get; }
+	public SnoPower Generic_p4SetDungDHEssPly { get; }
 
-	public ISnoPower Generic_p4SetDungDHMarEnmy { get; }
+	public SnoPower Generic_p4SetDungDHMarEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungDHMarPly { get; }
+	public SnoPower Generic_p4SetDungDHMarPly { get; }
 
-	public ISnoPower Generic_p4SetDungDHNatEnmy { get; }
+	public SnoPower Generic_p4SetDungDHNatEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungDHNatPly { get; }
+	public SnoPower Generic_p4SetDungDHNatPly { get; }
 
-	public ISnoPower Generic_p4SetDungDHShadowEnmy { get; }
+	public SnoPower Generic_p4SetDungDHShadowEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungDHShadowPly { get; }
+	public SnoPower Generic_p4SetDungDHShadowPly { get; }
 
-	public ISnoPower Generic_p4SetDungGenericsEnmy { get; }
+	public SnoPower Generic_p4SetDungGenericsEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungGenericsPly { get; }
+	public SnoPower Generic_p4SetDungGenericsPly { get; }
 
-	public ISnoPower Generic_p4SetDungGenericsPlyBalance { get; }
+	public SnoPower Generic_p4SetDungGenericsPlyBalance { get; }
 
-	public ISnoPower Generic_p4SetDungGenericsPortal { get; }
+	public SnoPower Generic_p4SetDungGenericsPortal { get; }
 
-	public ISnoPower Generic_p4SetDungMonkInnasEnmy { get; }
+	public SnoPower Generic_p4SetDungMonkInnasEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungMonkInnasPly { get; }
+	public SnoPower Generic_p4SetDungMonkInnasPly { get; }
 
-	public ISnoPower Generic_p4SetDungMonkStormsEnmy { get; }
+	public SnoPower Generic_p4SetDungMonkStormsEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungMonkStormsPly { get; }
+	public SnoPower Generic_p4SetDungMonkStormsPly { get; }
 
-	public ISnoPower Generic_p4SetDungMonkSunwukoEnmy { get; }
+	public SnoPower Generic_p4SetDungMonkSunwukoEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungMonkSunwukoPly { get; }
+	public SnoPower Generic_p4SetDungMonkSunwukoPly { get; }
 
-	public ISnoPower Generic_p4SetDungMonkUlianaEnmy { get; }
+	public SnoPower Generic_p4SetDungMonkUlianaEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungMonkUlianaPly { get; }
+	public SnoPower Generic_p4SetDungMonkUlianaPly { get; }
 
-	public ISnoPower Generic_p4SetDungMonsterAffixMortarCast { get; }
+	public SnoPower Generic_p4SetDungMonsterAffixMortarCast { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalBarbKings { get; }
+	public SnoPower Generic_p4SetDungPedestalBarbKings { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalBarbMight { get; }
+	public SnoPower Generic_p4SetDungPedestalBarbMight { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalBarbRaekor { get; }
+	public SnoPower Generic_p4SetDungPedestalBarbRaekor { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalBarbWastes { get; }
+	public SnoPower Generic_p4SetDungPedestalBarbWastes { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalCruAkkhan { get; }
+	public SnoPower Generic_p4SetDungPedestalCruAkkhan { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalCruRoland { get; }
+	public SnoPower Generic_p4SetDungPedestalCruRoland { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalCruSeeker { get; }
+	public SnoPower Generic_p4SetDungPedestalCruSeeker { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalCruThorns { get; }
+	public SnoPower Generic_p4SetDungPedestalCruThorns { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalDHEss { get; }
+	public SnoPower Generic_p4SetDungPedestalDHEss { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalDHMar { get; }
+	public SnoPower Generic_p4SetDungPedestalDHMar { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalDHNat { get; }
+	public SnoPower Generic_p4SetDungPedestalDHNat { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalDHShadow { get; }
+	public SnoPower Generic_p4SetDungPedestalDHShadow { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalMonkInnas { get; }
+	public SnoPower Generic_p4SetDungPedestalMonkInnas { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalMonkStorms { get; }
+	public SnoPower Generic_p4SetDungPedestalMonkStorms { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalMonkSunwuko { get; }
+	public SnoPower Generic_p4SetDungPedestalMonkSunwuko { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalMonkUliana { get; }
+	public SnoPower Generic_p4SetDungPedestalMonkUliana { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWDHaunt { get; }
+	public SnoPower Generic_p4SetDungPedestalWDHaunt { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWDJade { get; }
+	public SnoPower Generic_p4SetDungPedestalWDJade { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWDSpider { get; }
+	public SnoPower Generic_p4SetDungPedestalWDSpider { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWDTooth { get; }
+	public SnoPower Generic_p4SetDungPedestalWDTooth { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWizFirebird { get; }
+	public SnoPower Generic_p4SetDungPedestalWizFirebird { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWizOpus { get; }
+	public SnoPower Generic_p4SetDungPedestalWizOpus { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWizRasha { get; }
+	public SnoPower Generic_p4SetDungPedestalWizRasha { get; }
 
-	public ISnoPower Generic_p4SetDungPedestalWizVyr { get; }
+	public SnoPower Generic_p4SetDungPedestalWizVyr { get; }
 
-	public ISnoPower Generic_p4SetDungPortalChecks { get; }
+	public SnoPower Generic_p4SetDungPortalChecks { get; }
 
-	public ISnoPower Generic_p4SetDungWDHauntEnmy { get; }
+	public SnoPower Generic_p4SetDungWDHauntEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWDHauntPly { get; }
+	public SnoPower Generic_p4SetDungWDHauntPly { get; }
 
-	public ISnoPower Generic_p4SetDungWDJadeEnmy { get; }
+	public SnoPower Generic_p4SetDungWDJadeEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWDJadePly { get; }
+	public SnoPower Generic_p4SetDungWDJadePly { get; }
 
-	public ISnoPower Generic_p4SetDungWDSpiderEnmy { get; }
+	public SnoPower Generic_p4SetDungWDSpiderEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWDSpiderPly { get; }
+	public SnoPower Generic_p4SetDungWDSpiderPly { get; }
 
-	public ISnoPower Generic_p4SetDungWDToothEnmy { get; }
+	public SnoPower Generic_p4SetDungWDToothEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWDToothPly { get; }
+	public SnoPower Generic_p4SetDungWDToothPly { get; }
 
-	public ISnoPower Generic_p4SetDungWestmarchBruteCharge { get; }
+	public SnoPower Generic_p4SetDungWestmarchBruteCharge { get; }
 
-	public ISnoPower Generic_p4SetDungWizFirebirdEnmy { get; }
+	public SnoPower Generic_p4SetDungWizFirebirdEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWizFirebirdPly { get; }
+	public SnoPower Generic_p4SetDungWizFirebirdPly { get; }
 
-	public ISnoPower Generic_p4SetDungWizOpusEnmy { get; }
+	public SnoPower Generic_p4SetDungWizOpusEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWizOpusPly { get; }
+	public SnoPower Generic_p4SetDungWizOpusPly { get; }
 
-	public ISnoPower Generic_p4SetDungWizRashaEnmy { get; }
+	public SnoPower Generic_p4SetDungWizRashaEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWizRashaPly { get; }
+	public SnoPower Generic_p4SetDungWizRashaPly { get; }
 
-	public ISnoPower Generic_p4SetDungWizVyrEnmy { get; }
+	public SnoPower Generic_p4SetDungWizVyrEnmy { get; }
 
-	public ISnoPower Generic_p4SetDungWizVyrPly { get; }
+	public SnoPower Generic_p4SetDungWizVyrPly { get; }
 
-	public ISnoPower Generic_P4ShrineDebuffDamage { get; }
+	public SnoPower Generic_P4ShrineDebuffDamage { get; }
 
-	public ISnoPower Generic_P4ShrineDebuffSpawner { get; }
+	public SnoPower Generic_P4ShrineDebuffSpawner { get; }
 
-	public ISnoPower Generic_p4SkeletonZombieSpawnerADeath { get; }
+	public SnoPower Generic_p4SkeletonZombieSpawnerADeath { get; }
 
-	public ISnoPower Generic_P4SpiderBombAODDamage { get; }
+	public SnoPower Generic_P4SpiderBombAODDamage { get; }
 
-	public ISnoPower Generic_P4SpiderBombBurrowIn { get; }
+	public SnoPower Generic_P4SpiderBombBurrowIn { get; }
 
-	public ISnoPower Generic_p4WaspNestDeath { get; }
+	public SnoPower Generic_p4WaspNestDeath { get; }
 
-	public ISnoPower Generic_p4WickermanSpawnerADeath { get; }
+	public SnoPower Generic_p4WickermanSpawnerADeath { get; }
 
-	public ISnoPower Generic_P4WoodWraithSummonSporesCeremonyEvent { get; }
+	public SnoPower Generic_P4WoodWraithSummonSporesCeremonyEvent { get; }
 
-	public ISnoPower Generic_p4WoodWraithVineTrap { get; }
+	public SnoPower Generic_p4WoodWraithVineTrap { get; }
 
-	public ISnoPower Generic_p4YetiIceBreath { get; }
+	public SnoPower Generic_p4YetiIceBreath { get; }
 
-	public ISnoPower Generic_p4YetiIceSpikes { get; }
+	public SnoPower Generic_p4YetiIceSpikes { get; }
 
-	public ISnoPower Generic_p4YetiMeleeBasic { get; }
+	public SnoPower Generic_p4YetiMeleeBasic { get; }
 
-	public ISnoPower Generic_p4YetiOverheadSmash { get; }
+	public SnoPower Generic_p4YetiOverheadSmash { get; }
 
-	public ISnoPower Generic_p4YetiSnowBoulderRoll { get; }
+	public SnoPower Generic_p4YetiSnowBoulderRoll { get; }
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P5ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P610ItemPassiveUniqueMojo010x1tooltipDummy2 { get; }
+	public SnoPower Generic_P610ItemPassiveUniqueMojo010x1tooltipDummy2 { get; }
 
-	public ISnoPower Generic_P61ItemPassiveUniqueRing021 { get; }
+	public SnoPower Generic_P61ItemPassiveUniqueRing021 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing930 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing930 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing932 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing932 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing933 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing933 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing934 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing934 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing935 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing935 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing941 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing941 { get; }
 
-	public ISnoPower Generic_P66ItemPassiveUniqueRing946 { get; }
+	public SnoPower Generic_P66ItemPassiveUniqueRing946 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing947 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing947 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing948 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing948 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing949 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing949 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing950 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing950 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing951 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing951 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing952 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing952 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing953 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing953 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing956 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing956 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing957 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing957 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing958 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing958 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing959 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing959 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing960 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing960 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing961 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing961 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing962 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing962 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing963 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing963 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing964 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing964 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing965 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing965 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing966 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing966 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing002 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing002 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing006 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing006 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing007 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing007 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing008 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing008 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing009 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing009 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing011 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing011 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing013 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing013 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing014 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing014 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing970 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing970 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing011 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing011 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing013 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing013 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing014 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing014 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing015 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing015 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing100 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing100 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing101 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing101 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing102 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing102 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing103 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing103 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing104 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing104 { get; }
 
-	public ISnoPower Generic_p6CrowHoundProjectile { get; }
+	public SnoPower Generic_p6CrowHoundProjectile { get; }
 
-	public ISnoPower Generic_P6EnvyBossLookSwitch { get; }
+	public SnoPower Generic_P6EnvyBossLookSwitch { get; }
 
-	public ISnoPower Generic_P6EnvyBossMirrorPortBuff { get; }
+	public SnoPower Generic_P6EnvyBossMirrorPortBuff { get; }
 
-	public ISnoPower Generic_P6EnvyBossMirrorPortBuffRemove { get; }
+	public SnoPower Generic_P6EnvyBossMirrorPortBuffRemove { get; }
 
-	public ISnoPower Generic_P6EnvyBossRangedPortBuff { get; }
+	public SnoPower Generic_P6EnvyBossRangedPortBuff { get; }
 
-	public ISnoPower Generic_P6EnvyDMGReduction { get; }
+	public SnoPower Generic_P6EnvyDMGReduction { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing002 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing002 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing004 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing004 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing005 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing005 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing006 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing006 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing007 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing007 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing008 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing008 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing009 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing009 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing011 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing011 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing013 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing013 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing014 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing014 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing015 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing015 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing016 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing016 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing017 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing017 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing018 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing018 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing019 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing019 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing020 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing020 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing021 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing021 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing022 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing022 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing023 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing023 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing024 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing024 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing025 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing025 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing026 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing026 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing027 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing027 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing028 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing028 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing029 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing029 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing030 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing030 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing031 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing031 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing032 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing032 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing033 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing033 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing034 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing034 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing035 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing035 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing036 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing036 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing038 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing038 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing051 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing051 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing052 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing052 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing053 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing053 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing055 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing055 { get; }
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing056 { get; }
+	public SnoPower Generic_P6ItemPassiveUniqueRing056 { get; }
 
-	public ISnoPower Generic_P6NecroBoneSpikesInversePassability { get; }
+	public SnoPower Generic_P6NecroBoneSpikesInversePassability { get; }
 
-	public ISnoPower Generic_P6NecroBoneSpiritPassive { get; }
+	public SnoPower Generic_P6NecroBoneSpiritPassive { get; }
 
-	public ISnoPower Generic_P6NecroDevourAura { get; }
+	public SnoPower Generic_P6NecroDevourAura { get; }
 
-	public ISnoPower Generic_P6NecroFrailtyAura { get; }
+	public SnoPower Generic_P6NecroFrailtyAura { get; }
 
-	public ISnoPower Generic_P6NecroGenericCorpseTargeting { get; }
+	public SnoPower Generic_P6NecroGenericCorpseTargeting { get; }
 
-	public ISnoPower Generic_P6NecroGolemMelee { get; }
+	public SnoPower Generic_P6NecroGolemMelee { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadDDecayAura { get; }
+	public SnoPower Generic_P6NecroRaiseDeadDDecayAura { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadDDecayAuraSpawn { get; }
+	public SnoPower Generic_P6NecroRaiseDeadDDecayAuraSpawn { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadEArcherAttack { get; }
+	public SnoPower Generic_P6NecroRaiseDeadEArcherAttack { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadEArcherSpawnAttack { get; }
+	public SnoPower Generic_P6NecroRaiseDeadEArcherSpawnAttack { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadMageSpawnAttack { get; }
+	public SnoPower Generic_P6NecroRaiseDeadMageSpawnAttack { get; }
 
-	public ISnoPower Generic_P6NecroRaiseDeadMageSpawnAttackNoTarget { get; }
+	public SnoPower Generic_P6NecroRaiseDeadMageSpawnAttackNoTarget { get; }
 
-	public ISnoPower Generic_p6NecroRaiseGolemBloodGolemVeinAoE { get; }
+	public SnoPower Generic_p6NecroRaiseGolemBloodGolemVeinAoE { get; }
 
-	public ISnoPower Generic_P6NecroRaiseGolemBoneGolemTornado { get; }
+	public SnoPower Generic_P6NecroRaiseGolemBoneGolemTornado { get; }
 
-	public ISnoPower Generic_P6NecroRaiseGolemConsumeGolemEatCorpses { get; }
+	public SnoPower Generic_P6NecroRaiseGolemConsumeGolemEatCorpses { get; }
 
-	public ISnoPower Generic_p6NecroRaiseGolemDestroyBreakables { get; }
+	public SnoPower Generic_p6NecroRaiseGolemDestroyBreakables { get; }
 
-	public ISnoPower Generic_P6NecroRaiseGolemFleshGolemDropCorpses { get; }
+	public SnoPower Generic_P6NecroRaiseGolemFleshGolemDropCorpses { get; }
 
-	public ISnoPower Generic_P6NecroRaiseGolemIceGolemFreeze { get; }
+	public SnoPower Generic_P6NecroRaiseGolemIceGolemFreeze { get; }
 
-	public ISnoPower Generic_P6NecroRaiseSkeletonsChargeAttack { get; }
+	public SnoPower Generic_P6NecroRaiseSkeletonsChargeAttack { get; }
 
-	public ISnoPower Generic_p6NecroReviveAngelCorruptPiercingDash { get; }
+	public SnoPower Generic_p6NecroReviveAngelCorruptPiercingDash { get; }
 
-	public ISnoPower Generic_p6NecroRevivearmorScavengerbuff { get; }
+	public SnoPower Generic_p6NecroRevivearmorScavengerbuff { get; }
 
-	public ISnoPower Generic_p6NecroReviveBeastCharge { get; }
+	public SnoPower Generic_p6NecroReviveBeastCharge { get; }
 
-	public ISnoPower Generic_p6NecroReviveBigRedCharge { get; }
+	public SnoPower Generic_p6NecroReviveBigRedCharge { get; }
 
-	public ISnoPower Generic_p6NecroReviveBogFamilyRangedRapidShot { get; }
+	public SnoPower Generic_p6NecroReviveBogFamilyRangedRapidShot { get; }
 
-	public ISnoPower Generic_p6NecroReviveBrickhouseSlam { get; }
+	public SnoPower Generic_p6NecroReviveBrickhouseSlam { get; }
 
-	public ISnoPower Generic_p6NecroReviveCorpulentExplode { get; }
+	public SnoPower Generic_p6NecroReviveCorpulentExplode { get; }
 
-	public ISnoPower Generic_p6NecroReviveCrowHoundProjectile { get; }
+	public SnoPower Generic_p6NecroReviveCrowHoundProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveDarkAngelSoulRush { get; }
+	public SnoPower Generic_p6NecroReviveDarkAngelSoulRush { get; }
 
-	public ISnoPower Generic_p6NecroRevivedeathMaidenSpinAttack { get; }
+	public SnoPower Generic_p6NecroRevivedeathMaidenSpinAttack { get; }
 
-	public ISnoPower Generic_p6NecroReviveDemonFlyerProjectile { get; }
+	public SnoPower Generic_p6NecroReviveDemonFlyerProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveDervishWhirlwind { get; }
+	public SnoPower Generic_p6NecroReviveDervishWhirlwind { get; }
 
-	public ISnoPower Generic_p6NecroReviveFallenShamanProjectile { get; }
+	public SnoPower Generic_p6NecroReviveFallenShamanProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveFastMummyDiseaseCloud { get; }
+	public SnoPower Generic_p6NecroReviveFastMummyDiseaseCloud { get; }
 
-	public ISnoPower Generic_p6NecroReviveFloaterAngelProjectile { get; }
+	public SnoPower Generic_p6NecroReviveFloaterAngelProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveGoatmanRangedProjectile { get; }
+	public SnoPower Generic_p6NecroReviveGoatmanRangedProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveGoatmanShamanLightningbolt { get; }
+	public SnoPower Generic_p6NecroReviveGoatmanShamanLightningbolt { get; }
 
-	public ISnoPower Generic_P6NecroReviveGoatMutantRangedProjectile { get; }
+	public SnoPower Generic_P6NecroReviveGoatMutantRangedProjectile { get; }
 
-	public ISnoPower Generic_P6NecroReviveGoatMutantShamanBlast { get; }
+	public SnoPower Generic_P6NecroReviveGoatMutantShamanBlast { get; }
 
-	public ISnoPower Generic_p6NecroReviveHoodedNightmareProjectile { get; }
+	public SnoPower Generic_p6NecroReviveHoodedNightmareProjectile { get; }
 
-	public ISnoPower Generic_P6NecroReviveIcePorcupineShot { get; }
+	public SnoPower Generic_P6NecroReviveIcePorcupineShot { get; }
 
-	public ISnoPower Generic_p6NecroReviveLacuniLeap { get; }
+	public SnoPower Generic_p6NecroReviveLacuniLeap { get; }
 
-	public ISnoPower Generic_p6NecroReviveLacuniMaleDoubleSwing { get; }
+	public SnoPower Generic_p6NecroReviveLacuniMaleDoubleSwing { get; }
 
-	public ISnoPower Generic_p6NecroReviveLeaperAngelLeap { get; }
+	public SnoPower Generic_p6NecroReviveLeaperAngelLeap { get; }
 
-	public ISnoPower Generic_P6NecroReviveMelee { get; }
+	public SnoPower Generic_P6NecroReviveMelee { get; }
 
-	public ISnoPower Generic_p6NecroReviveMermaidRangedProjectile { get; }
+	public SnoPower Generic_p6NecroReviveMermaidRangedProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveMoleMutantRangedProjectile { get; }
+	public SnoPower Generic_p6NecroReviveMoleMutantRangedProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveMoleMutantShamanProjectile { get; }
+	public SnoPower Generic_p6NecroReviveMoleMutantShamanProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveMorluSpellcasterBreathOfFire { get; }
+	public SnoPower Generic_p6NecroReviveMorluSpellcasterBreathOfFire { get; }
 
-	public ISnoPower Generic_p6NecroReviveNightScreamerProjectile { get; }
+	public SnoPower Generic_p6NecroReviveNightScreamerProjectile { get; }
 
-	public ISnoPower Generic_p6NecroRevivepandExtRanged { get; }
+	public SnoPower Generic_p6NecroRevivepandExtRanged { get; }
 
-	public ISnoPower Generic_p6NecroRevivePortalGuardianMinionprojectile { get; }
+	public SnoPower Generic_p6NecroRevivePortalGuardianMinionprojectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveQuillDemonProjectile { get; }
+	public SnoPower Generic_p6NecroReviveQuillDemonProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviverockwormprojectile { get; }
+	public SnoPower Generic_p6NecroReviverockwormprojectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveSandWaspProjectile { get; }
+	public SnoPower Generic_p6NecroReviveSandWaspProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveScorpionBugHoverProjectile { get; }
+	public SnoPower Generic_p6NecroReviveScorpionBugHoverProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveShepherdProjectile { get; }
+	public SnoPower Generic_p6NecroReviveShepherdProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveSkeletonArcherProjectile { get; }
+	public SnoPower Generic_p6NecroReviveSkeletonArcherProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveskeletonMageProjectile { get; }
+	public SnoPower Generic_p6NecroReviveskeletonMageProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveSkeletonSummonerProjectile { get; }
+	public SnoPower Generic_p6NecroReviveSkeletonSummonerProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveSniperAngelcloseRangedAttack { get; }
+	public SnoPower Generic_p6NecroReviveSniperAngelcloseRangedAttack { get; }
 
-	public ISnoPower Generic_p6NecroReviveSuccubusBloodStar { get; }
+	public SnoPower Generic_p6NecroReviveSuccubusBloodStar { get; }
 
-	public ISnoPower Generic_p6NecroReviveTempleCultistCasterProjectile { get; }
+	public SnoPower Generic_p6NecroReviveTempleCultistCasterProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveTempleCultistSuicide { get; }
+	public SnoPower Generic_p6NecroReviveTempleCultistSuicide { get; }
 
-	public ISnoPower Generic_p6NecroReviveThousandPounderKnockback { get; }
+	public SnoPower Generic_p6NecroReviveThousandPounderKnockback { get; }
 
-	public ISnoPower Generic_p6NecroReviveTriuneSummonerProjectile { get; }
+	public SnoPower Generic_p6NecroReviveTriuneSummonerProjectile { get; }
 
-	public ISnoPower Generic_p6NecroReviveUnburiedKnockback { get; }
+	public SnoPower Generic_p6NecroReviveUnburiedKnockback { get; }
 
-	public ISnoPower Generic_p6NecroReviveWerewolfMelee { get; }
+	public SnoPower Generic_p6NecroReviveWerewolfMelee { get; }
 
-	public ISnoPower Generic_p6NecroReviveWestmarchBruteBDecapitateSlide { get; }
+	public SnoPower Generic_p6NecroReviveWestmarchBruteBDecapitateSlide { get; }
 
-	public ISnoPower Generic_p6NecroReviveWestmarchBruteCharge { get; }
+	public SnoPower Generic_p6NecroReviveWestmarchBruteCharge { get; }
 
-	public ISnoPower Generic_p6NecroReviveWestmarchHoundTaunt { get; }
+	public SnoPower Generic_p6NecroReviveWestmarchHoundTaunt { get; }
 
-	public ISnoPower Generic_p6NecroReviveWestmarchHoundTauntSearch { get; }
+	public SnoPower Generic_p6NecroReviveWestmarchHoundTauntSearch { get; }
 
-	public ISnoPower Generic_p6NecroRevivewestmarchRangedProjectile { get; }
+	public SnoPower Generic_p6NecroRevivewestmarchRangedProjectile { get; }
 
-	public ISnoPower Generic_P6NecroReviveWraithMelee { get; }
+	public SnoPower Generic_P6NecroReviveWraithMelee { get; }
 
-	public ISnoPower Generic_p6NecroReviveZombieFemaleProjectile { get; }
+	public SnoPower Generic_p6NecroReviveZombieFemaleProjectile { get; }
 
-	public ISnoPower Generic_P6NecroSimulacrumWeaponMeleeInstant { get; }
+	public SnoPower Generic_P6NecroSimulacrumWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_P6NecroSkeletalWarriorMelee { get; }
+	public SnoPower Generic_P6NecroSkeletalWarriorMelee { get; }
 
-	public ISnoPower Generic_P6NecroSkeletalWarriorUberMelee { get; }
+	public SnoPower Generic_P6NecroSkeletalWarriorUberMelee { get; }
 
-	public ISnoPower Generic_P6NecroSkeletonMageFireProjectile { get; }
+	public SnoPower Generic_P6NecroSkeletonMageFireProjectile { get; }
 
-	public ISnoPower Generic_P6NecroTraitGolemSpawner { get; }
+	public SnoPower Generic_P6NecroTraitGolemSpawner { get; }
 
-	public ISnoPower Generic_P6NecroTraitSkeletonSpawner { get; }
+	public SnoPower Generic_P6NecroTraitSkeletonSpawner { get; }
 
-	public ISnoPower Generic_p6RavenFlyerJumpBackAttack { get; }
+	public SnoPower Generic_p6RavenFlyerJumpBackAttack { get; }
 
-	public ISnoPower Generic_p6RavenFlyerPathingBuff { get; }
+	public SnoPower Generic_p6RavenFlyerPathingBuff { get; }
 
-	public ISnoPower Generic_p6SetDungDeathNecroBlood { get; }
+	public SnoPower Generic_p6SetDungDeathNecroBlood { get; }
 
-	public ISnoPower Generic_p6SetDungDeathNecroBone { get; }
+	public SnoPower Generic_p6SetDungDeathNecroBone { get; }
 
-	public ISnoPower Generic_p6SetDungDeathNecroPlague { get; }
+	public SnoPower Generic_p6SetDungDeathNecroPlague { get; }
 
-	public ISnoPower Generic_p6SetDungDeathNecroSaint { get; }
+	public SnoPower Generic_p6SetDungDeathNecroSaint { get; }
 
-	public ISnoPower Generic_p6SetDungNecroBloodEnmy { get; }
+	public SnoPower Generic_p6SetDungNecroBloodEnmy { get; }
 
-	public ISnoPower Generic_p6SetDungNecroBloodPly { get; }
+	public SnoPower Generic_p6SetDungNecroBloodPly { get; }
 
-	public ISnoPower Generic_p6SetDungNecroBoneEnmy { get; }
+	public SnoPower Generic_p6SetDungNecroBoneEnmy { get; }
 
-	public ISnoPower Generic_p6SetDungNecroBonePly { get; }
+	public SnoPower Generic_p6SetDungNecroBonePly { get; }
 
-	public ISnoPower Generic_p6SetDungNecroPlagueEnmy { get; }
+	public SnoPower Generic_p6SetDungNecroPlagueEnmy { get; }
 
-	public ISnoPower Generic_p6SetDungNecroPlaguePly { get; }
+	public SnoPower Generic_p6SetDungNecroPlaguePly { get; }
 
-	public ISnoPower Generic_p6SetDungNecroSaintEnmy { get; }
+	public SnoPower Generic_p6SetDungNecroSaintEnmy { get; }
 
-	public ISnoPower Generic_p6SetDungNecroSaintPly { get; }
+	public SnoPower Generic_p6SetDungNecroSaintPly { get; }
 
-	public ISnoPower Generic_p6SetDungPedestalNecroBlood { get; }
+	public SnoPower Generic_p6SetDungPedestalNecroBlood { get; }
 
-	public ISnoPower Generic_p6SetDungPedestalNecroBone { get; }
+	public SnoPower Generic_p6SetDungPedestalNecroBone { get; }
 
-	public ISnoPower Generic_p6SetDungPedestalNecroPlague { get; }
+	public SnoPower Generic_p6SetDungPedestalNecroPlague { get; }
 
-	public ISnoPower Generic_p6SetDungPedestalNecroSaint { get; }
+	public SnoPower Generic_p6SetDungPedestalNecroSaint { get; }
 
-	public ISnoPower Generic_P6ShepherdBossTeleportOutro { get; }
+	public SnoPower Generic_P6ShepherdBossTeleportOutro { get; }
 
-	public ISnoPower Generic_p6ShepherdRangedAttack { get; }
+	public SnoPower Generic_p6ShepherdRangedAttack { get; }
 
-	public ISnoPower Generic_p6ShepherdRangedAttackBoss { get; }
+	public SnoPower Generic_p6ShepherdRangedAttackBoss { get; }
 
-	public ISnoPower Generic_p6ShepherdRangedAttackBossTransformed { get; }
+	public SnoPower Generic_p6ShepherdRangedAttackBossTransformed { get; }
 
-	public ISnoPower Generic_p6ShepherdRangedAttackNodmg { get; }
+	public SnoPower Generic_p6ShepherdRangedAttackNodmg { get; }
 
-	public ISnoPower Generic_P6ShepherdSpawnBossOutro { get; }
+	public SnoPower Generic_P6ShepherdSpawnBossOutro { get; }
 
-	public ISnoPower Generic_P6ShepherdSpawnIntro { get; }
+	public SnoPower Generic_P6ShepherdSpawnIntro { get; }
 
-	public ISnoPower Generic_P6ShepherdSpawnOutro { get; }
+	public SnoPower Generic_P6ShepherdSpawnOutro { get; }
 
-	public ISnoPower Generic_P6ShepherdTeleportIntro { get; }
+	public SnoPower Generic_P6ShepherdTeleportIntro { get; }
 
-	public ISnoPower Generic_P6ShepherdTeleportIntroMirror { get; }
+	public SnoPower Generic_P6ShepherdTeleportIntroMirror { get; }
 
-	public ISnoPower Generic_P6ShepherdTeleportOutro { get; }
+	public SnoPower Generic_P6ShepherdTeleportOutro { get; }
 
-	public ISnoPower Generic_p6TempleCultistLobbedShot { get; }
+	public SnoPower Generic_p6TempleCultistLobbedShot { get; }
 
-	public ISnoPower Generic_p6TempleCultistSuicide { get; }
+	public SnoPower Generic_p6TempleCultistSuicide { get; }
 
-	public ISnoPower Generic_p6TempleMonstrosityGrenadeVolley { get; }
+	public SnoPower Generic_p6TempleMonstrosityGrenadeVolley { get; }
 
-	public ISnoPower Generic_p6TempleMonstrosityMeleeLance { get; }
+	public SnoPower Generic_p6TempleMonstrosityMeleeLance { get; }
 
-	public ISnoPower Generic_P6WerewolfClawRush { get; }
+	public SnoPower Generic_P6WerewolfClawRush { get; }
 
-	public ISnoPower Generic_P6WerewolfHowl { get; }
+	public SnoPower Generic_P6WerewolfHowl { get; }
 
-	public ISnoPower Generic_P6WerewolfJumpBack { get; }
+	public SnoPower Generic_P6WerewolfJumpBack { get; }
 
-	public ISnoPower Generic_P6WerewolfLeap { get; }
+	public SnoPower Generic_P6WerewolfLeap { get; }
 
-	public ISnoPower Generic_P6WerewolfLeapFire { get; }
+	public SnoPower Generic_P6WerewolfLeapFire { get; }
 
-	public ISnoPower Generic_P6WerewolfMelee { get; }
+	public SnoPower Generic_P6WerewolfMelee { get; }
 
-	public ISnoPower Generic_P6WerewolfMeleeFire { get; }
+	public SnoPower Generic_P6WerewolfMeleeFire { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal001 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal001 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal002 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal002 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal003 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal003 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal004 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal004 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal005 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal005 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal006 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal006 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal007 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal007 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal008 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal008 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal009 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal009 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal010 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal010 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal011 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal011 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal012 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal012 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal013 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal013 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal014 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal014 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal015 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal015 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal016 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal016 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal017 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal017 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal018 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal018 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal019 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal019 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal020 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal020 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal021 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal021 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal022 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal022 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal023 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal023 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal024 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal024 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveEthereal025 { get; }
+	public SnoPower Generic_P71ItemPassiveEthereal025 { get; }
 
-	public ISnoPower Generic_P71ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P71ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P7ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P7ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P7ItemPassiveUniqueRing002 { get; }
+	public SnoPower Generic_P7ItemPassiveUniqueRing002 { get; }
 
-	public ISnoPower Generic_P7ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P7ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_PagesBuffDamage { get; }
+	public SnoPower Generic_PagesBuffDamage { get; }
 
-	public ISnoPower Generic_PagesBuffElectrified { get; }
+	public SnoPower Generic_PagesBuffElectrified { get; }
 
-	public ISnoPower Generic_PagesBuffElectrifiedCast { get; }
+	public SnoPower Generic_PagesBuffElectrifiedCast { get; }
 
-	public ISnoPower Generic_PagesBuffElectrifiedCastTieredRift { get; }
+	public SnoPower Generic_PagesBuffElectrifiedCastTieredRift { get; }
 
-	public ISnoPower Generic_PagesBuffElectrifiedTieredRift { get; }
+	public SnoPower Generic_PagesBuffElectrifiedTieredRift { get; }
 
-	public ISnoPower Generic_PagesBuffInfiniteCasting { get; }
+	public SnoPower Generic_PagesBuffInfiniteCasting { get; }
 
-	public ISnoPower Generic_PagesBuffInvulnerable { get; }
+	public SnoPower Generic_PagesBuffInvulnerable { get; }
 
-	public ISnoPower Generic_PagesBuffInvulnerableCastv2 { get; }
+	public SnoPower Generic_PagesBuffInvulnerableCastv2 { get; }
 
-	public ISnoPower Generic_PagesBuffRunSpeed { get; }
+	public SnoPower Generic_PagesBuffRunSpeed { get; }
 
-	public ISnoPower Generic_PagesBuffRunSpeedKnockbackCast { get; }
+	public SnoPower Generic_PagesBuffRunSpeedKnockbackCast { get; }
 
-	public ISnoPower Generic_PagesBuffRunSpeedWallerCast { get; }
+	public SnoPower Generic_PagesBuffRunSpeedWallerCast { get; }
 
-	public ISnoPower Generic_PagesBuffRunSpeedWallerCastUpgrade { get; }
+	public SnoPower Generic_PagesBuffRunSpeedWallerCastUpgrade { get; }
 
-	public ISnoPower Generic_PandemoniumPortal { get; }
+	public SnoPower Generic_PandemoniumPortal { get; }
 
-	public ISnoPower Generic_PandemoniumPortalDiablo { get; }
+	public SnoPower Generic_PandemoniumPortalDiablo { get; }
 
-	public ISnoPower Generic_PandemoniumPortalghom { get; }
+	public SnoPower Generic_PandemoniumPortalghom { get; }
 
-	public ISnoPower Generic_PandemoniumPortalSiegeBreaker { get; }
+	public SnoPower Generic_PandemoniumPortalSiegeBreaker { get; }
 
-	public ISnoPower Generic_PandemoniumPortalSkeletonKing { get; }
+	public SnoPower Generic_PandemoniumPortalSkeletonKing { get; }
 
-	public ISnoPower Generic_PassiveChallengeRift { get; }
+	public SnoPower Generic_PassiveChallengeRift { get; }
 
-	public ISnoPower Generic_PassiveSetDungeon { get; }
+	public SnoPower Generic_PassiveSetDungeon { get; }
 
-	public ISnoPower Generic_PickupNearby { get; }
+	public SnoPower Generic_PickupNearby { get; }
 
-	public ISnoPower Generic_PlagueOfToadsKnockback { get; }
+	public SnoPower Generic_PlagueOfToadsKnockback { get; }
 
-	public ISnoPower Generic_PlayerUpscaledBuff { get; }
+	public SnoPower Generic_PlayerUpscaledBuff { get; }
 
-	public ISnoPower Generic_ProxyDelayedPower { get; }
+	public SnoPower Generic_ProxyDelayedPower { get; }
 
-	public ISnoPower Generic_Punch { get; }
+	public SnoPower Generic_Punch { get; }
 
-	public ISnoPower Generic_PVPBuff { get; }
+	public SnoPower Generic_PVPBuff { get; }
 
-	public ISnoPower Generic_PVPcontrolpoint { get; }
+	public SnoPower Generic_PVPcontrolpoint { get; }
 
-	public ISnoPower Generic_PvPDamageBuff { get; }
+	public SnoPower Generic_PvPDamageBuff { get; }
 
-	public ISnoPower Generic_PvPDeathstreakBuff { get; }
+	public SnoPower Generic_PvPDeathstreakBuff { get; }
 
-	public ISnoPower Generic_PvPHealingMacguffin { get; }
+	public SnoPower Generic_PvPHealingMacguffin { get; }
 
-	public ISnoPower Generic_PVPhill { get; }
+	public SnoPower Generic_PVPhill { get; }
 
-	public ISnoPower Generic_PvPHunterBuff { get; }
+	public SnoPower Generic_PvPHunterBuff { get; }
 
-	public ISnoPower Generic_PvPLevelEqualizerBuff { get; }
+	public SnoPower Generic_PvPLevelEqualizerBuff { get; }
 
-	public ISnoPower Generic_PVPPeanutNeutralObjective { get; }
+	public SnoPower Generic_PVPPeanutNeutralObjective { get; }
 
-	public ISnoPower Generic_PvPRangedProjectile { get; }
+	public SnoPower Generic_PvPRangedProjectile { get; }
 
-	public ISnoPower Generic_PVPRoundEndBuff { get; }
+	public SnoPower Generic_PVPRoundEndBuff { get; }
 
-	public ISnoPower Generic_PVPShrineMurderball { get; }
+	public SnoPower Generic_PVPShrineMurderball { get; }
 
-	public ISnoPower Generic_PVPSkirmishBuff { get; }
+	public SnoPower Generic_PVPSkirmishBuff { get; }
 
-	public ISnoPower Generic_PVPspawnersetup { get; }
+	public SnoPower Generic_PVPspawnersetup { get; }
 
-	public ISnoPower Generic_PVPspawnerTowerDefenders { get; }
+	public SnoPower Generic_PVPspawnerTowerDefenders { get; }
 
-	public ISnoPower Generic_PVPStationaryattack { get; }
+	public SnoPower Generic_PVPStationaryattack { get; }
 
-	public ISnoPower Generic_PVPThreeControlSpawnDefenders { get; }
+	public SnoPower Generic_PVPThreeControlSpawnDefenders { get; }
 
-	public ISnoPower Generic_pxBoneyardsCampSnakemanSpawner { get; }
+	public SnoPower Generic_pxBoneyardsCampSnakemanSpawner { get; }
 
-	public ISnoPower Generic_pxbountytestchaosportalssummonChampion { get; }
+	public SnoPower Generic_pxbountytestchaosportalssummonChampion { get; }
 
-	public ISnoPower Generic_pxBridgeCampDemonSpawner { get; }
+	public SnoPower Generic_pxBridgeCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxCampPortalSpawner { get; }
+	public SnoPower Generic_pxCampPortalSpawner { get; }
 
-	public ISnoPower Generic_pxCraterCampDemonSpawner { get; }
+	public SnoPower Generic_pxCraterCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxFesteringWoodsCampGhoulSpawner { get; }
+	public SnoPower Generic_pxFesteringWoodsCampGhoulSpawner { get; }
 
-	public ISnoPower Generic_pxGardensOfHopeCampDemonSpawner { get; }
+	public SnoPower Generic_pxGardensOfHopeCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxGraveyardCampReaperSpawner { get; }
+	public SnoPower Generic_pxGraveyardCampReaperSpawner { get; }
 
-	public ISnoPower Generic_pxHighlandsCampCultistSpawner { get; }
+	public SnoPower Generic_pxHighlandsCampCultistSpawner { get; }
 
-	public ISnoPower Generic_pxLeoricsDungeonCampDemonSpawner { get; }
+	public SnoPower Generic_pxLeoricsDungeonCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxOasisCampSnakemanSpawner { get; }
+	public SnoPower Generic_pxOasisCampSnakemanSpawner { get; }
 
-	public ISnoPower Generic_pxQuestFollowerDamageSetup { get; }
+	public SnoPower Generic_pxQuestFollowerDamageSetup { get; }
 
-	public ISnoPower Generic_pxRampartsCampDemonSpawner { get; }
+	public SnoPower Generic_pxRampartsCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxRuinsFrostKingKanaiWhirlwind { get; }
+	public SnoPower Generic_pxRuinsFrostKingKanaiWhirlwind { get; }
 
-	public ISnoPower Generic_pxRuinsFrostThreeGuardiansGoatmanLeap { get; }
+	public SnoPower Generic_pxRuinsFrostThreeGuardiansGoatmanLeap { get; }
 
-	public ISnoPower Generic_pxSpiderCavesCampCocoonHumanVictim { get; }
+	public SnoPower Generic_pxSpiderCavesCampCocoonHumanVictim { get; }
 
-	public ISnoPower Generic_pxSpiderCavesCampSpiderSpawner { get; }
+	public SnoPower Generic_pxSpiderCavesCampSpiderSpawner { get; }
 
-	public ISnoPower Generic_pxSpireCampDemonSpawner { get; }
+	public SnoPower Generic_pxSpireCampDemonSpawner { get; }
 
-	public ISnoPower Generic_pxStingingWindsCampCultistSpawner { get; }
+	public SnoPower Generic_pxStingingWindsCampCultistSpawner { get; }
 
-	public ISnoPower Generic_pxWestmarchCampReaperSpawner { get; }
+	public SnoPower Generic_pxWestmarchCampReaperSpawner { get; }
 
-	public ISnoPower Generic_pxWildernessCampTemplarSpawner { get; }
+	public SnoPower Generic_pxWildernessCampTemplarSpawner { get; }
 
-	public ISnoPower Generic_QuestCanyonBridgeEnchantressRevealFootsteps { get; }
+	public SnoPower Generic_QuestCanyonBridgeEnchantressRevealFootsteps { get; }
 
-	public ISnoPower Generic_QuestCanyonBridgePlayerRevealFootsteps { get; }
+	public SnoPower Generic_QuestCanyonBridgePlayerRevealFootsteps { get; }
 
-	public ISnoPower Generic_QuillDemonProjectile { get; }
+	public SnoPower Generic_QuillDemonProjectile { get; }
 
-	public ISnoPower Generic_QuillDemonProjectileFastAttack { get; }
+	public SnoPower Generic_QuillDemonProjectileFastAttack { get; }
 
-	public ISnoPower Generic_RandomMovespeedScripted { get; }
+	public SnoPower Generic_RandomMovespeedScripted { get; }
 
-	public ISnoPower Generic_RangedEscortProjectile { get; }
+	public SnoPower Generic_RangedEscortProjectile { get; }
 
-	public ISnoPower Generic_RatKingLifetimeBuff { get; }
+	public SnoPower Generic_RatKingLifetimeBuff { get; }
 
-	public ISnoPower Generic_RedWingsBuff { get; }
+	public SnoPower Generic_RedWingsBuff { get; }
 
-	public ISnoPower Generic_RemoveBurrowEffect { get; }
+	public SnoPower Generic_RemoveBurrowEffect { get; }
 
-	public ISnoPower Generic_ResurrectFallen { get; }
+	public SnoPower Generic_ResurrectFallen { get; }
 
-	public ISnoPower Generic_ResurrectionBuff { get; }
+	public SnoPower Generic_ResurrectionBuff { get; }
 
-	public ISnoPower Generic_RockwormAttack { get; }
+	public SnoPower Generic_RockwormAttack { get; }
 
-	public ISnoPower Generic_RockwormBurrowAndTeleport { get; }
+	public SnoPower Generic_RockwormBurrowAndTeleport { get; }
 
-	public ISnoPower Generic_RockwormBurstOut { get; }
+	public SnoPower Generic_RockwormBurstOut { get; }
 
-	public ISnoPower Generic_RockwormGrab { get; }
+	public SnoPower Generic_RockwormGrab { get; }
 
-	public ISnoPower Generic_RockwormGrabBurstOut { get; }
+	public SnoPower Generic_RockwormGrabBurstOut { get; }
 
-	public ISnoPower Generic_RockwormHideIdle { get; }
+	public SnoPower Generic_RockwormHideIdle { get; }
 
-	public ISnoPower Generic_RockwormPreBurst { get; }
+	public SnoPower Generic_RockwormPreBurst { get; }
 
-	public ISnoPower Generic_RockwormRetreat { get; }
+	public SnoPower Generic_RockwormRetreat { get; }
 
-	public ISnoPower Generic_RockwormWeb { get; }
+	public SnoPower Generic_RockwormWeb { get; }
 
-	public ISnoPower Generic_RootTryGrab { get; }
+	public SnoPower Generic_RootTryGrab { get; }
 
-	public ISnoPower Generic_SandMonsterBurrowOut { get; }
+	public SnoPower Generic_SandMonsterBurrowOut { get; }
 
-	public ISnoPower Generic_SandMonsterBurrowOutLong { get; }
+	public SnoPower Generic_SandMonsterBurrowOutLong { get; }
 
-	public ISnoPower Generic_SandMonsterSandWall { get; }
+	public SnoPower Generic_SandMonsterSandWall { get; }
 
-	public ISnoPower Generic_SandmonsterWeaponMeleeInstant { get; }
+	public SnoPower Generic_SandmonsterWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_SandsharkBurrowIn { get; }
+	public SnoPower Generic_SandsharkBurrowIn { get; }
 
-	public ISnoPower Generic_SandsharkBurrowOut { get; }
+	public SnoPower Generic_SandsharkBurrowOut { get; }
 
-	public ISnoPower Generic_SandTornadoOnSpawn { get; }
+	public SnoPower Generic_SandTornadoOnSpawn { get; }
 
-	public ISnoPower Generic_SandWaspProjectile { get; }
+	public SnoPower Generic_SandWaspProjectile { get; }
 
-	public ISnoPower Generic_ScavengerBurrowIn { get; }
+	public SnoPower Generic_ScavengerBurrowIn { get; }
 
-	public ISnoPower Generic_ScavengerBurrowOut { get; }
+	public SnoPower Generic_ScavengerBurrowOut { get; }
 
-	public ISnoPower Generic_ScavengerLeap { get; }
+	public SnoPower Generic_ScavengerLeap { get; }
 
-	public ISnoPower Generic_ScoundrelAnatomy { get; }
+	public SnoPower Generic_ScoundrelAnatomy { get; }
 
-	public ISnoPower Generic_ScoundrelBandage { get; }
+	public SnoPower Generic_ScoundrelBandage { get; }
 
-	public ISnoPower Generic_ScoundrelCheatDeathPassive { get; }
+	public SnoPower Generic_ScoundrelCheatDeathPassive { get; }
 
-	public ISnoPower Generic_ScoundrelCripplingShot { get; }
+	public SnoPower Generic_ScoundrelCripplingShot { get; }
 
-	public ISnoPower Generic_ScoundrelDebuffCloud { get; }
+	public SnoPower Generic_ScoundrelDebuffCloud { get; }
 
-	public ISnoPower Generic_ScoundrelHysteria { get; }
+	public SnoPower Generic_ScoundrelHysteria { get; }
 
-	public ISnoPower Generic_ScoundrelPiercingShot { get; }
+	public SnoPower Generic_ScoundrelPiercingShot { get; }
 
-	public ISnoPower Generic_ScoundrelPowerShot { get; }
+	public SnoPower Generic_ScoundrelPowerShot { get; }
 
-	public ISnoPower Generic_ScoundrelRangedProjectile { get; }
+	public SnoPower Generic_ScoundrelRangedProjectile { get; }
 
-	public ISnoPower Generic_ScoundrelRunAway { get; }
+	public SnoPower Generic_ScoundrelRunAway { get; }
 
-	public ISnoPower Generic_ScoundrelVanishV2 { get; }
+	public SnoPower Generic_ScoundrelVanishV2 { get; }
 
-	public ISnoPower Generic_ScrollBuff { get; }
+	public SnoPower Generic_ScrollBuff { get; }
 
-	public ISnoPower Generic_SeasonThemeBarbarianWhirlwind { get; }
+	public SnoPower Generic_SeasonThemeBarbarianWhirlwind { get; }
 
-	public ISnoPower Generic_SelectingSkill { get; }
+	public SnoPower Generic_SelectingSkill { get; }
 
-	public ISnoPower Generic_SetItemBonusBuff { get; }
+	public SnoPower Generic_SetItemBonusBuff { get; }
 
-	public ISnoPower Generic_SetModeEscortFollow { get; }
+	public SnoPower Generic_SetModeEscortFollow { get; }
 
-	public ISnoPower Generic_ShieldSkeletonShield { get; }
+	public SnoPower Generic_ShieldSkeletonShield { get; }
 
-	public ISnoPower Generic_ShrineCallMonster { get; }
+	public SnoPower Generic_ShrineCallMonster { get; }
 
-	public ISnoPower Generic_ShrineDesecratedBlessed { get; }
+	public SnoPower Generic_ShrineDesecratedBlessed { get; }
 
-	public ISnoPower Generic_ShrineDesecratedEnlightened { get; }
+	public SnoPower Generic_ShrineDesecratedEnlightened { get; }
 
-	public ISnoPower Generic_ShrineDesecratedFortune { get; }
+	public SnoPower Generic_ShrineDesecratedFortune { get; }
 
-	public ISnoPower Generic_ShrineDesecratedFrenzied { get; }
+	public SnoPower Generic_ShrineDesecratedFrenzied { get; }
 
-	public ISnoPower Generic_ShrineDesecratedHoarder { get; }
+	public SnoPower Generic_ShrineDesecratedHoarder { get; }
 
-	public ISnoPower Generic_ShrineDesecratedReloaded { get; }
+	public SnoPower Generic_ShrineDesecratedReloaded { get; }
 
-	public ISnoPower Generic_ShrineDesecratedtreasureGoblin { get; }
+	public SnoPower Generic_ShrineDesecratedtreasureGoblin { get; }
 
-	public ISnoPower Generic_ShrinePowerBlessed { get; }
+	public SnoPower Generic_ShrinePowerBlessed { get; }
 
-	public ISnoPower Generic_ShrinePowerEnlightened { get; }
+	public SnoPower Generic_ShrinePowerEnlightened { get; }
 
-	public ISnoPower Generic_ShrinePowerFortune { get; }
+	public SnoPower Generic_ShrinePowerFortune { get; }
 
-	public ISnoPower Generic_ShrinePowerFrenzied { get; }
+	public SnoPower Generic_ShrinePowerFrenzied { get; }
 
-	public ISnoPower Generic_SidekickStatsBoostBuff { get; }
+	public SnoPower Generic_SidekickStatsBoostBuff { get; }
 
-	public ISnoPower Generic_SidekickWeaponDamageBoostBuff { get; }
+	public SnoPower Generic_SidekickWeaponDamageBoostBuff { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonBite { get; }
+	public SnoPower Generic_SiegebreakerDemonBite { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonCharge { get; }
+	public SnoPower Generic_SiegebreakerDemonCharge { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonChargeNew { get; }
+	public SnoPower Generic_SiegebreakerDemonChargeNew { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonGrab { get; }
+	public SnoPower Generic_SiegebreakerDemonGrab { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonGrabToBite { get; }
+	public SnoPower Generic_SiegebreakerDemonGrabToBite { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonLookAround { get; }
+	public SnoPower Generic_SiegebreakerDemonLookAround { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonMiniCharge { get; }
+	public SnoPower Generic_SiegebreakerDemonMiniCharge { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonPound { get; }
+	public SnoPower Generic_SiegebreakerDemonPound { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonRoar { get; }
+	public SnoPower Generic_SiegebreakerDemonRoar { get; }
 
-	public ISnoPower Generic_SiegebreakerDemonStomp { get; }
+	public SnoPower Generic_SiegebreakerDemonStomp { get; }
 
-	public ISnoPower Generic_SiegebreakerEnrage { get; }
+	public SnoPower Generic_SiegebreakerEnrage { get; }
 
-	public ISnoPower Generic_SiegeBreakerReflectsDamageCast { get; }
+	public SnoPower Generic_SiegeBreakerReflectsDamageCast { get; }
 
-	public ISnoPower Generic_SkeletonArcherProjectile { get; }
+	public SnoPower Generic_SkeletonArcherProjectile { get; }
 
-	public ISnoPower Generic_SkeletonKingCleave { get; }
+	public SnoPower Generic_SkeletonKingCleave { get; }
 
-	public ISnoPower Generic_SkeletonKingSummonSkeleton { get; }
+	public SnoPower Generic_SkeletonKingSummonSkeleton { get; }
 
-	public ISnoPower Generic_SkeletonKingTeleport { get; }
+	public SnoPower Generic_SkeletonKingTeleport { get; }
 
-	public ISnoPower Generic_SkeletonKingTeleportAway { get; }
+	public SnoPower Generic_SkeletonKingTeleportAway { get; }
 
-	public ISnoPower Generic_SkeletonKingWhirlwind { get; }
+	public SnoPower Generic_SkeletonKingWhirlwind { get; }
 
-	public ISnoPower Generic_skeletonMageColdprojectile { get; }
+	public SnoPower Generic_skeletonMageColdprojectile { get; }
 
-	public ISnoPower Generic_skeletonMageFireAOE { get; }
+	public SnoPower Generic_skeletonMageFireAOE { get; }
 
-	public ISnoPower Generic_skeletonMageFireprojectile { get; }
+	public SnoPower Generic_skeletonMageFireprojectile { get; }
 
-	public ISnoPower Generic_skeletonMageLightningpierce { get; }
+	public SnoPower Generic_skeletonMageLightningpierce { get; }
 
-	public ISnoPower Generic_skeletonMagepoisondeath { get; }
+	public SnoPower Generic_skeletonMagepoisondeath { get; }
 
-	public ISnoPower Generic_skeletonMagePoisonpierce { get; }
+	public SnoPower Generic_skeletonMagePoisonpierce { get; }
 
-	public ISnoPower Generic_SkeletonSummonerProjectile { get; }
+	public SnoPower Generic_SkeletonSummonerProjectile { get; }
 
-	public ISnoPower Generic_SkillOverrideStartedOrEnded { get; }
+	public SnoPower Generic_SkillOverrideStartedOrEnded { get; }
 
-	public ISnoPower Generic_SnakemanCasterElectricBurst { get; }
+	public SnoPower Generic_SnakemanCasterElectricBurst { get; }
 
-	public ISnoPower Generic_SnakemanMeleeStealth { get; }
+	public SnoPower Generic_SnakemanMeleeStealth { get; }
 
-	public ISnoPower Generic_SnakemanMeleeUnstealth { get; }
+	public SnoPower Generic_SnakemanMeleeUnstealth { get; }
 
-	public ISnoPower Generic_SoaringAscend { get; }
+	public SnoPower Generic_SoaringAscend { get; }
 
-	public ISnoPower Generic_SoaringDescend { get; }
+	public SnoPower Generic_SoaringDescend { get; }
 
-	public ISnoPower Generic_SoulRipperDespairTongueLash { get; }
+	public SnoPower Generic_SoulRipperDespairTongueLash { get; }
 
-	public ISnoPower Generic_SoulRipperTongueLash { get; }
+	public SnoPower Generic_SoulRipperTongueLash { get; }
 
-	public ISnoPower Generic_SpiderQueenVomitSpidersCharge { get; }
+	public SnoPower Generic_SpiderQueenVomitSpidersCharge { get; }
 
-	public ISnoPower Generic_SpiderQueenVomitSpidersVomit { get; }
+	public SnoPower Generic_SpiderQueenVomitSpidersVomit { get; }
 
-	public ISnoPower Generic_SpiderQueenWebSpit { get; }
+	public SnoPower Generic_SpiderQueenWebSpit { get; }
 
-	public ISnoPower Generic_SpiderSprintThroughObjectsTo { get; }
+	public SnoPower Generic_SpiderSprintThroughObjectsTo { get; }
 
-	public ISnoPower Generic_SpiderWebImmobolize { get; }
+	public SnoPower Generic_SpiderWebImmobolize { get; }
 
-	public ISnoPower Generic_SpiderWebSlow { get; }
+	public SnoPower Generic_SpiderWebSlow { get; }
 
-	public ISnoPower Generic_SpiderWebSlowSpit { get; }
+	public SnoPower Generic_SpiderWebSlowSpit { get; }
 
-	public ISnoPower Generic_SplashDamageProc { get; }
+	public SnoPower Generic_SplashDamageProc { get; }
 
-	public ISnoPower Generic_SporeCloud { get; }
+	public SnoPower Generic_SporeCloud { get; }
 
-	public ISnoPower Generic_StealthBuff { get; }
+	public SnoPower Generic_StealthBuff { get; }
 
-	public ISnoPower Generic_StitchExplode { get; }
+	public SnoPower Generic_StitchExplode { get; }
 
-	public ISnoPower Generic_StitchMeleeAlternate { get; }
+	public SnoPower Generic_StitchMeleeAlternate { get; }
 
-	public ISnoPower Generic_StitchPush { get; }
+	public SnoPower Generic_StitchPush { get; }
 
-	public ISnoPower Generic_SuccubusBloodStar { get; }
+	public SnoPower Generic_SuccubusBloodStar { get; }
 
-	public ISnoPower Generic_SuccubusBloodStarLR { get; }
+	public SnoPower Generic_SuccubusBloodStarLR { get; }
 
-	public ISnoPower Generic_SuccubusFly { get; }
+	public SnoPower Generic_SuccubusFly { get; }
 
-	public ISnoPower Generic_SuccubusLeap { get; }
+	public SnoPower Generic_SuccubusLeap { get; }
 
-	public ISnoPower Generic_SuicideProc { get; }
+	public SnoPower Generic_SuicideProc { get; }
 
-	public ISnoPower Generic_SuicideScripted { get; }
+	public SnoPower Generic_SuicideScripted { get; }
 
-	public ISnoPower Generic_Summoned { get; }
+	public SnoPower Generic_Summoned { get; }
 
-	public ISnoPower Generic_SummonFallenAUnique01 { get; }
+	public SnoPower Generic_SummonFallenAUnique01 { get; }
 
-	public ISnoPower Generic_SummonFallenOnSpawn { get; }
+	public SnoPower Generic_SummonFallenOnSpawn { get; }
 
-	public ISnoPower Generic_SummoningMachineSummon { get; }
+	public SnoPower Generic_SummoningMachineSummon { get; }
 
-	public ISnoPower Generic_SummonSkeleton { get; }
+	public SnoPower Generic_SummonSkeleton { get; }
 
-	public ISnoPower Generic_SummonSkeletonJondar { get; }
+	public SnoPower Generic_SummonSkeletonJondar { get; }
 
-	public ISnoPower Generic_SummonSkeletonOnSpawn { get; }
+	public SnoPower Generic_SummonSkeletonOnSpawn { get; }
 
-	public ISnoPower Generic_SummonSkeletonOrb { get; }
+	public SnoPower Generic_SummonSkeletonOrb { get; }
 
-	public ISnoPower Generic_SummonSkeletonPillar { get; }
+	public SnoPower Generic_SummonSkeletonPillar { get; }
 
-	public ISnoPower Generic_SummonTriuneDemon { get; }
+	public SnoPower Generic_SummonTriuneDemon { get; }
 
-	public ISnoPower Generic_SummonZombieCrawler { get; }
+	public SnoPower Generic_SummonZombieCrawler { get; }
 
-	public ISnoPower Generic_SummonZombieVomit { get; }
+	public SnoPower Generic_SummonZombieVomit { get; }
 
-	public ISnoPower Generic_Swarmdeath { get; }
+	public SnoPower Generic_Swarmdeath { get; }
 
-	public ISnoPower Generic_TarPitSlowOff { get; }
+	public SnoPower Generic_TarPitSlowOff { get; }
 
-	public ISnoPower Generic_TarPitSlowOn { get; }
+	public SnoPower Generic_TarPitSlowOn { get; }
 
-	public ISnoPower Generic_TauntedMonsterRangedProjectile { get; }
+	public SnoPower Generic_TauntedMonsterRangedProjectile { get; }
 
-	public ISnoPower Generic_TauntedWeaponMeleeInstant { get; }
+	public SnoPower Generic_TauntedWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_TeleportCheckPathPassability { get; }
+	public SnoPower Generic_TeleportCheckPathPassability { get; }
 
-	public ISnoPower Generic_TeleportToPlayer { get; }
+	public SnoPower Generic_TeleportToPlayer { get; }
 
-	public ISnoPower Generic_TeleportToPlayerCast { get; }
+	public SnoPower Generic_TeleportToPlayerCast { get; }
 
-	public ISnoPower Generic_TeleportToWaypoint { get; }
+	public SnoPower Generic_TeleportToWaypoint { get; }
 
-	public ISnoPower Generic_TeleportToWaypointCast { get; }
+	public SnoPower Generic_TeleportToWaypointCast { get; }
 
-	public ISnoPower Generic_TemplarCheatDeathPassive { get; }
+	public SnoPower Generic_TemplarCheatDeathPassive { get; }
 
-	public ISnoPower Generic_TemplarGuardianV2 { get; }
+	public SnoPower Generic_TemplarGuardianV2 { get; }
 
-	public ISnoPower Generic_TemplarHeal110 { get; }
+	public SnoPower Generic_TemplarHeal110 { get; }
 
-	public ISnoPower Generic_TemplarInspire { get; }
+	public SnoPower Generic_TemplarInspire { get; }
 
-	public ISnoPower Generic_TemplarIntervene { get; }
+	public SnoPower Generic_TemplarIntervene { get; }
 
-	public ISnoPower Generic_TemplarInterveneProc { get; }
+	public SnoPower Generic_TemplarInterveneProc { get; }
 
-	public ISnoPower Generic_TemplarIntimidate { get; }
+	public SnoPower Generic_TemplarIntimidate { get; }
 
-	public ISnoPower Generic_TemplarLoyalty { get; }
+	public SnoPower Generic_TemplarLoyalty { get; }
 
-	public ISnoPower Generic_TemplarMeleeInstant { get; }
+	public SnoPower Generic_TemplarMeleeInstant { get; }
 
-	public ISnoPower Generic_TemplarOnslaught { get; }
+	public SnoPower Generic_TemplarOnslaught { get; }
 
-	public ISnoPower Generic_TemplarOnslaughtV2 { get; }
+	public SnoPower Generic_TemplarOnslaughtV2 { get; }
 
-	public ISnoPower Generic_TemplarShieldCharge { get; }
+	public SnoPower Generic_TemplarShieldCharge { get; }
 
-	public ISnoPower Generic_TentacleHorseAUnique01Charge { get; }
+	public SnoPower Generic_TentacleHorseAUnique01Charge { get; }
 
-	public ISnoPower Generic_TerrorDemonMeleeStrike { get; }
+	public SnoPower Generic_TerrorDemonMeleeStrike { get; }
 
-	public ISnoPower Generic_TerrorDemonShadowPhase { get; }
+	public SnoPower Generic_TerrorDemonShadowPhase { get; }
 
-	public ISnoPower Generic_TerrorDemonShadowPhaseEnd { get; }
+	public SnoPower Generic_TerrorDemonShadowPhaseEnd { get; }
 
-	public ISnoPower Generic_TestSpikeTrapRuins { get; }
+	public SnoPower Generic_TestSpikeTrapRuins { get; }
 
-	public ISnoPower Generic_Thorns { get; }
+	public SnoPower Generic_Thorns { get; }
 
-	public ISnoPower Generic_ThousandPounderKnockback { get; }
+	public SnoPower Generic_ThousandPounderKnockback { get; }
 
-	public ISnoPower Generic_ThousandPounderMelee { get; }
+	public SnoPower Generic_ThousandPounderMelee { get; }
 
-	public ISnoPower Generic_tongueprototype { get; }
+	public SnoPower Generic_tongueprototype { get; }
 
-	public ISnoPower Generic_TraitBarbarianFury { get; }
+	public SnoPower Generic_TraitBarbarianFury { get; }
 
-	public ISnoPower Generic_TraitMonkSpirit { get; }
+	public SnoPower Generic_TraitMonkSpirit { get; }
 
-	public ISnoPower Generic_TransformToActivatedTriune { get; }
+	public SnoPower Generic_TransformToActivatedTriune { get; }
 
-	public ISnoPower Generic_trDunCathWallCollapseDamage { get; }
+	public SnoPower Generic_trDunCathWallCollapseDamage { get; }
 
-	public ISnoPower Generic_trDunCathWallCollapseDamageoffset { get; }
+	public SnoPower Generic_trDunCathWallCollapseDamageoffset { get; }
 
-	public ISnoPower Generic_TreasureGoblinAnniversaryEscape { get; }
+	public SnoPower Generic_TreasureGoblinAnniversaryEscape { get; }
 
-	public ISnoPower Generic_TreasureGoblinAnniversaryThrowPortal { get; }
+	public SnoPower Generic_TreasureGoblinAnniversaryThrowPortal { get; }
 
-	public ISnoPower Generic_TreasureGoblinEscape { get; }
+	public SnoPower Generic_TreasureGoblinEscape { get; }
 
-	public ISnoPower Generic_TreasureGoblinPause { get; }
+	public SnoPower Generic_TreasureGoblinPause { get; }
 
-	public ISnoPower Generic_TreasureGoblinPlayAlertSound { get; }
+	public SnoPower Generic_TreasureGoblinPlayAlertSound { get; }
 
-	public ISnoPower Generic_TreasureGoblinPortalIn { get; }
+	public SnoPower Generic_TreasureGoblinPortalIn { get; }
 
-	public ISnoPower Generic_TreasureGoblinThrowPortal { get; }
+	public SnoPower Generic_TreasureGoblinThrowPortal { get; }
 
-	public ISnoPower Generic_TreasureGoblinThrowPortalBackup { get; }
+	public SnoPower Generic_TreasureGoblinThrowPortalBackup { get; }
 
-	public ISnoPower Generic_TreasureGoblinThrowPortalFast { get; }
+	public SnoPower Generic_TreasureGoblinThrowPortalFast { get; }
 
-	public ISnoPower Generic_TreasureGoblinUsePortal { get; }
+	public SnoPower Generic_TreasureGoblinUsePortal { get; }
 
-	public ISnoPower Generic_TriuneBerserkerPowerHit { get; }
+	public SnoPower Generic_TriuneBerserkerPowerHit { get; }
 
-	public ISnoPower Generic_TriuneSummonerProjectile { get; }
+	public SnoPower Generic_TriuneSummonerProjectile { get; }
 
-	public ISnoPower Generic_TriuneSummonerShield { get; }
+	public SnoPower Generic_TriuneSummonerShield { get; }
 
-	public ISnoPower Generic_TriuneSummonerSplitSummonCast { get; }
+	public SnoPower Generic_TriuneSummonerSplitSummonCast { get; }
 
-	public ISnoPower Generic_TriuneVesselCharge { get; }
+	public SnoPower Generic_TriuneVesselCharge { get; }
 
-	public ISnoPower Generic_TriuneVesselOverpower { get; }
+	public SnoPower Generic_TriuneVesselOverpower { get; }
 
-	public ISnoPower Generic_trOutLogStackShortDamage { get; }
+	public SnoPower Generic_trOutLogStackShortDamage { get; }
 
-	public ISnoPower Generic_trOutLogStackTrap { get; }
+	public SnoPower Generic_trOutLogStackTrap { get; }
 
-	public ISnoPower Generic_trouttristramfieldspunjitrapaoe { get; }
+	public SnoPower Generic_trouttristramfieldspunjitrapaoe { get; }
 
-	public ISnoPower Generic_trouttristramfieldspunjitrapmirroraoe { get; }
+	public SnoPower Generic_trouttristramfieldspunjitrapmirroraoe { get; }
 
-	public ISnoPower Generic_UberDespairMeleeCleave { get; }
+	public SnoPower Generic_UberDespairMeleeCleave { get; }
 
-	public ISnoPower Generic_UberDespairSummonMinion { get; }
+	public SnoPower Generic_UberDespairSummonMinion { get; }
 
-	public ISnoPower Generic_UberDespairSummonMinionDiablo { get; }
+	public SnoPower Generic_UberDespairSummonMinionDiablo { get; }
 
-	public ISnoPower Generic_UberDespairTeleport { get; }
+	public SnoPower Generic_UberDespairTeleport { get; }
 
-	public ISnoPower Generic_UberDespairTeleportEnrageDiablo { get; }
+	public SnoPower Generic_UberDespairTeleportEnrageDiablo { get; }
 
-	public ISnoPower Generic_UberDespairVolley { get; }
+	public SnoPower Generic_UberDespairVolley { get; }
 
-	public ISnoPower Generic_UberDespairVolleyDiablo { get; }
+	public SnoPower Generic_UberDespairVolleyDiablo { get; }
 
-	public ISnoPower Generic_UberDiabloMirrorImage { get; }
+	public SnoPower Generic_UberDiabloMirrorImage { get; }
 
-	public ISnoPower Generic_UberDiabloStompAndStun { get; }
+	public SnoPower Generic_UberDiabloStompAndStun { get; }
 
-	public ISnoPower Generic_UberGluttonyBreathAttack { get; }
+	public SnoPower Generic_UberGluttonyBreathAttack { get; }
 
-	public ISnoPower Generic_UberGluttonyGasCloud { get; }
+	public SnoPower Generic_UberGluttonyGasCloud { get; }
 
-	public ISnoPower Generic_UberGluttonyGasCloudDiablo { get; }
+	public SnoPower Generic_UberGluttonyGasCloudDiablo { get; }
 
-	public ISnoPower Generic_UberGluttonyLoogiespawn { get; }
+	public SnoPower Generic_UberGluttonyLoogiespawn { get; }
 
-	public ISnoPower Generic_UberMaghdaMothDust { get; }
+	public SnoPower Generic_UberMaghdaMothDust { get; }
 
-	public ISnoPower Generic_UberMaghdaPunish { get; }
+	public SnoPower Generic_UberMaghdaPunish { get; }
 
-	public ISnoPower Generic_UberMaghdaPunishShielded { get; }
+	public SnoPower Generic_UberMaghdaPunishShielded { get; }
 
-	public ISnoPower Generic_UberMaghdaSummonBeserker { get; }
+	public SnoPower Generic_UberMaghdaSummonBeserker { get; }
 
-	public ISnoPower Generic_UberMaghdaSummonBeserkerDiablo { get; }
+	public SnoPower Generic_UberMaghdaSummonBeserkerDiablo { get; }
 
-	public ISnoPower Generic_UberSiegebreakerDemonPound { get; }
+	public SnoPower Generic_UberSiegebreakerDemonPound { get; }
 
-	public ISnoPower Generic_UberSiegebreakerDemonStomp { get; }
+	public SnoPower Generic_UberSiegebreakerDemonStomp { get; }
 
-	public ISnoPower Generic_UberSkeletonKingCleave { get; }
+	public SnoPower Generic_UberSkeletonKingCleave { get; }
 
-	public ISnoPower Generic_UberSkeletonKingSummonSkeleton { get; }
+	public SnoPower Generic_UberSkeletonKingSummonSkeleton { get; }
 
-	public ISnoPower Generic_UberSkeletonKingSummonSkeletonDiablo { get; }
+	public SnoPower Generic_UberSkeletonKingSummonSkeletonDiablo { get; }
 
-	public ISnoPower Generic_UberSkeletonKingWhirlwind { get; }
+	public SnoPower Generic_UberSkeletonKingWhirlwind { get; }
 
-	public ISnoPower Generic_UberZoltunKulleCollapseCeiling { get; }
+	public SnoPower Generic_UberZoltunKulleCollapseCeiling { get; }
 
-	public ISnoPower Generic_UberZoltunKulleEnergyTwister { get; }
+	public SnoPower Generic_UberZoltunKulleEnergyTwister { get; }
 
-	public ISnoPower Generic_UberZoltunKulleFieryBoulder { get; }
+	public SnoPower Generic_UberZoltunKulleFieryBoulder { get; }
 
-	public ISnoPower Generic_UberZoltunKulleSlowTime { get; }
+	public SnoPower Generic_UberZoltunKulleSlowTime { get; }
 
-	public ISnoPower Generic_UberZoltunKulleSlowTimeDiablo { get; }
+	public SnoPower Generic_UberZoltunKulleSlowTimeDiablo { get; }
 
-	public ISnoPower Generic_UberZoltunKulleTeleport { get; }
+	public SnoPower Generic_UberZoltunKulleTeleport { get; }
 
-	public ISnoPower Generic_UnburiedBossCleave { get; }
+	public SnoPower Generic_UnburiedBossCleave { get; }
 
-	public ISnoPower Generic_UnburiedKnockback { get; }
+	public SnoPower Generic_UnburiedKnockback { get; }
 
-	public ISnoPower Generic_UnburiedMeleeAttack { get; }
+	public SnoPower Generic_UnburiedMeleeAttack { get; }
 
-	public ISnoPower Generic_UnburiedWreckableAttack { get; }
+	public SnoPower Generic_UnburiedWreckableAttack { get; }
 
-	public ISnoPower Generic_UnholyShield { get; }
+	public SnoPower Generic_UnholyShield { get; }
 
-	public ISnoPower Generic_UninterruptibleDuringBuff { get; }
+	public SnoPower Generic_UninterruptibleDuringBuff { get; }
 
-	public ISnoPower Generic_UniqueMonsterEarthquakePrototype { get; }
+	public SnoPower Generic_UniqueMonsterEarthquakePrototype { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericAOENova { get; }
+	public SnoPower Generic_UniqueMonsterGenericAOENova { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericAOERandomAroundOwner { get; }
+	public SnoPower Generic_UniqueMonsterGenericAOERandomAroundOwner { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericAOETargeted { get; }
+	public SnoPower Generic_UniqueMonsterGenericAOETargeted { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericProjectile { get; }
+	public SnoPower Generic_UniqueMonsterGenericProjectile { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericProjectile2 { get; }
+	public SnoPower Generic_UniqueMonsterGenericProjectile2 { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericProjectileAllPlayers { get; }
+	public SnoPower Generic_UniqueMonsterGenericProjectileAllPlayers { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericSummon { get; }
+	public SnoPower Generic_UniqueMonsterGenericSummon { get; }
 
-	public ISnoPower Generic_UniqueMonsterGenericSummon2 { get; }
+	public SnoPower Generic_UniqueMonsterGenericSummon2 { get; }
 
-	public ISnoPower Generic_UniqueMonsterIceTrailPassivePrototype { get; }
+	public SnoPower Generic_UniqueMonsterIceTrailPassivePrototype { get; }
 
-	public ISnoPower Generic_UniqueMonsterTempestRushPrototype { get; }
+	public SnoPower Generic_UniqueMonsterTempestRushPrototype { get; }
 
-	public ISnoPower Generic_UntargetableDuringBuff { get; }
+	public SnoPower Generic_UntargetableDuringBuff { get; }
 
-	public ISnoPower Generic_UrzaelStompAndStun { get; }
+	public SnoPower Generic_UrzaelStompAndStun { get; }
 
-	public ISnoPower Generic_UseArcaneGlyph { get; }
+	public SnoPower Generic_UseArcaneGlyph { get; }
 
-	public ISnoPower Generic_UseDungeonStone { get; }
+	public SnoPower Generic_UseDungeonStone { get; }
 
-	public ISnoPower Generic_UseHealthGlyph { get; }
+	public SnoPower Generic_UseHealthGlyph { get; }
 
-	public ISnoPower Generic_UseItem { get; }
+	public SnoPower Generic_UseItem { get; }
 
-	public ISnoPower Generic_UseLootRunPortal { get; }
+	public SnoPower Generic_UseLootRunPortal { get; }
 
-	public ISnoPower Generic_UseLootRunProgressGlyph { get; }
+	public SnoPower Generic_UseLootRunProgressGlyph { get; }
 
-	public ISnoPower Generic_UseManaGlyph { get; }
+	public SnoPower Generic_UseManaGlyph { get; }
 
-	public ISnoPower Generic_UseStoneOfRecall { get; }
+	public SnoPower Generic_UseStoneOfRecall { get; }
 
-	public ISnoPower Generic_Walk { get; }
+	public SnoPower Generic_Walk { get; }
 
-	public ISnoPower Generic_WallMonsterSpawn { get; }
+	public SnoPower Generic_WallMonsterSpawn { get; }
 
-	public ISnoPower Generic_WallMonsterSpawnSiegeBreaker { get; }
+	public SnoPower Generic_WallMonsterSpawnSiegeBreaker { get; }
 
-	public ISnoPower Generic_Warp { get; }
+	public SnoPower Generic_Warp { get; }
 
-	public ISnoPower Generic_WarpInMagical { get; }
+	public SnoPower Generic_WarpInMagical { get; }
 
-	public ISnoPower Generic_waterloggedCorpseEelSpawn { get; }
+	public SnoPower Generic_waterloggedCorpseEelSpawn { get; }
 
-	public ISnoPower Generic_waterloggedCorpsePoisonCloud { get; }
+	public SnoPower Generic_waterloggedCorpsePoisonCloud { get; }
 
-	public ISnoPower Generic_waterTowerAOasiscaOutBreakableDamage { get; }
+	public SnoPower Generic_waterTowerAOasiscaOutBreakableDamage { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstant { get; }
+	public SnoPower Generic_WeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantBothHand { get; }
+	public SnoPower Generic_WeaponMeleeInstantBothHand { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantCowKing { get; }
+	public SnoPower Generic_WeaponMeleeInstantCowKing { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantFreezeFacing { get; }
+	public SnoPower Generic_WeaponMeleeInstantFreezeFacing { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantOffHand { get; }
+	public SnoPower Generic_WeaponMeleeInstantOffHand { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantShortEscape { get; }
+	public SnoPower Generic_WeaponMeleeInstantShortEscape { get; }
 
-	public ISnoPower Generic_WeaponMeleeInstantWreckables { get; }
+	public SnoPower Generic_WeaponMeleeInstantWreckables { get; }
 
-	public ISnoPower Generic_WeaponMeleeNoClose { get; }
+	public SnoPower Generic_WeaponMeleeNoClose { get; }
 
-	public ISnoPower Generic_WeaponMeleeObstruction { get; }
+	public SnoPower Generic_WeaponMeleeObstruction { get; }
 
-	public ISnoPower Generic_WeaponMeleeReachInstant { get; }
+	public SnoPower Generic_WeaponMeleeReachInstant { get; }
 
-	public ISnoPower Generic_WeaponMeleeReachInstantFreezeFacing { get; }
+	public SnoPower Generic_WeaponMeleeReachInstantFreezeFacing { get; }
 
-	public ISnoPower Generic_WeaponRangedInstant { get; }
+	public SnoPower Generic_WeaponRangedInstant { get; }
 
-	public ISnoPower Generic_WeaponRangedProjectile { get; }
+	public SnoPower Generic_WeaponRangedProjectile { get; }
 
-	public ISnoPower Generic_WeaponRangedWand { get; }
+	public SnoPower Generic_WeaponRangedWand { get; }
 
-	public ISnoPower Generic_WitchdoctorCorpseSpiderLeap { get; }
+	public SnoPower Generic_WitchdoctorCorpseSpiderLeap { get; }
 
-	public ISnoPower Generic_WitchdoctorFetishArmyHunter { get; }
+	public SnoPower Generic_WitchdoctorFetishArmyHunter { get; }
 
-	public ISnoPower Generic_WitchdoctorFetishArmyMelee { get; }
+	public SnoPower Generic_WitchdoctorFetishArmyMelee { get; }
 
-	public ISnoPower Generic_WitchdoctorFetishArmyPoisonDart { get; }
+	public SnoPower Generic_WitchdoctorFetishArmyPoisonDart { get; }
 
-	public ISnoPower Generic_WitchdoctorFetishArmyShaman { get; }
+	public SnoPower Generic_WitchdoctorFetishArmyShaman { get; }
 
-	public ISnoPower Generic_WitchdoctorFetishSycophantsMelee { get; }
+	public SnoPower Generic_WitchdoctorFetishSycophantsMelee { get; }
 
-	public ISnoPower Generic_WitchdoctorGargantuanCleave { get; }
+	public SnoPower Generic_WitchdoctorGargantuanCleave { get; }
 
-	public ISnoPower Generic_WitchdoctorGargantuanPoisonCloud { get; }
+	public SnoPower Generic_WitchdoctorGargantuanPoisonCloud { get; }
 
-	public ISnoPower Generic_WitchdoctorGargantuanSlam { get; }
+	public SnoPower Generic_WitchdoctorGargantuanSlam { get; }
 
-	public ISnoPower Generic_WitchdoctorGargantuanSmash { get; }
+	public SnoPower Generic_WitchdoctorGargantuanSmash { get; }
 
-	public ISnoPower Generic_WitchdoctorHexChickenWalk { get; }
+	public SnoPower Generic_WitchdoctorHexChickenWalk { get; }
 
-	public ISnoPower Generic_WitchdoctorHexExplode { get; }
+	public SnoPower Generic_WitchdoctorHexExplode { get; }
 
-	public ISnoPower Generic_WitchdoctorHexFetish { get; }
+	public SnoPower Generic_WitchdoctorHexFetish { get; }
 
-	public ISnoPower Generic_WitchdoctorHexFetishHeal { get; }
+	public SnoPower Generic_WitchdoctorHexFetishHeal { get; }
 
-	public ISnoPower Generic_WitchdoctorPlagueOfToadsBigToadAttack { get; }
+	public SnoPower Generic_WitchdoctorPlagueOfToadsBigToadAttack { get; }
 
-	public ISnoPower Generic_WitchdoctorPlagueOfToadsBigToadTongueSlap { get; }
+	public SnoPower Generic_WitchdoctorPlagueOfToadsBigToadTongueSlap { get; }
 
-	public ISnoPower Generic_WitchdoctorSpiritBarrageRuneCAOE { get; }
+	public SnoPower Generic_WitchdoctorSpiritBarrageRuneCAOE { get; }
 
-	public ISnoPower Generic_WitchdoctorZombieDogFireAoE { get; }
+	public SnoPower Generic_WitchdoctorZombieDogFireAoE { get; }
 
-	public ISnoPower Generic_WitchdoctorZombieDogMelee { get; }
+	public SnoPower Generic_WitchdoctorZombieDogMelee { get; }
 
-	public ISnoPower Generic_WitchdoctorZombieDogPoisonDoT { get; }
+	public SnoPower Generic_WitchdoctorZombieDogPoisonDoT { get; }
 
-	public ISnoPower Generic_WizardArcaneTorrentRuneCMine { get; }
+	public SnoPower Generic_WizardArcaneTorrentRuneCMine { get; }
 
-	public ISnoPower Generic_WizardEnergyShield { get; }
+	public SnoPower Generic_WizardEnergyShield { get; }
 
-	public ISnoPower Generic_WizardHydraDefaultFirePrototype { get; }
+	public SnoPower Generic_WizardHydraDefaultFirePrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneAcidPrototype { get; }
+	public SnoPower Generic_WizardHydraRuneAcidPrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneArcanePrototype { get; }
+	public SnoPower Generic_WizardHydraRuneArcanePrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneBigPrototype { get; }
+	public SnoPower Generic_WizardHydraRuneBigPrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneFirePrototype { get; }
+	public SnoPower Generic_WizardHydraRuneFirePrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneFrostPrototype { get; }
+	public SnoPower Generic_WizardHydraRuneFrostPrototype { get; }
 
-	public ISnoPower Generic_WizardHydraRuneLightningPrototype { get; }
+	public SnoPower Generic_WizardHydraRuneLightningPrototype { get; }
 
-	public ISnoPower Generic_WizardMagicMissileCount { get; }
+	public SnoPower Generic_WizardMagicMissileCount { get; }
 
-	public ISnoPower Generic_WizardMagicMissileDamage { get; }
+	public SnoPower Generic_WizardMagicMissileDamage { get; }
 
-	public ISnoPower Generic_WizardMagicMissileSpeed { get; }
+	public SnoPower Generic_WizardMagicMissileSpeed { get; }
 
-	public ISnoPower Generic_WoDFlagBuff { get; }
+	public SnoPower Generic_WoDFlagBuff { get; }
 
-	public ISnoPower Generic_WoodWraithSummonSpores { get; }
+	public SnoPower Generic_WoodWraithSummonSpores { get; }
 
-	public ISnoPower Generic_WorldCreatingBuff { get; }
+	public SnoPower Generic_WorldCreatingBuff { get; }
 
-	public ISnoPower Generic_x1abattoirfurnace01 { get; }
+	public SnoPower Generic_x1abattoirfurnace01 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinner { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinner { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerEvent { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerEvent { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase1 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase1 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase2 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase2 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase3 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerEventPhase3 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwise { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwise { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEvent { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEvent { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase1 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase1 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase2 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase2 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase3 { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamclockwiseEventPhase3 { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamcounterClockwise { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamcounterClockwise { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamcounterClockwiseEvent { get; }
+	public SnoPower Generic_x1AbattoirfurnaceSpinnerfireBeamcounterClockwiseEvent { get; }
 
-	public ISnoPower Generic_x1AbattoirfurnaceWall { get; }
+	public SnoPower Generic_x1AbattoirfurnaceWall { get; }
 
-	public ISnoPower Generic_x1AdriaArenaFloorPanelFire { get; }
+	public SnoPower Generic_x1AdriaArenaFloorPanelFire { get; }
 
-	public ISnoPower Generic_x1AdriaArenaFloorPanelStart { get; }
+	public SnoPower Generic_x1AdriaArenaFloorPanelStart { get; }
 
-	public ISnoPower Generic_X1AdriaBossArenaGasOff0 { get; }
+	public SnoPower Generic_X1AdriaBossArenaGasOff0 { get; }
 
-	public ISnoPower Generic_X1AdriaBossArenaGasOff1 { get; }
+	public SnoPower Generic_X1AdriaBossArenaGasOff1 { get; }
 
-	public ISnoPower Generic_X1AdriaBossArenaGasOn0 { get; }
+	public SnoPower Generic_X1AdriaBossArenaGasOn0 { get; }
 
-	public ISnoPower Generic_X1AdriaBossArenaGasOn1 { get; }
+	public SnoPower Generic_X1AdriaBossArenaGasOn1 { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerActivate { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerActivate { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerInitialPoolsBuff { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerInitialPoolsBuff { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerLifetimeBuff { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerLifetimeBuff { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerRoomPools { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerRoomPools { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerRoomPoolsInner { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerRoomPoolsInner { get; }
 
-	public ISnoPower Generic_x1AdriaCauldronSpawnerRoomPoolsOuter { get; }
+	public SnoPower Generic_x1AdriaCauldronSpawnerRoomPoolsOuter { get; }
 
-	public ISnoPower Generic_x1AdriaDelayedTeleportAttack { get; }
+	public SnoPower Generic_x1AdriaDelayedTeleportAttack { get; }
 
-	public ISnoPower Generic_x1AdriaDelayedTeleportCauldronActivate { get; }
+	public SnoPower Generic_x1AdriaDelayedTeleportCauldronActivate { get; }
 
-	public ISnoPower Generic_x1AdriaDelayedTeleportStart { get; }
+	public SnoPower Generic_x1AdriaDelayedTeleportStart { get; }
 
-	public ISnoPower Generic_x1AdriaJumpBack { get; }
+	public SnoPower Generic_x1AdriaJumpBack { get; }
 
-	public ISnoPower Generic_x1AdriaPhaseOneAIState { get; }
+	public SnoPower Generic_x1AdriaPhaseOneAIState { get; }
 
-	public ISnoPower Generic_x1AdriaPhaseTwoAIState { get; }
+	public SnoPower Generic_x1AdriaPhaseTwoAIState { get; }
 
-	public ISnoPower Generic_x1AdriaScriptedSequence180Turn { get; }
+	public SnoPower Generic_x1AdriaScriptedSequence180Turn { get; }
 
-	public ISnoPower Generic_x1AdriaSpitAtPlayer { get; }
+	public SnoPower Generic_x1AdriaSpitAtPlayer { get; }
 
-	public ISnoPower Generic_x1AdriaWingSweepLeft { get; }
+	public SnoPower Generic_x1AdriaWingSweepLeft { get; }
 
-	public ISnoPower Generic_x1AdriaWingSweepRight { get; }
+	public SnoPower Generic_x1AdriaWingSweepRight { get; }
 
-	public ISnoPower Generic_X1armorScavengerAsteroidRain { get; }
+	public SnoPower Generic_X1armorScavengerAsteroidRain { get; }
 
-	public ISnoPower Generic_x1armorScavengerbuff { get; }
+	public SnoPower Generic_x1armorScavengerbuff { get; }
 
-	public ISnoPower Generic_x1armorScavengerBurrowIn { get; }
+	public SnoPower Generic_x1armorScavengerBurrowIn { get; }
 
-	public ISnoPower Generic_x1armorScavengerBurrowOut { get; }
+	public SnoPower Generic_x1armorScavengerBurrowOut { get; }
 
-	public ISnoPower Generic_x1armorScavengerPreBurrow { get; }
+	public SnoPower Generic_x1armorScavengerPreBurrow { get; }
 
-	public ISnoPower Generic_X1AsteroidBasic { get; }
+	public SnoPower Generic_X1AsteroidBasic { get; }
 
-	public ISnoPower Generic_X1AsteroidBasicSmall { get; }
+	public SnoPower Generic_X1AsteroidBasicSmall { get; }
 
-	public ISnoPower Generic_X1AsteroidPool { get; }
+	public SnoPower Generic_X1AsteroidPool { get; }
 
-	public ISnoPower Generic_X1AsteroidSpawn { get; }
+	public SnoPower Generic_X1AsteroidSpawn { get; }
 
-	public ISnoPower Generic_X1BarbarianAvalanchev2Passive { get; }
+	public SnoPower Generic_X1BarbarianAvalanchev2Passive { get; }
 
-	public ISnoPower Generic_X1BloodhawkEventBallistaBossFuriousCharge { get; }
+	public SnoPower Generic_X1BloodhawkEventBallistaBossFuriousCharge { get; }
 
-	public ISnoPower Generic_x1bogbearTrap { get; }
+	public SnoPower Generic_x1bogbearTrap { get; }
 
-	public ISnoPower Generic_x1BogBearTrapTrigger { get; }
+	public SnoPower Generic_x1BogBearTrapTrigger { get; }
 
-	public ISnoPower Generic_x1BogBlightBurrowIn { get; }
+	public SnoPower Generic_x1BogBlightBurrowIn { get; }
 
-	public ISnoPower Generic_x1BogBlightBurrowOut { get; }
+	public SnoPower Generic_x1BogBlightBurrowOut { get; }
 
-	public ISnoPower Generic_x1BogBlightPustuleDeath { get; }
+	public SnoPower Generic_x1BogBlightPustuleDeath { get; }
 
-	public ISnoPower Generic_x1BogBlightPustuleSpawn { get; }
+	public SnoPower Generic_x1BogBlightPustuleSpawn { get; }
 
-	public ISnoPower Generic_x1BogBlightPustuleSpawnCon { get; }
+	public SnoPower Generic_x1BogBlightPustuleSpawnCon { get; }
 
-	public ISnoPower Generic_x1BogBogWater { get; }
+	public SnoPower Generic_x1BogBogWater { get; }
 
-	public ISnoPower Generic_x1BogBogWaterlarge { get; }
+	public SnoPower Generic_x1BogBogWaterlarge { get; }
 
-	public ISnoPower Generic_x1BogBogWatermedium { get; }
+	public SnoPower Generic_x1BogBogWatermedium { get; }
 
-	public ISnoPower Generic_x1BogFamilyBruteCharge { get; }
+	public SnoPower Generic_x1BogFamilyBruteCharge { get; }
 
-	public ISnoPower Generic_x1BogFamilyBruteShout { get; }
+	public SnoPower Generic_x1BogFamilyBruteShout { get; }
 
-	public ISnoPower Generic_x1BogFamilyBruteSummonMeleeAction { get; }
+	public SnoPower Generic_x1BogFamilyBruteSummonMeleeAction { get; }
 
-	public ISnoPower Generic_x1BogFamilyBruteSummonMeleeActionUnique { get; }
+	public SnoPower Generic_x1BogFamilyBruteSummonMeleeActionUnique { get; }
 
-	public ISnoPower Generic_x1BogFamilyBruteThrowDude { get; }
+	public SnoPower Generic_x1BogFamilyBruteThrowDude { get; }
 
-	public ISnoPower Generic_X1BogFamilyGuardTowerSetup { get; }
+	public SnoPower Generic_X1BogFamilyGuardTowerSetup { get; }
 
-	public ISnoPower Generic_x1BogFamilyMeleeTransform { get; }
+	public SnoPower Generic_x1BogFamilyMeleeTransform { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedBearTrap { get; }
+	public SnoPower Generic_x1BogFamilyRangedBearTrap { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedBearTrapFromTower { get; }
+	public SnoPower Generic_x1BogFamilyRangedBearTrapFromTower { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedBearTrapFromTowerReturnToFacing { get; }
+	public SnoPower Generic_x1BogFamilyRangedBearTrapFromTowerReturnToFacing { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedRapidShot { get; }
+	public SnoPower Generic_x1BogFamilyRangedRapidShot { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedRapidShotFromTower { get; }
+	public SnoPower Generic_x1BogFamilyRangedRapidShotFromTower { get; }
 
-	public ISnoPower Generic_x1BogFamilyRangedRapidShotFromTowerReturnToFacing { get; }
+	public SnoPower Generic_x1BogFamilyRangedRapidShotFromTowerReturnToFacing { get; }
 
-	public ISnoPower Generic_X1BogKingOfTheHillLeap { get; }
+	public SnoPower Generic_X1BogKingOfTheHillLeap { get; }
 
-	public ISnoPower Generic_x1BogPlantexplodeKnockback { get; }
+	public SnoPower Generic_x1BogPlantexplodeKnockback { get; }
 
-	public ISnoPower Generic_x1CatacombsDoorAonDeath { get; }
+	public SnoPower Generic_x1CatacombsDoorAonDeath { get; }
 
-	public ISnoPower Generic_x1CatacombsFloorRunesAonDeath { get; }
+	public SnoPower Generic_x1CatacombsFloorRunesAonDeath { get; }
 
-	public ISnoPower Generic_x1CatacombsSpiritTotemactivate { get; }
+	public SnoPower Generic_x1CatacombsSpiritTotemactivate { get; }
 
-	public ISnoPower Generic_x1CesspoolSlimePosionAttack { get; }
+	public SnoPower Generic_x1CesspoolSlimePosionAttack { get; }
 
-	public ISnoPower Generic_x1ChallengeBuffImmuneStun { get; }
+	public SnoPower Generic_x1ChallengeBuffImmuneStun { get; }
 
-	public ISnoPower Generic_X1ChallengeLureSupersizeLure { get; }
+	public SnoPower Generic_X1ChallengeLureSupersizeLure { get; }
 
-	public ISnoPower Generic_x1CrazedAngelArcherFireArrow { get; }
+	public SnoPower Generic_x1CrazedAngelArcherFireArrow { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfFate { get; }
+	public SnoPower Generic_X1CrusaderLawsOfFate { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfFatePassive { get; }
+	public SnoPower Generic_X1CrusaderLawsOfFatePassive { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfHope { get; }
+	public SnoPower Generic_X1CrusaderLawsOfHope { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfHopePassive { get; }
+	public SnoPower Generic_X1CrusaderLawsOfHopePassive { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfHopePassive2 { get; }
+	public SnoPower Generic_X1CrusaderLawsOfHopePassive2 { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfJustice { get; }
+	public SnoPower Generic_X1CrusaderLawsOfJustice { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfJusticePassive { get; }
+	public SnoPower Generic_X1CrusaderLawsOfJusticePassive { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfJusticePassive2 { get; }
+	public SnoPower Generic_X1CrusaderLawsOfJusticePassive2 { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfValor { get; }
+	public SnoPower Generic_X1CrusaderLawsOfValor { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfValorPassive { get; }
+	public SnoPower Generic_X1CrusaderLawsOfValorPassive { get; }
 
-	public ISnoPower Generic_X1CrusaderLawsOfValorPassive2 { get; }
+	public SnoPower Generic_X1CrusaderLawsOfValorPassive2 { get; }
 
-	public ISnoPower Generic_x1CrusaderPhalanxArcherRangedProjectile { get; }
+	public SnoPower Generic_x1CrusaderPhalanxArcherRangedProjectile { get; }
 
-	public ISnoPower Generic_X1CrusaderPhalanxBasicMelee { get; }
+	public SnoPower Generic_X1CrusaderPhalanxBasicMelee { get; }
 
-	public ISnoPower Generic_x1DarkAngelDeath { get; }
+	public SnoPower Generic_x1DarkAngelDeath { get; }
 
-	public ISnoPower Generic_x1DarkAngelSoulRush { get; }
+	public SnoPower Generic_x1DarkAngelSoulRush { get; }
 
-	public ISnoPower Generic_x1DarkAngelSummon { get; }
+	public SnoPower Generic_x1DarkAngelSummon { get; }
 
-	public ISnoPower Generic_x1deathMaidenPowerSlamLRBoss { get; }
+	public SnoPower Generic_x1deathMaidenPowerSlamLRBoss { get; }
 
-	public ISnoPower Generic_x1deathMaidenPowerSlamPrototype { get; }
+	public SnoPower Generic_x1deathMaidenPowerSlamPrototype { get; }
 
-	public ISnoPower Generic_x1deathMaidenSpinAttackMortarLRBoss { get; }
+	public SnoPower Generic_x1deathMaidenSpinAttackMortarLRBoss { get; }
 
-	public ISnoPower Generic_x1deathMaidenSpinAttackPrototype { get; }
+	public SnoPower Generic_x1deathMaidenSpinAttackPrototype { get; }
 
-	public ISnoPower Generic_x1deathMaidenSummonprototype { get; }
+	public SnoPower Generic_x1deathMaidenSummonprototype { get; }
 
-	public ISnoPower Generic_x1deathMaidenSummonprototypeextraskeletons { get; }
+	public SnoPower Generic_x1deathMaidenSummonprototypeextraskeletons { get; }
 
-	public ISnoPower Generic_x1DeathMaidenUniqueFireAbattoirFurnaceFireWreath { get; }
+	public SnoPower Generic_x1DeathMaidenUniqueFireAbattoirFurnaceFireWreath { get; }
 
-	public ISnoPower Generic_x1DetonateDOTBuffs { get; }
+	public SnoPower Generic_x1DetonateDOTBuffs { get; }
 
-	public ISnoPower Generic_X1DHCompanionBoarIntervene { get; }
+	public SnoPower Generic_X1DHCompanionBoarIntervene { get; }
 
-	public ISnoPower Generic_x1FloaterAngelLightningBeam { get; }
+	public SnoPower Generic_x1FloaterAngelLightningBeam { get; }
 
-	public ISnoPower Generic_x1FloaterAngelLightningBeamMalthael { get; }
+	public SnoPower Generic_x1FloaterAngelLightningBeamMalthael { get; }
 
-	public ISnoPower Generic_x1FloaterAngelTeleport { get; }
+	public SnoPower Generic_x1FloaterAngelTeleport { get; }
 
-	public ISnoPower Generic_x1FloaterAngelTransform { get; }
+	public SnoPower Generic_x1FloaterAngelTransform { get; }
 
-	public ISnoPower Generic_x1FloaterAngelTransformMalthael { get; }
+	public SnoPower Generic_x1FloaterAngelTransformMalthael { get; }
 
-	public ISnoPower Generic_X1FortressBVisuals { get; }
+	public SnoPower Generic_X1FortressBVisuals { get; }
 
-	public ISnoPower Generic_X1FortressJudgeEventSpawnKnockback { get; }
+	public SnoPower Generic_X1FortressJudgeEventSpawnKnockback { get; }
 
-	public ISnoPower Generic_x1FortressPortalSwitch { get; }
+	public SnoPower Generic_x1FortressPortalSwitch { get; }
 
-	public ISnoPower Generic_X1FortressPortalSwitchCheckMonsters { get; }
+	public SnoPower Generic_X1FortressPortalSwitchCheckMonsters { get; }
 
-	public ISnoPower Generic_X1FortressPortalSwitchTeleportMonster { get; }
+	public SnoPower Generic_X1FortressPortalSwitchTeleportMonster { get; }
 
-	public ISnoPower Generic_x1FortressRotatingDoor { get; }
+	public SnoPower Generic_x1FortressRotatingDoor { get; }
 
-	public ISnoPower Generic_X1GenericBreakWallsBuff { get; }
+	public SnoPower Generic_X1GenericBreakWallsBuff { get; }
 
-	public ISnoPower Generic_x1GhostDarkSoulSiphon { get; }
+	public SnoPower Generic_x1GhostDarkSoulSiphon { get; }
 
-	public ISnoPower Generic_x1GhostSoulSiphon { get; }
+	public SnoPower Generic_x1GhostSoulSiphon { get; }
 
-	public ISnoPower Generic_x1GhostSoulSiphonFire { get; }
+	public SnoPower Generic_x1GhostSoulSiphonFire { get; }
 
-	public ISnoPower Generic_x1GhostWalkThroughWalls { get; }
+	public SnoPower Generic_x1GhostWalkThroughWalls { get; }
 
-	public ISnoPower Generic_x1GreedDeath { get; }
+	public SnoPower Generic_x1GreedDeath { get; }
 
-	public ISnoPower Generic_x1GreedDeathAncient { get; }
+	public SnoPower Generic_x1GreedDeathAncient { get; }
 
-	public ISnoPower Generic_x1ImperiusCleave { get; }
+	public SnoPower Generic_x1ImperiusCleave { get; }
 
-	public ISnoPower Generic_X1ImperiusEnemyOrNothing { get; }
+	public SnoPower Generic_X1ImperiusEnemyOrNothing { get; }
 
-	public ISnoPower Generic_x1ImperiusLeapSmash { get; }
+	public SnoPower Generic_x1ImperiusLeapSmash { get; }
 
-	public ISnoPower Generic_x1ImperiusWingsBuff { get; }
+	public SnoPower Generic_x1ImperiusWingsBuff { get; }
 
-	public ISnoPower Generic_X1Kylacheer { get; }
+	public SnoPower Generic_X1Kylacheer { get; }
 
-	public ISnoPower Generic_X1Kylafalldownanimation { get; }
+	public SnoPower Generic_X1Kylafalldownanimation { get; }
 
-	public ISnoPower Generic_X1Kylashieldup { get; }
+	public SnoPower Generic_X1Kylashieldup { get; }
 
-	public ISnoPower Generic_X1LegendaryAIRunToGuaranteedSpider { get; }
+	public SnoPower Generic_X1LegendaryAIRunToGuaranteedSpider { get; }
 
-	public ISnoPower Generic_X1LegendaryGenericPotionPowerup { get; }
+	public SnoPower Generic_X1LegendaryGenericPotionPowerup { get; }
 
-	public ISnoPower Generic_X1LifetimeBuffAbsorbNonPlayerDamage { get; }
+	public SnoPower Generic_X1LifetimeBuffAbsorbNonPlayerDamage { get; }
 
-	public ISnoPower Generic_X1LRBossBigRedIzualFrostNova { get; }
+	public SnoPower Generic_X1LRBossBigRedIzualFrostNova { get; }
 
-	public ISnoPower Generic_x1LRBossButcherSpears { get; }
+	public SnoPower Generic_x1LRBossButcherSpears { get; }
 
-	public ISnoPower Generic_x1LRBossDarkAngelSoulRush { get; }
+	public SnoPower Generic_x1LRBossDarkAngelSoulRush { get; }
 
-	public ISnoPower Generic_x1LRBossDarkAngelSummon { get; }
+	public SnoPower Generic_x1LRBossDarkAngelSummon { get; }
 
-	public ISnoPower Generic_x1LRBossDarkAngelWave { get; }
+	public SnoPower Generic_x1LRBossDarkAngelWave { get; }
 
-	public ISnoPower Generic_X1LRBossdemonFlyerMegaFireBreath { get; }
+	public SnoPower Generic_X1LRBossdemonFlyerMegaFireBreath { get; }
 
-	public ISnoPower Generic_X1LRBossExpandingFireRing { get; }
+	public SnoPower Generic_X1LRBossExpandingFireRing { get; }
 
-	public ISnoPower Generic_X1LRBossFireNova { get; }
+	public SnoPower Generic_X1LRBossFireNova { get; }
 
-	public ISnoPower Generic_X1LRBossGenericTaunt { get; }
+	public SnoPower Generic_X1LRBossGenericTaunt { get; }
 
-	public ISnoPower Generic_X1LRBossMorluSpellcasterMeteor { get; }
+	public SnoPower Generic_X1LRBossMorluSpellcasterMeteor { get; }
 
-	public ISnoPower Generic_x1LRBossmorluSpellcasterWeaponMeleeInstant { get; }
+	public SnoPower Generic_x1LRBossmorluSpellcasterWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_X1LRBossRatKingBurrowSetup { get; }
+	public SnoPower Generic_X1LRBossRatKingBurrowSetup { get; }
 
-	public ISnoPower Generic_X1LRBossRatKingDeadPlayerTaunt { get; }
+	public SnoPower Generic_X1LRBossRatKingDeadPlayerTaunt { get; }
 
-	public ISnoPower Generic_X1LRBossRatKingDeadPlayerTauntSearch { get; }
+	public SnoPower Generic_X1LRBossRatKingDeadPlayerTauntSearch { get; }
 
-	public ISnoPower Generic_X1LRBossRatKingOnDeath { get; }
+	public SnoPower Generic_X1LRBossRatKingOnDeath { get; }
 
-	public ISnoPower Generic_x1LRBossSandmonsterOnDeath { get; }
+	public SnoPower Generic_x1LRBossSandmonsterOnDeath { get; }
 
-	public ISnoPower Generic_x1LRBossSharedCooldown { get; }
+	public SnoPower Generic_x1LRBossSharedCooldown { get; }
 
-	public ISnoPower Generic_X1LRBossSkeletonKingSummonSkeleton { get; }
+	public SnoPower Generic_X1LRBossSkeletonKingSummonSkeleton { get; }
 
-	public ISnoPower Generic_X1LRBossSkeletonKingWhirlwind { get; }
+	public SnoPower Generic_X1LRBossSkeletonKingWhirlwind { get; }
 
-	public ISnoPower Generic_X1LRBossSkeletonSummonerProjectile { get; }
+	public SnoPower Generic_X1LRBossSkeletonSummonerProjectile { get; }
 
-	public ISnoPower Generic_X1LRBossSkeletonSummonerProjectileB { get; }
+	public SnoPower Generic_X1LRBossSkeletonSummonerProjectileB { get; }
 
-	public ISnoPower Generic_X1LRBossSkeletonSummonerProjectileC { get; }
+	public SnoPower Generic_X1LRBossSkeletonSummonerProjectileC { get; }
 
-	public ISnoPower Generic_x1LRBossSkeletonSummonerSummoning { get; }
+	public SnoPower Generic_x1LRBossSkeletonSummonerSummoning { get; }
 
-	public ISnoPower Generic_X1LRBossSuccubusFirestorm { get; }
+	public SnoPower Generic_X1LRBossSuccubusFirestorm { get; }
 
-	public ISnoPower Generic_X1LRBossSummonCoreElites { get; }
+	public SnoPower Generic_X1LRBossSummonCoreElites { get; }
 
-	public ISnoPower Generic_X1LRCreepMobHerdingAttack { get; }
+	public SnoPower Generic_X1LRCreepMobHerdingAttack { get; }
 
-	public ISnoPower Generic_X1LRCreepMobMultipleArmAttack { get; }
+	public SnoPower Generic_X1LRCreepMobMultipleArmAttack { get; }
 
-	public ISnoPower Generic_X1LRCreepMobRangedArmLineAttack { get; }
+	public SnoPower Generic_X1LRCreepMobRangedArmLineAttack { get; }
 
-	public ISnoPower Generic_x1MalthaelBaalAIState { get; }
+	public SnoPower Generic_x1MalthaelBaalAIState { get; }
 
-	public ISnoPower Generic_x1MalthaelBaalFesteringAppendageMelee { get; }
+	public SnoPower Generic_x1MalthaelBaalFesteringAppendageMelee { get; }
 
-	public ISnoPower Generic_x1MalthaelBaalHoarfrost { get; }
+	public SnoPower Generic_x1MalthaelBaalHoarfrost { get; }
 
-	public ISnoPower Generic_x1MalthaelBaalRift { get; }
+	public SnoPower Generic_x1MalthaelBaalRift { get; }
 
-	public ISnoPower Generic_x1MalthaelBaalSummonFesteringAppendages { get; }
+	public SnoPower Generic_x1MalthaelBaalSummonFesteringAppendages { get; }
 
-	public ISnoPower Generic_x1MalthaelDeathFogMonsterSetup { get; }
+	public SnoPower Generic_x1MalthaelDeathFogMonsterSetup { get; }
 
-	public ISnoPower Generic_x1MalthaelDiabloAIState { get; }
+	public SnoPower Generic_x1MalthaelDiabloAIState { get; }
 
-	public ISnoPower Generic_x1MalthaelDiabloTeleportFireNovaLightning { get; }
+	public SnoPower Generic_x1MalthaelDiabloTeleportFireNovaLightning { get; }
 
-	public ISnoPower Generic_X1MalthaelDrainSoul { get; }
+	public SnoPower Generic_X1MalthaelDrainSoul { get; }
 
-	public ISnoPower Generic_x1MalthaelHealthGlobeDropper { get; }
+	public SnoPower Generic_x1MalthaelHealthGlobeDropper { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoAIState { get; }
+	public SnoPower Generic_x1MalthaelMephistoAIState { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoPoisonCloud { get; }
+	public SnoPower Generic_x1MalthaelMephistoPoisonCloud { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoSkullMissile { get; }
+	public SnoPower Generic_x1MalthaelMephistoSkullMissile { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoSpawnInvisLightningProxies { get; }
+	public SnoPower Generic_x1MalthaelMephistoSpawnInvisLightningProxies { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoSpiralLightningInward { get; }
+	public SnoPower Generic_x1MalthaelMephistoSpiralLightningInward { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoSummonRotatingLightning { get; }
+	public SnoPower Generic_x1MalthaelMephistoSummonRotatingLightning { get; }
 
-	public ISnoPower Generic_x1MalthaelMephistoTeleportExplodeOrbs { get; }
+	public SnoPower Generic_x1MalthaelMephistoTeleportExplodeOrbs { get; }
 
-	public ISnoPower Generic_x1MalthaelOnDeath { get; }
+	public SnoPower Generic_x1MalthaelOnDeath { get; }
 
-	public ISnoPower Generic_x1MalthaelPhaseOneAIState { get; }
+	public SnoPower Generic_x1MalthaelPhaseOneAIState { get; }
 
-	public ISnoPower Generic_x1MalthaelPhaseThreeAIState { get; }
+	public SnoPower Generic_x1MalthaelPhaseThreeAIState { get; }
 
-	public ISnoPower Generic_x1MalthaelPhaseTwoAIState { get; }
+	public SnoPower Generic_x1MalthaelPhaseTwoAIState { get; }
 
-	public ISnoPower Generic_X1MalthaelSickleThrowTeleport { get; }
+	public SnoPower Generic_X1MalthaelSickleThrowTeleport { get; }
 
-	public ISnoPower Generic_x1MalthaelSpiritDeath { get; }
+	public SnoPower Generic_x1MalthaelSpiritDeath { get; }
 
-	public ISnoPower Generic_x1MalthaelSpiritFog { get; }
+	public SnoPower Generic_x1MalthaelSpiritFog { get; }
 
-	public ISnoPower Generic_X1MalthaelSummonDeathFogMonster { get; }
+	public SnoPower Generic_X1MalthaelSummonDeathFogMonster { get; }
 
-	public ISnoPower Generic_X1MalthaelSummonFloaterAngel { get; }
+	public SnoPower Generic_X1MalthaelSummonFloaterAngel { get; }
 
-	public ISnoPower Generic_x1MalthaelSwordShieldStart { get; }
+	public SnoPower Generic_x1MalthaelSwordShieldStart { get; }
 
-	public ISnoPower Generic_x1MalthaelSwordShieldStop { get; }
+	public SnoPower Generic_x1MalthaelSwordShieldStop { get; }
 
-	public ISnoPower Generic_x1MoleMutantEnragedCombo { get; }
+	public SnoPower Generic_x1MoleMutantEnragedCombo { get; }
 
-	public ISnoPower Generic_x1MoleMutantRangedJumpBackShot { get; }
+	public SnoPower Generic_x1MoleMutantRangedJumpBackShot { get; }
 
-	public ISnoPower Generic_x1MoleMutantRangedProjectile { get; }
+	public SnoPower Generic_x1MoleMutantRangedProjectile { get; }
 
-	public ISnoPower Generic_x1MoleMutantShamanBlast { get; }
+	public SnoPower Generic_x1MoleMutantShamanBlast { get; }
 
-	public ISnoPower Generic_x1MoleMutantShamanResurrect { get; }
+	public SnoPower Generic_x1MoleMutantShamanResurrect { get; }
 
-	public ISnoPower Generic_X1MonkMysticAllyRuneAExplode { get; }
+	public SnoPower Generic_X1MonkMysticAllyRuneAExplode { get; }
 
-	public ISnoPower Generic_X1MonkMysticAllyRuneATagForExplosion { get; }
+	public SnoPower Generic_X1MonkMysticAllyRuneATagForExplosion { get; }
 
-	public ISnoPower Generic_X1MonkMysticAllyv2Passive { get; }
+	public SnoPower Generic_X1MonkMysticAllyv2Passive { get; }
 
-	public ISnoPower Generic_X1MonkMysticAllyv3Passive { get; }
+	public SnoPower Generic_X1MonkMysticAllyv3Passive { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerCorpseBomberRare { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerCorpseBomberRare { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerCorpseBomberRareCast { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerCorpseBomberRareCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerLightningStorm { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerLightningStorm { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerLightningStormCast { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerLightningStormCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerOrbiter { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerOrbiter { get; }
 
-	public ISnoPower Generic_X1MonsterAffixAvengerOrbiterCast { get; }
+	public SnoPower Generic_X1MonsterAffixAvengerOrbiterCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixCorpseBomber { get; }
+	public SnoPower Generic_X1MonsterAffixCorpseBomber { get; }
 
-	public ISnoPower Generic_X1MonsterAffixCorpseBomberCast { get; }
+	public SnoPower Generic_X1MonsterAffixCorpseBomberCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixCorpseBomberRare { get; }
+	public SnoPower Generic_X1MonsterAffixCorpseBomberRare { get; }
 
-	public ISnoPower Generic_X1MonsterAffixCorpseBomberRareCast { get; }
+	public SnoPower Generic_X1MonsterAffixCorpseBomberRareCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStorm { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStorm { get; }
 
-	public ISnoPower Generic_x1MonsterAffixLightningStormAIClose { get; }
+	public SnoPower Generic_x1MonsterAffixLightningStormAIClose { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStormCast { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStormCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStormChampion { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStormChampion { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStormKillSelf { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStormKillSelf { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStormPulse { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStormPulse { get; }
 
-	public ISnoPower Generic_X1MonsterAffixLightningStormTagTarget { get; }
+	public SnoPower Generic_X1MonsterAffixLightningStormTagTarget { get; }
 
-	public ISnoPower Generic_X1MonsterAffixOrbiter { get; }
+	public SnoPower Generic_X1MonsterAffixOrbiter { get; }
 
-	public ISnoPower Generic_X1MonsterAffixOrbiterCast { get; }
+	public SnoPower Generic_X1MonsterAffixOrbiterCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixOrbiterChampion { get; }
+	public SnoPower Generic_X1MonsterAffixOrbiterChampion { get; }
 
-	public ISnoPower Generic_X1MonsterAffixOrbiterChampionCast { get; }
+	public SnoPower Generic_X1MonsterAffixOrbiterChampionCast { get; }
 
-	public ISnoPower Generic_X1MonsterAffixTeleportMines { get; }
+	public SnoPower Generic_X1MonsterAffixTeleportMines { get; }
 
-	public ISnoPower Generic_X1MonsterAffixTeleportMinesCast { get; }
+	public SnoPower Generic_X1MonsterAffixTeleportMinesCast { get; }
 
-	public ISnoPower Generic_X1NegativeHealthGlobeFlash { get; }
+	public SnoPower Generic_X1NegativeHealthGlobeFlash { get; }
 
-	public ISnoPower Generic_x1NightScreamerAllyBiteTransform { get; }
+	public SnoPower Generic_x1NightScreamerAllyBiteTransform { get; }
 
-	public ISnoPower Generic_x1NightScreamerCanTransform { get; }
+	public SnoPower Generic_x1NightScreamerCanTransform { get; }
 
-	public ISnoPower Generic_X1NightScreamerFuriousCharge { get; }
+	public SnoPower Generic_X1NightScreamerFuriousCharge { get; }
 
-	public ISnoPower Generic_x1NightScreamerScreamAttack { get; }
+	public SnoPower Generic_x1NightScreamerScreamAttack { get; }
 
-	public ISnoPower Generic_x1NPCWestmarchAldritchCrushingResolve { get; }
+	public SnoPower Generic_x1NPCWestmarchAldritchCrushingResolve { get; }
 
-	public ISnoPower Generic_x1PandBruteDecapitateSlide { get; }
+	public SnoPower Generic_x1PandBruteDecapitateSlide { get; }
 
-	public ISnoPower Generic_X1pandemoniumideationtimeStopBuff { get; }
+	public SnoPower Generic_X1pandemoniumideationtimeStopBuff { get; }
 
-	public ISnoPower Generic_x1PandExtCollapsingPillar { get; }
+	public SnoPower Generic_x1PandExtCollapsingPillar { get; }
 
-	public ISnoPower Generic_x1PandExtEventgreatWeaponbossSuckIn { get; }
+	public SnoPower Generic_x1PandExtEventgreatWeaponbossSuckIn { get; }
 
-	public ISnoPower Generic_x1PandExtEventgreatWeaponfireEnergyPulses { get; }
+	public SnoPower Generic_x1PandExtEventgreatWeaponfireEnergyPulses { get; }
 
-	public ISnoPower Generic_x1PandExtEventgreatWeaponsummonBoss { get; }
+	public SnoPower Generic_x1PandExtEventgreatWeaponsummonBoss { get; }
 
-	public ISnoPower Generic_x1PandExtEventgreatWeaponsummonMonsters { get; }
+	public SnoPower Generic_x1PandExtEventgreatWeaponsummonMonsters { get; }
 
-	public ISnoPower Generic_x1PandExtideationbaconbeaconOnDeath { get; }
+	public SnoPower Generic_x1PandExtideationbaconbeaconOnDeath { get; }
 
-	public ISnoPower Generic_x1PandExtIdeationWarSpawnerAngel { get; }
+	public SnoPower Generic_x1PandExtIdeationWarSpawnerAngel { get; }
 
-	public ISnoPower Generic_x1PandExtIdeationWarSpawnerDemon { get; }
+	public SnoPower Generic_x1PandExtIdeationWarSpawnerDemon { get; }
 
-	public ISnoPower Generic_x1PandExtImperiusChargetowerschains { get; }
+	public SnoPower Generic_x1PandExtImperiusChargetowerschains { get; }
 
-	public ISnoPower Generic_x1PandExtImperiusChargeTowersSetup { get; }
+	public SnoPower Generic_x1PandExtImperiusChargeTowersSetup { get; }
 
-	public ISnoPower Generic_X1PandExtRamKnockback { get; }
+	public SnoPower Generic_X1PandExtRamKnockback { get; }
 
-	public ISnoPower Generic_x1pandExtRangedPrototype { get; }
+	public SnoPower Generic_x1pandExtRangedPrototype { get; }
 
-	public ISnoPower Generic_x1pandExtRangedPrototypeStrafeLeft { get; }
+	public SnoPower Generic_x1pandExtRangedPrototypeStrafeLeft { get; }
 
-	public ISnoPower Generic_x1pandExtRangedPrototypeStrafeRight { get; }
+	public SnoPower Generic_x1pandExtRangedPrototypeStrafeRight { get; }
 
-	public ISnoPower Generic_X1PandExtTimeTrap { get; }
+	public SnoPower Generic_X1PandExtTimeTrap { get; }
 
-	public ISnoPower Generic_X1PandFortressOrdnanceChronoField { get; }
+	public SnoPower Generic_X1PandFortressOrdnanceChronoField { get; }
 
-	public ISnoPower Generic_X1PandFortressOrdnanceMine { get; }
+	public SnoPower Generic_X1PandFortressOrdnanceMine { get; }
 
-	public ISnoPower Generic_X1PandFortressOrdnanceShocker { get; }
+	public SnoPower Generic_X1PandFortressOrdnanceShocker { get; }
 
-	public ISnoPower Generic_X1PandHexMazePortalChampSummon { get; }
+	public SnoPower Generic_X1PandHexMazePortalChampSummon { get; }
 
-	public ISnoPower Generic_X1PandIntSplitMonstermerge { get; }
+	public SnoPower Generic_X1PandIntSplitMonstermerge { get; }
 
-	public ISnoPower Generic_X1PandIntSplitMonstersplit { get; }
+	public SnoPower Generic_X1PandIntSplitMonstersplit { get; }
 
-	public ISnoPower Generic_x1PandLeaperAngelLeap { get; }
+	public SnoPower Generic_x1PandLeaperAngelLeap { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPower { get; }
+	public SnoPower Generic_x1PandMazePortalTestPower { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerBloone { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerBloone { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerBorgoth { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerBorgoth { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerGrotescor { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerGrotescor { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerHaziael { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerHaziael { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerMagrethar { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerMagrethar { get; }
 
-	public ISnoPower Generic_x1PandMazePortalTestPowerSeverag { get; }
+	public SnoPower Generic_x1PandMazePortalTestPowerSeverag { get; }
 
-	public ISnoPower Generic_x1PandRockwormBurstOut { get; }
+	public SnoPower Generic_x1PandRockwormBurstOut { get; }
 
-	public ISnoPower Generic_x1PandSniperAngelcloseRangedAttack { get; }
+	public SnoPower Generic_x1PandSniperAngelcloseRangedAttack { get; }
 
-	public ISnoPower Generic_x1PandSniperAngelcloseRangedAttackLRBoss { get; }
+	public SnoPower Generic_x1PandSniperAngelcloseRangedAttackLRBoss { get; }
 
-	public ISnoPower Generic_x1PandSniperAngelrangedAttack { get; }
+	public SnoPower Generic_x1PandSniperAngelrangedAttack { get; }
 
-	public ISnoPower Generic_x1PandSniperAngelrangedAttackLRBoss { get; }
+	public SnoPower Generic_x1PandSniperAngelrangedAttackLRBoss { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScroll { get; }
+	public SnoPower Generic_X1PassiveBountyScroll { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollBeastDamage { get; }
+	public SnoPower Generic_X1PassiveBountyScrollBeastDamage { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollBossDamage { get; }
+	public SnoPower Generic_X1PassiveBountyScrollBossDamage { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollDemonDamage { get; }
+	public SnoPower Generic_X1PassiveBountyScrollDemonDamage { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollEliteDamage { get; }
+	public SnoPower Generic_X1PassiveBountyScrollEliteDamage { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollExperience { get; }
+	public SnoPower Generic_X1PassiveBountyScrollExperience { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollLifeRegen { get; }
+	public SnoPower Generic_X1PassiveBountyScrollLifeRegen { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollRunSpeed { get; }
+	public SnoPower Generic_X1PassiveBountyScrollRunSpeed { get; }
 
-	public ISnoPower Generic_X1PassiveBountyScrollUndeadDamage { get; }
+	public SnoPower Generic_X1PassiveBountyScrollUndeadDamage { get; }
 
-	public ISnoPower Generic_X1PlaguedLacuniMaleSummon { get; }
+	public SnoPower Generic_X1PlaguedLacuniMaleSummon { get; }
 
-	public ISnoPower Generic_x1PlaguedLacuniSpecialMelee { get; }
+	public SnoPower Generic_x1PlaguedLacuniSpecialMelee { get; }
 
-	public ISnoPower Generic_x1portalGuardianMinionprojectile { get; }
+	public SnoPower Generic_x1portalGuardianMinionprojectile { get; }
 
-	public ISnoPower Generic_x1PortalGuardianTurning { get; }
+	public SnoPower Generic_x1PortalGuardianTurning { get; }
 
-	public ISnoPower Generic_x1PortalMonsterBurrowIn { get; }
+	public SnoPower Generic_x1PortalMonsterBurrowIn { get; }
 
-	public ISnoPower Generic_x1PortalMonsterBurrowOut { get; }
+	public SnoPower Generic_x1PortalMonsterBurrowOut { get; }
 
-	public ISnoPower Generic_x1PortalMonsterLifetimeBuff { get; }
+	public SnoPower Generic_x1PortalMonsterLifetimeBuff { get; }
 
-	public ISnoPower Generic_X1PortalMonsterPortalSummon { get; }
+	public SnoPower Generic_X1PortalMonsterPortalSummon { get; }
 
-	public ISnoPower Generic_X1PortalMonsterRoarSummon { get; }
+	public SnoPower Generic_X1PortalMonsterRoarSummon { get; }
 
-	public ISnoPower Generic_X1PortalMonsterStomp { get; }
+	public SnoPower Generic_X1PortalMonsterStomp { get; }
 
-	public ISnoPower Generic_x1PortalMonsterSwipe { get; }
+	public SnoPower Generic_x1PortalMonsterSwipe { get; }
 
-	public ISnoPower Generic_x1RockFodderCharge { get; }
+	public SnoPower Generic_x1RockFodderCharge { get; }
 
-	public ISnoPower Generic_X1RockFodderFuriousCharge { get; }
+	public SnoPower Generic_X1RockFodderFuriousCharge { get; }
 
-	public ISnoPower Generic_X1RockFodderFuriousChargeRockHiveQueen { get; }
+	public SnoPower Generic_X1RockFodderFuriousChargeRockHiveQueen { get; }
 
-	public ISnoPower Generic_x1RockFodderTumble { get; }
+	public SnoPower Generic_x1RockFodderTumble { get; }
 
-	public ISnoPower Generic_x1rockwormpandprojectile { get; }
+	public SnoPower Generic_x1rockwormpandprojectile { get; }
 
-	public ISnoPower Generic_X1SandmonsterpetWeaponMeleeInstant { get; }
+	public SnoPower Generic_X1SandmonsterpetWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_X1SandmonsterWeaponMeleeInstant { get; }
+	public SnoPower Generic_X1SandmonsterWeaponMeleeInstant { get; }
 
-	public ISnoPower Generic_x1ScaryEyesBurrowInHidden { get; }
+	public SnoPower Generic_x1ScaryEyesBurrowInHidden { get; }
 
-	public ISnoPower Generic_x1ScaryEyesBurrowOut { get; }
+	public SnoPower Generic_x1ScaryEyesBurrowOut { get; }
 
-	public ISnoPower Generic_x1ScaryEyescharge { get; }
+	public SnoPower Generic_x1ScaryEyescharge { get; }
 
-	public ISnoPower Generic_X1ScoundrelMultishot { get; }
+	public SnoPower Generic_X1ScoundrelMultishot { get; }
 
-	public ISnoPower Generic_X1ScoundrelMultishotPassive { get; }
+	public SnoPower Generic_X1ScoundrelMultishotPassive { get; }
 
-	public ISnoPower Generic_X1ShardPassiveFakeGlobes { get; }
+	public SnoPower Generic_X1ShardPassiveFakeGlobes { get; }
 
-	public ISnoPower Generic_X1ShardPassiveMinResource { get; }
+	public SnoPower Generic_X1ShardPassiveMinResource { get; }
 
-	public ISnoPower Generic_x1SkeletonArcherFireArrow { get; }
+	public SnoPower Generic_x1SkeletonArcherFireArrow { get; }
 
-	public ISnoPower Generic_x1SkeletonArcherFireArrowBackpedal { get; }
+	public SnoPower Generic_x1SkeletonArcherFireArrowBackpedal { get; }
 
-	public ISnoPower Generic_x1SkeletonStab { get; }
+	public SnoPower Generic_x1SkeletonStab { get; }
 
-	public ISnoPower Generic_x1SkeletonStrafe { get; }
+	public SnoPower Generic_x1SkeletonStrafe { get; }
 
-	public ISnoPower Generic_X1SnitchleyTreasureGoblinEscape { get; }
+	public SnoPower Generic_X1SnitchleyTreasureGoblinEscape { get; }
 
-	public ISnoPower Generic_X1SpectralHoundBuff { get; }
+	public SnoPower Generic_X1SpectralHoundBuff { get; }
 
-	public ISnoPower Generic_X1SummonVanityPet { get; }
+	public SnoPower Generic_X1SummonVanityPet { get; }
 
-	public ISnoPower Generic_X1tempballistaswitchleap { get; }
+	public SnoPower Generic_X1tempballistaswitchleap { get; }
 
-	public ISnoPower Generic_x1UberDiabloHellSpikes { get; }
+	public SnoPower Generic_x1UberDiabloHellSpikes { get; }
 
-	public ISnoPower Generic_x1UdderLightning { get; }
+	public SnoPower Generic_x1UdderLightning { get; }
 
-	public ISnoPower Generic_x1UniqueNPCEnchantressForcefulPush { get; }
+	public SnoPower Generic_x1UniqueNPCEnchantressForcefulPush { get; }
 
-	public ISnoPower Generic_x1UniqueNPCEnchantressMassCharm { get; }
+	public SnoPower Generic_x1UniqueNPCEnchantressMassCharm { get; }
 
-	public ISnoPower Generic_x1UniqueNPCEnchantressScorchedEarth { get; }
+	public SnoPower Generic_x1UniqueNPCEnchantressScorchedEarth { get; }
 
-	public ISnoPower Generic_x1UniqueNPCTemplarHeal { get; }
+	public SnoPower Generic_x1UniqueNPCTemplarHeal { get; }
 
-	public ISnoPower Generic_x1UniqueNPCTemplarOnslaught { get; }
+	public SnoPower Generic_x1UniqueNPCTemplarOnslaught { get; }
 
-	public ISnoPower Generic_x1UniqueNPCTemplarShieldCharge { get; }
+	public SnoPower Generic_x1UniqueNPCTemplarShieldCharge { get; }
 
-	public ISnoPower Generic_x1UniqueTriuneSummonerProjectile { get; }
+	public SnoPower Generic_x1UniqueTriuneSummonerProjectile { get; }
 
-	public ISnoPower Generic_x1UrzaelCannonball { get; }
+	public SnoPower Generic_x1UrzaelCannonball { get; }
 
-	public ISnoPower Generic_x1UrzaelCannonballBurning { get; }
+	public SnoPower Generic_x1UrzaelCannonballBurning { get; }
 
-	public ISnoPower Generic_x1UrzaelCeilingDebris { get; }
+	public SnoPower Generic_x1UrzaelCeilingDebris { get; }
 
-	public ISnoPower Generic_x1UrzaelCeilingDebrisBurning { get; }
+	public SnoPower Generic_x1UrzaelCeilingDebrisBurning { get; }
 
-	public ISnoPower Generic_x1UrzaelFlameSweep { get; }
+	public SnoPower Generic_x1UrzaelFlameSweep { get; }
 
-	public ISnoPower Generic_x1UrzaelLeapKnockback { get; }
+	public SnoPower Generic_x1UrzaelLeapKnockback { get; }
 
-	public ISnoPower Generic_x1UrzaelMeleeInstant { get; }
+	public SnoPower Generic_x1UrzaelMeleeInstant { get; }
 
-	public ISnoPower Generic_x1UrzaelPhaseOneAIState { get; }
+	public SnoPower Generic_x1UrzaelPhaseOneAIState { get; }
 
-	public ISnoPower Generic_x1UrzaelPhaseTwoAIState { get; }
+	public SnoPower Generic_x1UrzaelPhaseTwoAIState { get; }
 
-	public ISnoPower Generic_x1WestmarchBruteBChargeCustomLRBoss { get; }
+	public SnoPower Generic_x1WestmarchBruteBChargeCustomLRBoss { get; }
 
-	public ISnoPower Generic_x1WestmarchBruteBChargeCustomLRBossHulkmode { get; }
+	public SnoPower Generic_x1WestmarchBruteBChargeCustomLRBossHulkmode { get; }
 
-	public ISnoPower Generic_x1WestmarchBruteCharge { get; }
+	public SnoPower Generic_x1WestmarchBruteCharge { get; }
 
-	public ISnoPower Generic_x1WestmarchBruteDecapitate { get; }
+	public SnoPower Generic_x1WestmarchBruteDecapitate { get; }
 
-	public ISnoPower Generic_x1WestmarchBruteVomit { get; }
+	public SnoPower Generic_x1WestmarchBruteVomit { get; }
 
-	public ISnoPower Generic_X1WestmarchHoundDeadPlayerTaunt { get; }
+	public SnoPower Generic_X1WestmarchHoundDeadPlayerTaunt { get; }
 
-	public ISnoPower Generic_X1WestmarchHoundDeadPlayerTauntSearch { get; }
+	public SnoPower Generic_X1WestmarchHoundDeadPlayerTauntSearch { get; }
 
-	public ISnoPower Generic_X1WestmarchHoundShakeTarget { get; }
+	public SnoPower Generic_X1WestmarchHoundShakeTarget { get; }
 
-	public ISnoPower Generic_x1westmarchRangedRangedAttackPrototype { get; }
+	public SnoPower Generic_x1westmarchRangedRangedAttackPrototype { get; }
 
-	public ISnoPower Generic_x1westmarchRangedSlowAreaDenialPrototype { get; }
+	public SnoPower Generic_x1westmarchRangedSlowAreaDenialPrototype { get; }
 
-	public ISnoPower Generic_x1WestmarchRatCharge { get; }
+	public SnoPower Generic_x1WestmarchRatCharge { get; }
 
-	public ISnoPower Generic_x1WestmarchRatKamikaze { get; }
+	public SnoPower Generic_x1WestmarchRatKamikaze { get; }
 
-	public ISnoPower Generic_X1WestmConvert { get; }
+	public SnoPower Generic_X1WestmConvert { get; }
 
-	public ISnoPower Generic_X1WestmConvert2 { get; }
+	public SnoPower Generic_X1WestmConvert2 { get; }
 
-	public ISnoPower Generic_X1WestmConvertAoE { get; }
+	public SnoPower Generic_X1WestmConvertAoE { get; }
 
-	public ISnoPower Generic_X1WestmConvertDelayedStart2 { get; }
+	public SnoPower Generic_X1WestmConvertDelayedStart2 { get; }
 
-	public ISnoPower Generic_X1WestmConvertDelayedStartFromTarget { get; }
+	public SnoPower Generic_X1WestmConvertDelayedStartFromTarget { get; }
 
-	public ISnoPower Generic_X1WestmConvertScripted { get; }
+	public SnoPower Generic_X1WestmConvertScripted { get; }
 
-	public ISnoPower Generic_X1westmdoomedWomanvisual { get; }
+	public SnoPower Generic_X1westmdoomedWomanvisual { get; }
 
-	public ISnoPower Generic_x1westmHoistTriggeronDeathPower { get; }
+	public SnoPower Generic_x1westmHoistTriggeronDeathPower { get; }
 
-	public ISnoPower Generic_x1westmideationeventRATZNGGOLD { get; }
+	public SnoPower Generic_x1westmideationeventRATZNGGOLD { get; }
 
-	public ISnoPower Generic_x1westmSoulSummonerOrbSummonNearTarget { get; }
+	public SnoPower Generic_x1westmSoulSummonerOrbSummonNearTarget { get; }
 
-	public ISnoPower Generic_X1westmSoulsummonersetup { get; }
+	public SnoPower Generic_X1westmSoulsummonersetup { get; }
 
-	public ISnoPower Generic_X1westmSoulSummonerSummon { get; }
+	public SnoPower Generic_X1westmSoulSummonerSummon { get; }
 
-	public ISnoPower Generic_X1westmUniqueghostLordshockwave { get; }
+	public SnoPower Generic_X1westmUniqueghostLordshockwave { get; }
 
-	public ISnoPower Generic_x1WickermanAggro { get; }
+	public SnoPower Generic_x1WickermanAggro { get; }
 
-	public ISnoPower Generic_X1WickerManFireNova { get; }
+	public SnoPower Generic_X1WickerManFireNova { get; }
 
-	public ISnoPower Generic_X1WickerManFirePhantom { get; }
+	public SnoPower Generic_X1WickerManFirePhantom { get; }
 
-	public ISnoPower Generic_x1WickermanSuicide { get; }
+	public SnoPower Generic_x1WickermanSuicide { get; }
 
-	public ISnoPower Generic_x1WraithChargeClose { get; }
+	public SnoPower Generic_x1WraithChargeClose { get; }
 
-	public ISnoPower Generic_X1WraithMelee { get; }
+	public SnoPower Generic_X1WraithMelee { get; }
 
-	public ISnoPower Generic_X1WraithPiercingDash { get; }
+	public SnoPower Generic_X1WraithPiercingDash { get; }
 
-	public ISnoPower Generic_X1X1EventSpeedKillChampionSpawner { get; }
+	public SnoPower Generic_X1X1EventSpeedKillChampionSpawner { get; }
 
-	public ISnoPower Generic_X1X1EventSpeedKillSpawner { get; }
+	public SnoPower Generic_X1X1EventSpeedKillSpawner { get; }
 
-	public ISnoPower Generic_x1ZombieFemaleProjectilePoison { get; }
+	public SnoPower Generic_x1ZombieFemaleProjectilePoison { get; }
 
-	public ISnoPower Generic_ZKBallSummonSkeleton { get; }
+	public SnoPower Generic_ZKBallSummonSkeleton { get; }
 
-	public ISnoPower Generic_zoltsmallFloorSpawner { get; }
+	public SnoPower Generic_zoltsmallFloorSpawner { get; }
 
-	public ISnoPower Generic_zoltTabletstateChange { get; }
+	public SnoPower Generic_zoltTabletstateChange { get; }
 
-	public ISnoPower Generic_ZoltunKulleCollapseCeiling { get; }
+	public SnoPower Generic_ZoltunKulleCollapseCeiling { get; }
 
-	public ISnoPower Generic_ZoltunKulleEnergyTwister { get; }
+	public SnoPower Generic_ZoltunKulleEnergyTwister { get; }
 
-	public ISnoPower Generic_ZoltunKulleFieryBoulder { get; }
+	public SnoPower Generic_ZoltunKulleFieryBoulder { get; }
 
-	public ISnoPower Generic_ZoltunKulleSlowTime { get; }
+	public SnoPower Generic_ZoltunKulleSlowTime { get; }
 
-	public ISnoPower Generic_ZoltunKulleTeleport { get; }
+	public SnoPower Generic_ZoltunKulleTeleport { get; }
 
-	public ISnoPower Generic_ZoltunKulleTeleportToPlayer { get; }
+	public SnoPower Generic_ZoltunKulleTeleportToPlayer { get; }
 
-	public ISnoPower Generic_ZoltunKulleTeleportToPlayerEnrage { get; }
+	public SnoPower Generic_ZoltunKulleTeleportToPlayerEnrage { get; }
 
-	public ISnoPower Generic_ZombieEatStart { get; }
+	public SnoPower Generic_ZombieEatStart { get; }
 
-	public ISnoPower Generic_ZombieEatStop { get; }
+	public SnoPower Generic_ZombieEatStop { get; }
 
-	public ISnoPower Generic_ZombieFemaleProjectile { get; }
+	public SnoPower Generic_ZombieFemaleProjectile { get; }
 
-	public ISnoPower Generic_ZombieKillerGrab { get; }
+	public SnoPower Generic_ZombieKillerGrab { get; }
 
-	public ISnoPower BroodOfAraneae => SnoData.Powers.GetBySno(486136u);
+	public SnoPower BroodOfAraneae => SnoData.Powers.GetBySno(486136u);
 
-	public ISnoPower DregsOfLies => SnoData.Powers.GetBySno(486126u);
+	public SnoPower DregsOfLies => SnoData.Powers.GetBySno(486126u);
 
-	public ISnoPower EssenceOfAnguish => SnoData.Powers.GetBySno(486198u);
+	public SnoPower EssenceOfAnguish => SnoData.Powers.GetBySno(486198u);
 
-	public ISnoPower FragmentOfDestruction => SnoData.Powers.GetBySno(486213u);
+	public SnoPower FragmentOfDestruction => SnoData.Powers.GetBySno(486213u);
 
-	public ISnoPower RemnantOfPain => SnoData.Powers.GetBySno(486134u);
+	public SnoPower RemnantOfPain => SnoData.Powers.GetBySno(486134u);
 
-	public ISnoPower ShardOfHatred => SnoData.Powers.GetBySno(486178u);
+	public SnoPower ShardOfHatred => SnoData.Powers.GetBySno(486178u);
 
-	public ISnoPower SliverOfTerror => SnoData.Powers.GetBySno(486182u);
+	public SnoPower SliverOfTerror => SnoData.Powers.GetBySno(486182u);
 
-	public ISnoPower StainOfSin => SnoData.Powers.GetBySno(486209u);
+	public SnoPower StainOfSin => SnoData.Powers.GetBySno(486209u);
 
-	public ISnoPower Generic_CommunityBuffWeather { get; }
+	public SnoPower Generic_CommunityBuffWeather { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing007 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing007 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing010 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing010 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing013 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing013 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing019 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing019 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing020 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing020 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing021 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing021 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing022 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing022 { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing025 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing025 { get; }
 
-	public ISnoPower Generic_P67ItemPassiveUniqueRing968 { get; }
+	public SnoPower Generic_P67ItemPassiveUniqueRing968 { get; }
 
-	public ISnoPower Generic_P68ItemPassiveUniqueRing018 { get; }
+	public SnoPower Generic_P68ItemPassiveUniqueRing018 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_P69ItemPassiveUniqueRing004 { get; }
+	public SnoPower Generic_P69ItemPassiveUniqueRing004 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard029 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard029 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveUniqueRing005 { get; }
+	public SnoPower Generic_P72ItemPassiveUniqueRing005 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveUniqueRing006 { get; }
+	public SnoPower Generic_P72ItemPassiveUniqueRing006 { get; }
 
-	public ISnoPower DemonHunter_P74Ballista { get; }
+	public SnoPower DemonHunter_P74Ballista { get; }
 
-	public ISnoPower Monk_P74WayOfTheHundredFists { get; }
+	public SnoPower Monk_P74WayOfTheHundredFists { get; }
 
-	public ISnoPower WhisperOfAtonementPrimary => SnoData.Powers.GetBySno(486910u);
+	public SnoPower WhisperOfAtonementPrimary => SnoData.Powers.GetBySno(486910u);
 
-	public ISnoPower WhisperOfAtonementSecondary => SnoData.Powers.GetBySno(486910u);
+	public SnoPower WhisperOfAtonementSecondary => SnoData.Powers.GetBySno(486910u);
 
-	public ISnoPower MempoOfTwilight => SnoData.Powers.GetBySno(487972u);
+	public SnoPower MempoOfTwilight => SnoData.Powers.GetBySno(487972u);
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard002 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard002 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard003 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard003 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard004 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard004 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard006 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard006 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard007 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard007 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard008 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard008 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard010 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard010 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard011 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard011 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard012 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard012 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard014 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard014 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard015 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard015 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard016 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard016 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard018 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard018 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard019 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard019 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard020 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard020 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard022 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard022 { get; }
 
-	public ISnoPower Generic_P73ExplodingLunaticSuicide { get; }
+	public SnoPower Generic_P73ExplodingLunaticSuicide { get; }
 
-	public ISnoPower Generic_P73ItemPassiveUniqueRing003 { get; }
+	public SnoPower Generic_P73ItemPassiveUniqueRing003 { get; }
 
-	public ISnoPower Generic_P73PagesBuffDamageSwarmRift { get; }
+	public SnoPower Generic_P73PagesBuffDamageSwarmRift { get; }
 
-	public ISnoPower Generic_P73PagesBuffElectrifiedCastSwarmRift { get; }
+	public SnoPower Generic_P73PagesBuffElectrifiedCastSwarmRift { get; }
 
-	public ISnoPower Generic_P73PagesBuffRunSpeed { get; }
+	public SnoPower Generic_P73PagesBuffRunSpeed { get; }
 
-	public ISnoPower Generic_P73PagesBuffRunSpeedKnockbackCast { get; }
+	public SnoPower Generic_P73PagesBuffRunSpeedKnockbackCast { get; }
 
-	public ISnoPower Generic_P73PagesBuffRunSpeedWallerCast { get; }
+	public SnoPower Generic_P73PagesBuffRunSpeedWallerCast { get; }
 
-	public ISnoPower Generic_P73PagesBuffRunSpeedWallerCastUpgrade { get; }
+	public SnoPower Generic_P73PagesBuffRunSpeedWallerCastUpgrade { get; }
 
-	public ISnoPower Generic_P73ShrineDesecratedtreasureGoblin { get; }
+	public SnoPower Generic_P73ShrineDesecratedtreasureGoblin { get; }
 
-	public ISnoPower Generic_P73SwarmRiftCloneDeathExplosionAffix { get; }
+	public SnoPower Generic_P73SwarmRiftCloneDeathExplosionAffix { get; }
 
-	public ISnoPower Generic_P73SwarmRiftGreenMeteors { get; }
+	public SnoPower Generic_P73SwarmRiftGreenMeteors { get; }
 
-	public ISnoPower Generic_P73SwarmRiftLunaticMolten { get; }
+	public SnoPower Generic_P73SwarmRiftLunaticMolten { get; }
 
-	public ISnoPower Generic_P73SwarmRiftPagesBuffElectrifiedTieredRift { get; }
+	public SnoPower Generic_P73SwarmRiftPagesBuffElectrifiedTieredRift { get; }
 
-	public ISnoPower Generic_P73SwarmRiftPagesBuffInfiniteCasting { get; }
+	public SnoPower Generic_P73SwarmRiftPagesBuffInfiniteCasting { get; }
 
-	public ISnoPower Generic_p73SwarmRiftSummon { get; }
+	public SnoPower Generic_p73SwarmRiftSummon { get; }
 
-	public ISnoPower Generic_P74GargantuanWormwoodSeasonTheme { get; }
+	public SnoPower Generic_P74GargantuanWormwoodSeasonTheme { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing004 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing004 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing006 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing006 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing007 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing007 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing009 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing009 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing012 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing012 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing014 { get; }
+	public SnoPower Generic_P74ItemPassiveUniqueRing014 { get; }
 
-	public ISnoPower Generic_P74NecroGolemDevourAura { get; }
+	public SnoPower Generic_P74NecroGolemDevourAura { get; }
 
-	public ISnoPower Generic_CommunityBuffDarkAlchemy { get; }
+	public SnoPower Generic_CommunityBuffDarkAlchemy { get; }
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing026 { get; }
+	public SnoPower Generic_P2ItemPassiveUniqueRing026 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard023 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard023 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard024 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard024 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard026 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard026 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard027 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard027 { get; }
 
-	public ISnoPower Generic_P72ItemPassiveSoulshard028 { get; }
+	public SnoPower Generic_P72ItemPassiveSoulshard028 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme001 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme001 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme002 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme002 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme003 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme003 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme004 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme004 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme005 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme005 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme006 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme006 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme007 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme007 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme008 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme008 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme009 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme009 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme010 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme010 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme011 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme011 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme012 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme012 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme013 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme013 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme014 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme014 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme015 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme015 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme016 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme016 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme017 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme017 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme018 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme018 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme019 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme019 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme020 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme020 { get; }
 
-	public ISnoPower Generic_P74ItemPassiveSeasonTheme021 { get; }
+	public SnoPower Generic_P74ItemPassiveSeasonTheme021 { get; }
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor018AIPetPickup { get; }
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor018AIPetPickup { get; }
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor021AIPetPickup { get; }
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor021AIPetPickup { get; }
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemySeal001 { get; }
+	public SnoPower Generic_P75ItemPassiveDarkAlchemySeal001 { get; }
 
-	public ISnoPower Generic_P75ItemPassiveUniqueRing001 { get; }
+	public SnoPower Generic_P75ItemPassiveUniqueRing001 { get; }
 
-	public ISnoPower Generic_P75ItemPassiveUniqueRing006 { get; }
+	public SnoPower Generic_P75ItemPassiveUniqueRing006 { get; }
 
-	public ISnoPower Generic_P75PagesBuffDamageDarkAlchemy { get; }
+	public SnoPower Generic_P75PagesBuffDamageDarkAlchemy { get; }
 
-	public ISnoPower VigilanteBelt => SnoData.Powers.GetBySno(488555u);
+	public SnoPower VigilanteBelt => SnoData.Powers.GetBySno(488555u);
 
-	public ISnoPower Generic_CommunityBuffNestingPortalSpawn { get; }
+	public SnoPower Generic_CommunityBuffNestingPortalSpawn { get; }
 
-	public ISnoPower Generic_MonsterAffixLethargy { get; }
+	public SnoPower Generic_MonsterAffixLethargy { get; }
 
-	public ISnoPower Generic_MonsterAffixNecrotic { get; }
+	public SnoPower Generic_MonsterAffixNecrotic { get; }
 
-	public ISnoPower Generic_MonsterAffixNecroticQAtest { get; }
+	public SnoPower Generic_MonsterAffixNecroticQAtest { get; }
 
-	public ISnoPower Generic_MonsterAffixResourceSteal { get; }
+	public SnoPower Generic_MonsterAffixResourceSteal { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Alcarnus { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Alcarnus { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76BloodPit { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76BloodPit { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Bog { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Bog { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Boneyard { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Boneyard { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Church { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Church { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76ForestTower { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76ForestTower { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76GideonsCourt { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76GideonsCourt { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76GravyardAct1 { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76GravyardAct1 { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Hell { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Hell { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76MoorsSacrifice { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76MoorsSacrifice { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76NewTristram { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76NewTristram { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76OldTristram { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76OldTristram { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76PandBatteringRam { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76PandBatteringRam { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Sescheron { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Sescheron { get; }
 
-	public ISnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Spire { get; }
+	public SnoPower Generic_P76ItemPassiveNestingWorldSpawnP76Spire { get; }
 
-	public ISnoPower Generic_P76ItemPassiveSpawnChest001 { get; }
+	public SnoPower Generic_P76ItemPassiveSpawnChest001 { get; }
 
-	public ISnoPower Generic_itemPassiveUniqueAmulet003 { get; } = SnoData.Powers.GetBySno(246750u);
+	public SnoPower Generic_itemPassiveUniqueAmulet003 { get; } = SnoData.Powers.GetBySno(246750u);
 
-	public ISnoPower Generic_itemPassiveUniqueAmulet011 { get; } = SnoData.Powers.GetBySno(248136u);
+	public SnoPower Generic_itemPassiveUniqueAmulet011 { get; } = SnoData.Powers.GetBySno(248136u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAmulet017x1 { get; } = SnoData.Powers.GetBySno(322978u);
+	public SnoPower Generic_ItemPassiveUniqueAmulet017x1 { get; } = SnoData.Powers.GetBySno(322978u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAmulet105x1 { get; } = SnoData.Powers.GetBySno(334880u);
+	public SnoPower Generic_ItemPassiveUniqueAmulet105x1 { get; } = SnoData.Powers.GetBySno(334880u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAxe1H003 { get; } = SnoData.Powers.GetBySno(245854u);
+	public SnoPower Generic_ItemPassiveUniqueAxe1H003 { get; } = SnoData.Powers.GetBySno(245854u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAxe1H005 { get; } = SnoData.Powers.GetBySno(246101u);
+	public SnoPower Generic_ItemPassiveUniqueAxe1H005 { get; } = SnoData.Powers.GetBySno(246101u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAxe1H005x1 { get; } = SnoData.Powers.GetBySno(364318u);
+	public SnoPower Generic_ItemPassiveUniqueAxe1H005x1 { get; } = SnoData.Powers.GetBySno(364318u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAxe2H010 { get; } = SnoData.Powers.GetBySno(248462u);
+	public SnoPower Generic_ItemPassiveUniqueAxe2H010 { get; } = SnoData.Powers.GetBySno(248462u);
 
-	public ISnoPower Generic_ItemPassiveUniqueAxe2H012x1 { get; } = SnoData.Powers.GetBySno(322974u);
+	public SnoPower Generic_ItemPassiveUniqueAxe2H012x1 { get; } = SnoData.Powers.GetBySno(322974u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBarbBelt003 { get; } = SnoData.Powers.GetBySno(246363u);
+	public SnoPower Generic_ItemPassiveUniqueBarbBelt003 { get; } = SnoData.Powers.GetBySno(246363u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBelt016x1 { get; } = SnoData.Powers.GetBySno(322980u);
+	public SnoPower Generic_ItemPassiveUniqueBelt016x1 { get; } = SnoData.Powers.GetBySno(322980u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBoots007 { get; } = SnoData.Powers.GetBySno(246442u);
+	public SnoPower Generic_ItemPassiveUniqueBoots007 { get; } = SnoData.Powers.GetBySno(246442u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBoots007x1 { get; } = SnoData.Powers.GetBySno(342515u);
+	public SnoPower Generic_ItemPassiveUniqueBoots007x1 { get; } = SnoData.Powers.GetBySno(342515u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBoots020x1 { get; } = SnoData.Powers.GetBySno(322976u);
+	public SnoPower Generic_ItemPassiveUniqueBoots020x1 { get; } = SnoData.Powers.GetBySno(322976u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBow008 { get; } = SnoData.Powers.GetBySno(246605u);
+	public SnoPower Generic_ItemPassiveUniqueBow008 { get; } = SnoData.Powers.GetBySno(246605u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBow015 { get; } = SnoData.Powers.GetBySno(248817u);
+	public SnoPower Generic_ItemPassiveUniqueBow015 { get; } = SnoData.Powers.GetBySno(248817u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBow015x1 { get; } = SnoData.Powers.GetBySno(344372u);
+	public SnoPower Generic_ItemPassiveUniqueBow015x1 { get; } = SnoData.Powers.GetBySno(344372u);
 
-	public ISnoPower Generic_ItemPassiveUniqueBracer105x1 { get; } = SnoData.Powers.GetBySno(334881u);
+	public SnoPower Generic_ItemPassiveUniqueBracer105x1 { get; } = SnoData.Powers.GetBySno(334881u);
 
-	public ISnoPower Generic_ItemPassiveUniqueCeremonialDagger002 { get; } = SnoData.Powers.GetBySno(245835u);
+	public SnoPower Generic_ItemPassiveUniqueCeremonialDagger002 { get; } = SnoData.Powers.GetBySno(245835u);
 
-	public ISnoPower Generic_ItemPassiveUniqueCeremonialDagger008 { get; } = SnoData.Powers.GetBySno(247896u);
+	public SnoPower Generic_ItemPassiveUniqueCeremonialDagger008 { get; } = SnoData.Powers.GetBySno(247896u);
 
-	public ISnoPower Generic_ItemPassiveUniqueDagger010 { get; } = SnoData.Powers.GetBySno(245837u);
+	public SnoPower Generic_ItemPassiveUniqueDagger010 { get; } = SnoData.Powers.GetBySno(245837u);
 
-	public ISnoPower Generic_ItemPassiveUniqueDagger010x1 { get; } = SnoData.Powers.GetBySno(364312u);
+	public SnoPower Generic_ItemPassiveUniqueDagger010x1 { get; } = SnoData.Powers.GetBySno(364312u);
 
-	public ISnoPower Generic_ItemPassiveUniqueDagger103x1 { get; } = SnoData.Powers.GetBySno(322979u);
+	public SnoPower Generic_ItemPassiveUniqueDagger103x1 { get; } = SnoData.Powers.GetBySno(322979u);
 
-	public ISnoPower Generic_ItemPassiveUniqueHandXBow012 { get; } = SnoData.Powers.GetBySno(246678u);
+	public SnoPower Generic_ItemPassiveUniqueHandXBow012 { get; } = SnoData.Powers.GetBySno(246678u);
 
-	public ISnoPower Generic_itemPassiveUniqueHelm003 { get; } = SnoData.Powers.GetBySno(246814u);
+	public SnoPower Generic_itemPassiveUniqueHelm003 { get; } = SnoData.Powers.GetBySno(246814u);
 
-	public ISnoPower Generic_itemPassiveUniqueHelm003x1 { get; } = SnoData.Powers.GetBySno(338061u);
+	public SnoPower Generic_itemPassiveUniqueHelm003x1 { get; } = SnoData.Powers.GetBySno(338061u);
 
-	public ISnoPower Generic_ItemPassiveUniqueHelm017x1 { get; } = SnoData.Powers.GetBySno(322977u);
+	public SnoPower Generic_ItemPassiveUniqueHelm017x1 { get; } = SnoData.Powers.GetBySno(322977u);
 
-	public ISnoPower Generic_itemPassiveUniqueMace1H002 { get; } = SnoData.Powers.GetBySno(246918u);
+	public SnoPower Generic_itemPassiveUniqueMace1H002 { get; } = SnoData.Powers.GetBySno(246918u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMace2H003 { get; } = SnoData.Powers.GetBySno(249958u);
+	public SnoPower Generic_ItemPassiveUniqueMace2H003 { get; } = SnoData.Powers.GetBySno(249958u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMace2H009 { get; } = SnoData.Powers.GetBySno(247913u);
+	public SnoPower Generic_ItemPassiveUniqueMace2H009 { get; } = SnoData.Powers.GetBySno(247913u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMace2H009x1 { get; } = SnoData.Powers.GetBySno(364319u);
+	public SnoPower Generic_ItemPassiveUniqueMace2H009x1 { get; } = SnoData.Powers.GetBySno(364319u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMighty1H006 { get; } = SnoData.Powers.GetBySno(246836u);
+	public SnoPower Generic_ItemPassiveUniqueMighty1H006 { get; } = SnoData.Powers.GetBySno(246836u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMighty1H006p3 { get; } = SnoData.Powers.GetBySno(441762u);
+	public SnoPower Generic_ItemPassiveUniqueMighty1H006p3 { get; } = SnoData.Powers.GetBySno(441762u);
 
-	public ISnoPower Generic_ItemPassiveUniqueMighty1H006x1 { get; } = SnoData.Powers.GetBySno(364322u);
+	public SnoPower Generic_ItemPassiveUniqueMighty1H006x1 { get; } = SnoData.Powers.GetBySno(364322u);
 
-	public ISnoPower Generic_itemPassiveUniquePants007 { get; } = SnoData.Powers.GetBySno(247009u);
+	public SnoPower Generic_itemPassiveUniquePants007 { get; } = SnoData.Powers.GetBySno(247009u);
 
-	public ISnoPower Generic_itemPassiveUniquePants007x1 { get; } = SnoData.Powers.GetBySno(364342u);
+	public SnoPower Generic_itemPassiveUniquePants007x1 { get; } = SnoData.Powers.GetBySno(364342u);
 
-	public ISnoPower Generic_ItemPassiveUniquePolearm001 { get; } = SnoData.Powers.GetBySno(247641u);
+	public SnoPower Generic_ItemPassiveUniquePolearm001 { get; } = SnoData.Powers.GetBySno(247641u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(248880u);
+	public SnoPower Generic_ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(248880u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(247797u);
+	public SnoPower Generic_ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(247797u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(248537u);
+	public SnoPower Generic_ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(248537u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing025x1 { get; } = SnoData.Powers.GetBySno(322975u);
+	public SnoPower Generic_ItemPassiveUniqueRing025x1 { get; } = SnoData.Powers.GetBySno(322975u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing505x1 { get; } = SnoData.Powers.GetBySno(318349u);
+	public SnoPower Generic_ItemPassiveUniqueRing505x1 { get; } = SnoData.Powers.GetBySno(318349u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing508x1 { get; } = SnoData.Powers.GetBySno(318359u);
+	public SnoPower Generic_ItemPassiveUniqueRing508x1 { get; } = SnoData.Powers.GetBySno(318359u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing510x1 { get; } = SnoData.Powers.GetBySno(318371u);
+	public SnoPower Generic_ItemPassiveUniqueRing510x1 { get; } = SnoData.Powers.GetBySno(318371u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing521x1 { get; } = SnoData.Powers.GetBySno(318383u);
+	public SnoPower Generic_ItemPassiveUniqueRing521x1 { get; } = SnoData.Powers.GetBySno(318383u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing528x1 { get; } = SnoData.Powers.GetBySno(318417u);
+	public SnoPower Generic_ItemPassiveUniqueRing528x1 { get; } = SnoData.Powers.GetBySno(318417u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing551x1 { get; } = SnoData.Powers.GetBySno(318722u);
+	public SnoPower Generic_ItemPassiveUniqueRing551x1 { get; } = SnoData.Powers.GetBySno(318722u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing555x1 { get; } = SnoData.Powers.GetBySno(318732u);
+	public SnoPower Generic_ItemPassiveUniqueRing555x1 { get; } = SnoData.Powers.GetBySno(318732u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing557x1 { get; } = SnoData.Powers.GetBySno(318734u);
+	public SnoPower Generic_ItemPassiveUniqueRing557x1 { get; } = SnoData.Powers.GetBySno(318734u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing560x1 { get; } = SnoData.Powers.GetBySno(318742u);
+	public SnoPower Generic_ItemPassiveUniqueRing560x1 { get; } = SnoData.Powers.GetBySno(318742u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing565x1 { get; } = SnoData.Powers.GetBySno(318747u);
+	public SnoPower Generic_ItemPassiveUniqueRing565x1 { get; } = SnoData.Powers.GetBySno(318747u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing568x1 { get; } = SnoData.Powers.GetBySno(318750u);
+	public SnoPower Generic_ItemPassiveUniqueRing568x1 { get; } = SnoData.Powers.GetBySno(318750u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing576x1 { get; } = SnoData.Powers.GetBySno(318758u);
+	public SnoPower Generic_ItemPassiveUniqueRing576x1 { get; } = SnoData.Powers.GetBySno(318758u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing579x1 { get; } = SnoData.Powers.GetBySno(318761u);
+	public SnoPower Generic_ItemPassiveUniqueRing579x1 { get; } = SnoData.Powers.GetBySno(318761u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing594x1 { get; } = SnoData.Powers.GetBySno(318776u);
+	public SnoPower Generic_ItemPassiveUniqueRing594x1 { get; } = SnoData.Powers.GetBySno(318776u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing602x1 { get; } = SnoData.Powers.GetBySno(318784u);
+	public SnoPower Generic_ItemPassiveUniqueRing602x1 { get; } = SnoData.Powers.GetBySno(318784u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing604x1 { get; } = SnoData.Powers.GetBySno(318786u);
+	public SnoPower Generic_ItemPassiveUniqueRing604x1 { get; } = SnoData.Powers.GetBySno(318786u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing607x1 { get; } = SnoData.Powers.GetBySno(318789u);
+	public SnoPower Generic_ItemPassiveUniqueRing607x1 { get; } = SnoData.Powers.GetBySno(318789u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing609x1 { get; } = SnoData.Powers.GetBySno(318791u);
+	public SnoPower Generic_ItemPassiveUniqueRing609x1 { get; } = SnoData.Powers.GetBySno(318791u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing610x1 { get; } = SnoData.Powers.GetBySno(318792u);
+	public SnoPower Generic_ItemPassiveUniqueRing610x1 { get; } = SnoData.Powers.GetBySno(318792u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing611x1 { get; } = SnoData.Powers.GetBySno(318793u);
+	public SnoPower Generic_ItemPassiveUniqueRing611x1 { get; } = SnoData.Powers.GetBySno(318793u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing612x1 { get; } = SnoData.Powers.GetBySno(318794u);
+	public SnoPower Generic_ItemPassiveUniqueRing612x1 { get; } = SnoData.Powers.GetBySno(318794u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing615x1 { get; } = SnoData.Powers.GetBySno(318797u);
+	public SnoPower Generic_ItemPassiveUniqueRing615x1 { get; } = SnoData.Powers.GetBySno(318797u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing620x1 { get; } = SnoData.Powers.GetBySno(318802u);
+	public SnoPower Generic_ItemPassiveUniqueRing620x1 { get; } = SnoData.Powers.GetBySno(318802u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing622x1 { get; } = SnoData.Powers.GetBySno(318804u);
+	public SnoPower Generic_ItemPassiveUniqueRing622x1 { get; } = SnoData.Powers.GetBySno(318804u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing623x1 { get; } = SnoData.Powers.GetBySno(318805u);
+	public SnoPower Generic_ItemPassiveUniqueRing623x1 { get; } = SnoData.Powers.GetBySno(318805u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing643x1 { get; } = SnoData.Powers.GetBySno(318825u);
+	public SnoPower Generic_ItemPassiveUniqueRing643x1 { get; } = SnoData.Powers.GetBySno(318825u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing644x1 { get; } = SnoData.Powers.GetBySno(318826u);
+	public SnoPower Generic_ItemPassiveUniqueRing644x1 { get; } = SnoData.Powers.GetBySno(318826u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing645x1 { get; } = SnoData.Powers.GetBySno(318827u);
+	public SnoPower Generic_ItemPassiveUniqueRing645x1 { get; } = SnoData.Powers.GetBySno(318827u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing646x1 { get; } = SnoData.Powers.GetBySno(318828u);
+	public SnoPower Generic_ItemPassiveUniqueRing646x1 { get; } = SnoData.Powers.GetBySno(318828u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing647x1 { get; } = SnoData.Powers.GetBySno(318829u);
+	public SnoPower Generic_ItemPassiveUniqueRing647x1 { get; } = SnoData.Powers.GetBySno(318829u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing648p2 { get; } = SnoData.Powers.GetBySno(434022u);
+	public SnoPower Generic_ItemPassiveUniqueRing648p2 { get; } = SnoData.Powers.GetBySno(434022u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing648x1 { get; } = SnoData.Powers.GetBySno(318830u);
+	public SnoPower Generic_ItemPassiveUniqueRing648x1 { get; } = SnoData.Powers.GetBySno(318830u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing649x1 { get; } = SnoData.Powers.GetBySno(318831u);
+	public SnoPower Generic_ItemPassiveUniqueRing649x1 { get; } = SnoData.Powers.GetBySno(318831u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing651x1 { get; } = SnoData.Powers.GetBySno(318833u);
+	public SnoPower Generic_ItemPassiveUniqueRing651x1 { get; } = SnoData.Powers.GetBySno(318833u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing655x1 { get; } = SnoData.Powers.GetBySno(318850u);
+	public SnoPower Generic_ItemPassiveUniqueRing655x1 { get; } = SnoData.Powers.GetBySno(318850u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing664x1 { get; } = SnoData.Powers.GetBySno(318860u);
+	public SnoPower Generic_ItemPassiveUniqueRing664x1 { get; } = SnoData.Powers.GetBySno(318860u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing667x1 { get; } = SnoData.Powers.GetBySno(318863u);
+	public SnoPower Generic_ItemPassiveUniqueRing667x1 { get; } = SnoData.Powers.GetBySno(318863u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing670x1 { get; } = SnoData.Powers.GetBySno(318866u);
+	public SnoPower Generic_ItemPassiveUniqueRing670x1 { get; } = SnoData.Powers.GetBySno(318866u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing687x1 { get; } = SnoData.Powers.GetBySno(318883u);
+	public SnoPower Generic_ItemPassiveUniqueRing687x1 { get; } = SnoData.Powers.GetBySno(318883u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing697x1 { get; } = SnoData.Powers.GetBySno(318893u);
+	public SnoPower Generic_ItemPassiveUniqueRing697x1 { get; } = SnoData.Powers.GetBySno(318893u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing703x1 { get; } = SnoData.Powers.GetBySno(359540u);
+	public SnoPower Generic_ItemPassiveUniqueRing703x1 { get; } = SnoData.Powers.GetBySno(359540u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing705x1 { get; } = SnoData.Powers.GetBySno(359546u);
+	public SnoPower Generic_ItemPassiveUniqueRing705x1 { get; } = SnoData.Powers.GetBySno(359546u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing707x1 { get; } = SnoData.Powers.GetBySno(359552u);
+	public SnoPower Generic_ItemPassiveUniqueRing707x1 { get; } = SnoData.Powers.GetBySno(359552u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing708x1 { get; } = SnoData.Powers.GetBySno(359553u);
+	public SnoPower Generic_ItemPassiveUniqueRing708x1 { get; } = SnoData.Powers.GetBySno(359553u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing742x1 { get; } = SnoData.Powers.GetBySno(359593u);
+	public SnoPower Generic_ItemPassiveUniqueRing742x1 { get; } = SnoData.Powers.GetBySno(359593u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing749x1 { get; } = SnoData.Powers.GetBySno(359605u);
+	public SnoPower Generic_ItemPassiveUniqueRing749x1 { get; } = SnoData.Powers.GetBySno(359605u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing751x1 { get; } = SnoData.Powers.GetBySno(397780u);
+	public SnoPower Generic_ItemPassiveUniqueRing751x1 { get; } = SnoData.Powers.GetBySno(397780u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing753x1 { get; } = SnoData.Powers.GetBySno(397782u);
+	public SnoPower Generic_ItemPassiveUniqueRing753x1 { get; } = SnoData.Powers.GetBySno(397782u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing755x1 { get; } = SnoData.Powers.GetBySno(397784u);
+	public SnoPower Generic_ItemPassiveUniqueRing755x1 { get; } = SnoData.Powers.GetBySno(397784u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing761x1 { get; } = SnoData.Powers.GetBySno(397792u);
+	public SnoPower Generic_ItemPassiveUniqueRing761x1 { get; } = SnoData.Powers.GetBySno(397792u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing762x1 { get; } = SnoData.Powers.GetBySno(397802u);
+	public SnoPower Generic_ItemPassiveUniqueRing762x1 { get; } = SnoData.Powers.GetBySno(397802u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing903x1 { get; } = SnoData.Powers.GetBySno(402411u);
+	public SnoPower Generic_ItemPassiveUniqueRing903x1 { get; } = SnoData.Powers.GetBySno(402411u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing905x1 { get; } = SnoData.Powers.GetBySno(402413u);
+	public SnoPower Generic_ItemPassiveUniqueRing905x1 { get; } = SnoData.Powers.GetBySno(402413u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing906x1 { get; } = SnoData.Powers.GetBySno(402414u);
+	public SnoPower Generic_ItemPassiveUniqueRing906x1 { get; } = SnoData.Powers.GetBySno(402414u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing911x1 { get; } = SnoData.Powers.GetBySno(402447u);
+	public SnoPower Generic_ItemPassiveUniqueRing911x1 { get; } = SnoData.Powers.GetBySno(402447u);
 
-	public ISnoPower Generic_ItemPassiveUniqueRing912x1 { get; } = SnoData.Powers.GetBySno(402448u);
+	public SnoPower Generic_ItemPassiveUniqueRing912x1 { get; } = SnoData.Powers.GetBySno(402448u);
 
-	public ISnoPower Generic_itemPassiveUniqueShield008 { get; } = SnoData.Powers.GetBySno(247053u);
+	public SnoPower Generic_itemPassiveUniqueShield008 { get; } = SnoData.Powers.GetBySno(247053u);
 
-	public ISnoPower Generic_ItemPassiveUniqueShoulder002 { get; } = SnoData.Powers.GetBySno(247619u);
+	public SnoPower Generic_ItemPassiveUniqueShoulder002 { get; } = SnoData.Powers.GetBySno(247619u);
 
-	public ISnoPower Generic_ItemPassiveUniqueShoulder002x1 { get; } = SnoData.Powers.GetBySno(364339u);
+	public SnoPower Generic_ItemPassiveUniqueShoulder002x1 { get; } = SnoData.Powers.GetBySno(364339u);
 
-	public ISnoPower Generic_ItemPassiveUniqueShoulder103x1 { get; } = SnoData.Powers.GetBySno(334883u);
+	public SnoPower Generic_ItemPassiveUniqueShoulder103x1 { get; } = SnoData.Powers.GetBySno(334883u);
 
-	public ISnoPower Generic_ItemPassiveUniqueSword1H004 { get; } = SnoData.Powers.GetBySno(247662u);
+	public SnoPower Generic_ItemPassiveUniqueSword1H004 { get; } = SnoData.Powers.GetBySno(247662u);
 
-	public ISnoPower Generic_ItemPassiveUniqueSword1H012 { get; } = SnoData.Powers.GetBySno(249592u);
+	public SnoPower Generic_ItemPassiveUniqueSword1H012 { get; } = SnoData.Powers.GetBySno(249592u);
 
-	public ISnoPower Generic_ItemPassiveUniqueSword1H012x1 { get; } = SnoData.Powers.GetBySno(374362u);
+	public SnoPower Generic_ItemPassiveUniqueSword1H012x1 { get; } = SnoData.Powers.GetBySno(374362u);
 
-	public ISnoPower Generic_ItemPassiveUniqueSword2H004 { get; } = SnoData.Powers.GetBySno(247537u);
+	public SnoPower Generic_ItemPassiveUniqueSword2H004 { get; } = SnoData.Powers.GetBySno(247537u);
 
-	public ISnoPower Generic_ItemPassiveUniqueSword2H010 { get; } = SnoData.Powers.GetBySno(249138u);
+	public SnoPower Generic_ItemPassiveUniqueSword2H010 { get; } = SnoData.Powers.GetBySno(249138u);
 
-	public ISnoPower Generic_itemPassiveUniqueWizardHat004 { get; } = SnoData.Powers.GetBySno(247090u);
+	public SnoPower Generic_itemPassiveUniqueWizardHat004 { get; } = SnoData.Powers.GetBySno(247090u);
 
-	public ISnoPower Generic_ItemPassiveUniqueXBow001 { get; } = SnoData.Powers.GetBySno(247429u);
+	public SnoPower Generic_ItemPassiveUniqueXBow001 { get; } = SnoData.Powers.GetBySno(247429u);
 
-	public ISnoPower Generic_ItemPassiveUniqueXBow011 { get; } = SnoData.Powers.GetBySno(248480u);
+	public SnoPower Generic_ItemPassiveUniqueXBow011 { get; } = SnoData.Powers.GetBySno(248480u);
 
-	public ISnoPower Generic_ItemPassiveUniqueXBow012 { get; } = SnoData.Powers.GetBySno(247430u);
+	public SnoPower Generic_ItemPassiveUniqueXBow012 { get; } = SnoData.Powers.GetBySno(247430u);
 
-	public ISnoPower Generic_LewisItemPassiveTest { get; } = SnoData.Powers.GetBySno(437919u);
+	public SnoPower Generic_LewisItemPassiveTest { get; } = SnoData.Powers.GetBySno(437919u);
 
-	public ISnoPower Generic_p1ItemPassiveUniqueRing942 { get; } = SnoData.Powers.GetBySno(408974u);
+	public SnoPower Generic_p1ItemPassiveUniqueRing942 { get; } = SnoData.Powers.GetBySno(408974u);
 
-	public ISnoPower Generic_p1ItemPassiveUniqueRing943 { get; } = SnoData.Powers.GetBySno(409811u);
+	public SnoPower Generic_p1ItemPassiveUniqueRing943 { get; } = SnoData.Powers.GetBySno(409811u);
 
-	public ISnoPower Generic_p1ItemPassiveUniqueRing945 { get; } = SnoData.Powers.GetBySno(440923u);
+	public SnoPower Generic_p1ItemPassiveUniqueRing945 { get; } = SnoData.Powers.GetBySno(440923u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(423227u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(423227u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(423233u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(423233u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(423235u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(423235u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(423239u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(423239u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(423240u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(423240u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(423241u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(423241u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(423242u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(423242u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing023 { get; } = SnoData.Powers.GetBySno(428220u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing023 { get; } = SnoData.Powers.GetBySno(428220u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(429851u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(429851u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing028 { get; } = SnoData.Powers.GetBySno(429855u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing028 { get; } = SnoData.Powers.GetBySno(429855u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing029 { get; } = SnoData.Powers.GetBySno(429856u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing029 { get; } = SnoData.Powers.GetBySno(429856u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing030 { get; } = SnoData.Powers.GetBySno(429857u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing030 { get; } = SnoData.Powers.GetBySno(429857u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing031 { get; } = SnoData.Powers.GetBySno(429885u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing031 { get; } = SnoData.Powers.GetBySno(429885u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(430228u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(430228u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing036 { get; } = SnoData.Powers.GetBySno(430672u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing036 { get; } = SnoData.Powers.GetBySno(430672u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(430673u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(430673u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing039 { get; } = SnoData.Powers.GetBySno(430675u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing039 { get; } = SnoData.Powers.GetBySno(430675u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing040 { get; } = SnoData.Powers.GetBySno(430676u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing040 { get; } = SnoData.Powers.GetBySno(430676u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing041 { get; } = SnoData.Powers.GetBySno(430677u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing041 { get; } = SnoData.Powers.GetBySno(430677u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(430680u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(430680u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing048 { get; } = SnoData.Powers.GetBySno(430684u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing048 { get; } = SnoData.Powers.GetBySno(430684u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing049 { get; } = SnoData.Powers.GetBySno(430685u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing049 { get; } = SnoData.Powers.GetBySno(430685u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing050 { get; } = SnoData.Powers.GetBySno(430686u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing050 { get; } = SnoData.Powers.GetBySno(430686u);
 
-	public ISnoPower Generic_P2ItemPassiveUniqueRing059 { get; } = SnoData.Powers.GetBySno(435040u);
+	public SnoPower Generic_P2ItemPassiveUniqueRing059 { get; } = SnoData.Powers.GetBySno(435040u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(436426u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(436426u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(436427u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(436427u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(436428u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(436428u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(436468u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(436468u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(437710u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(437710u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(437711u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(437711u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(437840u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(437840u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(437843u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(437843u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(437844u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(437844u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(439303u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(439303u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(439308u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(439308u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(439309u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(439309u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(439310u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(439310u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(439311u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(439311u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(439312u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(439312u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(440235u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(440235u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing025 { get; } = SnoData.Powers.GetBySno(440568u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing025 { get; } = SnoData.Powers.GetBySno(440568u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing026 { get; } = SnoData.Powers.GetBySno(440569u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing026 { get; } = SnoData.Powers.GetBySno(440569u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing030 { get; } = SnoData.Powers.GetBySno(441113u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing030 { get; } = SnoData.Powers.GetBySno(441113u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(441280u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(441280u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing035 { get; } = SnoData.Powers.GetBySno(441305u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing035 { get; } = SnoData.Powers.GetBySno(441305u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing036 { get; } = SnoData.Powers.GetBySno(441318u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing036 { get; } = SnoData.Powers.GetBySno(441318u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(441349u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(441349u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing039 { get; } = SnoData.Powers.GetBySno(442353u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing039 { get; } = SnoData.Powers.GetBySno(442353u);
 
-	public ISnoPower Generic_P3ItemPassiveUniqueRing040 { get; } = SnoData.Powers.GetBySno(442477u);
+	public SnoPower Generic_P3ItemPassiveUniqueRing040 { get; } = SnoData.Powers.GetBySno(442477u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(451158u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(451158u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing007 { get; } = SnoData.Powers.GetBySno(451165u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing007 { get; } = SnoData.Powers.GetBySno(451165u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(451171u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(451171u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(451172u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(451172u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(451173u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(451173u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(451174u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(451174u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(451175u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(451175u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(451176u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(451176u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(451177u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(451177u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(451178u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(451178u);
 
-	public ISnoPower Generic_P41ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(451186u);
+	public SnoPower Generic_P41ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(451186u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(451236u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(451236u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(451239u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(451239u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(451240u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(451240u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing006 { get; } = SnoData.Powers.GetBySno(451241u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing006 { get; } = SnoData.Powers.GetBySno(451241u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(451243u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(451243u);
 
-	public ISnoPower Generic_P42ItemPassiveUniqueRing697x1 { get; } = SnoData.Powers.GetBySno(451313u);
+	public SnoPower Generic_P42ItemPassiveUniqueRing697x1 { get; } = SnoData.Powers.GetBySno(451313u);
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(454929u);
+	public SnoPower Generic_P43ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(454929u);
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(454939u);
+	public SnoPower Generic_P43ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(454939u);
 
-	public ISnoPower Generic_P43ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(454940u);
+	public SnoPower Generic_P43ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(454940u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(444521u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing001 { get; } = SnoData.Powers.GetBySno(444521u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(444522u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(444522u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(444929u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(444929u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(444969u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(444969u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(445008u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(445008u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(445279u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(445279u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(445639u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(445639u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(445692u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(445692u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(445798u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(445798u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(445814u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(445814u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(445829u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(445829u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(445920u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(445920u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(445942u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(445942u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(446063u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing021 { get; } = SnoData.Powers.GetBySno(446063u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(446195u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(446195u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing028 { get; } = SnoData.Powers.GetBySno(446318u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing028 { get; } = SnoData.Powers.GetBySno(446318u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing031 { get; } = SnoData.Powers.GetBySno(446511u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing031 { get; } = SnoData.Powers.GetBySno(446511u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(446562u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing033 { get; } = SnoData.Powers.GetBySno(446562u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(446638u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing037 { get; } = SnoData.Powers.GetBySno(446638u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing042 { get; } = SnoData.Powers.GetBySno(446734u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing042 { get; } = SnoData.Powers.GetBySno(446734u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing043 { get; } = SnoData.Powers.GetBySno(446761u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing043 { get; } = SnoData.Powers.GetBySno(446761u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(446762u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(446762u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing051 { get; } = SnoData.Powers.GetBySno(447290u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing051 { get; } = SnoData.Powers.GetBySno(447290u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing052 { get; } = SnoData.Powers.GetBySno(447291u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing052 { get; } = SnoData.Powers.GetBySno(447291u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing057 { get; } = SnoData.Powers.GetBySno(447541u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing057 { get; } = SnoData.Powers.GetBySno(447541u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing058 { get; } = SnoData.Powers.GetBySno(447553u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing058 { get; } = SnoData.Powers.GetBySno(447553u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing059 { get; } = SnoData.Powers.GetBySno(447581u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing059 { get; } = SnoData.Powers.GetBySno(447581u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing064 { get; } = SnoData.Powers.GetBySno(447905u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing064 { get; } = SnoData.Powers.GetBySno(447905u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing066 { get; } = SnoData.Powers.GetBySno(449001u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing066 { get; } = SnoData.Powers.GetBySno(449001u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing067 { get; } = SnoData.Powers.GetBySno(449021u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing067 { get; } = SnoData.Powers.GetBySno(449021u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing069 { get; } = SnoData.Powers.GetBySno(449037u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing069 { get; } = SnoData.Powers.GetBySno(449037u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing071 { get; } = SnoData.Powers.GetBySno(449046u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing071 { get; } = SnoData.Powers.GetBySno(449046u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing076 { get; } = SnoData.Powers.GetBySno(449114u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing076 { get; } = SnoData.Powers.GetBySno(449114u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing077 { get; } = SnoData.Powers.GetBySno(449222u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing077 { get; } = SnoData.Powers.GetBySno(449222u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing079 { get; } = SnoData.Powers.GetBySno(449237u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing079 { get; } = SnoData.Powers.GetBySno(449237u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing080 { get; } = SnoData.Powers.GetBySno(449252u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing080 { get; } = SnoData.Powers.GetBySno(449252u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing081 { get; } = SnoData.Powers.GetBySno(449264u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing081 { get; } = SnoData.Powers.GetBySno(449264u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing082 { get; } = SnoData.Powers.GetBySno(449671u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing082 { get; } = SnoData.Powers.GetBySno(449671u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing083 { get; } = SnoData.Powers.GetBySno(449703u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing083 { get; } = SnoData.Powers.GetBySno(449703u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing084 { get; } = SnoData.Powers.GetBySno(450294u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing084 { get; } = SnoData.Powers.GetBySno(450294u);
 
-	public ISnoPower Generic_P4ItemPassiveUniqueRing085 { get; } = SnoData.Powers.GetBySno(450472u);
+	public SnoPower Generic_P4ItemPassiveUniqueRing085 { get; } = SnoData.Powers.GetBySno(450472u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(451257u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing002 { get; } = SnoData.Powers.GetBySno(451257u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(451258u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing003 { get; } = SnoData.Powers.GetBySno(451258u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(451259u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing004 { get; } = SnoData.Powers.GetBySno(451259u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(451260u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing005 { get; } = SnoData.Powers.GetBySno(451260u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing006 { get; } = SnoData.Powers.GetBySno(451261u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing006 { get; } = SnoData.Powers.GetBySno(451261u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing007 { get; } = SnoData.Powers.GetBySno(451262u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing007 { get; } = SnoData.Powers.GetBySno(451262u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(451263u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing008 { get; } = SnoData.Powers.GetBySno(451263u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(451264u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing009 { get; } = SnoData.Powers.GetBySno(451264u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(451265u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing010 { get; } = SnoData.Powers.GetBySno(451265u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(451266u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing011 { get; } = SnoData.Powers.GetBySno(451266u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(451267u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing012 { get; } = SnoData.Powers.GetBySno(451267u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(451268u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing013 { get; } = SnoData.Powers.GetBySno(451268u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(451269u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing014 { get; } = SnoData.Powers.GetBySno(451269u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(451270u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing015 { get; } = SnoData.Powers.GetBySno(451270u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(451271u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(451271u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(451272u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing017 { get; } = SnoData.Powers.GetBySno(451272u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(451273u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing018 { get; } = SnoData.Powers.GetBySno(451273u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(451274u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing019 { get; } = SnoData.Powers.GetBySno(451274u);
 
-	public ISnoPower Generic_P5ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(451275u);
+	public SnoPower Generic_P5ItemPassiveUniqueRing020 { get; } = SnoData.Powers.GetBySno(451275u);
 
-	public ISnoPower Generic_P61ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(478539u);
+	public SnoPower Generic_P61ItemPassiveUniqueRing027 { get; } = SnoData.Powers.GetBySno(478539u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(475248u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing044 { get; } = SnoData.Powers.GetBySno(475248u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing045 { get; } = SnoData.Powers.GetBySno(475249u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing045 { get; } = SnoData.Powers.GetBySno(475249u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing054 { get; } = SnoData.Powers.GetBySno(476050u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing054 { get; } = SnoData.Powers.GetBySno(476050u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing057 { get; } = SnoData.Powers.GetBySno(476578u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing057 { get; } = SnoData.Powers.GetBySno(476578u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing061 { get; } = SnoData.Powers.GetBySno(476582u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing061 { get; } = SnoData.Powers.GetBySno(476582u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing067 { get; } = SnoData.Powers.GetBySno(476588u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing067 { get; } = SnoData.Powers.GetBySno(476588u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing069 { get; } = SnoData.Powers.GetBySno(476590u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing069 { get; } = SnoData.Powers.GetBySno(476590u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing072 { get; } = SnoData.Powers.GetBySno(476689u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing072 { get; } = SnoData.Powers.GetBySno(476689u);
 
-	public ISnoPower Generic_P6ItemPassiveUniqueRing073 { get; } = SnoData.Powers.GetBySno(476695u);
+	public SnoPower Generic_P6ItemPassiveUniqueRing073 { get; } = SnoData.Powers.GetBySno(476695u);
 
-	public ISnoPower Generic_X1LegendaryPotion07 { get; } = SnoData.Powers.GetBySno(405166u);
+	public SnoPower Generic_X1LegendaryPotion07 { get; } = SnoData.Powers.GetBySno(405166u);
 
-	public ISnoPower Generic_P74ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(488102u);
+	public SnoPower Generic_P74ItemPassiveUniqueRing016 { get; } = SnoData.Powers.GetBySno(488102u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMajor001 { get; } = SnoData.Powers.GetBySno(488004u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMajor001 { get; } = SnoData.Powers.GetBySno(488004u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMajor002 { get; } = SnoData.Powers.GetBySno(488036u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMajor002 { get; } = SnoData.Powers.GetBySno(488036u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMajor003 { get; } = SnoData.Powers.GetBySno(488037u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMajor003 { get; } = SnoData.Powers.GetBySno(488037u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMajor004 { get; } = SnoData.Powers.GetBySno(488038u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMajor004 { get; } = SnoData.Powers.GetBySno(488038u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor001 { get; } = SnoData.Powers.GetBySno(488006u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor001 { get; } = SnoData.Powers.GetBySno(488006u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor002 { get; } = SnoData.Powers.GetBySno(488011u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor002 { get; } = SnoData.Powers.GetBySno(488011u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor003 { get; } = SnoData.Powers.GetBySno(488012u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor003 { get; } = SnoData.Powers.GetBySno(488012u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor004 { get; } = SnoData.Powers.GetBySno(488013u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor004 { get; } = SnoData.Powers.GetBySno(488013u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor005 { get; } = SnoData.Powers.GetBySno(488014u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor005 { get; } = SnoData.Powers.GetBySno(488014u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor006 { get; } = SnoData.Powers.GetBySno(488015u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor006 { get; } = SnoData.Powers.GetBySno(488015u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor007 { get; } = SnoData.Powers.GetBySno(488016u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor007 { get; } = SnoData.Powers.GetBySno(488016u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor008 { get; } = SnoData.Powers.GetBySno(488017u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor008 { get; } = SnoData.Powers.GetBySno(488017u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor009 { get; } = SnoData.Powers.GetBySno(488018u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor009 { get; } = SnoData.Powers.GetBySno(488018u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor010 { get; } = SnoData.Powers.GetBySno(488019u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor010 { get; } = SnoData.Powers.GetBySno(488019u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor011 { get; } = SnoData.Powers.GetBySno(488020u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor011 { get; } = SnoData.Powers.GetBySno(488020u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor012 { get; } = SnoData.Powers.GetBySno(488021u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor012 { get; } = SnoData.Powers.GetBySno(488021u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor013 { get; } = SnoData.Powers.GetBySno(488022u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor013 { get; } = SnoData.Powers.GetBySno(488022u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor014 { get; } = SnoData.Powers.GetBySno(488023u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor014 { get; } = SnoData.Powers.GetBySno(488023u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor015 { get; } = SnoData.Powers.GetBySno(488024u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor015 { get; } = SnoData.Powers.GetBySno(488024u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor016 { get; } = SnoData.Powers.GetBySno(488025u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor016 { get; } = SnoData.Powers.GetBySno(488025u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor017 { get; } = SnoData.Powers.GetBySno(488026u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor017 { get; } = SnoData.Powers.GetBySno(488026u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor018 { get; } = SnoData.Powers.GetBySno(488027u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor018 { get; } = SnoData.Powers.GetBySno(488027u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor019 { get; } = SnoData.Powers.GetBySno(488028u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor019 { get; } = SnoData.Powers.GetBySno(488028u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor020 { get; } = SnoData.Powers.GetBySno(488029u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor020 { get; } = SnoData.Powers.GetBySno(488029u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor021 { get; } = SnoData.Powers.GetBySno(488030u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor021 { get; } = SnoData.Powers.GetBySno(488030u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor022 { get; } = SnoData.Powers.GetBySno(488031u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor022 { get; } = SnoData.Powers.GetBySno(488031u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor023 { get; } = SnoData.Powers.GetBySno(488032u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor023 { get; } = SnoData.Powers.GetBySno(488032u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor024 { get; } = SnoData.Powers.GetBySno(488033u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor024 { get; } = SnoData.Powers.GetBySno(488033u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor025 { get; } = SnoData.Powers.GetBySno(488034u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor025 { get; } = SnoData.Powers.GetBySno(488034u);
 
-	public ISnoPower Generic_P75ItemPassiveDarkAlchemyMinor026 { get; } = SnoData.Powers.GetBySno(488035u);
+	public SnoPower Generic_P75ItemPassiveDarkAlchemyMinor026 { get; } = SnoData.Powers.GetBySno(488035u);
 
-	public IEnumerable<ISnoPower> GetClassSpecificPowers(HeroClass heroClass)
+	public IEnumerable<SnoPower> GetClassSpecificPowers(HeroClass heroClass)
 	{
 		return dictionary_0[heroClass];
 	}
 
-	public IEnumerable<ISnoPower> GetLegendaryGemPowers()
+	public IEnumerable<SnoPower> GetLegendaryGemPowers()
 	{
 		return list_0;
 	}
 
-	public IEnumerable<ISnoPower> GetLegendaryItemPowers()
+	public IEnumerable<SnoPower> GetLegendaryItemPowers()
 	{
 		return list_1;
 	}
 
 	public SnoPowerList()
 	{
-		List<ISnoPower> list = new List<ISnoPower>();
+		List<SnoPower> list = new List<SnoPower>();
 		dictionary_0[HeroClass.Barbarian] = list;
 		list.Add(Barbarian_AncientSpear = SnoData.Powers.GetBySno(377453u));
 		list.Add(Barbarian_Avalanche = SnoData.Powers.GetBySno(353447u));
@@ -6561,7 +6561,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(Barbarian_Passive_ToughAsNails = SnoData.Powers.GetBySno(205848u));
 		list.Add(Barbarian_Passive_Unforgiving = SnoData.Powers.GetBySno(205300u));
 		list.Add(Barbarian_Passive_WeaponsMaster = SnoData.Powers.GetBySno(206147u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.Crusader] = list;
 		list.Add(Crusader_AkaratsChampion = SnoData.Powers.GetBySno(269032u));
 		list.Add(Crusader_BlessedHammer = SnoData.Powers.GetBySno(266766u));
@@ -6606,7 +6606,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(Crusader_Passive_ToweringShield = SnoData.Powers.GetBySno(356052u));
 		list.Add(Crusader_Passive_Vigilant = SnoData.Powers.GetBySno(310626u));
 		list.Add(Crusader_Passive_Wrathful = SnoData.Powers.GetBySno(310775u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.DemonHunter] = list;
 		list.Add(DemonHunter_Bolas = SnoData.Powers.GetBySno(77552u));
 		list.Add(DemonHunter_Caltrops = SnoData.Powers.GetBySno(129216u));
@@ -6654,7 +6654,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(DemonHunter_Passive_TacticalAdvantage = SnoData.Powers.GetBySno(218385u));
 		list.Add(DemonHunter_Passive_ThrillOfTheHunt = SnoData.Powers.GetBySno(211225u));
 		list.Add(DemonHunter_Passive_VengeancePassiveEffect = SnoData.Powers.GetBySno(155714u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.Monk] = list;
 		list.Add(Monk_BlindingFlash = SnoData.Powers.GetBySno(136954u));
 		list.Add(Monk_BreathOfHeaven = SnoData.Powers.GetBySno(69130u));
@@ -6701,7 +6701,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(Monk_Passive_TheGuardiansPath = SnoData.Powers.GetBySno(209812u));
 		list.Add(Monk_Passive_Transcendence = SnoData.Powers.GetBySno(209250u));
 		list.Add(Monk_Passive_Unity = SnoData.Powers.GetBySno(368899u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.Necromancer] = list;
 		list.Add(Necromancer_ArmyOfTheDead = SnoData.Powers.GetBySno(460358u));
 		list.Add(Necromancer_BloodRush = SnoData.Powers.GetBySno(454090u));
@@ -6747,7 +6747,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(Necromancer_Passive_SpreadingMalediction = SnoData.Powers.GetBySno(472220u));
 		list.Add(Necromancer_Passive_StandAlone = SnoData.Powers.GetBySno(470725u));
 		list.Add(Necromancer_Passive_SwiftHarvesting = SnoData.Powers.GetBySno(470805u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.WitchDoctor] = list;
 		list.Add(WitchDoctor_AcidCloud = SnoData.Powers.GetBySno(70455u));
 		list.Add(WitchDoctor_BigBadVoodoo = SnoData.Powers.GetBySno(117402u));
@@ -6792,7 +6792,7 @@ internal class SnoPowerList : ISnoPowerList
 		list.Add(WitchDoctor_Passive_TribalRites = SnoData.Powers.GetBySno(208601u));
 		list.Add(WitchDoctor_Passive_VisionQuest = SnoData.Powers.GetBySno(209041u));
 		list.Add(WitchDoctor_Passive_ZombieHandler = SnoData.Powers.GetBySno(208563u));
-		list = new List<ISnoPower>();
+		list = new List<SnoPower>();
 		dictionary_0[HeroClass.Wizard] = list;
 		list.Add(Wizard_ArcaneOrb = SnoData.Powers.GetBySno(30668u));
 		list.Add(Wizard_ArcaneTorrent = SnoData.Powers.GetBySno(134456u));

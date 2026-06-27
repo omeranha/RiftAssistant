@@ -7,11 +7,11 @@ using SNO;
 
 namespace work;
 
-internal class PlayerPowerInfo : IPlayerPowerInfo
+public class PlayerPowerInfo
 {
 	private readonly Player class310_0;
 
-	private IPlayerSkill iplayerSkill_0;
+	private Skill iplayerSkill_0;
 
 	[CompilerGenerated]
 	private bool bool_0;
@@ -23,47 +23,47 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 	private bool bool_2;
 
 	[CompilerGenerated]
-	private readonly IBarbarianPowerInfo ibarbarianPowerInfo_0;
+	private readonly BarbarianPowerInfo ibarbarianPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly ICrusaderPowerInfo icrusaderPowerInfo_0;
+	private readonly CrusaderPowerInfo icrusaderPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly IDemonHunterPowerInfo idemonHunterPowerInfo_0;
+	private readonly DemonHunterPowerInfo idemonHunterPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly IMonkPowerInfo imonkPowerInfo_0;
+	private readonly MonkPowerInfo imonkPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly INecromancerPowerInfo inecromancerPowerInfo_0;
+	private readonly NecromancerPowerInfo inecromancerPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly IWitchDoctorPowerInfo iwitchDoctorPowerInfo_0;
+	private readonly WitchDoctorPowerInfo iwitchDoctorPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly IWizardPowerInfo iwizardPowerInfo_0;
+	private readonly WizardPowerInfo iwizardPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly ILegendaryPowerInfo ilegendaryPowerInfo_0;
+	private readonly LegendaryPowerInfo LegendaryPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly ILegendaryGemInfo ilegendaryGemInfo_0;
+	private readonly LegendaryGemInfo ilegendaryGemInfo_0;
 
-	public IPlayerSkill HealthPotionSkill => iplayerSkill_0 ?? (iplayerSkill_0 = new Skill(class310_0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
+	public Skill HealthPotionSkill => iplayerSkill_0 ?? (iplayerSkill_0 = new Skill(class310_0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
 
-	public IEnumerable<IPlayerSkill> CurrentSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0?.CurrentSnoPower != null);
+	public IEnumerable<Skill> CurrentSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0?.CurrentSnoPower != null);
 
-	public IEnumerable<IPlayerSkill> UsedSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0 != null);
+	public IEnumerable<Skill> UsedSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0 != null);
 
-	public IEnumerable<ISnoPower> UsedPassives => class310_0.list_2;
+	public IEnumerable<SnoPower> UsedPassives => class310_0.list_2;
 
-	public IPlayerSkill[] SkillSlots => class310_0.class386_0;
+	public Skill[] SkillSlots => class310_0.class386_0;
 
-	public ISnoPower[] PassiveSlots => class310_0.isnoPower_0;
+	public SnoPower[] PassiveSlots => class310_0.SnoPower_0;
 
 	public bool SkillOverrideActive => class310_0.bool_13;
 
-	public IEnumerable<IBuff> AllBuffs => class310_0.powerSno2buff.Values;
+	public IEnumerable<Buff> AllBuffs => class310_0.powerSno2buff.Values;
 
 	public bool Frozen
 	{
@@ -119,7 +119,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public IBarbarianPowerInfo UsedBarbarianPowers
+	public BarbarianPowerInfo UsedBarbarianPowers
 	{
 		[CompilerGenerated]
 		get
@@ -128,7 +128,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public ICrusaderPowerInfo UsedCrusaderPowers
+	public CrusaderPowerInfo UsedCrusaderPowers
 	{
 		[CompilerGenerated]
 		get
@@ -137,7 +137,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public IDemonHunterPowerInfo UsedDemonHunterPowers
+	public DemonHunterPowerInfo UsedDemonHunterPowers
 	{
 		[CompilerGenerated]
 		get
@@ -146,7 +146,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public IMonkPowerInfo UsedMonkPowers
+	public MonkPowerInfo UsedMonkPowers
 	{
 		[CompilerGenerated]
 		get
@@ -155,7 +155,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public INecromancerPowerInfo UsedNecromancerPowers
+	public NecromancerPowerInfo UsedNecromancerPowers
 	{
 		[CompilerGenerated]
 		get
@@ -164,7 +164,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public IWitchDoctorPowerInfo UsedWitchDoctorPowers
+	public WitchDoctorPowerInfo UsedWitchDoctorPowers
 	{
 		[CompilerGenerated]
 		get
@@ -173,7 +173,7 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public IWizardPowerInfo UsedWizardPowers
+	public WizardPowerInfo UsedWizardPowers
 	{
 		[CompilerGenerated]
 		get
@@ -182,16 +182,16 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		}
 	}
 
-	public ILegendaryPowerInfo UsedLegendaryPowers
+	public LegendaryPowerInfo UsedLegendaryPowers
 	{
 		[CompilerGenerated]
 		get
 		{
-			return ilegendaryPowerInfo_0;
+			return LegendaryPowerInfo_0;
 		}
 	}
 
-	public ILegendaryGemInfo UsedLegendaryGems
+	public LegendaryGemInfo UsedLegendaryGems
 	{
 		[CompilerGenerated]
 		get
@@ -210,11 +210,11 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		inecromancerPowerInfo_0 = new NecromancerPowerInfo(class310_1);
 		iwitchDoctorPowerInfo_0 = new WitchDoctorPowerInfo(class310_1);
 		iwizardPowerInfo_0 = new WizardPowerInfo(class310_1);
-		ilegendaryPowerInfo_0 = new LegendaryPowerInfo(class310_1);
+		LegendaryPowerInfo_0 = new LegendaryPowerInfo(class310_1);
 		ilegendaryGemInfo_0 = new LegendaryGemInfo(class310_1);
 	}
 
-	public IPlayerSkill GetUsedSkill(ISnoPower snoPower)
+	public Skill GetUsedSkill(SnoPower snoPower)
 	{
 		if (snoPower == null)
 		{
@@ -244,34 +244,16 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		return @class;
 	}
 
-	IPlayerSkill IPlayerPowerInfo.GetUsedSkill(ISnoPower snoPower)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetUsedSkill
-		return this.GetUsedSkill(snoPower);
-	}
-
-	public IBuff GetBuff(string code)
+	public Buff GetBuff(string code)
 	{
 		class310_0.dictionary_1.TryGetValue(code, out var value);
 		return value;
 	}
 
-	IBuff IPlayerPowerInfo.GetBuff(string code)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetBuff
-		return this.GetBuff(code);
-	}
-
-	public IBuff GetBuff(uint sno)
+	public Buff GetBuff(uint sno)
 	{
 		class310_0.powerSno2buff.TryGetValue(sno, out var value);
 		return value;
-	}
-
-	IBuff IPlayerPowerInfo.GetBuff(uint sno)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetBuff
-		return this.GetBuff(sno);
 	}
 
 	public bool method_0(string string_0)
@@ -292,12 +274,6 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 		return value.Active;
 	}
 
-	bool IPlayerPowerInfo.BuffIsActive(uint sno)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in BuffIsActive
-		return this.BuffIsActive(sno);
-	}
-
 	public bool BuffIsActive(uint sno, int iconIndex)
 	{
 		if (!class310_0.powerSno2buff.TryGetValue(sno, out var value))
@@ -309,11 +285,5 @@ internal class PlayerPowerInfo : IPlayerPowerInfo
 			return true;
 		}
 		return false;
-	}
-
-	bool IPlayerPowerInfo.BuffIsActive(uint sno, int iconIndex)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in BuffIsActive
-		return this.BuffIsActive(sno, iconIndex);
 	}
 }

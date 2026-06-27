@@ -1,18 +1,19 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Plugins;
+using SNO;
 
-internal class Quest(ISnoQuest isnoQuest_1) : IQuest
+public class Quest(SnoQuest isnoQuest_1)
 {
 	private readonly Stopwatch iwatch_2 = new();
 
-	public ISnoQuest SnoQuest { get; set; } = isnoQuest_1;
+	public SnoQuest SnoQuest { get; set; } = isnoQuest_1;
 
 	public int CreatedOn { get; set; }
 
 	public uint QuestStepId { get; set; }
 
-	public ISnoQuestStep QuestStep { get; set; }
+	public SnoQuestStep QuestStep { get; set; }
 
 	public QuestState State { get; set; }
 

@@ -1,6 +1,6 @@
 using Plugins;
 
-internal class SnoPower : ISnoPower
+public class SnoPower
 {
 	internal uint sno;
 	private readonly string code;
@@ -20,7 +20,7 @@ internal class SnoPower : ISnoPower
 	private double[] baseCoolDownByRune;
 	private readonly SnoPowerIcon[] snoPowerIcon = new SnoPowerIcon[32];
 	private uint normalIconTextureId;
-	private ISnoPower isnoPower;
+	private SnoPower isnoPower;
 
 	public uint Sno
 	{
@@ -184,7 +184,7 @@ internal class SnoPower : ISnoPower
 		}
 	}
 
-	public ISnoPower SynergyPower
+	public SnoPower SynergyPower
 	{
 		get {
 			return isnoPower;

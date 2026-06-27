@@ -17,5 +17,5 @@ internal struct r_Waypoint
 	[FieldOffset(40)]
 	public int int_1;
 
-	public static int int_2 = 44;
+	public static int Size = 44;
 }

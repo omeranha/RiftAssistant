@@ -3,13 +3,13 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class SkillEffectRule : ISkillEffectRule
+public sealed class SkillEffectRule
 {
 	[CompilerGenerated]
 	private readonly SkillEffectType skillEffectType_0;
 
 	[CompilerGenerated]
-	private readonly ISnoActor isnoActor_0;
+	private readonly SnoActor SnoActor_0;
 
 	[CompilerGenerated]
 	private readonly float float_0;
@@ -23,12 +23,12 @@ public sealed class SkillEffectRule : ISkillEffectRule
 		}
 	}
 
-	public ISnoActor SnoActor
+	public SnoActor SnoActor
 	{
 		[CompilerGenerated]
 		get
 		{
-			return isnoActor_0;
+			return SnoActor_0;
 		}
 	}
 
@@ -41,10 +41,10 @@ public sealed class SkillEffectRule : ISkillEffectRule
 		}
 	}
 
-	internal SkillEffectRule(SkillEffectType skillEffectType_1, ISnoActor isnoActor_1, float float_1)
+	internal SkillEffectRule(SkillEffectType skillEffectType_1, SnoActor SnoActor_1, float float_1)
 	{
 		skillEffectType_0 = skillEffectType_1;
-		isnoActor_0 = isnoActor_1;
+		SnoActor_0 = SnoActor_1;
 		float_0 = float_1;
 	}
 }

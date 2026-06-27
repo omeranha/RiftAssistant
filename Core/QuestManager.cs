@@ -13,12 +13,9 @@ internal class QuestManager
 
 	private readonly Class112<uint, Quest> class112_0 = new Class112<uint, Quest>();
 
-	public readonly Class112<uint, IQuest> class112_1 = new Class112<uint, IQuest>();
+	public readonly Class112<uint, Quest> class112_1 = new Class112<uint, Quest>();
 
-	public readonly Class112<uint, IQuest> class112_2 = new Class112<uint, IQuest>();
-
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern bool ReadProcessMemory(IntPtr intptr_0, IntPtr intptr_1, ref r_Quest struct20_1, int int_0, int int_1);
+	public readonly Class112<uint, Quest> class112_2 = new Class112<uint, Quest>();
 
 	internal void method_0()
 	{
@@ -36,7 +33,7 @@ internal class QuestManager
 		for (int i = 0; i < class351_0.RawBlocks.Count; i++) {
 			r_Block r_Block2 = class351_0.RawBlocks[i];
 			if (r_Block2.ElementCount > 0) {
-				ReadProcessMemory(MR.Instance.ProcessHandle, (IntPtr)r_Block2.ArrayStart, ref struct20_0[num], 376 * r_Block2.ElementCount, 0);
+				GameWindowManager.ReadIntoArray(r_Block2.ArrayStart, struct20_0, num, r_Block2.ElementCount);
 			}
 			num += r_Block2.ElementCount;
 		}
@@ -58,7 +55,7 @@ internal class QuestManager
 		if (uint_ == uint.MaxValue) {
 			return;
 		}
-		ISnoQuest quest = SnoData.Quests.GetQuest(uint_);
+		SnoQuest quest = SnoData.Quests.GetQuest(uint_);
 		if (quest == null) {
 			return;
 		}
@@ -97,7 +94,7 @@ internal class QuestManager
 
 	public uint method_3(QuestState questState_0, uint uint_0)
 	{
-		IQuest quest = class112_1[uint_0];
+		Quest quest = class112_1[uint_0];
 		if (quest?.QuestStep != null && quest.State == questState_0) {
 			return quest.QuestStepId;
 		}

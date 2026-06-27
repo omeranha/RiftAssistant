@@ -5,7 +5,7 @@ using Plugins;
 
 namespace SNO;
 
-public sealed class AcdAttribute : IAttribute
+public sealed class AcdAttribute
 {
 	[CompilerGenerated]
 	private readonly string string_0;
@@ -52,7 +52,7 @@ public sealed class AcdAttribute : IAttribute
 		}
 	}
 
-	public IEnumerable<IAttributeProcessor> Processors => list_0;
+	public IEnumerable<AttributeProcessor> Processors => list_0;
 
 	public bool OrderIndexPrimary
 	{
@@ -81,12 +81,6 @@ public sealed class AcdAttribute : IAttribute
 		return Index | (modifier << 12);
 	}
 
-	uint IAttribute.GetId(uint modifier)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetId
-		return this.GetId(modifier);
-	}
-
 	public string GetDescription(uint modifier)
 	{
 		dictionary_0.TryGetValue(modifier, out var value);
@@ -95,12 +89,6 @@ public sealed class AcdAttribute : IAttribute
 			dictionary_0.TryGetValue(uint.MaxValue, out value);
 		}
 		return value;
-	}
-
-	string IAttribute.GetDescription(uint modifier)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetDescription
-		return this.GetDescription(modifier);
 	}
 
 	public void AddProcessor(AttributeProcessor processor)
@@ -112,12 +100,6 @@ public sealed class AcdAttribute : IAttribute
 	{
 		dictionary_1.TryGetValue(mod, out var value);
 		return value;
-	}
-
-	int IAttribute.GetModLowestOrderIndex(int mod)
-	{
-		//ILSpy generated this explicit interface implementation from .override directive in GetModLowestOrderIndex
-		return this.GetModLowestOrderIndex(mod);
 	}
 
 	public void SetModLowestOrderIndex(int mod, int value)

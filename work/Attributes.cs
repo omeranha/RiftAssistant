@@ -16,7 +16,7 @@ public sealed class Attributes
 
 	private readonly Dictionary<string, AcdAttribute> dictionary_0 = new Dictionary<string, AcdAttribute>();
 
-	private readonly Dictionary<string, IAttributeProcessor> dictionary_1 = new Dictionary<string, IAttributeProcessor>();
+	private readonly Dictionary<string, AttributeProcessor> dictionary_1 = new Dictionary<string, AttributeProcessor>();
 
 	public AttributeMap Map
 	{
@@ -40,7 +40,7 @@ public sealed class Attributes
 		return value;
 	}
 
-	public IAttributeProcessor GetAttributeProcessor(string code)
+	public AttributeProcessor GetAttributeProcessor(string code)
 	{
 		dictionary_1.TryGetValue(code, out var value);
 		return value;
