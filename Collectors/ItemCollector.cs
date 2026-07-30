@@ -7,13 +7,13 @@ using System.Linq;
 using structs;
 using Plugins;
 using SNO;
-using work;
+
 
 namespace collectors;
 
 internal class ItemCollector
 {
-	public readonly Class112<uint, Item> class112_0 = new Class112<uint, Item>();
+	public readonly Dictionary<uint, Item> Items = [];
 
 	public readonly List<Item> list_0 = new List<Item>();
 
@@ -66,7 +66,7 @@ internal class ItemCollector
 		if (bool_1) {
 			class112_1.Clear();
 		}
-		class112_0.Clear();
+		Items.Clear();
 		Item_1 = null;
 		Item_2 = null;
 		list_0.Clear();
@@ -185,16 +185,16 @@ internal class ItemCollector
 			uint uInt32_ = item.UInt32_0;
 			item.UInt32_0 = struct7_.SocketHostAcdId;
 			if (flag2 && uInt32_ != item.UInt32_0) {
-				Item item2 = class112_0[uInt32_];
+				Items.TryGetValue(uInt32_, out var item2);
 				if (item2 != null && !list_5.Contains(item2)) {
 					list_5.Add(item2 as Item);
 				}
-				Item item3 = class112_0[item.UInt32_0];
+				Items.TryGetValue(item.UInt32_0, out var item3);
 				if (item3 != null && !list_5.Contains(item3)) {
 					list_5.Add(item3 as Item);
 				}
 			}
-			class112_0.Set(acdId, item);
+			Items[acdId] = item;
 			if (itemLocation == ItemLocation.Inventory) {
 				int_0 += item.SnoItem.ItemWidth * item.SnoItem.ItemHeight;
 			}
@@ -297,7 +297,7 @@ internal class ItemCollector
 				item9.method_45();
 			}
 		}
-		foreach (Item item10 in class112_0.IEnumerable_0) {
+		foreach (Item item10 in Items.Values) {
 			if (item10.Location != ItemLocation.Floor && item10.Location != ItemLocation.Merchant && item10.Location != ItemLocation.MerchantAvaibleItemsForPurchase && item10.Location != ItemLocation.MerchantBuyback) {
 				Item obj = item10 as Item;
 				if (obj != null && !obj.bool_12) {

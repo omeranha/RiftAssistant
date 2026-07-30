@@ -2,7 +2,7 @@ using System.Globalization;
 using SharpDX;
 using Plugins;
 using SNO;
-using work;
+
 
 internal class ModuleConditionEvaluator
 {

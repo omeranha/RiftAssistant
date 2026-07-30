@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using structs;
 using Plugins;
 using SNO;
-using work;
+
 
 internal class WaypointManager
 {

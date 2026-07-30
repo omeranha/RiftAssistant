@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using work;
+
 using Plugins;
 using SNO;
 using System.Diagnostics;
@@ -831,7 +831,7 @@ public class StatTracker
 		{
 			num = 0L;
 		}
-		return Formatting.VtoS(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(num * 10000, valueFormat_0);
 	}
 
 	public string method_26(ValueFormat valueFormat_0 = ValueFormat.LongTime)
@@ -841,7 +841,7 @@ public class StatTracker
 		{
 			num = 0L;
 		}
-		return Formatting.VtoS(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(num * 10000, valueFormat_0);
 	}
 
 	public string method_27(ValueFormat valueFormat_0 = ValueFormat.LongTime)
@@ -851,7 +851,7 @@ public class StatTracker
 		{
 			num = 0L;
 		}
-		return Formatting.VtoS(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(num * 10000, valueFormat_0);
 	}
 
 	internal void method_28()

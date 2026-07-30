@@ -12,16 +12,12 @@ using collectors;
 using Plugins;
 using SNO;
 
-namespace work;
-
 internal static class CoreCollector
 {
 	public static readonly uint Magic_600DF00D;
 
 	[CompilerGenerated]
 	private static EventHandler eventHandler_5;
-
-	private static bool isGameWindowRunning;
 
 	[CompilerGenerated]
 	private static readonly UiElements uiElements;
@@ -243,6 +239,7 @@ internal static class CoreCollector
 	public static Portal[] portalsSnapshot;
 	public static IClickableActor[] NormalChestsSnapshot;
 	public static IClickableActor[] ResplendentChestsSnapshot;
+	public static Actor[] actorsSnapshot;
 
 	static CoreCollector()
 	{
@@ -396,6 +393,8 @@ internal static class CoreCollector
 
 	public static void Update()
 	{
+		if (GameWindowManager.Window.Handle == IntPtr.Zero) return;
+
 		CurrentRealTimeTicks = DateTime.Now.Ticks;
 		try {
 			GameWindowManager.Window.CursorX = Cursor.Position.X - ((GameWindowManager.Window.Handle != IntPtr.Zero) ? GameWindowManager.Window.Offset.X : 0);
@@ -505,8 +504,7 @@ internal static class CoreCollector
 					var dict = CoreCollector.ActorCollector.Class112_1;
 					var temp = new List<Portal>();
 					bool isRift = playerArea != null && playerArea.Code.StartsWith("x1_lr_level_", StringComparison.InvariantCulture);
-					foreach (var kvp in dict)
-					{
+					foreach (var kvp in dict) {
 						var portal = kvp.Value;
 						if (portal == null)
 							continue;
@@ -529,16 +527,12 @@ internal static class CoreCollector
 					int normalsidx = 0;
 					int resplandecentsidx = 0;
 
-					for (int i = 0; i < source.Count; i++)
-					{
+					for (int i = 0; i < source.Count; i++) {
 						var actor = source[i];
 
-						if (actor.SnoActor.Kind == ActorKind.ChestNormal)
-						{
+						if (actor.SnoActor.Kind == ActorKind.ChestNormal) {
 							normals[normalsidx++] = (IClickableActor)actor;
-						}
-						else if (actor.SnoActor.Kind == ActorKind.Chest)
-						{
+						} else if (actor.SnoActor.Kind == ActorKind.Chest) {
 							resplandecents[resplandecentsidx++] = (IClickableActor)actor;
 						}
 					}
@@ -547,6 +541,12 @@ internal static class CoreCollector
 					Array.Resize(ref resplandecents, resplandecentsidx);
 					NormalChestsSnapshot = normals;
 					ResplendentChestsSnapshot = resplandecents;
+
+					actorsSnapshot = new Actor[source.Count];
+					for (int i = 0; i < source.Count; i++) {
+						var actor = source[i];
+						actorsSnapshot[i] = actor;
+					}
 				} catch (Exception ex) {
 					Logger.LogException(ex.Message);
 				}

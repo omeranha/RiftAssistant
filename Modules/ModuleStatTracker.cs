@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using SharpDX.DirectWrite;
-using work;
+
 
 sealed class StatColumn
 {
@@ -115,7 +115,7 @@ internal class ModuleStatTracker : Module
 			Header = "Experience",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -124,7 +124,7 @@ internal class ModuleStatTracker : Module
 			Header = "Gold Pickup",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -133,7 +133,7 @@ internal class ModuleStatTracker : Module
 			Header = "Total Kills",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -142,7 +142,7 @@ internal class ModuleStatTracker : Module
 			Header = "Elite Kills",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -151,7 +151,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop All",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -160,7 +160,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop White",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -169,7 +169,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop Magic",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -178,7 +178,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop Rare",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -187,7 +187,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop Legendary",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -196,7 +196,7 @@ internal class ModuleStatTracker : Module
 			Header = "Drop Blood Shard",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -205,7 +205,7 @@ internal class ModuleStatTracker : Module
 			Header = "Death",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -214,7 +214,7 @@ internal class ModuleStatTracker : Module
 			Header = "Damage Dealt",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -223,7 +223,7 @@ internal class ModuleStatTracker : Module
 			Header = "Damage Taken",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});
@@ -232,7 +232,7 @@ internal class ModuleStatTracker : Module
 			Header = "Healing",
 			HeaderFont = whiteText,
 			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.VtoS(
+			TotalValue = t => Formatting.ValueToString(
 		t.DropLegendary,
 		ValueFormat.NormalNumber)
 		});

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using structs;
 using Plugins;
 using SNO;
-using work;
+
 using System.Diagnostics;
 
 public class Player : Actor
@@ -1108,7 +1108,7 @@ public class Player : Actor
 			return 0;
 		}
 		int num = 0;
-		foreach (Item item in CoreCollector.ItemCollector.class112_0.IEnumerable_0)
+		foreach (Item item in CoreCollector.ItemCollector.Items.Values)
 		{
 			ItemLocation location = item.Location;
 			if (location == ItemLocation.Bracers || location == ItemLocation.Shoulders || location == ItemLocation.Head || location == ItemLocation.Neck || location == ItemLocation.Torso || location == ItemLocation.Feet || location == ItemLocation.Hands || location == ItemLocation.LeftRing || location == ItemLocation.RightRing || location == ItemLocation.Waist || location == ItemLocation.Legs || location == ItemLocation.LeftHand || location == ItemLocation.RightHand)

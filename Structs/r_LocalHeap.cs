@@ -1,7 +1,5 @@
 using System.Runtime.InteropServices;
 
-namespace work;
-
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
 internal struct r_LocalHeap
 {

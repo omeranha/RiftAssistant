@@ -7,7 +7,7 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using Plugins;
 using SNO;
-using work;
+
 
 public readonly record struct SceneKey(float X, float Y);
 
@@ -22,8 +22,6 @@ internal class SceneMapRenderer
 	private readonly System.Drawing.Brush whiteBrush;
 
 	private float scaleFactor = 1f;
-
-	private uint lastSnoWorldId;
 
 	private string lastAreaGroupInfo;
 

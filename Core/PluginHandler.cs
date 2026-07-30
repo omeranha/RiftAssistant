@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using work;
 
 internal class PluginHandler
 {
@@ -110,17 +109,17 @@ internal class PluginHandler
 		return Plugins.Where(p => p.Enabled).OfType<T>();
 	}
 
-	public void DispatchKeyEvent(IKeyEvent keyEvent)
+	public void DispatchKeyEvent(InputEvent e)
 	{
 		if (!GameWindowManager.Window.IsForeground) return;
 
-		List<IKeyEventHandler> handlers;
+		List<InputEventHandler> handlers;
 		lock (pluginLock) {
-			handlers = [.. Plugins.Where(p => p.Enabled).OfType<IKeyEventHandler>()];
+			handlers = [.. Plugins.Where(p => p.Enabled).OfType<InputEventHandler>()];
 		}
 
 		foreach (var handler in handlers) {
-			handler.OnKeyEvent(keyEvent);
+			handler.OnInputEvent(e);
 		}
 	}
 
@@ -197,6 +196,7 @@ internal class PluginHandler
 					}
 
 					MessageBox.Show("Plugin compilation failed.\nCheck logs for details.", "Compilation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Core.Exit();
 					return false;
 				}
 

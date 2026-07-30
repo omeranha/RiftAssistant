@@ -1,6 +1,6 @@
 namespace Plugins;
 
-public interface IKeyEventHandler : IPlugin
+public interface InputEventHandler : IPlugin
 {
-	void OnKeyEvent(IKeyEvent keyEvent);
+	void OnInputEvent(InputEvent inputEventEvent);
 }

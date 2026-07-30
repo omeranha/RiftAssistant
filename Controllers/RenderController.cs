@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-using work;
+
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 public class RenderController

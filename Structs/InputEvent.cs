@@ -1,18 +1,10 @@
-﻿using Plugins;
-
-public readonly struct InputEvent : IKeyEvent
+﻿public readonly struct InputEvent
 {
 	public readonly Vk Key;
 	public readonly bool Down;
 	public readonly bool Shift;
 	public readonly bool Ctrl;
 	public readonly bool Alt;
-
-	Vk IKeyEvent.Key => Key;
-	bool IKeyEvent.Down => Down;
-	bool IKeyEvent.Shift => Shift;
-	bool IKeyEvent.Ctrl => Ctrl;
-	bool IKeyEvent.Alt => Alt;
 
 	public InputEvent(Vk key, bool down)
 	{
@@ -27,5 +19,15 @@ public readonly struct InputEvent : IKeyEvent
 		Shift = shift;
 		Ctrl = ctrl;
 		Alt = alt;
+	}
+
+	public bool Is(Vk key, bool down)
+	{
+		return Key == key && Down == down;
+	}
+
+	public bool Is(Vk key, bool down, bool shift, bool ctrl, bool alt)
+	{
+		return Key == key && Down == down && Shift == shift && Ctrl == ctrl && Alt == alt;
 	}
 }

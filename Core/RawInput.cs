@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-using work;
+
 
 internal static unsafe class RawInput
 {
@@ -36,8 +36,8 @@ internal static unsafe class RawInput
 	private const int WM_SYSKEYDOWN = 0x0104;
 	private const int WM_SYSKEYUP = 0x0105;
 
-	public static readonly ConcurrentQueue<InputEvent> events = new();
-	public static readonly ConcurrentQueue<InputEvent> mouseEvents = new();
+	public static event Action<InputEvent> KeyboardEvent;
+	public static event Action<InputEvent> MouseEvent;
 
 	private static Thread thread;
 	private static uint threadId;
@@ -106,6 +106,8 @@ internal static unsafe class RawInput
 
 	private static void ProcessRawInput(IntPtr hRawInput)
 	{
+		if (!GameWindowManager.Window.IsForeground) return;
+
 		uint size = 0;
 		GetRawInputData(hRawInput, RID_INPUT, IntPtr.Zero, ref size, (uint)sizeof(RAWINPUTHEADER));
 
@@ -133,7 +135,7 @@ internal static unsafe class RawInput
 		bool shift = IsKeyDown(Vk.LSHIFT) || IsKeyDown(Vk.RSHIFT);
 		bool ctrl = IsKeyDown(Vk.LCONTROL) || IsKeyDown(Vk.RCONTROL);
 		bool alt = IsKeyDown(Vk.LMENU) || IsKeyDown(Vk.RMENU);
-		events.Enqueue(new InputEvent((Vk)vk, down, shift, ctrl, alt));
+		KeyboardEvent?.Invoke(new InputEvent((Vk)vk, down, shift, ctrl, alt));
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -151,13 +153,13 @@ internal static unsafe class RawInput
 		ref var m = ref raw->data.mouse;
 		ushort f = m.usButtonFlags;
 
-		if ((f & RI_MOUSE_LEFT_BUTTON_DOWN) != 0) mouseEvents.Enqueue(new InputEvent(Vk.LBUTTON, true));
+		if ((f & RI_MOUSE_LEFT_BUTTON_DOWN) != 0) MouseEvent?.Invoke(new InputEvent(Vk.LBUTTON, true));
 
-		if ((f & RI_MOUSE_LEFT_BUTTON_UP) != 0) mouseEvents.Enqueue(new InputEvent(Vk.LBUTTON, false));
+		if ((f & RI_MOUSE_LEFT_BUTTON_UP) != 0) MouseEvent?.Invoke(new InputEvent(Vk.LBUTTON, false));
 
-		if ((f & RI_MOUSE_RIGHT_BUTTON_DOWN) != 0) mouseEvents.Enqueue(new InputEvent(Vk.RBUTTON, true));
+		if ((f & RI_MOUSE_RIGHT_BUTTON_DOWN) != 0) MouseEvent?.Invoke(new InputEvent(Vk.RBUTTON, true));
 
-		if ((f & RI_MOUSE_RIGHT_BUTTON_UP) != 0) mouseEvents.Enqueue(new InputEvent(Vk.RBUTTON, false));
+		if ((f & RI_MOUSE_RIGHT_BUTTON_UP) != 0) MouseEvent?.Invoke(new InputEvent(Vk.RBUTTON, false));
 	}
 
 	private static readonly IntPtr HWND_MESSAGE = new(-3);

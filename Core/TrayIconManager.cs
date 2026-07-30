@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using work;
+
 
 internal static class TrayIconManager
 {
@@ -15,7 +15,7 @@ internal static class TrayIconManager
 		Assembly assembly = Assembly.GetExecutingAssembly();
 		using Stream stream = assembly.GetManifestResourceStream("RiftAssistant.rift_assistant.ico");
 		trayIcon = new NotifyIcon {
-			Icon = new Icon(stream),
+			Icon = AppResources.Icon,
 			Text = "Rift Assistant",
 			Visible = true,
 			ContextMenuStrip = CreateMenu()
@@ -32,7 +32,8 @@ internal static class TrayIconManager
 		});
 
 		menu.Items.Add("Exit", null, (_, _) => {
-			trayIcon!.Visible = false;
+			trayIcon.Visible = false;
+			Application.ExitThread();
 			Core.Exit();
 		});
 

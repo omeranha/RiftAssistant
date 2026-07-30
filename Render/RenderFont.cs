@@ -5,7 +5,7 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 using Plugins;
-using work;
+
 
 public class RenderFont : ITransparent, IFont, IDisposable
 {
@@ -158,7 +158,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		WordWrapping expectedWrapping = WordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap;
 
 		if (useCache) {
-			if (TextCache.TryGetValue(text, out var list) && list != null) {
+			if (text != null && TextCache.TryGetValue(text, out var list) && list != null) {
 				for (int i = 0; i < list.Count; i++) {
 					if (list[i].Font == this) {
 						if (needsLayoutUpdate) {
@@ -171,8 +171,10 @@ public class RenderFont : ITransparent, IFont, IDisposable
 					}
 				}
 			} else {
-				list = new List<TextLayoutCacheEntry>();
-				TextCache[text] = list;
+				list = [];
+				if (text != null) {
+					TextCache[text] = list;
+				}
 			}
 
 			needsLayoutUpdate = false;

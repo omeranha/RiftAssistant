@@ -1,6 +1,6 @@
 using System;
 using SharpDX.DirectWrite;
-using work;
+
 using Plugins;
 
 internal class ModulePortraitPlayerStats : Module
@@ -25,15 +25,15 @@ internal class ModulePortraitPlayerStats : Module
 
 	private readonly RenderBrush class219_3 = new RenderBrush(192, 0, 0, 0, 0f);
 
-	public ModulePortraitPlayerStats(PortraitPlayerStats portraitPlayerStats) : base(portraitPlayerStats.Enabled)
+	public ModulePortraitPlayerStats(Settings settings) : base(true)
 	{
-		bool_1 = false;
-		bool_6 = portraitPlayerStats.ShowRealDPS;
-		bool_7 = portraitPlayerStats.ShowRunDPS;
-		bool_8 = portraitPlayerStats.ShowTotalDPS;
-		bool_4 = portraitPlayerStats.ShowInfo;
+		Show = settings.Overlay.PortraitPlayerStats.Enabled;
+		bool_6 = settings.Overlay.PortraitPlayerStats.ShowRealDPS;
+		bool_7 = settings.Overlay.PortraitPlayerStats.ShowRunDPS;
+		bool_8 = settings.Overlay.PortraitPlayerStats.ShowTotalDPS;
+		bool_4 = settings.Overlay.PortraitPlayerStats.ShowInfo;
 		class219_0 = new RenderBrush(255, 0, 0, 0, 0f);
-		bool_5 = portraitPlayerStats.EHP;
+		bool_5 = settings.Overlay.PortraitPlayerStats.EHP;
 		class219_1 = new RenderBrush(160, 0, 170, 0, 0f);
 		class219_2 = new RenderBrush(160, 100, 100, 100, 0f);
 		method_0(class219_0, class219_3, class219_2, class219_1, renderFont);
@@ -85,17 +85,17 @@ internal class ModulePortraitPlayerStats : Module
 				float num9 = class2.rectangleF_0.Top + class2.rectangleF_0.Height * 0.72f;
 				double currentDps = item2.Damage.CurrentDps;
 				double runDps = item2.Damage.RunDps;
-				TextLayout textLayout = renderFont.GetTextLayout(Formatting.VtoS(item2.Damage.TotalDamage, ValueFormat.LongNumber));
+				TextLayout textLayout = renderFont.GetTextLayout(Formatting.ValueToString(item2.Damage.TotalDamage, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
 				if (bool_8) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
 				}
-				textLayout = renderFont.GetTextLayout(Formatting.VtoS(runDps, ValueFormat.LongNumber));
+				textLayout = renderFont.GetTextLayout(Formatting.ValueToString(runDps, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
 				if (bool_7) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
 				}
-				textLayout = renderFont.GetTextLayout(Formatting.VtoS(currentDps, ValueFormat.LongNumber));
+				textLayout = renderFont.GetTextLayout(Formatting.ValueToString(currentDps, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
 				if (bool_6) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
@@ -118,13 +118,13 @@ internal class ModulePortraitPlayerStats : Module
 				}
 			} else {
 				if (item2.Powers.BuffIsActive(191590u)) {
-					text = "Returning to town";
+					text = "returning to town";
 				} else if (item2.Powers.BuffIsActive(293981u)) {
-					text = "Using Book of Cain";
+					text = "using Book of Cain";
 				}
 			}
 			if (item2.IsDeadSafeCheck) {
-				text = "Dead";
+				text = "dead";
 				if (item2.SnoArea != null && item2.SnoArea != Core.Controller.Game.Me.SnoArea) {
 					text = text + " [" + item2.SnoArea.NameLocalized + "]";
 				}
@@ -162,16 +162,16 @@ internal class ModulePortraitPlayerStats : Module
 			double runDps = item.Damage.RunDps;
 			double maximumDps = item.Damage.MaximumDps;
 			array[num2 + 1, 0] = renderFont.GetTextLayout(item.BattleTagAbovePortrait);
-			array[num2 + 1, 1] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.VtoS(item.Defense.EhpMax, ValueFormat.LongNumber) : "?");
-			array[num2 + 1, 2] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.VtoS(item.Offense.SheetDps, ValueFormat.LongNumber) : "?");
-			array[num2 + 1, 3] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.VtoS(item.Offense.SheetDps * (1f + item.Offense.HighestElementalDamageBonus), ValueFormat.LongNumber) : "?");
-			array[num2 + 1, 4] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.VtoS(item.Offense.SheetDps * (1f + item.Offense.HighestElementalDamageBonus) * (1f + item.Offense.BonusToElitesBase), ValueFormat.LongNumber) : "?");
-			array[num2 + 1, 5] = renderFont.GetTextLayout(item.IsMe ? Formatting.VtoS(maximumDps, ValueFormat.LongNumber) : "n/a");
-			array[num2 + 1, 6] = renderFont.GetTextLayout(item.IsMe ? Formatting.VtoS(runDps, ValueFormat.LongNumber) : "n/a");
-			array[num2 + 1, 7] = renderFont.GetTextLayout(item.IsMe ? Formatting.VtoS(item.Damage.TotalDamage, ValueFormat.LongNumber) : "n/a");
-			array[num2 + 1, 8] = renderFont.GetTextLayout(Formatting.VtoS(item.Stats.CooldownReduction * 100f, ValueFormat.NormalNumberNoDecimal) + "%");
-			array[num2 + 1, 9] = renderFont.GetTextLayout(Formatting.VtoS(item.Stats.ResourceCostReduction * 100f, ValueFormat.NormalNumberNoDecimal) + "%");
-			array[num2 + 1, 10] = renderFont.GetTextLayout(Formatting.VtoS(item.Offense.AreaDamageBonus, ValueFormat.NormalNumberNoDecimal) + "%");
+			array[num2 + 1, 1] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.ValueToString(item.Defense.EhpMax, ValueFormat.LongNumber) : "?");
+			array[num2 + 1, 2] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.ValueToString(item.Offense.SheetDps, ValueFormat.LongNumber) : "?");
+			array[num2 + 1, 3] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.ValueToString(item.Offense.SheetDps * (1f + item.Offense.HighestElementalDamageBonus), ValueFormat.LongNumber) : "?");
+			array[num2 + 1, 4] = renderFont.GetTextLayout(item.HasValidActor ? Formatting.ValueToString(item.Offense.SheetDps * (1f + item.Offense.HighestElementalDamageBonus) * (1f + item.Offense.BonusToElitesBase), ValueFormat.LongNumber) : "?");
+			array[num2 + 1, 5] = renderFont.GetTextLayout(item.IsMe ? Formatting.ValueToString(maximumDps, ValueFormat.LongNumber) : "n/a");
+			array[num2 + 1, 6] = renderFont.GetTextLayout(item.IsMe ? Formatting.ValueToString(runDps, ValueFormat.LongNumber) : "n/a");
+			array[num2 + 1, 7] = renderFont.GetTextLayout(item.IsMe ? Formatting.ValueToString(item.Damage.TotalDamage, ValueFormat.LongNumber) : "n/a");
+			array[num2 + 1, 8] = renderFont.GetTextLayout(Formatting.ValueToString(item.Stats.CooldownReduction * 100f, ValueFormat.NormalNumberNoDecimal) + "%");
+			array[num2 + 1, 9] = renderFont.GetTextLayout(Formatting.ValueToString(item.Stats.ResourceCostReduction * 100f, ValueFormat.NormalNumberNoDecimal) + "%");
+			array[num2 + 1, 10] = renderFont.GetTextLayout(Formatting.ValueToString(item.Offense.AreaDamageBonus, ValueFormat.NormalNumberNoDecimal) + "%");
 		}
 		float num3 = (float)GameWindowManager.Window.Size.Height * 0.01f;
 		float num4 = (float)GameWindowManager.Window.Size.Height * 0.01f;

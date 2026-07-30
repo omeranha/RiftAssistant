@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using Plugins;
 using SNO;
-using work;
+
 
 public class Item : Actor
 {
@@ -42,9 +42,6 @@ public class Item : Actor
 
 	[CompilerGenerated]
 	private Item[] iitem_0;
-
-	[CompilerGenerated]
-	private double double_3;
 
 	[CompilerGenerated]
 	private bool bool_11;
@@ -182,7 +179,7 @@ public class Item : Actor
 		}
 	}
 
-	public Item SocketedInto => CoreCollector.ItemCollector.class112_0[UInt32_0];
+	public Item SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(UInt32_0, out var value) ? value : null;
 
 	public int InventoryX
 	{

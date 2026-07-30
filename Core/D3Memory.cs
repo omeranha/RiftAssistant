@@ -4,13 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 using structs;
-using Plugins;
 using SNO;
-
-namespace work;
 
 internal class D3Memory
 {
@@ -61,9 +57,6 @@ internal class D3Memory
 
 	[CompilerGenerated]
 	private static readonly int int_15 = 384;
-
-	[CompilerGenerated]
-	private static readonly int int_16;
 
 	[CompilerGenerated]
 	private static readonly int int_17 = 144;
@@ -344,14 +337,6 @@ internal class D3Memory
 		[CompilerGenerated]
 		get {
 			return int_15;
-		}
-	}
-
-	public static int Offset_FastAttrib_BucketAllocator1
-	{
-		[CompilerGenerated]
-		get {
-			return int_16;
 		}
 	}
 
@@ -897,7 +882,7 @@ internal class D3Memory
 		long num15 = GameWindowManager.Read<long>(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_Scenes);
 		long num16 = GameWindowManager.Read<long>(ObjectManagerStorageAddress + Offset_Storage_FastAttrib);
 		long num17 = GameWindowManager.Read<long>(num16 + Offset_FastAttrib_FastAttribGroups);
-		AttribAllocator.Snapshot(num16 + Offset_FastAttrib_BucketAllocator1);
+		AttribAllocator.Snapshot(num16); // Offset_FastAttrib_BucketAllocator1 == 0?
 		long num18 = GameWindowManager.Read<long>(CoreCollector.DAF.AcdManagerAddress + CoreCollector.DAF.AcdManager_ACDs_Offset);
 		ACDContainer.Snapshot(num18);
 		ActorContainer.Snapshot(num13);

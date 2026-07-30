@@ -9,7 +9,7 @@ using System.Text;
 using structs;
 using Plugins;
 using SNO;
-using work;
+
 
 namespace collectors;
 
@@ -736,7 +736,7 @@ internal class ActorCollector
 			}
 		}
 		if (num6 > 30) {
-			Logger.Info("[ERROR] force daf scan due to problem with actor's acd (" + CoreCollector.DAF.CryptoKey_Actor_AcdId + ")");
+			Logger.Info("[ERROR] force daf scan due to problem with actor's acd");
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return false;
 		}
@@ -2240,7 +2240,7 @@ internal class ActorCollector
 		buff2 = class310_0.Powers.GetBuff("P4_ItemPassive_Unique_Ring_014");
 		if (buff2 != null && buff2.Active) {
 			int num20 = 0;
-			foreach (Item item4 in CoreCollector.ItemCollector.class112_0.IEnumerable_0) {
+			foreach (Item item4 in CoreCollector.ItemCollector.Items.Values) {
 				if (item4.Location >= ItemLocation.Head && item4.Location <= ItemLocation.Neck && item4.AncientRank > 0) {
 					num20++;
 				}

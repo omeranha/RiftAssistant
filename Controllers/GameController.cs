@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Plugins;
 using SNO;
-using work;
 
 public class GameController
 {
@@ -53,7 +48,7 @@ public class GameController
 
 	public Quest[] Bounties => [.. CoreCollector.Class376_0.class112_2.IEnumerable_0];
 
-	public Item[] Items => CoreCollector.ItemCollector.class112_0.IEnumerable_0.ToArray();
+	public Item[] Items => [.. CoreCollector.ItemCollector.Items.Values];
 
 	public Player[] Players => [.. CoreCollector.PlayerCollector.PlayersInGame];
 
@@ -69,7 +64,7 @@ public class GameController
 
 	public MonsterPriority MaxPriorityOnScreen => CoreCollector.ActorCollector.MonsterPriority_0;
 
-	public Actor[] Actors => [.. CoreCollector.ActorCollector.list_3];
+	public Actor[] Actors => CoreCollector.actorsSnapshot;
 
 	public Monster[] Monsters => [.. CoreCollector.ActorCollector.list_0];
 

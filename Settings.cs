@@ -67,7 +67,7 @@ public sealed class SkillCooldowns
 {
 	public bool Enabled { get; set; } = true;
 
-	public bool ShowImage { get; set; } = true;
+	public bool ShowSkillIcon { get; set; } = true;
 
 	public bool EnableFade { get; set; } = true;
 }

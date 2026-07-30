@@ -1,25 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading;
-using collectors;
 using structs;
-using Plugins;
 using SNO;
-
-namespace work;
-
-internal delegate bool Delegate7();
 
 internal class DAF
 {
 	internal LocalHeapCache localHeapCache;
 
-	private readonly Dictionary<string, Delegate7> blockValidateFuncs = new Dictionary<string, Delegate7>();
+	private readonly Dictionary<string, Func<bool>> blockValidateFuncs = [];
 
 	private r_PlayerData struct32_0;
 
@@ -105,7 +96,7 @@ internal class DAF
 	public bool IsScanRequired()
 	{
 		int num = 0;
-		foreach (KeyValuePair<string, Delegate7> blockValidateFunc in blockValidateFuncs) {
+		foreach (var blockValidateFunc in blockValidateFuncs) {
 			if (!blockValidateFunc.Value()) {
 				num++;
 			}
@@ -121,22 +112,22 @@ internal class DAF
 		localHeapCache.Init(AddressList.PtrMemoryManager);
 		blockValidateFuncs.Clear();
 
-		if (!Scan4ObjectManager()) return;
+		if (!ScanObjectManager()) return;
 
 		int num = GameWindowManager.Read<int>(ObjectManagerAddress + D3Memory.Offset_ObjectManager_InGameFlag);
 		if (num != 0) {
-			Scan4LevelArea();
+			ScanLevelArea();
 		} else {
 			LevelAreaAddress = 0L;
 		}
 		long long_ = FindContainerByItemSize(localHeapCache, "acd", Constants.ACD_SizeOf);
-		Scan4ACDManager(long_);
-		Scan4Player();
-		Scan4PlayerDataManager();
-		Scan4TrickleManager();
-		Scan4BattleNetClient();
-		Scan4GameState();
-		Scan4Realm();
+		ScanACDManager(long_);
+		ScanPlayer();
+		ScanPlayerDataManager();
+		ScanTrickleManager();
+		ScanBattleNetClient();
+		ScanGameState();
+		ScanRealm();
 		localHeapCache.ClearSmallBlocksCache();
 	}
 
@@ -150,20 +141,20 @@ internal class DAF
 		return (ulong_0 << int_1) | (ulong_0 >> 64 - int_1);
 	}
 
-	private void Scan4Realm()
+	private void ScanRealm()
 	{
-		int int_ = AlignedSize(448, 32);
-		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(int_).Where(method_9).FirstOrDefault();
-		if (num != 0L) {
+		int size = AlignedSize(448, 32);
+		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(size).Where(method_9).FirstOrDefault();
+		if (num != 0) {
 			if (num != RealmAddress) {
 				RealmAddress = num;
 			}
-			int int_2 = localHeapCache.GetSizeOfBlock(RealmAddress);
-			blockValidateFuncs["RealmAddress"] = () => method_9(RealmAddress) && localHeapCache.VerifyBlock(RealmAddress, int_2);
+			int blockSize = localHeapCache.GetSizeOfBlock(RealmAddress);
+			blockValidateFuncs["RealmAddress"] = () => method_9(RealmAddress) && localHeapCache.VerifyBlock(RealmAddress, blockSize);
 			return;
 		}
 		RealmAddress = 0L;
-		throw new Exception("can't find player");
+		Logger.Info("[ERROR] can't find realm.");
 	}
 
 	private bool method_9(long long_10)
@@ -175,7 +166,7 @@ internal class DAF
 		return false;
 	}
 
-	private void Scan4ACDManager(long long_10)
+	private void ScanACDManager(long long_10)
 	{
 		IEnumerable<long> mainBlocksWithSize = localHeapCache.GetMainBlocksWithSize(24800);
 		long num = 0L;
@@ -196,10 +187,10 @@ internal class DAF
 			return;
 		}
 		AcdManagerAddress = 0L;
-		throw new Exception("can't find acd manager");
+
 	}
 
-	private void Scan4PlayerDataManager()
+	private void ScanPlayerDataManager()
 	{
 		int int_ = AlignedSize(8 * Constants.PlayerData_SizeOf + D3Memory.Offset_PlayerDataManager_Elements, 32);
 		int localPlayerIndex = GameWindowManager.Read<int>(PlayerAddress + D3Memory.Offset_Player_LocalPlayerIndex);
@@ -221,10 +212,9 @@ internal class DAF
 			return;
 		}
 		PlayerDataManagerAddress = 0L;
-		throw new Exception("can't find player data manager. candidate count: " + mainBlocksWithSize.Count());
 	}
 
-	private void Scan4Player()
+	private void ScanPlayer()
 	{
 		int int_ = AlignedSize(41952, 32);
 		long num = localHeapCache.GetMainBlocksWithSize(int_).Where(method_13).FirstOrDefault();
@@ -237,7 +227,6 @@ internal class DAF
 			return;
 		}
 		PlayerAddress = 0L;
-		throw new Exception("can't find player");
 	}
 
 	private bool method_13(long long_10)
@@ -246,7 +235,7 @@ internal class DAF
 		return localHeapCache.ReadUInt32(long_11, 40L) == CoreCollector.Magic_600DF00D;
 	}
 
-	private bool Scan4ObjectManager()
+	private bool ScanObjectManager()
 	{
 		int int_ = AlignedSize(D3Memory.ObjectManager_SizeOf, 32);
 		int int_2 = AlignedSize(304, 32);
@@ -283,7 +272,7 @@ internal class DAF
 		return localHeapCache.GetSizeOfBlock(long_10);
 	}
 
-	private void Scan4GameState()
+	private void ScanGameState()
 	{
 		int int_ = AlignedSize(D3Memory.SizeOf_GameState, 32);
 		long long_0 = GameWindowManager.MainModuleHandle.ToInt64();
@@ -298,7 +287,6 @@ internal class DAF
 			return;
 		}
 		GameStateAddress = 0L;
-		throw new Exception("can't find game state");
 	}
 
 	internal bool method_17(long long_10, long long_11)
@@ -326,7 +314,7 @@ internal class DAF
 		return true;
 	}
 
-	private void Scan4BattleNetClient()
+	private void ScanBattleNetClient()
 	{
 		int num = AlignedSize(3648, 32);
 		long num2 = localHeapCache.GetMainBlocksWithSize(num).Concat(localHeapCache.GetMainBlocksWithSize(num + 32)).Where(delegate (long long_10) {
@@ -355,10 +343,9 @@ internal class DAF
 			return;
 		}
 		BattleNetClientAddress = 0L;
-		throw new Exception("can't find bnet client");
 	}
 
-	private void Scan4LevelArea()
+	private void ScanLevelArea()
 	{
 		int int_ = AlignedSize(2432, 32);
 		IEnumerable<long> mainBlocksWithSize = localHeapCache.GetMainBlocksWithSize(int_);
@@ -389,7 +376,7 @@ internal class DAF
 		}
 	}
 
-	private void Scan4TrickleManager()
+	private void ScanTrickleManager()
 	{
 		int int_ = AlignedSize(16, 32);
 		int int_2 = AlignedSize(48, 32);
@@ -417,7 +404,6 @@ internal class DAF
 			return;
 		}
 		TrickleManagerAddress = 0L;
-		throw new Exception("can't find trickle manager");
 	}
 
 	private long FindContainerByItemSize(LocalHeapCache class332_1, string string_0, int int_1)

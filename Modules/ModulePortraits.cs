@@ -1,11 +1,10 @@
 using Plugins;
-using work;
+
 
 internal class ModulePortraits : Module
 {
 	public ModulePortraits() : base(true)
 	{
-		bool_1 = false;
 	}
 
 	public void method_1()

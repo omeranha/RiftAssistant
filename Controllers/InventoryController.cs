@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Plugins;
 using SNO;
-using work;
+
 
 public class InventoryController
 {
@@ -36,7 +36,7 @@ public class InventoryController
 			{
 				return null;
 			}
-			return CoreCollector.ItemCollector.class112_0[CoreCollector.UiElements.class341_162.AcdId];
+			return CoreCollector.ItemCollector.Items.TryGetValue(CoreCollector.UiElements.class341_162.AcdId, out var value) ? value : null;
 		}
 	}
 

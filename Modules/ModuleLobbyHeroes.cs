@@ -5,9 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using SharpDX;
 using SharpDX.DirectWrite;
-using Plugins;
 using SNO;
-using work;
 
 internal class ModuleLobbyHeroes : Module
 {
@@ -49,10 +47,9 @@ internal class ModuleLobbyHeroes : Module
 
 	private readonly RenderFont class221_5;
 
-	public ModuleLobbyHeroes(bool enabled) : base(enabled)
+	public ModuleLobbyHeroes(Settings settings) : base(true)
 	{
-		Show = true;
-		bool_1 = false;
+		Show = settings.Overlay.EnableLobbyHeroes;
 		class219_0 = new RenderBrush(192, 1, 1, 1, 0f);
 		class219_1 = new RenderBrush(96, 1, 1, 1, 0f);
 		class221_0 = new RenderFont(255, 205, 205, 205, "Arial", true, false, 6f, Alignment.Left, false, true);
@@ -189,12 +186,12 @@ internal class ModuleLobbyHeroes : Module
 			}
 			ihero_0 = hero2;
 			DateTime now = DateTime.Now;
-			class340_0 = new StatTracker(CoreCollector.BattleTag, bool_1: false, "ACCOUNT TOTAL", "total");
-			class340_3 = new StatTracker(CoreCollector.BattleTag, bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_4 = new StatTracker(CoreCollector.BattleTag, bool_1: false, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_5 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "HERO TOTAL", "total");
-			class340_8 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_9 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			class340_0 = new StatTracker(CoreCollector.BattleTag, false, "ACCOUNT TOTAL", "total");
+			class340_3 = new StatTracker(CoreCollector.BattleTag, false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			class340_4 = new StatTracker(CoreCollector.BattleTag, false, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			class340_5 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), false, "HERO TOTAL", "total");
+			class340_8 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			class340_9 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), false, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			List<string> list2 = new List<string>();
 			List<string> list3 = new List<string>();
 			for (int num18 = 0; num18 < 30; num18++)
@@ -206,10 +203,10 @@ internal class ModuleLobbyHeroes : Module
 					list3.Add(item);
 				}
 			}
-			class340_6 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "last 30 days", list2);
-			class340_7 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "last 7 days", list3);
-			class340_1 = new StatTracker(CoreCollector.BattleTag, bool_1: false, "last 30 days", list2);
-			class340_2 = new StatTracker(CoreCollector.BattleTag, bool_1: false, "last 7 days", list3);
+			class340_6 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), false, "last 30 days", list2);
+			class340_7 = new StatTracker(hero2.Id.ToString("D", CultureInfo.InvariantCulture), false, "last 7 days", list3);
+			class340_1 = new StatTracker(CoreCollector.BattleTag, false, "last 30 days", list2);
+			class340_2 = new StatTracker(CoreCollector.BattleTag, false, "last 7 days", list3);
 		}
 		else
 		{

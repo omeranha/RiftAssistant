@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using structs;
 using Plugins;
-using work;
+
 using SNO;
 
 public class Actor
@@ -493,9 +493,9 @@ public class Actor
 		AcdId = uint_7;
 		AnnId = uint_8;
 		SnoActor = SnoActor_1;
-		iworldCoordinate_0 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
-		iworldCoordinate_1 = GameWindowManager.Window.CreateWorldCoordinate(0f, 0f, 0f);
-		ScreenCoordinate_0 = GameWindowManager.Window.CreateScreenCoordinate(0f, 0f);
+		iworldCoordinate_0 = Window.CreateWorldCoordinate(0f, 0f, 0f);
+		iworldCoordinate_1 = Window.CreateWorldCoordinate(0f, 0f, 0f);
+		ScreenCoordinate_0 = Window.CreateScreenCoordinate(0f, 0f);
 	}
 
 	public void method_24(float float_3, float float_4, float float_5)
@@ -518,9 +518,9 @@ public class Actor
 	public void method_25()
 	{
 		bool_0 = false;
-		CentralXyDistanceToMe = FloorCoordinate.XYDistanceTo(GameWindowManager.Window.Center);
+		CentralXyDistanceToMe = FloorCoordinate.XYDistanceTo(Window.Center);
 		NormalizedXyDistanceToMe = CentralXyDistanceToMe - (double)RadiusBottom;
-		ZDistanceToMeAbsolute = Math.Abs(GameWindowManager.Window.Center.Z - FloorCoordinate.Z);
+		ZDistanceToMeAbsolute = Math.Abs(Window.Center.Z - FloorCoordinate.Z);
 		IsOnScreen = CollisionCoordinate.IsOnScreen() || FloorCoordinate.IsOnScreen();
 	}
 

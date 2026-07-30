@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Plugins;
-using work;
+
 
 public class Controller
 {
@@ -12,8 +12,6 @@ public class Controller
 	private readonly SceneRevealController sceneRevealController = new SceneRevealController();
 
 	private readonly InventoryController inventoryController = new InventoryController();
-
-	private readonly QueueController queueController = new QueueController();
 
 	private readonly GameController gameController;
 
@@ -29,9 +27,7 @@ public class Controller
 
 	public InventoryController Inventory => inventoryController;
 
-	public QueueController Queue => queueController;
-
-	public DiabloWindow Window => GameWindowManager.Window;
+	public Window Window => GameWindowManager.Window;
 
 	public GameController Game => gameController;
 

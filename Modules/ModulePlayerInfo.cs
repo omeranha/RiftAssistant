@@ -2,8 +2,7 @@ using System;
 using System.Globalization;
 using SharpDX;
 using SharpDX.Direct2D1;
-using Plugins;
-using work;
+
 using System.Collections.Generic;
 
 internal class ModulePlayerInfo : Module
@@ -48,9 +47,9 @@ internal class ModulePlayerInfo : Module
 	{
 		showHealthBar = settings.Overlay.ShowHealthBar;
 		showResourcesBar = settings.Overlay.ShowResourcesBar;
-		showCooldowns = true;//personal.Cooldown.Enabled;
-		showSkillIcons = true; //personal.Cooldown.SkillImage.Enabled;
-		fadeSkillIcons = true;//personal.Cooldown.SkillImage.Fade;
+		showCooldowns = settings.Overlay.SkillCooldowns.Enabled;
+		showSkillIcons = settings.Overlay.SkillCooldowns.ShowSkillIcon;
+		fadeSkillIcons = settings.Overlay.SkillCooldowns.EnableFade;
 		method_0(healthFill, arcaneFill, disciplineFill, hatredFill, furyFill, manaFill, spiritFill, barBackground, cooldownFill);
 	}
 

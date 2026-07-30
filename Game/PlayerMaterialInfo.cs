@@ -1,7 +1,4 @@
 using structs;
-using Plugins;
-
-namespace work;
 
 public class PlayerMaterialInfo
 {

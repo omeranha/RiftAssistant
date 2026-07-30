@@ -25,4 +25,6 @@ internal class AppResources
 	internal static Bitmap DebuffFrame => (Bitmap)ResourceManager.GetObject("DebuffFrame", CultureInfo);
 
 	internal static Bitmap SpawnDecoy => (Bitmap)ResourceManager.GetObject("itempassive_unique_ring_724_spawndecoy_x1", CultureInfo);
+
+	internal static Icon Icon => (Icon)ResourceManager.GetObject("rift_assistant", CultureInfo);
 }

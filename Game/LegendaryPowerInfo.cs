@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Plugins;
-
-namespace work;
 
 public class LegendaryPowerInfo
 {

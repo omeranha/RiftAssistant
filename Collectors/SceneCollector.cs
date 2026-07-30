@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using structs;
 using Plugins;
 using SNO;
-using work;
+
 
 namespace collectors;
 
@@ -207,7 +207,7 @@ internal class SceneCollector
 				float num2 = item.PosY + item.H / 2f;
 				if (item.SnoScene.Hint.FloorCoordinate == null)
 				{
-					(item.SnoScene.Hint as SceneHint).FloorCoordinate = GameWindowManager.Window.CreateWorldCoordinate(num, num2, 0f);
+					(item.SnoScene.Hint as SceneHint).FloorCoordinate = Window.CreateWorldCoordinate(num, num2, 0f);
 				}
 				else
 				{

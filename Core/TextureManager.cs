@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using Plugins;
 using SNO;
-using work;
+
 
 internal static class TextureManager
 {

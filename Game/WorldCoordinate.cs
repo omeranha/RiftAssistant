@@ -1,67 +1,52 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
-using Plugins;
 
-namespace work;
-
-public class WorldCoordinate
+public class WorldCoordinate(float x, float y, float z)
 {
-	public DiabloWindow Window => GameWindowManager.Window;
+	public float X { get; private set; } = x;
 
-	public float X { get; private set; }
+	public float Y { get; private set; } = y;
 
-	public float Y { get; private set; }
-
-	public float Z { get; private set; }
+	public float Z { get; private set; } = z;
 
 	public bool IsValid
 	{
-		get
-		{
-			if (X == 0f && Y == 0f)
-			{
+		get {
+			if (X == 0f && Y == 0f) {
 				return Z != 0f;
 			}
 			return true;
 		}
 	}
 
-	public WorldCoordinate(float float_3, float float_4, float float_5)
-	{
-		X = float_3;
-		Y = float_4;
-		Z = float_5;
-	}
-
 	public float XYDistanceTo(WorldCoordinate otherCoordinate)
 	{
-		float num = otherCoordinate.X - X;
-		float num2 = otherCoordinate.Y - Y;
-		return (float)Math.Sqrt(num * num + num2 * num2);
+		float x = otherCoordinate.X - X;
+		float y = otherCoordinate.Y - Y;
+		return (float)Math.Sqrt(x * x + y * y);
 	}
 
 	public float XYDistanceTo(float x, float y)
 	{
-		float num = x - X;
-		float num2 = y - Y;
-		return (float)Math.Sqrt(num * num + num2 * num2);
+		float distX = x - X;
+		float distY = y - Y;
+		return (float)Math.Sqrt(distX * distX + distY * distY);
 	}
 
 	public float XYZDistanceTo(float x, float y, float z)
 	{
-		float num = x - X;
-		float num2 = y - Y;
-		float num3 = z - Z;
-		return (float)Math.Sqrt(num * num + num2 * num2 + num3 * num3);
+		float distX = x - X;
+		float distY = y - Y;
+		float distZ = z - Z;
+		return (float)Math.Sqrt(distX * distX + distY * distY + distZ * distZ);
 	}
 
 	public float XYZDistanceTo(WorldCoordinate otherWorldCoordinate)
 	{
-		float num = otherWorldCoordinate.X - X;
-		float num2 = otherWorldCoordinate.Y - Y;
-		float num3 = otherWorldCoordinate.Z - Z;
-		return (float)Math.Sqrt(num * num + num2 * num2 + num3 * num3);
+		float distX = otherWorldCoordinate.X - X;
+		float distY = otherWorldCoordinate.Y - Y;
+		float distZ = otherWorldCoordinate.Z - Z;
+		return (float)Math.Sqrt(distX * distX + distY * distY + distZ * distZ);
 	}
 
 	public override string ToString()
@@ -107,43 +92,41 @@ public class WorldCoordinate
 
 	public bool Equals(WorldCoordinate otherWorldCoordinate)
 	{
-		if (otherWorldCoordinate.X == X && otherWorldCoordinate.Y == Y)
-		{
+		if (otherWorldCoordinate.X == X && otherWorldCoordinate.Y == Y) {
 			return otherWorldCoordinate.Z == Z;
 		}
 		return false;
 	}
 
-	public float ZDiffTo(WorldCoordinate wc)
+	public float ZDiffTo(WorldCoordinate coordinate)
 	{
-		return Math.Abs(wc.Z - Z);
+		return Math.Abs(coordinate.Z - Z);
 	}
 
 	public ScreenCoordinate ToScreenCoordinate(bool raw = false, bool precise = false)
 	{
-		return Window.WorldToScreenCoordinate(X, Y, Z, raw, precise);
+		return GameWindowManager.Window.WorldToScreenCoordinate(X, Y, Z, raw, precise);
 	}
 
-	public void SetScreenCoordinate(ScreenCoordinate sc, bool raw = false, bool precise = false)
+	public void SetScreenCoordinate(ScreenCoordinate coordinate, bool raw = false, bool precise = false)
 	{
-		Window.SetScreenCoordinate(sc, X, Y, Z, raw, precise);
+		GameWindowManager.Window.SetScreenCoordinate(coordinate, X, Y, Z, raw, precise);
 	}
 
 	public bool IsOnScreen(double r = 1.0)
 	{
-		float num = X - Window.Center.X;
-		float num2 = Y - Window.Center.Y;
-		float num3 = Z - Window.Center.Z;
-		float num4 = -0.515f * num + -0.514f * num2 + -0.686f * num3 + 97.985f;
-		if (num4 < 1f)
-		{
+		var window = GameWindowManager.Window;
+		float x = X - Window.Center.X;
+		float y = Y - Window.Center.Y;
+		float z = Z - Window.Center.Z;
+		float num4 = -0.515f * x + -0.514f * y + -0.686f * z + 97.985f;
+		if (num4 < 1f) {
 			num4 = 1f;
 		}
-		float value = (-1.682f * num + 1.683f * num2 + 0.007045f) / num4 / Window.Aspect;
-		float value2 = (-1.54f * num + -1.539f * num2 + 2.307f * num3 + 6.161f) / num4;
-		float num5 = (-0.515f * num + -0.514f * num2 + -0.686f * num3 + 97.002f) / num4;
-		if ((double)Math.Abs(value) < r && (double)Math.Abs(value2) < r)
-		{
+		float value = (-1.682f * x + 1.683f * y + 0.007045f) / num4 / window.Aspect;
+		float value2 = (-1.54f * x + -1.539f * y + 2.307f * z + 6.161f) / num4;
+		float num5 = (-0.515f * x + -0.514f * y + -0.686f * z + 97.002f) / num4;
+		if ((double)Math.Abs(value) < r && (double)Math.Abs(value2) < r) {
 			return num5 > 0f;
 		}
 		return false;

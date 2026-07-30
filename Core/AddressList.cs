@@ -1,5 +1,3 @@
-namespace work;
-
 internal static class AddressList
 {
 	public static readonly long SelectedActOnMap;
