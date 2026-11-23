@@ -126,7 +126,7 @@ internal static class Pickit
 
 	private static bool Matches(Item item, StatCondition condition)
 	{
-		var stat = item.class112_0[condition.Code];
+		var stat = item.class112_0.GetValueOrDefault(condition.Code);
 		if (stat == null) return condition.Operator == '=' && condition.Text == null && condition.Number == -1.0;
 
 		return condition.Operator switch {

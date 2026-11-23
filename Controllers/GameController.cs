@@ -44,9 +44,9 @@ public class GameController
 
 	public Player Me => CoreCollector.LocalPlayer;
 
-	public Quest[] Quests => [.. CoreCollector.Class376_0.class112_1.IEnumerable_0];
+	public Quest[] Quests => [.. CoreCollector.Class376_0.class112_1.Values];
 
-	public Quest[] Bounties => [.. CoreCollector.Class376_0.class112_2.IEnumerable_0];
+	public Quest[] Bounties => [.. CoreCollector.Class376_0.class112_2.Values];
 
 	public Item[] Items => [.. CoreCollector.ItemCollector.Items.Values];
 

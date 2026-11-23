@@ -127,7 +127,7 @@ internal class ModuleConditionEvaluator
 		if (!class205_0.Show || !isParentVisible) {
 			return false;
 		}
-		if (class205_0.string_1 != null && (Overlay.Instance.class112_0.Contains(class205_0.string_1) || class205_0.bool_3)) {
+		if (class205_0.string_1 != null && (Overlay.Instance.class112_0.ContainsKey(class205_0.string_1) || class205_0.bool_3)) {
 			return false;
 		}
 		if ((onlyInTown && !CoreCollector.IsInTown) || (onlyOutTown && CoreCollector.IsInTown)) {

@@ -190,7 +190,7 @@ internal class SceneCollector
 				continue;
 			}
 			bool flag = false;
-			foreach (Portal item2 in CoreCollector.ActorCollector.Class112_1.IEnumerable_0)
+			foreach (Portal item2 in CoreCollector.ActorCollector.Class112_1.Values)
 			{
 				if (item2.Scene != null && (item2.Scene.SnoScene == item.SnoScene || (item2.Scene.PosX <= item.PosX && item2.Scene.PosY <= item.PosY && item2.Scene.W >= item.W && item2.Scene.H >= item.H)))
 				{

@@ -726,7 +726,7 @@ internal static class CoreCollector
 				specialArea_0 = SpecialArea.UberFight;
 			}
 		} else {
-			Quest quest = Class376_0.class112_1[337492u];
+			Quest quest = Class376_0.class112_1.GetValueOrDefault(337492u);
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 13 || quest.QuestStepId == 16 || quest.QuestStepId == 34)) {
 				specialArea_0 = SpecialArea.GreaterRift;
 			}

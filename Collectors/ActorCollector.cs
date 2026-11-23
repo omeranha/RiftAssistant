@@ -12,7 +12,7 @@ namespace collectors;
 
 internal class ActorCollector
 {
-	private readonly SafeDictionary<uint, Actor> class112_0 = new SafeDictionary<uint, Actor>(1000);
+	private readonly Dictionary<uint, Actor> class112_0 = new Dictionary<uint, Actor>(1000);
 
 	[CompilerGenerated]
 	private Monster imonster_0;
@@ -61,10 +61,10 @@ internal class ActorCollector
 	private bool bool_3;
 
 	[CompilerGenerated]
-	private readonly SafeDictionary<SkillEffectType, List<SkillEffect>> class112_1 = new SafeDictionary<SkillEffectType, List<SkillEffect>>();
+	private readonly Dictionary<SkillEffectType, List<SkillEffect>> class112_1 = new Dictionary<SkillEffectType, List<SkillEffect>>();
 
 	[CompilerGenerated]
-	private readonly SafeDictionary<uint, Portal> class112_2 = new SafeDictionary<uint, Portal>();
+	private readonly Dictionary<uint, Portal> class112_2 = new Dictionary<uint, Portal>();
 
 	[CompilerGenerated]
 	private readonly List<Shrine> list_4 = new List<Shrine>();
@@ -218,7 +218,7 @@ internal class ActorCollector
 		}
 	}
 
-	public SafeDictionary<SkillEffectType, List<SkillEffect>> Class112_0
+	public Dictionary<SkillEffectType, List<SkillEffect>> Class112_0
 	{
 		[CompilerGenerated]
 		get {
@@ -226,7 +226,7 @@ internal class ActorCollector
 		}
 	}
 
-	public SafeDictionary<uint, Portal> Class112_1
+	public Dictionary<uint, Portal> Class112_1
 	{
 		[CompilerGenerated]
 		get {
@@ -354,7 +354,7 @@ internal class ActorCollector
 		list_3.Clear();
 		list_0.Clear();
 		list_1.Clear();
-		foreach (List<SkillEffect> item in Class112_0.IEnumerable_0) {
+		foreach (List<SkillEffect> item in Class112_0.Values) {
 			item.Clear();
 		}
 		if (bool_4) {
@@ -396,7 +396,7 @@ internal class ActorCollector
 			num -= num4;
 			num2 += num4;
 		}
-		foreach (Portal item in Class112_1.IEnumerable_0) {
+		foreach (Portal item in Class112_1.Values) {
 			item.ActorAvailable = false;
 		}
 		IMonster_0 = null;
@@ -412,7 +412,7 @@ internal class ActorCollector
 				}
 				uint acdid = ptr->AcdIdEncrypted;
 				if (acdid == uint.MaxValue) {
-					Actor actor = class112_0[actorId];
+					Actor actor = class112_0.GetValueOrDefault(actorId);
 					if (actor == null || !(actor is Monster { CurHealth: > 0.0 } @class)) {
 						continue;
 					}
@@ -426,9 +426,11 @@ internal class ActorCollector
 						}
 					}
 					if (@class.Pack != null) {
-						(@class.Pack as MonsterPack)?.Class112_2.Remove(@class.MaxHealth);
-						(@class.Pack as MonsterPack)?.Class112_0.Remove(@class.MaxHealth);
-						(@class.Pack as MonsterPack)?.Class112_1.Set(@class.MaxHealth, @class);
+						if (@class.Pack is MonsterPack previousPack) {
+							previousPack.Class112_2.Remove(@class.MaxHealth);
+							previousPack.Class112_0.Remove(@class.MaxHealth);
+							previousPack.Class112_1[@class.MaxHealth] = @class;
+						}
 					}
 					if (CoreCollector.LocalPlayer.SnoArea != null) {
 						SnoMonster snoMonster = @class.SnoMonster;
@@ -460,7 +462,7 @@ internal class ActorCollector
 				if (annId == uint.MaxValue) {
 					continue;
 				}
-				Actor actor2 = class112_0[gparam_];
+				Actor actor2 = class112_0.GetValueOrDefault(gparam_);
 				SnoActor snoActor;
 				if (actor2 == null) {
 					snoActor = SnoData.Actors.GetActor(actorSnoEnum);
@@ -572,7 +574,7 @@ internal class ActorCollector
 					if (actor2 == null) {
 						actor2 = method_4(gizmoType_0: (GizmoType)struct7_.GizmoType, uint_0: acdid, uint_1: annId, SnoActor_0: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
 						actor2.CreatedAtInGameTick = ptr->CreationTick;
-						class112_0.Set(gparam_, actor2);
+						class112_0[gparam_] = actor2;
 					}
 					actor2.GizmoType = (GizmoType)struct7_.GizmoType;
 					actor2.SummonerAcdDynamicId = num10;
@@ -642,7 +644,7 @@ internal class ActorCollector
 					class2 = new Monster(acdid, annId, snoMonster2.SnoActor, snoMonster2) {
 						SummonerAcdDynamicId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u)
 					};
-					class112_0.Set(gparam_, class2);
+					class112_0[gparam_] = class2;
 				}
 				class2.Rarity = actorRarity;
 				class2.IsElite = snoMonster2.IsUnique || actorRarity != ActorRarity.Normal;
@@ -740,8 +742,8 @@ internal class ActorCollector
 			return false;
 		}
 		foreach (MonsterPack item7 in list_2) {
-			foreach (Monster item8 in item7.Class112_0.IEnumerable_0) {
-				item7.Class112_2.Set(item8.MaxHealth, item8);
+			foreach (Monster item8 in item7.Class112_0.Values) {
+				item7.Class112_2[item8.MaxHealth] = item8;
 			}
 			item7.Class112_0.Clear();
 		}
@@ -820,7 +822,7 @@ internal class ActorCollector
 		}
 		for (int num12 = list_2.Count - 1; num12 >= 0; num12--) {
 			MonsterPack monsterPack5 = list_2[num12] as MonsterPack;
-			if (monsterPack5.LastActive.ElapsedMilliseconds >= 60000 && monsterPack5.Class112_0.Int32_0 <= 0) {
+			if (monsterPack5.LastActive.ElapsedMilliseconds >= 60000 && monsterPack5.Class112_0.Count <= 0) {
 				list_2.RemoveAt(num12);
 			}
 		}
@@ -1040,10 +1042,10 @@ internal class ActorCollector
 			return false;
 		}
 		if (class299_0 is SkillEffect @class) {
-			List<SkillEffect> list = Class112_0[@class.SkillEffectRule.Type];
+			List<SkillEffect> list = Class112_0.GetValueOrDefault(@class.SkillEffectRule.Type);
 			if (list == null) {
 				list = new List<SkillEffect>();
-				Class112_0.Set(@class.SkillEffectRule.Type, list);
+				Class112_0[@class.SkillEffectRule.Type] = list;
 			}
 			list.Add(@class);
 			return true;
@@ -2200,7 +2202,7 @@ internal class ActorCollector
 			class310_0.Offense.AttackSpeed = class310_0.Offense.AttackSpeedMainHand;
 		}
 		bool flag3 = class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.TaskerandTheo.Sno);
-		class310_0.Offense.AttackSpeedPets = (flag3 ? (class310_0.Offense.AttackSpeed * (1f + class310_0.class112_1[318731u])) : class310_0.Offense.AttackSpeed);
+		class310_0.Offense.AttackSpeedPets = (flag3 ? (class310_0.Offense.AttackSpeed * (1f + class310_0.class112_1.GetValueOrDefault(318731u))) : class310_0.Offense.AttackSpeed);
 		class310_0.Defense.ResAverage = (class310_0.Defense.ResPhysical + class310_0.Defense.ResFire + class310_0.Defense.ResLightning + class310_0.Defense.ResCold + class310_0.Defense.ResPoison + class310_0.Defense.ResArcane) / 6f;
 		class310_0.Defense.AverageDamageReductionFromType = 0f;
 		for (int num17 = 0; num17 < class310_0.Defense.DamageReductionFromType.Length; num17++) {

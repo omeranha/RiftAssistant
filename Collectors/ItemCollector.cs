@@ -48,13 +48,13 @@ internal class ItemCollector
 
 	public int[] int_1 = new int[20];
 
-	private readonly SafeDictionary<uint, Item> class112_1 = new SafeDictionary<uint, Item>(1000);
+	private readonly Dictionary<uint, Item> class112_1 = new Dictionary<uint, Item>(1000);
 
 	private readonly List<Item> list_4 = new List<Item>();
 
 	private readonly List<Item> list_5 = new List<Item>();
 
-	private readonly SafeDictionary<uint, Item> class112_2 = new SafeDictionary<uint, Item>();
+	private readonly Dictionary<uint, Item> class112_2 = new Dictionary<uint, Item>();
 
 	private Stopwatch stopwatch_0 = new();
 
@@ -115,7 +115,7 @@ internal class ItemCollector
 			if (itemLocation == ItemLocation.MerchantBuyback || itemLocation >= ItemLocation.VendorToken || (itemLocation == ItemLocation.Floor && struct7_.SWorldID_Encrypted == 0)) {
 				continue;
 			}
-			Item item = class112_1[annId];
+			Item item = class112_1.GetValueOrDefault(annId);
 			SnoItem snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
 			if (snoItem == null || (itemLocation == ItemLocation.Floor && struct7_.PositionX == 0f && double.IsNaN(struct7_.PositionY))) {
 				continue;
@@ -305,8 +305,8 @@ internal class ItemCollector
 		foreach (Item item6 in list_4.Concat(list_5)) {
 			class112_2[item6.AcdId] = item6;
 		}
-		if (class112_2.Int32_0 > 0) {
-			foreach (Item item9 in class112_2.IEnumerable_0) {
+		if (class112_2.Count > 0) {
+			foreach (Item item9 in class112_2.Values) {
 				item9.method_45();
 			}
 		}
@@ -565,7 +565,7 @@ internal class ItemCollector
 		CoreCollector.ACDCollector.SetIndexFromAcdId(Item_3.AcdId);
 		int num = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__JewelRank, 1048575u, 0);
 		if (num != 0) {
-			ItemStat itemStat = item.class112_0["jewel_rank"];
+			ItemStat itemStat = item.class112_0.GetValueOrDefault("jewel_rank");
 			if (itemStat == null || itemStat.IntegerValue != num) {
 				item.class112_0["jewel_rank"] = new ItemStat("jewel_rank", num, num);
 			}

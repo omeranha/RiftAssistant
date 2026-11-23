@@ -53,7 +53,7 @@ public class Item : Actor
 	[CompilerGenerated]
 	private string string_1;
 
-	public readonly SafeDictionary<string, ItemStat> class112_0 = new SafeDictionary<string, ItemStat>();
+	public readonly Dictionary<string, ItemStat> class112_0 = new Dictionary<string, ItemStat>();
 
 	[CompilerGenerated]
 	private uint uint_8;
@@ -292,7 +292,7 @@ public class Item : Actor
 		}
 	}
 
-	public IEnumerable<ItemStat> StatList => class112_0.IEnumerable_0;
+	public IEnumerable<ItemStat> StatList => class112_0.Values;
 
 	public ItemKeepDecision KeepDecision { get; internal set; }
 
@@ -527,17 +527,17 @@ public class Item : Actor
 
 	public int CountsIntoSet(uint setId)
 	{
-		return class112_0["Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture)]?.IntegerValue.Value ?? 0;
+		return class112_0.GetValueOrDefault("Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture))?.IntegerValue.Value ?? 0;
 	}
 
 	public void method_46(ItemStat iitemStat_0)
 	{
-		class112_0.Set(iitemStat_0.Id, iitemStat_0);
+		class112_0[iitemStat_0.Id] = iitemStat_0;
 	}
 
 	public int method_47(string string_2, int int_5 = 0)
 	{
-		ItemStat itemStat = class112_0[string_2];
+		ItemStat itemStat = class112_0.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return int_5;
@@ -547,7 +547,7 @@ public class Item : Actor
 
 	public uint method_48(string string_2, uint uint_10 = 0u)
 	{
-		ItemStat itemStat = class112_0[string_2];
+		ItemStat itemStat = class112_0.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return uint_10;

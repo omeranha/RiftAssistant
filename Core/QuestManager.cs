@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SNO;
 using structs;
 
@@ -9,11 +10,11 @@ internal class QuestManager
 
 	private r_Quest[] struct20_0;
 
-	private readonly SafeDictionary<uint, Quest> class112_0 = new SafeDictionary<uint, Quest>();
+	private readonly Dictionary<uint, Quest> class112_0 = new Dictionary<uint, Quest>();
 
-	public readonly SafeDictionary<uint, Quest> class112_1 = new SafeDictionary<uint, Quest>();
+	public readonly Dictionary<uint, Quest> class112_1 = new Dictionary<uint, Quest>();
 
-	public readonly SafeDictionary<uint, Quest> class112_2 = new SafeDictionary<uint, Quest>();
+	public readonly Dictionary<uint, Quest> class112_2 = new Dictionary<uint, Quest>();
 
 	internal void method_0()
 	{
@@ -58,10 +59,10 @@ internal class QuestManager
 			return;
 		}
 		try {
-			Quest @class = class112_0[uint_];
+			Quest @class = class112_0.GetValueOrDefault(uint_);
 			if (@class == null) {
 				@class = new Quest(quest);
-				class112_0.Set(uint_, @class);
+				class112_0[uint_] = @class;
 			}
 			@class.CreatedOn = struct20_1.int_0;
 			@class.QuestStepId = struct20_1.uint_4;
@@ -82,9 +83,9 @@ internal class QuestManager
 					@class.CompletedOn.Start();
 					break;
 			}
-			class112_1.Set(uint_, @class);
+			class112_1[uint_] = @class;
 			if (quest.Type == QuestType.Bounty) {
-				class112_2.Set(uint_, @class);
+				class112_2[uint_] = @class;
 			}
 		} catch (Exception) {
 		}
@@ -92,7 +93,7 @@ internal class QuestManager
 
 	public uint method_3(QuestState questState_0, uint uint_0)
 	{
-		Quest quest = class112_1[uint_0];
+		Quest quest = class112_1.GetValueOrDefault(uint_0);
 		if (quest?.QuestStep != null && quest.State == questState_0) {
 			return quest.QuestStepId;
 		}

@@ -91,8 +91,7 @@ internal static class TextureManager
 					}
 					atlasTex = new Texture(new Lazy<SharpDX.Direct2D1.Bitmap>(delegate {
 						if (!atlasPositionToBitmap.TryGetValue(nullable_0.Value.AtlasPosition, out SharpDX.Direct2D1.Bitmap bitmap) || bitmap == null) {
-							Overlay.Instance.class93_0.Stream_0.Position = nullable_0.Value.AtlasPosition;
-							Bitmap bitmap_3 = (Bitmap)Image.FromStream(new MemoryStream(Overlay.Instance.class93_0.method_27()));
+							Bitmap bitmap_3 = (Bitmap)Image.FromStream(new MemoryStream(ResourceData.ReadBlob(nullable_0.Value.AtlasPosition)));
 							bitmap = Overlay.Instance.method_10(bitmap_3);
 							atlasPositionToBitmap[nullable_0.Value.AtlasPosition] = bitmap;
 						}

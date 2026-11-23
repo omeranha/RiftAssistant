@@ -24,13 +24,13 @@ public class MonsterPack
 	private List<SnoMonsterAffix> list_0;
 
 	[CompilerGenerated]
-	private readonly SafeDictionary<double, Monster> class112_0 = new SafeDictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> class112_0 = new Dictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly SafeDictionary<double, Monster> class112_1 = new SafeDictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> class112_1 = new Dictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly SafeDictionary<double, Monster> class112_2 = new SafeDictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> class112_2 = new Dictionary<double, Monster>();
 
 	public Stopwatch LastActive { get; } = new Stopwatch();
 
@@ -64,11 +64,11 @@ public class MonsterPack
 
 	public IEnumerable<SnoMonsterAffix> AffixSnoList => List_0;
 
-	public IEnumerable<Monster> MonstersAlive => Class112_0.IEnumerable_0;
+	public IEnumerable<Monster> MonstersAlive => Class112_0.Values;
 
-	public IEnumerable<Monster> MonstersKilled => Class112_1.IEnumerable_0;
+	public IEnumerable<Monster> MonstersKilled => Class112_1.Values;
 
-	public IEnumerable<Monster> MonstersUnknown => Class112_2.IEnumerable_0;
+	public IEnumerable<Monster> MonstersUnknown => Class112_2.Values;
 
 	public SnoMonster MinionSnoMonster
 	{
@@ -126,7 +126,7 @@ public class MonsterPack
 		}
 	}
 
-	public SafeDictionary<double, Monster> Class112_0
+	public Dictionary<double, Monster> Class112_0
 	{
 		[CompilerGenerated]
 		get
@@ -135,7 +135,7 @@ public class MonsterPack
 		}
 	}
 
-	public SafeDictionary<double, Monster> Class112_1
+	public Dictionary<double, Monster> Class112_1
 	{
 		[CompilerGenerated]
 		get
@@ -144,7 +144,7 @@ public class MonsterPack
 		}
 	}
 
-	public SafeDictionary<double, Monster> Class112_2
+	public Dictionary<double, Monster> Class112_2
 	{
 		[CompilerGenerated]
 		get

@@ -11,14 +11,14 @@ internal class FloatingNumberManager
 {
 	public AllocationCache<r_FloatingNumber> FloatingNumberCache { get; } = new(112);
 
-	private readonly SafeDictionary<string, CombatNumberEvent> eventCache = [];
+	private readonly Dictionary<string, CombatNumberEvent> eventCache = [];
 	private readonly HashSet<string> ignoredEvents = [];
 
-	private readonly SafeDictionary<int, List<CombatNumberEvent>> damageDealtEvents = [];
+	private readonly Dictionary<int, List<CombatNumberEvent>> damageDealtEvents = [];
 
-	private readonly SafeDictionary<int, List<CombatNumberEvent>> damageTakenEvents = [];
+	private readonly Dictionary<int, List<CombatNumberEvent>> damageTakenEvents = [];
 
-	private readonly SafeDictionary<int, List<CombatNumberEvent>> healingEvents = [];
+	private readonly Dictionary<int, List<CombatNumberEvent>> healingEvents = [];
 
 	private int lastGameTick;
 	private int lastDamageTick;
@@ -51,7 +51,7 @@ internal class FloatingNumberManager
 		}
 
 		FloatingNumberCache.Snapshot(CoreCollector.D3Memory.FloatingNumberAllocator);
-		bool isFirstTick = eventCache.Int32_0 == 0 && ignoredEvents.Count == 0;
+		bool isFirstTick = eventCache.Count == 0 && ignoredEvents.Count == 0;
 
 		Buff conduitBuff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrified.Sno);
 		bool hasPylon = conduitBuff != null && conduitBuff.LastActive.ElapsedMilliseconds <= 3000;
@@ -76,7 +76,7 @@ internal class FloatingNumberManager
 			float value = item.float_3;
 			Enum3 type = item.enum3_0;
 			string eventKey = id.ToString("D", CultureInfo.InvariantCulture) + value.ToString("F2", CultureInfo.InvariantCulture) + (int)type;
-			if (eventCache.Contains(eventKey) || ignoredEvents.Contains(eventKey)) {
+			if (eventCache.ContainsKey(eventKey) || ignoredEvents.Contains(eventKey)) {
 				continue;
 			}
 
@@ -160,7 +160,7 @@ internal class FloatingNumberManager
 		int targetTick = CoreCollector.D3Memory.GameTick - 60;
 
 		double currentDps = damageDealtEvents.Where(kvp => kvp.Key >= targetTick).SelectMany(kvp => kvp.Value).Sum(e => e.Value);
-		if (currentDps == 0.0 && damageDealtEvents.Int32_0 > 0) {
+		if (currentDps == 0.0 && damageDealtEvents.Count > 0) {
 			damageDealtEvents.Clear();
 		}
 		player.Damage.RunDps = (totalCombatTicks <= 2) ? 0.0 : (player.Damage.TotalDamage * 60.0 / Math.Max(1, totalCombatTicks));
@@ -170,13 +170,13 @@ internal class FloatingNumberManager
 		}
 
 		double currentDamageTaken = damageTakenEvents.Where(kvp => kvp.Key >= targetTick).SelectMany(kvp => kvp.Value).Sum(e => e.Value);
-		if (currentDamageTaken == 0.0 && damageTakenEvents.Int32_0 > 0) {
+		if (currentDamageTaken == 0.0 && damageTakenEvents.Count > 0) {
 			damageTakenEvents.Clear();
 		}
 		player.Defense.CurrentDamageTakenPerSecond = currentDamageTaken;
 
 		double currentHealing = healingEvents.Where(kvp => kvp.Key >= targetTick).SelectMany(kvp => kvp.Value).Sum(e => e.Value);
-		if (currentHealing == 0.0 && healingEvents.Int32_0 > 0) {
+		if (currentHealing == 0.0 && healingEvents.Count > 0) {
 			healingEvents.Clear();
 		}
 		player.Defense.CurrentHealingPerSecond = currentHealing;

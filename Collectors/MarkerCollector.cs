@@ -23,15 +23,15 @@ internal class MarkerCollector
 
 	private readonly AllocationCache<r_Trickle> trickleReader = new AllocationCache<r_Trickle>(Constants.Trickle_SizeOf);
 
-	private readonly SafeDictionary<string, Banner> class112_0 = new SafeDictionary<string, Banner>();
+	private readonly Dictionary<string, Banner> class112_0 = new Dictionary<string, Banner>();
 
-	private readonly SafeDictionary<string, Marker> class112_1 = new SafeDictionary<string, Marker>();
+	private readonly Dictionary<string, Marker> class112_1 = new Dictionary<string, Marker>();
 
-	private readonly SafeDictionary<string, Marker> class112_2 = new SafeDictionary<string, Marker>();
+	private readonly Dictionary<string, Marker> class112_2 = new Dictionary<string, Marker>();
 
-	private readonly SafeDictionary<string, Marker> class112_3 = new SafeDictionary<string, Marker>();
+	private readonly Dictionary<string, Marker> class112_3 = new Dictionary<string, Marker>();
 
-	private readonly SafeDictionary<string, Marker> class112_4 = new SafeDictionary<string, Marker>();
+	private readonly Dictionary<string, Marker> class112_4 = new Dictionary<string, Marker>();
 
 	public List<Marker> list_0 = new List<Marker>();
 
@@ -105,17 +105,17 @@ internal class MarkerCollector
 				continue;
 			}
 			if (item.struct17_0.uint_3 != uint.MaxValue) {
-				Quest quest = CoreCollector.Class376_0.class112_1[item.struct17_0.uint_3];
+				Quest quest = CoreCollector.Class376_0.class112_1.GetValueOrDefault(item.struct17_0.uint_3);
 				if (quest != null && quest.State == QuestState.completed) {
 					continue;
 				}
 			}
-			Marker @class = class112_1[text];
+			Marker @class = class112_1.GetValueOrDefault(text);
 			if (@class == null) {
 				SnoQuest isnoQuest_ = ((item.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item.struct17_0.uint_3) : null);
 				SnoActor SnoActor_ = ((item.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item.struct17_0.uint_2) : null);
 				@class = new Marker(text, item.struct17_0.struct37_0.WorldId, isnoQuest_, SnoActor_, Window.CreateWorldCoordinate(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z), item.struct17_0.struct15_0.TextureSno, item.struct17_0.struct15_0.FrameIndex);
-				class112_1.Set(text, @class);
+				class112_1[text] = @class;
 			} else {
 				@class.FloorCoordinate.Set(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z);
 			}
@@ -144,17 +144,17 @@ internal class MarkerCollector
 						continue;
 					}
 					if (item2.struct17_0.uint_3 != uint.MaxValue) {
-						Quest quest2 = CoreCollector.Class376_0.class112_1[item2.struct17_0.uint_3];
+						Quest quest2 = CoreCollector.Class376_0.class112_1.GetValueOrDefault(item2.struct17_0.uint_3);
 						if (quest2 != null && quest2.State == QuestState.completed) {
 							continue;
 						}
 					}
-					Marker class2 = class112_1[text2];
+					Marker class2 = class112_1.GetValueOrDefault(text2);
 					if (class2 == null) {
 						SnoQuest isnoQuest_2 = ((item2.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item2.struct17_0.uint_3) : null);
 						SnoActor SnoActor_2 = ((item2.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item2.struct17_0.uint_2) : null);
 						class2 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, isnoQuest_2, SnoActor_2, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-						class112_1.Set(text2, class2);
+						class112_1[text2] = class2;
 					} else {
 						class2.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 					}
@@ -238,10 +238,10 @@ internal class MarkerCollector
 						flag = false;
 						break;
 				}
-				Marker class3 = class112_1[text2];
+				Marker class3 = class112_1.GetValueOrDefault(text2);
 				if (class3 == null) {
 					class3 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, SnoActor_3, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-					class112_1.Set(text2, class3);
+					class112_1[text2] = class3;
 				} else {
 					class3.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 					class3.TextureSno = item2.struct17_0.struct15_0.TextureSno;
@@ -254,10 +254,10 @@ internal class MarkerCollector
 				}
 				list_0.Add(class3);
 			} else {
-				Marker class4 = class112_3[text2];
+				Marker class4 = class112_3.GetValueOrDefault(text2);
 				if (class4 == null) {
 					class4 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, null, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-					class112_3.Set(text2, class4);
+					class112_3[text2] = class4;
 				} else {
 					class4.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 				}
@@ -307,10 +307,10 @@ internal class MarkerCollector
 				if (item3.StringListSno == 61539) {
 					SnoMonster monsterByStringId = SnoData.Monsters.GetMonsterByStringId(item3.StringLabelHandle);
 					if (monsterByStringId != null && monsterByStringId.SnoActor.Code.StartsWith("x1_lr_boss", ignoreCase: true, CultureInfo.InvariantCulture)) {
-						Marker class5 = class112_2[text3];
+						Marker class5 = class112_2.GetValueOrDefault(text3);
 						if (class5 == null) {
 							class5 = new Marker(text3, item3.WorldPlace.WorldId, null, monsterByStringId.SnoActor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
-							class112_2.Set(text3, class5);
+							class112_2[text3] = class5;
 						} else {
 							class5.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 						}
@@ -348,14 +348,14 @@ internal class MarkerCollector
 				}
 				ActorSnoEnum actorSno = (ActorSnoEnum)item3.ActorSno;
 				if (actorSno == ActorSnoEnum._poolofreflection || actorSno == ActorSnoEnum._healthwell_global || actorSno == ActorSnoEnum._a4_heaven_healthwell_global) {
-					Marker class6 = class112_4[text3];
+					Marker class6 = class112_4.GetValueOrDefault(text3);
 					if (class6 == null) {
 						SnoActor actor = SnoData.Actors.GetActor(actorSno);
 						class6 = new Marker(text3, item3.WorldPlace.WorldId, null, actor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex) {
 							IsPoolOfReflection = (actorSno == ActorSnoEnum._poolofreflection),
 							IsHealingWell = (actorSno == ActorSnoEnum._healthwell_global || actorSno == ActorSnoEnum._a4_heaven_healthwell_global)
 						};
-						class112_4.Set(text3, class6);
+						class112_4[text3] = class6;
 					} else {
 						class6.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 						class6.TextureSno = item3.ImageTextureFrame.TextureSno;
@@ -364,10 +364,10 @@ internal class MarkerCollector
 					class6.IsUsed = item3.ImageTextureFrame.TextureSno == 384218;
 				}
 				if (item3.ImageTextureFrame.TextureSno == 207630) {
-					Marker class7 = class112_2[text3];
+					Marker class7 = class112_2.GetValueOrDefault(text3);
 					if (class7 == null) {
 						class7 = new Marker(text3, item3.WorldPlace.WorldId, null, null, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
-						class112_2.Set(text3, class7);
+						class112_2[text3] = class7;
 					} else {
 						class7.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 					}
@@ -395,15 +395,15 @@ internal class MarkerCollector
 				int num18 = 6;
 				array4[num18] = item3.WorldPlace.Z.ToString("F0", CultureInfo.InvariantCulture);
 				string gparam_ = string.Concat(array4);
-				Banner class8 = class112_0[gparam_];
+				Banner class8 = class112_0.GetValueOrDefault(gparam_);
 				if (class8 == null) {
 					class8 = new Banner(item3.AnnId, item3.WorldPlace.WorldId, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z));
-					class112_0.Set(gparam_, class8);
+					class112_0[gparam_] = class8;
 				}
 				list_2.Add(class8);
 			}
 		}
-		list_0.AddRange(class112_4.IEnumerable_0.Where((Marker Marker_0) => Marker_0.WorldId == CoreCollector.LocalPlayer.WorldId));
+		list_0.AddRange(class112_4.Values.Where((Marker Marker_0) => Marker_0.WorldId == CoreCollector.LocalPlayer.WorldId));
 		if (CoreCollector.UiElements.class341_85.Visible) {
 			long num19 = CoreCollector.UiElements.class341_85.long_0 + 3252;
 			struct19_0 = GameWindowManager.ReadArray<r_MinimapIcon>(num19, struct19_0.Length);
@@ -464,7 +464,7 @@ internal class MarkerCollector
 
 	internal void method_3(Shrine shrine)
 	{
-		foreach (Marker item in class112_1.IEnumerable_0) {
+		foreach (Marker item in class112_1.Values) {
 			if (item.IsShrine && item.FloorCoordinate.XYDistanceTo(shrine.FloorCoordinate) < 5f) {
 				item.IsUsed = shrine.IsOperated;
 				item.SnoActor = shrine.SnoActor;

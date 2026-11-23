@@ -178,9 +178,9 @@ public class Player : Actor
 
 	internal Dictionary<uint, float> dictionary_5 = new Dictionary<uint, float>();
 
-	internal SafeDictionary<uint, int> class112_0 = new SafeDictionary<uint, int>();
+	internal Dictionary<uint, int> class112_0 = new Dictionary<uint, int>();
 
-	internal SafeDictionary<uint, float> class112_1 = new SafeDictionary<uint, float>();
+	internal Dictionary<uint, float> class112_1 = new Dictionary<uint, float>();
 
 	internal float[] float_4 = new float[9];
 
@@ -203,7 +203,7 @@ public class Player : Actor
 	[CompilerGenerated]
 	private readonly int[] int_12 = new int[4];
 
-	public readonly SafeDictionary<uint, int> class112_2 = new SafeDictionary<uint, int>();
+	public readonly Dictionary<uint, int> class112_2 = new Dictionary<uint, int>();
 
 	public int int_13;
 
