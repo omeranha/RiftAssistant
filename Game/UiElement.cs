@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 using structs;
-using Plugins;
 
 
 public class UiElement
@@ -204,16 +202,14 @@ public class UiElement
 		}
 	}
 
-	internal int method_4()
+	internal int GetChildCount()
 	{
 		return Class75_0.ChildCount;
 	}
 
-	internal string method_5(int int_2, UiElementData class75_1)
+	internal long ReadChildDataAddress(int index)
 	{
-		long num = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * int_2 + 520);
-		class75_1 = GameWindowManager.Read<UiElementData>(num);
-		return GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * int_2 + 8, 512, Encoding.ASCII, true);
+		return GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * index + 520);
 	}
 
 	internal UiElementData? method_6(string string_1, string string_2, out string string_3, Encoding encoding_0 = null)

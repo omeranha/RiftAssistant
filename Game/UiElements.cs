@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
-using Plugins;
 
 
 internal class UiElements
@@ -381,6 +381,9 @@ internal class UiElements
 	private const int MaxUiElements = 32768;
 	private const int MaxChainDepth = 1000;
 	private const int MaxChatLength = 8192;
+	private const int MaxChatScanEntries = 32;
+	private const int ChatPollIntervalMs = 100;
+	private const int ChatLineBufferSize = 1024;
 
 	private readonly Dictionary<string, UiElement> all = new(StringComparer.Ordinal);
 	private readonly Dictionary<string, UiElement> rootElements = new(StringComparer.Ordinal);
@@ -394,6 +397,11 @@ internal class UiElements
 	private int uiHash;
 	private long[] buckets;
 	private string lastChat;
+	private readonly Stopwatch chatPollTimer = Stopwatch.StartNew();
+	private byte[] chatLineBuffer = new byte[ChatLineBufferSize];
+	private byte[] lastChatLineBuffer = new byte[ChatLineBufferSize];
+	private bool hasLastChatLine;
+	private static readonly long ChatTextPointerOffset = (long)Marshal.OffsetOf<UiElementData>(nameof(UiElementData.UnknownPtr1));
 
 	public EventHandler<ChatChanged> ChatChanged;
 
@@ -431,7 +439,7 @@ internal class UiElements
 		}
 
 		HandleDisconnectPopup();
-		//ProcessChat(force);
+		ProcessChat(force);
 		if (class341_60.Visible) {
 			CoreCollector.BattleTag = null;
 			CoreCollector.HeroCollector.method_2();
@@ -478,9 +486,14 @@ internal class UiElements
 		}
 	}
 
-	private void ProcessChat(bool stripFormatting)
+	private void ProcessChat(bool force)
 	{
-		string current = ReadChat(stripFormatting);
+		if (ChatChanged == null) return;
+		if (!force && chatPollTimer.ElapsedMilliseconds < ChatPollIntervalMs) return;
+
+		chatPollTimer.Restart();
+
+		string current = ReadChat(true);
 		if (current == lastChat) return;
 
 		ChatChanged?.Invoke(this, new ChatChanged {
@@ -597,24 +610,47 @@ internal class UiElements
 
 	public string ReadChat(bool stripFormatting)
 	{
-		if (bucketCount == 0 || !class341_72.Visible) return null;
-
-		int count = class341_72.method_4();
-		if ((uint)count > MaxChatLength) return null;
-
-		var entry = new UiElementData();
-		for (int i = 0; i < count; i++) {
-			class341_72.method_5(i, entry);
-
-			if (entry.UnknownPtr1 == 0) continue;
-
-			string text = GameWindowManager.ReadString(entry.UnknownPtr1, 1024, Encoding.UTF8, false);
-			return SanitizeChat(text, stripFormatting);
+		if (bucketCount == 0 || !class341_72.Visible) {
+			hasLastChatLine = false;
+			return null;
 		}
 
-		return null;
+		long textAddress = FindFirstChatTextAddress();
+		if (textAddress == 0) {
+			hasLastChatLine = false;
+			return null;
+		}
+
+		if (!GameWindowManager.ReadIntoArray(textAddress, chatLineBuffer, 0, ChatLineBufferSize)) return lastChat;
+
+		if (hasLastChatLine && chatLineBuffer.AsSpan().SequenceEqual(lastChatLineBuffer)) return lastChat;
+
+		(chatLineBuffer, lastChatLineBuffer) = (lastChatLineBuffer, chatLineBuffer);
+		hasLastChatLine = true;
+
+		var raw = lastChatLineBuffer.AsSpan();
+		int terminator = raw[1..].IndexOf((byte)0);
+		int length = terminator < 0 ? raw.Length : terminator + 1;
+		return SanitizeChat(Encoding.UTF8.GetString(raw[..length]), stripFormatting);
 	}
 
+	private long FindFirstChatTextAddress()
+	{
+		int childCount = class341_72.GetChildCount();
+		if ((uint)childCount > MaxChatLength) return 0;
+
+		int count = Math.Min(childCount, MaxChatScanEntries);
+
+		for (int i = 0; i < count; i++) {
+			long dataAddress = class341_72.ReadChildDataAddress(i);
+			if (dataAddress == 0) continue;
+
+			long textAddress = GameWindowManager.Read<long>(dataAddress + ChatTextPointerOffset);
+			if (textAddress != 0) return textAddress;
+		}
+
+		return 0;
+	}
 	private static string SanitizeChat(string text, bool stripFormatting)
 	{
 		if (string.IsNullOrEmpty(text))	return null;
