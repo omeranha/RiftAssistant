@@ -44,12 +44,12 @@ public static class Core
 		CoreCollector.ItemCollector.OnLootGenerated += ProcessLoot;
 
 		CoreCollector.OnNewArea += (_, _) => {
-			Overlay.Instance.class204_0.ResetRenderer();
+			Overlay.Instance.mapRenderer.ResetRenderer();
 			Overlay.Instance.ModuleStatTracker.Show = false;
 		};
 
-		CoreCollector.EventHandler_5 += (_, _) => {
-			Overlay.Instance.class204_0.ResetRenderer();
+		CoreCollector.GameStateReset += (_, _) => {
+			Overlay.Instance.mapRenderer.ResetRenderer();
 		};
 
 		Application.ThreadException += (_, e) => {
@@ -81,16 +81,16 @@ public static class Core
 		if (e.item.SnoItem.Kind == ItemKind.goldcoin) {
 			uint amount = e.item.Amount;
 			string item = e.item.FloorCoordinate.ToStringCompactPrecise() + "/" + amount.ToString("D", CultureInfo.InvariantCulture);
-			if (!CoreCollector.class364_0.TrackedStrings.Contains(item)) {
+			if (!CoreCollector.RunTracker.TrackedStrings.Contains(item)) {
 				foreach (StatTracker item2 in CoreCollector.Trackers) {
 					item2.DropGold += amount;
 				}
 
-				CoreCollector.class364_0.TrackedStrings.Add(item);
+				CoreCollector.RunTracker.TrackedStrings.Add(item);
 			}
 		}
 
-		if ((e.item.SnoItem.Kind != ItemKind.loot && e.item.SnoItem.Kind != ItemKind.uberstuff && e.item.SnoItem.Kind != ItemKind.gem && e.item.SnoItem.Kind != ItemKind.craft) || CoreCollector.class364_0.TrackedLongs.Contains(e.item.Seed)) {
+		if ((e.item.SnoItem.Kind != ItemKind.loot && e.item.SnoItem.Kind != ItemKind.uberstuff && e.item.SnoItem.Kind != ItemKind.gem && e.item.SnoItem.Kind != ItemKind.craft) || CoreCollector.RunTracker.TrackedLongs.Contains(e.item.Seed)) {
 			return;
 		}
 
@@ -139,7 +139,7 @@ public static class Core
 			}
 		}
 
-		CoreCollector.class364_0.TrackedLongs.Add(e.item.Seed);
+		CoreCollector.RunTracker.TrackedLongs.Add(e.item.Seed);
 	}
 
 	private static void OnKeyboardEvent(InputEvent e)

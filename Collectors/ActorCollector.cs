@@ -9,7 +9,7 @@ namespace RiftAssistant.Collectors;
 
 internal partial class ActorCollector
 {
-	private readonly Dictionary<uint, Actor> class112_0 = new Dictionary<uint, Actor>(1000);
+	private readonly Dictionary<uint, Actor> actorsByAcdId = new Dictionary<uint, Actor>(1000);
 
 	[CompilerGenerated]
 	private Monster imonster_0;
@@ -30,7 +30,7 @@ internal partial class ActorCollector
 
 	private Stopwatch stopwatch_1 = new();
 
-	public FollowerClass followerClass_0;
+	public FollowerClass CurrentFollower;
 
 	public List<Monster> Monsters = new List<Monster>();
 
@@ -40,7 +40,7 @@ internal partial class ActorCollector
 
 	internal readonly PerSecCounter MonsterHitpointDecrease = new();
 
-	public List<Actor> list_3 = new List<Actor>(1000);
+	public List<Actor> AllActors = new List<Actor>(1000);
 
 	[CompilerGenerated]
 	private int int_2;
@@ -58,16 +58,16 @@ internal partial class ActorCollector
 	private bool isGoblinOnScreen;
 
 	[CompilerGenerated]
-	private readonly Dictionary<SkillEffectType, List<SkillEffect>> class112_1 = new Dictionary<SkillEffectType, List<SkillEffect>>();
+	private readonly Dictionary<SkillEffectType, List<SkillEffect>> skillEffectsByType = new Dictionary<SkillEffectType, List<SkillEffect>>();
 
 	[CompilerGenerated]
-	private readonly Dictionary<uint, Portal> class112_2 = new Dictionary<uint, Portal>();
+	private readonly Dictionary<uint, Portal> portalsByAnnId = new Dictionary<uint, Portal>();
 
 	[CompilerGenerated]
 	private readonly List<Shrine> shrines = new List<Shrine>();
 
 	[CompilerGenerated]
-	private readonly List<HeadStone> list_5 = new List<HeadStone>();
+	private readonly List<HeadStone> headStones = new List<HeadStone>();
 
 	[CompilerGenerated]
 	private readonly List<IClickableActor> doors = new List<IClickableActor>();
@@ -215,19 +215,19 @@ internal partial class ActorCollector
 		}
 	}
 
-	public Dictionary<SkillEffectType, List<SkillEffect>> Class112_0
+	public Dictionary<SkillEffectType, List<SkillEffect>> SkillEffectsByType
 	{
 		[CompilerGenerated]
 		get {
-			return class112_1;
+			return skillEffectsByType;
 		}
 	}
 
-	public Dictionary<uint, Portal> Class112_1
+	public Dictionary<uint, Portal> PortalsByAnnId
 	{
 		[CompilerGenerated]
 		get {
-			return class112_2;
+			return portalsByAnnId;
 		}
 	}
 
@@ -239,11 +239,11 @@ internal partial class ActorCollector
 		}
 	}
 
-	public List<HeadStone> List_1
+	public List<HeadStone> HeadStones
 	{
 		[CompilerGenerated]
 		get {
-			return list_5;
+			return headStones;
 		}
 	}
 
@@ -337,7 +337,7 @@ internal partial class ActorCollector
 
 	internal void ClearActors()
 	{
-		class112_0.Clear();
+		actorsByAcdId.Clear();
 	}
 
 	internal void ClearMonsters()
@@ -348,22 +348,22 @@ internal partial class ActorCollector
 
 	internal void ResetCollections(bool bool_4)
 	{
-		list_3.Clear();
+		AllActors.Clear();
 		Monsters.Clear();
 		AliveMonsters.Clear();
-		foreach (List<SkillEffect> item in Class112_0.Values) {
+		foreach (List<SkillEffect> item in SkillEffectsByType.Values) {
 			item.Clear();
 		}
 		if (bool_4) {
-			Class112_1.Clear();
+			PortalsByAnnId.Clear();
 		}
 		Shrines.Clear();
 		Doors.Clear();
-		List_1.Clear();
+		HeadStones.Clear();
 		for (int i = 0; i < ITownBanner_0.Length; i++) {
 			ITownBanner_0[i] = null;
 		}
-		followerClass_0 = null;
+		CurrentFollower = null;
 		IActor_1 = null;
 		IActor_3 = null;
 		IActor_2 = null;
@@ -393,7 +393,7 @@ internal partial class ActorCollector
 			num -= num4;
 			num2 += num4;
 		}
-		foreach (Portal item in Class112_1.Values) {
+		foreach (Portal item in PortalsByAnnId.Values) {
 			item.ActorAvailable = false;
 		}
 		IMonster_0 = null;
@@ -409,7 +409,7 @@ internal partial class ActorCollector
 				}
 				uint acdid = ptr->AcdIdEncrypted;
 				if (acdid == uint.MaxValue) {
-					Actor actor = class112_0.GetValueOrDefault(actorId);
+					Actor actor = actorsByAcdId.GetValueOrDefault(actorId);
 					if (actor == null || !(actor is Monster { CurHealth: > 0.0 } monster)) {
 						continue;
 					}
@@ -459,7 +459,7 @@ internal partial class ActorCollector
 				if (annId == uint.MaxValue) {
 					continue;
 				}
-				Actor actor2 = class112_0.GetValueOrDefault(gparam_);
+				Actor actor2 = actorsByAcdId.GetValueOrDefault(gparam_);
 				SnoActor snoActor;
 				if (actor2 == null) {
 					snoActor = SnoData.Actors.GetActor(actorSnoEnum);
@@ -476,7 +476,7 @@ internal partial class ActorCollector
 					goto IL_04b0;
 				}
 				actor2 = null;
-				class112_0.Remove(gparam_);
+				actorsByAcdId.Remove(gparam_);
 				snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 				if (snoActor != null) {
 					goto IL_04b0;
@@ -488,13 +488,13 @@ internal partial class ActorCollector
 				}
 				if (snoActor.Kind == ActorKind.Follower) {
 					if (actorSnoEnum == SnoData.Classes.FollowerEnchantress.ActorSno) {
-						followerClass_0 = SnoData.Classes.FollowerEnchantress;
+						CurrentFollower = SnoData.Classes.FollowerEnchantress;
 					}
 					if (actorSnoEnum == SnoData.Classes.FollowerScoundrel.ActorSno) {
-						followerClass_0 = SnoData.Classes.FollowerScoundrel;
+						CurrentFollower = SnoData.Classes.FollowerScoundrel;
 					}
 					if (actorSnoEnum == SnoData.Classes.FollowerTemplar.ActorSno) {
-						followerClass_0 = SnoData.Classes.FollowerTemplar;
+						CurrentFollower = SnoData.Classes.FollowerTemplar;
 					}
 				}
 				uint sSceneID_Encrypted;
@@ -536,8 +536,8 @@ internal partial class ActorCollector
 					player.RadiusBottom = ptr->BottomRadius;
 					player.UpdateDistances();
 					CollectPlayerAttributes(player);
-					list_3.Add(player);
-					class112_0.Remove(gparam_);
+					AllActors.Add(player);
+					actorsByAcdId.Remove(gparam_);
 					continue;
 				}
 				bool flag2 = false;
@@ -571,7 +571,7 @@ internal partial class ActorCollector
 					if (actor2 == null) {
 						actor2 = CreateActor(gizmoType: (GizmoType)struct7_.GizmoType, acdid: acdid, annId: annId, snoActor: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
 						actor2.CreatedAtInGameTick = ptr->CreationTick;
-						class112_0[gparam_] = actor2;
+						actorsByAcdId[gparam_] = actor2;
 					}
 					actor2.GizmoType = (GizmoType)struct7_.GizmoType;
 					actor2.SummonerAcdDynamicId = num10;
@@ -595,7 +595,7 @@ internal partial class ActorCollector
 						IActor_0 = actor2;
 					}
 					if (TrackSpecialActor(actor2)) {
-						list_3.Add(actor2);
+						AllActors.Add(actor2);
 					}
 					continue;
 				}
@@ -641,7 +641,7 @@ internal partial class ActorCollector
 					monster2 = new Monster(acdid, annId, snoMonster2.SnoActor, snoMonster2) {
 						SummonerAcdDynamicId = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u)
 					};
-					class112_0[gparam_] = monster2;
+					actorsByAcdId[gparam_] = monster2;
 				}
 				monster2.Rarity = actorRarity;
 				monster2.IsElite = snoMonster2.IsUnique || actorRarity != ActorRarity.Normal;
@@ -719,7 +719,7 @@ internal partial class ActorCollector
 						IsGoblinOnScreen = true;
 					}
 				}
-				list_3.Add(monster2);
+				AllActors.Add(monster2);
 				if (flag3) {
 					Monsters.Add(monster2);
 					AliveMonsters.Add(monster2);
@@ -824,7 +824,7 @@ internal partial class ActorCollector
 			}
 		}
 		MonsterHitpointDecrease.Add(num5);
-		foreach (Actor item11 in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
+		foreach (Actor item11 in AllActors.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
 			foreach (Monster item12 in AliveMonsters) {
 				if (item12.SummonerAcdDynamicId == item11.SummonerId) {
 					(item12 as Monster).IsQuestMonster = true;

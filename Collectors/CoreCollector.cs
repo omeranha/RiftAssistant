@@ -16,19 +16,19 @@ internal static class CoreCollector
 	public static readonly uint Magic_600DF00D;
 
 	[CompilerGenerated]
-	private static EventHandler eventHandler_5;
+	private static EventHandler gameStateReset;
 
 	[CompilerGenerated]
 	private static readonly UiElements uiElements;
 
 	[CompilerGenerated]
-	private static readonly FloatingNumberManager class335_0;
+	private static readonly FloatingNumberManager floatingNumberManager;
 
 	[CompilerGenerated]
-	private static readonly QuestManager class376_0;
+	private static readonly QuestManager questManager;
 
 	[CompilerGenerated]
-	private static readonly MarkerCollector class412_0;
+	private static readonly MarkerCollector markerCollector;
 
 	[CompilerGenerated]
 	private static readonly HeroCollector heroCollector;
@@ -79,7 +79,7 @@ internal static class CoreCollector
 
 	private static SnoArea LastSnoArea;
 
-	public static SpecialArea specialArea_0;
+	public static SpecialArea CurrentSpecialArea;
 
 	public static string GameServerIP;
 
@@ -91,11 +91,11 @@ internal static class CoreCollector
 
 	public static StatTracker SessionAlwaysRunning;
 
-	public static StatTracker class340_2;
+	public static StatTracker AccountTotal;
 
-	public static StatTracker class340_3;
+	public static StatTracker AccountYesterday;
 
-	public static StatTracker class340_4;
+	public static StatTracker AccountToday;
 
 	public static StatTracker CurrentHeroTotal;
 
@@ -115,7 +115,7 @@ internal static class CoreCollector
 
 	public static StatTracker CurrentHeroTodayOnCurrentDifficulty;
 
-	public static RunTracker class364_0;
+	public static RunTracker RunTracker;
 
 	public static Controller Controller { get; set; }
 
@@ -125,15 +125,15 @@ internal static class CoreCollector
 
 	public static EventHandler OnNewArea { get; set; }
 
-	public static EventHandler EventHandler_5
+	public static EventHandler GameStateReset
 	{
 		[CompilerGenerated]
 		get {
-			return eventHandler_5;
+			return gameStateReset;
 		}
 		[CompilerGenerated]
 		set {
-			eventHandler_5 = value;
+			gameStateReset = value;
 		}
 	}
 
@@ -147,27 +147,27 @@ internal static class CoreCollector
 		}
 	}
 
-	public static FloatingNumberManager Class335_0
+	public static FloatingNumberManager FloatingNumberManager
 	{
 		[CompilerGenerated]
 		get {
-			return class335_0;
+			return floatingNumberManager;
 		}
 	}
 
-	public static QuestManager Class376_0
+	public static QuestManager QuestManager
 	{
 		[CompilerGenerated]
 		get {
-			return class376_0;
+			return questManager;
 		}
 	}
 
-	public static MarkerCollector Class412_0
+	public static MarkerCollector MarkerCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class412_0;
+			return markerCollector;
 		}
 	}
 
@@ -245,9 +245,9 @@ internal static class CoreCollector
 		Magic_600DF00D = 1611526157u;
 		Unknown = GameDifficulty.unknown;
 		uiElements = new UiElements();
-		class335_0 = new FloatingNumberManager();
-		class376_0 = new QuestManager();
-		class412_0 = new MarkerCollector();
+		floatingNumberManager = new FloatingNumberManager();
+		questManager = new QuestManager();
+		markerCollector = new MarkerCollector();
 		heroCollector = new HeroCollector();
 		itemCollector = new ItemCollector();
 		sceneCollector = new SceneCollector();
@@ -268,8 +268,8 @@ internal static class CoreCollector
 	public static void ClearAllCaches()
 	{
 		SceneCollector.Clear();
-		Class376_0.Clear();
-		Class412_0.ClearMarkers(bool_0: true);
+		QuestManager.Clear();
+		MarkerCollector.ClearMarkers(bool_0: true);
 		ActorCollector.ClearActors();
 		ItemCollector.ClearItems(bool_1: true);
 		ActorCollector.ResetCollections(bool_4: true);
@@ -292,9 +292,9 @@ internal static class CoreCollector
 		object obj;
 		if (bool_8) {
 			DateTime now = DateTime.Now;
-			class340_2 = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total");
-			class340_3 = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_4 = new StatTracker(BattleTag, bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			AccountTotal = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total");
+			AccountYesterday = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			AccountToday = new StatTracker(BattleTag, bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			CurrentHeroTotal = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total");
 			CurrentHeroYesterday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			CurrentHeroToday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
@@ -316,9 +316,9 @@ internal static class CoreCollector
 			obj = LocalPlayer.SnoArea;
 			goto IL_03dd;
 		}
-		class340_2 = null;
-		class340_3 = null;
-		class340_4 = null;
+		AccountTotal = null;
+		AccountYesterday = null;
+		AccountToday = null;
 		CurrentHeroTotal = null;
 		CurrentHeroYesterday = null;
 		CurrentHeroToday = null;
@@ -328,33 +328,33 @@ internal static class CoreCollector
 		CurrentHeroTotalOnCurrentDifficulty = null;
 		CurrentHeroYesterdayOnCurrentDifficulty = null;
 		CurrentHeroTodayOnCurrentDifficulty = null;
-		if (class364_0 != null) {
+		if (RunTracker != null) {
 			ResetGameState();
 		}
 		Trackers.Clear();
 		return;
 	IL_03dd:
 		SnoArea isnoArea_ = (SnoArea)obj;
-		if (class364_0 == null) {
-			class364_0 = new RunTracker(isnoArea_);
+		if (RunTracker == null) {
+			RunTracker = new RunTracker(isnoArea_);
 		} else {
-			class364_0.UpdateCurrentArea(isnoArea_);
+			RunTracker.UpdateCurrentArea(isnoArea_);
 		}
 		Trackers.Clear();
 		Trackers.Add(Session);
 		Trackers.Add(SessionAlwaysRunning);
-		Trackers.Add(class364_0.RunStatTracker);
-		Trackers.Add(class364_0.CurrentArea.AreaStats);
-		Trackers.Add(class340_2);
-		Trackers.Add(class340_4);
+		Trackers.Add(RunTracker.RunStatTracker);
+		Trackers.Add(RunTracker.CurrentArea.AreaStats);
+		Trackers.Add(AccountTotal);
+		Trackers.Add(AccountToday);
 		Trackers.Add(CurrentHeroTotal);
 		Trackers.Add(CurrentHeroToday);
-		Trackers.Add(class364_0.CurrentArea.AreaTotalStats);
+		Trackers.Add(RunTracker.CurrentArea.AreaTotalStats);
 		Trackers.Add(CurrentAccountTotalOnCurrentDifficulty);
 		Trackers.Add(CurrentAccountTodayOnCurrentDifficulty);
 		Trackers.Add(CurrentHeroTotalOnCurrentDifficulty);
 		Trackers.Add(CurrentHeroTodayOnCurrentDifficulty);
-		Trackers.Add(class364_0.CurrentArea.AreaTotalDifficultyStats);
+		Trackers.Add(RunTracker.CurrentArea.AreaTotalDifficultyStats);
 	}
 
 	internal static void ClearGameServerContext(string string_3)
@@ -386,8 +386,8 @@ internal static class CoreCollector
 		for (int i = 0; i < ActorCollector.Boolean_0.Length; i++) {
 			ActorCollector.Boolean_0[i] = false;
 		}
-		EventHandler_5?.Invoke(null, EventArgs.Empty);
-		class364_0 = null;
+		GameStateReset?.Invoke(null, EventArgs.Empty);
+		RunTracker = null;
 	}
 
 	public static void Update()
@@ -461,7 +461,7 @@ internal static class CoreCollector
 			GameStateValid = D3Memory.ObjectManager_GameState_HasValue;
 			IsLoading = D3Memory.GameState_LoadingScreenEnabled_Value != 0;
 			if (!GameStateValid) {
-				Class335_0.Clear(LocalPlayer as Player);
+				FloatingNumberManager.Clear(LocalPlayer as Player);
 				ClearGameServerContext("!CurrentInGame");
 				return;
 			}
@@ -501,7 +501,7 @@ internal static class CoreCollector
 					var player = CoreCollector.LocalPlayer;
 					var playerArea = player?.SnoArea;
 					var playerWorldId = player?.WorldId ?? 0;
-					var dict = CoreCollector.ActorCollector.Class112_1;
+					var dict = CoreCollector.ActorCollector.PortalsByAnnId;
 					var temp = new List<Portal>();
 					bool isRift = playerArea != null && playerArea.Code.StartsWith("x1_lr_level_", StringComparison.InvariantCulture);
 					foreach (var kvp in dict) {
@@ -521,7 +521,7 @@ internal static class CoreCollector
 
 					portalsSnapshot = [.. temp];
 
-					var source = CoreCollector.ActorCollector.list_3;
+					var source = CoreCollector.ActorCollector.AllActors;
 					var normals = new IClickableActor[source.Count];
 					var resplandecents = new IClickableActor[source.Count];
 					int normalsidx = 0;
@@ -565,19 +565,19 @@ internal static class CoreCollector
 						flag3 = true;
 						Logger.Info("[ERROR] force daf scan due to game jump without leaving to the menu");
 						DAF.ClearObjectManagerAddr();
-						Class335_0.Clear(LocalPlayer as Player);
-						class364_0 = null;
+						FloatingNumberManager.Clear(LocalPlayer as Player);
+						RunTracker = null;
 					}
 					int_0 = HeroCollector.Int32_0;
 				}
 				IsGameReady = true;
 				try {
-					Class412_0.Collect();
+					MarkerCollector.Collect();
 				} catch (Exception exception) {
 					Logger.LogException(exception.Message);
 				}
 				try {
-					Class335_0.Update(LocalPlayer as Player);
+					FloatingNumberManager.Update(LocalPlayer as Player);
 				} catch (Exception exception2) {
 					Logger.LogException(exception2.Message);
 				}
@@ -587,19 +587,19 @@ internal static class CoreCollector
 					Logger.LogException(exception3.Message);
 				}
 				try {
-					Class376_0.Refresh();
+					QuestManager.Refresh();
 				} catch (Exception exception4) {
 					Logger.LogException(exception4.Message);
 				}
 				IsInTown = snoArea?.IsTown ?? false;
-				if (flag3 || Unknown == GameDifficulty.unknown || class364_0 == null) {
+				if (flag3 || Unknown == GameDifficulty.unknown || RunTracker == null) {
 					Unknown = D3Memory.GameDifficulty;
 				}
 				string gameServerIP = GameServerIP;
 				if (gameServerIP == null || !gameServerIP.Contains(".")) {
 					GameServerIP = D3Memory.ReadGameServerIP();
 				}
-				if (class364_0 == null) {
+				if (RunTracker == null) {
 					LastSnoArea = snoArea;
 					SceneCollector.Clear();
 					try {
@@ -631,7 +631,7 @@ internal static class CoreCollector
 				}
 				UpdateSpecialArea();
 				if (IsGameReady) {
-					if (D3Memory.GameDifficulty < GameDifficulty.t1 && specialArea_0 == SpecialArea.None) {
+					if (D3Memory.GameDifficulty < GameDifficulty.t1 && CurrentSpecialArea == SpecialArea.None) {
 						Player localPlayer = LocalPlayer;
 						if (localPlayer == null || localPlayer.SnoArea?.Sno != 288482) {
 							Player localPlayer2 = LocalPlayer;
@@ -661,7 +661,7 @@ internal static class CoreCollector
 			for (int j = 0; j < iPlayer_2.Length; j++) {
 				Player player3 = (Player)iPlayer_2[j];
 				if (player3.IsDeadSafeCheck && player3.CoordinateKnown) {
-					HeadStone headStone = ActorCollector.List_1.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == player3.AnnId) as HeadStone;
+					HeadStone headStone = ActorCollector.HeadStones.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == player3.AnnId) as HeadStone;
 					if (headStone != null) {
 						player3.HeadStone = headStone;
 					}
@@ -675,7 +675,7 @@ internal static class CoreCollector
 						continue;
 					}
 					headStone = player3.HeadStone as HeadStone;
-					ActorCollector.List_1.Add(headStone);
+					ActorCollector.HeadStones.Add(headStone);
 					if (headStone.PlayerActorAnnId == 0) {
 						headStone.PlayerActorAnnId = player3.AnnId;
 						headStone.Player = player3;
@@ -711,33 +711,33 @@ internal static class CoreCollector
 	{
 		if (LocalPlayer.SnoArea.Sno != 288482 && LocalPlayer.SnoArea.HostAreaSno != 288482) {
 			if (D3Memory.GameState_Value_IsChallengeRiftGame && LocalPlayer.SnoArea.Sno == 415369) {
-				specialArea_0 = SpecialArea.ChallengeRiftHub;
+				CurrentSpecialArea = SpecialArea.ChallengeRiftHub;
 			} else if (D3Memory.GameState_Value_IsChallengeRiftGame) {
-				specialArea_0 = SpecialArea.ChallengeRift;
+				CurrentSpecialArea = SpecialArea.ChallengeRift;
 			} else if (LocalPlayer.SnoArea.Sno == 257116) {
-				specialArea_0 = SpecialArea.UberPortals;
+				CurrentSpecialArea = SpecialArea.UberPortals;
 			} else if (LocalPlayer.SnoArea.Sno != 256767 && LocalPlayer.SnoArea.Sno != 256106 && LocalPlayer.SnoArea.Sno != 256742 && LocalPlayer.SnoArea.Sno != 374239) {
 				if (LocalPlayer.SnoArea.Type == AreaType.PvP) {
-					specialArea_0 = SpecialArea.PvP;
+					CurrentSpecialArea = SpecialArea.PvP;
 				} else {
-					specialArea_0 = SpecialArea.None;
+					CurrentSpecialArea = SpecialArea.None;
 				}
 			} else {
-				specialArea_0 = SpecialArea.UberFight;
+				CurrentSpecialArea = SpecialArea.UberFight;
 			}
 		} else {
-			Quest quest = Class376_0.Quests.GetValueOrDefault(337492u);
+			Quest quest = QuestManager.Quests.GetValueOrDefault(337492u);
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 13 || quest.QuestStepId == 16 || quest.QuestStepId == 34)) {
-				specialArea_0 = SpecialArea.GreaterRift;
+				CurrentSpecialArea = SpecialArea.GreaterRift;
 			}
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 1 || quest.QuestStepId == 3 || quest.QuestStepId == 10)) {
-				specialArea_0 = SpecialArea.Rift;
+				CurrentSpecialArea = SpecialArea.Rift;
 			} else if (UiElements.NephalemRiftBarUiElement.Visible) {
-				specialArea_0 = SpecialArea.Rift;
+				CurrentSpecialArea = SpecialArea.Rift;
 			} else if (UiElements.GreaterRiftBarUiElement.Visible) {
-				specialArea_0 = SpecialArea.GreaterRift;
+				CurrentSpecialArea = SpecialArea.GreaterRift;
 			} else {
-				specialArea_0 = SpecialArea.None;
+				CurrentSpecialArea = SpecialArea.None;
 			}
 		}
 	}

@@ -136,7 +136,7 @@ internal class AllocationCache<T> where T : unmanaged
 		}
 	}
 
-	public T? FindElement(long long_0)
+	public T? FindElement(long bucketAddress)
 	{
 		int num = 0;
 		AllocatedBlock<T> @class;
@@ -145,7 +145,7 @@ internal class AllocationCache<T> where T : unmanaged
 			if (num < int_1)
 			{
 				@class = class354_0[num];
-				if (long_0 >= @class.StartAddress && long_0 <= @class.LastElementAddress)
+				if (bucketAddress >= @class.StartAddress && bucketAddress <= @class.LastElementAddress)
 				{
 					break;
 				}
@@ -154,7 +154,7 @@ internal class AllocationCache<T> where T : unmanaged
 			}
 			return null;
 		}
-		return @class.Elements[(long_0 - @class.StartAddress) / elementSize];
+		return @class.Elements[(bucketAddress - @class.StartAddress) / elementSize];
 	}
 
 	public AllocationCache(int elementSize)

@@ -157,7 +157,7 @@ internal class PlayerCollector
 							player.bool_8 = true;
 						}
 						if (!isInGame && player.IsMe) {
-							CoreCollector.Class335_0.Clear(player);
+							CoreCollector.FloatingNumberManager.Clear(player);
 						}
 						for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
 							Skill skill = player.SkillSlots[(int)actionKey];
@@ -339,7 +339,7 @@ internal class PlayerCollector
 											}
 										}
 									}
-									if (player.ParagonTotalExp > 0 && player.bool_14 && player.HasValidActor && player.FloorCoordinate.IsValid && player.bool_8 && CoreCollector.class364_0 != null && player.SnoArea != null) {
+									if (player.ParagonTotalExp > 0 && player.bool_14 && player.HasValidActor && player.FloorCoordinate.IsValid && player.bool_8 && CoreCollector.RunTracker != null && player.SnoArea != null) {
 										if (player.ParagonTotalExp2 > 0 && player.ParagonTotalExp2 < player.ParagonTotalExp) {
 											long num10 = player.ParagonTotalExp - player.ParagonTotalExp2;
 											if (num10 != 0L && player.IsMe) {
@@ -375,7 +375,7 @@ internal class PlayerCollector
 			IL_0f38:
 				num2++;
 			}
-			CoreCollector.Class335_0.Clear(player);
+			CoreCollector.FloatingNumberManager.Clear(player);
 			return false;
 		} catch (Exception exception_) {
 			Logger.LogException(exception_.Message);

@@ -9,19 +9,19 @@ namespace RiftAssistant.Collectors;
 
 internal class MarkerCollector
 {
-	private readonly Map class357_0 = new Map(512);
+	private readonly Map primaryMarkerMap = new Map(512);
 
-	private readonly Map class357_1 = new Map(512);
+	private readonly Map secondaryMarkerMap = new Map(512);
 
-	private readonly Allocator class351_0 = new Allocator(2048, "IconAllocator");
+	private readonly Allocator trickleAllocator = new Allocator(2048, "IconAllocator");
 
-	private readonly AllocationCache<r_MarkerEntry> class352_0 = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
+	private readonly AllocationCache<r_MarkerEntry> primaryMarkerEntries = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
 
-	private readonly AllocationCache<r_MarkerEntry> class352_1 = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
+	private readonly AllocationCache<r_MarkerEntry> secondaryMarkerEntries = new AllocationCache<r_MarkerEntry>(Constants.MarkerEntry_SizeOf);
 
 	private readonly AllocationCache<r_Trickle> trickleReader = new AllocationCache<r_Trickle>(Constants.Trickle_SizeOf);
 
-	private readonly Dictionary<string, Banner> class112_0 = new Dictionary<string, Banner>();
+	private readonly Dictionary<string, Banner> bannersByKey = new Dictionary<string, Banner>();
 
 	private readonly Dictionary<string, Marker> class112_1 = new Dictionary<string, Marker>();
 
@@ -55,9 +55,9 @@ internal class MarkerCollector
 
 	public WorldCoordinate iworldCoordinate_8;
 
-	private r_MinimapIcon[] struct19_0 = new r_MinimapIcon[256];
+	private r_MinimapIcon[] minimapIcons = new r_MinimapIcon[256];
 
-	private AreaContainer class66_0 = new AreaContainer();
+	private AreaContainer areaContainer = new AreaContainer();
 
 	internal void Collect()
 	{
@@ -67,22 +67,22 @@ internal class MarkerCollector
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return;
 		}
-		class66_0 = GameWindowManager.Read<AreaContainer>(CoreCollector.DAF.LevelAreaAddress);
-		class357_0.SetAddress(class66_0.PrimaryAreaPtr);
-		class357_1.SetAddress(class66_0.SecondaryAreaPtr);
-		if (class357_0.class351_0.RawAllocator.ElementSize != 88) {
-			Logger.Info("[ERROR] marker struct size mismatch: " + class357_0.class351_0.RawAllocator.ElementSize);
+		areaContainer = GameWindowManager.Read<AreaContainer>(CoreCollector.DAF.LevelAreaAddress);
+		primaryMarkerMap.SetAddress(areaContainer.PrimaryAreaPtr);
+		secondaryMarkerMap.SetAddress(areaContainer.SecondaryAreaPtr);
+		if (primaryMarkerMap.class351_0.RawAllocator.ElementSize != 88) {
+			Logger.Info("[ERROR] marker struct size mismatch: " + primaryMarkerMap.class351_0.RawAllocator.ElementSize);
 			return;
 		}
-		if (class357_0.class351_0.RawAllocator.GoodFood != CoreCollector.Magic_600DF00D) {
+		if (primaryMarkerMap.class351_0.RawAllocator.GoodFood != CoreCollector.Magic_600DF00D) {
 			Logger.Info("[ERROR] force daf scan due to invalid MarkerMapA");
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return;
 		}
-		class352_0.Snapshot(class357_0.class351_0);
-		class352_1.Snapshot(class357_1.class351_0);
+		primaryMarkerEntries.Snapshot(primaryMarkerMap.class351_0);
+		secondaryMarkerEntries.Snapshot(secondaryMarkerMap.class351_0);
 		iworldCoordinate_0 = null;
-		foreach (r_MarkerEntry item in class352_0.GetItems()) {
+		foreach (r_MarkerEntry item in primaryMarkerEntries.GetItems()) {
 			if (item.uint_0 == uint.MaxValue || item.struct17_0.struct37_0.WorldId != CoreCollector.LocalPlayer.WorldId) {
 				continue;
 			}
@@ -103,7 +103,7 @@ internal class MarkerCollector
 				continue;
 			}
 			if (item.struct17_0.uint_3 != uint.MaxValue) {
-				Quest quest = CoreCollector.Class376_0.Quests.GetValueOrDefault(item.struct17_0.uint_3);
+				Quest quest = CoreCollector.QuestManager.Quests.GetValueOrDefault(item.struct17_0.uint_3);
 				if (quest != null && quest.State == QuestState.completed) {
 					continue;
 				}
@@ -119,7 +119,7 @@ internal class MarkerCollector
 			}
 			Markers.Add(marker);
 		}
-		foreach (r_MarkerEntry item2 in class352_1.GetItems()) {
+		foreach (r_MarkerEntry item2 in secondaryMarkerEntries.GetItems()) {
 			if (item2.uint_0 == uint.MaxValue || item2.struct17_0.struct37_0.WorldId != CoreCollector.LocalPlayer.WorldId) {
 				continue;
 			}
@@ -142,7 +142,7 @@ internal class MarkerCollector
 						continue;
 					}
 					if (item2.struct17_0.uint_3 != uint.MaxValue) {
-						Quest quest2 = CoreCollector.Class376_0.Quests.GetValueOrDefault(item2.struct17_0.uint_3);
+						Quest quest2 = CoreCollector.QuestManager.Quests.GetValueOrDefault(item2.struct17_0.uint_3);
 						if (quest2 != null && quest2.State == QuestState.completed) {
 							continue;
 						}
@@ -270,12 +270,12 @@ internal class MarkerCollector
 		}
 		long num10 = GameWindowManager.Read<long>(CoreCollector.DAF.TrickleManagerAddress + AddressList.Offset_Trickle_Ptr8);
 		long address = GameWindowManager.Read<long>(num10 + AddressList.Offset_Trickle_Ptr24);
-		class351_0.Snapshot(address);
-		if (class351_0.RawAllocator.ElementSize != Constants.Trickle_SizeOf) {
+		trickleAllocator.Snapshot(address);
+		if (trickleAllocator.RawAllocator.ElementSize != Constants.Trickle_SizeOf) {
 			Trace.WriteLine("icon struct size mismatch!");
 			return;
 		}
-		trickleReader.Snapshot(class351_0);
+		trickleReader.Snapshot(trickleAllocator);
 		iworldCoordinate_1.Set(0f, 0f, 0f);
 		iworldCoordinate_2.Set(0f, 0f, 0f);
 		iworldCoordinate_3.Set(0f, 0f, 0f);
@@ -393,10 +393,10 @@ internal class MarkerCollector
 				int num18 = 6;
 				array4[num18] = item3.WorldPlace.Z.ToString("F0", CultureInfo.InvariantCulture);
 				string gparam_ = string.Concat(array4);
-				Banner banner = class112_0.GetValueOrDefault(gparam_);
+				Banner banner = bannersByKey.GetValueOrDefault(gparam_);
 				if (banner == null) {
 					banner = new Banner(item3.AnnId, item3.WorldPlace.WorldId, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z));
-					class112_0[gparam_] = banner;
+					bannersByKey[gparam_] = banner;
 				}
 				Banners.Add(banner);
 			}
@@ -404,11 +404,11 @@ internal class MarkerCollector
 		Markers.AddRange(class112_4.Values.Where((Marker marker) => marker.WorldId == CoreCollector.LocalPlayer.WorldId));
 		if (CoreCollector.UiElements.MinimapUiElement.Visible) {
 			long num19 = CoreCollector.UiElements.MinimapUiElement.long_0 + 3252;
-			struct19_0 = GameWindowManager.ReadArray<r_MinimapIcon>(num19, struct19_0.Length);
+			minimapIcons = GameWindowManager.ReadArray<r_MinimapIcon>(num19, minimapIcons.Length);
 
 			int count = CoreCollector.ActorCollector.AliveMonsters.Count;
-			for (int num20 = 0; num20 < struct19_0.Length; num20++) {
-				uint uint_ = struct19_0[num20].uint_0;
+			for (int num20 = 0; num20 < minimapIcons.Length; num20++) {
+				uint uint_ = minimapIcons[num20].uint_0;
 				if (uint_ == uint.MaxValue) {
 					continue;
 				}
@@ -438,7 +438,7 @@ internal class MarkerCollector
 			class112_3.Clear();
 			class112_1.Clear();
 			class112_2.Clear();
-			class112_0.Clear();
+			bannersByKey.Clear();
 			class112_4.Clear();
 		}
 	}

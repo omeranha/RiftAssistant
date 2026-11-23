@@ -67,7 +67,7 @@ internal class ModulePlayerInfo : Module
 
 	public void Draw(Player iplayer_0)
 	{
-		bool flag = Overlay.Instance.mapMode_0 != MapMode.Map;
+		bool flag = Overlay.Instance.ActiveMapMode != MapMode.Map;
 		if (!vmethod_0(flag)) {
 			return;
 		}
@@ -157,7 +157,7 @@ internal class ModulePlayerInfo : Module
 			}
 			pointCache[gparam_2] = array;
 		}
-		PathGeometry pathGeometry = new PathGeometry(Overlay.Instance.factory_0);
+		PathGeometry pathGeometry = new PathGeometry(Overlay.Instance.direct2DFactory);
 		using (GeometrySink geometrySink = pathGeometry.Open()) {
 			if (bool_10) {
 				for (int j = int_3; j <= int_2; j++) {

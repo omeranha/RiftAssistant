@@ -18,11 +18,11 @@ public class GameController
 
 	public bool IsInTown => CoreCollector.IsInTown;
 
-	public MapMode MapMode => Overlay.Instance.mapMode_0;
+	public MapMode MapMode => Overlay.Instance.ActiveMapMode;
 
 	public string ServerIpAddress => CoreCollector.GameServerIP;
 
-	public SpecialArea SpecialArea => CoreCollector.specialArea_0;
+	public SpecialArea SpecialArea => CoreCollector.CurrentSpecialArea;
 
 	public double RiftPercentage => (double)(CoreCollector.D3Memory.GameState_RiftProgressAccumulated_Value / CoreCollector.D3Memory.MaxQuestProgress) * 100.0;
 
@@ -44,15 +44,15 @@ public class GameController
 
 	public Player Me => CoreCollector.LocalPlayer;
 
-	public Quest[] Quests => [.. CoreCollector.Class376_0.Quests.Values];
+	public Quest[] Quests => [.. CoreCollector.QuestManager.Quests.Values];
 
-	public Quest[] Bounties => [.. CoreCollector.Class376_0.Bounties.Values];
+	public Quest[] Bounties => [.. CoreCollector.QuestManager.Bounties.Values];
 
 	public Item[] Items => [.. CoreCollector.ItemCollector.Items.Values];
 
 	public Player[] Players => [.. CoreCollector.PlayerCollector.PlayersInGame];
 
-	public HeadStone[] HeadStones => [.. CoreCollector.ActorCollector.List_1.Where((HeadStone iheadStone_0) => iheadStone_0.Player != null)];
+	public HeadStone[] HeadStones => [.. CoreCollector.ActorCollector.HeadStones.Where((HeadStone iheadStone_0) => iheadStone_0.Player != null)];
 
 	public int NumberOfPlayersInGame => CoreCollector.PlayerCollector.NumberOfPlayersInGame;
 
@@ -84,9 +84,9 @@ public class GameController
 
 	public SceneHint[] SceneHints => [.. CoreCollector.SceneCollector.SceneHints];
 
-	public Banner[] Banners => [.. CoreCollector.Class412_0.Banners];
+	public Banner[] Banners => [.. CoreCollector.MarkerCollector.Banners];
 
-	public Marker[] Markers => [.. CoreCollector.Class412_0.Markers];
+	public Marker[] Markers => [.. CoreCollector.MarkerCollector.Markers];
 
 	public Waypoint[] ActMapWaypoints => [.. CoreCollector.WaypointManager.MapWaypoints.Values];
 

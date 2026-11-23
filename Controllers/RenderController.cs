@@ -165,7 +165,7 @@ public class RenderController
 
 	public PathGeometry CreateGeometry()
 	{
-		return new PathGeometry(Overlay.Instance.factory_0);
+		return new PathGeometry(Overlay.Instance.direct2DFactory);
 	}
 
 	public void GetMinimapCoordinates(float x, float y, out float mapX, out float mapY)
@@ -180,7 +180,7 @@ public class RenderController
 
 	public void SetHint(string text, string specialLocation = null)
 	{
-		Overlay.Instance.class208_0?.SetHint(text, specialLocation);
+		Overlay.Instance.cursorHintModule?.SetHint(text, specialLocation);
 	}
 
 	public void TurnOnAliasing()

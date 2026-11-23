@@ -23,19 +23,19 @@ internal class Overlay
 
 	private Matrix3x2 matrix3x2_0;
 
-	public SharpDX.Direct3D11.Device device_0;
+	public SharpDX.Direct3D11.Device device;
 
-	public SwapChain swapChain_0;
+	public SwapChain swapChain;
 
-	public Surface surface_0;
+	public Surface surface;
 
 	internal RenderTarget renderTarget;
 
-	public SwapChainDescription swapChainDescription_0;
+	public SwapChainDescription swapChainDescription;
 
-	public RenderTargetProperties renderTargetProperties_0;
+	public RenderTargetProperties renderTargetProperties;
 
-	private Layer layer_0;
+	private Layer clipLayer;
 
 	public static Overlay Instance;
 
@@ -45,25 +45,25 @@ internal class Overlay
 
 	public readonly Form Frm;
 
-	public readonly SharpDX.Direct2D1.Factory factory_0;
+	public readonly SharpDX.Direct2D1.Factory direct2DFactory;
 
-	public readonly SharpDX.DirectWrite.Factory factory_1;
+	public readonly SharpDX.DirectWrite.Factory directWriteFactory;
 
 	public OverlayDisplayState State = OverlayDisplayState.Normal;
 
-	private Stopwatch stopwatch_0 = new();
+	private Stopwatch fontCleanupTimer = new();
 
-	public MapMode mapMode_0;
+	public MapMode ActiveMapMode;
 
-	public float float_2;
+	public float mapSize;
 
 	public float MinimapScale;
 
-	public float float_4;
+	public float mapHalfSize;
 
-	public float float_5;
+	public float mapCenterX;
 
-	public float float_6;
+	public float mapCenterY;
 
 	public float MinimapOffsetX;
 
@@ -114,20 +114,20 @@ internal class Overlay
 	public RenderFont class221_15;
 
 
-	public readonly List<UiElement> list_0 = [];
+	public readonly List<UiElement> clipElements = [];
 
-	public SceneMapRenderer class204_0 = new();
+	public SceneMapRenderer mapRenderer = new();
 
-	internal ModulePlayerInfo class213_0;
+	internal ModulePlayerInfo playerInfoModule;
 
-	internal ModulePortraitPlayerStats class212_0;
+	internal ModulePortraitPlayerStats portraitPlayerStatsModule;
 
-	internal ModulePortraits class206_0;
+	internal ModulePortraits portraitsModule;
 
 	public ModuleStatTracker ModuleStatTracker;
 
-	internal ModuleCursorHint class208_0;
-	internal ModuleLobbyHeroes class209_0;
+	internal ModuleCursorHint cursorHintModule;
+	internal ModuleLobbyHeroes lobbyHeroesModule;
 
 	public Dictionary<string, string> class112_0 = new Dictionary<string, string>();
 
@@ -154,11 +154,11 @@ internal class Overlay
 	{
 		RawMatrix3x2 transform = renderTarget.Transform;
 		Matrix3x2 matrix3x = Matrix3x2.Rotation(-(float)Math.PI / 4f);
-		Matrix3x2 matrix3x2 = Matrix3x2.Translation(float_5, float_6);
+		Matrix3x2 matrix3x2 = Matrix3x2.Translation(mapCenterX, mapCenterY);
 		matrix3x2_0 = transform * matrix3x * matrix3x2;
 		renderTarget.Transform = matrix3x2_0;
 		try {
-			class204_0.RenderMap();
+			mapRenderer.RenderMap();
 		} catch (Exception exception_) {
 			Logger.LogException(exception_.Message);
 		}
@@ -168,19 +168,19 @@ internal class Overlay
 		} catch (Exception exception) {
 			Logger.LogException(exception.Message);
 		}
-		if (mapMode_0 == MapMode.Minimap) {
+		if (ActiveMapMode == MapMode.Minimap) {
 			if (Core.Controller.SceneReveal.MinimapClip) {
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(0f, 0f, float_5 - float_2 / 2f, GameWindowManager.Window.Size.Height), AntialiasMode.PerPrimitive);
+				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(0f, 0f, mapCenterX - mapSize / 2f, GameWindowManager.Window.Size.Height), AntialiasMode.PerPrimitive);
 				renderTarget.Clear(SharpDX.Color.Transparent);
 				renderTarget.PopAxisAlignedClip();
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(float_5 - float_2 / 2f, 0f, (float)GameWindowManager.Window.Size.Width - (float_5 - float_2 / 2f), float_6 - float_2 / 2f), AntialiasMode.PerPrimitive);
+				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX - mapSize / 2f, 0f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), mapCenterY - mapSize / 2f), AntialiasMode.PerPrimitive);
 				renderTarget.Clear(SharpDX.Color.Transparent);
 				renderTarget.PopAxisAlignedClip();
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(float_5 - float_2 / 2f, float_6 + float_2 / 2f, (float)GameWindowManager.Window.Size.Width - (float_5 - float_2 / 2f), (float)GameWindowManager.Window.Size.Height - (float_6 + float_2 / 2f)), AntialiasMode.PerPrimitive);
+				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX - mapSize / 2f, mapCenterY + mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), (float)GameWindowManager.Window.Size.Height - (mapCenterY + mapSize / 2f)), AntialiasMode.PerPrimitive);
 				renderTarget.Clear(SharpDX.Color.Transparent);
 				renderTarget.PopAxisAlignedClip();
 			}
-			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(float_5 + float_2 / 2f, float_6 - float_2 / 2f, (float)GameWindowManager.Window.Size.Width - (float_5 + float_2 / 2f), float_2), AntialiasMode.PerPrimitive);
+			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX + mapSize / 2f, mapCenterY - mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX + mapSize / 2f), mapSize), AntialiasMode.PerPrimitive);
 			renderTarget.Clear(SharpDX.Color.Transparent);
 			renderTarget.PopAxisAlignedClip();
 		}
@@ -188,8 +188,8 @@ internal class Overlay
 
 	public void ToMinimapCoordinates(float float_9, float statusY0, bool bool_0, out float statusY1, out float statusY2)
 	{
-		statusY1 = (MinimapOffsetX + CoreCollector.LocalPlayer.FloorCoordinate.X - float_9) * float_2 / 350f;
-		statusY2 = (0f - (MinimapOffsetY + CoreCollector.LocalPlayer.FloorCoordinate.Y - statusY0)) * float_2 / 350f;
+		statusY1 = (MinimapOffsetX + CoreCollector.LocalPlayer.FloorCoordinate.X - float_9) * mapSize / 350f;
+		statusY2 = (0f - (MinimapOffsetY + CoreCollector.LocalPlayer.FloorCoordinate.Y - statusY0)) * mapSize / 350f;
 		if (bool_0) {
 			float num = statusY1 * matrix3x2_0.M11 + statusY2 * matrix3x2_0.M21 + matrix3x2_0.M31;
 			float num2 = statusY1 * matrix3x2_0.M12 + statusY2 * matrix3x2_0.M22 + matrix3x2_0.M32;
@@ -200,8 +200,8 @@ internal class Overlay
 
 	private void CreateRenderTarget()
 	{
-		surface_0 = Surface.FromSwapChain(swapChain_0, 0);
-		renderTarget = new RenderTarget(factory_0, surface_0, renderTargetProperties_0) {
+		surface = Surface.FromSwapChain(swapChain, 0);
+		renderTarget = new RenderTarget(direct2DFactory, surface, renderTargetProperties) {
 			AntialiasMode = AntialiasMode.PerPrimitive,
 			TextAntialiasMode = SharpDX.Direct2D1.TextAntialiasMode.Grayscale
 		};
@@ -210,7 +210,7 @@ internal class Overlay
 	private void form_0_SizeChanged(object sender, EventArgs e)
 	{
 		DisposeRenderTargets();
-		swapChain_0.ResizeBuffers(swapChainDescription_0.BufferCount, 0, 0, Format.Unknown, SwapChainFlags.None);
+		swapChain.ResizeBuffers(swapChainDescription.BufferCount, 0, 0, Format.Unknown, SwapChainFlags.None);
 		CreateRenderTarget();
 		DisposeModules();
 	}
@@ -221,7 +221,7 @@ internal class Overlay
 		foreach (Module item in modules.ToArray()) {
 			item.Dispose();
 		}
-		class204_0.DisposeTextures();
+		mapRenderer.DisposeTextures();
 		if (Core.Settings != null) {
 			RecreateSharedFonts();
 			InitializeModulesFromConfig(Core.Settings);
@@ -236,14 +236,14 @@ internal class Overlay
 			Opacity = float_9
 		};
 		renderTarget.PushLayer(ref layerParameters, layer);
-		layer_0 = layer;
+		clipLayer = layer;
 	}
 
 	public void EndClip()
 	{
 		renderTarget.PopLayer();
-		layer_0.Dispose();
-		layer_0 = null;
+		clipLayer.Dispose();
+		clipLayer = null;
 	}
 
 	public void method_9(params UiElement[] inventoryMainUiElement)
@@ -251,8 +251,8 @@ internal class Overlay
 		if (CoreCollector.D3Memory.IsUiHidden) {
 			return;
 		}
-		for (int i = 0; i < list_0.Count; i++) {
-			UiElement uiElement = list_0[i];
+		for (int i = 0; i < clipElements.Count; i++) {
+			UiElement uiElement = clipElements[i];
 			if (uiElement == null || !uiElement.Visible) {
 				continue;
 			}
@@ -307,9 +307,9 @@ internal class Overlay
 		Frm = new FormOverlay();
 		Frm.SetBounds(0, 0, 0, 0);
 		Frm.SizeChanged += form_0_SizeChanged;
-		factory_0 = new SharpDX.Direct2D1.Factory();
-		factory_1 = new SharpDX.DirectWrite.Factory();
-		swapChainDescription_0 = new SwapChainDescription {
+		direct2DFactory = new SharpDX.Direct2D1.Factory();
+		directWriteFactory = new SharpDX.DirectWrite.Factory();
+		swapChainDescription = new SwapChainDescription {
 			BufferCount = 2,
 			ModeDescription = new ModeDescription(0, 0, new Rational(60, 1), Format.R8G8B8A8_UNorm),
 			IsWindowed = true,
@@ -319,7 +319,7 @@ internal class Overlay
 			Usage = Usage.RenderTargetOutput,
 			Flags = SwapChainFlags.None
 		};
-		renderTargetProperties_0 = new RenderTargetProperties {
+		renderTargetProperties = new RenderTargetProperties {
 			DpiX = 96f,
 			DpiY = 96f,
 			MinLevel = SharpDX.Direct2D1.FeatureLevel.Level_10,
@@ -333,67 +333,67 @@ internal class Overlay
 		} catch (Exception ex) {
 			Logger.Info($"Error occurred while querying supported feature level: {ex.Message}");
 		}
-		SharpDX.Direct3D11.Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[1] { featureLevel }, swapChainDescription_0, out device_0, out swapChain_0);
+		SharpDX.Direct3D11.Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[1] { featureLevel }, swapChainDescription, out device, out swapChain);
 		CreateRenderTarget();
 		method_12();
 	}
 
 	private void method_12()
 	{
-		list_0.Add(CoreCollector.UiElements.InventoryMainUiElement);
-		list_0.Add(CoreCollector.UiElements.InventorySidePaneContainer);
-		list_0.Add(CoreCollector.UiElements.CharacterDetailsContainer);
-		list_0.Add(CoreCollector.UiElements.StashMainUiElement);
-		list_0.Add(CoreCollector.UiElements.EquipmentManagerMainPage);
-		list_0.Add(CoreCollector.UiElements.Details);
-		list_0.Add(CoreCollector.UiElements.VendorDialogMainPagePanel);
-		list_0.Add(CoreCollector.UiElements.ShopDialogMainPagePanel);
-		list_0.Add(CoreCollector.UiElements.Item2Stack);
-		list_0.Add(CoreCollector.UiElements.Item3Stack);
-		list_0.Add(CoreCollector.UiElements.SkillsList);
-		list_0.Add(CoreCollector.UiElements.ActiveSkillSelect);
-		list_0.Add(CoreCollector.UiElements.PassiveSkillSelect);
-		list_0.Add(CoreCollector.UiElements.GamemenuBkgrnd);
-		list_0.Add(CoreCollector.UiElements.FriendsListContent);
-		list_0.Add(CoreCollector.UiElements.GroupsListContent);
-		list_0.Add(CoreCollector.UiElements.RiftDialogMainPage);
-		list_0.Add(CoreCollector.UiElements.BattleNetGameSettingsMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.FollowerMainUiElement);
-		list_0.Add(CoreCollector.UiElements.InspectMainPage);
-		list_0.Add(CoreCollector.UiElements.MapDialogMainPage);
-		list_0.Add(CoreCollector.UiElements.WorldMapUiElement);
-		list_0.Add(CoreCollector.UiElements.ActMapUiElement);
-		list_0.Add(CoreCollector.UiElements.Instructions);
-		list_0.Add(CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.ConversationDialogMain);
-		list_0.Add(CoreCollector.UiElements.Item1Stack);
-		list_0.Add(CoreCollector.UiElements.TradeDialogMainPage);
-		list_0.Add(CoreCollector.UiElements.InGamePortraitTooltip2);
-		list_0.Add(CoreCollector.UiElements.PlayerContextMenu);
-		list_0.Add(CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.BattleNetLeaderboardMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.BattleNetSeasonJourneyMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.BattleNetStoreMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.FrameBackground);
-		list_0.Add(CoreCollector.UiElements.DialogSendRealIdRequest);
-		list_0.Add(CoreCollector.UiElements.Banner2);
-		list_0.Add(CoreCollector.UiElements.Skill2Stack);
-		list_0.Add(CoreCollector.UiElements.BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer);
-		list_0.Add(CoreCollector.UiElements.InGamePetContextMenu);
-		list_0.Add(CoreCollector.UiElements.ParagonPointSelect);
-		list_0.Add(CoreCollector.UiElements.Tooltip2);
-		list_0.Add(CoreCollector.UiElements.HirelingDetailsContainer);
-		list_0.Add(CoreCollector.UiElements.QuestloreDialogPanel);
-		list_0.Add(CoreCollector.UiElements.RactorTag0);
-		list_0.Add(CoreCollector.UiElements.Subdlg);
-		list_0.Add(CoreCollector.UiElements.InviteToPartyNotification);
-		list_0.Add(CoreCollector.UiElements.JoinRequestNotification);
-		list_0.Add(CoreCollector.UiElements.LorePlayerDlgBackground);
-		list_0.Add(CoreCollector.UiElements.LoreNotifyDlg);
-		list_0.Add(CoreCollector.UiElements.LeaveGameWindow);
-		list_0.Add(CoreCollector.UiElements.GuildMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.InventoryMainUiElement);
+		clipElements.Add(CoreCollector.UiElements.InventorySidePaneContainer);
+		clipElements.Add(CoreCollector.UiElements.CharacterDetailsContainer);
+		clipElements.Add(CoreCollector.UiElements.StashMainUiElement);
+		clipElements.Add(CoreCollector.UiElements.EquipmentManagerMainPage);
+		clipElements.Add(CoreCollector.UiElements.Details);
+		clipElements.Add(CoreCollector.UiElements.VendorDialogMainPagePanel);
+		clipElements.Add(CoreCollector.UiElements.ShopDialogMainPagePanel);
+		clipElements.Add(CoreCollector.UiElements.Item2Stack);
+		clipElements.Add(CoreCollector.UiElements.Item3Stack);
+		clipElements.Add(CoreCollector.UiElements.SkillsList);
+		clipElements.Add(CoreCollector.UiElements.ActiveSkillSelect);
+		clipElements.Add(CoreCollector.UiElements.PassiveSkillSelect);
+		clipElements.Add(CoreCollector.UiElements.GamemenuBkgrnd);
+		clipElements.Add(CoreCollector.UiElements.FriendsListContent);
+		clipElements.Add(CoreCollector.UiElements.GroupsListContent);
+		clipElements.Add(CoreCollector.UiElements.RiftDialogMainPage);
+		clipElements.Add(CoreCollector.UiElements.BattleNetGameSettingsMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.FollowerMainUiElement);
+		clipElements.Add(CoreCollector.UiElements.InspectMainPage);
+		clipElements.Add(CoreCollector.UiElements.MapDialogMainPage);
+		clipElements.Add(CoreCollector.UiElements.WorldMapUiElement);
+		clipElements.Add(CoreCollector.UiElements.ActMapUiElement);
+		clipElements.Add(CoreCollector.UiElements.Instructions);
+		clipElements.Add(CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.ConversationDialogMain);
+		clipElements.Add(CoreCollector.UiElements.Item1Stack);
+		clipElements.Add(CoreCollector.UiElements.TradeDialogMainPage);
+		clipElements.Add(CoreCollector.UiElements.InGamePortraitTooltip2);
+		clipElements.Add(CoreCollector.UiElements.PlayerContextMenu);
+		clipElements.Add(CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.BattleNetLeaderboardMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.BattleNetSeasonJourneyMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.BattleNetStoreMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.FrameBackground);
+		clipElements.Add(CoreCollector.UiElements.DialogSendRealIdRequest);
+		clipElements.Add(CoreCollector.UiElements.Banner2);
+		clipElements.Add(CoreCollector.UiElements.Skill2Stack);
+		clipElements.Add(CoreCollector.UiElements.BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer);
+		clipElements.Add(CoreCollector.UiElements.InGamePetContextMenu);
+		clipElements.Add(CoreCollector.UiElements.ParagonPointSelect);
+		clipElements.Add(CoreCollector.UiElements.Tooltip2);
+		clipElements.Add(CoreCollector.UiElements.HirelingDetailsContainer);
+		clipElements.Add(CoreCollector.UiElements.QuestloreDialogPanel);
+		clipElements.Add(CoreCollector.UiElements.RactorTag0);
+		clipElements.Add(CoreCollector.UiElements.Subdlg);
+		clipElements.Add(CoreCollector.UiElements.InviteToPartyNotification);
+		clipElements.Add(CoreCollector.UiElements.JoinRequestNotification);
+		clipElements.Add(CoreCollector.UiElements.LorePlayerDlgBackground);
+		clipElements.Add(CoreCollector.UiElements.LoreNotifyDlg);
+		clipElements.Add(CoreCollector.UiElements.LeaveGameWindow);
+		clipElements.Add(CoreCollector.UiElements.GuildMainLayoutRootOverlayContainer);
 	}
 
 	internal void RecreateSharedFonts()
@@ -423,16 +423,16 @@ internal class Overlay
 
 	internal void InitializeModulesFromConfig(Settings settings)
 	{
-		class208_0 = new ModuleCursorHint();
-		class213_0 = new ModulePlayerInfo(settings);
+		cursorHintModule = new ModuleCursorHint();
+		playerInfoModule = new ModulePlayerInfo(settings);
 
-		class212_0 = new ModulePortraitPlayerStats(settings);
-		class206_0 = new ModulePortraits();
+		portraitPlayerStatsModule = new ModulePortraitPlayerStats(settings);
+		portraitsModule = new ModulePortraits();
 
 		var statTracker = settings.Overlay.StatTracker;
 		ModuleStatTracker = new ModuleStatTracker(statTracker);
 
-		class209_0 = new ModuleLobbyHeroes(settings);
+		lobbyHeroesModule = new ModuleLobbyHeroes(settings);
 	}
 
 	internal bool Update()
@@ -446,37 +446,37 @@ internal class Overlay
 			return false;
 		}
 		try {
-			mapMode_0 = (CoreCollector.UiElements.MapDialogMainPage.Visible ? MapMode.Map : (CoreCollector.UiElements.WorldMapUiElement.Visible ? (CoreCollector.UiElements.ActMapUiElement.Visible ? MapMode.ActMap : MapMode.WaypointMap) : MapMode.Minimap));
+			ActiveMapMode = (CoreCollector.UiElements.MapDialogMainPage.Visible ? MapMode.Map : (CoreCollector.UiElements.WorldMapUiElement.Visible ? (CoreCollector.UiElements.ActMapUiElement.Visible ? MapMode.ActMap : MapMode.WaypointMap) : MapMode.Minimap));
 			MinimapScale = (float)GameWindowManager.Window.Size.Height / 1200f;
-			if (mapMode_0 == MapMode.PermaMap) {
+			if (ActiveMapMode == MapMode.PermaMap) {
 				MinimapScale *= 0.5f;
 			}
-			float_2 = 350f * MinimapScale;
-			switch (mapMode_0) {
+			mapSize = 350f * MinimapScale;
+			switch (ActiveMapMode) {
 				case MapMode.Minimap:
-					float_5 = (float)(GameWindowManager.Window.Size.Width - 1) - 27f * MinimapScale - float_2 / 2f;
-					float_6 = 54f * MinimapScale + float_2 / 2f;
+					mapCenterX = (float)(GameWindowManager.Window.Size.Width - 1) - 27f * MinimapScale - mapSize / 2f;
+					mapCenterY = 54f * MinimapScale + mapSize / 2f;
 					MinimapOffsetX = 0f;
 					MinimapOffsetY = 0f;
 					break;
 				case MapMode.Map:
-					float_5 = GameWindowManager.Window.Size.Width / 2;
-					float_6 = GameWindowManager.Window.Size.Height / 2;
+					mapCenterX = GameWindowManager.Window.Size.Width / 2;
+					mapCenterY = GameWindowManager.Window.Size.Height / 2;
 					MinimapOffsetX = CoreCollector.UiElements.Localmap.MinimapOffsetX;
 					MinimapOffsetY = CoreCollector.UiElements.Localmap.MinimapOffsetY;
 					break;
 				case MapMode.PermaMap:
-					float_5 = GameWindowManager.Window.Size.Width / 2;
-					float_6 = (float)GameWindowManager.Window.Size.Height * 0.47f;
+					mapCenterX = GameWindowManager.Window.Size.Width / 2;
+					mapCenterY = (float)GameWindowManager.Window.Size.Height * 0.47f;
 					MinimapOffsetX = 0f;
 					MinimapOffsetY = 0f;
 					break;
 			}
-			float_4 = float_2 / 2f;
+			mapHalfSize = mapSize / 2f;
 			RenderCounter.StartMeasure();
 			renderTarget.BeginDraw();
 			renderTarget.Clear(SharpDX.Color.Transparent);
-			class208_0.SetHint(null, null);
+			cursorHintModule.SetHint(null, null);
 			BeforeRender?.Invoke(this, EventArgs.Empty);
 			if (Core.Controller.Render.IsRenderEnabled) {
 				bool flag4 = CoreCollector.UiElements.Cutscene.Visible || CoreCollector.UiElements.ScriptedSequence.Visible;
@@ -493,9 +493,9 @@ internal class Overlay
 					if (!boolean_) {
 						PaintWorld_Ground?.Invoke(this, EventArgs.Empty);
 					}
-					class212_0.Update();
-					class206_0.Update();
-					class213_0.Draw(CoreCollector.LocalPlayer);
+					portraitPlayerStatsModule.Update();
+					portraitsModule.Update();
+					playerInfoModule.Draw(CoreCollector.LocalPlayer);
 					PaintTop_BeforeClip?.Invoke(this, EventArgs.Empty);
 					method_9(CoreCollector.UiElements.MapDialogMainPage);
 					if ((CoreCollector.UiElements.InventoryMainUiElement.Visible || CoreCollector.UiElements.FollowerMainUiElement.Visible) && !CoreCollector.UiElements.GamemenuBkgrnd.Visible && !CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.MapDialogMainPage.Visible && !CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer.Visible && !CoreCollector.D3Memory.IsUiHidden && CoreCollector.LocalPlayer != null) {
@@ -504,10 +504,10 @@ internal class Overlay
 					}
 					PaintTop_AfterClip?.Invoke(this, EventArgs.Empty);
 				}
-				class209_0?.Update();
+				lobbyHeroesModule?.Update();
 				ModuleStatTracker?.Draw();
 				Core.SettingsMenu.Draw();
-				class208_0?.Draw();
+				cursorHintModule?.Draw();
 				if (Core.PluginHandler.Reloading) {
 					Instance.DrawStatus("Reloading plugins", Instance.StatusMessage);
 				} else if (Core.PluginHandler.Reloaded) {
@@ -519,9 +519,9 @@ internal class Overlay
 			}
 			renderTarget.EndDraw();
 			RenderCounter.EndMeasure();
-			swapChain_0.Present(1, PresentFlags.None);
-			if (stopwatch_0.ElapsedMilliseconds >= 1000) {
-				stopwatch_0.Restart();
+			swapChain.Present(1, PresentFlags.None);
+			if (fontCleanupTimer.ElapsedMilliseconds >= 1000) {
+				fontCleanupTimer.Restart();
 				CleanupFontCache();
 			}
 		} catch (SharpDXException exception_) {
@@ -540,11 +540,11 @@ internal class Overlay
 
 	void DisposeRenderTargets()
 	{
-		DisposeRenders(layer_0);
-		layer_0 = null;
+		DisposeRenders(clipLayer);
+		clipLayer = null;
 		DisposeRenders(renderTarget);
 		renderTarget = null;
-		DisposeRenders(surface_0);
-		surface_0 = null;
+		DisposeRenders(surface);
+		surface = null;
 	}
 }

@@ -205,16 +205,16 @@ internal partial class ActorCollector
 			return false;
 		}
 		if (actor is SkillEffect skillEffect) {
-			List<SkillEffect> list = Class112_0.GetValueOrDefault(skillEffect.SkillEffectRule.Type);
+			List<SkillEffect> list = SkillEffectsByType.GetValueOrDefault(skillEffect.SkillEffectRule.Type);
 			if (list == null) {
 				list = new List<SkillEffect>();
-				Class112_0[skillEffect.SkillEffectRule.Type] = list;
+				SkillEffectsByType[skillEffect.SkillEffectRule.Type] = list;
 			}
 			list.Add(skillEffect);
 			return true;
 		}
 		if (actor is Portal portal) {
-			Class112_1[portal.AnnId] = portal;
+			PortalsByAnnId[portal.AnnId] = portal;
 			portal.ActorAvailable = true;
 			portal.ActorLastAvailable.Restart();
 			return true;
@@ -222,7 +222,7 @@ internal partial class ActorCollector
 		if (actor is Shrine shrine) {
 			shrine.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
 			shrine.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
-			CoreCollector.Class412_0.UpdateShrineMarker(shrine);
+			CoreCollector.MarkerCollector.UpdateShrineMarker(shrine);
 			Shrines.Add(shrine);
 			return true;
 		}
@@ -263,7 +263,7 @@ internal partial class ActorCollector
 		}
 		if (actor is HeadStone) {
 			HeadStone item = actor as HeadStone;
-			List_1.Add(item);
+			HeadStones.Add(item);
 			return true;
 		}
 		if (actor.SnoActor.Kind == ActorKind.QuestActivate) {

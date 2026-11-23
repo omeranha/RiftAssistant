@@ -341,11 +341,11 @@ public class Scene
 
 	public uint UInt32_0 { get; set; }
 
-	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint uint_4, uint sSceneID, uint uint_6, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
+	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint worldSno, uint sSceneID, uint uint_6, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
 	{
 		SnoScene = isnoScene_1;
 		SnoArea = isnoArea_1;
-		WorldSno = uint_4;
+		WorldSno = worldSno;
 		NavMeshId = sSceneID;
 		SceneId = uint_6;
 		PosX = meshMinX;

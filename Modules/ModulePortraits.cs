@@ -8,7 +8,7 @@ internal class ModulePortraits : Module
 
 	public void Update()
 	{
-		bool bool_ = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.mapMode_0 != MapMode.Map && CoreCollector.D3Memory.IsUiHidden;
+		bool bool_ = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.ActiveMapMode != MapMode.Map && CoreCollector.D3Memory.IsUiHidden;
 		if (!vmethod_0(bool_)) {
 			return;
 		}

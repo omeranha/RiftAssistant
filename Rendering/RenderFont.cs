@@ -11,7 +11,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 	internal class TextLayoutCacheEntry(RenderFont font, string text)
 	{
 		public readonly RenderFont Font = font;
-		public TextLayout Layout = new(Overlay.Instance.factory_1, text, font.GetTextFormat(), font.MaxWidth, font.MaxHeight);
+		public TextLayout Layout = new(Overlay.Instance.directWriteFactory, text, font.GetTextFormat(), font.MaxWidth, font.MaxHeight);
 		public long LastAccessTicks;
 	}
 
@@ -126,7 +126,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 	private void RecreateTextFormat(string familyName, FontWeight weight, SharpDX.DirectWrite.FontStyle style, float fontSize, WordWrapping wrapping)
 	{
 		TextFormat?.Dispose();
-		TextFormat = new TextFormat(Overlay.Instance.factory_1, familyName, weight, style, fontSize);
+		TextFormat = new TextFormat(Overlay.Instance.directWriteFactory, familyName, weight, style, fontSize);
 		if (TextFormat.WordWrapping != wrapping) {
 			TextFormat.WordWrapping = wrapping;
 		}
@@ -188,7 +188,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 			return entry.Layout;
 		}
 
-		var textLayout = new TextLayout(Overlay.Instance.factory_1, text, GetTextFormat(), MaxWidth, MaxHeight);
+		var textLayout = new TextLayout(Overlay.Instance.directWriteFactory, text, GetTextFormat(), MaxWidth, MaxHeight);
 		if (textLayout.WordWrapping != expectedWrapping) {
 			textLayout.WordWrapping = expectedWrapping;
 		}

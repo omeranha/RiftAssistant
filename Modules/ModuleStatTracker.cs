@@ -250,18 +250,18 @@ internal class ModuleStatTracker : Module
 	{
 		trackers.Clear();
 		if (CoreCollector.IsGameReady) {
-			trackers.Add(CoreCollector.class340_2);
-			trackers.Add(CoreCollector.class340_3);
-			trackers.Add(CoreCollector.class340_4);
+			trackers.Add(CoreCollector.AccountTotal);
+			trackers.Add(CoreCollector.AccountYesterday);
+			trackers.Add(CoreCollector.AccountToday);
 			trackers.Add(CoreCollector.CurrentHeroTotal);
 			trackers.Add(CoreCollector.CurrentHeroYesterday);
 			trackers.Add(CoreCollector.CurrentHeroToday);
 			trackers.Add(CoreCollector.Session);
 			trackers.Add(CoreCollector.SessionAlwaysRunning);
-			if (CoreCollector.class364_0 != null) {
-				trackers.Add(CoreCollector.class364_0.RunStatTracker);
-				for (int i = 0; i < CoreCollector.class364_0.VisitedAreas.Count; i++) {
-					AreaTracker areaTracker = CoreCollector.class364_0.VisitedAreas[i];
+			if (CoreCollector.RunTracker != null) {
+				trackers.Add(CoreCollector.RunTracker.RunStatTracker);
+				for (int i = 0; i < CoreCollector.RunTracker.VisitedAreas.Count; i++) {
+					AreaTracker areaTracker = CoreCollector.RunTracker.VisitedAreas[i];
 					if (!areaTracker.SnoArea.IsTown) {
 						StatTracker class340_ = areaTracker.AreaStats;
 						class340_.Title = areaTracker.AreaNameLocalized;
@@ -277,18 +277,18 @@ internal class ModuleStatTracker : Module
 				}
 			}
 		} else {
-			trackers.Add(Overlay.Instance.class209_0.class340_0);
-			trackers.Add(Overlay.Instance.class209_0.class340_1);
-			trackers.Add(Overlay.Instance.class209_0.class340_2);
-			trackers.Add(Overlay.Instance.class209_0.class340_3);
-			trackers.Add(Overlay.Instance.class209_0.class340_4);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_0);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_1);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_2);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_3);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_4);
 			trackers.Add(CoreCollector.Session);
 			trackers.Add(CoreCollector.SessionAlwaysRunning);
-			trackers.Add(Overlay.Instance.class209_0.class340_5);
-			trackers.Add(Overlay.Instance.class209_0.class340_6);
-			trackers.Add(Overlay.Instance.class209_0.class340_7);
-			trackers.Add(Overlay.Instance.class209_0.class340_8);
-			trackers.Add(Overlay.Instance.class209_0.class340_9);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_5);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_6);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_7);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_8);
+			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_9);
 		}
 	}
 
@@ -309,7 +309,7 @@ internal class ModuleStatTracker : Module
 			columnWidths = new int[num];
 		}
 		bool show = Show;
-		if (Overlay.Instance.class209_0 != null && Overlay.Instance.class209_0.ihero_0 != null) {
+		if (Overlay.Instance.lobbyHeroesModule != null && Overlay.Instance.lobbyHeroesModule.ihero_0 != null) {
 			Show = true;
 		}
 		if (!vmethod_0(bool_4: true)) {
@@ -317,7 +317,7 @@ internal class ModuleStatTracker : Module
 			return;
 		}
 		Show = show;
-		if (!CoreCollector.IsGameReady && Overlay.Instance.class209_0 != null && Overlay.Instance.class209_0.ihero_0 == null) {
+		if (!CoreCollector.IsGameReady && Overlay.Instance.lobbyHeroesModule != null && Overlay.Instance.lobbyHeroesModule.ihero_0 == null) {
 			return;
 		}
 
@@ -396,14 +396,14 @@ internal class ModuleStatTracker : Module
 		}
 	}
 
-	private void DrawCell(int columnIndex, RenderFont font, string text, float height, RenderBrush hoverBrush, Alignment alignment, int columnSpan, RenderBrush overrideBrush)
+	private void DrawCell(int columnIndex, RenderFont font, string header, float height, RenderBrush hoverBrush, Alignment alignment, int columnSpan, RenderBrush overrideBrush)
 	{
 		int width = columnWidths[columnIndex];
 		while (--columnSpan > 0) {
 			width += columnWidths[++columnIndex];
 		}
 
-		var layout = font.GetTextLayout(text);
+		var layout = font.GetTextLayout(header);
 		float x = currentColumnX + 0.5f;
 		float y = currentRowY + 0.5f;
 		(hoverBrush ?? class219_8).DrawRectangle(x, y, width, height);

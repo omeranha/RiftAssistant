@@ -41,8 +41,8 @@ internal class ModulePortraitPlayerStats : Module
 
 	public void Update()
 	{
-		bool flag = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.mapMode_0 != MapMode.Map && !CoreCollector.D3Memory.IsUiHidden;
-		if (Overlay.Instance.mapMode_0 == MapMode.WaypointMap || Overlay.Instance.mapMode_0 == MapMode.ActMap) {
+		bool flag = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.ActiveMapMode != MapMode.Map && !CoreCollector.D3Memory.IsUiHidden;
+		if (Overlay.Instance.ActiveMapMode == MapMode.WaypointMap || Overlay.Instance.ActiveMapMode == MapMode.ActMap) {
 			flag = false;
 		}
 		if (!vmethod_0(flag)) {

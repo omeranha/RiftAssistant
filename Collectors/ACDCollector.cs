@@ -157,18 +157,18 @@ internal class ACDCollector
 			UpdateAttributeMap();
 		}
 		uint id = iattribute_0.GetId(uint_0);
-		long num = AttributeMap.GetBucketAddress(id);
+		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
-		while (num != 0L && num2 < 20)
+		while (bucketAddress != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(bucketAddress);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
 			}
 			if (r_AttributeEntry2.Value.uint_0 != id)
 			{
-				num = r_AttributeEntry2.Value.long_0;
+				bucketAddress = r_AttributeEntry2.Value.long_0;
 				num2++;
 				continue;
 			}
@@ -188,18 +188,18 @@ internal class ACDCollector
 			UpdateAttributeMap();
 		}
 		uint id = iattribute_0.GetId(sno);
-		long num = AttributeMap.GetBucketAddress(id);
+		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
-		while (num != 0L && num2 < 20)
+		while (bucketAddress != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(bucketAddress);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
 			}
 			if (r_AttributeEntry2.Value.uint_0 != id)
 			{
-				num = r_AttributeEntry2.Value.long_0;
+				bucketAddress = r_AttributeEntry2.Value.long_0;
 				num2++;
 				continue;
 			}
@@ -219,18 +219,18 @@ internal class ACDCollector
 			UpdateAttributeMap();
 		}
 		uint id = acdAttribute.GetId(uint_0);
-		long num = AttributeMap.GetBucketAddress(id);
+		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
-		while (num != 0L && num2 < 20)
+		while (bucketAddress != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(bucketAddress);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
 			}
 			if (r_AttributeEntry2.Value.uint_0 != id)
 			{
-				num = r_AttributeEntry2.Value.long_0;
+				bucketAddress = r_AttributeEntry2.Value.long_0;
 				num2++;
 				continue;
 			}
@@ -250,18 +250,18 @@ internal class ACDCollector
 			UpdateAttributeMap();
 		}
 		uint id = acdAttribute.GetId(uint_0);
-		long num = AttributeMap.GetBucketAddress(id);
+		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
-		while (num != 0L && num2 < 20)
+		while (bucketAddress != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(bucketAddress);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
 			}
 			if (r_AttributeEntry2.Value.uint_0 != id)
 			{
-				num = r_AttributeEntry2.Value.long_0;
+				bucketAddress = r_AttributeEntry2.Value.long_0;
 				num2++;
 				continue;
 			}
@@ -270,9 +270,9 @@ internal class ACDCollector
 		return uint_1;
 	}
 
-	public bool ReadAttributeEntries(List<r_AttributeEntry> list_0)
+	public bool ReadAttributeEntries(List<r_AttributeEntry> attributeEntries)
 	{
-		if (list_0 == null)
+		if (attributeEntries == null)
 		{
 			return false;
 		}
@@ -316,7 +316,7 @@ internal class ACDCollector
 					break;
 				}
 				r_AttributeEntry item = @class.Elements[num3];
-				list_0.Add(item);
+				attributeEntries.Add(item);
 				num = item.long_0;
 				num2++;
 			}

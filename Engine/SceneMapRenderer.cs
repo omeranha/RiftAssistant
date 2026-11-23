@@ -137,7 +137,7 @@ internal class SceneMapRenderer
 
 		var brush = Core.Controller.SceneReveal.BrushKnown;
 		string code = scene.Code;
-		if (code != null && (CoreCollector.specialArea_0 == SpecialArea.Rift || CoreCollector.specialArea_0 == SpecialArea.GreaterRift)) {
+		if (code != null && (CoreCollector.CurrentSpecialArea == SpecialArea.Rift || CoreCollector.CurrentSpecialArea == SpecialArea.GreaterRift)) {
 			if (code.Contains("entrance")) {
 				brush = entranceBrush;
 			} else if (code.Contains("exit")) {
@@ -204,7 +204,7 @@ internal class SceneMapRenderer
 								SnoScene snoScene = (sceneInfo as SnoWorldSceneInfoStatic).SnoScene;
 								DrawScene(offsetX, offsetY, sceneInfo.W, sceneInfo.H, snoScene as SnoScene, graphics);
 								renderedSceneCache.Add(cacheKey);
-							} else if (Overlay.Instance.mapMode_0 != MapMode.PermaMap) {
+							} else if (Overlay.Instance.ActiveMapMode != MapMode.PermaMap) {
 								DrawScene(offsetX, offsetY, sceneInfo.W, sceneInfo.H, null, graphics);
 							}
 						}
@@ -258,7 +258,7 @@ internal class SceneMapRenderer
 		} catch (Exception ex) {
 			Logger.LogException(ex.Message);
 		}
-		currentMapMode = Overlay.Instance.mapMode_0;
+		currentMapMode = Overlay.Instance.ActiveMapMode;
 	}
 
 	public bool SetupRequiredMapValidations(float activeMaxX, float activeMinY)
@@ -283,7 +283,7 @@ internal class SceneMapRenderer
 	public void RenderMap()
 	{
 		var overlay = Overlay.Instance;
-		if (CoreCollector.IsLoading || (overlay.mapMode_0 != MapMode.Minimap && overlay.mapMode_0 != MapMode.Map) || !CalculateMapBounds(out var minX, out var maxX, out var minY, out var maxY)) {
+		if (CoreCollector.IsLoading || (overlay.ActiveMapMode != MapMode.Minimap && overlay.ActiveMapMode != MapMode.Map) || !CalculateMapBounds(out var minX, out var maxX, out var minY, out var maxY)) {
 			return;
 		}
 
@@ -302,10 +302,10 @@ internal class SceneMapRenderer
 			isCacheValid = SetupRequiredMapValidations(maxX, minY);
 		}
 
-		if (currentMapMode == MapMode.PermaMap && overlay.mapMode_0 != MapMode.PermaMap) {
+		if (currentMapMode == MapMode.PermaMap && overlay.ActiveMapMode != MapMode.PermaMap) {
 			isCacheValid = false;
 		}
-		if (currentMapMode != MapMode.PermaMap && overlay.mapMode_0 == MapMode.PermaMap) {
+		if (currentMapMode != MapMode.PermaMap && overlay.ActiveMapMode == MapMode.PermaMap) {
 			isCacheValid = false;
 		}
 
@@ -317,7 +317,7 @@ internal class SceneMapRenderer
 		}
 
 		float mapOpacity = 1f;
-		if (Overlay.Instance.mapMode_0 == MapMode.Minimap) {
+		if (Overlay.Instance.ActiveMapMode == MapMode.Minimap) {
 			if (!Core.Controller.SceneReveal.MinimapEnabled) {
 				return;
 			}
@@ -325,10 +325,10 @@ internal class SceneMapRenderer
 			return;
 		}
 
-		mapOpacity = mapOpacity * ((overlay.mapMode_0 == MapMode.Map) ? Core.Controller.SceneReveal.MapOpacity : Core.Controller.SceneReveal.MinimapOpacity);
+		mapOpacity = mapOpacity * ((overlay.ActiveMapMode == MapMode.Map) ? Core.Controller.SceneReveal.MapOpacity : Core.Controller.SceneReveal.MinimapOpacity);
 		Matrix3x2 priorTransform = renderTarget.Transform;
 		Matrix3x2 isoRotationInfo = Matrix3x2.Rotation(-(float)Math.PI / 4f);
-		Matrix3x2 panTranslation = Matrix3x2.Translation(overlay.float_5, overlay.float_6);
+		Matrix3x2 panTranslation = Matrix3x2.Translation(overlay.mapCenterX, overlay.mapCenterY);
 
 		for (int y = 0; y < mapTextureChunks.GetLength(1); y++) {
 			for (int x = 0; x < mapTextureChunks.GetLength(0); x++) {

@@ -49,7 +49,7 @@ internal class RenderBrush : ITransparent, IDisposable, IBrush
 			EndCap = endCap
 		};
 
-		StrokeStyle = new StrokeStyle(Overlay.Instance.factory_0, properties);
+		StrokeStyle = new StrokeStyle(Overlay.Instance.direct2DFactory, properties);
 	}
 
 	public void Dispose()
@@ -174,7 +174,7 @@ internal class RenderBrush : ITransparent, IDisposable, IBrush
 			sectionCount = 6;
 		}
 
-		using var pathGeometry = new PathGeometry(Overlay.Instance.factory_0);
+		using var pathGeometry = new PathGeometry(Overlay.Instance.direct2DFactory);
 		using (var geometrySink = pathGeometry.Open()) {
 			for (int i = 0; i < sectionCount; i++) {
 				float num = radius * (float)Math.Cos(360f / sectionCount * i * Math.PI / 180.0);

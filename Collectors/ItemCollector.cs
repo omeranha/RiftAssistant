@@ -46,17 +46,17 @@ internal class ItemCollector
 
 	public int[] int_1 = new int[20];
 
-	private readonly Dictionary<uint, Item> class112_1 = new Dictionary<uint, Item>(1000);
+	private readonly Dictionary<uint, Item> itemsByAnnId = new Dictionary<uint, Item>(1000);
 
 	private readonly List<Item> list_4 = new List<Item>();
 
 	private readonly List<Item> list_5 = new List<Item>();
 
-	private readonly Dictionary<uint, Item> class112_2 = new Dictionary<uint, Item>();
+	private readonly Dictionary<uint, Item> changedItems = new Dictionary<uint, Item>();
 
-	private Stopwatch stopwatch_0 = new();
+	private Stopwatch refreshTimer = new();
 
-	private static readonly List<r_AttributeEntry> list_6 = new List<r_AttributeEntry>();
+	private static readonly List<r_AttributeEntry> attributeEntries = new List<r_AttributeEntry>();
 
 	public EventHandler<Item> OnItemIdentified { get; set; }
 
@@ -69,7 +69,7 @@ internal class ItemCollector
 	internal void ClearItems(bool bool_1)
 	{
 		if (bool_1) {
-			class112_1.Clear();
+			itemsByAnnId.Clear();
 		}
 		Items.Clear();
 		Item_1 = null;
@@ -90,13 +90,13 @@ internal class ItemCollector
 	{
 		ClearItems(bool_1: false);
 		bool flag = false;
-		if (stopwatch_0.ElapsedMilliseconds >= 1000) {
+		if (refreshTimer.ElapsedMilliseconds >= 1000) {
 			flag = true;
-			stopwatch_0.Restart();
+			refreshTimer.Restart();
 		}
 		list_4.Clear();
 		list_5.Clear();
-		class112_2.Clear();
+		changedItems.Clear();
 		bool_0 = false;
 		for (int i = 0; i <= CoreCollector.D3Memory.ACDContainer.MaxIndex; i++) {
 			CoreCollector.ACDCollector.SetIndex(i);
@@ -113,7 +113,7 @@ internal class ItemCollector
 			if (itemLocation == ItemLocation.MerchantBuyback || itemLocation >= ItemLocation.VendorToken || (itemLocation == ItemLocation.Floor && struct7_.SWorldID_Encrypted == 0)) {
 				continue;
 			}
-			Item item = class112_1.GetValueOrDefault(annId);
+			Item item = itemsByAnnId.GetValueOrDefault(annId);
 			SnoItem snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
 			if (snoItem == null || (itemLocation == ItemLocation.Floor && struct7_.PositionX == 0f && double.IsNaN(struct7_.PositionY))) {
 				continue;
@@ -165,7 +165,7 @@ internal class ItemCollector
 			}
 			item.Unidentified = flag4;
 			if (flag2 && (itemLocation != itemLocation2 || flag4 != flag5)) {
-				class112_2[item.AcdId] = item;
+				changedItems[item.AcdId] = item;
 			}
 			if (decideKeep) {
 				item.KeepDecision = DecideKeep(item);
@@ -188,7 +188,7 @@ internal class ItemCollector
 				}
 			} else {
 				if (flag2 && (item.InventoryX != struct7_.ItemSlotX || item.InventoryY != struct7_.ItemSlotY)) {
-					class112_2[item.AcdId] = item;
+					changedItems[item.AcdId] = item;
 				}
 				item.InventoryX = struct7_.ItemSlotX;
 				item.InventoryY = struct7_.ItemSlotY;
@@ -263,12 +263,12 @@ internal class ItemCollector
 				}
 				continue;
 			}
-			class112_1[annId] = item;
+			itemsByAnnId[annId] = item;
 			if (itemLocation == ItemLocation.Inventory && CoreCollector.IsInTown && CoreCollector.UiElements.ShopDialogMainPagePanel.Visible) {
 				string text = CoreCollector.UiElements.GoldText.ReadText();
 				if (text != null && text.Contains("{icon:x1_shard}")) {
-					int num2 = item.GetStatInt("picked_up_time", -1);
-					if (num2 > -1 && num2 > CoreCollector.D3Memory.GameTick - 240) {
+					int statInt = item.GetStatInt("picked_up_time", -1);
+					if (statInt > -1 && statInt > CoreCollector.D3Memory.GameTick - 240) {
 						item.Boolean_1 = true;
 						try {
 							OnLootGenerated?.Invoke(this, new LootGenerated {
@@ -301,10 +301,10 @@ internal class ItemCollector
 			}
 		}
 		foreach (Item item6 in list_4.Concat(list_5)) {
-			class112_2[item6.AcdId] = item6;
+			changedItems[item6.AcdId] = item6;
 		}
-		if (class112_2.Count > 0) {
-			foreach (Item item9 in class112_2.Values) {
+		if (changedItems.Count > 0) {
+			foreach (Item item9 in changedItems.Values) {
 				item9.method_45();
 			}
 		}
@@ -395,12 +395,12 @@ internal class ItemCollector
 		double num8 = -1.0;
 		double num9 = -1.0;
 		item2.Quantity = -1L;
-		list_6.Clear();
-		if (!CoreCollector.ACDCollector.ReadAttributeEntries(list_6)) {
+		attributeEntries.Clear();
+		if (!CoreCollector.ACDCollector.ReadAttributeEntries(attributeEntries)) {
 			return false;
 		}
-		for (int i = 0; i < list_6.Count; i++) {
-			r_AttributeEntry r_AttributeEntry2 = list_6[i];
+		for (int i = 0; i < attributeEntries.Count; i++) {
+			r_AttributeEntry r_AttributeEntry2 = attributeEntries[i];
 			int num10 = (int)(r_AttributeEntry2.uint_0 & 0xFFF);
 			if (num10 <= 0 || num10 >= SnoData.Attributes.ByIndex.Count) {
 				continue;

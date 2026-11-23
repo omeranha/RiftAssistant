@@ -158,8 +158,8 @@ internal class SceneCollector
 					SnoScene scene2 = SnoData.Scenes.GetScene(item.uint_0);
 					if (scene2 != null)
 					{
-						uint uint_2 = GetWorldSno(item.uint_2);
-						Scene value6 = new Scene(scene2, null, uint_2, item.uint_1, 0u, item.float_0, item.float_1, item.float_2, item.float_3, 0f);
+						uint worldSno = GetWorldSno(item.uint_2);
+						Scene value6 = new Scene(scene2, null, worldSno, item.uint_1, 0u, item.float_0, item.float_1, item.float_2, item.float_3, 0f);
 						value4.Add(item.uint_1, value6);
 					}
 				}
@@ -188,7 +188,7 @@ internal class SceneCollector
 				continue;
 			}
 			bool flag = false;
-			foreach (Portal item2 in CoreCollector.ActorCollector.Class112_1.Values)
+			foreach (Portal item2 in CoreCollector.ActorCollector.PortalsByAnnId.Values)
 			{
 				if (item2.Scene != null && (item2.Scene.SnoScene == item.SnoScene || (item2.Scene.PosX <= item.PosX && item2.Scene.PosY <= item.PosY && item2.Scene.W >= item.W && item2.Scene.H >= item.H)))
 				{
