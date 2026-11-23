@@ -8,6 +8,20 @@ A Diablo III overlay.
 * Overlay rendering system
 * Plugin system
 
+## Project layout
+
+* `App`: entry point, settings, logging and resources
+* `Engine`: game memory reading and the main loop
+* `Collectors`: turn raw memory into game objects each frame
+* `Model`: game objects, UI elements and enums
+* `Sno`: game data tables, `Generated`: large generated lookup tables
+* `Rendering` and `Modules`: the Direct2D overlay and its built-in panels
+* `Controllers`: the API that plugins see (`Controller`)
+* `Plugins` and `PluginHost`: the plugin interfaces and the host that compiles and runs them
+* `PluginScripts`: the plugin sources that ship in releases, see `docs/PLUGIN_API.md`
+* `tests`: unit tests, including a check that every plugin in PluginScripts compiles
+
+Run the tests with `dotnet test tests/RiftAssistant.Tests`.
 ## Disclaimer
 
 This project is based on the latest free release of TurboHUD and was created by independently decompiling the publicly distributed binaries.
