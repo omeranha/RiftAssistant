@@ -267,26 +267,26 @@ internal static class CoreCollector
 
 	public static void ClearAllCaches()
 	{
-		SceneCollector.method_4();
-		Class376_0.method_1();
-		Class412_0.method_1(bool_0: true);
-		ActorCollector.method_0();
-		ItemCollector.method_0(bool_1: true);
-		ActorCollector.method_2(bool_4: true);
-		ActorCollector.method_1();
+		SceneCollector.Clear();
+		Class376_0.Clear();
+		Class412_0.ClearMarkers(bool_0: true);
+		ActorCollector.ClearActors();
+		ItemCollector.ClearItems(bool_1: true);
+		ActorCollector.ResetCollections(bool_4: true);
+		ActorCollector.ClearMonsters();
 		foreach (UiElement value in UiElements.All.Values) {
 			value.long_0 = 0L;
 		}
 	}
 
-	private static void smethod_1(bool bool_7, bool bool_8)
+	private static void ResetStatTrackers(bool bool_7, bool bool_8)
 	{
 		if (bool_7) {
 			foreach (StatTracker item in Trackers) {
 				item.Stop();
 			}
 			foreach (StatTracker item2 in Trackers) {
-				item2.method_24();
+				item2.Save();
 			}
 		}
 		object obj;
@@ -329,7 +329,7 @@ internal static class CoreCollector
 		CurrentHeroYesterdayOnCurrentDifficulty = null;
 		CurrentHeroTodayOnCurrentDifficulty = null;
 		if (class364_0 != null) {
-			smethod_3();
+			ResetGameState();
 		}
 		Trackers.Clear();
 		return;
@@ -369,19 +369,19 @@ internal static class CoreCollector
 		bool bool_;
 		if (bool_ = stopwatch != null && stopwatch.ElapsedMilliseconds >= 2000 && !D3Memory.ObjectManager_GameState_HasValue) {
 			stopwatch_1 = new();
-			smethod_1(bool_7: true, bool_8: false);
+			ResetStatTrackers(bool_7: true, bool_8: false);
 			GameServerIP = null;
 			LastSnoArea = null;
 		}
-		PlayerCollector.method_0();
+		PlayerCollector.ResetPlayers();
 		WaypointManager.Clear();
 		IsGameReady = false;
 		(LocalPlayer as Player).SnoArea = null;
 		IsInTown = false;
-		ActorCollector.method_2(bool_);
+		ActorCollector.ResetCollections(bool_);
 	}
 
-	public static void smethod_3()
+	public static void ResetGameState()
 	{
 		for (int i = 0; i < ActorCollector.Boolean_0.Length; i++) {
 			ActorCollector.Boolean_0[i] = false;
@@ -586,7 +586,7 @@ internal static class CoreCollector
 					Logger.LogException(exception3.Message);
 				}
 				try {
-					Class376_0.method_0();
+					Class376_0.Refresh();
 				} catch (Exception exception4) {
 					Logger.LogException(exception4.Message);
 				}
@@ -600,7 +600,7 @@ internal static class CoreCollector
 				}
 				if (class364_0 == null) {
 					LastSnoArea = snoArea;
-					SceneCollector.method_4();
+					SceneCollector.Clear();
 					try {
 						SceneCollector.Collect();
 					} catch (Exception exception5) {
@@ -621,14 +621,14 @@ internal static class CoreCollector
 						player2.class362_0.ForceSet(0L);
 						player2.Gold = 0L;
 					}
-					smethod_1(bool_7: false, bool_8: true);
+					ResetStatTrackers(bool_7: false, bool_8: true);
 				}
 				if (!IsLoading && snoArea != null && (LastSnoArea == null || (LastSnoArea != snoArea && LastSnoArea.NameLocalized != snoArea.NameLocalized))) {
 					LastSnoArea = snoArea;
 					OnFalseNewArea?.Invoke(null, LastSnoArea);
-					smethod_1(bool_7: true, bool_8: true);
+					ResetStatTrackers(bool_7: true, bool_8: true);
 				}
-				smethod_6();
+				UpdateSpecialArea();
 				if (IsGameReady) {
 					if (D3Memory.GameDifficulty < GameDifficulty.t1 && specialArea_0 == SpecialArea.None) {
 						Player localPlayer = LocalPlayer;
@@ -652,7 +652,7 @@ internal static class CoreCollector
 			stopwatch_0.Restart();
 			stopwatch_1.Restart();
 			try {
-				ItemCollector.method_1();
+				ItemCollector.Collect();
 			} catch (Exception exception7) {
 				Logger.LogException(exception7.Message);
 			}
@@ -669,7 +669,7 @@ internal static class CoreCollector
 					}
 					if (player3.HeadStone == null) {
 						headStone = new HeadStone(0u, 0u, SnoData.Actors.GetActor(ActorSnoEnum._playerheadstone), player3.AnnId, player3);
-						headStone.method_24(player3.FloorCoordinate.X, player3.FloorCoordinate.Y, player3.FloorCoordinate.Z);
+						headStone.SetPosition(player3.FloorCoordinate.X, player3.FloorCoordinate.Y, player3.FloorCoordinate.Z);
 						player3.HeadStone = headStone;
 						continue;
 					}
@@ -687,11 +687,11 @@ internal static class CoreCollector
 				SnoArea snoArea2 = LocalPlayer.SnoArea;
 				if (snoArea2 != null && snoArea2.Type == AreaType.Normal && LocalPlayer.SnoArea.Sno != 405915) {
 					foreach (StatTracker item in Trackers) {
-						item.method_28();
+						item.StartIfStopped();
 					}
 					{
 						foreach (StatTracker item2 in Trackers) {
-							item2.method_30(IsInTown);
+							item2.UpdateTownState(IsInTown);
 						}
 						return;
 					}
@@ -706,7 +706,7 @@ internal static class CoreCollector
 		}
 	}
 
-	private static void smethod_6()
+	private static void UpdateSpecialArea()
 	{
 		if (LocalPlayer.SnoArea.Sno != 288482 && LocalPlayer.SnoArea.HostAreaSno != 288482) {
 			if (D3Memory.GameState_Value_IsChallengeRiftGame && LocalPlayer.SnoArea.Sno == 415369) {
@@ -741,7 +741,7 @@ internal static class CoreCollector
 		}
 	}
 
-	public unsafe static PointF smethod_7(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player iplayer_1 = null)
+	public unsafe static PointF EvaluatePowerFormula(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player iplayer_1 = null)
 	{
 		if (int_2 == 0) {
 			return new PointF(0f, 0f);
@@ -831,7 +831,7 @@ internal static class CoreCollector
 											if (acdAttribute.Code.StartsWith("Buff_Icon_")) {
 												uint_ = snoPower.Sno;
 											}
-											num7 = ACDCollector.method_7(acdAttribute, uint_);
+											num7 = ACDCollector.ReadFloatAttribute(acdAttribute, uint_);
 										} else {
 											Trace.WriteLine("can't evaluate this");
 										}

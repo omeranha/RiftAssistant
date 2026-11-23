@@ -935,7 +935,7 @@ public class Player : Actor
 		iplayerArmorySet_0 = array;
 	}
 
-	public void method_58()
+	public void ResetStats()
 	{
 		Skill[] skillSlots = SkillSlots;
 		foreach (Skill skill in skillSlots)
@@ -1073,7 +1073,7 @@ public class Player : Actor
 		class112_2.Clear();
 	}
 
-	public void method_59()
+	public void ResetHero()
 	{
 		Hero = null;
 		HeroName = "";
@@ -1083,14 +1083,14 @@ public class Player : Actor
 		HeroClassDefinition = null;
 		SnoArea = null;
 		bool_8 = false;
-		method_60();
+		ResetActor();
 		class112_2.Clear();
 	}
 
-	public void method_60()
+	public void ResetActor()
 	{
 		base.SnoActor = null;
-		method_26(0u);
+		SetAcdId(0u);
 		base.WorldId = 0u;
 	}
 
@@ -1135,6 +1135,6 @@ public class Player : Actor
 			return SnoData.Powers.GetTagValue(0, key)?.Item2 ?? 0;
 		}
 		byte b = SnoData.Powers.FormulaData[tagFormula.Value];
-		return CoreCollector.smethod_7(SnoData.Powers.FormulaData, tagFormula.Value + 1, b, snoPower, this).X;
+		return CoreCollector.EvaluatePowerFormula(SnoData.Powers.FormulaData, tagFormula.Value + 1, b, snoPower, this).X;
 	}
 }

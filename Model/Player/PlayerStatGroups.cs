@@ -67,7 +67,7 @@ public class PlayerArmorySet(Player player, int int_1)
 		return itemAnnIds.Any((uint uint_0) => item.AnnId == uint_0);
 	}
 
-	public void method_1(uint uint_0)
+	public void AddItemAnnId(uint uint_0)
 	{
 		if (uint_0 != uint.MaxValue)
 		{

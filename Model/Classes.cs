@@ -50,13 +50,13 @@ public sealed class Classes
 
 	internal Classes()
 	{
-		ClassWizard = method_0(HeroClass.Wizard, "wizard", "Wizard", bool_0: true, ActorSnoEnum._wizard_male, ActorSnoEnum._wizard_female, "arcane", null);
-		ClassDemonHunter = method_0(HeroClass.DemonHunter, "demonhunter", "DemonHunter", bool_0: true, ActorSnoEnum._demonhunter_male, ActorSnoEnum._demonhunter_female, "hatred", "discipline");
-		ClassBarbarian = method_0(HeroClass.Barbarian, "barbarian", "Barbarian", bool_0: false, ActorSnoEnum._barbarian_male, ActorSnoEnum._barbarian_female, "fury", null);
-		ClassWitchDoctor = method_0(HeroClass.WitchDoctor, "witchdoctor", "WitchDoctor", bool_0: true, ActorSnoEnum._witchdoctor_male, ActorSnoEnum._witchdoctor_female, "mana", null);
-		ClassMonk = method_0(HeroClass.Monk, "monk", "Monk", bool_0: false, ActorSnoEnum._monk_male, ActorSnoEnum._monk_female, "spirit", null);
-		ClassCrusader = method_0(HeroClass.Crusader, "crusader", "Crusader", bool_0: false, ActorSnoEnum._x1_crusader_male, ActorSnoEnum._x1_crusader_female, "wrath", null);
-		ClassNecromancer = method_0(HeroClass.Necromancer, "necromancer", "Necromancer", bool_0: true, ActorSnoEnum._p6_necro_male, ActorSnoEnum._p6_necro_female, "essence", null);
+		ClassWizard = AddHeroClass(HeroClass.Wizard, "wizard", "Wizard", bool_0: true, ActorSnoEnum._wizard_male, ActorSnoEnum._wizard_female, "arcane", null);
+		ClassDemonHunter = AddHeroClass(HeroClass.DemonHunter, "demonhunter", "DemonHunter", bool_0: true, ActorSnoEnum._demonhunter_male, ActorSnoEnum._demonhunter_female, "hatred", "discipline");
+		ClassBarbarian = AddHeroClass(HeroClass.Barbarian, "barbarian", "Barbarian", bool_0: false, ActorSnoEnum._barbarian_male, ActorSnoEnum._barbarian_female, "fury", null);
+		ClassWitchDoctor = AddHeroClass(HeroClass.WitchDoctor, "witchdoctor", "WitchDoctor", bool_0: true, ActorSnoEnum._witchdoctor_male, ActorSnoEnum._witchdoctor_female, "mana", null);
+		ClassMonk = AddHeroClass(HeroClass.Monk, "monk", "Monk", bool_0: false, ActorSnoEnum._monk_male, ActorSnoEnum._monk_female, "spirit", null);
+		ClassCrusader = AddHeroClass(HeroClass.Crusader, "crusader", "Crusader", bool_0: false, ActorSnoEnum._x1_crusader_male, ActorSnoEnum._x1_crusader_female, "wrath", null);
+		ClassNecromancer = AddHeroClass(HeroClass.Necromancer, "necromancer", "Necromancer", bool_0: true, ActorSnoEnum._p6_necro_male, ActorSnoEnum._p6_necro_female, "essence", null);
 		HeroClassesByIDX.Add(0u, ClassDemonHunter);
 		HeroClassesByIDX.Add(1u, ClassBarbarian);
 		HeroClassesByIDX.Add(2u, ClassWizard);
@@ -64,12 +64,12 @@ public sealed class Classes
 		HeroClassesByIDX.Add(4u, ClassMonk);
 		HeroClassesByIDX.Add(5u, ClassCrusader);
 		HeroClassesByIDX.Add(6u, ClassNecromancer);
-		FollowerTemplar = method_1("templar", "Templar", ActorSnoEnum._hireling_templar, FollowerClassEnum.Templar);
-		FollowerScoundrel = method_1("scoundrel", "Scoundrel", ActorSnoEnum._hireling_scoundrel, FollowerClassEnum.Scoundrel);
-		FollowerEnchantress = method_1("enchantress", "Enchantress", ActorSnoEnum._hireling_enchantress, FollowerClassEnum.Enchantress);
+		FollowerTemplar = AddFollowerClass("templar", "Templar", ActorSnoEnum._hireling_templar, FollowerClassEnum.Templar);
+		FollowerScoundrel = AddFollowerClass("scoundrel", "Scoundrel", ActorSnoEnum._hireling_scoundrel, FollowerClassEnum.Scoundrel);
+		FollowerEnchantress = AddFollowerClass("enchantress", "Enchantress", ActorSnoEnum._hireling_enchantress, FollowerClassEnum.Enchantress);
 	}
 
-	private HeroClassDefinition method_0(HeroClass heroClass, string string_0, string string_1, bool bool_0, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_2, string string_3)
+	private HeroClassDefinition AddHeroClass(HeroClass heroClass, string string_0, string string_1, bool bool_0, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_2, string string_3)
 	{
 		string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bnet_classes, string_1);
 		HeroClassDefinition heroClassDefinition = new HeroClassDefinition(heroClass, string_0, string_1, stringByCode, bool_0, actorSnoEnum, actorSnoEnum2, string_2, string_3);
@@ -78,7 +78,7 @@ public sealed class Classes
 		return heroClassDefinition;
 	}
 
-	private FollowerClass method_1(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
+	private FollowerClass AddFollowerClass(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
 	{
 		FollowerClass followerClass = new FollowerClass(string_0, string_1, actorSnoEnum, followerClassEnum);
 		dictionary_0.Add(actorSnoEnum, followerClass);

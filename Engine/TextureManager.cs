@@ -51,10 +51,10 @@ internal static class TextureManager
 
 	public static Texture GetTextureByName(string textureName)
 	{
-		return GetTextureById(smethod_0(textureName, bool_0: false));
+		return GetTextureById(HashTextureName(textureName, bool_0: false));
 	}
 
-	public static uint smethod_0(string textureName, bool bool_0)
+	public static uint HashTextureName(string textureName, bool bool_0)
 	{
 		uint num = 0u;
 		byte[] bytes = Encoding.ASCII.GetBytes(bool_0 ? textureName.ToLower() : textureName);
@@ -73,13 +73,13 @@ internal static class TextureManager
 		switch (textureId) {
 			case 2078949389u: {
 					Bitmap buffFrame = AppResources.BuffFrame;
-					Texture texture = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
+					Texture texture = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
 					textureIdToTexture[textureId] = texture;
 					return texture;
 				}
 			case 948845718u: {
 					Bitmap debuffFrame = AppResources.DebuffFrame;
-					Texture texture2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
+					Texture texture2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
 					textureIdToTexture[textureId] = texture2;
 					return texture2;
 				}
@@ -92,7 +92,7 @@ internal static class TextureManager
 					atlasTex = new Texture(new Lazy<SharpDX.Direct2D1.Bitmap>(delegate {
 						if (!atlasPositionToBitmap.TryGetValue(textureIndexEntry.Value.AtlasPosition, out SharpDX.Direct2D1.Bitmap bitmap) || bitmap == null) {
 							Bitmap bitmap2 = (Bitmap)Image.FromStream(new MemoryStream(ResourceData.ReadBlob(textureIndexEntry.Value.AtlasPosition)));
-							bitmap = Overlay.Instance.method_10(bitmap2);
+							bitmap = Overlay.Instance.ToDirect2DBitmap(bitmap2);
 							atlasPositionToBitmap[textureIndexEntry.Value.AtlasPosition] = bitmap;
 						}
 						return bitmap;
@@ -130,7 +130,7 @@ internal static class TextureManager
 			sceneSnoToMinimapPath[scene.Sno] = text;
 			Bitmap bitmap = new(text);
 			bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-			SharpDX.Direct2D1.Bitmap gparam_ = Overlay.Instance.method_10(bitmap);
+			SharpDX.Direct2D1.Bitmap gparam_ = Overlay.Instance.ToDirect2DBitmap(bitmap);
 			sceneSnoToMinimapBitmap[scene.Sno] = gparam_;
 		}
 		sceneSnoToLastAccessTicks[scene.Sno] = CoreCollector.CurrentRealTimeTicks;

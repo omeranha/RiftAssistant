@@ -2019,7 +2019,7 @@ public sealed class SnoQuest
 		unassignedStepBnetTitleEnglish = stringByCodeEnglish3;
 	}
 
-	internal void method_0(SnoQuestStep isnoQuestStep_0)
+	internal void AddStep(SnoQuestStep isnoQuestStep_0)
 	{
 		steps.Add(isnoQuestStep_0.Id, isnoQuestStep_0);
 	}
@@ -2277,13 +2277,13 @@ public class SnoScene
 			DataReader dataReader = new DataReader(Stream_0);
 			for (int i = 0; i < NavCellSavedCount; i++)
 			{
-				float float_ = dataReader.method_14();
-				float float_2 = dataReader.method_14();
-				dataReader.method_14();
-				float float_3 = dataReader.method_14();
-				float float_4 = dataReader.method_14();
-				dataReader.method_14();
-				dataReader.method_8();
+				float float_ = dataReader.ReadSingle();
+				float float_2 = dataReader.ReadSingle();
+				dataReader.ReadSingle();
+				float float_3 = dataReader.ReadSingle();
+				float float_4 = dataReader.ReadSingle();
+				dataReader.ReadSingle();
+				dataReader.ReadUInt32();
 				NavCells[i] = new NavCell(float_, float_2, float_3, float_4);
 			}
 		}
@@ -2301,12 +2301,12 @@ public class SnoScene
 		int num = 0;
 		for (int i = 0; i < NavSquareSavedCount; i++)
 		{
-			int num2 = dataReader.method_11();
-			byte num3 = dataReader.method_6();
+			int num2 = dataReader.ReadPackedInt32();
+			byte num3 = dataReader.ReadByte();
 			float naN = float.NaN;
 			if (num3 == 1)
 			{
-				naN = dataReader.method_14();
+				naN = dataReader.ReadSingle();
 			}
 			for (int j = 0; j < num2; j++)
 			{

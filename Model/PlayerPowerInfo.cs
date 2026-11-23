@@ -253,15 +253,6 @@ public class PlayerPowerInfo
 		return value;
 	}
 
-	public bool method_0(string string_0)
-	{
-		if (string_0 == null)
-		{
-			return false;
-		}
-		return GetBuff(string_0)?.Active ?? false;
-	}
-
 	public bool BuffIsActive(uint sno)
 	{
 		if (!class310_0.powerSno2buff.TryGetValue(sno, out var value))

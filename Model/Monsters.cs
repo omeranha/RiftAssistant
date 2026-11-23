@@ -52,8 +52,8 @@ public sealed class Monsters
 		{
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = dataReader.method_8();
-				string code = dataReader.method_1();
+				uint num = dataReader.ReadUInt32();
+				string code = dataReader.ReadString();
 				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._monsteraffixnames, code);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._monsteraffixnames, code);
 				if (Enum.IsDefined(typeof(MonsterAffix), num))

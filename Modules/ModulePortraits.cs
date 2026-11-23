@@ -6,7 +6,7 @@ internal class ModulePortraits : Module
 	{
 	}
 
-	public void method_1()
+	public void Update()
 	{
 		bool bool_ = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.mapMode_0 != MapMode.Map && CoreCollector.D3Memory.IsUiHidden;
 		if (!vmethod_0(bool_)) {
@@ -25,11 +25,11 @@ internal class ModulePortraits : Module
 			UiElement uiElement3 = CoreCollector.UiElements.class341_147[num2];
 			Texture itexture_3 = TextureManager.GetTextureById(uiElement3.TextureSno);
 			float num3 = (float)GameWindowManager.Window.Size.Height * 0.0085f;
-			method_2(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, itexture_2, itexture_3);
+			DrawPortrait(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, itexture_2, itexture_3);
 		}
 	}
 
-	private void method_2(float float_1, float float_2, Texture itexture_0, Texture itexture_1, Texture itexture_2)
+	private void DrawPortrait(float float_1, float float_2, Texture itexture_0, Texture itexture_1, Texture itexture_2)
 	{
 		float num = (float)GameWindowManager.Window.Size.Height * 0.143f;
 		float num2 = itexture_0.Width / itexture_0.Height * num;

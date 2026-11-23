@@ -162,8 +162,8 @@ public static class Core
 					break;
 				case "resetSession":
 					if (CoreCollector.Session != null && Overlay.Instance.ModuleStatTracker.Show) {
-						CoreCollector.Session.method_22();
-						CoreCollector.SessionAlwaysRunning.method_22();
+						CoreCollector.Session.Reset();
+						CoreCollector.SessionAlwaysRunning.Reset();
 					}
 
 					break;
@@ -214,10 +214,10 @@ public static class Core
 	{
 		GameWindowManager.Window.Handle = IntPtr.Zero;
 		foreach (StatTracker item in CoreCollector.Trackers) {
-			item.method_24();
+			item.Save();
 		}
 
-		CoreCollector.smethod_3();
+		CoreCollector.ResetGameState();
 	}
 
 	internal static void Exit()

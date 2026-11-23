@@ -38,7 +38,7 @@ internal abstract class Module : IDisposable
 		Overlay.Instance.modules.Remove(this);
 	}
 
-	protected void method_0(params ITransparent[] itransparent_1)
+	protected void SetTransparentComponents(params ITransparent[] itransparent_1)
 	{
 		int num = 0;
 		for (int i = 0; i < itransparent_1.Length; i++) {

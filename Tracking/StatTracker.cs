@@ -684,7 +684,7 @@ public class StatTracker
 		Title = string_4;
 		if (bool_1)
 		{
-			method_28();
+			StartIfStopped();
 		}
 		if (string_2 != null)
 		{
@@ -693,7 +693,7 @@ public class StatTracker
 			string text2 = Path.Combine(text, battleTag + "_" + string_2 + ".xml");
 			if (File.Exists(text2))
 			{
-				method_23(text2);
+				LoadFromFile(text2);
 			}
 		}
 	}
@@ -705,7 +705,7 @@ public class StatTracker
 		string_2 = null;
 		if (bool_1)
 		{
-			method_28();
+			StartIfStopped();
 		}
 		for (int i = 0; i < list_0.Count; i++)
 		{
@@ -714,12 +714,12 @@ public class StatTracker
 			string text2 = Path.Combine(text, battleTag + "_" + list_0[i] + ".xml");
 			if (File.Exists(text2))
 			{
-				method_23(text2);
+				LoadFromFile(text2);
 			}
 		}
 	}
 
-	public void method_22()
+	public void Reset()
 	{
 		long_13 = 0L;
 		long_14 = 0L;
@@ -745,7 +745,7 @@ public class StatTracker
 		Healing = 0.0;
 	}
 
-	private void method_23(string string_3)
+	private void LoadFromFile(string string_3)
 	{
 		/*
 		try
@@ -784,7 +784,7 @@ public class StatTracker
 		*/
 	}
 
-	public void method_24()
+	public void Save()
 	{
 		if (string_2 != null)
 		{
@@ -822,17 +822,7 @@ public class StatTracker
 		}
 	}
 
-	public string method_25(ValueFormat valueFormat = ValueFormat.LongTime)
-	{
-		long elapsedMilliseconds = ElapsedMilliseconds;
-		if (elapsedMilliseconds < 1000)
-		{
-			elapsedMilliseconds = 0L;
-		}
-		return Formatting.ValueToString(elapsedMilliseconds * 10000, valueFormat);
-	}
-
-	public string method_26(ValueFormat valueFormat = ValueFormat.LongTime)
+	public string FormatTownTime(ValueFormat valueFormat = ValueFormat.LongTime)
 	{
 		long townElapsedMilliseconds = TownElapsedMilliseconds;
 		if (townElapsedMilliseconds < 1000)
@@ -842,7 +832,7 @@ public class StatTracker
 		return Formatting.ValueToString(townElapsedMilliseconds * 10000, valueFormat);
 	}
 
-	public string method_27(ValueFormat valueFormat = ValueFormat.LongTime)
+	public string FormatPlayTime(ValueFormat valueFormat = ValueFormat.LongTime)
 	{
 		long playElapsedMilliseconds = PlayElapsedMilliseconds;
 		if (playElapsedMilliseconds < 1000)
@@ -852,7 +842,7 @@ public class StatTracker
 		return Formatting.ValueToString(playElapsedMilliseconds * 10000, valueFormat);
 	}
 
-	internal void method_28()
+	internal void StartIfStopped()
 	{
 		if (!stopwatch_0.IsRunning)
 		{
@@ -869,7 +859,7 @@ public class StatTracker
 		}
 	}
 
-	internal void method_30(bool isInTown)
+	internal void UpdateTownState(bool isInTown)
 	{
 		if (AlwaysRunning)
 		{

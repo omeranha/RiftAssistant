@@ -130,33 +130,23 @@ internal class DAF
 		localHeapCache.ClearSmallBlocksCache();
 	}
 
-	public static ulong smethod_1(ulong ulong_0, int int_1)
-	{
-		return (ulong_0 >> int_1) | (ulong_0 << 64 - int_1);
-	}
-
-	public static ulong smethod_2(ulong ulong_0, int int_1)
-	{
-		return (ulong_0 << int_1) | (ulong_0 >> 64 - int_1);
-	}
-
 	private void ScanRealm()
 	{
 		int size = AlignedSize(448, 32);
-		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(size).Where(method_9).FirstOrDefault();
+		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(size).Where(IsRealmAddress).FirstOrDefault();
 		if (num != 0) {
 			if (num != RealmAddress) {
 				RealmAddress = num;
 			}
 			int blockSize = localHeapCache.GetSizeOfBlock(RealmAddress);
-			blockValidateFuncs["RealmAddress"] = () => method_9(RealmAddress) && localHeapCache.VerifyBlock(RealmAddress, blockSize);
+			blockValidateFuncs["RealmAddress"] = () => IsRealmAddress(RealmAddress) && localHeapCache.VerifyBlock(RealmAddress, blockSize);
 			return;
 		}
 		RealmAddress = 0L;
 		Logger.Info("[ERROR] can't find realm.");
 	}
 
-	private bool method_9(long realmAddress)
+	private bool IsRealmAddress(long realmAddress)
 	{
 		string text = GameWindowManager.ReadString(realmAddress + Offset_Realm_ServerGateway, 128, Encoding.UTF8, true);
 		if (!string.IsNullOrEmpty(text)) {
@@ -171,7 +161,7 @@ internal class DAF
 		long num = 0L;
 		int int_ = 0;
 		foreach (long item in mainBlocksWithSize) {
-			if (method_23(item, long_10, out int_)) {
+			if (TryFindAcdBlockOffset(item, long_10, out int_)) {
 				num = item;
 				break;
 			}
@@ -216,19 +206,19 @@ internal class DAF
 	private void ScanPlayer()
 	{
 		int int_ = AlignedSize(41952, 32);
-		long num = localHeapCache.GetMainBlocksWithSize(int_).Where(method_13).FirstOrDefault();
+		long num = localHeapCache.GetMainBlocksWithSize(int_).Where(HasFloatingNumberAllocator).FirstOrDefault();
 		if (num != 0L) {
 			if (num != PlayerAddress) {
 				PlayerAddress = num;
 			}
 			int sizeOfBlock = localHeapCache.GetSizeOfBlock(PlayerAddress);
-			blockValidateFuncs["PlayerAddress"] = () => method_13(PlayerAddress) && localHeapCache.VerifyBlock(PlayerAddress, sizeOfBlock);
+			blockValidateFuncs["PlayerAddress"] = () => HasFloatingNumberAllocator(PlayerAddress) && localHeapCache.VerifyBlock(PlayerAddress, sizeOfBlock);
 			return;
 		}
 		PlayerAddress = 0L;
 	}
 
-	private bool method_13(long playerAddress)
+	private bool HasFloatingNumberAllocator(long playerAddress)
 	{
 		long long_11 = playerAddress + D3Memory.Offset_Player_FloatingNumbers + D3Memory.FloatingNumAllocatorOffset2;
 		return localHeapCache.ReadUInt32(long_11, 40L) == CoreCollector.Magic_600DF00D;
@@ -266,29 +256,24 @@ internal class DAF
 		return false;
 	}
 
-	public int method_15(long long_10)
-	{
-		return localHeapCache.GetSizeOfBlock(long_10);
-	}
-
 	private void ScanGameState()
 	{
 		int int_ = AlignedSize(D3Memory.SizeOf_GameState, 32);
 		long long_0 = GameWindowManager.MainModuleHandle.ToInt64();
 		long num = (from long_1 in localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(int_)
-					where method_17(long_1, long_0)
+					where IsValidGameState(long_1, long_0)
 					select long_1).FirstOrDefault();
 		if (num != 0L) {
 			if (num != GameStateAddress) {
 				GameStateAddress = num;
 			}
-			blockValidateFuncs["GameStateAddress"] = () => method_17(GameStateAddress, long_0);
+			blockValidateFuncs["GameStateAddress"] = () => IsValidGameState(GameStateAddress, long_0);
 			return;
 		}
 		GameStateAddress = 0L;
 	}
 
-	internal bool method_17(long gameStateAddress, long long_11)
+	internal bool IsValidGameState(long gameStateAddress, long long_11)
 	{
 		long num = localHeapCache.ReadInt64(gameStateAddress, D3Memory.Offset_GameState_Validation1);
 		long num2 = localHeapCache.ReadInt64(gameStateAddress, D3Memory.Offset_GameState_Validation2);
@@ -427,17 +412,12 @@ internal class DAF
 		Logger.Info("[ERROR] '" + containerName + "' container candidate count: " + candidateCount + ", struct size: " + itemSize);
 		throw new Exception("can't find '" + containerName + "' container");
 	}
-	internal static byte[] smethod_3(string string_0, Func<string, uint, byte[]> func_0, uint uint_8)
-	{
-		return func_0(string_0, uint_8 * 2 - (uint)Environment.MachineName.GetHashCode());
-	}
-
 	public static int AlignedSize(int int_1, int int_2)
 	{
 		return (int_1 + (int_2 - 1)) / int_2 * int_2;
 	}
 
-	public bool method_23(long long_10, long long_11, out int int_1)
+	public bool TryFindAcdBlockOffset(long long_10, long long_11, out int int_1)
 	{
 		int num = Array.IndexOf(localHeapCache.ReadBlockPointers(long_10, localHeapCache.GetSizeOfBlock(long_10)), long_11);
 		if (num != -1) {

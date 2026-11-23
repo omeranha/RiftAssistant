@@ -56,11 +56,11 @@ public sealed class Items
 		{
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = dataReader.method_8();
-				string text = dataReader.method_1();
+				uint num = dataReader.ReadUInt32();
+				string text = dataReader.ReadString();
 				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._itemtypenames, text);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._itemtypenames, text);
-				uint num2 = dataReader.method_8();
+				uint num2 = dataReader.ReadUInt32();
 				SnoItemType SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
 				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, SnoItemType_);
 				dictionary_1.Add(num, value);
@@ -71,13 +71,13 @@ public sealed class Items
 		{
 			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint num3 = dataReader2.method_8();
-				string code = string.Intern(dataReader2.method_1());
+				uint num3 = dataReader2.ReadUInt32();
+				string code = string.Intern(dataReader2.ReadString());
 				string stringByCode2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._affixes, code);
 				string stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._affixes, code);
-				uint uint_ = dataReader2.method_8();
-				uint num4 = dataReader2.method_8();
-				uint num5 = dataReader2.method_8();
+				uint uint_ = dataReader2.ReadUInt32();
+				uint num4 = dataReader2.ReadUInt32();
+				uint num5 = dataReader2.ReadUInt32();
 				SnoItemAffixGroup snoItemAffixGroup = null;
 				SnoItemAffixGroup snoItemAffixGroup2 = null;
 				if (num4 != 0)
@@ -98,20 +98,20 @@ public sealed class Items
 						dictionary_4.Add(num5, snoItemAffixGroup2);
 					}
 				}
-				HeroClass heroClass_ = (HeroClass)dataReader2.method_8();
-				bool bool_ = dataReader2.method_18();
+				HeroClass heroClass_ = (HeroClass)dataReader2.ReadUInt32();
+				bool bool_ = dataReader2.ReadBoolean();
 				SnoItemAffix snoItemAffix = new SnoItemAffix(num3, stringByCode2, stringByCodeEnglish2, uint_, snoItemAffixGroup, snoItemAffixGroup2, heroClass_, bool_);
 				dictionary_3.Add(num3, snoItemAffix);
 				snoItemAffixGroup?.AddAffix(snoItemAffix);
 				snoItemAffixGroup2?.AddAffix(snoItemAffix);
-				byte b = dataReader2.method_6();
+				byte b = dataReader2.ReadByte();
 				SnoItemMod[] array = new SnoItemMod[b];
 				for (int i = 0; i < b; i++)
 				{
-					AcdAttribute iattribute_ = SnoData.Attributes.ByIndex[dataReader2.method_11()];
-					uint uint_2 = dataReader2.method_8();
-					float float_ = dataReader2.method_14();
-					float float_2 = dataReader2.method_14();
+					AcdAttribute iattribute_ = SnoData.Attributes.ByIndex[dataReader2.ReadPackedInt32()];
+					uint uint_2 = dataReader2.ReadUInt32();
+					float float_ = dataReader2.ReadSingle();
+					float float_2 = dataReader2.ReadSingle();
 					array[i] = new SnoItemMod(iattribute_, uint_2, float_, float_2, snoItemAffix);
 				}
 				SnoItemMod[] mods = array;
@@ -272,9 +272,9 @@ public sealed class Items
 		using DataReader dataReader3 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_socketed_effects.bin")));
 		while (dataReader3.Stream.Position < dataReader3.Stream.Length)
 		{
-			uint sno2 = dataReader3.method_8();
-			uint sno3 = dataReader3.method_8();
-			int num10 = dataReader3.method_11();
+			uint sno2 = dataReader3.ReadUInt32();
+			uint sno3 = dataReader3.ReadUInt32();
+			int num10 = dataReader3.ReadPackedInt32();
 			SnoItem bySno = GetBySno(sno2);
 			if (bySno.SocketedEffects == null)
 			{
@@ -283,11 +283,11 @@ public sealed class Items
 			SnoItemMod[] array5 = new SnoItemMod[num10];
 			for (int l = 0; l < num10; l++)
 			{
-				int index = dataReader3.method_11();
+				int index = dataReader3.ReadPackedInt32();
 				AcdAttribute iattribute_2 = SnoData.Attributes.ByIndex[index];
-				uint uint_9 = dataReader3.method_8();
-				float float_5 = dataReader3.method_14();
-				float float_6 = dataReader3.method_14();
+				uint uint_9 = dataReader3.ReadUInt32();
+				float float_5 = dataReader3.ReadSingle();
+				float float_6 = dataReader3.ReadSingle();
 				array5[l] = new SnoItemMod(iattribute_2, uint_9, float_5, float_6, null);
 			}
 			SnoSocketedEffect item = new SnoSocketedEffect(GetSnoItemType(sno3), array5);

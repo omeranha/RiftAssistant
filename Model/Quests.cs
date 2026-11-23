@@ -92,7 +92,7 @@ public sealed class Quests
 					string stringByCodeEnglish5 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetTitle");
 					string stringByCode6 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
 					string stringByCodeEnglish6 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
-					snoQuest.method_0(new SnoQuestStep(snoQuest, uint_, stringByCode4, stringByCodeEnglish4, stringByCode5, stringByCodeEnglish5, stringByCode6, stringByCodeEnglish6));
+					snoQuest.AddStep(new SnoQuestStep(snoQuest, uint_, stringByCode4, stringByCodeEnglish4, stringByCode5, stringByCodeEnglish5, stringByCode6, stringByCodeEnglish6));
 				}
 			}
 			all.Add(num2, snoQuest);

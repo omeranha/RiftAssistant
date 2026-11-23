@@ -61,15 +61,15 @@ internal class MarkerCollector
 
 	internal void Collect()
 	{
-		method_1(bool_0: false);
+		ClearMarkers(bool_0: false);
 		if (CoreCollector.DAF.LevelAreaAddress == 0L) {
 			Logger.Info("[ERROR] force daf scan due to missing LevelAreaAddress");
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return;
 		}
 		class66_0 = GameWindowManager.Read<AreaContainer>(CoreCollector.DAF.LevelAreaAddress);
-		class357_0.method_0(class66_0.PrimaryAreaPtr);
-		class357_1.method_0(class66_0.SecondaryAreaPtr);
+		class357_0.SetAddress(class66_0.PrimaryAreaPtr);
+		class357_1.SetAddress(class66_0.SecondaryAreaPtr);
 		if (class357_0.class351_0.RawAllocator.ElementSize != 88) {
 			Logger.Info("[ERROR] marker struct size mismatch: " + class357_0.class351_0.RawAllocator.ElementSize);
 			return;
@@ -429,7 +429,7 @@ internal class MarkerCollector
 		}
 	}
 
-	internal void method_1(bool bool_0)
+	internal void ClearMarkers(bool bool_0)
 	{
 		Markers.Clear();
 		list_1.Clear();
@@ -449,8 +449,8 @@ internal class MarkerCollector
 			if (item.PlayerIndex == player.Index && item.WorldPlace.WorldId == CoreCollector.LocalPlayer.WorldId && item.TrickleInfoType == 3) {
 				player.CollisionCoordinate.Set(item.WorldPlace.X, item.WorldPlace.Y, item.WorldPlace.Z);
 				player.FloorCoordinate.Set(item.WorldPlace.X, item.WorldPlace.Y, item.WorldPlace.Z);
-				ActorCollector.smethod_2(player, item.WorldPlace.WorldId, 0u);
-				player.method_25();
+				ActorCollector.UpdateSceneContext(player, item.WorldPlace.WorldId, 0u);
+				player.UpdateDistances();
 				player.CoordinateKnown = true;
 				if (!player.IsMe && player.SnoArea != null && CoreCollector.LocalPlayer.SnoArea != null) {
 					player.SnoArea = CoreCollector.LocalPlayer.SnoArea;
@@ -460,7 +460,7 @@ internal class MarkerCollector
 		return false;
 	}
 
-	internal void method_3(Shrine shrine)
+	internal void UpdateShrineMarker(Shrine shrine)
 	{
 		foreach (Marker item in class112_1.Values) {
 			if (item.IsShrine && item.FloorCoordinate.XYDistanceTo(shrine.FloorCoordinate) < 5f) {

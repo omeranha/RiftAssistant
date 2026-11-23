@@ -20,7 +20,7 @@ internal class ModuleCursorHint : Module
 	public ModuleCursorHint() : base(true)
 	{
 		bool_1 = false;
-		method_0(backgroundBrush, class221_0, class221_0);
+		SetTransparentComponents(backgroundBrush, class221_0, class221_0);
 	}
 
 	protected void Dispose(bool disposing)

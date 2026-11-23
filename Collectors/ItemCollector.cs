@@ -66,7 +66,7 @@ internal class ItemCollector
 
 	public EventHandler<LootGenerated> OnLootGenerated {  get; set; }
 
-	internal void method_0(bool bool_1)
+	internal void ClearItems(bool bool_1)
 	{
 		if (bool_1) {
 			class112_1.Clear();
@@ -86,9 +86,9 @@ internal class ItemCollector
 		Array.Clear(int_1, 0, int_1.Length);
 	}
 
-	internal void method_1()
+	internal void Collect()
 	{
-		method_0(bool_1: false);
+		ClearItems(bool_1: false);
 		bool flag = false;
 		if (stopwatch_0.ElapsedMilliseconds >= 1000) {
 			flag = true;
@@ -129,7 +129,7 @@ internal class ItemCollector
 				if (struct7_.affix_list_ptr == 0L) {
 					continue;
 				}
-				if (!CoreCollector.ACDCollector.method_5() || !method_2(struct7_, item, snoItem, bool_1: true, itemLocation)) {
+				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true, itemLocation)) {
 					continue;
 				}
 				list_4.Add(item);
@@ -140,15 +140,15 @@ internal class ItemCollector
 					Unidentified = flag4
 				};
 				list_4.Add(item);
-				if (!CoreCollector.ACDCollector.method_5() || !method_2(struct7_, item, snoItem, bool_1: false, itemLocation)) {
+				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: false, itemLocation)) {
 					continue;
 				}
 			} else {
 				if (item.AcdId != acdId) {
-					item.method_26(acdId);
+					item.SetAcdId(acdId);
 				}
 				if (flag && ((item.Location >= ItemLocation.Inventory && item.Location <= ItemLocation.Neck) || (CoreCollector.ActorCollector.IActor_1 != null && item.SnoItem.MainGroupCode == "gems_unique"))) {
-					if (!CoreCollector.ACDCollector.method_5() || !method_2(struct7_, item, snoItem, bool_1: true, itemLocation)) {
+					if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true, itemLocation)) {
 						continue;
 					}
 					list_4.Add(item);
@@ -161,7 +161,7 @@ internal class ItemCollector
 				item.SeenInInventory = true;
 			}
 			if (item.Quality == ItemQuality.Legendary && item.SnoItem.MainGroupCode == "gems_unique" && !flag4) {
-				flag4 = item.method_47("unidentified") == 1;
+				flag4 = item.GetStatInt("unidentified") == 1;
 			}
 			item.Unidentified = flag4;
 			if (flag2 && (itemLocation != itemLocation2 || flag4 != flag5)) {
@@ -173,10 +173,10 @@ internal class ItemCollector
 			if (itemLocation == ItemLocation.Floor) {
 				item.InventoryX = -1;
 				item.InventoryY = -1;
-				item.method_24(struct7_.PositionX, struct7_.PositionY, struct7_.PositionZ);
+				item.SetPosition(struct7_.PositionX, struct7_.PositionY, struct7_.PositionZ);
 				uint sSceneID_Encrypted = struct7_.SSceneID_Encrypted;
 				uint sWorldID_Encrypted = struct7_.SWorldID_Encrypted;
-				ActorCollector.smethod_1(item, sWorldID_Encrypted, sSceneID_Encrypted);
+				ActorCollector.EnsureSceneContext(item, sWorldID_Encrypted, sSceneID_Encrypted);
 				if (sWorldID_Encrypted == 0) {
 					continue;
 				}
@@ -267,7 +267,7 @@ internal class ItemCollector
 			if (itemLocation == ItemLocation.Inventory && CoreCollector.IsInTown && CoreCollector.UiElements.ShopDialogMainPagePanel.Visible) {
 				string text = CoreCollector.UiElements.GoldText.ReadText();
 				if (text != null && text.Contains("{icon:x1_shard}")) {
-					int num2 = item.method_47("picked_up_time", -1);
+					int num2 = item.GetStatInt("picked_up_time", -1);
 					if (num2 > -1 && num2 > CoreCollector.D3Memory.GameTick - 240) {
 						item.Boolean_1 = true;
 						try {
@@ -318,13 +318,13 @@ internal class ItemCollector
 		}
 	}
 
-	private bool method_2(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation)
+	private bool ReadItem(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation)
 	{
-		if (!method_3(item, isnoItem_0)) {
+		if (!ReadItemStats(item, isnoItem_0)) {
 			Logger.LogException("can't read item stats");
 			return false;
 		}
-		method_4(item, bool_1, itemLocation);
+		ReadItemAffixes(item, bool_1, itemLocation);
 		if ((int)item.Quality >= 6 && (int)item.Quality <= 8) {
 			if (acd.rare_item_stringlist_id != uint.MaxValue && (item.RareName == null || bool_1)) {
 				string text = null;
@@ -376,14 +376,14 @@ internal class ItemCollector
 		return true;
 	}
 
-	private bool method_3(Item item2, SnoItem isnoItem_0)
+	private bool ReadItemStats(Item item2, SnoItem isnoItem_0)
 	{
 		if (item2 == null) {
 			return false;
 		}
 		item2.StatList2.Clear();
-		item2.method_46(new ItemStat("name", isnoItem_0.NameLocalized));
-		item2.method_46(new ItemStat("ilvl", isnoItem_0.Level, isnoItem_0.Level));
+		item2.AddStat(new ItemStat("name", isnoItem_0.NameLocalized));
+		item2.AddStat(new ItemStat("ilvl", isnoItem_0.Level, isnoItem_0.Level));
 		double num = -1.0;
 		double num2 = -1.0;
 		double num3 = -1.0;
@@ -396,7 +396,7 @@ internal class ItemCollector
 		double num9 = -1.0;
 		item2.Quantity = -1L;
 		list_6.Clear();
-		if (!CoreCollector.ACDCollector.method_12(list_6)) {
+		if (!CoreCollector.ACDCollector.ReadAttributeEntries(list_6)) {
 			return false;
 		}
 		for (int i = 0; i < list_6.Count; i++) {
@@ -416,15 +416,15 @@ internal class ItemCollector
 				flag = true;
 				double val2 = ((acdAttribute.ValueType == AttributeValueType._int) ? ((double)r_AttributeEntry2.int_0) : ((double)r_AttributeEntry2.float_0));
 				double num11 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val2));
-				item2.method_46(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.int_0));
+				item2.AddStat(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.int_0));
 				if (acdAttribute.ValueType == AttributeValueType._int) {
 					int val3 = item.ProcessInt(r_AttributeEntry2.int_0);
 					val2 = Math.Min(int.MaxValue, Math.Max(int.MinValue, val3));
-					item2.method_46(new ItemStat(item, val2, val3));
+					item2.AddStat(new ItemStat(item, val2, val3));
 				} else {
 					double val4 = item.ProcessDouble(r_AttributeEntry2.float_0);
 					val2 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val4));
-					item2.method_46(new ItemStat(item, val2, 0));
+					item2.AddStat(new ItemStat(item, val2, 0));
 				}
 				string code = item.Code;
 				switch (code) {
@@ -470,10 +470,10 @@ internal class ItemCollector
 			}
 			if (!flag) {
 				if (acdAttribute.ValueType == AttributeValueType._int) {
-					item2.method_46(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.int_0, r_AttributeEntry2.int_0));
+					item2.AddStat(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.int_0, r_AttributeEntry2.int_0));
 				} else {
 					float num13 = Math.Min(2.1474836E+09f, Math.Max(-2.1474836E+09f, r_AttributeEntry2.float_0));
-					item2.method_46(new ItemStat(acdAttribute, uint_0, num13));
+					item2.AddStat(new ItemStat(acdAttribute, uint_0, num13));
 				}
 				switch (acdAttribute.Code) {
 					case "EnchantedAffixCount":
@@ -490,15 +490,15 @@ internal class ItemCollector
 		}
 		if (num > 0.0 && num2 > 0.0 && num3 > -1.0) {
 			double num14 = Math.Round((num + num2) * num3 / 2.0, MidpointRounding.AwayFromZero);
-			item2.method_46(new ItemStat("dps", num14));
+			item2.AddStat(new ItemStat("dps", num14));
 		}
 		if (num4 > -1.0 || num5 > -1.0) {
 			double num15 = Math.Round(((num4 == -1.0) ? 0.0 : num4) + ((num5 == -1.0) ? 0.0 : num5) / 2.0, MidpointRounding.AwayFromZero);
-			item2.method_46(new ItemStat("dps", num15));
+			item2.AddStat(new ItemStat("dps", num15));
 		}
 		if (num6 > 0.0) {
-			item2.method_46(new ItemStat("main_stat", num6));
-			item2.method_46(new ItemStat("main_stat_vita", num6 + Math.Max(0.0, val)));
+			item2.AddStat(new ItemStat("main_stat", num6));
+			item2.AddStat(new ItemStat("main_stat_vita", num6 + Math.Max(0.0, val)));
 		}
 		if (num7 > 0.0 || num9 > 0.0) {
 			double num16 = 0.0;
@@ -508,7 +508,7 @@ internal class ItemCollector
 			if (num9 > 0.0) {
 				num16 += (double)Convert.ToInt32(Math.Round(num9 / 10.0, MidpointRounding.AwayFromZero));
 			}
-			item2.method_46(new ItemStat("allres_armor", num16));
+			item2.AddStat(new ItemStat("allres_armor", num16));
 		}
 		if (num7 > 0.0 || num9 > 0.0 || num8 > 0.0) {
 			double num17 = 0.0;
@@ -521,14 +521,14 @@ internal class ItemCollector
 			if (num8 > 0.0) {
 				num17 += num8;
 			}
-			item2.method_46(new ItemStat("allres_anyres", num17));
+			item2.AddStat(new ItemStat("allres_anyres", num17));
 		}
-		item2.Seed = item2.method_47("seed");
-		item2.Quality = (ItemQuality)item2.method_47("quality");
+		item2.Seed = item2.GetStatInt("seed");
+		item2.Quality = (ItemQuality)item2.GetStatInt("quality");
 		return true;
 	}
 
-	private void method_4(Item item, bool bool_1, ItemLocation itemLocation)
+	private void ReadItemAffixes(Item item, bool bool_1, ItemLocation itemLocation)
 	{
 		if (item.Unidentified && !bool_1) {
 			return;
@@ -555,27 +555,4 @@ internal class ItemCollector
 		item.Affixes = list?.ToArray();
 	}
 
-	public void method_6(Item item2)
-	{
-		if (!(item2 is Item item)) {
-			return;
-		}
-		CoreCollector.ACDCollector.SetIndexFromAcdId(item2.AcdId);
-		int num = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__JewelRank, 1048575u, 0);
-		if (num != 0) {
-			ItemStat itemStat = item.StatList2.GetValueOrDefault("jewel_rank");
-			if (itemStat == null || itemStat.IntegerValue != num) {
-				item.StatList2["jewel_rank"] = new ItemStat("jewel_rank", num, num);
-			}
-		}
-	}
-
-	public Item method_7(SnoItem isnoItem_0, ItemQuality itemQuality, ItemLocation itemLocation, long long_0)
-	{
-		return new Item(0u, 0u, isnoItem_0) {
-			Quality = itemQuality,
-			Location = itemLocation,
-			Quantity = long_0
-		};
-	}
 }

@@ -69,7 +69,7 @@ internal class SceneMapRenderer
 
 	private bool CalculateMapBounds(out float minX, out float maxX, out float minY, out float maxY)
 	{
-		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
+		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.GetScenes(CoreCollector.LocalPlayer.WorldId);
 		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
 		bool mapUpdated = false;
 
@@ -167,7 +167,7 @@ internal class SceneMapRenderer
 			DisposeTextures();
 		}
 
-		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId);
+		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.GetScenes(CoreCollector.LocalPlayer.WorldId);
 		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
 
 		int bitmapWidth = Convert.ToInt32((maxX - minX) * currentZoom);
@@ -233,7 +233,7 @@ internal class SceneMapRenderer
 			try {
 				mapTextureChunks = new SharpDX.Direct2D1.Bitmap[chunksX, chunksY];
 				if (chunksX <= 1 && chunksY <= 1) {
-					mapTextureChunks[0, 0] = Overlay.Instance.method_10(giantMapBitmap);
+					mapTextureChunks[0, 0] = Overlay.Instance.ToDirect2DBitmap(giantMapBitmap);
 				} else {
 					for (int y = 0; y < chunksY; y++) {
 						for (int x = 0; x < chunksX; x++) {
@@ -243,7 +243,7 @@ internal class SceneMapRenderer
 							int cropHeight = Math.Min(giantMapBitmap.Height - y * maxBitmapSize, maxBitmapSize);
 
 							using System.Drawing.Bitmap textureChunk = giantMapBitmap.Clone(new System.Drawing.Rectangle(cropX, cropY, cropWidth, cropHeight), System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-							mapTextureChunks[x, y] = Overlay.Instance.method_10(textureChunk);
+							mapTextureChunks[x, y] = Overlay.Instance.ToDirect2DBitmap(textureChunk);
 						}
 					}
 				}
@@ -266,7 +266,7 @@ internal class SceneMapRenderer
 		if (CoreCollector.IsInTown) return true;
 
 		var area = CoreCollector.LocalPlayer.SnoArea;
-		foreach (var scene in CoreCollector.SceneCollector.method_0(CoreCollector.LocalPlayer.WorldId)) {
+		foreach (var scene in CoreCollector.SceneCollector.GetScenes(CoreCollector.LocalPlayer.WorldId)) {
 			if (scene.SnoArea != null && scene.SnoArea.AreaGroupInWorld != area.AreaGroupInWorld) {
 				continue;
 			}

@@ -68,7 +68,7 @@ internal class HeroCollector
 
 	public IEnumerable<Hero> HeroList => heroList.Values;
 
-	public Hero method_0(uint heroId2)
+	public Hero GetHero(uint heroId2)
 	{
 		heroList.TryGetValue(heroId2, out var value);
 		return value;
@@ -102,7 +102,7 @@ internal class HeroCollector
 				{
 					num8++;
 					buffer[0] = GameWindowManager.Read<r_Hero>(num7);
-					method_3(ref buffer[0]);
+					ReadHero(ref buffer[0]);
 					num7 = buffer[0].long_0;
 				}
 			}
@@ -123,12 +123,12 @@ internal class HeroCollector
 		IHero_0 = value;
 	}
 
-	internal void method_2()
+	internal void ClearHeroes()
 	{
 		heroList.Clear();
 	}
 
-	private void method_3(ref r_Hero hero2)
+	private void ReadHero(ref r_Hero hero2)
 	{
 		uint uint_ = hero2.uint_0;
 		if (uint_ == uint.MaxValue)
@@ -137,7 +137,7 @@ internal class HeroCollector
 		}
 		try
 		{
-			Hero hero = method_0(uint_) as Hero;
+			Hero hero = GetHero(uint_) as Hero;
 			if (hero == null)
 			{
 				string text = GameWindowManager.ReadString(hero2.long_3, 64, Encoding.UTF8, true);
@@ -168,25 +168,4 @@ internal class HeroCollector
 		}
 	}
 
-	public Hero method_4()
-	{
-		Player localPlayer = CoreCollector.LocalPlayer;
-		object hero;
-		if (localPlayer == null)
-		{
-			hero = null;
-		}
-		else
-		{
-			hero = localPlayer.Hero;
-			if (hero != null)
-			{
-				goto IL_0053;
-			}
-		}
-		hero = IHero_0 ?? heroList.Values.OrderByDescending((Hero ihero_0) => ihero_0.LastPlayed).FirstOrDefault();
-		goto IL_0053;
-		IL_0053:
-		return (Hero)hero;
-	}
 }

@@ -150,7 +150,7 @@ internal class Overlay
 		statusX += textLayout.Metrics.Width + (spacing ? (textLayout.Metrics.Height / 5f) : 1f);
 	}
 
-	public void method_3()
+	public void DrawRotatedMap()
 	{
 		RawMatrix3x2 transform = renderTarget.Transform;
 		Matrix3x2 matrix3x = Matrix3x2.Rotation(-(float)Math.PI / 4f);
@@ -186,7 +186,7 @@ internal class Overlay
 		}
 	}
 
-	public void method_4(float float_9, float statusY0, bool bool_0, out float statusY1, out float statusY2)
+	public void ToMinimapCoordinates(float float_9, float statusY0, bool bool_0, out float statusY1, out float statusY2)
 	{
 		statusY1 = (MinimapOffsetX + CoreCollector.LocalPlayer.FloorCoordinate.X - float_9) * float_2 / 350f;
 		statusY2 = (0f - (MinimapOffsetY + CoreCollector.LocalPlayer.FloorCoordinate.Y - statusY0)) * float_2 / 350f;
@@ -198,7 +198,7 @@ internal class Overlay
 		}
 	}
 
-	private void method_5()
+	private void CreateRenderTarget()
 	{
 		surface_0 = Surface.FromSwapChain(swapChain_0, 0);
 		renderTarget = new RenderTarget(factory_0, surface_0, renderTargetProperties_0) {
@@ -209,13 +209,13 @@ internal class Overlay
 
 	private void form_0_SizeChanged(object sender, EventArgs e)
 	{
-		method_19();
+		DisposeRenderTargets();
 		swapChain_0.ResizeBuffers(swapChainDescription_0.BufferCount, 0, 0, Format.Unknown, SwapChainFlags.None);
-		method_5();
-		method_6();
+		CreateRenderTarget();
+		DisposeModules();
 	}
 
-	private void method_6()
+	private void DisposeModules()
 	{
 		RenderFont.CleanupCache(true);
 		foreach (Module item in modules.ToArray()) {
@@ -228,7 +228,7 @@ internal class Overlay
 		}
 	}
 
-	public void method_7(float float_9 = 1f)
+	public void BeginClip(float float_9 = 1f)
 	{
 		Layer layer = new Layer(renderTarget, new Size2F(GameWindowManager.Window.Size.Width, GameWindowManager.Window.Size.Height));
 		LayerParameters layerParameters = new LayerParameters {
@@ -239,7 +239,7 @@ internal class Overlay
 		layer_0 = layer;
 	}
 
-	public void method_8()
+	public void EndClip()
 	{
 		renderTarget.PopLayer();
 		layer_0.Dispose();
@@ -278,7 +278,7 @@ internal class Overlay
 		}
 	}
 
-	public SharpDX.Direct2D1.Bitmap method_10(System.Drawing.Bitmap bitmap, bool bool_0 = false)
+	public SharpDX.Direct2D1.Bitmap ToDirect2DBitmap(System.Drawing.Bitmap bitmap, bool bool_0 = false)
 	{
 		if (bool_0) {
 			bitmap.MakeTransparent(System.Drawing.Color.Black);
@@ -334,7 +334,7 @@ internal class Overlay
 			Logger.Info($"Error occurred while querying supported feature level: {ex.Message}");
 		}
 		SharpDX.Direct3D11.Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[1] { featureLevel }, swapChainDescription_0, out device_0, out swapChain_0);
-		method_5();
+		CreateRenderTarget();
 		method_12();
 	}
 
@@ -486,15 +486,15 @@ internal class Overlay
 				bool flag6 = CoreCollector.UiElements.GamemenuBkgrnd.Visible || CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible;
 				if (num && !flag4 && !flag5 && !flag6) {
 					if (!CoreCollector.UiElements.InventoryMainUiElement.Visible && !boolean_) {
-						method_7();
-						method_3();
-						method_8();
+						BeginClip();
+						DrawRotatedMap();
+						EndClip();
 					}
 					if (!boolean_) {
 						PaintWorld_Ground?.Invoke(this, EventArgs.Empty);
 					}
-					class212_0.method_1();
-					class206_0.method_1();
+					class212_0.Update();
+					class206_0.Update();
 					class213_0.Draw(CoreCollector.LocalPlayer);
 					PaintTop_BeforeClip?.Invoke(this, EventArgs.Empty);
 					method_9(CoreCollector.UiElements.MapDialogMainPage);
@@ -504,7 +504,7 @@ internal class Overlay
 					}
 					PaintTop_AfterClip?.Invoke(this, EventArgs.Empty);
 				}
-				class209_0?.method_1();
+				class209_0?.Update();
 				ModuleStatTracker?.Draw();
 				Core.SettingsMenu.Draw();
 				class208_0?.Draw();
@@ -522,7 +522,7 @@ internal class Overlay
 			swapChain_0.Present(1, PresentFlags.None);
 			if (stopwatch_0.ElapsedMilliseconds >= 1000) {
 				stopwatch_0.Restart();
-				method_18();
+				CleanupFontCache();
 			}
 		} catch (SharpDXException exception_) {
 			Logger.LogException(exception_.Message);
@@ -533,12 +533,12 @@ internal class Overlay
 		return true;
 	}
 
-	private void method_18()
+	private void CleanupFontCache()
 	{
 		RenderFont.CleanupCache(false);
 	}
 
-	void method_19()
+	void DisposeRenderTargets()
 	{
 		DisposeRenders(layer_0);
 		layer_0 = null;

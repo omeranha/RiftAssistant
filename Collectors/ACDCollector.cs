@@ -105,29 +105,29 @@ internal class ACDCollector
 		return AcdIndexCur <= CoreCollector.D3Memory.ACDContainer.MaxIndex;
 	}
 
-	public void method_3(out AnimSnoEnum animSnoEnum, out AcdAnimationState acdAnimationState)
+	public void ReadAnimation(out AnimSnoEnum animSnoEnum, out AcdAnimationState acdAnimationState)
 	{
 		long ptr_animation_info = Buffer_ACDs[AcdIndexCur].ptr_animation_info;
 		animSnoEnum = (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
 		acdAnimationState = (AcdAnimationState)GameWindowManager.Read<int>(ptr_animation_info + 216);
 	}
 
-	public AnimSnoEnum method_4()
+	public AnimSnoEnum ReadAnimSno()
 	{
 		long ptr_animation_info = Buffer_ACDs[AcdIndexCur].ptr_animation_info;
 		return (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
 	}
 
-	public bool method_5()
+	public bool EnsureAttributeMap()
 	{
 		if (!attributeMapUpdated)
 		{
-			return method_6();
+			return UpdateAttributeMap();
 		}
 		return true;
 	}
 
-	private bool method_6()
+	private bool UpdateAttributeMap()
 	{
 		if (AcdIndexCur >= 0 && AcdIndexCur < Buffer_ACDs.Length)
 		{
@@ -137,7 +137,7 @@ internal class ACDCollector
 				long num = CoreCollector.D3Memory.FastAttribGroupContainer.ElementAt(fastAttribGroupID);
 				AttributeMapFlags = GameWindowManager.Read<int>(num + 4);
 				long long_ = (((AttributeMapFlags & 4) != 0) ? GameWindowManager.Read<long>(num + 16) : (num + 24));
-				AttributeMap.method_0(long_);
+				AttributeMap.SetAddress(long_);
 				if (AttributeMap.bool_0)
 				{
 					attributeMapUpdated = true;
@@ -150,18 +150,18 @@ internal class ACDCollector
 		return false;
 	}
 
-	public float method_7(AcdAttribute iattribute_0, uint uint_0, float float_0 = -1f)
+	public float ReadFloatAttribute(AcdAttribute iattribute_0, uint uint_0, float float_0 = -1f)
 	{
 		if (!attributeMapUpdated)
 		{
-			method_6();
+			UpdateAttributeMap();
 		}
 		uint id = iattribute_0.GetId(uint_0);
-		long num = AttributeMap.method_1(id);
+		long num = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.method_1(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
@@ -181,18 +181,18 @@ internal class ACDCollector
 		return float_0;
 	}
 
-	public double method_8(AcdAttribute iattribute_0, uint sno, double double_0 = -1.0)
+	public double ReadDoubleAttribute(AcdAttribute iattribute_0, uint sno, double double_0 = -1.0)
 	{
 		if (!attributeMapUpdated)
 		{
-			method_6();
+			UpdateAttributeMap();
 		}
 		uint id = iattribute_0.GetId(sno);
-		long num = AttributeMap.method_1(id);
+		long num = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.method_1(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
@@ -212,18 +212,18 @@ internal class ACDCollector
 		return double_0;
 	}
 
-	public int method_9(AcdAttribute acdAttribute, uint uint_0, int int_2 = -1)
+	public int ReadIntAttribute(AcdAttribute acdAttribute, uint uint_0, int int_2 = -1)
 	{
 		if (!attributeMapUpdated)
 		{
-			method_6();
+			UpdateAttributeMap();
 		}
 		uint id = acdAttribute.GetId(uint_0);
-		long num = AttributeMap.method_1(id);
+		long num = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.method_1(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
@@ -239,7 +239,7 @@ internal class ACDCollector
 		return int_2;
 	}
 
-	public uint method_10(AcdAttribute acdAttribute, uint uint_0, uint uint_1 = uint.MaxValue)
+	public uint ReadUIntAttribute(AcdAttribute acdAttribute, uint uint_0, uint uint_1 = uint.MaxValue)
 	{
 		if (acdAttribute == null && uint_0 == 97)
 		{
@@ -247,14 +247,14 @@ internal class ACDCollector
 		}
 		if (!attributeMapUpdated)
 		{
-			method_6();
+			UpdateAttributeMap();
 		}
 		uint id = acdAttribute.GetId(uint_0);
-		long num = AttributeMap.method_1(id);
+		long num = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
 		{
-			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.method_1(num);
+			r_AttributeEntry? r_AttributeEntry2 = AttributeAllocationCache.FindElement(num);
 			if (!r_AttributeEntry2.HasValue)
 			{
 				break;
@@ -270,7 +270,7 @@ internal class ACDCollector
 		return uint_1;
 	}
 
-	public bool method_12(List<r_AttributeEntry> list_0)
+	public bool ReadAttributeEntries(List<r_AttributeEntry> list_0)
 	{
 		if (list_0 == null)
 		{
@@ -280,7 +280,7 @@ internal class ACDCollector
 		{
 			return false;
 		}
-		if (!attributeMapUpdated && !method_6())
+		if (!attributeMapUpdated && !UpdateAttributeMap())
 		{
 			return false;
 		}

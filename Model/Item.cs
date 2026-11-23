@@ -440,29 +440,29 @@ public class Item : Actor
 		}
 	}
 
-	public int CaldesannRank => method_47("cube_enchanted_gem_rank");
+	public int CaldesannRank => GetStatInt("cube_enchanted_gem_rank");
 
-	public int AncientRank => method_47("ancient_rank");
+	public int AncientRank => GetStatInt("ancient_rank");
 
-	public bool AccountBound => method_47("bound_to_account") == 1;
+	public bool AccountBound => GetStatInt("bound_to_account") == 1;
 
 	public bool BoundToMyAccount
 	{
 		get
 		{
-			if (method_47("bound_to_account") == 1)
+			if (GetStatInt("bound_to_account") == 1)
 			{
-				return method_48("bound_to_acdid") == CoreCollector.LocalPlayer.SummonerId;
+				return GetStatUInt("bound_to_acdid") == CoreCollector.LocalPlayer.SummonerId;
 			}
 			return false;
 		}
 	}
 
-	public bool VendorBought => method_47("vendor_bought") == 1;
+	public bool VendorBought => GetStatInt("vendor_bought") == 1;
 
-	public int JewelRank => method_47("jewel_rank", -1);
+	public int JewelRank => GetStatInt("jewel_rank", -1);
 
-	public int SocketCount => method_47("sock");
+	public int SocketCount => GetStatInt("sock");
 
 	public Item(uint acdId2, uint annId2, SnoItem isnoItem_1)
 		: base(acdId2, annId2, isnoItem_1.SnoActor)
@@ -530,12 +530,12 @@ public class Item : Actor
 		return StatList2.GetValueOrDefault("Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture))?.IntegerValue.Value ?? 0;
 	}
 
-	public void method_46(ItemStat iitemStat_0)
+	public void AddStat(ItemStat iitemStat_0)
 	{
 		StatList2[iitemStat_0.Id] = iitemStat_0;
 	}
 
-	public int method_47(string string_2, int int_5 = 0)
+	public int GetStatInt(string string_2, int int_5 = 0)
 	{
 		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)
@@ -545,7 +545,7 @@ public class Item : Actor
 		return (itemStat as ItemStat).IntegerValue.GetValueOrDefault();
 	}
 
-	public uint method_48(string string_2, uint uint_10 = 0u)
+	public uint GetStatUInt(string string_2, uint uint_10 = 0u)
 	{
 		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)

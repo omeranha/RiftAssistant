@@ -21,7 +21,7 @@ internal class SceneCollector
 
 	internal r_World[] Buffer_Worlds { get; private set; }
 
-	public IEnumerable<Scene> method_0(uint worldId)
+	public IEnumerable<Scene> GetScenes(uint worldId)
 	{
 		if (dictionary_0.TryGetValue(worldId, out var value))
 		{
@@ -30,7 +30,7 @@ internal class SceneCollector
 		return Enumerable.Empty<Scene>();
 	}
 
-	public Scene method_1(uint worldId, uint sSceneIDEncrypted)
+	public Scene GetScene(uint worldId, uint sSceneIDEncrypted)
 	{
 		if (dictionary_0.TryGetValue(worldId, out var value) && value.TryGetValue(sSceneIDEncrypted, out var value2))
 		{
@@ -39,7 +39,7 @@ internal class SceneCollector
 		return null;
 	}
 
-	public uint method_2(uint uint_0)
+	public uint GetWorldSno(uint uint_0)
 	{
 		if (dictionary_1.TryGetValue(uint_0, out var value))
 		{
@@ -120,7 +120,7 @@ internal class SceneCollector
 			SnoScene scene = SnoData.Scenes.GetScene(r_Scene2.SceneSno);
 			if (scene != null)
 			{
-				uint uint_ = method_2(r_Scene2.SWorldID);
+				uint uint_ = GetWorldSno(r_Scene2.SWorldID);
 				Scene value3 = new Scene(scene, snoArea, uint_, r_Scene2.SSceneID, r_Scene2.Id, r_Scene2.mesh_min_x, r_Scene2.mesh_min_y, r_Scene2.mesh_max_x, r_Scene2.mesh_max_y, r_Scene2.mesh_max_z);
 				value.Add(r_Scene2.SSceneID, value3);
 			}
@@ -158,7 +158,7 @@ internal class SceneCollector
 					SnoScene scene2 = SnoData.Scenes.GetScene(item.uint_0);
 					if (scene2 != null)
 					{
-						uint uint_2 = method_2(item.uint_2);
+						uint uint_2 = GetWorldSno(item.uint_2);
 						Scene value6 = new Scene(scene2, null, uint_2, item.uint_1, 0u, item.float_0, item.float_1, item.float_2, item.float_3, 0f);
 						value4.Add(item.uint_1, value6);
 					}
@@ -168,7 +168,7 @@ internal class SceneCollector
 		return true;
 	}
 
-	public void method_4()
+	public void Clear()
 	{
 		dictionary_0.Clear();
 		dictionary_1.Clear();
@@ -181,7 +181,7 @@ internal class SceneCollector
 		{
 			return;
 		}
-		foreach (Scene item in method_0(CoreCollector.LocalPlayer.WorldId))
+		foreach (Scene item in GetScenes(CoreCollector.LocalPlayer.WorldId))
 		{
 			if (item.SnoScene.Hint == null)
 			{

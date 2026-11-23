@@ -23,7 +23,7 @@ public sealed class Experience
 			{
 				break;
 			}
-			long num3 = dataReader.method_12();
+			long num3 = dataReader.ReadPackedInt64();
 			ParagonExpLevel[num2] = num3;
 			num += num3;
 			ParagonTableTotal[num2] = num;

@@ -64,7 +64,7 @@ internal class ModuleLobbyHeroes : Module
 		{
 			HeavyShadow = true
 		};
-		method_0(class219_0, class219_1, class221_0, class221_1, class221_2, class221_3, class221_4, class221_5);
+		SetTransparentComponents(class219_0, class219_1, class221_0, class221_1, class221_2, class221_3, class221_4, class221_5);
 	}
 
 	protected void Dispose(bool disposing)
@@ -73,7 +73,7 @@ internal class ModuleLobbyHeroes : Module
 		base.Dispose();
 	}
 
-	public void method_1()
+	public void Update()
 	{
 		bool bool_;
 		if (!(bool_ = !CoreCollector.IsGameReady && CoreCollector.UiElements.QuestNameValue.Visible && !CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.BattleNetGameSettingsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GamemenuBkgrnd.Visible && CoreCollector.HeroCollector.HeroList.Any()))

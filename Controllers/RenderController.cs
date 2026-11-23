@@ -66,7 +66,7 @@ public class RenderController
 		get {
 			string string_ = "Root.NormalLayer.buffs_backgroundScreen.buff_icon_wrapper.buff ";
 			List<string> list = new List<string>(30);
-			CoreCollector.UiElements.BuffIconWrapper.method_3(string_, list);
+			CoreCollector.UiElements.BuffIconWrapper.CollectChildPaths(string_, list);
 			for (int i = 0; i < list.Count; i++) {
 				string string_2 = list[i];
 				yield return CoreCollector.UiElements.CreateTemporary(string_2);
@@ -170,7 +170,7 @@ public class RenderController
 
 	public void GetMinimapCoordinates(float x, float y, out float mapX, out float mapY)
 	{
-		Overlay.Instance.method_4(x, y, bool_0: true, out mapX, out mapY);
+		Overlay.Instance.ToMinimapCoordinates(x, y, bool_0: true, out mapX, out mapY);
 	}
 
 	public bool IsConfirmationDialogVisible()

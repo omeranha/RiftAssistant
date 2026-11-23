@@ -15,7 +15,7 @@ internal class QuestManager
 
 	public readonly Dictionary<uint, Quest> Bounties = new Dictionary<uint, Quest>();
 
-	internal void method_0()
+	internal void Refresh()
 	{
 		Quests.Clear();
 		Bounties.Clear();
@@ -36,18 +36,18 @@ internal class QuestManager
 			num += r_Block2.ElementCount;
 		}
 		for (int j = 0; j < totalElementCount; j++) {
-			method_2(ref struct20_0[j]);
+			ReadQuest(ref struct20_0[j]);
 		}
 	}
 
-	internal void method_1()
+	internal void Clear()
 	{
 		Quests.Clear();
 		Bounties.Clear();
 		class112_0.Clear();
 	}
 
-	private void method_2(ref r_Quest quest2)
+	private void ReadQuest(ref r_Quest quest2)
 	{
 		uint uint_ = quest2.uint_0;
 		if (uint_ == uint.MaxValue) {
@@ -90,12 +90,4 @@ internal class QuestManager
 		}
 	}
 
-	public uint method_3(QuestState questState, uint uint_0)
-	{
-		Quest quest = Quests.GetValueOrDefault(uint_0);
-		if (quest?.QuestStep != null && quest.State == questState) {
-			return quest.QuestStepId;
-		}
-		return uint.MaxValue;
-	}
 }

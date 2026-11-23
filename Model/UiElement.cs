@@ -117,14 +117,14 @@ public class UiElement
 	public UiElement(string path2, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
 	{
 		path = path2;
-		ulong_0 = smethod_0(path2.ToLower(CultureInfo.InvariantCulture));
+		ulong_0 = HashPath(path2.ToLower(CultureInfo.InvariantCulture));
 		int_0 = (int)ulong_0;
 		rectangle = default(RectangleF);
 		iuiElement_0 = iuiElement_3;
 		iuiElement_1 = iuiElement_4;
 	}
 
-	private static ulong smethod_0(string string_1)
+	private static ulong HashPath(string string_1)
 	{
 		ulong num = 14695981039346656037uL;
 		for (int i = 0; i < string_1.Length; i++) {
@@ -168,23 +168,12 @@ public class UiElement
 		return null;
 	}
 
-	public string method_2(Encoding encoding = null)
-	{
-		if (Class75_0.UnknownPtr2 != 0L) {
-			long num = GameWindowManager.Read<long>(Class75_0.UnknownPtr2 + 2656);
-			if (num != 0L) {
-				return GameWindowManager.ReadString(num, 256, encoding ?? Encoding.ASCII, true);
-			}
-		}
-		return null;
-	}
-
 	public void Refresh()
 	{
 		CoreCollector.UiElements.Resolve(this);
 	}
 
-	public unsafe void method_3(string string_1, List<string> list_0)
+	public unsafe void CollectChildPaths(string string_1, List<string> list_0)
 	{
 		if (Class75_0.ChildCount <= 0 || Class75_0.ChildCount >= 10000) {
 			return;
@@ -210,28 +199,6 @@ public class UiElement
 	internal long ReadChildDataAddress(int index)
 	{
 		return GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * index + 520);
-	}
-
-	internal UiElementData? method_6(string string_1, string string_2, out string string_3, Encoding encoding = null)
-	{
-		int num = 0;
-		string text;
-		while (true) {
-			if (num < Class75_0.ChildCount) {
-				text = GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * num + 8, 512, encoding ?? Encoding.ASCII, true);
-				if ((string_1 == null || text.StartsWith(string_1, StringComparison.InvariantCultureIgnoreCase)) && (string_2 == null || text.EndsWith(string_2, StringComparison.InvariantCultureIgnoreCase))) {
-					break;
-				}
-				num++;
-				continue;
-			}
-			string_3 = null;
-			return null;
-		}
-		long num2 = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * num + 520);
-		var uiElementData = GameWindowManager.Read<UiElementData>(num2);
-		string_3 = text;
-		return uiElementData;
 	}
 
 	public List<(string Text, int Top, int Bottom)> GetChildTextMetrics(Encoding encoding = null)

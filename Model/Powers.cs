@@ -107,12 +107,12 @@ public sealed class Powers
 			DataReader dataReader = new(stream_);
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				dataReader.method_1();
-				int num = dataReader.method_11();
+				dataReader.ReadString();
+				int num = dataReader.ReadPackedInt32();
 				float[] array = new float[num];
 				for (int i = 0; i < num; i++)
 				{
-					array[i] = dataReader.method_14();
+					array[i] = dataReader.ReadSingle();
 				}
 				list_0.Add(array);
 			}
@@ -122,8 +122,8 @@ public sealed class Powers
 		{
 			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint num2 = dataReader2.method_8();
-				string text = dataReader2.method_1();
+				uint num2 = dataReader2.ReadUInt32();
+				string text = dataReader2.ReadString();
 				string text2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._powers, text + "_name");
 				if (string.IsNullOrEmpty(text2))
 				{
@@ -141,26 +141,26 @@ public sealed class Powers
 					string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4);
 					if (!string.IsNullOrEmpty(stringByCode))
 					{
-						stringByCode = SnoData.smethod_2(stringByCode);
+						stringByCode = SnoData.ReplaceNewlines(stringByCode);
 						if (!string.IsNullOrEmpty(stringByCode))
 						{
 							snoPower.Icons[j].Exists = true;
 							snoPower.Icons[j].TitleLocalized = stringByCode;
-							snoPower.Icons[j].DescriptionLocalized = SnoData.smethod_2(SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4 + "_desc"));
+							snoPower.Icons[j].DescriptionLocalized = SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4 + "_desc"));
 						}
 					}
 				}
 				bool flag = true;
 				for (int k = 0; k < 5; k++)
 				{
-					int num3 = dataReader2.method_11();
+					int num3 = dataReader2.ReadPackedInt32();
 					for (int l = 0; l < num3; l++)
 					{
-						int num4 = dataReader2.method_6();
-						uint num5 = dataReader2.method_8();
+						int num4 = dataReader2.ReadByte();
+						uint num5 = dataReader2.ReadUInt32();
 						if (num4 != 4)
 						{
-							uint num6 = dataReader2.method_8();
+							uint num6 = dataReader2.ReadUInt32();
 							if (flag)
 							{
 								dictionary_2[k].Add(((ulong)num2 << 32) + num5, (num4, num6));
@@ -221,7 +221,7 @@ public sealed class Powers
 						}
 						else
 						{
-							int value = dataReader2.method_11();
+							int value = dataReader2.ReadPackedInt32();
 							if (flag)
 							{
 								dictionary_3[k].Add(((ulong)num2 << 32) + num5, value);
@@ -293,14 +293,14 @@ public sealed class Powers
 	private SnoPower Create(string code, string name, string category, uint snoId)
 	{
 		string localizedDesc =
-			SnoData.smethod_2(SnoData.Strings.GetStringByCode(code + "_simple_desc")) ??
-			SnoData.smethod_2(SnoData.Strings.GetStringByCode(code + "_desc")) ??
-			SnoData.smethod_2(SnoData.Strings.GetStringByCode(code));
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code + "_simple_desc")) ??
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code + "_desc")) ??
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code));
 
 		string englishDesc =
-			SnoData.smethod_2(SnoData.Strings.GetStringByCodeEnglish(code + "_simple_desc")) ??
-			SnoData.smethod_2(SnoData.Strings.GetStringByCodeEnglish(code + "_desc")) ??
-			SnoData.smethod_2(SnoData.Strings.GetStringByCodeEnglish(code));
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code + "_simple_desc")) ??
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code + "_desc")) ??
+			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code));
 
 		var power = new SnoPower(snoId, code, name, category, localizedDesc, englishDesc);
 		dictionary_0[snoId] = power;
@@ -312,7 +312,7 @@ public sealed class Powers
 		bool hasAnyRune = false;
 		for (int i = 0; i < runeLetters.Length; i++) {
 			string key = $"NameRune_{runeLetters[i]}#{code}";
-			localizedRunes[i] = SnoData.smethod_2(SnoData.Strings.GetStringByCode(key));
+			localizedRunes[i] = SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(key));
 			englishRunes[i] = SnoData.Strings.GetStringByCodeEnglish(key);
 
 			if (!string.IsNullOrEmpty(localizedRunes[i])) hasAnyRune = true;

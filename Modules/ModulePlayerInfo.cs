@@ -51,7 +51,7 @@ internal class ModulePlayerInfo : Module
 		showCooldowns = settings.Overlay.SkillCooldowns.Enabled;
 		showSkillIcons = settings.Overlay.SkillCooldowns.ShowSkillIcon;
 		fadeSkillIcons = settings.Overlay.SkillCooldowns.EnableFade;
-		method_0(healthFill, arcaneFill, disciplineFill, hatredFill, furyFill, manaFill, spiritFill, barBackground, cooldownFill);
+		SetTransparentComponents(healthFill, arcaneFill, disciplineFill, hatredFill, furyFill, manaFill, spiritFill, barBackground, cooldownFill);
 	}
 
 	public override void Dispose()

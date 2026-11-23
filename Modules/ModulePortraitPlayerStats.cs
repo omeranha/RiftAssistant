@@ -36,10 +36,10 @@ internal class ModulePortraitPlayerStats : Module
 		ehp = settings.Overlay.PortraitPlayerStats.EHP;
 		class219_1 = new RenderBrush(160, 0, 170, 0, 0f);
 		class219_2 = new RenderBrush(160, 100, 100, 100, 0f);
-		method_0(class219_0, class219_3, class219_2, class219_1, renderFont);
+		SetTransparentComponents(class219_0, class219_3, class219_2, class219_1, renderFont);
 	}
 
-	public void method_1()
+	public void Update()
 	{
 		bool flag = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.mapMode_0 != MapMode.Map && !CoreCollector.D3Memory.IsUiHidden;
 		if (Overlay.Instance.mapMode_0 == MapMode.WaypointMap || Overlay.Instance.mapMode_0 == MapMode.ActMap) {
@@ -51,7 +51,7 @@ internal class ModulePortraitPlayerStats : Module
 		int num = 0;
 		UiElement uiElement = CoreCollector.UiElements.class341_145[0];
 		if ((float)GameWindowManager.Window.CursorX >= uiElement.rectangle.Left && (float)GameWindowManager.Window.CursorX <= uiElement.rectangle.Right && (float)GameWindowManager.Window.CursorY >= uiElement.rectangle.Top && (float)GameWindowManager.Window.CursorY <= uiElement.rectangle.Bottom) {
-			method_2();
+			DrawStats();
 		}
 		float ehpMax = 0f;
 		foreach (Player item in CoreCollector.PlayerCollector.PlayersInGame) {
@@ -102,7 +102,7 @@ internal class ModulePortraitPlayerStats : Module
 				}
 			}
 			if (num3 == 0 && (float)GameWindowManager.Window.CursorX >= uiElement2.rectangle.Left && (float)GameWindowManager.Window.CursorX <= uiElement2.rectangle.Right && (float)GameWindowManager.Window.CursorY >= uiElement2.rectangle.Top && (float)GameWindowManager.Window.CursorY <= uiElement2.rectangle.Bottom) {
-				method_2();
+				DrawStats();
 			}
 			if (!showInfo) {
 				continue;
@@ -139,7 +139,7 @@ internal class ModulePortraitPlayerStats : Module
 		}
 	}
 
-	private void method_2()
+	private void DrawStats()
 	{
 		TextLayout[,] array = new TextLayout[CoreCollector.PlayerCollector.NumberOfPlayersInGame + 1, 11];
 		array[0, 0] = renderFont.GetTextLayout("player");

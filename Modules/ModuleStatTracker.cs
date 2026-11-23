@@ -93,7 +93,7 @@ internal class ModuleStatTracker : Module
 
 	public ModuleStatTracker(StatTrackerSettings statTracker) : base(statTracker.Enabled) {
 		Show = false;
-		method_0(class219_0, class219_1, class219_2, class219_3, class219_4, class219_5, class219_6, class219_7, class219_8, class219_9, class221_0, class221_1, blackText, class221_3, whiteText);
+		SetTransparentComponents(class219_0, class219_1, class219_2, class219_3, class219_4, class219_5, class219_6, class219_7, class219_8, class219_9, class221_0, class221_1, blackText, class221_3, whiteText);
 		widthScale = statTracker.ScaleWidth / 100f;
 
 		showExperience = statTracker.Columns.Experience;
@@ -383,9 +383,9 @@ internal class ModuleStatTracker : Module
 			if (statTracker.SnoArea != null) {
 				DrawCell(num19++, blackText, "", num7, class219_, Alignment.Right, 1, null);
 			} else {
-				DrawCell(num19++, blackText, statTracker.AlwaysRunning ? "-" : statTracker.method_26(), num7, class219_, Alignment.Right, 1, null);
+				DrawCell(num19++, blackText, statTracker.AlwaysRunning ? "-" : statTracker.FormatTownTime(), num7, class219_, Alignment.Right, 1, null);
 			}
-			DrawCell(num19++, whiteText, statTracker.method_27(), num7, class219_, Alignment.Right, 1, class219_9);
+			DrawCell(num19++, whiteText, statTracker.FormatPlayTime(), num7, class219_, Alignment.Right, 1, class219_9);
 
 			foreach (var column in columns) {
 				if (!column.Enabled) continue;

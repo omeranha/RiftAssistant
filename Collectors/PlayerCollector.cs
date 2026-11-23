@@ -80,7 +80,7 @@ internal class PlayerCollector
 		}
 	}
 
-	internal void method_0()
+	internal void ResetPlayers()
 	{
 		NumberOfPlayersInGame = 0;
 		Player[] iPlayer_ = PlayerSlots;
@@ -89,7 +89,7 @@ internal class PlayerCollector
 			player.ParagonTotalExp2 = 0L;
 			player.ParagonTotalExp = 0L;
 			player.class362_0.ForceSet(0L);
-			player.method_59();
+			player.ResetHero();
 		}
 	}
 
@@ -214,16 +214,16 @@ internal class PlayerCollector
 						}
 						if (flag) {
 							fixed (r_PlayerData* pData2 = &player.RawPlayerData) {
-								(player.ArmorySets[0] as PlayerArmorySet).Name = method_2(pData2->struct28_0.struct29_0, 52);
-								(player.ArmorySets[1] as PlayerArmorySet).Name = method_2(pData2->struct28_1.struct29_0, 52);
-								(player.ArmorySets[2] as PlayerArmorySet).Name = method_2(pData2->struct28_2.struct29_0, 52);
-								(player.ArmorySets[3] as PlayerArmorySet).Name = method_2(pData2->struct28_3.struct29_0, 52);
-								(player.ArmorySets[4] as PlayerArmorySet).Name = method_2(pData2->struct28_4.struct29_0, 52);
-								(player.ArmorySets[5] as PlayerArmorySet).Name = method_2(pData2->struct28_5.struct29_0, 52);
-								(player.ArmorySets[6] as PlayerArmorySet).Name = method_2(pData2->struct28_6.struct29_0, 52);
-								(player.ArmorySets[7] as PlayerArmorySet).Name = method_2(pData2->struct28_7.struct29_0, 52);
-								(player.ArmorySets[8] as PlayerArmorySet).Name = method_2(pData2->struct28_8.struct29_0, 52);
-								(player.ArmorySets[9] as PlayerArmorySet).Name = method_2(pData2->struct28_9.struct29_0, 52);
+								(player.ArmorySets[0] as PlayerArmorySet).Name = DecodeString(pData2->struct28_0.struct29_0, 52);
+								(player.ArmorySets[1] as PlayerArmorySet).Name = DecodeString(pData2->struct28_1.struct29_0, 52);
+								(player.ArmorySets[2] as PlayerArmorySet).Name = DecodeString(pData2->struct28_2.struct29_0, 52);
+								(player.ArmorySets[3] as PlayerArmorySet).Name = DecodeString(pData2->struct28_3.struct29_0, 52);
+								(player.ArmorySets[4] as PlayerArmorySet).Name = DecodeString(pData2->struct28_4.struct29_0, 52);
+								(player.ArmorySets[5] as PlayerArmorySet).Name = DecodeString(pData2->struct28_5.struct29_0, 52);
+								(player.ArmorySets[6] as PlayerArmorySet).Name = DecodeString(pData2->struct28_6.struct29_0, 52);
+								(player.ArmorySets[7] as PlayerArmorySet).Name = DecodeString(pData2->struct28_7.struct29_0, 52);
+								(player.ArmorySets[8] as PlayerArmorySet).Name = DecodeString(pData2->struct28_8.struct29_0, 52);
+								(player.ArmorySets[9] as PlayerArmorySet).Name = DecodeString(pData2->struct28_9.struct29_0, 52);
 							}
 							(player.ArmorySets[0] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_0;
 							(player.ArmorySets[1] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_1;
@@ -238,26 +238,26 @@ internal class PlayerCollector
 							for (int j = 0; j < 10; j++) {
 								PlayerArmorySet playerArmorySet = player.ArmorySets[j] as PlayerArmorySet;
 								playerArmorySet.itemAnnIds.Clear();
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_0.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_1.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_2.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_3.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_4.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_5.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_6.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_7.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_8.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_9.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_10.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_11.uint_0);
-								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_12.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_0.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_1.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_2.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_3.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_4.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_5.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_6.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_7.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_8.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_9.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_10.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_11.uint_0);
+								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_12.uint_0);
 							}
 						}
 						uint heroId2 = player.RawPlayerData.HeroId;
 						if (heroId2 != 0 && heroId2 != uint.MaxValue) {
 							if (heroId != heroId2) {
 								player.HeroId = heroId2;
-								Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.method_0(heroId2) : null));
+								Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.GetHero(heroId2) : null));
 								if (hero != null) {
 									player.HeroName = hero.Name;
 									player.Season = hero.Season;
@@ -274,7 +274,7 @@ internal class PlayerCollector
 								}
 								if (string.IsNullOrEmpty(player.HeroName)) {
 									if (!player.IsMe) {
-										player.method_59();
+										player.ResetHero();
 										goto IL_0f38;
 									}
 									return false;
@@ -289,10 +289,10 @@ internal class PlayerCollector
 								}
 								uint acdIdEncrypted = player.RawPlayerData.AcdIdEncrypted;
 								uint actorIdEncrypted = player.RawPlayerData.ActorIdEncrypted;
-								player.method_26(acdIdEncrypted);
+								player.SetAcdId(acdIdEncrypted);
 								player.ActorId = actorIdEncrypted;
 								if (!player.HasValidActor) {
-									player.method_60();
+									player.ResetActor();
 									if (player.IsMe) {
 										return false;
 									}
@@ -355,19 +355,19 @@ internal class PlayerCollector
 								if (player.IsMe) {
 									return false;
 								}
-								player.method_59();
+								player.ResetHero();
 							}
 						} else {
 							if (player.IsMe) {
 								return false;
 							}
-							player.method_59();
+							player.ResetHero();
 						}
 					} else {
 						if (player.IsMe) {
 							break;
 						}
-						player.method_59();
+						player.ResetHero();
 					}
 					goto IL_0f38;
 				}
@@ -383,7 +383,7 @@ internal class PlayerCollector
 		return false;
 	}
 
-	private unsafe string method_2(sbyte* pSbyte_0, int int_1)
+	private unsafe string DecodeString(sbyte* pSbyte_0, int int_1)
 	{
 		string text = new string(pSbyte_0, 0, int_1, Encoding.UTF8);
 		int num = text.IndexOf('\0');

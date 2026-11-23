@@ -136,7 +136,7 @@ internal class AllocationCache<T> where T : unmanaged
 		}
 	}
 
-	public T? method_1(long long_0)
+	public T? FindElement(long long_0)
 	{
 		int num = 0;
 		AllocatedBlock<T> @class;

@@ -37,15 +37,15 @@ public sealed class Areas
 		{
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint uint_ = dataReader.method_8();
-				int num = dataReader.method_11();
-				int num2 = dataReader.method_11();
+				uint uint_ = dataReader.ReadUInt32();
+				int num = dataReader.ReadPackedInt32();
+				int num2 = dataReader.ReadPackedInt32();
 				SnoAct snoAct = new SnoAct(uint_, num);
 				AllActs[num - 1] = snoAct;
 				for (int i = 0; i < num2; i++)
 				{
-					uint uint_2 = dataReader.method_8();
-					uint uint_3 = dataReader.method_8();
+					uint uint_2 = dataReader.ReadUInt32();
+					uint uint_3 = dataReader.ReadUInt32();
 					snoAct.Waypoints.Add(new SnoActWaypoint(uint_2, uint_3));
 				}
 			}
@@ -218,7 +218,7 @@ internal class Map
 		}
 	}
 
-	public void method_0(long long_3)
+	public void SetAddress(long long_3)
 	{
 		Int64_0 = long_3;
 		bool_0 = long_3 != 0;
@@ -252,7 +252,7 @@ internal class Map
 		}
 	}
 
-	public long method_1(uint uint_0)
+	public long GetBucketAddress(uint uint_0)
 	{
 		uint num = uint_0 ^ (uint_0 >> 12);
 		int num2 = (int)(mask & num);
@@ -377,14 +377,14 @@ public sealed class Scenes
 		{
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = dataReader.method_8();
-				int int_ = (int)dataReader.method_12();
-				int int_2 = dataReader.method_11();
-				int int_3 = dataReader.method_11();
-				int int_4 = dataReader.method_11();
-				int int_5 = dataReader.method_11();
-				int int_6 = (int)dataReader.method_12();
-				string string_ = dataReader.method_1();
+				uint num = dataReader.ReadUInt32();
+				int int_ = (int)dataReader.ReadPackedInt64();
+				int int_2 = dataReader.ReadPackedInt32();
+				int int_3 = dataReader.ReadPackedInt32();
+				int int_4 = dataReader.ReadPackedInt32();
+				int int_5 = dataReader.ReadPackedInt32();
+				int int_6 = (int)dataReader.ReadPackedInt64();
+				string string_ = dataReader.ReadString();
 				SnoScene value = new SnoScene(num, int_, int_2, int_3, int_4, int_5, int_6, string_);
 				allScenes.Add(num, value);
 			}

@@ -495,7 +495,7 @@ public class Actor
 		ScreenCoordinate_0 = Window.CreateScreenCoordinate(0f, 0f);
 	}
 
-	public void method_24(float positionX, float positionY, float positionZ)
+	public void SetPosition(float positionX, float positionY, float positionZ)
 	{
 		CollisionCoordinate.Set(positionX, positionY, positionZ);
 		FloorCoordinate.Set(positionX, positionY, positionZ);
@@ -508,11 +508,11 @@ public class Actor
 		}
 		else
 		{
-			method_25();
+			UpdateDistances();
 		}
 	}
 
-	public void method_25()
+	public void UpdateDistances()
 	{
 		bool_0 = false;
 		CentralXyDistanceToMe = FloorCoordinate.XYDistanceTo(Window.Center);
@@ -530,7 +530,7 @@ public class Actor
 		return SnoActor.Code;
 	}
 
-	public void method_26(uint uint_7)
+	public void SetAcdId(uint uint_7)
 	{
 		AcdId = uint_7;
 	}

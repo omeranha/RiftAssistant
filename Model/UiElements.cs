@@ -443,7 +443,7 @@ internal class UiElements
 		ProcessChat(force);
 		if (SubmitButton.Visible) {
 			CoreCollector.BattleTag = null;
-			CoreCollector.HeroCollector.method_2();
+			CoreCollector.HeroCollector.ClearHeroes();
 		}
 	}
 

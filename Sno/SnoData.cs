@@ -58,8 +58,8 @@ public static class SnoData
 
 	public static void Load()
 	{
-		smethod_0();
-		smethod_1();
+		LoadResourceIndex();
+		LoadPowerTagMap();
 		Strings = new Strings();
 		Classes = new Classes();
 		Powers = new Powers();
@@ -75,17 +75,17 @@ public static class SnoData
 
 	}
 
-	private static void smethod_0()
+	private static void LoadResourceIndex()
 	{
 		using DataReader dataReader = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "resource_index.bin")));
 		while (dataReader.Stream.Position < dataReader.Stream.Length) {
-			ulong key = dataReader.method_10();
-			uint num = dataReader.method_8();
-			int num2 = dataReader.method_11();
-			int x = dataReader.method_11();
-			int y = dataReader.method_11();
-			int w = dataReader.method_11();
-			int h = dataReader.method_11();
+			ulong key = dataReader.ReadUInt64();
+			uint num = dataReader.ReadUInt32();
+			int num2 = dataReader.ReadPackedInt32();
+			int x = dataReader.ReadPackedInt32();
+			int y = dataReader.ReadPackedInt32();
+			int w = dataReader.ReadPackedInt32();
+			int h = dataReader.ReadPackedInt32();
 			TextureIndexEntry value = new() {
 				Id = num,
 				AtlasPosition = num2,
@@ -99,12 +99,12 @@ public static class SnoData
 		}
 	}
 
-	private static void smethod_1()
+	private static void LoadPowerTagMap()
 	{
 		using DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "tagmap_powers.bin")));
 		while (dataReader.Stream.Position < dataReader.Stream.Length) {
-			uint num = dataReader.method_8();
-			string text = dataReader.method_1();
+			uint num = dataReader.ReadUInt32();
+			string text = dataReader.ReadString();
 			if (GeneralTagMapEntries.TryAdd(num, text)) {
 				if (text.StartsWith("TAG_POWER_SCRIPT_FORMULA_")) {
 					int num2 = int.Parse(text.Replace("TAG_POWER_SCRIPT_FORMULA_", ""));
@@ -114,82 +114,9 @@ public static class SnoData
 		}
 	}
 
-	internal static string smethod_2(string stringByCode, string string_1 = "<br>")
+	internal static string ReplaceNewlines(string stringByCode, string string_1 = "<br>")
 	{
 		return stringByCode?.Replace("\n", string_1);
 	}
 
-	internal static string smethod_3(string string_0, string string_1, string string_2)
-	{
-		if (string.IsNullOrEmpty(string_0))
-		{
-			return string_0;
-		}
-		while (true)
-		{
-			int num = string_0.IndexOf("{" + string_1 + "}");
-			if (num == -1)
-			{
-				return string_0;
-			}
-			int num2 = string_0.IndexOf("{/" + string_1 + "}", num + 1);
-			if (num2 == -1)
-			{
-				break;
-			}
-			string_0 = string_0.Substring(0, num) + string_2 + string_0.Substring(num2 + 3 + string_1.Length);
-		}
-		return string_0;
-	}
-
-	internal static string smethod_4(string string_0)
-	{
-		if (string.IsNullOrEmpty(string_0))
-		{
-			return string_0;
-		}
-		while (true)
-		{
-			int num = string_0.LastIndexOf("{c_");
-			if (num == -1)
-			{
-				break;
-			}
-			int num2 = string_0.IndexOf("{/c", num + 1);
-			if (num2 == -1)
-			{
-				break;
-			}
-			int num3 = string_0.IndexOf("}", num2 + 1);
-			if (num3 == -1)
-			{
-				break;
-			}
-			string_0 = string_0.Remove(num, num3 - num + 1);
-		}
-		return string_0;
-	}
-
-	internal static string smethod_5(string string_0, string string_1)
-	{
-		if (string.IsNullOrEmpty(string_0))
-		{
-			return string_0;
-		}
-		while (true)
-		{
-			int num = string_0.IndexOf("[");
-			if (num == -1)
-			{
-				return string_0;
-			}
-			int num2 = string_0.IndexOf("]", num + 1);
-			if (num2 == -1)
-			{
-				break;
-			}
-			string_0 = string_0.Substring(0, num) + string_1 + string_0.Substring(num2 + 1);
-		}
-		return string_0;
-	}
 }

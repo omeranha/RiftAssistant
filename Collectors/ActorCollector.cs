@@ -335,18 +335,18 @@ internal class ActorCollector
 		}
 	}
 
-	internal void method_0()
+	internal void ClearActors()
 	{
 		class112_0.Clear();
 	}
 
-	internal void method_1()
+	internal void ClearMonsters()
 	{
 		Monsters.Clear();
 		AliveMonsters.Clear();
 	}
 
-	internal void method_2(bool bool_4)
+	internal void ResetCollections(bool bool_4)
 	{
 		list_3.Clear();
 		Monsters.Clear();
@@ -375,7 +375,7 @@ internal class ActorCollector
 		if (flag) {
 			stopwatch_1.Restart();
 		}
-		method_2(bool_4: false);
+		ResetCollections(bool_4: false);
 		Int32_1 = 0;
 		IsEliteNearby = false;
 		IsEliteOnScreen = false;
@@ -469,7 +469,7 @@ internal class ActorCollector
 					continue;
 				}
 				if (actor2.AcdId != acdid) {
-					actor2.method_26(acdid);
+					actor2.SetAcdId(acdid);
 				}
 				snoActor = actor2.SnoActor;
 				if (snoActor.Sno == actorSnoEnum) {
@@ -483,7 +483,7 @@ internal class ActorCollector
 				}
 				goto end_IL_019d;
 			IL_04b0:
-				if (!CoreCollector.ACDCollector.method_5()) {
+				if (!CoreCollector.ACDCollector.EnsureAttributeMap()) {
 					continue;
 				}
 				if (snoActor.Kind == ActorKind.Follower) {
@@ -504,14 +504,14 @@ internal class ActorCollector
 						continue;
 					}
 					player.list_0.Clear();
-					CoreCollector.ACDCollector.method_12(player.list_0);
+					CoreCollector.ACDCollector.ReadAttributeEntries(player.list_0);
 					if (player.AcdId == uint.MaxValue) {
-						player.method_60();
+						player.ResetActor();
 						break;
 					}
 					player.AnnId = struct7_.AnnId;
 					player.CoordinateKnown = true;
-					CoreCollector.ACDCollector.method_3(out var animSnoEnum_, out var acdAnimationState_);
+					CoreCollector.ACDCollector.ReadAnimation(out var animSnoEnum_, out var acdAnimationState_);
 					player.Animation = animSnoEnum_;
 					player.AnimationState = acdAnimationState_;
 					player.SnoActor = snoActor;
@@ -531,11 +531,11 @@ internal class ActorCollector
 					}
 					player.CollisionCoordinate.Set(ptr->CollisionX, ptr->CollisionY, ptr->CollisionZ);
 					player.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
-					smethod_1(player, sWorldID_Encrypted, sSceneID_Encrypted);
+					EnsureSceneContext(player, sWorldID_Encrypted, sSceneID_Encrypted);
 					player.RadiusScaled = struct7_.CollisionRadius;
 					player.RadiusBottom = ptr->BottomRadius;
-					player.method_25();
-					method_7(player);
+					player.UpdateDistances();
+					CollectPlayerAttributes(player);
 					list_3.Add(player);
 					class112_0.Remove(gparam_);
 					continue;
@@ -554,47 +554,47 @@ internal class ActorCollector
 				}
 				bool flag3 = true;
 				if (flag2 && snoActor.Sno != ActorSnoEnum._x1_adria_boss && snoActor.Sno != ActorSnoEnum._x1_templarnpc_camp_bounty) {
-					if (CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__Is_NPC, 1048575u, 0) == 1) {
+					if (CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__Is_NPC, 1048575u, 0) == 1) {
 						flag3 = false;
 					}
-					if (CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__Pet_Type, 1048575u) > 0) {
+					if (CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__Pet_Type, 1048575u) > 0) {
 						flag3 = false;
 					}
-					int num8 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__TeamID, 1048575u);
+					int num8 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__TeamID, 1048575u);
 					if (num8 == 2 || num8 == 1) {
 						flag3 = false;
 					}
 				}
 				if (!flag2) {
 					bool num9 = actor2 == null || !(actor2?.SnoActor.IsStatic ?? false);
-					uint num10 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u);
+					uint num10 = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u);
 					if (actor2 == null) {
-						actor2 = method_4(gizmoType: (GizmoType)struct7_.GizmoType, acdid: acdid, annId: annId, snoActor: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
+						actor2 = CreateActor(gizmoType: (GizmoType)struct7_.GizmoType, acdid: acdid, annId: annId, snoActor: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
 						actor2.CreatedAtInGameTick = ptr->CreationTick;
 						class112_0[gparam_] = actor2;
 					}
 					actor2.GizmoType = (GizmoType)struct7_.GizmoType;
 					actor2.SummonerAcdDynamicId = num10;
-					actor2.Untargetable = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Untargetable, 1048575u, 0.0) == 1.0;
-					actor2.Boolean_0 = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__gizmo_disabled_by_script, 1048575u, 0.0) == 1.0;
+					actor2.Untargetable = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Untargetable, 1048575u, 0.0) == 1.0;
+					actor2.Boolean_0 = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__gizmo_disabled_by_script, 1048575u, 0.0) == 1.0;
 					actor2.list_0.Clear();
-					CoreCollector.ACDCollector.method_12(actor2.list_0);
+					CoreCollector.ACDCollector.ReadAttributeEntries(actor2.list_0);
 					if (num9) {
 						actor2.CollisionCoordinate.Set(ptr->CollisionX, ptr->CollisionY, ptr->CollisionZ);
 						actor2.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
 						sSceneID_Encrypted = struct7_.SSceneID_Encrypted;
 						sWorldID_Encrypted = struct7_.SWorldID_Encrypted;
-						smethod_1(actor2, sWorldID_Encrypted, sSceneID_Encrypted);
+						EnsureSceneContext(actor2, sWorldID_Encrypted, sSceneID_Encrypted);
 						actor2.RadiusScaled = struct7_.CollisionRadius;
 						actor2.RadiusBottom = ptr->BottomRadius;
 					}
-					actor2.method_25();
+					actor2.UpdateDistances();
 					actor2.Hitpoints = struct7_.HitPoints;
 					actor2.IsSelected = ptr->IsSelected != uint.MaxValue;
 					if (actor2.IsSelected) {
 						IActor_0 = actor2;
 					}
-					if (method_5(actor2)) {
+					if (TrackSpecialActor(actor2)) {
 						list_3.Add(actor2);
 					}
 					continue;
@@ -603,8 +603,8 @@ internal class ActorCollector
 				if (monster2 != null && (monster2.IsElite || monster2.SnoMonster.Priority >= MonsterPriority.keywarden)) {
 					flag4 = true;
 				}
-				double value = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Max_Total, 1048575u, 0.0) : monster2.MaxHealth);
-				double num11 = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Cur, 1048575u, 1.0) : monster2.CurHealth);
+				double value = (flag4 ? CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Hitpoints_Max_Total, 1048575u, 0.0) : monster2.MaxHealth);
+				double num11 = (flag4 ? CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Hitpoints_Cur, 1048575u, 1.0) : monster2.CurHealth);
 				if (num11 < 0.3) {
 					if (monster2 != null && monster2.CurHealth > 0.0) {
 						num5 += monster2.CurHealth;
@@ -639,7 +639,7 @@ internal class ActorCollector
 				ActorRarity actorRarity = (ActorRarity)struct7_.ActorRarity;
 				if (monster2 == null) {
 					monster2 = new Monster(acdid, annId, snoMonster2.SnoActor, snoMonster2) {
-						SummonerAcdDynamicId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u)
+						SummonerAcdDynamicId = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u)
 					};
 					class112_0[gparam_] = monster2;
 				}
@@ -649,9 +649,9 @@ internal class ActorCollector
 				if (monster2.IsSelected) {
 					IActor_0 = monster2;
 				}
-				smethod_0(struct7_, monster2);
+				ReadMonsterAffixes(struct7_, monster2);
 				monster2.list_0.Clear();
-				CoreCollector.ACDCollector.method_12(monster2.list_0);
+				CoreCollector.ACDCollector.ReadAttributeEntries(monster2.list_0);
 				if (num11 < monster2.CurHealth) {
 					num5 += monster2.CurHealth - num11;
 				}
@@ -661,11 +661,11 @@ internal class ActorCollector
 				monster2.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
 				sSceneID_Encrypted = struct7_.SSceneID_Encrypted;
 				sWorldID_Encrypted = struct7_.SWorldID_Encrypted;
-				smethod_1(monster2, sWorldID_Encrypted, sSceneID_Encrypted);
+				EnsureSceneContext(monster2, sWorldID_Encrypted, sSceneID_Encrypted);
 				monster2.RadiusScaled = struct7_.CollisionRadius;
 				monster2.RadiusBottom = ptr->BottomRadius;
 				monster2.CreatedAtInGameTick = ptr->CreationTick;
-				monster2.method_25();
+				monster2.UpdateDistances();
 				if (snoMonster2.Priority == MonsterPriority.keywarden && CoreCollector.LocalPlayer.SnoArea != null) {
 					IWorldCoordinate_0 = monster2.FloorCoordinate;
 					Act2 = CoreCollector.LocalPlayer.SnoArea.Act;
@@ -677,30 +677,30 @@ internal class ActorCollector
 					IMonster_1 = monster2;
 				}
 				if (flag4) {
-					monster2.Illusion = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, 264185u, 0.0) != 0.0;
-					monster2.Frozen = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Frozen, 1048575u, 0.0) == 1.0;
-					monster2.Chilled = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Chilled, 1048575u, 0.0) == 1.0;
-					monster2.Slow = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Slow, 1048575u, 0.0) == 1.0;
-					monster2.Stunned = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stunned, 1048575u, 0.0) == 1.0;
-					monster2.Untargetable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Untargetable, 1048575u, 0.0) == 1.0;
-					monster2.Invulnerable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Invulnerable, 1048575u, 0.0) == 1.0;
-					monster2.Burrowed = monster2.Untargetable || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Burrowed, 1048575u, 0.0) == 1.0;
-					monster2.Stealthed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stealthed, 1048575u, 0.0) == 1.0;
-					monster2.Blind = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Blind, 1048575u, 0.0) == 1.0;
-					monster2.Bleeding = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Bleeding, 1048575u, 0.0) == 1.0;
-					monster2.Hidden = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Hidden, 1048575u, 0.0) == 1.0;
+					monster2.Illusion = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, 264185u, 0.0) != 0.0;
+					monster2.Frozen = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Frozen, 1048575u, 0.0) == 1.0;
+					monster2.Chilled = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Chilled, 1048575u, 0.0) == 1.0;
+					monster2.Slow = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Slow, 1048575u, 0.0) == 1.0;
+					monster2.Stunned = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Stunned, 1048575u, 0.0) == 1.0;
+					monster2.Untargetable = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Untargetable, 1048575u, 0.0) == 1.0;
+					monster2.Invulnerable = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Invulnerable, 1048575u, 0.0) == 1.0;
+					monster2.Burrowed = monster2.Untargetable || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Burrowed, 1048575u, 0.0) == 1.0;
+					monster2.Stealthed = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Stealthed, 1048575u, 0.0) == 1.0;
+					monster2.Blind = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Blind, 1048575u, 0.0) == 1.0;
+					monster2.Bleeding = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Bleeding, 1048575u, 0.0) == 1.0;
+					monster2.Hidden = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Hidden, 1048575u, 0.0) == 1.0;
 					monster2.Invisible = monster2.Burrowed || monster2.Stealthed || monster2.Hidden;
-					monster2.Palmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0;
-					monster2.Haunted = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0;
-					monster2.MarkedForDeath = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0;
-					monster2.Locust = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0;
-					monster2.Piranhas = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_3_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_5_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_6_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_1_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0;
-					monster2.Cursed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_DecrepifyPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_LeechPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_FrailtyPassiveEffect.Sno, 0.0) == 1.0;
-					monster2.Strongarmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.StrongarmBracers.Sno, 0.0) == 1.0;
-					monster2.Phoenixed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Generic_ItemPassiveUniqueRing733x1.Sno, 0.0) == 1.0;
-					monster2.DotDpsApplied = CoreCollector.ACDCollector.method_7(CoreCollector.Controller.Sno.Attributes.DOT_DPS, 1048575u);
+					monster2.Palmed = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0;
+					monster2.Haunted = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0;
+					monster2.MarkedForDeath = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0;
+					monster2.Locust = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0;
+					monster2.Piranhas = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_3_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_5_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_6_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_1_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0;
+					monster2.Cursed = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_DecrepifyPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_LeechPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_FrailtyPassiveEffect.Sno, 0.0) == 1.0;
+					monster2.Strongarmed = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.StrongarmBracers.Sno, 0.0) == 1.0;
+					monster2.Phoenixed = CoreCollector.ACDCollector.ReadDoubleAttribute(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Generic_ItemPassiveUniqueRing733x1.Sno, 0.0) == 1.0;
+					monster2.DotDpsApplied = CoreCollector.ACDCollector.ReadFloatAttribute(CoreCollector.Controller.Sno.Attributes.DOT_DPS, 1048575u);
 					if (monster2.SnoMonster.Priority >= MonsterPriority.keywarden || monster2.IsElite) {
-						CoreCollector.ACDCollector.method_3(out var animSnoEnum, out var acdAnimationState);
+						CoreCollector.ACDCollector.ReadAnimation(out var animSnoEnum, out var acdAnimationState);
 						monster2.Animation = animSnoEnum;
 						monster2.AnimationState = acdAnimationState;
 					}
@@ -839,7 +839,7 @@ internal class ActorCollector
 		return true;
 	}
 
-	private static void smethod_0(r_ACD acd, Monster monster)
+	private static void ReadMonsterAffixes(r_ACD acd, Monster monster)
 	{
 		List<SnoMonsterAffix> affixSnoList = monster.AffixSnoList;
 		affixSnoList?.Clear();
@@ -881,7 +881,7 @@ internal class ActorCollector
 		}
 	}
 
-	private Actor method_4(uint acdid, uint annId, SnoActor snoActor, GizmoType gizmoType, uint uint_2)
+	private Actor CreateActor(uint acdid, uint annId, SnoActor snoActor, GizmoType gizmoType, uint uint_2)
 	{
 		if (snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && snoActor.Sno != ActorSnoEnum._x1_westm_bridge && snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
 			if (snoActor.Sno == ActorSnoEnum._a3dun_keep_bridge) {
@@ -899,21 +899,21 @@ internal class ActorCollector
 					return null;
 				}
 				if (skillEffectRule.Type == SkillEffectType.blizzard) {
-					int num = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_a, 30680u);
-					int num2 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_b, 30680u);
-					int num3 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_c, 30680u);
-					int num4 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_d, 30680u);
-					int num5 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_e, 30680u);
+					int num = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_a, 30680u);
+					int num2 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_b, 30680u);
+					int num3 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_c, 30680u);
+					int num4 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_d, 30680u);
+					int num5 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_e, 30680u);
 					if (num == -1 && num2 == -1 && num3 == -1 && num4 == -1 && num5 == -1) {
 						return null;
 					}
 				}
 				if (skillEffectRule.Type == SkillEffectType.meteor) {
-					int num6 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_a, 69190u);
-					int num7 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_b, 69190u);
-					int num8 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_c, 69190u);
-					int num9 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_d, 69190u);
-					int num10 = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__rune_e, 69190u);
+					int num6 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_a, 69190u);
+					int num7 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_b, 69190u);
+					int num8 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_c, 69190u);
+					int num9 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_d, 69190u);
+					int num10 = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__rune_e, 69190u);
 					if (num6 == -1 && num7 == -1 && num8 == -1 && num9 == -1 && num10 == -1) {
 						return null;
 					}
@@ -925,14 +925,14 @@ internal class ActorCollector
 				return new Shrine(acdid, annId, actorShrineTypeInfo);
 			}
 			if (snoActor.Kind == ActorKind.Gold) {
-				uint value = Convert.ToUInt32(CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gold, 1048575u, 0.0));
+				uint value = Convert.ToUInt32(CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gold, 1048575u, 0.0));
 				return new Actor(acdid, annId, snoActor) {
 					Amount = value
 				};
 			}
 			if (snoActor.Kind == ActorKind.QuestActivate) {
 				return new MapObject(acdid, annId, snoActor) {
-					SummonerId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoner_id, 1048575u, 0u)
+					SummonerId = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__summoner_id, 1048575u, 0u)
 				};
 			}
 			if (snoActor.Kind == ActorKind.HealthGlobe) {
@@ -977,7 +977,7 @@ internal class ActorCollector
 						case GizmoType.Door:
 							return new Door(acdid, annId, snoActor);
 						case GizmoType.Headstone: {
-								uint uint_3 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
+								uint uint_3 = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
 								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uint_3);
 								return new HeadStone(acdid, annId, snoActor, uint_3, iplayer_);
 							}
@@ -1021,10 +1021,10 @@ internal class ActorCollector
 		return new Door(acdid, annId, snoActor);
 	}
 
-	private bool method_5(Actor actor)
+	private bool TrackSpecialActor(Actor actor)
 	{
 		if (actor.SnoActor.Sno == ActorSnoEnum._p1_lr_tieredrift_nephalem) {
-			CoreCollector.ACDCollector.method_3(out var animSnoEnum_, out var _);
+			CoreCollector.ACDCollector.ReadAnimation(out var animSnoEnum_, out var _);
 			if (animSnoEnum_ == AnimSnoEnum._p1_omninpc_female_lr_tieredrift_nephalem_idle_01) {
 				IActor_1 = actor;
 			}
@@ -1035,7 +1035,7 @@ internal class ActorCollector
 		if (actor.SnoActor.Sno == ActorSnoEnum._x1_openworld_lootrunobelisk_b) {
 			IActor_3 = actor;
 		}
-		if ((actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep || actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep_reverse) && CoreCollector.ACDCollector.method_4() == AnimSnoEnum._arcaneenchanteddummy_death) {
+		if ((actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep || actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep_reverse) && CoreCollector.ACDCollector.ReadAnimSno() == AnimSnoEnum._arcaneenchanteddummy_death) {
 			return false;
 		}
 		if (actor is SkillEffect skillEffect) {
@@ -1054,23 +1054,23 @@ internal class ActorCollector
 			return true;
 		}
 		if (actor is Shrine shrine) {
-			shrine.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
-			shrine.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
-			CoreCollector.Class412_0.method_3(shrine);
+			shrine.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
+			shrine.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
+			CoreCollector.Class412_0.UpdateShrineMarker(shrine);
 			Shrines.Add(shrine);
 			return true;
 		}
 		if (actor.SnoActor.Kind == ActorKind.CursedEvent) {
-			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
-			if (actor.IsOperated && actor.SnoActor.Sno == ActorSnoEnum._a1dun_leor_chest_rare_garrach && CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0) {
+			actor.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
+			if (actor.IsOperated && actor.SnoActor.Sno == ActorSnoEnum._a1dun_leor_chest_rare_garrach && CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0) {
 				actor.IsOperated = true;
 			}
 			return true;
 		}
 		if (actor is MonsterObstacle) {
 			if (actor.Hitpoints > 0f) {
-				actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0;
-				actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0;
+				actor.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0;
+				actor.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0;
 				if (!actor.IsDisabled && !actor.IsOperated) {
 					return true;
 				}
@@ -1080,8 +1080,8 @@ internal class ActorCollector
 			return false;
 		}
 		if (actor is Door) {
-			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
-			actor.IsOperated = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0) == 1;
+			actor.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
+			actor.IsOperated = CoreCollector.ACDCollector.ReadIntAttribute(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0) == 1;
 			if (actor.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_a || actor.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_b || actor.SnoActor.Sno == ActorSnoEnum._caout_stingingwinds_arena_bridge || actor.SnoActor.Sno == ActorSnoEnum._a4dun_spire_sigil_door_fate || actor.SnoActor.Sno == ActorSnoEnum._a1dun_leor_spike_trapdoor || actor.SnoActor.Sno == ActorSnoEnum._catapult_a3dunkeep_warmachines_snow_firing) {
 				actor.IsDisabled = true;
 			}
@@ -1093,7 +1093,7 @@ internal class ActorCollector
 		if (actor is TownBanner) {
 			TownBanner townBanner = actor as TownBanner;
 			ITownBanner_0[townBanner.Index] = townBanner;
-			townBanner.Usable = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
+			townBanner.Usable = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
 		}
 		if (actor is HeadStone) {
 			HeadStone item = actor as HeadStone;
@@ -1101,44 +1101,33 @@ internal class ActorCollector
 			return true;
 		}
 		if (actor.SnoActor.Kind == ActorKind.QuestActivate) {
-			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
-			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
+			actor.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
+			actor.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
 			return true;
 		}
 		if (actor.IsClickable) {
-			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
-			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
+			actor.IsDisabled = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
+			actor.IsOperated = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
 		}
 		return true;
 	}
 
-	internal static void smethod_1(Actor player, uint sWorldIDEncrypted, uint sSceneIDEncrypted)
+	internal static void EnsureSceneContext(Actor player, uint sWorldIDEncrypted, uint sSceneIDEncrypted)
 	{
 		if (player.WorldId != sWorldIDEncrypted || player.WorldSno == 0 || player.Scene == null || player.Scene.NavMeshId != sSceneIDEncrypted) {
-			smethod_2(player, sWorldIDEncrypted, sSceneIDEncrypted);
+			UpdateSceneContext(player, sWorldIDEncrypted, sSceneIDEncrypted);
 		}
 	}
 
-	internal static void smethod_2(Actor player, uint worldId, uint sSceneIDEncrypted)
+	internal static void UpdateSceneContext(Actor player, uint worldId, uint sSceneIDEncrypted)
 	{
 		player.WorldId = worldId;
-		player.WorldSno = CoreCollector.SceneCollector.method_2(player.WorldId);
+		player.WorldSno = CoreCollector.SceneCollector.GetWorldSno(player.WorldId);
 		player.SnoWorld = SnoData.Worlds.GetWorld(player.WorldSno);
-		player.Scene = CoreCollector.SceneCollector.method_1(player.WorldId, sSceneIDEncrypted);
+		player.Scene = CoreCollector.SceneCollector.GetScene(player.WorldId, sSceneIDEncrypted);
 	}
 
-	public Actor method_6(ActorSnoEnum actorSnoEnum)
-	{
-		Actor actor = null;
-		foreach (Actor item in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Sno == actorSnoEnum)) {
-			if (actor == null || item.CentralXyDistanceToMe < actor.CentralXyDistanceToMe) {
-				actor = item;
-			}
-		}
-		return actor;
-	}
-
-	private unsafe void method_7(Player player)
+	private unsafe void CollectPlayerAttributes(Player player)
 	{
 		if (CoreCollector.IsLoading) {
 			return;
@@ -1160,7 +1149,7 @@ internal class ActorCollector
 		Array.Clear(player.ParagonPointsAvailable, 0, player.ParagonPointsAvailable.Length);
 		player.int_13 = 0;
 		player.bool_17 = false;
-		player.method_58();
+		player.ResetStats();
 		float num = 0f;
 		float num2 = 0f;
 		float num3 = 0f;
@@ -1192,13 +1181,13 @@ internal class ActorCollector
 				}
 				switch (acdAttribute.Code) {
 					case "Buff_Icon_End_Tick9":
-						smethod_7(player, num13, num14, 9, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 9, ref bool_);
 						break;
 					case "Gold_PickUp_Radius":
 						player.Stats.PickupRange = (float)Math.Floor(5.5f + num15);
 						break;
 					case "Buff_Icon_End_Tick8":
-						smethod_7(player, num13, num14, 8, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 8, ref bool_);
 						break;
 					case "Strength_Total":
 						player.Stats.Strength = (float)Math.Floor(num15);
@@ -1231,16 +1220,16 @@ internal class ActorCollector
 						player.Defense.DRElite = num15;
 						break;
 					case "Buff_Icon_Count30":
-						smethod_3(player, num13, num14, 30, ref bool_);
+						SetBuffIconCount(player, num13, num14, 30, ref bool_);
 						break;
 					case "Buff_Icon_Count31":
-						smethod_3(player, num13, num14, 31, ref bool_);
+						SetBuffIconCount(player, num13, num14, 31, ref bool_);
 						break;
 					case "Highest_Solo_Rift_Level":
 						player.HighestSoloRiftLevel = num14;
 						break;
 					case "Buff_Icon_Count19":
-						smethod_3(player, num13, num14, 19, ref bool_);
+						SetBuffIconCount(player, num13, num14, 19, ref bool_);
 						break;
 					case "Looping_Animation_Start_Time":
 						player.LoopingAnimationStartTick = num14;
@@ -1252,7 +1241,7 @@ internal class ActorCollector
 						player.float_5[num13] = num15;
 						break;
 					case "Buff_Icon_Count18":
-						smethod_3(player, num13, num14, 18, ref bool_);
+						SetBuffIconCount(player, num13, num14, 18, ref bool_);
 						break;
 					case "Resistance_Total":
 						switch (num13) {
@@ -1289,10 +1278,10 @@ internal class ActorCollector
 						num3 = num15;
 						break;
 					case "Buff_Icon_Count12":
-						smethod_3(player, num13, num14, 12, ref bool_);
+						SetBuffIconCount(player, num13, num14, 12, ref bool_);
 						break;
 					case "Buff_Icon_Count13":
-						smethod_3(player, num13, num14, 13, ref bool_);
+						SetBuffIconCount(player, num13, num14, 13, ref bool_);
 						break;
 					case "Dexterity_Total":
 						player.Stats.Dexterity = (float)Math.Floor(num15);
@@ -1301,55 +1290,55 @@ internal class ActorCollector
 						player.Defense.LifeOnKill = (float)Math.Floor(num15);
 						break;
 					case "Buff_Icon_Count11":
-						smethod_3(player, num13, num14, 11, ref bool_);
+						SetBuffIconCount(player, num13, num14, 11, ref bool_);
 						break;
 					case "Buff_Icon_Count28":
-						smethod_3(player, num13, num14, 28, ref bool_);
+						SetBuffIconCount(player, num13, num14, 28, ref bool_);
 						break;
 					case "Buff_Icon_Count26":
-						smethod_3(player, num13, num14, 26, ref bool_);
+						SetBuffIconCount(player, num13, num14, 26, ref bool_);
 						break;
 					case "Buff_Icon_Count10":
-						smethod_3(player, num13, num14, 10, ref bool_);
+						SetBuffIconCount(player, num13, num14, 10, ref bool_);
 						break;
 					case "Buff_Icon_Count29":
-						smethod_3(player, num13, num14, 29, ref bool_);
+						SetBuffIconCount(player, num13, num14, 29, ref bool_);
 						break;
 					case "Buff_Icon_Count16":
-						smethod_3(player, num13, num14, 16, ref bool_);
+						SetBuffIconCount(player, num13, num14, 16, ref bool_);
 						break;
 					case "Buff_Icon_Count27":
-						smethod_3(player, num13, num14, 27, ref bool_);
+						SetBuffIconCount(player, num13, num14, 27, ref bool_);
 						break;
 					case "Buff_Icon_Count17":
-						smethod_3(player, num13, num14, 17, ref bool_);
+						SetBuffIconCount(player, num13, num14, 17, ref bool_);
 						break;
 					case "Buff_Icon_Count25":
-						smethod_3(player, num13, num14, 25, ref bool_);
+						SetBuffIconCount(player, num13, num14, 25, ref bool_);
 						break;
 					case "Buff_Icon_Count15":
-						smethod_3(player, num13, num14, 15, ref bool_);
+						SetBuffIconCount(player, num13, num14, 15, ref bool_);
 						break;
 					case "Buff_Icon_Count24":
-						smethod_3(player, num13, num14, 24, ref bool_);
+						SetBuffIconCount(player, num13, num14, 24, ref bool_);
 						break;
 					case "Buff_Icon_Count22":
-						smethod_3(player, num13, num14, 22, ref bool_);
+						SetBuffIconCount(player, num13, num14, 22, ref bool_);
 						break;
 					case "Buff_Icon_Count14":
-						smethod_3(player, num13, num14, 14, ref bool_);
+						SetBuffIconCount(player, num13, num14, 14, ref bool_);
 						break;
 					case "Experience_Bonus_No_Penalty":
 						player.Stats.ExpOnKillNoPenalty = (float)Math.Round(num15, 0);
 						break;
 					case "Buff_Icon_Count21":
-						smethod_3(player, num13, num14, 21, ref bool_);
+						SetBuffIconCount(player, num13, num14, 21, ref bool_);
 						break;
 					case "Buff_Icon_Count20":
-						smethod_3(player, num13, num14, 20, ref bool_);
+						SetBuffIconCount(player, num13, num14, 20, ref bool_);
 						break;
 					case "Buff_Icon_Count23":
-						smethod_3(player, num13, num14, 23, ref bool_);
+						SetBuffIconCount(player, num13, num14, 23, ref bool_);
 						break;
 					case "Vitality_Total":
 						player.Stats.Vitality = (float)Math.Floor(num15);
@@ -1429,7 +1418,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick19":
-						smethod_6(player, num13, num14, 19, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 19, ref bool_);
 						break;
 
 					case "Damage_Percent_All_From_Skills":
@@ -1437,11 +1426,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick18":
-						smethod_6(player, num13, num14, 18, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 18, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick10":
-						smethod_6(player, num13, num14, 10, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 10, ref bool_);
 						break;
 
 					case "Damage_Percent_Reduction_From_Ranged":
@@ -1461,35 +1450,35 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick11":
-						smethod_6(player, num13, num14, 11, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 11, ref bool_);
 						break;
 
 					case "Buff_Icon_Count8":
-						smethod_3(player, num13, num14, 8, ref bool_);
+						SetBuffIconCount(player, num13, num14, 8, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick13":
-						smethod_6(player, num13, num14, 13, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 13, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick12":
-						smethod_6(player, num13, num14, 12, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 12, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick15":
-						smethod_6(player, num13, num14, 15, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 15, ref bool_);
 						break;
 
 					case "Buff_Icon_Count9":
-						smethod_3(player, num13, num14, 9, ref bool_);
+						SetBuffIconCount(player, num13, num14, 9, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick14":
-						smethod_6(player, num13, num14, 14, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 14, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick16":
-						smethod_6(player, num13, num14, 16, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 16, ref bool_);
 						break;
 
 					case "Attacks_Per_Second_Item_Total_OffHand":
@@ -1509,7 +1498,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Count0":
-						smethod_3(player, num13, num14, 0, ref bool_);
+						SetBuffIconCount(player, num13, num14, 0, ref bool_);
 						break;
 					case "Resource_Regen_Total":
 						num15 = (float)Math.Round(num15, 2);
@@ -1567,11 +1556,11 @@ internal class ActorCollector
 						}
 						break;
 					case "Buff_Icon_Start_Tick17":
-						smethod_6(player, num13, num14, 17, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 17, ref bool_);
 						break;
 
 					case "Buff_Icon_Count2":
-						smethod_3(player, num13, num14, 2, ref bool_);
+						SetBuffIconCount(player, num13, num14, 2, ref bool_);
 						break;
 
 					case "Skill_From_Item":
@@ -1585,19 +1574,19 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Count1":
-						smethod_3(player, num13, num14, 1, ref bool_);
+						SetBuffIconCount(player, num13, num14, 1, ref bool_);
 						break;
 
 					case "Buff_Icon_Count5":
-						smethod_3(player, num13, num14, 5, ref bool_);
+						SetBuffIconCount(player, num13, num14, 5, ref bool_);
 						break;
 
 					case "Buff_Icon_Count4":
-						smethod_3(player, num13, num14, 4, ref bool_);
+						SetBuffIconCount(player, num13, num14, 4, ref bool_);
 						break;
 
 					case "Buff_Icon_Count3":
-						smethod_3(player, num13, num14, 3, ref bool_);
+						SetBuffIconCount(player, num13, num14, 3, ref bool_);
 						break;
 
 					case "Rest_Experience_Bonus_Percent":
@@ -1605,11 +1594,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Count7":
-						smethod_3(player, num13, num14, 7, ref bool_);
+						SetBuffIconCount(player, num13, num14, 7, ref bool_);
 						break;
 
 					case "Buff_Icon_Count6":
-						smethod_3(player, num13, num14, 6, ref bool_);
+						SetBuffIconCount(player, num13, num14, 6, ref bool_);
 						break;
 
 					case "Crit_Percent_Bonus_Capped":
@@ -1627,7 +1616,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick9":
-						smethod_6(player, num13, num14, 9, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 9, ref bool_);
 						break;
 
 					case "Stunned":
@@ -1653,23 +1642,23 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick8":
-						smethod_6(player, num13, num14, 8, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 8, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick3":
-						smethod_6(player, num13, num14, 3, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 3, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick0":
-						smethod_6(player, num13, num14, 0, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 0, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick1":
-						smethod_6(player, num13, num14, 1, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 1, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick5":
-						smethod_6(player, num13, num14, 5, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 5, ref bool_);
 						break;
 
 					case "Movement_Scalar_Total":
@@ -1677,14 +1666,14 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick2":
-						smethod_6(player, num13, num14, 2, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 2, ref bool_);
 						break;
 
 					case "Experience_Next_Hi":
 						break;
 
 					case "Buff_Icon_Start_Tick4":
-						smethod_6(player, num13, num14, 4, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 4, ref bool_);
 						break;
 
 					case "Thorns_Fixed":
@@ -1692,11 +1681,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick6":
-						smethod_6(player, num13, num14, 6, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 6, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick7":
-						smethod_6(player, num13, num14, 7, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 7, ref bool_);
 						break;
 
 					case "Crit_Percent_Bonus_Uncapped":
@@ -1765,19 +1754,19 @@ internal class ActorCollector
 						}
 						break;
 					case "Buff_Icon_End_Tick22":
-						smethod_7(player, num13, num14, 22, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 22, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick21":
-						smethod_7(player, num13, num14, 21, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 21, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick20":
-						smethod_7(player, num13, num14, 20, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 20, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick24":
-						smethod_7(player, num13, num14, 24, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 24, ref bool_);
 						break;
 
 					case "Damage_Percent_Reduction_From_Melee":
@@ -1785,23 +1774,23 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick23":
-						smethod_7(player, num13, num14, 23, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 23, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick26":
-						smethod_7(player, num13, num14, 26, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 26, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick31":
-						smethod_7(player, num13, num14, 31, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 31, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick25":
-						smethod_7(player, num13, num14, 25, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 25, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick27":
-						smethod_7(player, num13, num14, 27, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 27, ref bool_);
 						break;
 
 					case "Magic_Find_Total":
@@ -1809,23 +1798,23 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick30":
-						smethod_7(player, num13, num14, 30, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 30, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick19":
-						smethod_7(player, num13, num14, 19, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 19, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick29":
-						smethod_7(player, num13, num14, 29, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 29, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick28":
-						smethod_7(player, num13, num14, 28, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 28, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick18":
-						smethod_7(player, num13, num14, 18, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 18, ref bool_);
 						break;
 
 					case "Damage_Type_Cost_Reduction_Percent":
@@ -1857,7 +1846,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick11":
-						smethod_7(player, num13, num14, 11, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 11, ref bool_);
 						break;
 
 					case "Damage_Weapon_Delta_Total_OffHand":
@@ -1869,7 +1858,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick13":
-						smethod_7(player, num13, num14, 13, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 13, ref bool_);
 						break;
 
 					case "Experience_Bonus_Percent_Total":
@@ -1877,19 +1866,19 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick10":
-						smethod_7(player, num13, num14, 10, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 10, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick14":
-						smethod_7(player, num13, num14, 14, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 14, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick15":
-						smethod_7(player, num13, num14, 15, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 15, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick12":
-						smethod_7(player, num13, num14, 12, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 12, ref bool_);
 						break;
 
 					case "Damage_Shield_Amount":
@@ -1901,7 +1890,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick17":
-						smethod_7(player, num13, num14, 17, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 17, ref bool_);
 						break;
 
 					case "Shared_Stash_Slots":
@@ -1913,7 +1902,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_End_Tick16":
-						smethod_7(player, num13, num14, 16, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 16, ref bool_);
 						break;
 
 					case "Hitpoints_On_Hit":
@@ -1933,11 +1922,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick20":
-						smethod_6(player, num13, num14, 20, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 20, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick21":
-						smethod_6(player, num13, num14, 21, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 21, ref bool_);
 						break;
 
 					case "Experience_Bonus_Percent_Super_Scalar_Total":
@@ -1945,7 +1934,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick23":
-						smethod_6(player, num13, num14, 23, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 23, ref bool_);
 						break;
 
 					case "In_Tiered_Loot_Run_Level":
@@ -1957,7 +1946,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick25":
-						smethod_6(player, num13, num14, 25, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 25, ref bool_);
 						break;
 
 					case "Damage_Reduction_Total":
@@ -1965,7 +1954,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick22":
-						smethod_6(player, num13, num14, 22, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 22, ref bool_);
 						break;
 
 					case "IsRooted":
@@ -1973,11 +1962,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick27":
-						smethod_6(player, num13, num14, 27, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 27, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick24":
-						smethod_6(player, num13, num14, 24, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 24, ref bool_);
 						break;
 
 					case "Class_Damage_Reduction_Percent":
@@ -1985,11 +1974,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick29":
-						smethod_6(player, num13, num14, 29, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 29, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick26":
-						smethod_6(player, num13, num14, 26, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 26, ref bool_);
 						break;
 
 					case "Corpse_Resurrection_Disabled":
@@ -2001,7 +1990,7 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick28":
-						smethod_6(player, num13, num14, 28, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 28, ref bool_);
 						break;
 
 					case "Rest_Experience_Hi":
@@ -2083,28 +2072,28 @@ internal class ActorCollector
 						num6 = (uint)num14;
 						break;
 					case "Buff_Icon_Start_Tick31":
-						smethod_6(player, num13, num14, 31, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 31, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick2":
-						smethod_7(player, num13, num14, 2, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 2, ref bool_);
 						break;
 					case "Buff_Icon_Start_Tick30":
-						smethod_6(player, num13, num14, 30, ref bool_);
+						SetBuffTimeElapsed(player, num13, num14, 30, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick1":
-						smethod_7(player, num13, num14, 1, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 1, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick0":
-						smethod_7(player, num13, num14, 0, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 0, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick3":
-						smethod_7(player, num13, num14, 3, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 3, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick7":
-						smethod_7(player, num13, num14, 7, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 7, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick6":
-						smethod_7(player, num13, num14, 6, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 6, ref bool_);
 						break;
 					case "Item_Power_Passive":
 						player.class112_1[num13] = num15;
@@ -2113,10 +2102,10 @@ internal class ActorCollector
 						player.Offense.AttackSpeedBonus = num15;
 						break;
 					case "Buff_Icon_End_Tick5":
-						smethod_7(player, num13, num14, 5, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 5, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick4":
-						smethod_7(player, num13, num14, 4, ref bool_);
+						SetBuffTimeLeft(player, num13, num14, 4, ref bool_);
 						break;
 				}
 			} catch {
@@ -2351,7 +2340,7 @@ internal class ActorCollector
 		player.float_6 = player.Defense.LifeOnHit * player.Offense.AttackSpeed + player.Defense.LifeRegen;
 	}
 
-	internal static void smethod_3(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffIconCount(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		Buff buff = player.Powers.GetBuff(uint_0) as Buff;
 		if (buff == null) {
@@ -2372,7 +2361,7 @@ internal class ActorCollector
 		}
 	}
 
-	internal static void smethod_6(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffTimeElapsed(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(CoreCollector.D3Memory.GameTick - int_4) / 60.0) : 0.0);
 		Buff buff = player.Powers.GetBuff(uint_0);
@@ -2389,7 +2378,7 @@ internal class ActorCollector
 		buff.TimeElapsedSeconds[int_5] = num;
 	}
 
-	internal static void smethod_7(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffTimeLeft(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(int_4 - CoreCollector.D3Memory.GameTick) / 60.0) : 0.0);
 		Buff buff = player.Powers.GetBuff(uint_0);

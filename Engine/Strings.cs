@@ -93,9 +93,9 @@ public sealed class Strings
 		{
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint key = dataReader.method_8();
-				dataReader.method_1();
-				int num = dataReader.method_7();
+				uint key = dataReader.ReadUInt32();
+				dataReader.ReadString();
+				int num = dataReader.ReadInt32();
 				List<string> list = new List<string>();
 				Dictionary<uint, string> dictionary = new Dictionary<uint, string>();
 				Dictionary<string, string> dictionary2 = new Dictionary<string, string>();
@@ -104,9 +104,9 @@ public sealed class Strings
 				dictionary_2.Add((StringListSnoEnum)key, dictionary2);
 				for (int i = 0; i < num; i++)
 				{
-					uint key2 = dataReader.method_8();
-					string key3 = string.Intern(dataReader.method_1());
-					string text = string.Intern(dataReader.method_1());
+					uint key2 = dataReader.ReadUInt32();
+					string key3 = string.Intern(dataReader.ReadString());
+					string text = string.Intern(dataReader.ReadString());
 					list.Add(text);
 					dictionary.Add(key2, text);
 					dictionary2.Add(key3, text);
@@ -123,9 +123,9 @@ public sealed class Strings
 			using DataReader dataReader2 = new DataReader(byte_);
 			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint key4 = dataReader2.method_8();
-				dataReader2.method_1();
-				int num2 = dataReader2.method_7();
+				uint key4 = dataReader2.ReadUInt32();
+				dataReader2.ReadString();
+				int num2 = dataReader2.ReadInt32();
 				List<string> list2 = new List<string>();
 				Dictionary<uint, string> dictionary3 = new Dictionary<uint, string>();
 				Dictionary<string, string> dictionary4 = new Dictionary<string, string>();
@@ -133,9 +133,9 @@ public sealed class Strings
 				dictionary_3.Add((StringListSnoEnum)key4, dictionary4);
 				for (int j = 0; j < num2; j++)
 				{
-					uint key5 = dataReader2.method_8();
-					string key6 = string.Intern(dataReader2.method_1());
-					string text2 = string.Intern(dataReader2.method_1());
+					uint key5 = dataReader2.ReadUInt32();
+					string key6 = string.Intern(dataReader2.ReadString());
+					string text2 = string.Intern(dataReader2.ReadString());
 					list2.Add(text2);
 					dictionary3.Add(key5, text2);
 					dictionary4.Add(key6, text2);
