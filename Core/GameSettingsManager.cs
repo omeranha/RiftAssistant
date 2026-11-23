@@ -15,13 +15,7 @@ internal class GameSettingsManager
 
 	private FrameRateSettings frameRateSettings = new();
 
-	private Class71 class71_0 = new();
-
 	private VideoSettings videoSettings = new();
-
-	private Class72 class72_0 = new();
-
-	private Class73 class73_0 = new();
 
 	public (InputBind Primary, InputBind Secondary)[] Keybinds = new (InputBind, InputBind)[75];
 
@@ -38,15 +32,10 @@ internal class GameSettingsManager
 		IsForegroundFpsEnabled = frameRateSettings.ForegroundLimitEnabled;
 		IsBackgroundFpsEnabled = frameRateSettings.BackgroundLimitEnabled;
 
-		class71_0 = GameWindowManager.Read<Class71>(AddressList.long_10, true);
-
-		videoSettings = GameWindowManager.Read<VideoSettings>(AddressList.long_8, true);
+		videoSettings = GameWindowManager.Read<VideoSettings>(AddressList.VideoSettingsAddress, true);
 		IsFullscreen = videoSettings.bool_1;
 		WindowMode = ((videoSettings.int_12 == 0) ? WindowMode.Windowed : videoSettings.windowMode_0);
 
-		class72_0 = GameWindowManager.Read<Class72>(AddressList.long_11, true);
-
-		class73_0 = GameWindowManager.Read<Class73>(AddressList.long_9, true);
 	}
 
 	public static Vk ToVk(KeyBinding keyBinding)

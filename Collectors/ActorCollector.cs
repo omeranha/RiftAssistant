@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using structs;
 using Plugins;
 using SNO;
+using structs;
 
 
 namespace collectors;
 
 internal class ActorCollector
 {
-	private readonly Class112<uint, Actor> class112_0 = new Class112<uint, Actor>(1000);
+	private readonly SafeDictionary<uint, Actor> class112_0 = new SafeDictionary<uint, Actor>(1000);
 
 	[CompilerGenerated]
 	private Monster imonster_0;
@@ -62,10 +59,10 @@ internal class ActorCollector
 	private bool bool_3;
 
 	[CompilerGenerated]
-	private readonly Class112<SkillEffectType, List<SkillEffect>> class112_1 = new Class112<SkillEffectType, List<SkillEffect>>();
+	private readonly SafeDictionary<SkillEffectType, List<SkillEffect>> class112_1 = new SafeDictionary<SkillEffectType, List<SkillEffect>>();
 
 	[CompilerGenerated]
-	private readonly Class112<uint, Portal> class112_2 = new Class112<uint, Portal>();
+	private readonly SafeDictionary<uint, Portal> class112_2 = new SafeDictionary<uint, Portal>();
 
 	[CompilerGenerated]
 	private readonly List<Shrine> list_4 = new List<Shrine>();
@@ -219,7 +216,7 @@ internal class ActorCollector
 		}
 	}
 
-	public Class112<SkillEffectType, List<SkillEffect>> Class112_0
+	public SafeDictionary<SkillEffectType, List<SkillEffect>> Class112_0
 	{
 		[CompilerGenerated]
 		get {
@@ -227,7 +224,7 @@ internal class ActorCollector
 		}
 	}
 
-	public Class112<uint, Portal> Class112_1
+	public SafeDictionary<uint, Portal> Class112_1
 	{
 		[CompilerGenerated]
 		get {

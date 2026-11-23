@@ -1,6 +1,3 @@
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Plugins;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,10 +10,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Plugins;
 
 internal class PluginHandler
 {
-	private readonly Controller controller;
 	private AssemblyLoadContext loadContext;
 	private WeakReference loadContextReference;
 	private readonly Lock pluginLock = new();
@@ -27,9 +26,8 @@ internal class PluginHandler
 	public bool Reloaded { get; private set; } = false;
 	public bool Errored { get; private set; } = false;
 
-	internal PluginHandler(Controller controller)
+	internal PluginHandler()
 	{
-		this.controller = controller;
 		references = [.. AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
 			.Select(a => a.Location).Distinct(StringComparer.OrdinalIgnoreCase).Where(File.Exists).Select(path => MetadataReference.CreateFromFile(path))];
 
@@ -104,6 +102,7 @@ internal class PluginHandler
 		}
 	}
 
+	// Runs on the low-level mouse hook thread, so it must not take pluginLock: a plugin reload holds it while compiling.
 	internal IEnumerable<T> GetPlugins<T>()
 	{
 		return Plugins.Where(p => p.Enabled).OfType<T>();

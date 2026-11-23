@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using Plugins;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
-using Plugins;
 
 
 public class RenderFont : ITransparent, IFont, IDisposable

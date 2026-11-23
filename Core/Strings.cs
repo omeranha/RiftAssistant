@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using Plugins;
 
 public sealed class Strings
 {

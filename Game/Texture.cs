@@ -1,9 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
+using Plugins;
 using SharpDX;
 using SharpDX.Direct2D1;
-using Plugins;
-
 using SharpDX.Mathematics.Interop;
 
 public class Texture : ITransparent

@@ -1,16 +1,10 @@
-using Plugins;
-using SharpDX;
-using SharpDX.Direct2D1;
-using SharpDX.Direct3D11;
-using SharpDX.WIC;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Plugins;
+using SharpDX.Direct2D1;
 
 public class RenderController
 {

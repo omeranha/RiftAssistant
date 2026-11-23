@@ -1,6 +1,5 @@
 using System.Drawing;
 using System.Runtime.CompilerServices;
-using Plugins;
 
 public class SceneRevealController
 {

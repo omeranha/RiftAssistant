@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using structs;
-using Plugins;
-
 using SNO;
+using structs;
 
 public class Actor
 {

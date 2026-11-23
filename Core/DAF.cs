@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using structs;
 using SNO;
+using structs;
 
 internal class DAF
 {
@@ -381,12 +380,12 @@ internal class DAF
 		int int_ = AlignedSize(16, 32);
 		int int_2 = AlignedSize(48, 32);
 		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(int_).Where(delegate (long long_0) {
-			long long_1 = localHeapCache.ReadInt64(long_0, AddressList.long_13);
+			long long_1 = localHeapCache.ReadInt64(long_0, AddressList.Offset_Trickle_Block0);
 			int sizeOfBlock = localHeapCache.GetSizeOfBlock(long_1);
 			if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, int_2) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
-				long long_2 = localHeapCache.ReadInt64(long_0, AddressList.long_14);
+				long long_2 = localHeapCache.ReadInt64(long_0, AddressList.Offset_Trickle_Ptr8);
 				if (localHeapCache.GetSizeOfBlock(long_2) != 0) {
-					long_1 = localHeapCache.ReadInt64(long_2, AddressList.long_15);
+					long_1 = localHeapCache.ReadInt64(long_2, AddressList.Offset_Trickle_Ptr24);
 					sizeOfBlock = localHeapCache.GetSizeOfBlock(long_1);
 					if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, int_2) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
 						return true;
@@ -406,72 +405,28 @@ internal class DAF
 		TrickleManagerAddress = 0L;
 	}
 
-	private long FindContainerByItemSize(LocalHeapCache class332_1, string string_0, int int_1)
-{
-    int int_2 = AlignedSize(364, 64);
-
-    var candidates = class332_1.GetSmallBlocksWithSize_OrPlus0x20(int_2);
-
-    long result = 0L;
-    int expectedSize = int_1;
-
-    foreach (long addr in candidates)
-    {
-        if (class332_1.ReadUInt32(addr, 328L) != CoreCollector.Magic_600DF00D)
-            continue;
-
-        int num2 = class332_1.ReadInt32(addr, 256L);
-        if (num2 <= 0)
-            continue;
-
-        long long_1 = class332_1.ReadInt64(addr, 288L);
-        long long_2 = class332_1.ReadInt64(long_1, 0L);
-
-        int sizeOfBlock = class332_1.GetSizeOfBlock(long_2);
-        int num3 = class332_1.ReadInt32(addr, 296L);
-
-        int actual = sizeOfBlock * num3;
-        int expected = expectedSize * num2;
-
-        if (class332_1.IsBlockSizeEqual_OrPlus0x20(actual, expected))
-        {
-            result = addr;
-            break;
-        }
-    }
-
-    if (result == 0L)
-    {
-        // optional: still avoid multiple enumeration
-        int count = 0;
-        foreach (var _ in candidates) count++;
-
-        Logger.Info("[ERROR] '" + string_0 + "' container candidate count: " + count + ", struct size: " + int_1);
-
-        method_22(candidates, int_1);
-
-        throw new Exception("can't find '" + string_0 + "' container");
-    }
-
-    return result;
-}
-
-	private void method_22(IEnumerable<long> ienumerable_0, int int_1)
+	private long FindContainerByItemSize(LocalHeapCache heapCache, string containerName, int itemSize)
 	{
-		foreach (long item in ienumerable_0) {
-			if (localHeapCache.ReadUInt32(item, 328L) == CoreCollector.Magic_600DF00D) {
-				int num = localHeapCache.ReadInt32(item, 256L);
-				if (num > 0) {
-					long long_ = localHeapCache.ReadInt64(item, 288L);
-					long long_2 = localHeapCache.ReadInt64(long_, 0L);
-					int sizeOfBlock = localHeapCache.GetSizeOfBlock(long_2);
-					int num2 = localHeapCache.ReadInt32(item, 296L);
-					int num3 = sizeOfBlock * num2;
-				}
-			}
-		}
-	}
+		var candidates = heapCache.GetSmallBlocksWithSize_OrPlus0x20(AlignedSize(364, 64));
+		int candidateCount = 0;
 
+		foreach (long address in candidates) {
+			candidateCount++;
+			if (heapCache.ReadUInt32(address, 328L) != CoreCollector.Magic_600DF00D) continue;
+
+			int itemCount = heapCache.ReadInt32(address, 256L);
+			if (itemCount <= 0) continue;
+
+			long blockTable = heapCache.ReadInt64(address, 288L);
+			long firstBlock = heapCache.ReadInt64(blockTable, 0L);
+			int actualSize = heapCache.GetSizeOfBlock(firstBlock) * heapCache.ReadInt32(address, 296L);
+
+			if (heapCache.IsBlockSizeEqual_OrPlus0x20(actualSize, itemSize * itemCount)) return address;
+		}
+
+		Logger.Info("[ERROR] '" + containerName + "' container candidate count: " + candidateCount + ", struct size: " + itemSize);
+		throw new Exception("can't find '" + containerName + "' container");
+	}
 	internal static byte[] smethod_3(string string_0, Func<string, uint, byte[]> func_0, uint uint_8)
 	{
 		return func_0(string_0, uint_8 * 2 - (uint)Environment.MachineName.GetHashCode());
@@ -493,22 +448,4 @@ internal class DAF
 		return false;
 	}
 
-	[CompilerGenerated]
-	private bool method_24(long long_10)
-	{
-		long num = localHeapCache.ReadInt64(long_10, 312L);
-		int sizeOfBlock = localHeapCache.GetSizeOfBlock(num);
-		if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, 832)) {
-			long long_11 = localHeapCache.ReadInt64(long_10, 320L);
-			int sizeOfBlock2 = localHeapCache.GetSizeOfBlock(long_11);
-			if (sizeOfBlock2 != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock2, 384)) {
-				int num2 = GameWindowManager.Read<int>(num + 88);
-				int num3 = GameWindowManager.Read<int>(num + 104);
-				if (num3 >= 0 && num2 >= 0 && num3 <= num2) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 }

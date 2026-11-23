@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
-
-using Plugins;
 using SNO;
-using System.Diagnostics;
 
 public class StatTracker
 {

@@ -1,7 +1,7 @@
-﻿using Plugins;
-using SharpDX;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Plugins;
+using SharpDX;
 
 
 public class SettingsMenu

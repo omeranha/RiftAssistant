@@ -28,7 +28,6 @@ internal class LocalHeapCache
 	private long smallblocksnode_address;
 	private int smallblocksnode_size;
 	private long[] smallblocksnode_data;
-	private long[] smallBlockBuffer = new long[1024];
 	
 	// Use arrays for small blocks by size instead of Dictionary<List<long>>
 	private SmallBlockGroup[] smallBlocksBySize = new SmallBlockGroup[100]; // Pre-allocated

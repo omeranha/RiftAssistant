@@ -1,14 +1,10 @@
 #define TRACE
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using structs;
-using Plugins;
 using SNO;
+using structs;
 
 
 namespace collectors;
@@ -27,15 +23,15 @@ internal class MarkerCollector
 
 	private readonly AllocationCache<r_Trickle> trickleReader = new AllocationCache<r_Trickle>(Constants.Trickle_SizeOf);
 
-	private readonly Class112<string, Banner> class112_0 = new Class112<string, Banner>();
+	private readonly SafeDictionary<string, Banner> class112_0 = new SafeDictionary<string, Banner>();
 
-	private readonly Class112<string, Marker> class112_1 = new Class112<string, Marker>();
+	private readonly SafeDictionary<string, Marker> class112_1 = new SafeDictionary<string, Marker>();
 
-	private readonly Class112<string, Marker> class112_2 = new Class112<string, Marker>();
+	private readonly SafeDictionary<string, Marker> class112_2 = new SafeDictionary<string, Marker>();
 
-	private readonly Class112<string, Marker> class112_3 = new Class112<string, Marker>();
+	private readonly SafeDictionary<string, Marker> class112_3 = new SafeDictionary<string, Marker>();
 
-	private readonly Class112<string, Marker> class112_4 = new Class112<string, Marker>();
+	private readonly SafeDictionary<string, Marker> class112_4 = new SafeDictionary<string, Marker>();
 
 	public List<Marker> list_0 = new List<Marker>();
 
@@ -274,8 +270,8 @@ internal class MarkerCollector
 				}
 			}
 		}
-		long num10 = GameWindowManager.Read<long>(CoreCollector.DAF.TrickleManagerAddress + AddressList.long_14);
-		long address = GameWindowManager.Read<long>(num10 + AddressList.long_15);
+		long num10 = GameWindowManager.Read<long>(CoreCollector.DAF.TrickleManagerAddress + AddressList.Offset_Trickle_Ptr8);
+		long address = GameWindowManager.Read<long>(num10 + AddressList.Offset_Trickle_Ptr24);
 		class351_0.Snapshot(address);
 		if (class351_0.RawAllocator.ElementSize != Constants.Trickle_SizeOf) {
 			Trace.WriteLine("icon struct size mismatch!");

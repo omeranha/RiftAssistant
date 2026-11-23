@@ -67,7 +67,7 @@ public static class Core
 		Overlay.Instance.InitializeModulesFromConfig(Settings);
 
 		SettingsMenu = new(Settings);
-		PluginHandler = new PluginHandler(Controller);
+		PluginHandler = new PluginHandler();
 		PluginHandler.LoadPlugins();
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();

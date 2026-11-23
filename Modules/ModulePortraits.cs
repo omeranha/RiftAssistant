@@ -1,6 +1,3 @@
-using Plugins;
-
-
 internal class ModulePortraits : Module
 {
 	public ModulePortraits() : base(true)

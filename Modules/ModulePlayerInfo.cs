@@ -1,9 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using SharpDX;
 using SharpDX.Direct2D1;
-
-using System.Collections.Generic;
 
 internal class ModulePlayerInfo : Module
 {

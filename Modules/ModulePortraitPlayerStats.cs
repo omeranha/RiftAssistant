@@ -1,8 +1,6 @@
 using System;
 using SharpDX.DirectWrite;
 
-using Plugins;
-
 internal class ModulePortraitPlayerStats : Module
 {
 	private readonly bool bool_4;

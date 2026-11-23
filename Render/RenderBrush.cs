@@ -1,9 +1,7 @@
 using System;
+using Plugins;
 using SharpDX;
 using SharpDX.Direct2D1;
-using Plugins;
-
-using System.Drawing;
 
 internal class RenderBrush : ITransparent, IDisposable, IBrush
 {

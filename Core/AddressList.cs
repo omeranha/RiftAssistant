@@ -1,54 +1,15 @@
 internal static class AddressList
 {
-	public static readonly long SelectedActOnMap;
+	public const long SelectedActOnMap = 23539052L;
+	public const long HotkeysAddress = 21435760L;
+	public const long PtrMemoryManager = 21421320L;
+	public const long UiIsHiddenFlagAddress = 24072844L;
 
-	public static readonly long HotkeysAddress;
+	// The settings blocks around the hotkeys block have fixed sizes: 80 before it, 104 and 48 after the 1152 byte hotkeys block.
+	public const long VideoSettingsAddress = HotkeysAddress - 80 - VideoSettings.Size;
+	public const long ScreenSettingsAddress = HotkeysAddress + 1152 + 104 + 48;
 
-	public static readonly long PtrMemoryManager;
-
-	public static readonly long PowerTagMapListAddress;
-
-	public static readonly long AttributeListAddress;
-
-	public static readonly long AttributeOrdersPri;
-
-	public static readonly long AttributeOrdersSec;
-
-	public static readonly long UiIsHiddenFlagAddress;
-
-	public static readonly long long_8;
-
-	public static readonly long long_9;
-
-	public static readonly long long_10;
-
-	public static readonly long long_11;
-
-	public static readonly long ScreenSettingsAddress;
-
-	public static readonly long long_13;
-
-	public static readonly long long_14;
-
-	public static readonly long long_15;
-
-	static AddressList()
-	{
-		SelectedActOnMap = 23539052L;
-		HotkeysAddress = 21435760L;
-		PtrMemoryManager = 21421320L;
-		PowerTagMapListAddress = 0L;
-		AttributeListAddress = 0L;
-		AttributeOrdersPri = 0L;
-		AttributeOrdersSec = 0L;
-		UiIsHiddenFlagAddress = 24072844L;
-		long_8 = HotkeysAddress - Class73.Size - VideoSettings.Size;
-		long_9 = HotkeysAddress - Class73.Size;
-		long_10 = HotkeysAddress + 1152;
-		long_11 = HotkeysAddress + 1152 + Class71.Size;
-		ScreenSettingsAddress = HotkeysAddress + 1152 + Class71.Size + Class72.Size;
-		long_13 = 0L;
-		long_14 = 8L;
-		long_15 = 24L;
-	}
+	public const long Offset_Trickle_Block0 = 0L;
+	public const long Offset_Trickle_Ptr8 = 8L;
+	public const long Offset_Trickle_Ptr24 = 24L;
 }

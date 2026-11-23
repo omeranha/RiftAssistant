@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Windows.Forms;
 using SharpDX;
 using SharpDX.Direct2D1;
-using Plugins;
 using SNO;
 
 
@@ -16,10 +15,6 @@ internal class SceneMapRenderer
 	private readonly SolidBrush exitBrush;
 
 	private readonly SolidBrush entranceBrush;
-
-	private readonly Font debugFont;
-
-	private readonly System.Drawing.Brush whiteBrush;
 
 	private float scaleFactor = 1f;
 
@@ -55,8 +50,6 @@ internal class SceneMapRenderer
 	{
 		exitBrush = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 120, 120));
 		entranceBrush = new SolidBrush(System.Drawing.Color.FromArgb(255, 120, 255, 120));
-		debugFont = new Font("Arial", 7f, System.Drawing.FontStyle.Bold);
-		whiteBrush = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255, 255));
 	}
 
 	public void DisposeTextures()

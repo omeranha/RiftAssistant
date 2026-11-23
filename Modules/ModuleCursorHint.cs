@@ -1,6 +1,5 @@
 using System;
 using SharpDX.DirectWrite;
-using Plugins;
 
 
 internal class ModuleCursorHint : Module

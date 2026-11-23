@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using structs;
-using Plugins;
 
 
 public record struct CombatNumberEvent(long Id, double Value);
@@ -13,14 +11,14 @@ internal class FloatingNumberManager
 {
 	public AllocationCache<r_FloatingNumber> FloatingNumberCache { get; } = new(112);
 
-	private readonly Class112<string, CombatNumberEvent> eventCache = [];
+	private readonly SafeDictionary<string, CombatNumberEvent> eventCache = [];
 	private readonly HashSet<string> ignoredEvents = [];
 
-	private readonly Class112<int, List<CombatNumberEvent>> damageDealtEvents = [];
+	private readonly SafeDictionary<int, List<CombatNumberEvent>> damageDealtEvents = [];
 
-	private readonly Class112<int, List<CombatNumberEvent>> damageTakenEvents = [];
+	private readonly SafeDictionary<int, List<CombatNumberEvent>> damageTakenEvents = [];
 
-	private readonly Class112<int, List<CombatNumberEvent>> healingEvents = [];
+	private readonly SafeDictionary<int, List<CombatNumberEvent>> healingEvents = [];
 
 	private int lastGameTick;
 	private int lastDamageTick;

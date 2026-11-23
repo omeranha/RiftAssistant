@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using structs;
-using Plugins;
 using SNO;
+using structs;
 
 
 namespace collectors;
@@ -41,13 +40,13 @@ internal class ItemCollector
 
 	public int[] int_1 = new int[20];
 
-	private readonly Class112<uint, Item> class112_1 = new Class112<uint, Item>(1000);
+	private readonly SafeDictionary<uint, Item> class112_1 = new SafeDictionary<uint, Item>(1000);
 
 	private readonly List<Item> list_4 = new List<Item>();
 
 	private readonly List<Item> list_5 = new List<Item>();
 
-	private readonly Class112<uint, Item> class112_2 = new Class112<uint, Item>();
+	private readonly SafeDictionary<uint, Item> class112_2 = new SafeDictionary<uint, Item>();
 
 	private Stopwatch stopwatch_0 = new();
 

@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using structs;
-using Plugins;
 using SNO;
+using structs;
 
 
 internal class WaypointManager

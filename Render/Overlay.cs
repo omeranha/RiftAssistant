@@ -108,7 +108,7 @@ internal class Overlay
 
 	public RenderFont class221_15;
 
-	public readonly Class91 class93_0;
+	public readonly BinaryStreamReader class93_0;
 
 	public readonly List<UiElement> list_0 = [];
 
@@ -125,7 +125,7 @@ internal class Overlay
 	internal ModuleCursorHint class208_0;
 	internal ModuleLobbyHeroes class209_0;
 
-	public Class112<string, string> class112_0 = new Class112<string, string>();
+	public SafeDictionary<string, string> class112_0 = new SafeDictionary<string, string>();
 
 	internal readonly List<Module> modules = [];
 
@@ -332,7 +332,7 @@ internal class Overlay
 		SharpDX.Direct3D11.Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[1] { featureLevel }, swapChainDescription_0, out device_0, out swapChain_0);
 		method_5();
 		FileStream stream_ = new FileStream(Path.Combine(Program.AppDir, "data", "resource_data.bin"), FileMode.Open, FileAccess.Read, FileShare.Read);
-		class93_0 = new Class91(stream_);
+		class93_0 = new BinaryStreamReader(stream_);
 		method_12();
 	}
 

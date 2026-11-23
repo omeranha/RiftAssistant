@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Plugins;
 using SNO;
 
 
@@ -54,7 +52,7 @@ public class Item : Actor
 	[CompilerGenerated]
 	private string string_1;
 
-	public readonly Class112<string, ItemStat> class112_0 = new Class112<string, ItemStat>();
+	public readonly SafeDictionary<string, ItemStat> class112_0 = new SafeDictionary<string, ItemStat>();
 
 	[CompilerGenerated]
 	private uint uint_8;

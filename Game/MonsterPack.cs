@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Plugins;
 using SNO;
 
 public class MonsterPack
@@ -25,13 +24,13 @@ public class MonsterPack
 	private List<SnoMonsterAffix> list_0;
 
 	[CompilerGenerated]
-	private readonly Class112<double, Monster> class112_0 = new Class112<double, Monster>();
+	private readonly SafeDictionary<double, Monster> class112_0 = new SafeDictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Class112<double, Monster> class112_1 = new Class112<double, Monster>();
+	private readonly SafeDictionary<double, Monster> class112_1 = new SafeDictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Class112<double, Monster> class112_2 = new Class112<double, Monster>();
+	private readonly SafeDictionary<double, Monster> class112_2 = new SafeDictionary<double, Monster>();
 
 	public Stopwatch LastActive { get; } = new Stopwatch();
 
@@ -127,7 +126,7 @@ public class MonsterPack
 		}
 	}
 
-	public Class112<double, Monster> Class112_0
+	public SafeDictionary<double, Monster> Class112_0
 	{
 		[CompilerGenerated]
 		get
@@ -136,7 +135,7 @@ public class MonsterPack
 		}
 	}
 
-	public Class112<double, Monster> Class112_1
+	public SafeDictionary<double, Monster> Class112_1
 	{
 		[CompilerGenerated]
 		get
@@ -145,7 +144,7 @@ public class MonsterPack
 		}
 	}
 
-	public Class112<double, Monster> Class112_2
+	public SafeDictionary<double, Monster> Class112_2
 	{
 		[CompilerGenerated]
 		get

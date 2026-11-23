@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using structs;
-using Plugins;
-using SNO;
-
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using SNO;
+using structs;
 
 public class Player : Actor
 {
@@ -180,9 +178,9 @@ public class Player : Actor
 
 	internal Dictionary<uint, float> dictionary_5 = new Dictionary<uint, float>();
 
-	internal Class112<uint, int> class112_0 = new Class112<uint, int>();
+	internal SafeDictionary<uint, int> class112_0 = new SafeDictionary<uint, int>();
 
-	internal Class112<uint, float> class112_1 = new Class112<uint, float>();
+	internal SafeDictionary<uint, float> class112_1 = new SafeDictionary<uint, float>();
 
 	internal float[] float_4 = new float[9];
 
@@ -205,7 +203,7 @@ public class Player : Actor
 	[CompilerGenerated]
 	private readonly int[] int_12 = new int[4];
 
-	public readonly Class112<uint, int> class112_2 = new Class112<uint, int>();
+	public readonly SafeDictionary<uint, int> class112_2 = new SafeDictionary<uint, int>();
 
 	public int int_13;
 

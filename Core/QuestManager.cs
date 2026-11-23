@@ -1,8 +1,6 @@
 using System;
-using System.Runtime.InteropServices;
-using structs;
-using Plugins;
 using SNO;
+using structs;
 
 
 internal class QuestManager
@@ -11,11 +9,11 @@ internal class QuestManager
 
 	private r_Quest[] struct20_0;
 
-	private readonly Class112<uint, Quest> class112_0 = new Class112<uint, Quest>();
+	private readonly SafeDictionary<uint, Quest> class112_0 = new SafeDictionary<uint, Quest>();
 
-	public readonly Class112<uint, Quest> class112_1 = new Class112<uint, Quest>();
+	public readonly SafeDictionary<uint, Quest> class112_1 = new SafeDictionary<uint, Quest>();
 
-	public readonly Class112<uint, Quest> class112_2 = new Class112<uint, Quest>();
+	public readonly SafeDictionary<uint, Quest> class112_2 = new SafeDictionary<uint, Quest>();
 
 	internal void method_0()
 	{
