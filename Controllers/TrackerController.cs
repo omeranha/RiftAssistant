@@ -1,3 +1,5 @@
+namespace RiftAssistant.Controllers;
+
 public class TrackerController
 {
 	public StatTracker Session => CoreCollector.Session;

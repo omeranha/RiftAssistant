@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Plugins;
 
+namespace RiftAssistant.Controllers;
 
 public class Controller
 {

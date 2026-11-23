@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using SNO;
-using structs;
 
 
-namespace collectors;
+namespace RiftAssistant.Collectors;
 
 internal class MarkerCollector
 {

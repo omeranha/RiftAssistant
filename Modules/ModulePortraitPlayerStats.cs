@@ -1,6 +1,8 @@
 using System;
 using SharpDX.DirectWrite;
 
+namespace RiftAssistant.Modules;
+
 internal class ModulePortraitPlayerStats : Module
 {
 	private readonly bool showInfo;

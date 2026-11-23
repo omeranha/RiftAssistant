@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using SNO;
-using structs;
 
 
-namespace collectors;
+namespace RiftAssistant.Collectors;
 
 internal class ACDCollector
 {

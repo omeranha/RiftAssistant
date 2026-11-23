@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-using Plugins;
 using SharpDX.Direct2D1;
+
+namespace RiftAssistant.Controllers;
 
 public class RenderController
 {

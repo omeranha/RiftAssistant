@@ -1,6 +1,6 @@
 using System;
-using Plugins;
 
+namespace RiftAssistant.Modules;
 
 internal abstract class Module : IDisposable
 {

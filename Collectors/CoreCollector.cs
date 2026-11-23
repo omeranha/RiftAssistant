@@ -8,9 +8,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
-using collectors;
-using Plugins;
-using SNO;
+
+namespace RiftAssistant.Collectors;
 
 internal static class CoreCollector
 {

@@ -5,6 +5,8 @@ using System.Media;
 using System.Runtime.InteropServices;
 using System.Speech.Synthesis;
 
+namespace RiftAssistant.Controllers;
+
 public class SoundController
 {
 	private SpeechSynthesizer synthesizer;

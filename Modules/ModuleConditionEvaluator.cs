@@ -1,7 +1,7 @@
 using System.Globalization;
 using SharpDX;
-using SNO;
 
+namespace RiftAssistant.Modules;
 
 internal class ModuleConditionEvaluator
 {

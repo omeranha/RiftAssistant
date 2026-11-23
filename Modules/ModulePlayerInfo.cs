@@ -4,6 +4,8 @@ using System.Globalization;
 using SharpDX;
 using SharpDX.Direct2D1;
 
+namespace RiftAssistant.Modules;
+
 internal class ModulePlayerInfo : Module
 {
 	private readonly Dictionary<string, Vector2[]> pointCache = [];

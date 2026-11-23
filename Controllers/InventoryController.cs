@@ -1,6 +1,6 @@
 using System.Drawing;
-using SNO;
 
+namespace RiftAssistant.Controllers;
 
 public class InventoryController
 {

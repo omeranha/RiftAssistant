@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using SharpDX.DirectWrite;
 
+namespace RiftAssistant.Modules;
 
 sealed class StatColumn
 {

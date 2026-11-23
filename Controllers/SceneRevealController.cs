@@ -1,6 +1,8 @@
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
+namespace RiftAssistant.Controllers;
+
 public class SceneRevealController
 {
 	[CompilerGenerated]

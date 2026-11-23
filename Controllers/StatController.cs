@@ -1,7 +1,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Plugins;
+
+namespace RiftAssistant.Controllers;
 
 internal sealed class PerSecCounter(int windowMs = 1000) : IPerfCounter
 {

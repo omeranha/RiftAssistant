@@ -1,3 +1,5 @@
+namespace RiftAssistant.Modules;
+
 internal class ModulePortraits : Module
 {
 	public ModulePortraits() : base(true)

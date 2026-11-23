@@ -1,6 +1,8 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
+namespace RiftAssistant.Controllers;
+
 public class InputController
 {
 	private const uint InputMouse = 0;

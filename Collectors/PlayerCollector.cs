@@ -5,11 +5,9 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using SNO;
-using structs;
 
 
-namespace collectors;
+namespace RiftAssistant.Collectors;
 
 internal class PlayerCollector
 {

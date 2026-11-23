@@ -87,7 +87,7 @@ Pickit files are reloaded together with the plugins. Known limitation: the `cube
 
 | Original | Now |
 |---|---|
-| `Turbo.Plugins`, `Turbo.Plugins.Default`, `Turbo.SNO` namespaces | `Plugins`, `Plugins.Default`, `SNO` |
+| `Turbo.Plugins`, `Turbo.Plugins.Default`, `Turbo.SNO` namespaces | `Plugins`, `Plugins.Default`; the SNO types live in `RiftAssistant.Sno` |
 | `IController`, `IItem`, `IActor`, `IMonster`, `IPlayer`, `IPlayerSkill`, `IWorldCoordinate`, `ITexture`, `IUiElement`, `ISno*` | The concrete classes `Controller`, `Item`, `Actor`, `Monster`, `Player`, `Skill`, `WorldCoordinate`, `Texture`, `UiElement`, `Sno*` |
 | `IKeyEvent`, `Assistant.Input.CreateKeyEvent(...)` with DirectInput keys | `InputEvent` with `Vk` keys: `keyEvent.Is(Vk.F6, true)` |
 | `IWatch`, `Assistant.Time.CreateWatch()` | `System.Diagnostics.Stopwatch` |
@@ -102,7 +102,7 @@ Pickit files are reloaded together with the plugins. Known limitation: the `cube
 ## Porting an original plugin
 
 1. Replace the namespaces and interface types using the table above.
-2. Add `using SNO;` when the file uses `Sno*` types.
+2. Remove `using Turbo.SNO;` and similar lines. Plugin compilation imports every `RiftAssistant.*` namespace and `Plugins` globally, so no using directives are needed for the game types.
 3. Replace `IWatch` with `Stopwatch` and DirectInput keys with `Vk`.
 4. Compile. Every remaining error is an API gap listed in this document or a real gap to report.
 

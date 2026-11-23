@@ -1,5 +1,4 @@
-using SNO;
-
+namespace RiftAssistant.Controllers;
 
 public class TextureController
 {

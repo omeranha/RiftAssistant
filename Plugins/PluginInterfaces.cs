@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
-using SNO;
 
 namespace Plugins;
 

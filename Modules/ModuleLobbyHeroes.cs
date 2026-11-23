@@ -4,7 +4,8 @@ using System.Globalization;
 using System.Linq;
 using SharpDX;
 using SharpDX.DirectWrite;
-using SNO;
+
+namespace RiftAssistant.Modules;
 
 internal class ModuleLobbyHeroes : Module
 {
