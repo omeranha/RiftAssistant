@@ -4,7 +4,7 @@ using System.IO;
 
 namespace RiftAssistant.Sno;
 
-public static class SnoData
+internal static class SnoData
 {
 	public static readonly Dictionary<uint, string> GeneralTagMapEntries = [];
 

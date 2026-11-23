@@ -1,6 +1,6 @@
 namespace RiftAssistant.Engine;
 
-public static class Constants
+internal static class Constants
 {
 	public static readonly int PlayerData_SizeOf;
 

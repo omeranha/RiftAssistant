@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Engine;
 
-public sealed class Attributes
+internal sealed class Attributes
 {
 	[CompilerGenerated]
 	private readonly AttributeMap map;

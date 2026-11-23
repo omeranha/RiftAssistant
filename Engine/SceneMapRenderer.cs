@@ -8,7 +8,7 @@ using SharpDX.Direct2D1;
 
 namespace RiftAssistant.Engine;
 
-public readonly record struct SceneKey(float X, float Y);
+internal readonly record struct SceneKey(float X, float Y);
 
 internal class SceneMapRenderer
 {

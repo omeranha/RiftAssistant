@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace RiftAssistant.Input;
 
-public static class MouseBlocker
+internal static class MouseBlocker
 {
 	private const int WH_MOUSE_LL = 14;
 	private const int WM_LBUTTONDOWN = 0x0201;

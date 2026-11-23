@@ -1,6 +1,6 @@
 namespace RiftAssistant.Engine;
 
-public readonly record struct InputBind(KeyBinding Key, Modifier Modifier);
+internal readonly record struct InputBind(KeyBinding Key, Modifier Modifier);
 
 internal class GameSettingsManager
 {

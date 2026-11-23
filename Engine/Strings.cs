@@ -3,7 +3,7 @@ using System.IO;
 
 namespace RiftAssistant.Engine;
 
-public sealed class Strings
+internal sealed class Strings
 {
 	public readonly string Language;
 

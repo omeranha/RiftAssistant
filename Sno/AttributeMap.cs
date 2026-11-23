@@ -2,7 +2,7 @@
 
 namespace RiftAssistant.Sno;
 
-public sealed class AttributeMap
+internal sealed class AttributeMap
 {
 	public AcdAttribute Attribute__Hitpoints_Cur;
 

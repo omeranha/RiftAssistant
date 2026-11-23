@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace RiftAssistant.Model;
 
-public sealed class Quests
+internal sealed class Quests
 {
 	private readonly Dictionary<uint, SnoQuest> all = new Dictionary<uint, SnoQuest>(500);
 

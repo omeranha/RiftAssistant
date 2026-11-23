@@ -5,7 +5,7 @@ using System.IO;
 
 namespace RiftAssistant.Model;
 
-public sealed class Actors
+internal sealed class Actors
 {
 	internal readonly Dictionary<ActorSnoEnum, SnoActor> dictionary_0 = new Dictionary<ActorSnoEnum, SnoActor>(5000);
 

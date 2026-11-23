@@ -282,7 +282,7 @@ public sealed class AttributeProcessor
 	}
 }
 
-public sealed class FollowerClass
+internal sealed class FollowerClass
 {
 	public readonly string Code;
 
@@ -782,7 +782,7 @@ public class SceneHint
 	}
 }
 
-public sealed class SkillEffectRule
+internal sealed class SkillEffectRule
 {
 	[CompilerGenerated]
 	private readonly SkillEffectType type;
@@ -2136,7 +2136,7 @@ public class SnoQuestStep
 	}
 }
 
-public static class SnoResourceHelper
+internal static class SnoResourceHelper
 {
 	public static string GetWorlds()
 	{
@@ -2772,7 +2772,7 @@ public enum TagType
 	NONE
 }
 
-public struct TextureIndexEntry
+internal struct TextureIndexEntry
 {
 	public uint Id;
 

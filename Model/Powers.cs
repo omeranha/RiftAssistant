@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
-public sealed class Powers
+internal sealed class Powers
 {
 	[CompilerGenerated]
 	private readonly byte[] formulaData;

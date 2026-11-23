@@ -211,7 +211,7 @@ internal struct r_MemoryManager
 }
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
-public struct RECT
+internal struct RECT
 {
 	public int Left;
 	public int Top;

@@ -325,7 +325,7 @@ internal class SkillEffect(uint acdid, uint annId2, SnoActor snoActor2, SkillEff
 	public SkillEffectRule SkillEffectRule { get; } = skillEffectRule;
 }
 
-public class TownBanner : Actor
+internal class TownBanner : Actor
 {
 	public int Index { get; set; }
 

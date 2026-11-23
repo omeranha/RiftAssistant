@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RiftAssistant.Model;
 
-public sealed class Classes
+internal sealed class Classes
 {
 	public readonly Dictionary<uint, HeroClassDefinition> HeroClassesByIDX = new Dictionary<uint, HeroClassDefinition>();
 

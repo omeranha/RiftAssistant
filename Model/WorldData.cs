@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
-public sealed class Areas
+internal sealed class Areas
 {
 	[CompilerGenerated]
 	private readonly SnoAct[] isnoAct_0 = new SnoAct[5];
@@ -87,7 +87,7 @@ public sealed class Areas
 	}
 }
 
-public static class Custom
+internal static class Custom
 {
 	internal sealed class UnknownSnoArea : SnoArea
 	{
@@ -359,7 +359,7 @@ public class Scene
 	}
 }
 
-public sealed class Scenes
+internal sealed class Scenes
 {
 	private readonly Dictionary<uint, SnoScene> allScenes = new Dictionary<uint, SnoScene>(3000);
 
@@ -412,7 +412,7 @@ public sealed class Scenes
 	}
 }
 
-public sealed class Worlds
+internal sealed class Worlds
 {
 	private readonly Dictionary<uint, SnoWorld> dictionary_0 = new Dictionary<uint, SnoWorld>(500);
 

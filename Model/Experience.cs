@@ -2,7 +2,7 @@ using System.IO;
 
 namespace RiftAssistant.Model;
 
-public sealed class Experience
+internal sealed class Experience
 {
 	public readonly long[] ParagonExpLevel = new long[20001];
 

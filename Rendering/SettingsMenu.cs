@@ -220,7 +220,7 @@ public class MenuCheckbox(string label, bool initialState, int width = 200, int 
 	}
 }
 
-public class MenuButton : IUIComponent
+internal class MenuButton : IUIComponent
 {
 	public RectangleF Bounds { get; set; }
 	public string Label { get; set; }

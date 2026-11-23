@@ -84,7 +84,7 @@ public sealed class SkillCooldowns
 	public bool EnableFade { get; set; } = true;
 }
 
-public sealed class Conditions
+internal sealed class Conditions
 {
 	public bool Enabled { get; set; } = true;
 	public bool OnlyOutTown { get; set; }

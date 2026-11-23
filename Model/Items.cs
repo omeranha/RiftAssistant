@@ -7,7 +7,7 @@ using System.IO;
 
 namespace RiftAssistant.Model;
 
-public sealed class Items
+internal sealed class Items
 {
 	private readonly Dictionary<uint, SnoItem> all = new Dictionary<uint, SnoItem>(3000);
 

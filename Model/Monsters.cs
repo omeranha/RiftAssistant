@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
-public sealed class Monsters
+internal sealed class Monsters
 {
 	[CompilerGenerated]
 	private readonly SnoMonster snoMonsterObstacle;

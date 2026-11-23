@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RiftAssistant.Engine;
 
-public record struct CombatNumberEvent(long Id, double Value);
+internal record struct CombatNumberEvent(long Id, double Value);
 
 internal class FloatingNumberManager
 {
