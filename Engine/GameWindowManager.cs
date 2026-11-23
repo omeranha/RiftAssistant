@@ -1,7 +1,10 @@
 using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace RiftAssistant.Engine;
@@ -110,8 +113,43 @@ internal static class GameWindowManager
 		return OpenProcess();
 	}
 
+	private static long readCalls;
+
+	public static long TakeReadCalls()
+	{
+		return Interlocked.Exchange(ref readCalls, 0);
+	}
+
+	public static unsafe void ReadMany<T>(IReadOnlyList<long> addresses, T[] results) where T : unmanaged
+	{
+		int size = sizeof(T);
+		foreach (var span in ReadPlanner.Plan(addresses, size)) {
+			byte[] buffer = ArrayPool<byte>.Shared.Rent(span.Length);
+			try {
+				bool success;
+				fixed (byte* pointer = buffer) {
+					success = ReadProcessMemory(ProcessHandle, checked((IntPtr)span.Start), pointer, span.Length, out _);
+				}
+
+				Interlocked.Increment(ref readCalls);
+				if (success) {
+					foreach (int item in span.Items) {
+						results[item] = MemoryMarshal.Read<T>(buffer.AsSpan((int)(addresses[item] - span.Start), size));
+					}
+				} else {
+					foreach (int item in span.Items) {
+						results[item] = Read<T>(addresses[item]);
+					}
+				}
+			} finally {
+				ArrayPool<byte>.Shared.Return(buffer);
+			}
+		}
+	}
+
 	public static unsafe T Read<T>(long address, bool relative = false, int size = 0) where T : unmanaged
 	{
+		Interlocked.Increment(ref readCalls);
 		T value = default;
 		ReadProcessMemory(ProcessHandle, checked((IntPtr)(relative ? address + MainModuleHandle : address)), &value, size == 0 ? sizeof(T) : size, out _);
 		return value;
@@ -119,6 +157,7 @@ internal static class GameWindowManager
 
 	public static unsafe byte[] ReadBytes(long address, int size)
 	{
+		Interlocked.Increment(ref readCalls);
 		byte[] buffer = new byte[size];
 		fixed (byte* ptr = buffer) {
 			ReadProcessMemory(ProcessHandle, checked((IntPtr)address), ptr, size, out _);
@@ -128,6 +167,7 @@ internal static class GameWindowManager
 
 	public static unsafe T[] ReadArray<T>(long address, int count, bool relative = false) where T : unmanaged
 	{
+		Interlocked.Increment(ref readCalls);
 		T[] array = new T[count];
 		fixed (T* ptr = array) {
 			ReadProcessMemory(ProcessHandle, checked((IntPtr)(relative ? address + MainModuleHandle : address)), ptr, count * sizeof(T), out _);

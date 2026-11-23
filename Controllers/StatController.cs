@@ -54,6 +54,10 @@ public class StatController
 
 	public IPerfCounter RenderPerfCounter => Overlay.Instance.RenderCounter;
 
+	internal readonly PerSecCounter MemoryReads = new();
+
+	public IPerfCounter MemoryReadPerfCounter => MemoryReads;
+
 	public IPerfCounter MonsterHitpointDecreasePerfCounter => CoreCollector.ActorCollector.MonsterHitpointDecrease;
 
 	public IReadOnlyDictionary<string, IPerfCounter> GetPluginCounters(IPlugin plugin)

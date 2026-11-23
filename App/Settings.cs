@@ -46,6 +46,8 @@ public sealed class Settings
 	public string DiabloWindowTitle { get; set; } = "Diablo III";
 	public bool AutoTerminate { get; set; } = false;
 	public int OverlayFps { get; set; } = 60;
+	public bool BatchedMemoryReads { get; set; } = true;
+	public bool VerifyBatchedReads { get; set; } = false;
 	public OverlaySettings Overlay { get; set; } = new();
 	public InventoryLockSettings InventoryLock { get; set; } = new();
 }

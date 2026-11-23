@@ -46,6 +46,7 @@ public class ExamplePlugin : BasePlugin, IInGameTopPainter
 ### `Assistant.Stat`
 
 - `RenderPerfCounter`: `LastValue` is milliseconds of render time per second, `LastCount` is frames per second. Render time is measured up to `Present`, so vsync wait is excluded.
+- `MemoryReadPerfCounter`: `LastValue` is game memory read calls per second.
 - `MonsterHitpointDecreasePerfCounter`: `LastValue` is monster hitpoints removed per second.
 - `GetPluginCounters(plugin)`: time spent in each handler of a plugin, keyed by handler interface name. Used by `DebugPlugin`.
 

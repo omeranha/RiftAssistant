@@ -394,6 +394,7 @@ internal static class CoreCollector
 	{
 		if (GameWindowManager.Window.Handle == IntPtr.Zero) return;
 
+		Controller?.Stat.MemoryReads.Add(GameWindowManager.TakeReadCalls());
 		CurrentRealTimeTicks = DateTime.Now.Ticks;
 		try {
 			GameWindowManager.Window.CursorX = Cursor.Position.X - ((GameWindowManager.Window.Handle != IntPtr.Zero) ? GameWindowManager.Window.Offset.X : 0);

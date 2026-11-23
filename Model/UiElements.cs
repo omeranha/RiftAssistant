@@ -417,13 +417,8 @@ internal partial class UiElements
 		uiHash = GameWindowManager.Read<int>(uiManager);
 		buckets = GameWindowManager.ReadArray<long>(bucketPtr, bucketCount);
 
-		foreach (var element in rootElements.Values) {
-			element.Refresh();
-		}
-
-		foreach (var element in conditionalElements.Values) {
-			RefreshConditional(element);
-		}
+		RefreshRootElements();
+		RefreshConditionalElements();
 
 		HandleDisconnectPopup();
 		ProcessChat(force);
@@ -599,18 +594,7 @@ internal partial class UiElements
 				element.Class75_0 = GameWindowManager.Read<UiElementData>(element.long_0);
 
 				if (element.Class75_0.Id == element.ulong_0) {
-					element.bool_0 = true;
-					element.Visible = (element.Class75_0.Flags & 4) != 0;
-
-					if (element.Visible &&
-						!TryBuildRectangle(
-							element.Class75_0,
-							ref element.rectangle,
-							element.PaddingX,
-							element.PaddingY)) {
-						element.Visible = false;
-					}
-
+					ApplyResolved(element);
 					return;
 				}
 			}
@@ -619,6 +603,17 @@ internal partial class UiElements
 		}
 
 		Hide(element);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private void ApplyResolved(UiElement element)
+	{
+		element.bool_0 = true;
+		element.Visible = (element.Class75_0.Flags & 4) != 0;
+
+		if (element.Visible && !TryBuildRectangle(element.Class75_0, ref element.rectangle, element.PaddingX, element.PaddingY)) {
+			element.Visible = false;
+		}
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
