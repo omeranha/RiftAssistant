@@ -7,19 +7,19 @@ public class Buff
 	private readonly Player iplayer_0;
 
 	[CompilerGenerated]
-	private readonly SnoPower SnoPower_0;
+	private readonly SnoPower snoPower;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool active;
 
 	[CompilerGenerated]
-	private readonly int[] int_0 = new int[32];
+	private readonly int[] iconCounts = new int[32];
 
 	[CompilerGenerated]
-	private readonly double[] double_0 = new double[32];
+	private readonly double[] timeElapsedSeconds = new double[32];
 
 	[CompilerGenerated]
-	private readonly double[] double_1 = new double[32];
+	private readonly double[] timeLeftSeconds = new double[32];
 
 	public Player Player
 	{
@@ -35,7 +35,7 @@ public class Buff
 		[CompilerGenerated]
 		get
 		{
-			return SnoPower_0;
+			return snoPower;
 		}
 	}
 
@@ -48,12 +48,12 @@ public class Buff
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return active;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_0 = value;
+			active = value;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class Buff
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return iconCounts;
 		}
 	}
 
@@ -71,7 +71,7 @@ public class Buff
 		[CompilerGenerated]
 		get
 		{
-			return double_0;
+			return timeElapsedSeconds;
 		}
 	}
 
@@ -80,13 +80,13 @@ public class Buff
 		[CompilerGenerated]
 		get
 		{
-			return double_1;
+			return timeLeftSeconds;
 		}
 	}
 
-	public Buff(Player iplayer_1, SnoPower SnoPower_1)
+	public Buff(Player iplayer_1, SnoPower bySno)
 	{
 		iplayer_0 = iplayer_1;
-		SnoPower_0 = SnoPower_1;
+		snoPower = bySno;
 	}
 }

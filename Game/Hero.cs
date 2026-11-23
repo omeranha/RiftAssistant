@@ -5,55 +5,55 @@ using SNO;
 public class Hero
 {
 	[CompilerGenerated]
-	private readonly uint uint_0;
+	private readonly uint id;
 
 	[CompilerGenerated]
-	private readonly string string_0;
+	private readonly string name;
 
 	[CompilerGenerated]
-	private readonly string string_1;
+	private readonly string battleTag;
 
 	[CompilerGenerated]
 	private readonly HeroClassDefinition iheroClassDefinition_0;
 
 	[CompilerGenerated]
-	private readonly ulong ulong_0;
+	private readonly ulong accountIdHi;
 
 	[CompilerGenerated]
-	private readonly ulong ulong_1;
+	private readonly ulong accountIdLo;
 
 	[CompilerGenerated]
-	private int int_0;
+	private int flags;
 
 	[CompilerGenerated]
-	private int int_1;
+	private int level;
 
 	[CompilerGenerated]
-	private int int_2;
+	private int paragonLevel;
 
 	[CompilerGenerated]
-	private int int_3;
+	private int playedSeconds;
 
 	[CompilerGenerated]
-	private readonly bool bool_0;
+	private readonly bool hardcore;
 
 	[CompilerGenerated]
-	private readonly bool bool_1;
+	private readonly bool isMale;
 
 	[CompilerGenerated]
-	private readonly int int_4;
+	private readonly int season;
 
 	[CompilerGenerated]
-	private readonly bool bool_2;
+	private readonly bool seasonal;
 
 	[CompilerGenerated]
-	private readonly DateTime dateTime_0;
+	private readonly DateTime createdDT;
 
 	[CompilerGenerated]
-	private long long_0;
+	private long lastPlayed;
 
 	[CompilerGenerated]
-	private DateTime dateTime_1 = DateTime.MinValue;
+	private DateTime lastPlayedDT = DateTime.MinValue;
 
 	[CompilerGenerated]
 	private SnoQuestStep isnoQuestStep_0;
@@ -63,7 +63,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return uint_0;
+			return id;
 		}
 	}
 
@@ -72,7 +72,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return string_0;
+			return name;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return string_1;
+			return battleTag;
 		}
 	}
 
@@ -99,7 +99,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return ulong_0;
+			return accountIdHi;
 		}
 	}
 
@@ -108,7 +108,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return ulong_1;
+			return accountIdLo;
 		}
 	}
 
@@ -117,12 +117,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return flags;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_0 = value;
+			flags = value;
 		}
 	}
 
@@ -131,12 +131,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return int_1;
+			return level;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_1 = value;
+			level = value;
 		}
 	}
 
@@ -145,12 +145,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return int_2;
+			return paragonLevel;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_2 = value;
+			paragonLevel = value;
 		}
 	}
 
@@ -159,12 +159,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return int_3;
+			return playedSeconds;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_3 = value;
+			playedSeconds = value;
 		}
 	}
 
@@ -173,7 +173,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return hardcore;
 		}
 	}
 
@@ -182,7 +182,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return bool_1;
+			return isMale;
 		}
 	}
 
@@ -191,7 +191,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return int_4;
+			return season;
 		}
 	}
 
@@ -200,7 +200,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return bool_2;
+			return seasonal;
 		}
 	}
 
@@ -209,7 +209,7 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return dateTime_0;
+			return createdDT;
 		}
 	}
 
@@ -218,12 +218,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return lastPlayed;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_0 = value;
+			lastPlayed = value;
 		}
 	}
 
@@ -232,12 +232,12 @@ public class Hero
 		[CompilerGenerated]
 		get
 		{
-			return dateTime_1;
+			return lastPlayedDT;
 		}
 		[CompilerGenerated]
 		set
 		{
-			dateTime_1 = value;
+			lastPlayedDT = value;
 		}
 	}
 
@@ -255,18 +255,18 @@ public class Hero
 		}
 	}
 
-	public Hero(uint uint_1, string string_2, string string_3, uint uint_2, long long_1, bool bool_3, bool bool_4, int int_5, bool bool_5, ulong ulong_2, ulong ulong_3)
+	public Hero(uint uint_1, string string_2, string string_3, uint uint_2, long long_1, bool bool_3, bool bool_4, int season2, bool bool_5, ulong ulong_2, ulong ulong_3)
 	{
-		uint_0 = uint_1;
-		string_0 = string_2;
-		string_1 = string_3;
+		id = uint_1;
+		name = string_2;
+		battleTag = string_3;
 		iheroClassDefinition_0 = SnoData.Classes.GetHeroClassByInternalIndex(uint_2);
-		dateTime_0 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long_1 / 1000).ToLocalTime();
-		bool_0 = bool_3;
-		bool_1 = bool_4;
-		int_4 = int_5;
-		bool_2 = bool_5;
-		ulong_0 = ulong_2;
-		ulong_1 = ulong_3;
+		createdDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long_1 / 1000).ToLocalTime();
+		hardcore = bool_3;
+		isMale = bool_4;
+		season = season2;
+		seasonal = bool_5;
+		accountIdHi = ulong_2;
+		accountIdLo = ulong_3;
 	}
 }

@@ -33,11 +33,11 @@ internal class MarkerCollector
 
 	private readonly Dictionary<string, Marker> class112_4 = new Dictionary<string, Marker>();
 
-	public List<Marker> list_0 = new List<Marker>();
+	public List<Marker> Markers = new List<Marker>();
 
 	private readonly List<Marker> list_1 = new List<Marker>();
 
-	public List<Banner> list_2 = new List<Banner>();
+	public List<Banner> Banners = new List<Banner>();
 
 	public WorldCoordinate iworldCoordinate_0;
 
@@ -105,21 +105,21 @@ internal class MarkerCollector
 				continue;
 			}
 			if (item.struct17_0.uint_3 != uint.MaxValue) {
-				Quest quest = CoreCollector.Class376_0.class112_1.GetValueOrDefault(item.struct17_0.uint_3);
+				Quest quest = CoreCollector.Class376_0.Quests.GetValueOrDefault(item.struct17_0.uint_3);
 				if (quest != null && quest.State == QuestState.completed) {
 					continue;
 				}
 			}
-			Marker @class = class112_1.GetValueOrDefault(text);
-			if (@class == null) {
+			Marker marker = class112_1.GetValueOrDefault(text);
+			if (marker == null) {
 				SnoQuest isnoQuest_ = ((item.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item.struct17_0.uint_3) : null);
 				SnoActor SnoActor_ = ((item.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item.struct17_0.uint_2) : null);
-				@class = new Marker(text, item.struct17_0.struct37_0.WorldId, isnoQuest_, SnoActor_, Window.CreateWorldCoordinate(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z), item.struct17_0.struct15_0.TextureSno, item.struct17_0.struct15_0.FrameIndex);
-				class112_1[text] = @class;
+				marker = new Marker(text, item.struct17_0.struct37_0.WorldId, isnoQuest_, SnoActor_, Window.CreateWorldCoordinate(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z), item.struct17_0.struct15_0.TextureSno, item.struct17_0.struct15_0.FrameIndex);
+				class112_1[text] = marker;
 			} else {
-				@class.FloorCoordinate.Set(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z);
+				marker.FloorCoordinate.Set(item.struct17_0.struct37_0.X, item.struct17_0.struct37_0.Y, item.struct17_0.struct37_0.Z);
 			}
-			list_0.Add(@class);
+			Markers.Add(marker);
 		}
 		foreach (r_MarkerEntry item2 in class352_1.GetItems()) {
 			if (item2.uint_0 == uint.MaxValue || item2.struct17_0.struct37_0.WorldId != CoreCollector.LocalPlayer.WorldId) {
@@ -144,129 +144,129 @@ internal class MarkerCollector
 						continue;
 					}
 					if (item2.struct17_0.uint_3 != uint.MaxValue) {
-						Quest quest2 = CoreCollector.Class376_0.class112_1.GetValueOrDefault(item2.struct17_0.uint_3);
+						Quest quest2 = CoreCollector.Class376_0.Quests.GetValueOrDefault(item2.struct17_0.uint_3);
 						if (quest2 != null && quest2.State == QuestState.completed) {
 							continue;
 						}
 					}
-					Marker class2 = class112_1.GetValueOrDefault(text2);
-					if (class2 == null) {
+					Marker marker2 = class112_1.GetValueOrDefault(text2);
+					if (marker2 == null) {
 						SnoQuest isnoQuest_2 = ((item2.struct17_0.uint_3 != uint.MaxValue) ? SnoData.Quests.GetQuest(item2.struct17_0.uint_3) : null);
-						SnoActor SnoActor_2 = ((item2.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item2.struct17_0.uint_2) : null);
-						class2 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, isnoQuest_2, SnoActor_2, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-						class112_1[text2] = class2;
+						SnoActor snoActor = ((item2.struct17_0.uint_2 != uint.MaxValue) ? SnoData.Actors.GetActor((ActorSnoEnum)item2.struct17_0.uint_2) : null);
+						marker2 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, isnoQuest_2, snoActor, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
+						class112_1[text2] = marker2;
 					} else {
-						class2.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
+						marker2.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 					}
-					list_0.Add(class2);
-					if (class2.SnoActor == null) {
+					Markers.Add(marker2);
+					if (marker2.SnoActor == null) {
 						continue;
 					}
-					if (class2.SnoActor.Code.StartsWith("x1_lr_boss", ignoreCase: true, CultureInfo.InvariantCulture)) {
-						iworldCoordinate_0 = class2.FloorCoordinate;
-					} else if (CoreCollector.LocalPlayer.SnoArea != null && (class2.SnoActor.Sno == ActorSnoEnum._dunedervish_b_unique_uber || class2.SnoActor.Sno == ActorSnoEnum._goatmutant_ranged_a_unique_uber || class2.SnoActor.Sno == ActorSnoEnum._morluspellcaster_a_unique_uber || class2.SnoActor.Sno == ActorSnoEnum._terrordemon_a_unique_uber)) {
+					if (marker2.SnoActor.Code.StartsWith("x1_lr_boss", ignoreCase: true, CultureInfo.InvariantCulture)) {
+						iworldCoordinate_0 = marker2.FloorCoordinate;
+					} else if (CoreCollector.LocalPlayer.SnoArea != null && (marker2.SnoActor.Sno == ActorSnoEnum._dunedervish_b_unique_uber || marker2.SnoActor.Sno == ActorSnoEnum._goatmutant_ranged_a_unique_uber || marker2.SnoActor.Sno == ActorSnoEnum._morluspellcaster_a_unique_uber || marker2.SnoActor.Sno == ActorSnoEnum._terrordemon_a_unique_uber)) {
 						if (CoreCollector.ActorCollector.IWorldCoordinate_0 == null) {
 							CoreCollector.ActorCollector.IWorldCoordinate_0 = Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 						} else {
 							CoreCollector.ActorCollector.IWorldCoordinate_0.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 						}
-						CoreCollector.ActorCollector.Int32_2 = CoreCollector.LocalPlayer.SnoArea.Act;
+						CoreCollector.ActorCollector.Act2 = CoreCollector.LocalPlayer.SnoArea.Act;
 					}
 					continue;
 				}
-				SnoActor SnoActor_3 = null;
+				SnoActor actor2 = null;
 				bool value = false;
 				bool value2 = false;
 				bool? flag = null;
 				switch (item2.struct17_0.struct15_0.TextureSno) {
 					case 226820u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
 						value2 = true;
 						break;
 					case 218235u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._shrine_global);
 						value2 = true;
 						break;
 					case 451494u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
 						value = true;
 						flag = false;
 						break;
 					case 451493u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
 						value = true;
 						flag = false;
 						break;
 					case 451504u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
 						value = true;
 						flag = false;
 						break;
 					case 451503u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
 						value = true;
 						flag = false;
 						break;
 					case 455276u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
 						value = true;
 						flag = true;
 						break;
 					case 455277u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_electrified);
 						value = true;
 						flag = true;
 						break;
 					case 455278u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_damage);
 						value = true;
 						flag = true;
 						break;
 					case 455279u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_invulnerable);
 						value = true;
 						flag = true;
 						break;
 					case 455280u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_run_speed);
 						value = true;
 						flag = true;
 						break;
 					case 451508u:
-						SnoActor_3 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
+						actor2 = SnoData.Actors.GetActor(ActorSnoEnum._x1_lr_shrine_infinite_casting);
 						value = true;
 						flag = false;
 						break;
 				}
-				Marker class3 = class112_1.GetValueOrDefault(text2);
-				if (class3 == null) {
-					class3 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, SnoActor_3, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-					class112_1[text2] = class3;
+				Marker marker3 = class112_1.GetValueOrDefault(text2);
+				if (marker3 == null) {
+					marker3 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, actor2, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
+					class112_1[text2] = marker3;
 				} else {
-					class3.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
-					class3.TextureSno = item2.struct17_0.struct15_0.TextureSno;
-					class3.TextureFrameIndex = item2.struct17_0.struct15_0.FrameIndex;
+					marker3.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
+					marker3.TextureSno = item2.struct17_0.struct15_0.TextureSno;
+					marker3.TextureFrameIndex = item2.struct17_0.struct15_0.FrameIndex;
 				}
-				class3.IsPylon = value;
-				class3.IsShrine = value2;
+				marker3.IsPylon = value;
+				marker3.IsShrine = value2;
 				if (flag.HasValue) {
-					class3.IsUsed = flag.Value;
+					marker3.IsUsed = flag.Value;
 				}
-				list_0.Add(class3);
+				Markers.Add(marker3);
 			} else {
-				Marker class4 = class112_3.GetValueOrDefault(text2);
-				if (class4 == null) {
-					class4 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, null, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
-					class112_3[text2] = class4;
+				Marker marker4 = class112_3.GetValueOrDefault(text2);
+				if (marker4 == null) {
+					marker4 = new Marker(text2, item2.struct17_0.struct37_0.WorldId, null, null, Window.CreateWorldCoordinate(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z), item2.struct17_0.struct15_0.TextureSno, item2.struct17_0.struct15_0.FrameIndex);
+					class112_3[text2] = marker4;
 				} else {
-					class4.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
+					marker4.FloorCoordinate.Set(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y, item2.struct17_0.struct37_0.Z);
 				}
-				list_1.Add(class4);
+				list_1.Add(marker4);
 				float num9 = CoreCollector.LocalPlayer.FloorCoordinate.XYDistanceTo(item2.struct17_0.struct37_0.X, item2.struct17_0.struct37_0.Y);
-				if (CoreCollector.ItemCollector.iworldCoordinate_0 == null || CoreCollector.ItemCollector.double_0 > (double)num9) {
-					CoreCollector.ItemCollector.iworldCoordinate_0 = class4.FloorCoordinate;
-					CoreCollector.ItemCollector.double_0 = num9;
-					CoreCollector.ItemCollector.double_1 = CoreCollector.LocalPlayer.FloorCoordinate.ZDiffTo(class4.FloorCoordinate);
+				if (CoreCollector.ItemCollector.iworldCoordinate_0 == null || CoreCollector.ItemCollector.CentralXyDistanceToMe > (double)num9) {
+					CoreCollector.ItemCollector.iworldCoordinate_0 = marker4.FloorCoordinate;
+					CoreCollector.ItemCollector.CentralXyDistanceToMe = num9;
+					CoreCollector.ItemCollector.ZDistanceToMeAbsolute = CoreCollector.LocalPlayer.FloorCoordinate.ZDiffTo(marker4.FloorCoordinate);
 				}
 			}
 		}
@@ -307,15 +307,15 @@ internal class MarkerCollector
 				if (item3.StringListSno == 61539) {
 					SnoMonster monsterByStringId = SnoData.Monsters.GetMonsterByStringId(item3.StringLabelHandle);
 					if (monsterByStringId != null && monsterByStringId.SnoActor.Code.StartsWith("x1_lr_boss", ignoreCase: true, CultureInfo.InvariantCulture)) {
-						Marker class5 = class112_2.GetValueOrDefault(text3);
-						if (class5 == null) {
-							class5 = new Marker(text3, item3.WorldPlace.WorldId, null, monsterByStringId.SnoActor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
-							class112_2[text3] = class5;
+						Marker marker5 = class112_2.GetValueOrDefault(text3);
+						if (marker5 == null) {
+							marker5 = new Marker(text3, item3.WorldPlace.WorldId, null, monsterByStringId.SnoActor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
+							class112_2[text3] = marker5;
 						} else {
-							class5.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
+							marker5.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 						}
-						list_0.Add(class5);
-						if (iworldCoordinate_8 == null || class5.FloorCoordinate.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate) < iworldCoordinate_8.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate)) {
+						Markers.Add(marker5);
+						if (iworldCoordinate_8 == null || marker5.FloorCoordinate.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate) < iworldCoordinate_8.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate)) {
 							if (iworldCoordinate_8 == null) {
 								iworldCoordinate_8 = Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 							} else {
@@ -348,31 +348,31 @@ internal class MarkerCollector
 				}
 				ActorSnoEnum actorSno = (ActorSnoEnum)item3.ActorSno;
 				if (actorSno == ActorSnoEnum._poolofreflection || actorSno == ActorSnoEnum._healthwell_global || actorSno == ActorSnoEnum._a4_heaven_healthwell_global) {
-					Marker class6 = class112_4.GetValueOrDefault(text3);
-					if (class6 == null) {
+					Marker marker6 = class112_4.GetValueOrDefault(text3);
+					if (marker6 == null) {
 						SnoActor actor = SnoData.Actors.GetActor(actorSno);
-						class6 = new Marker(text3, item3.WorldPlace.WorldId, null, actor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex) {
+						marker6 = new Marker(text3, item3.WorldPlace.WorldId, null, actor, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex) {
 							IsPoolOfReflection = (actorSno == ActorSnoEnum._poolofreflection),
 							IsHealingWell = (actorSno == ActorSnoEnum._healthwell_global || actorSno == ActorSnoEnum._a4_heaven_healthwell_global)
 						};
-						class112_4[text3] = class6;
+						class112_4[text3] = marker6;
 					} else {
-						class6.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
-						class6.TextureSno = item3.ImageTextureFrame.TextureSno;
-						class6.TextureFrameIndex = item3.ImageTextureFrame.FrameIndex;
+						marker6.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
+						marker6.TextureSno = item3.ImageTextureFrame.TextureSno;
+						marker6.TextureFrameIndex = item3.ImageTextureFrame.FrameIndex;
 					}
-					class6.IsUsed = item3.ImageTextureFrame.TextureSno == 384218;
+					marker6.IsUsed = item3.ImageTextureFrame.TextureSno == 384218;
 				}
 				if (item3.ImageTextureFrame.TextureSno == 207630) {
-					Marker class7 = class112_2.GetValueOrDefault(text3);
-					if (class7 == null) {
-						class7 = new Marker(text3, item3.WorldPlace.WorldId, null, null, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
-						class112_2[text3] = class7;
+					Marker marker7 = class112_2.GetValueOrDefault(text3);
+					if (marker7 == null) {
+						marker7 = new Marker(text3, item3.WorldPlace.WorldId, null, null, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z), item3.ImageTextureFrame.TextureSno, item3.ImageTextureFrame.FrameIndex);
+						class112_2[text3] = marker7;
 					} else {
-						class7.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
+						marker7.FloorCoordinate.Set(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 					}
-					list_0.Add(class7);
-					if (iworldCoordinate_7 == null || class7.FloorCoordinate.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate) < iworldCoordinate_7.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate)) {
+					Markers.Add(marker7);
+					if (iworldCoordinate_7 == null || marker7.FloorCoordinate.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate) < iworldCoordinate_7.XYDistanceTo(CoreCollector.LocalPlayer.FloorCoordinate)) {
 						if (iworldCoordinate_7 == null) {
 							iworldCoordinate_7 = Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z);
 						} else {
@@ -395,27 +395,27 @@ internal class MarkerCollector
 				int num18 = 6;
 				array4[num18] = item3.WorldPlace.Z.ToString("F0", CultureInfo.InvariantCulture);
 				string gparam_ = string.Concat(array4);
-				Banner class8 = class112_0.GetValueOrDefault(gparam_);
-				if (class8 == null) {
-					class8 = new Banner(item3.AnnId, item3.WorldPlace.WorldId, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z));
-					class112_0[gparam_] = class8;
+				Banner banner = class112_0.GetValueOrDefault(gparam_);
+				if (banner == null) {
+					banner = new Banner(item3.AnnId, item3.WorldPlace.WorldId, Window.CreateWorldCoordinate(item3.WorldPlace.X, item3.WorldPlace.Y, item3.WorldPlace.Z));
+					class112_0[gparam_] = banner;
 				}
-				list_2.Add(class8);
+				Banners.Add(banner);
 			}
 		}
-		list_0.AddRange(class112_4.Values.Where((Marker Marker_0) => Marker_0.WorldId == CoreCollector.LocalPlayer.WorldId));
-		if (CoreCollector.UiElements.class341_85.Visible) {
-			long num19 = CoreCollector.UiElements.class341_85.long_0 + 3252;
+		Markers.AddRange(class112_4.Values.Where((Marker marker) => marker.WorldId == CoreCollector.LocalPlayer.WorldId));
+		if (CoreCollector.UiElements.MinimapUiElement.Visible) {
+			long num19 = CoreCollector.UiElements.MinimapUiElement.long_0 + 3252;
 			struct19_0 = GameWindowManager.ReadArray<r_MinimapIcon>(num19, struct19_0.Length);
 
-			int count = CoreCollector.ActorCollector.list_1.Count;
+			int count = CoreCollector.ActorCollector.AliveMonsters.Count;
 			for (int num20 = 0; num20 < struct19_0.Length; num20++) {
 				uint uint_ = struct19_0[num20].uint_0;
 				if (uint_ == uint.MaxValue) {
 					continue;
 				}
 				for (int num21 = 0; num21 < count; num21++) {
-					Monster monster = CoreCollector.ActorCollector.list_1[num21];
+					Monster monster = CoreCollector.ActorCollector.AliveMonsters[num21];
 					if (monster.AcdId == uint_) {
 						(monster as Monster).IsQuestMonster = true;
 						break;
@@ -433,9 +433,9 @@ internal class MarkerCollector
 
 	internal void method_1(bool bool_0)
 	{
-		list_0.Clear();
+		Markers.Clear();
 		list_1.Clear();
-		list_2.Clear();
+		Banners.Clear();
 		if (bool_0) {
 			class112_3.Clear();
 			class112_1.Clear();

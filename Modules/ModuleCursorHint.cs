@@ -42,8 +42,8 @@ internal class ModuleCursorHint : Module
 	{
 		bool bool_;
 		if ((bool_ = hint != null && (!CoreCollector.IsGameReady || CoreCollector.LocalPlayer.AnimationState == AcdAnimationState.Idle)) && location != null) {
-			string text = location;
-			if ((text == "tooltip-top-left" || text == "tooltip-bottom-right") && !CoreCollector.UiElements.class341_162.Visible) {
+			string location2 = location;
+			if ((location2 == "tooltip-top-left" || location2 == "tooltip-bottom-right") && !CoreCollector.UiElements.Tooltip2.Visible) {
 				bool_ = false;
 			}
 		}
@@ -62,15 +62,15 @@ internal class ModuleCursorHint : Module
 		float num4 = (float)Math.Max(0, Math.Min(GameWindowManager.Window.CursorX - num2, GameWindowManager.Window.Size.Width - num2)) + 0.5f;
 		float num5 = (float)Math.Max(0, Math.Min(Convert.ToInt32(GameWindowManager.Window.CursorY - num3), GameWindowManager.Window.Size.Height - num3)) + 0.5f;
 		if (location != null) {
-			string text = location;
-			if (!(text == "tooltip-top-left")) {
-				if (text == "tooltip-bottom-right") {
-					num4 = CoreCollector.UiElements.class341_162.rectangleF_0.Right;
-					num5 = CoreCollector.UiElements.class341_162.rectangleF_0.Bottom - (float)num3;
+			string location3 = location;
+			if (!(location3 == "tooltip-top-left")) {
+				if (location3 == "tooltip-bottom-right") {
+					num4 = CoreCollector.UiElements.Tooltip2.rectangle.Right;
+					num5 = CoreCollector.UiElements.Tooltip2.rectangle.Bottom - (float)num3;
 				}
 			} else {
-				num4 = CoreCollector.UiElements.class341_162.rectangleF_0.Left;
-				num5 = CoreCollector.UiElements.class341_162.rectangleF_0.Top - (float)num3;
+				num4 = CoreCollector.UiElements.Tooltip2.rectangle.Left;
+				num5 = CoreCollector.UiElements.Tooltip2.rectangle.Top - (float)num3;
 			}
 		}
 		backgroundBrush.DrawRectangle(num4, num5, num2, num3);

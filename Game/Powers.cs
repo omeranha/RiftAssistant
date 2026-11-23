@@ -8,11 +8,11 @@ using SNO;
 public sealed class Powers
 {
 	[CompilerGenerated]
-	private readonly byte[] byte_0;
+	private readonly byte[] formulaData;
 
 	private readonly Dictionary<uint, SnoPower> dictionary_0 = [];
 
-	private readonly Dictionary<string, SnoPower> dictionary_1 = [];
+	private readonly Dictionary<string, SnoPower> all = [];
 
 	private readonly Dictionary<ulong, (int, uint)>[] dictionary_2 =
 	[
@@ -43,11 +43,11 @@ public sealed class Powers
 		[CompilerGenerated]
 		get
 		{
-			return byte_0;
+			return formulaData;
 		}
 	}
 
-	public IEnumerable<SnoPower> All => dictionary_1.Values;
+	public IEnumerable<SnoPower> All => all.Values;
 
 	public SnoPower GetBySno(uint sno)
 	{
@@ -57,7 +57,7 @@ public sealed class Powers
 
 	public SnoPower GetByCode(string code)
 	{
-		dictionary_1.TryGetValue(code, out var value);
+		all.TryGetValue(code, out var value);
 		return value;
 	}
 
@@ -100,29 +100,29 @@ public sealed class Powers
 
 	internal Powers()
 	{
-		byte_0 = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "power_formula_data.bin"));
+		formulaData = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "power_formula_data.bin"));
 		using (MemoryStream stream_ = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_power_formulas.bin"))))
 		{
-			DataReader @class = new(stream_);
-			while (@class.Stream.Position < @class.Stream.Length)
+			DataReader dataReader = new(stream_);
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				@class.method_1();
-				int num = @class.method_11();
+				dataReader.method_1();
+				int num = dataReader.method_11();
 				float[] array = new float[num];
 				for (int i = 0; i < num; i++)
 				{
-					array[i] = @class.method_14();
+					array[i] = dataReader.method_14();
 				}
 				list_0.Add(array);
 			}
 		}
 		List<SnoPower> list = [];
-		using (DataReader class2 = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "powers.bin"))))
+		using (DataReader dataReader2 = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "powers.bin"))))
 		{
-			while (class2.Stream.Position < class2.Stream.Length)
+			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint num2 = class2.method_8();
-				string text = class2.method_1();
+				uint num2 = dataReader2.method_8();
+				string text = dataReader2.method_1();
 				string text2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._powers, text + "_name");
 				if (string.IsNullOrEmpty(text2))
 				{
@@ -133,7 +133,7 @@ public sealed class Powers
 				{
 				 text3 = null;
 				}
-				SnoPower class3 = Create(text, text2, text3, num2);
+				SnoPower snoPower = Create(text, text2, text3, num2);
 				for (int j = 0; j < 32; j++)
 				{
 					string text4 = text + "_" + j.ToString("D", CultureInfo.InvariantCulture);
@@ -143,84 +143,84 @@ public sealed class Powers
 						stringByCode = SnoData.smethod_2(stringByCode);
 						if (!string.IsNullOrEmpty(stringByCode))
 						{
-							class3.Icons[j].Exists = true;
-							class3.Icons[j].TitleLocalized = stringByCode;
-							class3.Icons[j].DescriptionLocalized = SnoData.smethod_2(SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4 + "_desc"));
+							snoPower.Icons[j].Exists = true;
+							snoPower.Icons[j].TitleLocalized = stringByCode;
+							snoPower.Icons[j].DescriptionLocalized = SnoData.smethod_2(SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4 + "_desc"));
 						}
 					}
 				}
 				bool flag = true;
 				for (int k = 0; k < 5; k++)
 				{
-					int num3 = class2.method_11();
+					int num3 = dataReader2.method_11();
 					for (int l = 0; l < num3; l++)
 					{
-						int num4 = class2.method_6();
-						uint num5 = class2.method_8();
+						int num4 = dataReader2.method_6();
+						uint num5 = dataReader2.method_8();
 						if (num4 != 4)
 						{
-							uint num6 = class2.method_8();
+							uint num6 = dataReader2.method_8();
 							if (flag)
 							{
 								dictionary_2[k].Add(((ulong)num2 << 32) + num5, (num4, num6));
 							}
 							if (num5 == 329472)
 							{
-								class3.NormalIconTextureId = num6;
+								snoPower.NormalIconTextureId = num6;
 							}
 							if (num5 >= 270592 && num5 <= 270641 && num6 != 0)
 							{
-								class3.Icons[GetNumberFromTag(num5)].TextureId = num6;
+								snoPower.Icons[GetNumberFromTag(num5)].TextureId = num6;
 							}
 							if (num5 >= 271616 && num5 <= 271665)
 							{
-								class3.Icons[GetNumberFromTag(num5)].IsHidden = num6 == 0;
+								snoPower.Icons[GetNumberFromTag(num5)].IsHidden = num6 == 0;
 							}
 							if (num5 >= 270848 && num5 <= 270897)
 							{
-								class3.Icons[GetNumberFromTag(num5)].Harmful = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].Harmful = num6 == 1;
 							}
 							if (num5 >= 271104 && num5 <= 271153)
 							{
-								class3.Icons[GetNumberFromTag(num5)].ShowDuration = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].ShowDuration = num6 == 1;
 							}
 							if (num5 >= 271360 && num5 <= 271409)
 							{
-								class3.Icons[GetNumberFromTag(num5)].UserCanCancel = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].UserCanCancel = num6 == 1;
 							}
 							if (num5 >= 271872 && num5 <= 271921)
 							{
-								class3.Icons[GetNumberFromTag(num5)].MergesTooltip = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].MergesTooltip = num6 == 1;
 							}
 							if (num5 >= 272128 && num5 <= 272177)
 							{
-								class3.Icons[GetNumberFromTag(num5)].MergesTooltipIndex = num6;
+								snoPower.Icons[GetNumberFromTag(num5)].MergesTooltipIndex = num6;
 							}
 							if (num5 >= 272640 && num5 <= 272671)
 							{
-								class3.Icons[GetNumberFromTag(num5)].ShowActiveOnSkillButton = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].ShowActiveOnSkillButton = num6 == 1;
 							}
 							if (num5 >= 274432 && num5 <= 274463)
 							{
-								class3.Icons[GetNumberFromTag(num5)].ShowInBuffHolder = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].ShowInBuffHolder = num6 == 1;
 							}
 							if (num5 >= 274688 && num5 <= 274719)
 							{
-								class3.Icons[GetNumberFromTag(num5)].ShowDurationOnSkillButton = num6 == 1;
+								snoPower.Icons[GetNumberFromTag(num5)].ShowDurationOnSkillButton = num6 == 1;
 							}
-							if (num5 >= 721264 && num5 <= 721269 && class3.ElementalDamageTypesByRune != null)
+							if (num5 >= 721264 && num5 <= 721269 && snoPower.ElementalDamageTypesByRune != null)
 							{
-								class3.ElementalDamageTypesByRune[num5 - 721264] = (int)num6;
+								snoPower.ElementalDamageTypesByRune[num5 - 721264] = (int)num6;
 							}
 							if (num5 == 327764)
 							{
-								class3.sno = num6;
-								list.Add(class3);
+								snoPower.sno = num6;
+								list.Add(snoPower);
 							}
 						}
 						else
 						{
-							int value = class2.method_11();
+							int value = dataReader2.method_11();
 							if (flag)
 							{
 								dictionary_3[k].Add(((ulong)num2 << 32) + num5, value);
@@ -303,7 +303,7 @@ public sealed class Powers
 
 		var power = new SnoPower(snoId, code, name, category, localizedDesc, englishDesc);
 		dictionary_0[snoId] = power;
-		dictionary_1[code] = power;
+		all[code] = power;
 
 		var runeLetters = new[] { "A", "B", "C", "D", "E" };
 		var localizedRunes = new string[5];

@@ -19,7 +19,7 @@ public class Skill
 	public SnoPower CurrentSnoPower
 	{
 		get {
-			if (player.bool_13 && this != player.Powers.HealthPotionSkill) {
+			if (player.SkillOverrideActive && this != player.Powers.HealthPotionSkill) {
 				return OverrideSnoPower;
 			}
 			return SnoPower;

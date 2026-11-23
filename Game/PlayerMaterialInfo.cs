@@ -53,8 +53,8 @@ public class PlayerMaterialInfo
 		}
 	}
 
-	public PlayerMaterialInfo(Player class310_1)
+	public PlayerMaterialInfo(Player player)
 	{
-		Class310_0 = class310_1;
+		Class310_0 = player;
 	}
 }

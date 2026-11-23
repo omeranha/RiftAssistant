@@ -53,7 +53,7 @@ internal class Overlay
 
 	public float float_2;
 
-	public float float_3;
+	public float MinimapScale;
 
 	public float float_4;
 
@@ -61,9 +61,9 @@ internal class Overlay
 
 	public float float_6;
 
-	public float float_7;
+	public float MinimapOffsetX;
 
-	public float float_8;
+	public float MinimapOffsetY;
 
 	public EventHandler PaintTop_BeforeClip;
 
@@ -161,8 +161,8 @@ internal class Overlay
 		renderTarget.Transform = transform;
 		try {
 			PaintWorld_Map?.Invoke(this, EventArgs.Empty);
-		} catch (Exception exception_2) {
-			Logger.LogException(exception_2.Message);
+		} catch (Exception exception) {
+			Logger.LogException(exception.Message);
 		}
 		if (mapMode_0 == MapMode.Minimap) {
 			if (Core.Controller.SceneReveal.MinimapClip) {
@@ -184,8 +184,8 @@ internal class Overlay
 
 	public void method_4(float float_9, float statusY0, bool bool_0, out float statusY1, out float statusY2)
 	{
-		statusY1 = (float_7 + CoreCollector.LocalPlayer.FloorCoordinate.X - float_9) * float_2 / 350f;
-		statusY2 = (0f - (float_8 + CoreCollector.LocalPlayer.FloorCoordinate.Y - statusY0)) * float_2 / 350f;
+		statusY1 = (MinimapOffsetX + CoreCollector.LocalPlayer.FloorCoordinate.X - float_9) * float_2 / 350f;
+		statusY2 = (0f - (MinimapOffsetY + CoreCollector.LocalPlayer.FloorCoordinate.Y - statusY0)) * float_2 / 350f;
 		if (bool_0) {
 			float num = statusY1 * matrix3x2_0.M11 + statusY2 * matrix3x2_0.M21 + matrix3x2_0.M31;
 			float num2 = statusY1 * matrix3x2_0.M12 + statusY2 * matrix3x2_0.M22 + matrix3x2_0.M32;
@@ -242,20 +242,20 @@ internal class Overlay
 		layer_0 = null;
 	}
 
-	public void method_9(params UiElement[] class341_0)
+	public void method_9(params UiElement[] inventoryMainUiElement)
 	{
 		if (CoreCollector.D3Memory.IsUiHidden) {
 			return;
 		}
 		for (int i = 0; i < list_0.Count; i++) {
-			UiElement @class = list_0[i];
-			if (@class == null || !@class.Visible) {
+			UiElement uiElement = list_0[i];
+			if (uiElement == null || !uiElement.Visible) {
 				continue;
 			}
-			if (class341_0 != null) {
+			if (inventoryMainUiElement != null) {
 				bool flag = false;
-				for (int j = 0; j < class341_0.Length; j++) {
-					if (class341_0[j] == @class) {
+				for (int j = 0; j < inventoryMainUiElement.Length; j++) {
+					if (inventoryMainUiElement[j] == uiElement) {
 						flag = true;
 						break;
 					}
@@ -264,28 +264,28 @@ internal class Overlay
 					continue;
 				}
 			}
-			float height = @class.rectangleF_0.Height;
-			if (@class == CoreCollector.UiElements.class341_11 || @class == CoreCollector.UiElements.class341_9 || @class == CoreCollector.UiElements.class341_15 || @class == CoreCollector.UiElements.class341_47 || @class == CoreCollector.UiElements.class341_46) {
-				height = CoreCollector.UiElements.class341_64.rectangleF_0.Top;
+			float height = uiElement.rectangle.Height;
+			if (uiElement == CoreCollector.UiElements.InventoryMainUiElement || uiElement == CoreCollector.UiElements.StashMainUiElement || uiElement == CoreCollector.UiElements.FollowerMainUiElement || uiElement == CoreCollector.UiElements.ShopDialogMainPagePanel || uiElement == CoreCollector.UiElements.VendorDialogMainPagePanel) {
+				height = CoreCollector.UiElements.InGameBottomHudUiElement.rectangle.Top;
 			}
-			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(@class.rectangleF_0.Left, @class.rectangleF_0.Top, @class.rectangleF_0.Width, height), AntialiasMode.PerPrimitive);
+			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(uiElement.rectangle.Left, uiElement.rectangle.Top, uiElement.rectangle.Width, height), AntialiasMode.PerPrimitive);
 			renderTarget.Clear(SharpDX.Color.Transparent);
 			renderTarget.PopAxisAlignedClip();
 		}
 	}
 
-	public SharpDX.Direct2D1.Bitmap method_10(System.Drawing.Bitmap bitmap_0, bool bool_0 = false)
+	public SharpDX.Direct2D1.Bitmap method_10(System.Drawing.Bitmap bitmap, bool bool_0 = false)
 	{
 		if (bool_0) {
-			bitmap_0.MakeTransparent(System.Drawing.Color.Black);
+			bitmap.MakeTransparent(System.Drawing.Color.Black);
 		}
-		BitmapData bitmapData = bitmap_0.LockBits(new System.Drawing.Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+		BitmapData bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
 		using DataStream dataStream = new DataStream(bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, canRead: true, canWrite: false);
 		BitmapProperties bitmapProperties = new BitmapProperties {
 			PixelFormat = new SharpDX.Direct2D1.PixelFormat(Format.B8G8R8A8_UNorm, SharpDX.Direct2D1.AlphaMode.Premultiplied)
 		};
-		SharpDX.Direct2D1.Bitmap result = new SharpDX.Direct2D1.Bitmap(renderTarget, new Size2(bitmap_0.Width, bitmap_0.Height), dataStream, bitmapData.Stride, bitmapProperties);
-		bitmap_0.UnlockBits(bitmapData);
+		SharpDX.Direct2D1.Bitmap result = new SharpDX.Direct2D1.Bitmap(renderTarget, new Size2(bitmap.Width, bitmap.Height), dataStream, bitmapData.Stride, bitmapProperties);
+		bitmap.UnlockBits(bitmapData);
 		return result;
 	}
 
@@ -336,60 +336,60 @@ internal class Overlay
 
 	private void method_12()
 	{
-		list_0.Add(CoreCollector.UiElements.class341_11);
-		list_0.Add(CoreCollector.UiElements.class341_12);
-		list_0.Add(CoreCollector.UiElements.class341_14);
-		list_0.Add(CoreCollector.UiElements.class341_9);
-		list_0.Add(CoreCollector.UiElements.class341_17);
-		list_0.Add(CoreCollector.UiElements.class341_18);
-		list_0.Add(CoreCollector.UiElements.class341_46);
-		list_0.Add(CoreCollector.UiElements.class341_47);
-		list_0.Add(CoreCollector.UiElements.class341_68);
-		list_0.Add(CoreCollector.UiElements.class341_73);
-		list_0.Add(CoreCollector.UiElements.class341_52);
-		list_0.Add(CoreCollector.UiElements.class341_54);
-		list_0.Add(CoreCollector.UiElements.class341_53);
-		list_0.Add(CoreCollector.UiElements.class341_56);
-		list_0.Add(CoreCollector.UiElements.class341_75);
-		list_0.Add(CoreCollector.UiElements.class341_76);
-		list_0.Add(CoreCollector.UiElements.class341_164);
-		list_0.Add(CoreCollector.UiElements.class341_6);
-		list_0.Add(CoreCollector.UiElements.class341_15);
-		list_0.Add(CoreCollector.UiElements.class341_16);
-		list_0.Add(CoreCollector.UiElements.class341_84);
-		list_0.Add(CoreCollector.UiElements.class341_86);
-		list_0.Add(CoreCollector.UiElements.class341_88);
-		list_0.Add(CoreCollector.UiElements.class341_87);
-		list_0.Add(CoreCollector.UiElements.class341_148);
-		list_0.Add(CoreCollector.UiElements.class341_57);
-		list_0.Add(CoreCollector.UiElements.class341_71);
-		list_0.Add(CoreCollector.UiElements.class341_151);
-		list_0.Add(CoreCollector.UiElements.class341_150);
-		list_0.Add(CoreCollector.UiElements.class341_149);
-		list_0.Add(CoreCollector.UiElements.class341_156);
-		list_0.Add(CoreCollector.UiElements.class341_77);
-		list_0.Add(CoreCollector.UiElements.class341_78);
-		list_0.Add(CoreCollector.UiElements.class341_79);
-		list_0.Add(CoreCollector.UiElements.class341_89);
-		list_0.Add(CoreCollector.UiElements.class341_80);
-		list_0.Add(CoreCollector.UiElements.class341_81);
-		list_0.Add(CoreCollector.UiElements.class341_83);
-		list_0.Add(CoreCollector.UiElements.class341_159);
-		list_0.Add(CoreCollector.UiElements.class341_158);
-		list_0.Add(CoreCollector.UiElements.class341_160);
-		list_0.Add(CoreCollector.UiElements.class341_161);
-		list_0.Add(CoreCollector.UiElements.class341_55);
-		list_0.Add(CoreCollector.UiElements.class341_162);
-		list_0.Add(CoreCollector.UiElements.class341_163);
-		list_0.Add(CoreCollector.UiElements.class341_165);
-		list_0.Add(CoreCollector.UiElements.class341_166);
-		list_0.Add(CoreCollector.UiElements.class341_139);
-		list_0.Add(CoreCollector.UiElements.class341_167);
-		list_0.Add(CoreCollector.UiElements.class341_170);
-		list_0.Add(CoreCollector.UiElements.class341_168);
-		list_0.Add(CoreCollector.UiElements.class341_169);
-		list_0.Add(CoreCollector.UiElements.class341_171);
-		list_0.Add(CoreCollector.UiElements.class341_178);
+		list_0.Add(CoreCollector.UiElements.InventoryMainUiElement);
+		list_0.Add(CoreCollector.UiElements.InventorySidePaneContainer);
+		list_0.Add(CoreCollector.UiElements.CharacterDetailsContainer);
+		list_0.Add(CoreCollector.UiElements.StashMainUiElement);
+		list_0.Add(CoreCollector.UiElements.EquipmentManagerMainPage);
+		list_0.Add(CoreCollector.UiElements.Details);
+		list_0.Add(CoreCollector.UiElements.VendorDialogMainPagePanel);
+		list_0.Add(CoreCollector.UiElements.ShopDialogMainPagePanel);
+		list_0.Add(CoreCollector.UiElements.Item2Stack);
+		list_0.Add(CoreCollector.UiElements.Item3Stack);
+		list_0.Add(CoreCollector.UiElements.SkillsList);
+		list_0.Add(CoreCollector.UiElements.ActiveSkillSelect);
+		list_0.Add(CoreCollector.UiElements.PassiveSkillSelect);
+		list_0.Add(CoreCollector.UiElements.GamemenuBkgrnd);
+		list_0.Add(CoreCollector.UiElements.FriendsListContent);
+		list_0.Add(CoreCollector.UiElements.GroupsListContent);
+		list_0.Add(CoreCollector.UiElements.RiftDialogMainPage);
+		list_0.Add(CoreCollector.UiElements.BattleNetGameSettingsMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.FollowerMainUiElement);
+		list_0.Add(CoreCollector.UiElements.InspectMainPage);
+		list_0.Add(CoreCollector.UiElements.MapDialogMainPage);
+		list_0.Add(CoreCollector.UiElements.WorldMapUiElement);
+		list_0.Add(CoreCollector.UiElements.ActMapUiElement);
+		list_0.Add(CoreCollector.UiElements.Instructions);
+		list_0.Add(CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.ConversationDialogMain);
+		list_0.Add(CoreCollector.UiElements.Item1Stack);
+		list_0.Add(CoreCollector.UiElements.TradeDialogMainPage);
+		list_0.Add(CoreCollector.UiElements.InGamePortraitTooltip2);
+		list_0.Add(CoreCollector.UiElements.PlayerContextMenu);
+		list_0.Add(CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.BattleNetLeaderboardMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.BattleNetSeasonJourneyMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.BattleNetStoreMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.FrameBackground);
+		list_0.Add(CoreCollector.UiElements.DialogSendRealIdRequest);
+		list_0.Add(CoreCollector.UiElements.Banner2);
+		list_0.Add(CoreCollector.UiElements.Skill2Stack);
+		list_0.Add(CoreCollector.UiElements.BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer);
+		list_0.Add(CoreCollector.UiElements.InGamePetContextMenu);
+		list_0.Add(CoreCollector.UiElements.ParagonPointSelect);
+		list_0.Add(CoreCollector.UiElements.Tooltip2);
+		list_0.Add(CoreCollector.UiElements.HirelingDetailsContainer);
+		list_0.Add(CoreCollector.UiElements.QuestloreDialogPanel);
+		list_0.Add(CoreCollector.UiElements.RactorTag0);
+		list_0.Add(CoreCollector.UiElements.Subdlg);
+		list_0.Add(CoreCollector.UiElements.InviteToPartyNotification);
+		list_0.Add(CoreCollector.UiElements.JoinRequestNotification);
+		list_0.Add(CoreCollector.UiElements.LorePlayerDlgBackground);
+		list_0.Add(CoreCollector.UiElements.LoreNotifyDlg);
+		list_0.Add(CoreCollector.UiElements.LeaveGameWindow);
+		list_0.Add(CoreCollector.UiElements.GuildMainLayoutRootOverlayContainer);
 	}
 
 	internal void RecreateSharedFonts()
@@ -425,8 +425,8 @@ internal class Overlay
 		class212_0 = new ModulePortraitPlayerStats(settings);
 		class206_0 = new ModulePortraits();
 
-		var @class3 = settings.Overlay.StatTracker;
-		ModuleStatTracker = new ModuleStatTracker(@class3);
+		var statTracker = settings.Overlay.StatTracker;
+		ModuleStatTracker = new ModuleStatTracker(statTracker);
 
 		class209_0 = new ModuleLobbyHeroes(settings);
 	}
@@ -442,30 +442,30 @@ internal class Overlay
 			return false;
 		}
 		try {
-			mapMode_0 = (CoreCollector.UiElements.class341_84.Visible ? MapMode.Map : (CoreCollector.UiElements.class341_86.Visible ? (CoreCollector.UiElements.class341_88.Visible ? MapMode.ActMap : MapMode.WaypointMap) : MapMode.Minimap));
-			float_3 = (float)GameWindowManager.Window.Size.Height / 1200f;
+			mapMode_0 = (CoreCollector.UiElements.MapDialogMainPage.Visible ? MapMode.Map : (CoreCollector.UiElements.WorldMapUiElement.Visible ? (CoreCollector.UiElements.ActMapUiElement.Visible ? MapMode.ActMap : MapMode.WaypointMap) : MapMode.Minimap));
+			MinimapScale = (float)GameWindowManager.Window.Size.Height / 1200f;
 			if (mapMode_0 == MapMode.PermaMap) {
-				float_3 *= 0.5f;
+				MinimapScale *= 0.5f;
 			}
-			float_2 = 350f * float_3;
+			float_2 = 350f * MinimapScale;
 			switch (mapMode_0) {
 				case MapMode.Minimap:
-					float_5 = (float)(GameWindowManager.Window.Size.Width - 1) - 27f * float_3 - float_2 / 2f;
-					float_6 = 54f * float_3 + float_2 / 2f;
-					float_7 = 0f;
-					float_8 = 0f;
+					float_5 = (float)(GameWindowManager.Window.Size.Width - 1) - 27f * MinimapScale - float_2 / 2f;
+					float_6 = 54f * MinimapScale + float_2 / 2f;
+					MinimapOffsetX = 0f;
+					MinimapOffsetY = 0f;
 					break;
 				case MapMode.Map:
 					float_5 = GameWindowManager.Window.Size.Width / 2;
 					float_6 = GameWindowManager.Window.Size.Height / 2;
-					float_7 = CoreCollector.UiElements.class341_126.MinimapOffsetX;
-					float_8 = CoreCollector.UiElements.class341_126.MinimapOffsetY;
+					MinimapOffsetX = CoreCollector.UiElements.Localmap.MinimapOffsetX;
+					MinimapOffsetY = CoreCollector.UiElements.Localmap.MinimapOffsetY;
 					break;
 				case MapMode.PermaMap:
 					float_5 = GameWindowManager.Window.Size.Width / 2;
 					float_6 = (float)GameWindowManager.Window.Size.Height * 0.47f;
-					float_7 = 0f;
-					float_8 = 0f;
+					MinimapOffsetX = 0f;
+					MinimapOffsetY = 0f;
 					break;
 			}
 			float_4 = float_2 / 2f;
@@ -475,13 +475,13 @@ internal class Overlay
 			class208_0.SetHint(null, null);
 			BeforeRender?.Invoke(this, EventArgs.Empty);
 			if (Core.Controller.Render.IsRenderEnabled) {
-				bool flag4 = CoreCollector.UiElements.class341_62.Visible || CoreCollector.UiElements.class341_63.Visible;
+				bool flag4 = CoreCollector.UiElements.Cutscene.Visible || CoreCollector.UiElements.ScriptedSequence.Visible;
 				bool flag5 = Core.Controller.Game.Me.SnoArea != null && Core.Controller.Game.Me.SnoArea.Type != AreaType.Normal;
 				bool boolean_ = CoreCollector.D3Memory.GameState_Value_IsChallengeRiftGame;
 				bool num = CoreCollector.IsGameReady && CoreCollector.LocalPlayer.FloorCoordinate.IsValid;
-				bool flag6 = CoreCollector.UiElements.class341_56.Visible || CoreCollector.UiElements.class341_89.Visible || CoreCollector.UiElements.class341_156.Visible || CoreCollector.UiElements.class341_77.Visible;
+				bool flag6 = CoreCollector.UiElements.GamemenuBkgrnd.Visible || CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible;
 				if (num && !flag4 && !flag5 && !flag6) {
-					if (!CoreCollector.UiElements.class341_11.Visible && !boolean_) {
+					if (!CoreCollector.UiElements.InventoryMainUiElement.Visible && !boolean_) {
 						method_7();
 						method_3();
 						method_8();
@@ -493,10 +493,10 @@ internal class Overlay
 					class206_0.method_1();
 					class213_0.Draw(CoreCollector.LocalPlayer);
 					PaintTop_BeforeClip?.Invoke(this, EventArgs.Empty);
-					method_9(CoreCollector.UiElements.class341_84);
-					if ((CoreCollector.UiElements.class341_11.Visible || CoreCollector.UiElements.class341_15.Visible) && !CoreCollector.UiElements.class341_56.Visible && !CoreCollector.UiElements.class341_156.Visible && !CoreCollector.UiElements.class341_77.Visible && !CoreCollector.UiElements.class341_84.Visible && !CoreCollector.UiElements.class341_148.Visible && !CoreCollector.D3Memory.IsUiHidden && CoreCollector.LocalPlayer != null) {
+					method_9(CoreCollector.UiElements.MapDialogMainPage);
+					if ((CoreCollector.UiElements.InventoryMainUiElement.Visible || CoreCollector.UiElements.FollowerMainUiElement.Visible) && !CoreCollector.UiElements.GamemenuBkgrnd.Visible && !CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.MapDialogMainPage.Visible && !CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer.Visible && !CoreCollector.D3Memory.IsUiHidden && CoreCollector.LocalPlayer != null) {
 						PaintTop_Inventory?.Invoke(this, EventArgs.Empty);
-						method_9(CoreCollector.UiElements.class341_11, CoreCollector.UiElements.class341_9, CoreCollector.UiElements.class341_46, CoreCollector.UiElements.class341_15);
+						method_9(CoreCollector.UiElements.InventoryMainUiElement, CoreCollector.UiElements.StashMainUiElement, CoreCollector.UiElements.VendorDialogMainPagePanel, CoreCollector.UiElements.FollowerMainUiElement);
 					}
 					PaintTop_AfterClip?.Invoke(this, EventArgs.Empty);
 				}
@@ -523,8 +523,8 @@ internal class Overlay
 		} catch (SharpDXException exception_) {
 			Logger.LogException(exception_.Message);
 			form_0_SizeChanged(null, EventArgs.Empty);
-		} catch (Exception exception_2) {
-			Logger.LogException(exception_2.Message);
+		} catch (Exception exception) {
+			Logger.LogException(exception.Message);
 		}
 		return true;
 	}

@@ -54,10 +54,10 @@ internal static class TextureManager
 		return GetTextureById(smethod_0(textureName, bool_0: false));
 	}
 
-	public static uint smethod_0(string string_0, bool bool_0)
+	public static uint smethod_0(string textureName, bool bool_0)
 	{
 		uint num = 0u;
-		byte[] bytes = Encoding.ASCII.GetBytes(bool_0 ? string_0.ToLower() : string_0);
+		byte[] bytes = Encoding.ASCII.GetBytes(bool_0 ? textureName.ToLower() : textureName);
 		foreach (byte b in bytes) {
 			num = num * 33 + b;
 		}
@@ -72,31 +72,31 @@ internal static class TextureManager
 
 		switch (textureId) {
 			case 2078949389u: {
-					Bitmap bitmap_0 = AppResources.BuffFrame;
-					Texture class2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(bitmap_0, bool_0: true)), 0, 0, bitmap_0.Width, bitmap_0.Height);
-					textureIdToTexture[textureId] = class2;
-					return class2;
+					Bitmap buffFrame = AppResources.BuffFrame;
+					Texture texture = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
+					textureIdToTexture[textureId] = texture;
+					return texture;
 				}
 			case 948845718u: {
-					Bitmap bitmap_2 = AppResources.DebuffFrame;
-					Texture class4 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(bitmap_2, bool_0: true)), 0, 0, bitmap_2.Width, bitmap_2.Height);
-					textureIdToTexture[textureId] = class4;
-					return class4;
+					Bitmap debuffFrame = AppResources.DebuffFrame;
+					Texture texture2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.method_10(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
+					textureIdToTexture[textureId] = texture2;
+					return texture2;
 				}
 			default: {
-					TextureIndexEntry? nullable_0 = SnoData.GetTextureIndexEntry(textureId);
-					if (!nullable_0.HasValue) {
+					TextureIndexEntry? textureIndexEntry = SnoData.GetTextureIndexEntry(textureId);
+					if (!textureIndexEntry.HasValue) {
 						textureIdToTexture[textureId] = null;
 						return null;
 					}
 					atlasTex = new Texture(new Lazy<SharpDX.Direct2D1.Bitmap>(delegate {
-						if (!atlasPositionToBitmap.TryGetValue(nullable_0.Value.AtlasPosition, out SharpDX.Direct2D1.Bitmap bitmap) || bitmap == null) {
-							Bitmap bitmap_3 = (Bitmap)Image.FromStream(new MemoryStream(ResourceData.ReadBlob(nullable_0.Value.AtlasPosition)));
-							bitmap = Overlay.Instance.method_10(bitmap_3);
-							atlasPositionToBitmap[nullable_0.Value.AtlasPosition] = bitmap;
+						if (!atlasPositionToBitmap.TryGetValue(textureIndexEntry.Value.AtlasPosition, out SharpDX.Direct2D1.Bitmap bitmap) || bitmap == null) {
+							Bitmap bitmap2 = (Bitmap)Image.FromStream(new MemoryStream(ResourceData.ReadBlob(textureIndexEntry.Value.AtlasPosition)));
+							bitmap = Overlay.Instance.method_10(bitmap2);
+							atlasPositionToBitmap[textureIndexEntry.Value.AtlasPosition] = bitmap;
 						}
 						return bitmap;
-					}), nullable_0.Value.X, nullable_0.Value.Y, nullable_0.Value.W, nullable_0.Value.H);
+					}), textureIndexEntry.Value.X, textureIndexEntry.Value.Y, textureIndexEntry.Value.W, textureIndexEntry.Value.H);
 					textureIdToTexture[textureId] = atlasTex;
 					return atlasTex;
 				}

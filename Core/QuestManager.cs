@@ -12,14 +12,14 @@ internal class QuestManager
 
 	private readonly Dictionary<uint, Quest> class112_0 = new Dictionary<uint, Quest>();
 
-	public readonly Dictionary<uint, Quest> class112_1 = new Dictionary<uint, Quest>();
+	public readonly Dictionary<uint, Quest> Quests = new Dictionary<uint, Quest>();
 
-	public readonly Dictionary<uint, Quest> class112_2 = new Dictionary<uint, Quest>();
+	public readonly Dictionary<uint, Quest> Bounties = new Dictionary<uint, Quest>();
 
 	internal void method_0()
 	{
-		class112_1.Clear();
-		class112_2.Clear();
+		Quests.Clear();
+		Bounties.Clear();
 		class351_0.Snapshot(CoreCollector.D3Memory.QuestManagerAddress);
 		int totalElementCount = class351_0.GetTotalElementCount();
 		if (totalElementCount <= 0) {
@@ -43,14 +43,14 @@ internal class QuestManager
 
 	internal void method_1()
 	{
-		class112_1.Clear();
-		class112_2.Clear();
+		Quests.Clear();
+		Bounties.Clear();
 		class112_0.Clear();
 	}
 
-	private void method_2(ref r_Quest struct20_1)
+	private void method_2(ref r_Quest quest2)
 	{
-		uint uint_ = struct20_1.uint_0;
+		uint uint_ = quest2.uint_0;
 		if (uint_ == uint.MaxValue) {
 			return;
 		}
@@ -59,42 +59,42 @@ internal class QuestManager
 			return;
 		}
 		try {
-			Quest @class = class112_0.GetValueOrDefault(uint_);
-			if (@class == null) {
-				@class = new Quest(quest);
-				class112_0[uint_] = @class;
+			Quest quest3 = class112_0.GetValueOrDefault(uint_);
+			if (quest3 == null) {
+				quest3 = new Quest(quest);
+				class112_0[uint_] = quest3;
 			}
-			@class.CreatedOn = struct20_1.int_0;
-			@class.QuestStepId = struct20_1.uint_4;
-			@class.QuestStep = quest.GetStep(struct20_1.uint_4);
-			@class.State = (QuestState)struct20_1.int_1;
-			@class.Progress = struct20_1.float_0;
-			@class.Counter = struct20_1.int_2;
-			switch (@class.State) {
+			quest3.CreatedOn = quest2.int_0;
+			quest3.QuestStepId = quest2.uint_4;
+			quest3.QuestStep = quest.GetStep(quest2.uint_4);
+			quest3.State = (QuestState)quest2.int_1;
+			quest3.Progress = quest2.float_0;
+			quest3.Counter = quest2.int_2;
+			switch (quest3.State) {
 				case QuestState.none:
-					@class.CompletedOn.Reset();
-					@class.StartedOn.Reset();
+					quest3.CompletedOn.Reset();
+					quest3.StartedOn.Reset();
 					break;
 				case QuestState.started:
-					@class.CompletedOn.Reset();
-					@class.StartedOn.Start();
+					quest3.CompletedOn.Reset();
+					quest3.StartedOn.Start();
 					break;
 				case QuestState.completed:
-					@class.CompletedOn.Start();
+					quest3.CompletedOn.Start();
 					break;
 			}
-			class112_1[uint_] = @class;
+			Quests[uint_] = quest3;
 			if (quest.Type == QuestType.Bounty) {
-				class112_2[uint_] = @class;
+				Bounties[uint_] = quest3;
 			}
 		} catch (Exception) {
 		}
 	}
 
-	public uint method_3(QuestState questState_0, uint uint_0)
+	public uint method_3(QuestState questState, uint uint_0)
 	{
-		Quest quest = class112_1.GetValueOrDefault(uint_0);
-		if (quest?.QuestStep != null && quest.State == questState_0) {
+		Quest quest = Quests.GetValueOrDefault(uint_0);
+		if (quest?.QuestStep != null && quest.State == questState) {
 			return quest.QuestStepId;
 		}
 		return uint.MaxValue;

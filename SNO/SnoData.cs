@@ -77,15 +77,15 @@ public static class SnoData
 
 	private static void smethod_0()
 	{
-		using DataReader @class = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "resource_index.bin")));
-		while (@class.Stream.Position < @class.Stream.Length) {
-			ulong key = @class.method_10();
-			uint num = @class.method_8();
-			int num2 = @class.method_11();
-			int x = @class.method_11();
-			int y = @class.method_11();
-			int w = @class.method_11();
-			int h = @class.method_11();
+		using DataReader dataReader = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "resource_index.bin")));
+		while (dataReader.Stream.Position < dataReader.Stream.Length) {
+			ulong key = dataReader.method_10();
+			uint num = dataReader.method_8();
+			int num2 = dataReader.method_11();
+			int x = dataReader.method_11();
+			int y = dataReader.method_11();
+			int w = dataReader.method_11();
+			int h = dataReader.method_11();
 			TextureIndexEntry value = new() {
 				Id = num,
 				AtlasPosition = num2,
@@ -101,10 +101,10 @@ public static class SnoData
 
 	private static void smethod_1()
 	{
-		using DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "tagmap_powers.bin")));
-		while (@class.Stream.Position < @class.Stream.Length) {
-			uint num = @class.method_8();
-			string text = @class.method_1();
+		using DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "tagmap_powers.bin")));
+		while (dataReader.Stream.Position < dataReader.Stream.Length) {
+			uint num = dataReader.method_8();
+			string text = dataReader.method_1();
 			if (GeneralTagMapEntries.TryAdd(num, text)) {
 				if (text.StartsWith("TAG_POWER_SCRIPT_FORMULA_")) {
 					int num2 = int.Parse(text.Replace("TAG_POWER_SCRIPT_FORMULA_", ""));
@@ -114,9 +114,9 @@ public static class SnoData
 		}
 	}
 
-	internal static string smethod_2(string string_0, string string_1 = "<br>")
+	internal static string smethod_2(string stringByCode, string string_1 = "<br>")
 	{
-		return string_0?.Replace("\n", string_1);
+		return stringByCode?.Replace("\n", string_1);
 	}
 
 	internal static string smethod_3(string string_0, string string_1, string string_2)

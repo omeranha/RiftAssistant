@@ -48,9 +48,9 @@ internal class RunTracker
 		RunStatTracker = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), true, "RUN", (string)null);
 		IsHardcore = CoreCollector.LocalPlayer.HeroIsHardcore;
 		HeroId = CoreCollector.LocalPlayer.HeroId;
-		PlayerValue = ((CoreCollector.LocalPlayer as Player).Boolean_1 ? (CoreCollector.LocalPlayer as Player).Int32_0 : 0);
+		PlayerValue = ((CoreCollector.LocalPlayer as Player).Seasonal ? (CoreCollector.LocalPlayer as Player).Season : 0);
 		HeroClass = CoreCollector.LocalPlayer.HeroClassDefinition.HeroClass;
-		GameDifficulty = CoreCollector.gameDifficulty_0;
+		GameDifficulty = CoreCollector.Unknown;
 		IsChallengeRift = CoreCollector.D3Memory.GameState_Value_IsChallengeRiftGame;
 		UpdateCurrentArea(initialArea);
 	}
@@ -61,17 +61,17 @@ internal class RunTracker
 			CurrentArea.AreaStats.Stop();
 			CurrentArea.RecordExitStats();
 		}
-		AreaTracker @class = null;
+		AreaTracker areaTracker = null;
 		for (int i = 0; i < VisitedAreas.Count; i++) {
 			if (VisitedAreas[i].SnoArea.NameLocalized == isnoArea_0.NameLocalized) {
-				@class = VisitedAreas[i];
+				areaTracker = VisitedAreas[i];
 				break;
 			}
 		}
-		if (@class == null) {
-			@class = new AreaTracker(this, isnoArea_0, isnoArea_0.NameLocalized, isnoArea_0.Sno.ToString("D", CultureInfo.InvariantCulture));
-			VisitedAreas.Add(@class);
+		if (areaTracker == null) {
+			areaTracker = new AreaTracker(this, isnoArea_0, isnoArea_0.NameLocalized, isnoArea_0.Sno.ToString("D", CultureInfo.InvariantCulture));
+			VisitedAreas.Add(areaTracker);
 		}
-		CurrentArea = @class;
+		CurrentArea = areaTracker;
 	}
 }

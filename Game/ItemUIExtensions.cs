@@ -8,34 +8,34 @@ internal static class ItemUIExtensions
 		return item.Location switch
 		{
 			ItemLocation.Inventory => item.GetInventoryRectangle(), 
-			ItemLocation.Head => CoreCollector.UiElements.class341_19.rectangleF_0, 
-			ItemLocation.Torso => CoreCollector.UiElements.class341_24.rectangleF_0, 
-			ItemLocation.RightHand => CoreCollector.UiElements.class341_31.rectangleF_0, 
-			ItemLocation.LeftHand => CoreCollector.UiElements.class341_30.rectangleF_0, 
-			ItemLocation.Hands => CoreCollector.UiElements.class341_22.rectangleF_0, 
-			ItemLocation.Waist => CoreCollector.UiElements.class341_25.rectangleF_0, 
-			ItemLocation.Feet => CoreCollector.UiElements.class341_27.rectangleF_0, 
-			ItemLocation.Shoulders => CoreCollector.UiElements.class341_20.rectangleF_0, 
-			ItemLocation.Legs => CoreCollector.UiElements.class341_26.rectangleF_0, 
-			ItemLocation.Bracers => CoreCollector.UiElements.class341_23.rectangleF_0, 
-			ItemLocation.LeftRing => CoreCollector.UiElements.class341_29.rectangleF_0, 
-			ItemLocation.RightRing => CoreCollector.UiElements.class341_28.rectangleF_0, 
-			ItemLocation.Neck => CoreCollector.UiElements.class341_21.rectangleF_0, 
+			ItemLocation.Head => CoreCollector.UiElements.InventoryButtonHead.rectangle, 
+			ItemLocation.Torso => CoreCollector.UiElements.InventoryButtonTorso.rectangle, 
+			ItemLocation.RightHand => CoreCollector.UiElements.InventoryButtonArmRight.rectangle, 
+			ItemLocation.LeftHand => CoreCollector.UiElements.InventoryButtonArmLeft.rectangle, 
+			ItemLocation.Hands => CoreCollector.UiElements.InventoryButtonHands.rectangle, 
+			ItemLocation.Waist => CoreCollector.UiElements.InventoryButtonWaist.rectangle, 
+			ItemLocation.Feet => CoreCollector.UiElements.InventoryButtonFeet.rectangle, 
+			ItemLocation.Shoulders => CoreCollector.UiElements.InventoryButtonShoulders.rectangle, 
+			ItemLocation.Legs => CoreCollector.UiElements.InventoryButtonLegs.rectangle, 
+			ItemLocation.Bracers => CoreCollector.UiElements.InventoryButtonBracers.rectangle, 
+			ItemLocation.LeftRing => CoreCollector.UiElements.InventoryButtonFingerRight.rectangle, 
+			ItemLocation.RightRing => CoreCollector.UiElements.InventoryButtonFingerLeft.rectangle, 
+			ItemLocation.Neck => CoreCollector.UiElements.InventoryButtonNeck.rectangle, 
 			ItemLocation.Stash => item.GetStashRectangle(), 
-			ItemLocation.PetRightHand => CoreCollector.UiElements.class341_44.rectangleF_0, 
-			ItemLocation.PetLeftHand => CoreCollector.UiElements.class341_43.rectangleF_0, 
-			ItemLocation.PetSpecial => CoreCollector.UiElements.class341_45.rectangleF_0, 
-			ItemLocation.PetNeck => CoreCollector.UiElements.class341_34.rectangleF_0, 
-			ItemLocation.PetRightRing => CoreCollector.UiElements.class341_41.rectangleF_0, 
-			ItemLocation.PetLeftRing => CoreCollector.UiElements.class341_42.rectangleF_0, 
-			ItemLocation.PetHead => CoreCollector.UiElements.class341_32.rectangleF_0, 
-			ItemLocation.PetTorso => CoreCollector.UiElements.class341_37.rectangleF_0, 
-			ItemLocation.PetHands => CoreCollector.UiElements.class341_35.rectangleF_0, 
-			ItemLocation.PetWaist => CoreCollector.UiElements.class341_38.rectangleF_0, 
-			ItemLocation.PetFeet => CoreCollector.UiElements.class341_40.rectangleF_0, 
-			ItemLocation.PetShoulders => CoreCollector.UiElements.class341_33.rectangleF_0, 
-			ItemLocation.PetLegs => CoreCollector.UiElements.class341_39.rectangleF_0, 
-			ItemLocation.PetBracers => CoreCollector.UiElements.class341_36.rectangleF_0, 
+			ItemLocation.PetRightHand => CoreCollector.UiElements.HirelingSlotOffhand.rectangle, 
+			ItemLocation.PetLeftHand => CoreCollector.UiElements.HirelingSlotMainhand.rectangle, 
+			ItemLocation.PetSpecial => CoreCollector.UiElements.HirelingSlotSpecial.rectangle, 
+			ItemLocation.PetNeck => CoreCollector.UiElements.HirelingSlotNeck.rectangle, 
+			ItemLocation.PetRightRing => CoreCollector.UiElements.HirelingSlotRightFinger.rectangle, 
+			ItemLocation.PetLeftRing => CoreCollector.UiElements.HirelingSlotLeftFinger.rectangle, 
+			ItemLocation.PetHead => CoreCollector.UiElements.HirelingSlotHead.rectangle, 
+			ItemLocation.PetTorso => CoreCollector.UiElements.HirelingSlotTorso.rectangle, 
+			ItemLocation.PetHands => CoreCollector.UiElements.HirelingSlotHands.rectangle, 
+			ItemLocation.PetWaist => CoreCollector.UiElements.HirelingSlotWaist.rectangle, 
+			ItemLocation.PetFeet => CoreCollector.UiElements.HirelingSlotFeet.rectangle, 
+			ItemLocation.PetShoulders => CoreCollector.UiElements.HirelingSlotShoulders.rectangle, 
+			ItemLocation.PetLegs => CoreCollector.UiElements.HirelingSlotLegs.rectangle, 
+			ItemLocation.PetBracers => CoreCollector.UiElements.HirelingSlotBracers.rectangle, 
 			_ => RectangleF.Empty, 
 		};
 	}
@@ -52,7 +52,7 @@ internal static class ItemUIExtensions
 
 	public static RectangleF CalculateInventorySlotRect(int x, int y, int width, int height)
 	{
-		RectangleF baseRect = CoreCollector.UiElements.class341_13.rectangleF_0;
+		RectangleF baseRect = CoreCollector.UiElements.InventoryItemsUiElement.rectangle;
 		float cellWidth = baseRect.Width / 10f;
 		float cellHeight = baseRect.Height / 6f;
 		return new RectangleF(baseRect.Left + (x * cellWidth), baseRect.Top + (y * cellHeight), cellWidth * width, cellHeight * height);
@@ -60,7 +60,7 @@ internal static class ItemUIExtensions
 
 	public static RectangleF CalculateStashSlotRect(int x, int y, int width, int height)
 	{
-		RectangleF baseRect = CoreCollector.UiElements.class341_10.rectangleF_0;
+		RectangleF baseRect = CoreCollector.UiElements.ButtonStash.rectangle;
 		float cellWidth = baseRect.Width / 7f;
 		float cellHeight = baseRect.Height / 10f;
 		return new RectangleF(baseRect.Left + (x * cellWidth), baseRect.Top + ((y % 10) * cellHeight), cellWidth * width, cellHeight * height);

@@ -21,7 +21,7 @@ internal class PlayerCollector
 	private readonly Player[] iplayer_0 = new Player[4];
 
 	[CompilerGenerated]
-	private int int_0;
+	private int numberOfPlayersInGame;
 
 	[CompilerGenerated]
 	private bool bool_0;
@@ -43,11 +43,11 @@ internal class PlayerCollector
 	{
 		[CompilerGenerated]
 		get {
-			return int_0;
+			return numberOfPlayersInGame;
 		}
 		[CompilerGenerated]
 		private set {
-			int_0 = value;
+			numberOfPlayersInGame = value;
 		}
 	}
 
@@ -87,11 +87,11 @@ internal class PlayerCollector
 		NumberOfPlayersInGame = 0;
 		Player[] iPlayer_ = PlayerSlots;
 		for (int i = 0; i < iPlayer_.Length; i++) {
-			Player obj = (Player)iPlayer_[i];
-			obj.long_6 = 0L;
-			obj.ParagonTotalExp = 0L;
-			obj.class362_0.ForceSet(0L);
-			obj.method_59();
+			Player player = (Player)iPlayer_[i];
+			player.ParagonTotalExp2 = 0L;
+			player.ParagonTotalExp = 0L;
+			player.class362_0.ForceSet(0L);
+			player.method_59();
 		}
 	}
 
@@ -134,15 +134,15 @@ internal class PlayerCollector
 							}
 						}
 						if (player.Materials.Gold > 1) {
-							if (player.Materials.Gold >= player.long_0) {
-								long num4 = player.Materials.Gold - player.long_0;
-								if (num4 > 0 && num4 < 100000000 && player.long_0 > 0) {
+							if (player.Materials.Gold >= player.Gold) {
+								long num4 = player.Materials.Gold - player.Gold;
+								if (num4 > 0 && num4 < 100000000 && player.Gold > 0) {
 									foreach (StatTracker item in CoreCollector.Trackers) {
 										item.GainedGold += num4;
 									}
 								}
 							}
-							player.long_0 = player.Materials.Gold;
+							player.Gold = player.Materials.Gold;
 						}
 						NumberOfPlayersInGame++;
 						if (!player.IsMe) {
@@ -150,8 +150,8 @@ internal class PlayerCollector
 						}
 						player.PortraitIndex = ((!player.IsMe) ? num : 0);
 						if (string.IsNullOrEmpty(player.BattleTagAbovePortrait) || flag2) {
-							UiElement @class = CoreCollector.UiElements.CreateTemporary("Root.NormalLayer.portraits.stack.party_stack.portrait_" + player.PortraitIndex.ToString("D", CultureInfo.InvariantCulture) + ".text");
-							player.BattleTagAbovePortrait = @class.ReadText(Encoding.UTF8, removeColors: true);
+							UiElement temporary = CoreCollector.UiElements.CreateTemporary("Root.NormalLayer.portraits.stack.party_stack.portrait_" + player.PortraitIndex.ToString("D", CultureInfo.InvariantCulture) + ".text");
+							player.BattleTagAbovePortrait = temporary.ReadText(Encoding.UTF8, removeColors: true);
 							string battleTagAbovePortrait = player.BattleTagAbovePortrait;
 							if (battleTagAbovePortrait != null && battleTagAbovePortrait.Contains("\n")) {
 								player.BattleTagAbovePortrait = player.BattleTagAbovePortrait.Substring(player.BattleTagAbovePortrait.IndexOf("\n") + 1);
@@ -162,8 +162,8 @@ internal class PlayerCollector
 							CoreCollector.Class335_0.Clear(player);
 						}
 						for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
-							Skill class2 = player.class386_0[(int)actionKey];
-							SnoPower snoPower = class2?.SnoPower;
+							Skill skill = player.SkillSlots[(int)actionKey];
+							SnoPower snoPower = skill?.SnoPower;
 							uint num5 = 0u;
 							int num6 = 0;
 							switch (actionKey) {
@@ -195,12 +195,12 @@ internal class PlayerCollector
 							if (num6 == -1) {
 								num6 = 255;
 							}
-							if (snoPower == null || snoPower.Sno != num5 || class2.Rune != num6) {
+							if (snoPower == null || snoPower.Sno != num5 || skill.Rune != num6) {
 								snoPower = SnoData.Powers.GetBySno(num5);
-								player.class386_0[(int)actionKey] = ((snoPower == null) ? null : new Skill(player, snoPower, (byte)num6, actionKey));
+								player.SkillSlots[(int)actionKey] = ((snoPower == null) ? null : new Skill(player, snoPower, (byte)num6, actionKey));
 							}
 						}
-						player.list_2.Clear();
+						player.UsedPassives.Clear();
 						fixed (r_PlayerData* pData = &player.RawPlayerData) {
 							uint* struct33_ = pData->struct33_0;
 							for (int i = 0; i < 4; i++) {
@@ -210,7 +210,7 @@ internal class PlayerCollector
 									player.SnoPower_0[i] = bySno;
 								}
 								if (bySno != null) {
-									player.list_2.Add(bySno);
+									player.UsedPassives.Add(bySno);
 								}
 							}
 						}
@@ -238,21 +238,21 @@ internal class PlayerCollector
 							(player.ArmorySets[8] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_8;
 							(player.ArmorySets[9] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_9;
 							for (int j = 0; j < 10; j++) {
-								PlayerArmorySet obj = player.ArmorySets[j] as PlayerArmorySet;
-								obj.list_0.Clear();
-								obj.method_1(obj.ArmorySet.struct25_0.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_1.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_2.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_3.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_4.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_5.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_6.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_7.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_8.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_9.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_10.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_11.uint_0);
-								obj.method_1(obj.ArmorySet.struct25_12.uint_0);
+								PlayerArmorySet playerArmorySet = player.ArmorySets[j] as PlayerArmorySet;
+								playerArmorySet.itemAnnIds.Clear();
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_0.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_1.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_2.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_3.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_4.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_5.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_6.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_7.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_8.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_9.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_10.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_11.uint_0);
+								playerArmorySet.method_1(playerArmorySet.ArmorySet.struct25_12.uint_0);
 							}
 						}
 						uint heroId2 = player.RawPlayerData.HeroId;
@@ -262,15 +262,15 @@ internal class PlayerCollector
 								Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.method_0(heroId2) : null));
 								if (hero != null) {
 									player.HeroName = hero.Name;
-									player.Int32_0 = hero.Season;
+									player.Season = hero.Season;
 									player.HeroIsHardcore = hero.Hardcore;
 									player.HeroIsMale = hero.IsMale;
-									player.Boolean_1 = hero.Seasonal;
+									player.Seasonal = hero.Seasonal;
 								} else {
 									fixed (r_PlayerData* pData3 = &player.RawPlayerData) {
 										player.HeroName = new string(pData3->struct35_0) ?? "";
 									}
-									player.Int32_0 = 0;
+									player.Season = 0;
 									player.HeroIsHardcore = false;
 									player.HeroIsMale = true;
 								}
@@ -325,7 +325,7 @@ internal class PlayerCollector
 									}
 									if (num7 != player.ulong_0) {
 										player.ulong_0 = num7;
-										player.list_1.Clear();
+										player.cubedItems.Clear();
 										player.dictionary_0.Clear();
 										fixed (r_PlayerData* pData5 = &player.RawPlayerData) {
 											uint* struct34_2 = pData5->struct34_0;
@@ -334,7 +334,7 @@ internal class PlayerCollector
 												if (num9 != uint.MaxValue) {
 													SnoItem bySno2 = SnoData.Items.GetBySno(num9);
 													if (bySno2 != null) {
-														player.list_1.Add(bySno2);
+														player.cubedItems.Add(bySno2);
 														player.dictionary_0[bySno2.NameLocalized] = bySno2;
 													}
 												}
@@ -342,15 +342,15 @@ internal class PlayerCollector
 										}
 									}
 									if (player.ParagonTotalExp > 0 && player.bool_14 && player.HasValidActor && player.FloorCoordinate.IsValid && player.bool_8 && CoreCollector.class364_0 != null && player.SnoArea != null) {
-										if (player.long_6 > 0 && player.long_6 < player.ParagonTotalExp) {
-											long num10 = player.ParagonTotalExp - player.long_6;
+										if (player.ParagonTotalExp2 > 0 && player.ParagonTotalExp2 < player.ParagonTotalExp) {
+											long num10 = player.ParagonTotalExp - player.ParagonTotalExp2;
 											if (num10 != 0L && player.IsMe) {
 												foreach (StatTracker item2 in CoreCollector.Trackers) {
 													item2.GainedExperience += num10;
 												}
 											}
 										}
-										player.long_6 = player.ParagonTotalExp;
+										player.ParagonTotalExp2 = player.ParagonTotalExp;
 									}
 								}
 							} else {

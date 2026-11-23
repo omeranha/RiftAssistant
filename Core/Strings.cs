@@ -87,13 +87,13 @@ public sealed class Strings
 	internal Strings()
 	{
 		Language = LoadLanguage();
-		using (DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "strings_" + Language + ".bin"))))
+		using (DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "strings_" + Language + ".bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint key = @class.method_8();
-				@class.method_1();
-				int num = @class.method_7();
+				uint key = dataReader.method_8();
+				dataReader.method_1();
+				int num = dataReader.method_7();
 				List<string> list = new List<string>();
 				Dictionary<uint, string> dictionary = new Dictionary<uint, string>();
 				Dictionary<string, string> dictionary2 = new Dictionary<string, string>();
@@ -102,9 +102,9 @@ public sealed class Strings
 				dictionary_2.Add((StringListSnoEnum)key, dictionary2);
 				for (int i = 0; i < num; i++)
 				{
-					uint key2 = @class.method_8();
-					string key3 = string.Intern(@class.method_1());
-					string text = string.Intern(@class.method_1());
+					uint key2 = dataReader.method_8();
+					string key3 = string.Intern(dataReader.method_1());
+					string text = string.Intern(dataReader.method_1());
 					list.Add(text);
 					dictionary.Add(key2, text);
 					dictionary2.Add(key3, text);
@@ -118,12 +118,12 @@ public sealed class Strings
 			dictionary_3 = new Dictionary<StringListSnoEnum, Dictionary<string, string>>();
 			dictionary_5 = new Dictionary<StringListSnoEnum, Dictionary<uint, string>>();
 			dictionary_1 = new Dictionary<string, string>();
-			using DataReader class2 = new DataReader(byte_);
-			while (class2.Stream.Position < class2.Stream.Length)
+			using DataReader dataReader2 = new DataReader(byte_);
+			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint key4 = class2.method_8();
-				class2.method_1();
-				int num2 = class2.method_7();
+				uint key4 = dataReader2.method_8();
+				dataReader2.method_1();
+				int num2 = dataReader2.method_7();
 				List<string> list2 = new List<string>();
 				Dictionary<uint, string> dictionary3 = new Dictionary<uint, string>();
 				Dictionary<string, string> dictionary4 = new Dictionary<string, string>();
@@ -131,9 +131,9 @@ public sealed class Strings
 				dictionary_3.Add((StringListSnoEnum)key4, dictionary4);
 				for (int j = 0; j < num2; j++)
 				{
-					uint key5 = class2.method_8();
-					string key6 = string.Intern(class2.method_1());
-					string text2 = string.Intern(class2.method_1());
+					uint key5 = dataReader2.method_8();
+					string key6 = string.Intern(dataReader2.method_1());
+					string text2 = string.Intern(dataReader2.method_1());
 					list2.Add(text2);
 					dictionary3.Add(key5, text2);
 					dictionary4.Add(key6, text2);

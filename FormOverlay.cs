@@ -46,7 +46,7 @@ internal class FormOverlay : Form
 	}
 
 	[DllImport("dwmapi.dll")]
-	private static extern void DwmExtendFrameIntoClientArea(IntPtr intptr_0, ref int[] int_0);
+	private static extern void DwmExtendFrameIntoClientArea(IntPtr handle, ref int[] margins);
 
 	[DllImport("user32.dll")]
 	static extern int GetWindowLong(IntPtr hwnd, int index);

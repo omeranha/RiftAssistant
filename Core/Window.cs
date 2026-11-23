@@ -30,7 +30,7 @@ public class Window
 
 	public static WorldCoordinate Center => CoreCollector.LocalPlayer.FloorCoordinate;
 
-	public static Rectangle GroundRectangle => new(0, 0, GameWindowManager.Window.Size.Width, CoreCollector.D3Memory.IsUiHidden ? GameWindowManager.Window.Size.Height : Convert.ToInt32((double)CoreCollector.UiElements.class341_64.rectangleF_0.Y * 1.015));
+	public static Rectangle GroundRectangle => new(0, 0, GameWindowManager.Window.Size.Width, CoreCollector.D3Memory.IsUiHidden ? GameWindowManager.Window.Size.Height : Convert.ToInt32((double)CoreCollector.UiElements.InGameBottomHudUiElement.rectangle.Y * 1.015));
 
 	public Window()
 	{

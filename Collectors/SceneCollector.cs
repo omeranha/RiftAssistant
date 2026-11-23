@@ -13,7 +13,7 @@ internal class SceneCollector
 
 	private readonly Dictionary<uint, uint> dictionary_1 = new Dictionary<uint, uint>();
 
-	public List<SceneHint> list_0 = new List<SceneHint>();
+	public List<SceneHint> SceneHints = new List<SceneHint>();
 
 	private readonly Allocator class351_0 = new Allocator(8192, "SceneRevealInfoAllocator");
 
@@ -23,18 +23,18 @@ internal class SceneCollector
 
 	internal r_World[] Buffer_Worlds { get; private set; }
 
-	public IEnumerable<Scene> method_0(uint uint_0)
+	public IEnumerable<Scene> method_0(uint worldId)
 	{
-		if (dictionary_0.TryGetValue(uint_0, out var value))
+		if (dictionary_0.TryGetValue(worldId, out var value))
 		{
 			return value.Values;
 		}
 		return Enumerable.Empty<Scene>();
 	}
 
-	public Scene method_1(uint uint_0, uint uint_1)
+	public Scene method_1(uint worldId, uint sSceneIDEncrypted)
 	{
-		if (dictionary_0.TryGetValue(uint_0, out var value) && value.TryGetValue(uint_1, out var value2))
+		if (dictionary_0.TryGetValue(worldId, out var value) && value.TryGetValue(sSceneIDEncrypted, out var value2))
 		{
 			return value2;
 		}
@@ -178,7 +178,7 @@ internal class SceneCollector
 
 	internal void GenerateSceneHints()
 	{
-		list_0.Clear();
+		SceneHints.Clear();
 		if (CoreCollector.LocalPlayer?.SnoArea == null || CoreCollector.LocalPlayer.SnoArea.Code.StartsWith("x1_lr_level_", ignoreCase: false, CultureInfo.InvariantCulture))
 		{
 			return;
@@ -210,7 +210,7 @@ internal class SceneCollector
 				{
 					item.SnoScene.Hint.FloorCoordinate.Set(num, num2, 0f);
 				}
-				list_0.Add(item.SnoScene.Hint);
+				SceneHints.Add(item.SnoScene.Hint);
 			}
 		}
 	}

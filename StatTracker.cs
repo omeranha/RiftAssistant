@@ -7,73 +7,73 @@ using SNO;
 public class StatTracker
 {
 	[CompilerGenerated]
-	private readonly string string_0;
+	private readonly string id;
 
 	[CompilerGenerated]
-	private string string_1;
+	private string title;
 
 	[CompilerGenerated]
 	private SnoArea isnoArea_0;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool alwaysRunning;
 
 	[CompilerGenerated]
-	private double double_0;
+	private double gainedExperience;
 
 	[CompilerGenerated]
-	private long long_0;
+	private long gainedGold;
 
 	[CompilerGenerated]
-	private long long_1;
+	private long monsterKill;
 
 	[CompilerGenerated]
-	private long long_2;
+	private long eliteKill;
 
 	[CompilerGenerated]
-	private long long_3;
+	private long dropAll;
 
 	[CompilerGenerated]
-	private long long_4;
+	private long dropWhite;
 
 	[CompilerGenerated]
-	private long long_5;
+	private long dropMagic;
 
 	[CompilerGenerated]
-	private long long_6;
+	private long dropRare;
 
 	[CompilerGenerated]
-	private long long_7;
+	private long dropLegendary;
 
 	[CompilerGenerated]
-	private long long_8;
+	private long dropAncient;
 
 	[CompilerGenerated]
-	private long long_9;
+	private long dropPrimalAncient;
 
 	[CompilerGenerated]
-	private long long_10;
+	private long dropGold;
 
 	[CompilerGenerated]
-	private long long_11;
+	private long dropBloodShard;
 
 	[CompilerGenerated]
-	private long long_12;
+	private long death;
 
 	[CompilerGenerated]
-	private double double_1;
+	private double damageDealtAll;
 
 	[CompilerGenerated]
-	private double double_2;
+	private double damageDealtCrit;
 
 	[CompilerGenerated]
-	private double double_3;
+	private double damageTaken;
 
 	[CompilerGenerated]
-	private double double_4;
+	private double healing;
 
 	[CompilerGenerated]
-	private double double_5;
+	private double walkYards;
 
 	private readonly string string_2;
 
@@ -90,7 +90,7 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return string_0;
+			return id;
 		}
 	}
 
@@ -99,12 +99,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return string_1;
+			return title;
 		}
 		[CompilerGenerated]
 		set
 		{
-			string_1 = value;
+			title = value;
 		}
 	}
 
@@ -127,12 +127,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return alwaysRunning;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_0 = value;
+			alwaysRunning = value;
 		}
 	}
 
@@ -141,12 +141,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_0;
+			return gainedExperience;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_0 = value;
+			gainedExperience = value;
 		}
 	}
 
@@ -155,12 +155,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return gainedGold;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_0 = value;
+			gainedGold = value;
 		}
 	}
 
@@ -169,12 +169,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_1;
+			return monsterKill;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_1 = value;
+			monsterKill = value;
 		}
 	}
 
@@ -183,12 +183,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_2;
+			return eliteKill;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_2 = value;
+			eliteKill = value;
 		}
 	}
 
@@ -197,12 +197,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_3;
+			return dropAll;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_3 = value;
+			dropAll = value;
 		}
 	}
 
@@ -211,12 +211,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_4;
+			return dropWhite;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_4 = value;
+			dropWhite = value;
 		}
 	}
 
@@ -225,12 +225,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_5;
+			return dropMagic;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_5 = value;
+			dropMagic = value;
 		}
 	}
 
@@ -239,12 +239,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_6;
+			return dropRare;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_6 = value;
+			dropRare = value;
 		}
 	}
 
@@ -253,12 +253,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_7;
+			return dropLegendary;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_7 = value;
+			dropLegendary = value;
 		}
 	}
 
@@ -267,12 +267,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_8;
+			return dropAncient;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_8 = value;
+			dropAncient = value;
 		}
 	}
 
@@ -281,12 +281,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_9;
+			return dropPrimalAncient;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_9 = value;
+			dropPrimalAncient = value;
 		}
 	}
 
@@ -295,12 +295,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_10;
+			return dropGold;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_10 = value;
+			dropGold = value;
 		}
 	}
 
@@ -309,12 +309,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_11;
+			return dropBloodShard;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_11 = value;
+			dropBloodShard = value;
 		}
 	}
 
@@ -323,12 +323,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return long_12;
+			return death;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_12 = value;
+			death = value;
 		}
 	}
 
@@ -337,12 +337,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_1;
+			return damageDealtAll;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_1 = value;
+			damageDealtAll = value;
 		}
 	}
 
@@ -351,12 +351,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_2;
+			return damageDealtCrit;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_2 = value;
+			damageDealtCrit = value;
 		}
 	}
 
@@ -365,12 +365,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_3;
+			return damageTaken;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_3 = value;
+			damageTaken = value;
 		}
 	}
 
@@ -379,12 +379,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_4;
+			return healing;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_4 = value;
+			healing = value;
 		}
 	}
 
@@ -393,12 +393,12 @@ public class StatTracker
 		[CompilerGenerated]
 		get
 		{
-			return double_5;
+			return walkYards;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_5 = value;
+			walkYards = value;
 		}
 	}
 
@@ -676,9 +676,9 @@ public class StatTracker
 		}
 	}
 
-	public StatTracker(string string_3, bool bool_1, string string_4, string string_5)
+	public StatTracker(string battleTag, bool bool_1, string string_4, string string_5)
 	{
-		string_0 = string_3;
+		id = battleTag;
 		string_2 = string_5;
 		Title = string_4;
 		if (bool_1)
@@ -689,7 +689,7 @@ public class StatTracker
 		{
 			string text = Path.Combine(Program.AppDir, "stat_tracker");
 			Directory.CreateDirectory(text);
-			string text2 = Path.Combine(text, string_3 + "_" + string_2 + ".xml");
+			string text2 = Path.Combine(text, battleTag + "_" + string_2 + ".xml");
 			if (File.Exists(text2))
 			{
 				method_23(text2);
@@ -697,9 +697,9 @@ public class StatTracker
 		}
 	}
 
-	public StatTracker(string string_3, bool bool_1, string string_4, List<string> list_0)
+	public StatTracker(string battleTag, bool bool_1, string string_4, List<string> list_0)
 	{
-		string_0 = string_3;
+		id = battleTag;
 		Title = string_4;
 		string_2 = null;
 		if (bool_1)
@@ -710,7 +710,7 @@ public class StatTracker
 		{
 			string text = Path.Combine(Program.AppDir, "stat_tracker");
 			Directory.CreateDirectory(text);
-			string text2 = Path.Combine(text, string_3 + "_" + list_0[i] + ".xml");
+			string text2 = Path.Combine(text, battleTag + "_" + list_0[i] + ".xml");
 			if (File.Exists(text2))
 			{
 				method_23(text2);
@@ -821,34 +821,34 @@ public class StatTracker
 		}
 	}
 
-	public string method_25(ValueFormat valueFormat_0 = ValueFormat.LongTime)
+	public string method_25(ValueFormat valueFormat = ValueFormat.LongTime)
 	{
-		long num = ElapsedMilliseconds;
-		if (num < 1000)
+		long elapsedMilliseconds = ElapsedMilliseconds;
+		if (elapsedMilliseconds < 1000)
 		{
-			num = 0L;
+			elapsedMilliseconds = 0L;
 		}
-		return Formatting.ValueToString(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(elapsedMilliseconds * 10000, valueFormat);
 	}
 
-	public string method_26(ValueFormat valueFormat_0 = ValueFormat.LongTime)
+	public string method_26(ValueFormat valueFormat = ValueFormat.LongTime)
 	{
-		long num = TownElapsedMilliseconds;
-		if (num < 1000)
+		long townElapsedMilliseconds = TownElapsedMilliseconds;
+		if (townElapsedMilliseconds < 1000)
 		{
-			num = 0L;
+			townElapsedMilliseconds = 0L;
 		}
-		return Formatting.ValueToString(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(townElapsedMilliseconds * 10000, valueFormat);
 	}
 
-	public string method_27(ValueFormat valueFormat_0 = ValueFormat.LongTime)
+	public string method_27(ValueFormat valueFormat = ValueFormat.LongTime)
 	{
-		long num = PlayElapsedMilliseconds;
-		if (num < 1000)
+		long playElapsedMilliseconds = PlayElapsedMilliseconds;
+		if (playElapsedMilliseconds < 1000)
 		{
-			num = 0L;
+			playElapsedMilliseconds = 0L;
 		}
-		return Formatting.ValueToString(num * 10000, valueFormat_0);
+		return Formatting.ValueToString(playElapsedMilliseconds * 10000, valueFormat);
 	}
 
 	internal void method_28()
@@ -868,13 +868,13 @@ public class StatTracker
 		}
 	}
 
-	internal void method_30(bool bool_1)
+	internal void method_30(bool isInTown)
 	{
 		if (AlwaysRunning)
 		{
 			return;
 		}
-		if (bool_1)
+		if (isInTown)
 		{
 			if (!stopwatch_1.IsRunning)
 			{

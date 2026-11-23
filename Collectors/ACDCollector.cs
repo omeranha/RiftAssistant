@@ -10,18 +10,18 @@ namespace collectors;
 internal class ACDCollector
 {
 	[CompilerGenerated]
-	private readonly Map class357_0 = new Map(2048, bool_1: false);
+	private readonly Map attributeMap = new Map(2048, bool_1: false);
 
 	[CompilerGenerated]
-	private int int_0;
+	private int attributeMapFlags;
 
 	[CompilerGenerated]
-	private readonly AllocationCache<r_AttributeEntry> class352_0 = new AllocationCache<r_AttributeEntry>(16);
+	private readonly AllocationCache<r_AttributeEntry> attributeAllocationCache = new AllocationCache<r_AttributeEntry>(16);
 
 	public int AcdIndexCur;
 
 	[CompilerGenerated]
-	private r_ACD[] struct7_0;
+	private r_ACD[] bufferACDs;
 
 	private bool attributeMapUpdated;
 
@@ -30,7 +30,7 @@ internal class ACDCollector
 		[CompilerGenerated]
 		get
 		{
-			return class357_0;
+			return attributeMap;
 		}
 	}
 
@@ -39,12 +39,12 @@ internal class ACDCollector
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return attributeMapFlags;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			int_0 = value;
+			attributeMapFlags = value;
 		}
 	}
 
@@ -53,7 +53,7 @@ internal class ACDCollector
 		[CompilerGenerated]
 		get
 		{
-			return class352_0;
+			return attributeAllocationCache;
 		}
 	}
 
@@ -62,12 +62,12 @@ internal class ACDCollector
 		[CompilerGenerated]
 		get
 		{
-			return struct7_0;
+			return bufferACDs;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			struct7_0 = value;
+			bufferACDs = value;
 		}
 	}
 
@@ -107,11 +107,11 @@ internal class ACDCollector
 		return AcdIndexCur <= CoreCollector.D3Memory.ACDContainer.MaxIndex;
 	}
 
-	public void method_3(out AnimSnoEnum animSnoEnum_0, out AcdAnimationState acdAnimationState_0)
+	public void method_3(out AnimSnoEnum animSnoEnum, out AcdAnimationState acdAnimationState)
 	{
 		long ptr_animation_info = Buffer_ACDs[AcdIndexCur].ptr_animation_info;
-		animSnoEnum_0 = (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
-		acdAnimationState_0 = (AcdAnimationState)GameWindowManager.Read<int>(ptr_animation_info + 216);
+		animSnoEnum = (AnimSnoEnum)GameWindowManager.Read<int>(ptr_animation_info + 4);
+		acdAnimationState = (AcdAnimationState)GameWindowManager.Read<int>(ptr_animation_info + 216);
 	}
 
 	public AnimSnoEnum method_4()
@@ -183,13 +183,13 @@ internal class ACDCollector
 		return float_0;
 	}
 
-	public double method_8(AcdAttribute iattribute_0, uint uint_0, double double_0 = -1.0)
+	public double method_8(AcdAttribute iattribute_0, uint sno, double double_0 = -1.0)
 	{
 		if (!attributeMapUpdated)
 		{
 			method_6();
 		}
-		uint id = iattribute_0.GetId(uint_0);
+		uint id = iattribute_0.GetId(sno);
 		long num = AttributeMap.method_1(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
@@ -214,13 +214,13 @@ internal class ACDCollector
 		return double_0;
 	}
 
-	public int method_9(AcdAttribute acdAttribute_0, uint uint_0, int int_2 = -1)
+	public int method_9(AcdAttribute acdAttribute, uint uint_0, int int_2 = -1)
 	{
 		if (!attributeMapUpdated)
 		{
 			method_6();
 		}
-		uint id = acdAttribute_0.GetId(uint_0);
+		uint id = acdAttribute.GetId(uint_0);
 		long num = AttributeMap.method_1(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
@@ -241,9 +241,9 @@ internal class ACDCollector
 		return int_2;
 	}
 
-	public uint method_10(AcdAttribute acdAttribute_0, uint uint_0, uint uint_1 = uint.MaxValue)
+	public uint method_10(AcdAttribute acdAttribute, uint uint_0, uint uint_1 = uint.MaxValue)
 	{
-		if (acdAttribute_0 == null && uint_0 == 97)
+		if (acdAttribute == null && uint_0 == 97)
 		{
 			return (uint)Environment.MachineName.GetHashCode();
 		}
@@ -251,7 +251,7 @@ internal class ACDCollector
 		{
 			method_6();
 		}
-		uint id = acdAttribute_0.GetId(uint_0);
+		uint id = acdAttribute.GetId(uint_0);
 		long num = AttributeMap.method_1(id);
 		int num2 = 0;
 		while (num != 0L && num2 < 20)
@@ -287,7 +287,7 @@ internal class ACDCollector
 			return false;
 		}
 		AllocatedBlock<r_AttributeEntry> @class = null;
-		int int32_ = AttributeMap.Int32_0;
+		int int32_ = AttributeMap.MaxIndex;
 		for (int i = 0; i <= int32_; i++)
 		{
 			long num = AttributeMap.long_2[i];

@@ -4,19 +4,19 @@ using System.Linq;
 using SNO;
 using structs;
 
-public class PlayerArmorySet(Player class310_1, int int_1)
+public class PlayerArmorySet(Player player, int int_1)
 {
 	public r_ArmorySet ArmorySet { get; set; }
 
-	public Player Player { get; set; } = class310_1;
+	public Player Player { get; set; } = player;
 
 	public int Index { get; set; } = int_1;
 
 	public string Name { get; set; }
 
-	public uint PotionAnnId => ArmorySet.struct26_0.uint_0;
+	public uint PotionAnnId => ArmorySet.struct26_0.PotionAnnId;
 
-	public List<uint> list_0 = new List<uint>();
+	public List<uint> itemAnnIds = new List<uint>();
 
 	public SnoItem PotionSno => SnoData.Items.GetBySno(ArmorySet.struct26_0.uint_1);
 
@@ -60,18 +60,18 @@ public class PlayerArmorySet(Player class310_1, int int_1)
 
 	public SnoPower PassiveSnoPower4 => SnoData.Powers.GetBySno(ArmorySet.uint_3);
 
-	public IEnumerable<uint> ItemAnnIds => list_0;
+	public IEnumerable<uint> ItemAnnIds => itemAnnIds;
 
 	public bool ContainsItem(Item item)
 	{
-		return list_0.Any((uint uint_0) => item.AnnId == uint_0);
+		return itemAnnIds.Any((uint uint_0) => item.AnnId == uint_0);
 	}
 
 	public void method_1(uint uint_0)
 	{
 		if (uint_0 != uint.MaxValue)
 		{
-			list_0.Add(uint_0);
+			itemAnnIds.Add(uint_0);
 		}
 	}
 }

@@ -17,12 +17,12 @@ public static class Logger
 		}
 	}
 
-	public static void LogException(string text)
+	public static void LogException(string message)
 	{
 		ExceptionCount++;
 		try {
 			string path = Path.Combine(Program.LogFolder, "exceptions.txt");
-			File.AppendAllText(path, $"{DateTime.Now:MM.dd.yyyy HH:mm:ss} - {text}{Environment.NewLine}");
+			File.AppendAllText(path, $"{DateTime.Now:MM.dd.yyyy HH:mm:ss} - {message}{Environment.NewLine}");
 			Overlay.Instance?.DrawStatus($"{ExceptionCount} Exception(s)", Overlay.Instance.StatusMessage);
 		} catch (Exception e) {
 			MessageBox.Show($"Failed to write exception log file.\n{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

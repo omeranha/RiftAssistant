@@ -68,19 +68,19 @@ public sealed class Classes
 		FollowerEnchantress = method_1("enchantress", "Enchantress", ActorSnoEnum._hireling_enchantress, FollowerClassEnum.Enchantress);
 	}
 
-	private HeroClassDefinition method_0(HeroClass heroClass_0, string string_0, string string_1, bool bool_0, ActorSnoEnum actorSnoEnum_0, ActorSnoEnum actorSnoEnum_1, string string_2, string string_3)
+	private HeroClassDefinition method_0(HeroClass heroClass, string string_0, string string_1, bool bool_0, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_2, string string_3)
 	{
 		string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bnet_classes, string_1);
-		HeroClassDefinition heroClassDefinition = new HeroClassDefinition(heroClass_0, string_0, string_1, stringByCode, bool_0, actorSnoEnum_0, actorSnoEnum_1, string_2, string_3);
-		dictionary_1.Add(actorSnoEnum_0, heroClassDefinition);
-		dictionary_1.Add(actorSnoEnum_1, heroClassDefinition);
+		HeroClassDefinition heroClassDefinition = new HeroClassDefinition(heroClass, string_0, string_1, stringByCode, bool_0, actorSnoEnum, actorSnoEnum2, string_2, string_3);
+		dictionary_1.Add(actorSnoEnum, heroClassDefinition);
+		dictionary_1.Add(actorSnoEnum2, heroClassDefinition);
 		return heroClassDefinition;
 	}
 
-	private FollowerClass method_1(string string_0, string string_1, ActorSnoEnum actorSnoEnum_0, FollowerClassEnum followerClassEnum_0)
+	private FollowerClass method_1(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
 	{
-		FollowerClass followerClass = new FollowerClass(string_0, string_1, actorSnoEnum_0, followerClassEnum_0);
-		dictionary_0.Add(actorSnoEnum_0, followerClass);
+		FollowerClass followerClass = new FollowerClass(string_0, string_1, actorSnoEnum, followerClassEnum);
+		dictionary_0.Add(actorSnoEnum, followerClass);
 		return followerClass;
 	}
 }

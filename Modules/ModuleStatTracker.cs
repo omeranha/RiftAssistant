@@ -58,17 +58,17 @@ internal class ModuleStatTracker : Module
 
 	private readonly bool ShowDropAll;
 
-	private readonly bool bool_10;
+	private readonly bool dropWhite;
 
-	private readonly bool bool_11;
+	private readonly bool dropMagic;
 
-	private readonly bool bool_12;
+	private readonly bool dropRare;
 
-	private readonly bool bool_13;
+	private readonly bool dropLegendary;
 
-	private readonly bool bool_14;
+	private readonly bool dropBloodShard;
 
-	private readonly bool bool_15;
+	private readonly bool death;
 
 	private readonly bool showDamageDealt;
 
@@ -100,12 +100,12 @@ internal class ModuleStatTracker : Module
 		showTotalKills = statTracker.Columns.KillTotal;
 		showEliteKills = statTracker.Columns.KillElite;
 		ShowDropAll = statTracker.Columns.DropAll;
-		bool_10 = statTracker.Columns.DropWhite;
-		bool_11 = statTracker.Columns.DropMagic;
-		bool_12 = statTracker.Columns.DropRare;
-		bool_13 = statTracker.Columns.DropLegendary;
-		bool_14 = statTracker.Columns.DropBloodShard;
-		bool_15 = statTracker.Columns.Death;
+		dropWhite = statTracker.Columns.DropWhite;
+		dropMagic = statTracker.Columns.DropMagic;
+		dropRare = statTracker.Columns.DropRare;
+		dropLegendary = statTracker.Columns.DropLegendary;
+		dropBloodShard = statTracker.Columns.DropBloodShard;
+		death = statTracker.Columns.Death;
 		showDamageDealt = statTracker.Columns.DamageDealtAll;
 		showDamageTaken = statTracker.Columns.DamageTaken;
 		showHealing = statTracker.Columns.Healing;
@@ -253,24 +253,24 @@ internal class ModuleStatTracker : Module
 			trackers.Add(CoreCollector.class340_2);
 			trackers.Add(CoreCollector.class340_3);
 			trackers.Add(CoreCollector.class340_4);
-			trackers.Add(CoreCollector.class340_5);
-			trackers.Add(CoreCollector.class340_6);
-			trackers.Add(CoreCollector.class340_7);
-			trackers.Add(CoreCollector.class340_0);
-			trackers.Add(CoreCollector.class340_1);
+			trackers.Add(CoreCollector.CurrentHeroTotal);
+			trackers.Add(CoreCollector.CurrentHeroYesterday);
+			trackers.Add(CoreCollector.CurrentHeroToday);
+			trackers.Add(CoreCollector.Session);
+			trackers.Add(CoreCollector.SessionAlwaysRunning);
 			if (CoreCollector.class364_0 != null) {
 				trackers.Add(CoreCollector.class364_0.RunStatTracker);
 				for (int i = 0; i < CoreCollector.class364_0.VisitedAreas.Count; i++) {
-					AreaTracker @class = CoreCollector.class364_0.VisitedAreas[i];
-					if (!@class.SnoArea.IsTown) {
-						StatTracker class340_ = @class.AreaStats;
-						class340_.Title = @class.AreaNameLocalized;
-						class340_.SnoArea = @class.SnoArea;
+					AreaTracker areaTracker = CoreCollector.class364_0.VisitedAreas[i];
+					if (!areaTracker.SnoArea.IsTown) {
+						StatTracker class340_ = areaTracker.AreaStats;
+						class340_.Title = areaTracker.AreaNameLocalized;
+						class340_.SnoArea = areaTracker.SnoArea;
 						trackers.Add(class340_);
-						if (@class.AreaTotalStats != null) {
-							class340_ = @class.AreaTotalStats;
-							class340_.Title = "TOTAL - " + @class.AreaNameLocalized;
-							class340_.SnoArea = @class.SnoArea;
+						if (areaTracker.AreaTotalStats != null) {
+							class340_ = areaTracker.AreaTotalStats;
+							class340_.Title = "TOTAL - " + areaTracker.AreaNameLocalized;
+							class340_.SnoArea = areaTracker.SnoArea;
 							trackers.Add(class340_);
 						}
 					}
@@ -282,8 +282,8 @@ internal class ModuleStatTracker : Module
 			trackers.Add(Overlay.Instance.class209_0.class340_2);
 			trackers.Add(Overlay.Instance.class209_0.class340_3);
 			trackers.Add(Overlay.Instance.class209_0.class340_4);
-			trackers.Add(CoreCollector.class340_0);
-			trackers.Add(CoreCollector.class340_1);
+			trackers.Add(CoreCollector.Session);
+			trackers.Add(CoreCollector.SessionAlwaysRunning);
 			trackers.Add(Overlay.Instance.class209_0.class340_5);
 			trackers.Add(Overlay.Instance.class209_0.class340_6);
 			trackers.Add(Overlay.Instance.class209_0.class340_7);
@@ -308,15 +308,15 @@ internal class ModuleStatTracker : Module
 		if (columnWidths == null || columnWidths.Length != num) {
 			columnWidths = new int[num];
 		}
-		bool flag = Show;
+		bool show = Show;
 		if (Overlay.Instance.class209_0 != null && Overlay.Instance.class209_0.ihero_0 != null) {
 			Show = true;
 		}
 		if (!vmethod_0(bool_4: true)) {
-			Show = flag;
+			Show = show;
 			return;
 		}
-		Show = flag;
+		Show = show;
 		if (!CoreCollector.IsGameReady && Overlay.Instance.class209_0 != null && Overlay.Instance.class209_0.ihero_0 == null) {
 			return;
 		}
@@ -369,28 +369,28 @@ internal class ModuleStatTracker : Module
 		}
 		currentRowY += num6;
 		for (int k = 0; k < trackers.Count; k++) {
-			StatTracker class2 = trackers[k];
-			RenderFont obj = ((class2.Title == "ACCOUNT TOTAL" || class2.Title == "HERO TOTAL") ? class221_0 : class221_1);
-			TextLayout textLayout = obj.GetTextLayout(class2.Title);
-			obj.DrawText(textLayout, (float)num17 - textLayout.Metrics.Width - (float)cellPadding, (float)currentRowY + ((float)num7 - textLayout.Metrics.Height) / 2f);
+			StatTracker statTracker = trackers[k];
+			RenderFont renderFont = ((statTracker.Title == "ACCOUNT TOTAL" || statTracker.Title == "HERO TOTAL") ? class221_0 : class221_1);
+			TextLayout textLayout = renderFont.GetTextLayout(statTracker.Title);
+			renderFont.DrawText(textLayout, (float)num17 - textLayout.Metrics.Width - (float)cellPadding, (float)currentRowY + ((float)num7 - textLayout.Metrics.Height) / 2f);
 			currentColumnX = num17;
 			RenderBrush class219_ = null;
 			if (GameWindowManager.Window.CursorX >= num12 && (float)GameWindowManager.Window.CursorX <= (float)num12 + num16 && GameWindowManager.Window.CursorY >= currentRowY && GameWindowManager.Window.CursorY < currentRowY + num7) {
 				class219_ = class219_4;
 			}
 			num19 = 0;
-			if (class2.SnoArea != null) {
+			if (statTracker.SnoArea != null) {
 				DrawCell(num19++, blackText, "", num7, class219_, Alignment.Right, 1, null);
 			} else {
-				DrawCell(num19++, blackText, class2.AlwaysRunning ? "-" : class2.method_26(), num7, class219_, Alignment.Right, 1, null);
+				DrawCell(num19++, blackText, statTracker.AlwaysRunning ? "-" : statTracker.method_26(), num7, class219_, Alignment.Right, 1, null);
 			}
-			DrawCell(num19++, whiteText, class2.method_27(), num7, class219_, Alignment.Right, 1, class219_9);
+			DrawCell(num19++, whiteText, statTracker.method_27(), num7, class219_, Alignment.Right, 1, class219_9);
 
 			foreach (var column in columns) {
 				if (!column.Enabled) continue;
 
-				DrawCell(num19++, column.HeaderFont, column.TotalValue(class2), num7, class219_, Alignment.Right, 1, null);
-				DrawCell(num19++, column.HeaderFont, column.RateValue(class2), num7, class219_, Alignment.Right, 1, null);
+				DrawCell(num19++, column.HeaderFont, column.TotalValue(statTracker), num7, class219_, Alignment.Right, 1, null);
+				DrawCell(num19++, column.HeaderFont, column.RateValue(statTracker), num7, class219_, Alignment.Right, 1, null);
 			}
 			currentRowY += num7;
 		}

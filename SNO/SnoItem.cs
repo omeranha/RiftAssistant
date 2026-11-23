@@ -8,73 +8,73 @@ namespace SNO;
 public sealed class SnoItem
 {
 	[CompilerGenerated]
-	private readonly uint uint_0;
+	private readonly uint sno;
 
 	[CompilerGenerated]
-	private readonly SnoActor SnoActor_0;
+	private readonly SnoActor snoActor;
 
 	[CompilerGenerated]
-	private readonly ItemKind itemKind_0;
+	private readonly ItemKind kind;
 
 	[CompilerGenerated]
-	private readonly uint uint_1;
+	private readonly uint prefixStringSno;
 
 	[CompilerGenerated]
-	private readonly uint uint_2;
+	private readonly uint suffixStringSno;
 
 	[CompilerGenerated]
-	private readonly int int_0;
+	private readonly int level;
 
 	[CompilerGenerated]
-	private readonly int int_1;
+	private readonly int itemWidth;
 
 	[CompilerGenerated]
-	private readonly int int_2;
+	private readonly int itemHeight;
 
 	[CompilerGenerated]
-	private readonly string string_0;
+	private readonly string code;
 
 	[CompilerGenerated]
-	private readonly string string_1;
+	private readonly string nameLocalized;
 
 	[CompilerGenerated]
-	private readonly string string_2;
+	private readonly string nameEnglish;
 
 	[CompilerGenerated]
-	private readonly string string_3;
+	private readonly string mainGroupCode;
 
 	[CompilerGenerated]
-	private readonly string[] string_4;
+	private readonly string[] groupCodes;
 
 	[CompilerGenerated]
-	private readonly ItemLocation itemLocation_0 = ItemLocation.Floor;
+	private readonly ItemLocation usedLocation1 = ItemLocation.Floor;
 
 	[CompilerGenerated]
-	private readonly ItemLocation itemLocation_1 = ItemLocation.Floor;
+	private readonly ItemLocation usedLocation2 = ItemLocation.Floor;
 
 	[CompilerGenerated]
-	private readonly SnoItemType SnoItemType_0;
+	private readonly SnoItemType snoItemType;
 
 	[CompilerGenerated]
-	private readonly int int_3;
+	private readonly int stackSize;
 
 	[CompilerGenerated]
-	private readonly int int_4;
+	private readonly int goldPrice;
 
 	[CompilerGenerated]
-	private readonly int int_5;
+	private readonly int unsocketPrice;
 
 	[CompilerGenerated]
-	private readonly int int_6;
+	private readonly int requiredLevel;
 
 	[CompilerGenerated]
-	private readonly uint uint_3;
+	private readonly uint baseItemSno;
 
 	[CompilerGenerated]
-	private readonly uint uint_4;
+	private readonly uint setItemBonusesSno;
 
 	[CompilerGenerated]
-	private readonly ItemCraftQuality itemCraftQuality_0;
+	private readonly ItemCraftQuality craftQuality;
 
 	[CompilerGenerated]
 	private SnoItemMod[] isnoItemMod_0;
@@ -83,37 +83,37 @@ public sealed class SnoItem
 	private SnoItemAffixGroupLink[] isnoItemAffixGroupLink_0;
 
 	[CompilerGenerated]
-	private List<SnoSocketedEffect> list_0;
+	private List<SnoSocketedEffect> socketedEffects;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool canKanaiCube;
 
 	[CompilerGenerated]
-	private readonly int int_7;
+	private readonly int dropWeight;
 
 	[CompilerGenerated]
-	private readonly int int_8;
+	private readonly int dropSmartDemonHunter;
 
 	[CompilerGenerated]
-	private readonly int int_9;
+	private readonly int dropSmartBarbarian;
 
 	[CompilerGenerated]
-	private readonly int int_10;
+	private readonly int dropSmartWizard;
 
 	[CompilerGenerated]
-	private readonly int int_11;
+	private readonly int dropSmartWitchDoctor;
 
 	[CompilerGenerated]
-	private readonly int int_12;
+	private readonly int dropSmartMonk;
 
 	[CompilerGenerated]
-	private readonly int int_13;
+	private readonly int dropSmartCrusader;
 
 	public uint Sno
 	{
 		[CompilerGenerated]
 		get {
-			return uint_0;
+			return sno;
 		}
 	}
 
@@ -121,7 +121,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return SnoActor_0;
+			return snoActor;
 		}
 	}
 
@@ -129,7 +129,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return itemKind_0;
+			return kind;
 		}
 	}
 
@@ -137,7 +137,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return uint_1;
+			return prefixStringSno;
 		}
 	}
 
@@ -145,7 +145,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return uint_2;
+			return suffixStringSno;
 		}
 	}
 
@@ -153,7 +153,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_0;
+			return level;
 		}
 	}
 
@@ -161,7 +161,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_1;
+			return itemWidth;
 		}
 	}
 
@@ -169,7 +169,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_2;
+			return itemHeight;
 		}
 	}
 
@@ -177,7 +177,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return string_0;
+			return code;
 		}
 	}
 
@@ -185,7 +185,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return string_1;
+			return nameLocalized;
 		}
 	}
 
@@ -193,7 +193,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return string_2;
+			return nameEnglish;
 		}
 	}
 
@@ -201,7 +201,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return string_3;
+			return mainGroupCode;
 		}
 	}
 
@@ -209,7 +209,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return string_4;
+			return groupCodes;
 		}
 	}
 
@@ -217,7 +217,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return itemLocation_0;
+			return usedLocation1;
 		}
 	}
 
@@ -225,7 +225,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return itemLocation_1;
+			return usedLocation2;
 		}
 	}
 
@@ -233,7 +233,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return SnoItemType_0;
+			return snoItemType;
 		}
 	}
 
@@ -241,7 +241,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_3;
+			return stackSize;
 		}
 	}
 
@@ -249,7 +249,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_4;
+			return goldPrice;
 		}
 	}
 
@@ -257,7 +257,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_5;
+			return unsocketPrice;
 		}
 	}
 
@@ -265,7 +265,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_6;
+			return requiredLevel;
 		}
 	}
 
@@ -273,7 +273,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return uint_3;
+			return baseItemSno;
 		}
 	}
 
@@ -281,7 +281,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return uint_4;
+			return setItemBonusesSno;
 		}
 	}
 
@@ -289,7 +289,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return itemCraftQuality_0;
+			return craftQuality;
 		}
 	}
 
@@ -321,11 +321,11 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return list_0;
+			return socketedEffects;
 		}
 		[CompilerGenerated]
 		set {
-			list_0 = value;
+			socketedEffects = value;
 		}
 	}
 
@@ -333,11 +333,11 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return bool_0;
+			return canKanaiCube;
 		}
 		[CompilerGenerated]
 		set {
-			bool_0 = value;
+			canKanaiCube = value;
 		}
 	}
 
@@ -345,7 +345,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_7;
+			return dropWeight;
 		}
 	}
 
@@ -353,7 +353,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_8;
+			return dropSmartDemonHunter;
 		}
 	}
 
@@ -361,7 +361,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_9;
+			return dropSmartBarbarian;
 		}
 	}
 
@@ -369,7 +369,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_10;
+			return dropSmartWizard;
 		}
 	}
 
@@ -377,7 +377,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_11;
+			return dropSmartWitchDoctor;
 		}
 	}
 
@@ -385,7 +385,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_12;
+			return dropSmartMonk;
 		}
 	}
 
@@ -393,7 +393,7 @@ public sealed class SnoItem
 	{
 		[CompilerGenerated]
 		get {
-			return int_13;
+			return dropSmartCrusader;
 		}
 	}
 
@@ -412,88 +412,88 @@ public sealed class SnoItem
 
 	public bool IsEthereal => Code.StartsWith("P71_Ethereal");
 
-	internal SnoItem(uint uint_5, uint uint_6, uint uint_7, SnoActor SnoActor_1, uint uint_8, uint uint_9, int int_14, SnoItemType SnoItemType_1, int int_15, int int_16, int int_17, int int_18, int int_19, int int_20, string string_5, string string_6, string string_7, string string_8, string[] string_9, ItemLocation itemLocation_2, ItemLocation itemLocation_3, int int_21, int int_22, int int_23, int int_24, int int_25, int int_26, int int_27, ItemCraftQuality itemCraftQuality_1)
+	internal SnoItem(uint uint_5, uint uint_6, uint uint_7, SnoActor snoActor2, uint uint_8, uint uint_9, int int_14, SnoItemType snoItemType2, int int_15, int int_16, int int_17, int int_18, int int_19, int int_20, string string_5, string string_6, string string_7, string string_8, string[] string_9, ItemLocation itemLocation, ItemLocation itemLocation2, int int_21, int int_22, int int_23, int int_24, int int_25, int int_26, int int_27, ItemCraftQuality itemCraftQuality)
 	{
-		uint_0 = uint_5;
-		uint_3 = uint_6;
-		uint_4 = uint_7;
-		SnoActor_0 = SnoActor_1;
-		uint_1 = uint_8;
-		uint_2 = uint_9;
-		int_0 = int_14;
-		int_1 = int_19;
-		int_2 = int_20;
-		string_0 = string_5;
-		string_1 = string_6;
-		string_2 = string_7;
-		string_3 = string_8;
-		string_4 = string_9;
-		SnoItemType_0 = SnoItemType_1;
-		int_3 = int_15;
-		int_4 = int_16;
-		int_5 = int_17;
-		int_6 = int_18;
-		itemLocation_0 = itemLocation_2;
-		itemLocation_1 = itemLocation_3;
-		int_7 = int_21;
-		int_8 = int_22;
-		int_9 = int_23;
-		int_10 = int_24;
-		int_11 = int_25;
-		int_12 = int_26;
-		int_13 = int_27;
-		itemCraftQuality_0 = itemCraftQuality_1;
-		itemKind_0 = ItemKind.loot;
+		sno = uint_5;
+		baseItemSno = uint_6;
+		setItemBonusesSno = uint_7;
+		snoActor = snoActor2;
+		prefixStringSno = uint_8;
+		suffixStringSno = uint_9;
+		level = int_14;
+		itemWidth = int_19;
+		itemHeight = int_20;
+		code = string_5;
+		nameLocalized = string_6;
+		nameEnglish = string_7;
+		mainGroupCode = string_8;
+		groupCodes = string_9;
+		snoItemType = snoItemType2;
+		stackSize = int_15;
+		goldPrice = int_16;
+		unsocketPrice = int_17;
+		requiredLevel = int_18;
+		usedLocation1 = itemLocation;
+		usedLocation2 = itemLocation2;
+		dropWeight = int_21;
+		dropSmartDemonHunter = int_22;
+		dropSmartBarbarian = int_23;
+		dropSmartWizard = int_24;
+		dropSmartWitchDoctor = int_25;
+		dropSmartMonk = int_26;
+		dropSmartCrusader = int_27;
+		craftQuality = itemCraftQuality;
+		kind = ItemKind.loot;
 		switch (Sno) {
 			case 126259831u:
-				itemKind_0 = ItemKind.goldcoin;
+				kind = ItemKind.goldcoin;
 				break;
 			case 2603730171u:
-				itemKind_0 = ItemKind.loot;
+				kind = ItemKind.loot;
 				break;
 			default:
 				if (MainGroupCode != null) {
 					if (MainGroupCode == "potion") {
-						itemKind_0 = ItemKind.potion;
+						kind = ItemKind.potion;
 					}
 					if (MainGroupCode == "uber") {
-						itemKind_0 = ItemKind.uberstuff;
+						kind = ItemKind.uberstuff;
 					}
 					if (MainGroupCode == "gems") {
-						itemKind_0 = ItemKind.gem;
+						kind = ItemKind.gem;
 					}
 					if (MainGroupCode == "consumable") {
-						itemKind_0 = ItemKind.craft;
+						kind = ItemKind.craft;
 					}
 					if (MainGroupCode == "craftmats") {
-						itemKind_0 = ItemKind.craft;
+						kind = ItemKind.craft;
 					}
 					if (MainGroupCode == "crafttomes") {
-						itemKind_0 = ItemKind.craft;
+						kind = ItemKind.craft;
 					}
 					if (MainGroupCode == "craftpages") {
-						itemKind_0 = ItemKind.craft;
+						kind = ItemKind.craft;
 					}
 					if (MainGroupCode == "plans") {
-						itemKind_0 = ItemKind.craft;
+						kind = ItemKind.craft;
 					}
 					if (MainGroupCode == "gold") {
-						itemKind_0 = ItemKind.goldcoin;
+						kind = ItemKind.goldcoin;
 					}
 					if (MainGroupCode == "healthglobe") {
-						itemKind_0 = ItemKind.healthglobe;
+						kind = ItemKind.healthglobe;
 					}
 					if (MainGroupCode == "powerglobe") {
-						itemKind_0 = ItemKind.powerglobe;
+						kind = ItemKind.powerglobe;
 					}
 					if (MainGroupCode == "rift_orb") {
-						itemKind_0 = ItemKind.rift_orb;
+						kind = ItemKind.rift_orb;
 					}
 				}
 				break;
 		}
 		if (SnoItemType.Code == "Book") {
-			itemKind_0 = ItemKind.book;
+			kind = ItemKind.book;
 		}
 	}
 

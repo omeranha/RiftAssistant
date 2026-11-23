@@ -1,8 +1,8 @@
 public class TrackerController
 {
-	public StatTracker Session => CoreCollector.class340_0;
+	public StatTracker Session => CoreCollector.Session;
 
-	public StatTracker SessionAlwaysRunning => CoreCollector.class340_1;
+	public StatTracker SessionAlwaysRunning => CoreCollector.SessionAlwaysRunning;
 
 	public StatTracker CurrentAccountTotal
 	{

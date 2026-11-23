@@ -29,17 +29,17 @@ internal class ActorCollector
 	public Stopwatch stopwatch_0 = new();
 
 	[CompilerGenerated]
-	private int int_0;
+	private int act;
 
 	private Stopwatch stopwatch_1 = new();
 
 	public FollowerClass followerClass_0;
 
-	public List<Monster> list_0 = new List<Monster>();
+	public List<Monster> Monsters = new List<Monster>();
 
-	public List<Monster> list_1 = new List<Monster>();
+	public List<Monster> AliveMonsters = new List<Monster>();
 
-	public List<MonsterPack> list_2 = new List<MonsterPack>();
+	public List<MonsterPack> MonsterPacks = new List<MonsterPack>();
 
 	internal readonly PerSecCounter MonsterHitpointDecrease = new();
 
@@ -49,16 +49,16 @@ internal class ActorCollector
 	private int int_2;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool isEliteNearby;
 
 	[CompilerGenerated]
-	private bool bool_2;
+	private bool isEliteOnScreen;
 
 	[CompilerGenerated]
 	private MonsterPriority monsterPriority_0;
 
 	[CompilerGenerated]
-	private bool bool_3;
+	private bool isGoblinOnScreen;
 
 	[CompilerGenerated]
 	private readonly Dictionary<SkillEffectType, List<SkillEffect>> class112_1 = new Dictionary<SkillEffectType, List<SkillEffect>>();
@@ -67,13 +67,13 @@ internal class ActorCollector
 	private readonly Dictionary<uint, Portal> class112_2 = new Dictionary<uint, Portal>();
 
 	[CompilerGenerated]
-	private readonly List<Shrine> list_4 = new List<Shrine>();
+	private readonly List<Shrine> shrines = new List<Shrine>();
 
 	[CompilerGenerated]
 	private readonly List<HeadStone> list_5 = new List<HeadStone>();
 
 	[CompilerGenerated]
-	private readonly List<IClickableActor> list_6 = new List<IClickableActor>();
+	private readonly List<IClickableActor> doors = new List<IClickableActor>();
 
 	[CompilerGenerated]
 	private readonly TownBanner[] itownBanner_0 = new TownBanner[4];
@@ -91,10 +91,10 @@ internal class ActorCollector
 	private WorldCoordinate iworldCoordinate_0;
 
 	[CompilerGenerated]
-	private int int_3;
+	private int act2;
 
 	[CompilerGenerated]
-	private r_Actor[] struct6_0;
+	private r_Actor[] bufferActors;
 
 	public Monster IMonster_0
 	{
@@ -146,15 +146,15 @@ internal class ActorCollector
 		}
 	}
 
-	public int Int32_0
+	public int Act
 	{
 		[CompilerGenerated]
 		get {
-			return int_0;
+			return act;
 		}
 		[CompilerGenerated]
 		internal set {
-			int_0 = value;
+			act = value;
 		}
 	}
 
@@ -170,27 +170,27 @@ internal class ActorCollector
 		}
 	}
 
-	public bool Boolean_1
+	public bool IsEliteNearby
 	{
 		[CompilerGenerated]
 		get {
-			return bool_1;
+			return isEliteNearby;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_1 = value;
+			isEliteNearby = value;
 		}
 	}
 
-	public bool Boolean_2
+	public bool IsEliteOnScreen
 	{
 		[CompilerGenerated]
 		get {
-			return bool_2;
+			return isEliteOnScreen;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_2 = value;
+			isEliteOnScreen = value;
 		}
 	}
 
@@ -206,15 +206,15 @@ internal class ActorCollector
 		}
 	}
 
-	public bool Boolean_3
+	public bool IsGoblinOnScreen
 	{
 		[CompilerGenerated]
 		get {
-			return bool_3;
+			return isGoblinOnScreen;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_3 = value;
+			isGoblinOnScreen = value;
 		}
 	}
 
@@ -234,11 +234,11 @@ internal class ActorCollector
 		}
 	}
 
-	public List<Shrine> List_0
+	public List<Shrine> Shrines
 	{
 		[CompilerGenerated]
 		get {
-			return list_4;
+			return shrines;
 		}
 	}
 
@@ -250,11 +250,11 @@ internal class ActorCollector
 		}
 	}
 
-	public List<IClickableActor> List_2
+	public List<IClickableActor> Doors
 	{
 		[CompilerGenerated]
 		get {
-			return list_6;
+			return doors;
 		}
 	}
 
@@ -314,15 +314,15 @@ internal class ActorCollector
 		}
 	}
 
-	public int Int32_2
+	public int Act2
 	{
 		[CompilerGenerated]
 		get {
-			return int_3;
+			return act2;
 		}
 		[CompilerGenerated]
 		internal set {
-			int_3 = value;
+			act2 = value;
 		}
 	}
 
@@ -330,11 +330,11 @@ internal class ActorCollector
 	{
 		[CompilerGenerated]
 		get {
-			return struct6_0;
+			return bufferActors;
 		}
 		[CompilerGenerated]
 		private set {
-			struct6_0 = value;
+			bufferActors = value;
 		}
 	}
 
@@ -345,23 +345,23 @@ internal class ActorCollector
 
 	internal void method_1()
 	{
-		list_0.Clear();
-		list_1.Clear();
+		Monsters.Clear();
+		AliveMonsters.Clear();
 	}
 
 	internal void method_2(bool bool_4)
 	{
 		list_3.Clear();
-		list_0.Clear();
-		list_1.Clear();
+		Monsters.Clear();
+		AliveMonsters.Clear();
 		foreach (List<SkillEffect> item in Class112_0.Values) {
 			item.Clear();
 		}
 		if (bool_4) {
 			Class112_1.Clear();
 		}
-		List_0.Clear();
-		List_2.Clear();
+		Shrines.Clear();
+		Doors.Clear();
 		List_1.Clear();
 		for (int i = 0; i < ITownBanner_0.Length; i++) {
 			ITownBanner_0[i] = null;
@@ -380,10 +380,10 @@ internal class ActorCollector
 		}
 		method_2(bool_4: false);
 		Int32_1 = 0;
-		Boolean_1 = false;
-		Boolean_2 = false;
+		IsEliteNearby = false;
+		IsEliteOnScreen = false;
 		MonsterPriority_0 = MonsterPriority.none;
-		Boolean_3 = false;
+		IsGoblinOnScreen = false;
 		int num = CoreCollector.D3Memory.ActorContainer.MaxIndex + 1;
 		if (BufferActors == null || BufferActors.Length <= CoreCollector.D3Memory.ActorContainer.MaxIndex) {
 			BufferActors = new r_Actor[num];
@@ -413,35 +413,35 @@ internal class ActorCollector
 				uint acdid = ptr->AcdIdEncrypted;
 				if (acdid == uint.MaxValue) {
 					Actor actor = class112_0.GetValueOrDefault(actorId);
-					if (actor == null || !(actor is Monster { CurHealth: > 0.0 } @class)) {
+					if (actor == null || !(actor is Monster { CurHealth: > 0.0 } monster)) {
 						continue;
 					}
-					@class.CurHealth = 0.0;
+					monster.CurHealth = 0.0;
 					foreach (StatTracker item2 in CoreCollector.Trackers) {
 						item2.MonsterKill++;
 					}
-					if (@class.IsElite) {
+					if (monster.IsElite) {
 						foreach (StatTracker item3 in CoreCollector.Trackers) {
 							item3.EliteKill++;
 						}
 					}
-					if (@class.Pack != null) {
-						if (@class.Pack is MonsterPack previousPack) {
-							previousPack.Class112_2.Remove(@class.MaxHealth);
-							previousPack.Class112_0.Remove(@class.MaxHealth);
-							previousPack.Class112_1[@class.MaxHealth] = @class;
+					if (monster.Pack != null) {
+						if (monster.Pack is MonsterPack previousPack) {
+							previousPack.MonstersUnknown2.Remove(monster.MaxHealth);
+							previousPack.MonstersAlive2.Remove(monster.MaxHealth);
+							previousPack.MonstersKilled2[monster.MaxHealth] = monster;
 						}
 					}
 					if (CoreCollector.LocalPlayer.SnoArea != null) {
-						SnoMonster snoMonster = @class.SnoMonster;
+						SnoMonster snoMonster = monster.SnoMonster;
 						if (snoMonster != null && snoMonster.Priority == MonsterPriority.keywarden) {
 							stopwatch_0.Restart();
-							Int32_0 = CoreCollector.LocalPlayer.SnoArea.Act;
+							Act = CoreCollector.LocalPlayer.SnoArea.Act;
 							Boolean_0[CoreCollector.LocalPlayer.SnoArea.Act - 1] = true;
 						}
 					}
 					try {
-						onMonsterKilled?.Invoke(this, @class);
+						onMonsterKilled?.Invoke(this, monster);
 					} catch (Exception exception_) {
 						Logger.LogException(exception_.Message);
 					}
@@ -544,7 +544,7 @@ internal class ActorCollector
 					continue;
 				}
 				bool flag2 = false;
-				Monster class2 = null;
+				Monster monster2 = null;
 				SnoMonster snoMonster2 = null;
 				if (actor2 == null) {
 					snoMonster2 = SnoData.Monsters.GetMonster(actorSnoEnum);
@@ -552,8 +552,8 @@ internal class ActorCollector
 						flag2 = snoMonster2.Priority != MonsterPriority.none;
 					}
 				} else if (flag2 = actor2 is Monster && !(actor2 is MonsterObstacle)) {
-					class2 = actor2 as Monster;
-					snoMonster2 = class2.SnoMonster;
+					monster2 = actor2 as Monster;
+					snoMonster2 = monster2.SnoMonster;
 				}
 				bool flag3 = true;
 				if (flag2 && snoActor.Sno != ActorSnoEnum._x1_adria_boss && snoActor.Sno != ActorSnoEnum._x1_templarnpc_camp_bounty) {
@@ -572,7 +572,7 @@ internal class ActorCollector
 					bool num9 = actor2 == null || !(actor2?.SnoActor.IsStatic ?? false);
 					uint num10 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u);
 					if (actor2 == null) {
-						actor2 = method_4(gizmoType_0: (GizmoType)struct7_.GizmoType, uint_0: acdid, uint_1: annId, SnoActor_0: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
+						actor2 = method_4(gizmoType: (GizmoType)struct7_.GizmoType, acdid: acdid, annId: annId, snoActor: snoActor, uint_2: num10) ?? new Actor(acdid, annId, snoActor);
 						actor2.CreatedAtInGameTick = ptr->CreationTick;
 						class112_0[gparam_] = actor2;
 					}
@@ -602,136 +602,136 @@ internal class ActorCollector
 					}
 					continue;
 				}
-				bool flag4 = flag || class2 == null;
-				if (class2 != null && (class2.IsElite || class2.SnoMonster.Priority >= MonsterPriority.keywarden)) {
+				bool flag4 = flag || monster2 == null;
+				if (monster2 != null && (monster2.IsElite || monster2.SnoMonster.Priority >= MonsterPriority.keywarden)) {
 					flag4 = true;
 				}
-				double value = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Max_Total, 1048575u, 0.0) : class2.MaxHealth);
-				double num11 = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Cur, 1048575u, 1.0) : class2.CurHealth);
+				double value = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Max_Total, 1048575u, 0.0) : monster2.MaxHealth);
+				double num11 = (flag4 ? CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Hitpoints_Cur, 1048575u, 1.0) : monster2.CurHealth);
 				if (num11 < 0.3) {
-					if (class2 != null && class2.CurHealth > 0.0) {
-						num5 += class2.CurHealth;
-						class2.CurHealth = 0.0;
+					if (monster2 != null && monster2.CurHealth > 0.0) {
+						num5 += monster2.CurHealth;
+						monster2.CurHealth = 0.0;
 						foreach (StatTracker item5 in CoreCollector.Trackers) {
 							item5.MonsterKill++;
 						}
-						if (class2.IsElite) {
+						if (monster2.IsElite) {
 							foreach (StatTracker item6 in CoreCollector.Trackers) {
 								item6.EliteKill++;
 							}
 						}
 						if (CoreCollector.LocalPlayer.SnoArea != null) {
-							SnoMonster snoMonster3 = class2.SnoMonster;
+							SnoMonster snoMonster3 = monster2.SnoMonster;
 							if (snoMonster3 != null && snoMonster3.Priority == MonsterPriority.keywarden) {
 								stopwatch_0.Restart();
-								Int32_0 = CoreCollector.LocalPlayer.SnoArea.Act;
+								Act = CoreCollector.LocalPlayer.SnoArea.Act;
 								Boolean_0[CoreCollector.LocalPlayer.SnoArea.Act - 1] = true;
 							}
 						}
 						try {
-							onMonsterKilled?.Invoke(this, class2);
-						} catch (Exception exception_2) {
-							Logger.LogException(exception_2.Message);
+							onMonsterKilled?.Invoke(this, monster2);
+						} catch (Exception exception) {
+							Logger.LogException(exception.Message);
 						}
 					}
-					if (class2 != null) {
-						list_0.Add(class2);
+					if (monster2 != null) {
+						Monsters.Add(monster2);
 					}
 					continue;
 				}
 				ActorRarity actorRarity = (ActorRarity)struct7_.ActorRarity;
-				if (class2 == null) {
-					class2 = new Monster(acdid, annId, snoMonster2.SnoActor, snoMonster2) {
+				if (monster2 == null) {
+					monster2 = new Monster(acdid, annId, snoMonster2.SnoActor, snoMonster2) {
 						SummonerAcdDynamicId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoned_by_acdid, 1048575u, 0u)
 					};
-					class112_0[gparam_] = class2;
+					class112_0[gparam_] = monster2;
 				}
-				class2.Rarity = actorRarity;
-				class2.IsElite = snoMonster2.IsUnique || actorRarity != ActorRarity.Normal;
-				class2.IsSelected = ptr->IsSelected != uint.MaxValue;
-				if (class2.IsSelected) {
-					IActor_0 = class2;
+				monster2.Rarity = actorRarity;
+				monster2.IsElite = snoMonster2.IsUnique || actorRarity != ActorRarity.Normal;
+				monster2.IsSelected = ptr->IsSelected != uint.MaxValue;
+				if (monster2.IsSelected) {
+					IActor_0 = monster2;
 				}
-				smethod_0(struct7_, class2);
-				class2.list_0.Clear();
-				CoreCollector.ACDCollector.method_12(class2.list_0);
-				if (num11 < class2.CurHealth) {
-					num5 += class2.CurHealth - num11;
+				smethod_0(struct7_, monster2);
+				monster2.list_0.Clear();
+				CoreCollector.ACDCollector.method_12(monster2.list_0);
+				if (num11 < monster2.CurHealth) {
+					num5 += monster2.CurHealth - num11;
 				}
-				class2.MaxHealth = value;
-				class2.CurHealth = num11;
-				class2.CollisionCoordinate.Set(ptr->CollisionX, ptr->CollisionY, ptr->CollisionZ);
-				class2.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
+				monster2.MaxHealth = value;
+				monster2.CurHealth = num11;
+				monster2.CollisionCoordinate.Set(ptr->CollisionX, ptr->CollisionY, ptr->CollisionZ);
+				monster2.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
 				sSceneID_Encrypted = struct7_.SSceneID_Encrypted;
 				sWorldID_Encrypted = struct7_.SWorldID_Encrypted;
-				smethod_1(class2, sWorldID_Encrypted, sSceneID_Encrypted);
-				class2.RadiusScaled = struct7_.CollisionRadius;
-				class2.RadiusBottom = ptr->BottomRadius;
-				class2.CreatedAtInGameTick = ptr->CreationTick;
-				class2.method_25();
+				smethod_1(monster2, sWorldID_Encrypted, sSceneID_Encrypted);
+				monster2.RadiusScaled = struct7_.CollisionRadius;
+				monster2.RadiusBottom = ptr->BottomRadius;
+				monster2.CreatedAtInGameTick = ptr->CreationTick;
+				monster2.method_25();
 				if (snoMonster2.Priority == MonsterPriority.keywarden && CoreCollector.LocalPlayer.SnoArea != null) {
-					IWorldCoordinate_0 = class2.FloorCoordinate;
-					Int32_2 = CoreCollector.LocalPlayer.SnoArea.Act;
+					IWorldCoordinate_0 = monster2.FloorCoordinate;
+					Act2 = CoreCollector.LocalPlayer.SnoArea.Act;
 				}
 				if (acdid == CoreCollector.D3Memory.SelectedActor1_AcdId) {
-					IMonster_0 = class2;
+					IMonster_0 = monster2;
 				}
 				if (acdid == CoreCollector.D3Memory.SelectedActor2_AcdId) {
-					IMonster_1 = class2;
+					IMonster_1 = monster2;
 				}
 				if (flag4) {
-					class2.Illusion = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, 264185u, 0.0) != 0.0;
-					class2.Frozen = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Frozen, 1048575u, 0.0) == 1.0;
-					class2.Chilled = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Chilled, 1048575u, 0.0) == 1.0;
-					class2.Slow = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Slow, 1048575u, 0.0) == 1.0;
-					class2.Stunned = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stunned, 1048575u, 0.0) == 1.0;
-					class2.Untargetable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Untargetable, 1048575u, 0.0) == 1.0;
-					class2.Invulnerable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Invulnerable, 1048575u, 0.0) == 1.0;
-					class2.Burrowed = class2.Untargetable || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Burrowed, 1048575u, 0.0) == 1.0;
-					class2.Stealthed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stealthed, 1048575u, 0.0) == 1.0;
-					class2.Blind = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Blind, 1048575u, 0.0) == 1.0;
-					class2.Bleeding = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Bleeding, 1048575u, 0.0) == 1.0;
-					class2.Hidden = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Hidden, 1048575u, 0.0) == 1.0;
-					class2.Invisible = class2.Burrowed || class2.Stealthed || class2.Hidden;
-					class2.Palmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0;
-					class2.Haunted = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0;
-					class2.MarkedForDeath = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0;
-					class2.Locust = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0;
-					class2.Piranhas = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_3_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_5_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_6_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_1_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0;
-					class2.Cursed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_DecrepifyPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_LeechPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_FrailtyPassiveEffect.Sno, 0.0) == 1.0;
-					class2.Strongarmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.StrongarmBracers.Sno, 0.0) == 1.0;
-					class2.Phoenixed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Generic_ItemPassiveUniqueRing733x1.Sno, 0.0) == 1.0;
-					class2.DotDpsApplied = CoreCollector.ACDCollector.method_7(CoreCollector.Controller.Sno.Attributes.DOT_DPS, 1048575u);
-					if (class2.SnoMonster.Priority >= MonsterPriority.keywarden || class2.IsElite) {
-						CoreCollector.ACDCollector.method_3(out var animSnoEnum_2, out var acdAnimationState_2);
-						class2.Animation = animSnoEnum_2;
-						class2.AnimationState = acdAnimationState_2;
+					monster2.Illusion = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, 264185u, 0.0) != 0.0;
+					monster2.Frozen = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Frozen, 1048575u, 0.0) == 1.0;
+					monster2.Chilled = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Chilled, 1048575u, 0.0) == 1.0;
+					monster2.Slow = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Slow, 1048575u, 0.0) == 1.0;
+					monster2.Stunned = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stunned, 1048575u, 0.0) == 1.0;
+					monster2.Untargetable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Untargetable, 1048575u, 0.0) == 1.0;
+					monster2.Invulnerable = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Invulnerable, 1048575u, 0.0) == 1.0;
+					monster2.Burrowed = monster2.Untargetable || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Burrowed, 1048575u, 0.0) == 1.0;
+					monster2.Stealthed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Stealthed, 1048575u, 0.0) == 1.0;
+					monster2.Blind = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Blind, 1048575u, 0.0) == 1.0;
+					monster2.Bleeding = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Bleeding, 1048575u, 0.0) == 1.0;
+					monster2.Hidden = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Hidden, 1048575u, 0.0) == 1.0;
+					monster2.Invisible = monster2.Burrowed || monster2.Stealthed || monster2.Hidden;
+					monster2.Palmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Monk_ExplodingPalm.Sno, 0.0) == 1.0;
+					monster2.Haunted = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Haunt.Sno, 0.0) == 1.0;
+					monster2.MarkedForDeath = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.DemonHunter_MarkedForDeath.Sno, 0.0) == 1.0;
+					monster2.Locust = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_0_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_LocustSwarm.Sno, 0.0) == 1.0;
+					monster2.Piranhas = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_A, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_3_Visual_Effect_B, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_C, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_5_Visual_Effect_D, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_6_Visual_Effect_E, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_1_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.WitchDoctor_Piranhas.Sno, 0.0) == 1.0;
+					monster2.Cursed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_DecrepifyPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_LeechPassiveEffect.Sno, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Necromancer_Passive_FrailtyPassiveEffect.Sno, 0.0) == 1.0;
+					monster2.Strongarmed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_2_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.StrongarmBracers.Sno, 0.0) == 1.0;
+					monster2.Phoenixed = CoreCollector.ACDCollector.method_8(CoreCollector.Controller.Sno.Attributes.Power_Buff_4_Visual_Effect_None, CoreCollector.Controller.Sno.SnoPowers.Generic_ItemPassiveUniqueRing733x1.Sno, 0.0) == 1.0;
+					monster2.DotDpsApplied = CoreCollector.ACDCollector.method_7(CoreCollector.Controller.Sno.Attributes.DOT_DPS, 1048575u);
+					if (monster2.SnoMonster.Priority >= MonsterPriority.keywarden || monster2.IsElite) {
+						CoreCollector.ACDCollector.method_3(out var animSnoEnum, out var acdAnimationState);
+						monster2.Animation = animSnoEnum;
+						monster2.AnimationState = acdAnimationState;
 					}
 				}
-				if (class2.IsElite) {
-					Boolean_1 = true;
+				if (monster2.IsElite) {
+					IsEliteNearby = true;
 				}
-				if (class2.IsOnScreen && Math.Abs(CoreCollector.LocalPlayer.FloorCoordinate.Z - class2.FloorCoordinate.Z) <= 16f) {
-					if (class2.IsElite) {
-						Boolean_2 = true;
+				if (monster2.IsOnScreen && Math.Abs(CoreCollector.LocalPlayer.FloorCoordinate.Z - monster2.FloorCoordinate.Z) <= 16f) {
+					if (monster2.IsElite) {
+						IsEliteOnScreen = true;
 					}
-					if (class2.SnoMonster.Priority > MonsterPriority_0) {
-						MonsterPriority_0 = class2.SnoMonster.Priority;
+					if (monster2.SnoMonster.Priority > MonsterPriority_0) {
+						MonsterPriority_0 = monster2.SnoMonster.Priority;
 					}
-					if (class2.SnoMonster.Priority == MonsterPriority.goblin) {
-						Boolean_3 = true;
+					if (monster2.SnoMonster.Priority == MonsterPriority.goblin) {
+						IsGoblinOnScreen = true;
 					}
 				}
-				list_3.Add(class2);
+				list_3.Add(monster2);
 				if (flag3) {
-					list_0.Add(class2);
-					list_1.Add(class2);
-					class2.Attackable = class2.IsOnScreen && !class2.Untargetable && !class2.Invisible;
-					if (class2.IsOnScreen && !class2.Untargetable && !class2.Invisible) {
+					Monsters.Add(monster2);
+					AliveMonsters.Add(monster2);
+					monster2.Attackable = monster2.IsOnScreen && !monster2.Untargetable && !monster2.Invisible;
+					if (monster2.IsOnScreen && !monster2.Untargetable && !monster2.Invisible) {
 						Int32_1++;
 					}
 				} else {
-					class2.Attackable = false;
+					monster2.Attackable = false;
 				}
 			end_IL_019d:;
 			}
@@ -741,39 +741,39 @@ internal class ActorCollector
 			CoreCollector.DAF.ClearObjectManagerAddr();
 			return false;
 		}
-		foreach (MonsterPack item7 in list_2) {
-			foreach (Monster item8 in item7.Class112_0.Values) {
-				item7.Class112_2[item8.MaxHealth] = item8;
+		foreach (MonsterPack item7 in MonsterPacks) {
+			foreach (Monster item8 in item7.MonstersAlive2.Values) {
+				item7.MonstersUnknown2[item8.MaxHealth] = item8;
 			}
-			item7.Class112_0.Clear();
+			item7.MonstersAlive2.Clear();
 		}
-		list_0.Sort((Monster imonster_0, Monster imonster_1) => -((int)imonster_0.Rarity).CompareTo((int)imonster_1.Rarity));
-		foreach (Monster Monster_0 in list_0) {
-			if (Monster_0.Pack != null) {
-				(Monster_0.Pack as MonsterPack)?.Class112_2.Remove(Monster_0.MaxHealth);
-				if (Monster_0.CurHealth > 0.0) {
-					(Monster_0.Pack as MonsterPack).Class112_0[Monster_0.MaxHealth] = Monster_0;
+		Monsters.Sort((Monster imonster_0, Monster imonster_1) => -((int)imonster_0.Rarity).CompareTo((int)imonster_1.Rarity));
+		foreach (Monster monster3 in Monsters) {
+			if (monster3.Pack != null) {
+				(monster3.Pack as MonsterPack)?.MonstersUnknown2.Remove(monster3.MaxHealth);
+				if (monster3.CurHealth > 0.0) {
+					(monster3.Pack as MonsterPack).MonstersAlive2[monster3.MaxHealth] = monster3;
 				} else {
-					(Monster_0.Pack as MonsterPack).Class112_1[Monster_0.MaxHealth] = Monster_0;
+					(monster3.Pack as MonsterPack).MonstersKilled2[monster3.MaxHealth] = monster3;
 				}
 			} else {
-				if (Monster_0.AffixSnoList == null) {
+				if (monster3.AffixSnoList == null) {
 					continue;
 				}
-				if (Monster_0.Rarity != ActorRarity.Champion && Monster_0.Rarity != ActorRarity.Rare) {
-					if (Monster_0.Rarity != ActorRarity.RareMinion) {
+				if (monster3.Rarity != ActorRarity.Champion && monster3.Rarity != ActorRarity.Rare) {
+					if (monster3.Rarity != ActorRarity.RareMinion) {
 						continue;
 					}
-					if (Monster_0.SummonerAcdDynamicId != 0) {
+					if (monster3.SummonerAcdDynamicId != 0) {
 						continue;
 					}
-					string string_0 = string.Concat(Monster_0.AffixSnoList.Select((SnoMonsterAffix SnoMonsterAffix_0) => SnoMonsterAffix_0.NameLocalized));
-					MonsterPack monsterPack2 = list_2.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_1 == string_0 && imonsterPack_0.MinionSnoMonster == Monster_0.SnoMonster) as MonsterPack;
+					string string_0 = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
+					MonsterPack monsterPack2 = MonsterPacks.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_1 == string_0 && imonsterPack_0.MinionSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack2 == null) {
-						foreach (MonsterPack item9 in list_2) {
+						foreach (MonsterPack item9 in MonsterPacks) {
 							bool flag5 = true;
-							foreach (SnoMonsterAffix item10 in Monster_0.AffixSnoList) {
-								if (!item9.List_0.Contains(item10)) {
+							foreach (SnoMonsterAffix item10 in monster3.AffixSnoList) {
+								if (!item9.AffixSnoList2.Contains(item10)) {
 									flag5 = false;
 									break;
 								}
@@ -787,48 +787,48 @@ internal class ActorCollector
 							continue;
 						}
 						monsterPack2.String_1 = string_0;
-						monsterPack2.MinionSnoMonster = Monster_0.SnoMonster;
+						monsterPack2.MinionSnoMonster = monster3.SnoMonster;
 					}
-					monsterPack2.Class112_2.Remove(Monster_0.MaxHealth);
-					if (Monster_0.CurHealth > 0.0) {
-						monsterPack2.Class112_0[Monster_0.MaxHealth] = Monster_0;
+					monsterPack2.MonstersUnknown2.Remove(monster3.MaxHealth);
+					if (monster3.CurHealth > 0.0) {
+						monsterPack2.MonstersAlive2[monster3.MaxHealth] = monster3;
 					} else {
-						monsterPack2.Class112_1[Monster_0.MaxHealth] = Monster_0;
+						monsterPack2.MonstersKilled2[monster3.MaxHealth] = monster3;
 					}
 					monsterPack2.LastActive.Restart();
-					Monster_0.Pack = monsterPack2;
+					monster3.Pack = monsterPack2;
 				} else {
-					string string_1 = string.Concat(Monster_0.AffixSnoList.Select((SnoMonsterAffix SnoMonsterAffix_0) => SnoMonsterAffix_0.NameLocalized));
-					MonsterPack monsterPack4 = list_2.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_0 == string_1 && imonsterPack_0.LeadSnoMonster == Monster_0.SnoMonster) as MonsterPack;
+					string string_1 = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
+					MonsterPack monsterPack4 = MonsterPacks.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_0 == string_1 && imonsterPack_0.LeadSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack4 == null) {
 						monsterPack4 = new MonsterPack {
-							List_0 = Monster_0.AffixSnoList.ToList(),
+							AffixSnoList2 = monster3.AffixSnoList.ToList(),
 							String_0 = string_1,
-							IsFullChampionPack = (Monster_0.Rarity == ActorRarity.Champion),
-							LeadSnoMonster = Monster_0.SnoMonster
+							IsFullChampionPack = (monster3.Rarity == ActorRarity.Champion),
+							LeadSnoMonster = monster3.SnoMonster
 						};
-						list_2.Add(monsterPack4);
+						MonsterPacks.Add(monsterPack4);
 					}
-					monsterPack4.Class112_2.Remove(Monster_0.MaxHealth);
-					if (Monster_0.CurHealth > 0.0) {
-						monsterPack4.Class112_0[Monster_0.MaxHealth] = Monster_0;
+					monsterPack4.MonstersUnknown2.Remove(monster3.MaxHealth);
+					if (monster3.CurHealth > 0.0) {
+						monsterPack4.MonstersAlive2[monster3.MaxHealth] = monster3;
 					} else {
-						monsterPack4.Class112_1[Monster_0.MaxHealth] = Monster_0;
+						monsterPack4.MonstersKilled2[monster3.MaxHealth] = monster3;
 					}
 					monsterPack4.LastActive.Restart();
-					Monster_0.Pack = monsterPack4;
+					monster3.Pack = monsterPack4;
 				}
 			}
 		}
-		for (int num12 = list_2.Count - 1; num12 >= 0; num12--) {
-			MonsterPack monsterPack5 = list_2[num12] as MonsterPack;
-			if (monsterPack5.LastActive.ElapsedMilliseconds >= 60000 && monsterPack5.Class112_0.Count <= 0) {
-				list_2.RemoveAt(num12);
+		for (int num12 = MonsterPacks.Count - 1; num12 >= 0; num12--) {
+			MonsterPack monsterPack5 = MonsterPacks[num12] as MonsterPack;
+			if (monsterPack5.LastActive.ElapsedMilliseconds >= 60000 && monsterPack5.MonstersAlive2.Count <= 0) {
+				MonsterPacks.RemoveAt(num12);
 			}
 		}
 		MonsterHitpointDecrease.Add(num5);
 		foreach (Actor item11 in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
-			foreach (Monster item12 in list_1) {
+			foreach (Monster item12 in AliveMonsters) {
 				if (item12.SummonerAcdDynamicId == item11.SummonerId) {
 					(item12 as Monster).IsQuestMonster = true;
 				}
@@ -836,67 +836,67 @@ internal class ActorCollector
 		}
 		try {
 			EventHandler_0?.Invoke(this, EventArgs.Empty);
-		} catch (Exception exception_3) {
-			Logger.LogException(exception_3.Message);
+		} catch (Exception exception2) {
+			Logger.LogException(exception2.Message);
 		}
 		return true;
 	}
 
-	private static void smethod_0(r_ACD struct7_0, Monster Monster_0)
+	private static void smethod_0(r_ACD acd, Monster monster)
 	{
-		List<SnoMonsterAffix> list = Monster_0.AffixSnoList;
-		list?.Clear();
-		SnoMonsterAffix monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_0);
+		List<SnoMonsterAffix> affixSnoList = monster.AffixSnoList;
+		affixSnoList?.Clear();
+		SnoMonsterAffix monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_0);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_1);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_1);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_2);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_2);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_3);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_3);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_4);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_4);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_5);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_5);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_6);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_6);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		monsterAffix = SnoData.Monsters.GetMonsterAffix(struct7_0.monster_affix_id_7);
+		monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_7);
 		if (monsterAffix != null) {
-			(list ?? (list = new List<SnoMonsterAffix>())).Add(monsterAffix);
+			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
-		if (list != null) {
-			list.Sort((SnoMonsterAffix SnoMonsterAffix_0, SnoMonsterAffix SnoMonsterAffix_1) => SnoMonsterAffix_0.NameLocalized.CompareTo(SnoMonsterAffix_1.NameLocalized));
-			Monster_0.AffixSnoList = list;
+		if (affixSnoList != null) {
+			affixSnoList.Sort((SnoMonsterAffix snoMonsterAffix, SnoMonsterAffix snoMonsterAffix2) => snoMonsterAffix.NameLocalized.CompareTo(snoMonsterAffix2.NameLocalized));
+			monster.AffixSnoList = affixSnoList;
 		}
 	}
 
-	private Actor method_4(uint uint_0, uint uint_1, SnoActor SnoActor_0, GizmoType gizmoType_0, uint uint_2)
+	private Actor method_4(uint acdid, uint annId, SnoActor snoActor, GizmoType gizmoType, uint uint_2)
 	{
-		if (SnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && SnoActor_0.Sno != ActorSnoEnum._x1_westm_bridge && SnoActor_0.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
-			if (SnoActor_0.Sno == ActorSnoEnum._a3dun_keep_bridge) {
+		if (snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && snoActor.Sno != ActorSnoEnum._x1_westm_bridge && snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
+			if (snoActor.Sno == ActorSnoEnum._a3dun_keep_bridge) {
 				return null;
 			}
-			if (SnoActor_0.Sno == ActorSnoEnum._caout_target_dummy) {
+			if (snoActor.Sno == ActorSnoEnum._caout_target_dummy) {
 				return null;
 			}
-			if (SnoActor_0.Sno == ActorSnoEnum._trdun_crypt_skeleton_king_throne_parts) {
+			if (snoActor.Sno == ActorSnoEnum._trdun_crypt_skeleton_king_throne_parts) {
 				return null;
 			}
-			SkillEffectRule skillEffectRule = SnoData.Actors.GetSkillEffectRule(SnoActor_0.Sno);
+			SkillEffectRule skillEffectRule = SnoData.Actors.GetSkillEffectRule(snoActor.Sno);
 			if (skillEffectRule != null) {
 				if ((skillEffectRule.Type == SkillEffectType.fetish || skillEffectRule.Type == SkillEffectType.zombiedog || skillEffectRule.Type == SkillEffectType.gargantuan || skillEffectRule.Type == SkillEffectType.sentry || skillEffectRule.Type == SkillEffectType.hydra) && uint_2 != CoreCollector.LocalPlayer.SummonerId) {
 					return null;
@@ -921,87 +921,87 @@ internal class ActorCollector
 						return null;
 					}
 				}
-				return new SkillEffect(uint_0, uint_1, SnoActor_0, skillEffectRule);
+				return new SkillEffect(acdid, annId, snoActor, skillEffectRule);
 			}
-			ActorShrineTypeInfo actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(SnoActor_0.Sno);
+			ActorShrineTypeInfo actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(snoActor.Sno);
 			if (actorShrineTypeInfo != null) {
-				return new Shrine(uint_0, uint_1, actorShrineTypeInfo);
+				return new Shrine(acdid, annId, actorShrineTypeInfo);
 			}
-			if (SnoActor_0.Kind == ActorKind.Gold) {
+			if (snoActor.Kind == ActorKind.Gold) {
 				uint value = Convert.ToUInt32(CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gold, 1048575u, 0.0));
-				return new Actor(uint_0, uint_1, SnoActor_0) {
+				return new Actor(acdid, annId, snoActor) {
 					Amount = value
 				};
 			}
-			if (SnoActor_0.Kind == ActorKind.QuestActivate) {
-				return new MapObject(uint_0, uint_1, SnoActor_0) {
+			if (snoActor.Kind == ActorKind.QuestActivate) {
+				return new MapObject(acdid, annId, snoActor) {
 					SummonerId = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__summoner_id, 1048575u, 0u)
 				};
 			}
-			if (SnoActor_0.Kind == ActorKind.HealthGlobe) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.HealthGlobe) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.PowerGlobe) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.PowerGlobe) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.RiftOrb) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.RiftOrb) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.Stash) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.Stash) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.KanaiCube) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.KanaiCube) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.Waypoint) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.Waypoint) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind == ActorKind.BookOfCain) {
-				return new Actor(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind == ActorKind.BookOfCain) {
+				return new Actor(acdid, annId, snoActor);
 			}
-			if (SnoActor_0.Kind != ActorKind.Portal && gizmoType_0 != GizmoType.Portal) {
-				if (SnoActor_0.Kind == ActorKind.Chest) {
-					return new MapObject(uint_0, uint_1, SnoActor_0);
+			if (snoActor.Kind != ActorKind.Portal && gizmoType != GizmoType.Portal) {
+				if (snoActor.Kind == ActorKind.Chest) {
+					return new MapObject(acdid, annId, snoActor);
 				}
-				if (SnoActor_0.Kind == ActorKind.CursedEvent) {
-					return new MapObject(uint_0, uint_1, SnoActor_0);
+				if (snoActor.Kind == ActorKind.CursedEvent) {
+					return new MapObject(acdid, annId, snoActor);
 				}
-				if (SnoActor_0.Kind == ActorKind.ChestNormal) {
-					return new MapObject(uint_0, uint_1, SnoActor_0);
+				if (snoActor.Kind == ActorKind.ChestNormal) {
+					return new MapObject(acdid, annId, snoActor);
 				}
-				if (SnoActor_0.Kind != ActorKind.Obstacle && gizmoType_0 != GizmoType.BreakableDoor && gizmoType_0 != GizmoType.BreakableChest) {
-					if (SnoActor_0.Kind == ActorKind.ArmorRack) {
-						return new MapObject(uint_0, uint_1, SnoActor_0);
+				if (snoActor.Kind != ActorKind.Obstacle && gizmoType != GizmoType.BreakableDoor && gizmoType != GizmoType.BreakableChest) {
+					if (snoActor.Kind == ActorKind.ArmorRack) {
+						return new MapObject(acdid, annId, snoActor);
 					}
-					if (SnoActor_0.Kind == ActorKind.WeaponRack) {
-						return new MapObject(uint_0, uint_1, SnoActor_0);
+					if (snoActor.Kind == ActorKind.WeaponRack) {
+						return new MapObject(acdid, annId, snoActor);
 					}
-					switch (gizmoType_0) {
+					switch (gizmoType) {
 						case GizmoType.Door:
-							return new Door(uint_0, uint_1, SnoActor_0);
+							return new Door(acdid, annId, snoActor);
 						case GizmoType.Headstone: {
 								uint uint_3 = CoreCollector.ACDCollector.method_10(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
 								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uint_3);
-								return new HeadStone(uint_0, uint_1, SnoActor_0, uint_3, iplayer_);
+								return new HeadStone(acdid, annId, snoActor, uint_3, iplayer_);
 							}
 						default:
-							if (SnoActor_0.Kind == ActorKind.DeadBody) {
-								return new MapObject(uint_0, uint_1, SnoActor_0);
+							if (snoActor.Kind == ActorKind.DeadBody) {
+								return new MapObject(acdid, annId, snoActor);
 							}
-							if (SnoActor_0.Kind == ActorKind.Banner) {
-								return new TownBanner(uint_0, uint_1, SnoActor_0);
+							if (snoActor.Kind == ActorKind.Banner) {
+								return new TownBanner(acdid, annId, snoActor);
 							}
-							if (SnoActor_0.Kind == ActorKind.NoWalk) {
-								return new Actor(uint_0, uint_1, SnoActor_0);
+							if (snoActor.Kind == ActorKind.NoWalk) {
+								return new Actor(acdid, annId, snoActor);
 							}
-							return gizmoType_0 switch {
-								GizmoType.Chest => new MapObject(uint_0, uint_1, SnoActor_0),
-								GizmoType.LoreChest => new MapObject(uint_0, uint_1, SnoActor_0),
+							return gizmoType switch {
+								GizmoType.Chest => new MapObject(acdid, annId, snoActor),
+								GizmoType.LoreChest => new MapObject(acdid, annId, snoActor),
 								_ => null,
 							};
 					}
 				}
-				return new MonsterObstacle(uint_0, uint_1, SnoActor_0);
+				return new MonsterObstacle(acdid, annId, snoActor);
 			}
 			SnoArea snoArea = null;
 			long ptr_portal_info = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].ptr_portal_info;
@@ -1011,129 +1011,129 @@ internal class ActorCollector
 				uint sno = GameWindowManager.Read<uint>(ptr_portal_info + 8);
 				snoArea = SnoData.Areas.GetSnoArea(sno);
 			}
-			Portal @class = new(uint_0, uint_1, SnoActor_0, snoArea, uint_4);
+			Portal portal = new(acdid, annId, snoActor, snoArea, uint_4);
 			if (snoArea != null) {
 				try {
-					OnPortalFound?.Invoke(this, @class);
+					OnPortalFound?.Invoke(this, portal);
 				} catch (Exception exception_) {
 					Logger.LogException(exception_.Message);
 				}
 			}
-			return @class;
+			return portal;
 		}
-		return new Door(uint_0, uint_1, SnoActor_0);
+		return new Door(acdid, annId, snoActor);
 	}
 
-	private bool method_5(Actor class299_0)
+	private bool method_5(Actor actor)
 	{
-		if (class299_0.SnoActor.Sno == ActorSnoEnum._p1_lr_tieredrift_nephalem) {
+		if (actor.SnoActor.Sno == ActorSnoEnum._p1_lr_tieredrift_nephalem) {
 			CoreCollector.ACDCollector.method_3(out var animSnoEnum_, out var _);
 			if (animSnoEnum_ == AnimSnoEnum._p1_omninpc_female_lr_tieredrift_nephalem_idle_01) {
-				IActor_1 = class299_0;
+				IActor_1 = actor;
 			}
 		}
-		if (class299_0.SnoActor.Sno == ActorSnoEnum._tyrael_heaven) {
-			IActor_2 = class299_0;
+		if (actor.SnoActor.Sno == ActorSnoEnum._tyrael_heaven) {
+			IActor_2 = actor;
 		}
-		if (class299_0.SnoActor.Sno == ActorSnoEnum._x1_openworld_lootrunobelisk_b) {
-			IActor_3 = class299_0;
+		if (actor.SnoActor.Sno == ActorSnoEnum._x1_openworld_lootrunobelisk_b) {
+			IActor_3 = actor;
 		}
-		if ((class299_0.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep || class299_0.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep_reverse) && CoreCollector.ACDCollector.method_4() == AnimSnoEnum._arcaneenchanteddummy_death) {
+		if ((actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep || actor.SnoActor.Sno == ActorSnoEnum._monsteraffix_arcaneenchanted_petsweep_reverse) && CoreCollector.ACDCollector.method_4() == AnimSnoEnum._arcaneenchanteddummy_death) {
 			return false;
 		}
-		if (class299_0 is SkillEffect @class) {
-			List<SkillEffect> list = Class112_0.GetValueOrDefault(@class.SkillEffectRule.Type);
+		if (actor is SkillEffect skillEffect) {
+			List<SkillEffect> list = Class112_0.GetValueOrDefault(skillEffect.SkillEffectRule.Type);
 			if (list == null) {
 				list = new List<SkillEffect>();
-				Class112_0[@class.SkillEffectRule.Type] = list;
+				Class112_0[skillEffect.SkillEffectRule.Type] = list;
 			}
-			list.Add(@class);
+			list.Add(skillEffect);
 			return true;
 		}
-		if (class299_0 is Portal class2) {
-			Class112_1[class2.AnnId] = class2;
-			class2.ActorAvailable = true;
-			class2.ActorLastAvailable.Restart();
+		if (actor is Portal portal) {
+			Class112_1[portal.AnnId] = portal;
+			portal.ActorAvailable = true;
+			portal.ActorLastAvailable.Restart();
 			return true;
 		}
-		if (class299_0 is Shrine class3) {
-			class3.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || class299_0.Boolean_0;
-			class3.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
-			CoreCollector.Class412_0.method_3(class3);
-			List_0.Add(class3);
+		if (actor is Shrine shrine) {
+			shrine.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
+			shrine.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
+			CoreCollector.Class412_0.method_3(shrine);
+			Shrines.Add(shrine);
 			return true;
 		}
-		if (class299_0.SnoActor.Kind == ActorKind.CursedEvent) {
-			class299_0.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
-			if (class299_0.IsOperated && class299_0.SnoActor.Sno == ActorSnoEnum._a1dun_leor_chest_rare_garrach && CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0) {
-				class299_0.IsOperated = true;
+		if (actor.SnoActor.Kind == ActorKind.CursedEvent) {
+			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0.0) == 1.0;
+			if (actor.IsOperated && actor.SnoActor.Sno == ActorSnoEnum._a1dun_leor_chest_rare_garrach && CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0) {
+				actor.IsOperated = true;
 			}
 			return true;
 		}
-		if (class299_0 is MonsterObstacle) {
-			if (class299_0.Hitpoints > 0f) {
-				class299_0.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0;
-				class299_0.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0;
-				if (!class299_0.IsDisabled && !class299_0.IsOperated) {
+		if (actor is MonsterObstacle) {
+			if (actor.Hitpoints > 0f) {
+				actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0;
+				actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0;
+				if (!actor.IsDisabled && !actor.IsOperated) {
 					return true;
 				}
 				return false;
 			}
-			class299_0.Hitpoints = 0f;
+			actor.Hitpoints = 0f;
 			return false;
 		}
-		if (class299_0 is Door) {
-			class299_0.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || class299_0.Boolean_0 || class299_0.Untargetable;
-			class299_0.IsOperated = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0) == 1;
-			if (class299_0.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_a || class299_0.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_b || class299_0.SnoActor.Sno == ActorSnoEnum._caout_stingingwinds_arena_bridge || class299_0.SnoActor.Sno == ActorSnoEnum._a4dun_spire_sigil_door_fate || class299_0.SnoActor.Sno == ActorSnoEnum._a1dun_leor_spike_trapdoor || class299_0.SnoActor.Sno == ActorSnoEnum._catapult_a3dunkeep_warmachines_snow_firing) {
-				class299_0.IsDisabled = true;
+		if (actor is Door) {
+			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
+			actor.IsOperated = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__Gizmo_State, 1048575u, 0) == 1;
+			if (actor.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_a || actor.SnoActor.Sno == ActorSnoEnum._a1dunleor_interactive_door_locked_b || actor.SnoActor.Sno == ActorSnoEnum._caout_stingingwinds_arena_bridge || actor.SnoActor.Sno == ActorSnoEnum._a4dun_spire_sigil_door_fate || actor.SnoActor.Sno == ActorSnoEnum._a1dun_leor_spike_trapdoor || actor.SnoActor.Sno == ActorSnoEnum._catapult_a3dunkeep_warmachines_snow_firing) {
+				actor.IsDisabled = true;
 			}
-			if (!class299_0.IsDisabled && !class299_0.IsOperated) {
-				List_2.Add(class299_0 as IClickableActor);
+			if (!actor.IsDisabled && !actor.IsOperated) {
+				Doors.Add(actor as IClickableActor);
 			}
 			return true;
 		}
-		if (class299_0 is TownBanner) {
-			TownBanner class4 = class299_0 as TownBanner;
-			ITownBanner_0[class4.Index] = class4;
-			class4.Usable = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
+		if (actor is TownBanner) {
+			TownBanner townBanner = actor as TownBanner;
+			ITownBanner_0[townBanner.Index] = townBanner;
+			townBanner.Usable = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
 		}
-		if (class299_0 is HeadStone) {
-			HeadStone item = class299_0 as HeadStone;
+		if (actor is HeadStone) {
+			HeadStone item = actor as HeadStone;
 			List_1.Add(item);
 			return true;
 		}
-		if (class299_0.SnoActor.Kind == ActorKind.QuestActivate) {
-			class299_0.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || class299_0.Boolean_0 || class299_0.Untargetable;
-			class299_0.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
+		if (actor.SnoActor.Kind == ActorKind.QuestActivate) {
+			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0 || actor.Untargetable;
+			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
 			return true;
 		}
-		if (class299_0.IsClickable) {
-			class299_0.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || class299_0.Boolean_0;
-			class299_0.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
+		if (actor.IsClickable) {
+			actor.IsDisabled = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Deleted_On_Server, 1048575u, 0.0) == 1.0 || actor.Boolean_0;
+			actor.IsOperated = CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Gizmo_Has_Been_Operated, 1048575u, 0.0) == 1.0 || CoreCollector.ACDCollector.method_8(SnoData.Attributes.Map.Attribute__Chest_Open, 1048575u, 0.0) == 1.0;
 		}
 		return true;
 	}
 
-	internal static void smethod_1(Actor class299_0, uint uint_0, uint uint_1)
+	internal static void smethod_1(Actor player, uint sWorldIDEncrypted, uint sSceneIDEncrypted)
 	{
-		if (class299_0.WorldId != uint_0 || class299_0.WorldSno == 0 || class299_0.Scene == null || class299_0.Scene.NavMeshId != uint_1) {
-			smethod_2(class299_0, uint_0, uint_1);
+		if (player.WorldId != sWorldIDEncrypted || player.WorldSno == 0 || player.Scene == null || player.Scene.NavMeshId != sSceneIDEncrypted) {
+			smethod_2(player, sWorldIDEncrypted, sSceneIDEncrypted);
 		}
 	}
 
-	internal static void smethod_2(Actor class299_0, uint uint_0, uint uint_1)
+	internal static void smethod_2(Actor player, uint worldId, uint sSceneIDEncrypted)
 	{
-		class299_0.WorldId = uint_0;
-		class299_0.WorldSno = CoreCollector.SceneCollector.method_2(class299_0.WorldId);
-		class299_0.SnoWorld = SnoData.Worlds.GetWorld(class299_0.WorldSno);
-		class299_0.Scene = CoreCollector.SceneCollector.method_1(class299_0.WorldId, uint_1);
+		player.WorldId = worldId;
+		player.WorldSno = CoreCollector.SceneCollector.method_2(player.WorldId);
+		player.SnoWorld = SnoData.Worlds.GetWorld(player.WorldSno);
+		player.Scene = CoreCollector.SceneCollector.method_1(player.WorldId, sSceneIDEncrypted);
 	}
 
-	public Actor method_6(ActorSnoEnum actorSnoEnum_0)
+	public Actor method_6(ActorSnoEnum actorSnoEnum)
 	{
 		Actor actor = null;
-		foreach (Actor item in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Sno == actorSnoEnum_0)) {
+		foreach (Actor item in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Sno == actorSnoEnum)) {
 			if (actor == null || item.CentralXyDistanceToMe < actor.CentralXyDistanceToMe) {
 				actor = item;
 			}
@@ -1141,29 +1141,29 @@ internal class ActorCollector
 		return actor;
 	}
 
-	private unsafe void method_7(Player class310_0)
+	private unsafe void method_7(Player player)
 	{
 		if (CoreCollector.IsLoading) {
 			return;
 		}
-		List<Skill> list = class310_0.class386_0.Where((Skill class5) => class5 != null).Concat(new Skill[1] { class310_0.Powers.HealthPotionSkill as Skill }).ToList();
-		class310_0.list_3.Clear();
+		List<Skill> list = player.SkillSlots.Where((Skill skill) => skill != null).Concat(new Skill[1] { player.Powers.HealthPotionSkill as Skill }).ToList();
+		player.list_3.Clear();
 		foreach (Skill item2 in list) {
 			if (item2.IsOnCooldown) {
-				class310_0.list_3.Add(item2);
+				player.list_3.Add(item2);
 			}
 			item2.IsOnCooldown = false;
 			item2.CooldownStartTick = 0;
 			item2.CooldownFinishTick = 0;
 		}
-		foreach (Buff value in class310_0.powerSno2buff.Values) {
+		foreach (Buff value in player.powerSno2buff.Values) {
 			(value as Buff).Active = false;
 		}
-		class310_0.ParagonPointsAvailableTotal = 0;
-		Array.Clear(class310_0.ParagonPointsAvailable, 0, class310_0.ParagonPointsAvailable.Length);
-		class310_0.int_13 = 0;
-		class310_0.bool_17 = false;
-		class310_0.method_58();
+		player.ParagonPointsAvailableTotal = 0;
+		Array.Clear(player.ParagonPointsAvailable, 0, player.ParagonPointsAvailable.Length);
+		player.int_13 = 0;
+		player.bool_17 = false;
+		player.method_58();
 		float num = 0f;
 		float num2 = 0f;
 		float num3 = 0f;
@@ -1176,11 +1176,11 @@ internal class ActorCollector
 		float num9 = 0f;
 		bool bool_ = false;
 		int num10 = 0;
-		class310_0.bool_13 = false;
+		player.SkillOverrideActive = false;
 		bool flag2 = false;
-		int count = class310_0.list_0.Count;
+		int count = player.list_0.Count;
 		for (int num11 = 0; num11 < count; num11++) {
-			r_AttributeEntry r_AttributeEntry2 = class310_0.list_0[num11];
+			r_AttributeEntry r_AttributeEntry2 = player.list_0[num11];
 			try {
 				int num12 = (int)(r_AttributeEntry2.uint_0 & 0xFFF);
 				if (num12 <= 0 || num12 >= SnoData.Attributes.ByIndex.Count) {
@@ -1195,25 +1195,25 @@ internal class ActorCollector
 				}
 				switch (acdAttribute.Code) {
 					case "Buff_Icon_End_Tick9":
-						smethod_7(class310_0, num13, num14, 9, ref bool_);
+						smethod_7(player, num13, num14, 9, ref bool_);
 						break;
 					case "Gold_PickUp_Radius":
-						class310_0.Stats.PickupRange = (float)Math.Floor(5.5f + num15);
+						player.Stats.PickupRange = (float)Math.Floor(5.5f + num15);
 						break;
 					case "Buff_Icon_End_Tick8":
-						smethod_7(class310_0, num13, num14, 8, ref bool_);
+						smethod_7(player, num13, num14, 8, ref bool_);
 						break;
 					case "Strength_Total":
-						class310_0.Stats.Strength = (float)Math.Floor(num15);
+						player.Stats.Strength = (float)Math.Floor(num15);
 						break;
 					case "Damage_Dealt_Percent_Bonus":
-						class310_0.Offense.ElementalDamageBonus[num13] = num15;
-						if (num15 > class310_0.Offense.HighestElementalDamageBonus) {
-							class310_0.Offense.HighestElementalDamageBonus = num15;
+						player.Offense.ElementalDamageBonus[num13] = num15;
+						if (num15 > player.Offense.HighestElementalDamageBonus) {
+							player.Offense.HighestElementalDamageBonus = num15;
 						}
 						break;
 					case "Health_Globe_Bonus_Health":
-						class310_0.Defense.GlobeBonusHealth = (float)Math.Round(num15, 0);
+						player.Defense.GlobeBonusHealth = (float)Math.Round(num15, 0);
 						break;
 					case "Alt_Experience_Next_Hi":
 						num5 = (uint)num14;
@@ -1222,182 +1222,182 @@ internal class ActorCollector
 						num8 = (uint)num14;
 						break;
 					case "Highest_Hero_Solo_Rift_Level":
-						class310_0.HighestHeroSoloRiftLevel = num14;
+						player.HighestHeroSoloRiftLevel = num14;
 						break;
 					case "Gold_Find_Total":
-						class310_0.Stats.GoldFind = (float)Math.Round(num15 * 100f, 0);
+						player.Stats.GoldFind = (float)Math.Round(num15 * 100f, 0);
 						break;
 					case "Skill_Override_Active":
-						class310_0.bool_13 = num14 == 1;
+						player.SkillOverrideActive = num14 == 1;
 						break;
 					case "Damage_Percent_Reduction_From_Elites":
-						class310_0.Defense.DRElite = num15;
+						player.Defense.DRElite = num15;
 						break;
 					case "Buff_Icon_Count30":
-						smethod_3(class310_0, num13, num14, 30, ref bool_);
+						smethod_3(player, num13, num14, 30, ref bool_);
 						break;
 					case "Buff_Icon_Count31":
-						smethod_3(class310_0, num13, num14, 31, ref bool_);
+						smethod_3(player, num13, num14, 31, ref bool_);
 						break;
 					case "Highest_Solo_Rift_Level":
-						class310_0.HighestSoloRiftLevel = num14;
+						player.HighestSoloRiftLevel = num14;
 						break;
 					case "Buff_Icon_Count19":
-						smethod_3(class310_0, num13, num14, 19, ref bool_);
+						smethod_3(player, num13, num14, 19, ref bool_);
 						break;
 					case "Looping_Animation_Start_Time":
-						class310_0.LoopingAnimationStartTick = num14;
+						player.LoopingAnimationStartTick = num14;
 						break;
 					case "Armor_Total":
-						class310_0.Defense.Armor = (float)Math.Floor(num15);
+						player.Defense.Armor = (float)Math.Floor(num15);
 						break;
 					case "Resource_Cost_Reduction_Percent_Total":
-						class310_0.float_5[num13] = num15;
+						player.float_5[num13] = num15;
 						break;
 					case "Buff_Icon_Count18":
-						smethod_3(class310_0, num13, num14, 18, ref bool_);
+						smethod_3(player, num13, num14, 18, ref bool_);
 						break;
 					case "Resistance_Total":
 						switch (num13) {
 							case 0u:
-								class310_0.Defense.ResPhysical = num15;
+								player.Defense.ResPhysical = num15;
 								break;
 							case 1u:
-								class310_0.Defense.ResFire = num15;
+								player.Defense.ResFire = num15;
 								break;
 							case 2u:
-								class310_0.Defense.ResLightning = num15;
+								player.Defense.ResLightning = num15;
 								break;
 							case 3u:
-								class310_0.Defense.ResCold = num15;
+								player.Defense.ResCold = num15;
 								break;
 							case 4u:
-								class310_0.Defense.ResPoison = num15;
+								player.Defense.ResPoison = num15;
 								break;
 							case 5u:
-								class310_0.Defense.ResArcane = num15;
+								player.Defense.ResArcane = num15;
 								break;
 						}
-						if (num13 <= 5 && (class310_0.Defense.ResLowest == 0f || num15 < class310_0.Defense.ResLowest)) {
-							class310_0.Defense.ResLowest = num15;
+						if (num13 <= 5 && (player.Defense.ResLowest == 0f || num15 < player.Defense.ResLowest)) {
+							player.Defense.ResLowest = num15;
 						}
 						break;
 					case "Paragon_Bonus":
-						class310_0.class112_2[num13] = num14;
+						player.class112_2[num13] = num14;
 						break;
 					case "CrowdControl_Reduction":
-						class310_0.Defense.CCReduction = (float)Math.Round(num15 * 100f, 0);
+						player.Defense.CCReduction = (float)Math.Round(num15 * 100f, 0);
 						break;
 					case "Damage_Bonus_Min":
 						num3 = num15;
 						break;
 					case "Buff_Icon_Count12":
-						smethod_3(class310_0, num13, num14, 12, ref bool_);
+						smethod_3(player, num13, num14, 12, ref bool_);
 						break;
 					case "Buff_Icon_Count13":
-						smethod_3(class310_0, num13, num14, 13, ref bool_);
+						smethod_3(player, num13, num14, 13, ref bool_);
 						break;
 					case "Dexterity_Total":
-						class310_0.Stats.Dexterity = (float)Math.Floor(num15);
+						player.Stats.Dexterity = (float)Math.Floor(num15);
 						break;
 					case "Hitpoints_On_Kill":
-						class310_0.Defense.LifeOnKill = (float)Math.Floor(num15);
+						player.Defense.LifeOnKill = (float)Math.Floor(num15);
 						break;
 					case "Buff_Icon_Count11":
-						smethod_3(class310_0, num13, num14, 11, ref bool_);
+						smethod_3(player, num13, num14, 11, ref bool_);
 						break;
 					case "Buff_Icon_Count28":
-						smethod_3(class310_0, num13, num14, 28, ref bool_);
+						smethod_3(player, num13, num14, 28, ref bool_);
 						break;
 					case "Buff_Icon_Count26":
-						smethod_3(class310_0, num13, num14, 26, ref bool_);
+						smethod_3(player, num13, num14, 26, ref bool_);
 						break;
 					case "Buff_Icon_Count10":
-						smethod_3(class310_0, num13, num14, 10, ref bool_);
+						smethod_3(player, num13, num14, 10, ref bool_);
 						break;
 					case "Buff_Icon_Count29":
-						smethod_3(class310_0, num13, num14, 29, ref bool_);
+						smethod_3(player, num13, num14, 29, ref bool_);
 						break;
 					case "Buff_Icon_Count16":
-						smethod_3(class310_0, num13, num14, 16, ref bool_);
+						smethod_3(player, num13, num14, 16, ref bool_);
 						break;
 					case "Buff_Icon_Count27":
-						smethod_3(class310_0, num13, num14, 27, ref bool_);
+						smethod_3(player, num13, num14, 27, ref bool_);
 						break;
 					case "Buff_Icon_Count17":
-						smethod_3(class310_0, num13, num14, 17, ref bool_);
+						smethod_3(player, num13, num14, 17, ref bool_);
 						break;
 					case "Buff_Icon_Count25":
-						smethod_3(class310_0, num13, num14, 25, ref bool_);
+						smethod_3(player, num13, num14, 25, ref bool_);
 						break;
 					case "Buff_Icon_Count15":
-						smethod_3(class310_0, num13, num14, 15, ref bool_);
+						smethod_3(player, num13, num14, 15, ref bool_);
 						break;
 					case "Buff_Icon_Count24":
-						smethod_3(class310_0, num13, num14, 24, ref bool_);
+						smethod_3(player, num13, num14, 24, ref bool_);
 						break;
 					case "Buff_Icon_Count22":
-						smethod_3(class310_0, num13, num14, 22, ref bool_);
+						smethod_3(player, num13, num14, 22, ref bool_);
 						break;
 					case "Buff_Icon_Count14":
-						smethod_3(class310_0, num13, num14, 14, ref bool_);
+						smethod_3(player, num13, num14, 14, ref bool_);
 						break;
 					case "Experience_Bonus_No_Penalty":
-						class310_0.Stats.ExpOnKillNoPenalty = (float)Math.Round(num15, 0);
+						player.Stats.ExpOnKillNoPenalty = (float)Math.Round(num15, 0);
 						break;
 					case "Buff_Icon_Count21":
-						smethod_3(class310_0, num13, num14, 21, ref bool_);
+						smethod_3(player, num13, num14, 21, ref bool_);
 						break;
 					case "Buff_Icon_Count20":
-						smethod_3(class310_0, num13, num14, 20, ref bool_);
+						smethod_3(player, num13, num14, 20, ref bool_);
 						break;
 					case "Buff_Icon_Count23":
-						smethod_3(class310_0, num13, num14, 23, ref bool_);
+						smethod_3(player, num13, num14, 23, ref bool_);
 						break;
 					case "Vitality_Total":
-						class310_0.Stats.Vitality = (float)Math.Floor(num15);
+						player.Stats.Vitality = (float)Math.Floor(num15);
 						break;
 					case "Hitpoints_Max_Total":
-						if (num15 >= 0f && class310_0.Defense.HealthMax != num15) {
-							class310_0.Defense.HealthMax = num15;
+						if (num15 >= 0f && player.Defense.HealthMax != num15) {
+							player.Defense.HealthMax = num15;
 						}
 						break;
 					case "Hitpoints_Cur":
 						if (num15 >= 0f) {
-							class310_0.Defense.HealthCur = num15;
+							player.Defense.HealthCur = num15;
 						}
 						break;
 					case "Damage_Percent_Bonus_Vs_Elites":
-						class310_0.Offense.BonusToElitesBase = num15;
+						player.Offense.BonusToElitesBase = num15;
 						break;
 					case "DualWield_Hand_Next":
-						class310_0.Offense.MainHandIsActive = num14 == 1;
+						player.Offense.MainHandIsActive = num14 == 1;
 						break;
 					case "Level":
-						class310_0.CurrentLevelNormal = (uint)num14;
+						player.CurrentLevelNormal = (uint)num14;
 						break;
 					case "Damage_Weapon_Delta_Total_MainHand":
 						if (num13 == 0) {
-							class310_0.Offense.WeaponDamageAddPhysicalMainHand = num15;
+							player.Offense.WeaponDamageAddPhysicalMainHand = num15;
 						} else {
-							class310_0.Offense.WeaponDamageAddElementalMainHand += num15;
+							player.Offense.WeaponDamageAddElementalMainHand += num15;
 						}
 						break;
 					case "Crit_Damage_Percent":
-						class310_0.Offense.CritDamage += (float)Math.Round(num15 * 100f, 0);
+						player.Offense.CritDamage += (float)Math.Round(num15 * 100f, 0);
 						break;
 					case "In_Combat":
-						class310_0.InCombat = num14 == 1;
+						player.InCombat = num14 == 1;
 						break;
 					case "Death_Count":
 						num10 = num14;
 						break;
 					case "Hitpoints_Max_Percent_Bonus_Item":
-						class310_0.Defense.LifeBonus = (float)Math.Round(num15 * 100f, 0);
+						player.Defense.LifeBonus = (float)Math.Round(num15 * 100f, 0);
 						break;
 
 					case "Alt_Level":
-						class310_0.CurrentLevelParagon = (uint)num14;
+						player.CurrentLevelParagon = (uint)num14;
 						flag2 = true;
 						break;
 
@@ -1405,106 +1405,106 @@ internal class ActorCollector
 						if (num14 > 0) {
 							SnoPower bySno3 = SnoData.Powers.GetBySno(num13);
 
-							if (bySno3 != null && class310_0.Powers.GetUsedSkill(bySno3) is Skill class3) {
-								class3.CooldownStartTick = num14;
+							if (bySno3 != null && player.Powers.GetUsedSkill(bySno3) is Skill skill) {
+								skill.CooldownStartTick = num14;
 							}
 						}
 						break;
 
 					case "Looping_Animation_End_Time":
-						class310_0.LoopingAnimationEndTick = num14;
+						player.LoopingAnimationEndTick = num14;
 						break;
 
 					case "Corpse_Resurrection_Charges":
-						class310_0.int_13 = num14;
+						player.int_13 = num14;
 						break;
 
 					case "Power_Damage_Percent_Bonus":
-						class310_0.dictionary_5[num13] = num15;
+						player.dictionary_5[num13] = num15;
 						break;
 
 					case "Attacks_Per_Second_Percent_Subtotal":
-						class310_0.Offense.AttackSpeedPercent = num15 - 1f;
+						player.Offense.AttackSpeedPercent = num15 - 1f;
 						break;
 
 					case "Resource_Cost_Reduction_Percent_All":
-						class310_0.Stats.ResourceCostReduction = num15;
+						player.Stats.ResourceCostReduction = num15;
 						break;
 
 					case "Buff_Icon_Start_Tick19":
-						smethod_6(class310_0, num13, num14, 19, ref bool_);
+						smethod_6(player, num13, num14, 19, ref bool_);
 						break;
 
 					case "Damage_Percent_All_From_Skills":
-						class310_0.Offense.WeaponDamageIncreasedBySkills = num15;
+						player.Offense.WeaponDamageIncreasedBySkills = num15;
 						break;
 
 					case "Buff_Icon_Start_Tick18":
-						smethod_6(class310_0, num13, num14, 18, ref bool_);
+						smethod_6(player, num13, num14, 18, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick10":
-						smethod_6(class310_0, num13, num14, 10, ref bool_);
+						smethod_6(player, num13, num14, 10, ref bool_);
 						break;
 
 					case "Damage_Percent_Reduction_From_Ranged":
-						class310_0.Defense.DRRanged = num15;
+						player.Defense.DRRanged = num15;
 						break;
 
 					case "Summoner_ID":
-						class310_0.SummonerId = (uint)num14;
+						player.SummonerId = (uint)num14;
 						break;
 
 					case "Damage_Min":
-						class310_0.Offense.DamageMin = num15;
+						player.Offense.DamageMin = num15;
 						break;
 
 					case "Movement_Scalar_Uncapped_Bonus":
-						class310_0.Stats.MoveSpeedBonus = (float)Math.Round((num15 - 1f) * 100f, 1);
+						player.Stats.MoveSpeedBonus = (float)Math.Round((num15 - 1f) * 100f, 1);
 						break;
 
 					case "Buff_Icon_Start_Tick11":
-						smethod_6(class310_0, num13, num14, 11, ref bool_);
+						smethod_6(player, num13, num14, 11, ref bool_);
 						break;
 
 					case "Buff_Icon_Count8":
-						smethod_3(class310_0, num13, num14, 8, ref bool_);
+						smethod_3(player, num13, num14, 8, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick13":
-						smethod_6(class310_0, num13, num14, 13, ref bool_);
+						smethod_6(player, num13, num14, 13, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick12":
-						smethod_6(class310_0, num13, num14, 12, ref bool_);
+						smethod_6(player, num13, num14, 12, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick15":
-						smethod_6(class310_0, num13, num14, 15, ref bool_);
+						smethod_6(player, num13, num14, 15, ref bool_);
 						break;
 
 					case "Buff_Icon_Count9":
-						smethod_3(class310_0, num13, num14, 9, ref bool_);
+						smethod_3(player, num13, num14, 9, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick14":
-						smethod_6(class310_0, num13, num14, 14, ref bool_);
+						smethod_6(player, num13, num14, 14, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick16":
-						smethod_6(class310_0, num13, num14, 16, ref bool_);
+						smethod_6(player, num13, num14, 16, ref bool_);
 						break;
 
 					case "Attacks_Per_Second_Item_Total_OffHand":
-						class310_0.Offense.WeaponSpeedOffHand = num15;
+						player.Offense.WeaponSpeedOffHand = num15;
 						break;
 
 					case "Skill_Override":
 						if (num13 <= 5) {
-							Skill class2 = class310_0.class386_0[num13];
+							Skill skill2 = player.SkillSlots[num13];
 
-							if (class2 != null) {
-								class2.OverrideSnoPower = ((num14 != -1)
+							if (skill2 != null) {
+								skill2.OverrideSnoPower = ((num14 != -1)
 									? SnoData.Powers.GetBySno((uint)num14)
 									: null);
 							}
@@ -1512,57 +1512,57 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Count0":
-						smethod_3(class310_0, num13, num14, 0, ref bool_);
+						smethod_3(player, num13, num14, 0, ref bool_);
 						break;
 					case "Resource_Regen_Total":
 						num15 = (float)Math.Round(num15, 2);
 						switch (num13) {
 							case 0u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
-									class310_0.Stats.ResourceRegMana = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
+									player.Stats.ResourceRegMana = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 1u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWizard) {
-									class310_0.Stats.ResourceRegArcane = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWizard) {
+									player.Stats.ResourceRegArcane = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 2u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
-									class310_0.Stats.ResourceRegFury = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
+									player.Stats.ResourceRegFury = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 3u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassMonk) {
-									class310_0.Stats.ResourceRegSpirit = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassMonk) {
+									player.Stats.ResourceRegSpirit = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 5u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceRegHatred = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceRegHatred = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 6u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceRegDiscipline = num15;
-									class310_0.Stats.ResourceRegSec = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceRegDiscipline = num15;
+									player.Stats.ResourceRegSec = num15;
 								}
 								break;
 							case 7u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
-									class310_0.Stats.ResourceRegWrath = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
+									player.Stats.ResourceRegWrath = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 8u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
-									class310_0.Stats.ResourceRegEssence = num15;
-									class310_0.Stats.ResourceRegPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
+									player.Stats.ResourceRegEssence = num15;
+									player.Stats.ResourceRegPri = num15;
 								}
 								break;
 							case 4u:
@@ -1570,11 +1570,11 @@ internal class ActorCollector
 						}
 						break;
 					case "Buff_Icon_Start_Tick17":
-						smethod_6(class310_0, num13, num14, 17, ref bool_);
+						smethod_6(player, num13, num14, 17, ref bool_);
 						break;
 
 					case "Buff_Icon_Count2":
-						smethod_3(class310_0, num13, num14, 2, ref bool_);
+						smethod_3(player, num13, num14, 2, ref bool_);
 						break;
 
 					case "Skill_From_Item":
@@ -1582,37 +1582,37 @@ internal class ActorCollector
 							SnoPower bySno2 = SnoData.Powers.GetBySno(num13);
 
 							if (bySno2 != null) {
-								class310_0.list_2.Add(bySno2);
+								player.UsedPassives.Add(bySno2);
 							}
 						}
 						break;
 
 					case "Buff_Icon_Count1":
-						smethod_3(class310_0, num13, num14, 1, ref bool_);
+						smethod_3(player, num13, num14, 1, ref bool_);
 						break;
 
 					case "Buff_Icon_Count5":
-						smethod_3(class310_0, num13, num14, 5, ref bool_);
+						smethod_3(player, num13, num14, 5, ref bool_);
 						break;
 
 					case "Buff_Icon_Count4":
-						smethod_3(class310_0, num13, num14, 4, ref bool_);
+						smethod_3(player, num13, num14, 4, ref bool_);
 						break;
 
 					case "Buff_Icon_Count3":
-						smethod_3(class310_0, num13, num14, 3, ref bool_);
+						smethod_3(player, num13, num14, 3, ref bool_);
 						break;
 
 					case "Rest_Experience_Bonus_Percent":
-						class310_0.BonusPoolPercent = num15 * 100f;
+						player.BonusPoolPercent = num15 * 100f;
 						break;
 
 					case "Buff_Icon_Count7":
-						smethod_3(class310_0, num13, num14, 7, ref bool_);
+						smethod_3(player, num13, num14, 7, ref bool_);
 						break;
 
 					case "Buff_Icon_Count6":
-						smethod_3(class310_0, num13, num14, 6, ref bool_);
+						smethod_3(player, num13, num14, 6, ref bool_);
 						break;
 
 					case "Crit_Percent_Bonus_Capped":
@@ -1624,82 +1624,82 @@ internal class ActorCollector
 
 					case "Paragon_Bonus_Points_Available":
 						if (num13 < 4) {
-							class310_0.ParagonPointsAvailable[num13] = num14;
-							class310_0.ParagonPointsAvailableTotal += num14;
+							player.ParagonPointsAvailable[num13] = num14;
+							player.ParagonPointsAvailableTotal += num14;
 						}
 						break;
 
 					case "Buff_Icon_Start_Tick9":
-						smethod_6(class310_0, num13, num14, 9, ref bool_);
+						smethod_6(player, num13, num14, 9, ref bool_);
 						break;
 
 					case "Stunned":
-						class310_0.Powers.Stunned = num14 == 1;
+						player.Powers.Stunned = num14 == 1;
 						break;
 
 					case "Damage_Weapon_Min_Total_MainHand":
 						if (num13 == 0) {
-							class310_0.Offense.WeaponDamageMinPhysicalMainHand += num15;
+							player.Offense.WeaponDamageMinPhysicalMainHand += num15;
 						} else {
-							class310_0.Offense.WeaponDamageMinElementalMainHand += num15;
+							player.Offense.WeaponDamageMinElementalMainHand += num15;
 						}
 						break;
 
 					case "Damage_Percent_Reduction_From_Type":
 						if (num13 <= 5) {
-							class310_0.Defense.DamageReductionFromType[num13] = num15;
+							player.Defense.DamageReductionFromType[num13] = num15;
 						}
 						break;
 
 					case "Frozen":
-						class310_0.Powers.Frozen = num14 == 1;
+						player.Powers.Frozen = num14 == 1;
 						break;
 
 					case "Buff_Icon_Start_Tick8":
-						smethod_6(class310_0, num13, num14, 8, ref bool_);
+						smethod_6(player, num13, num14, 8, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick3":
-						smethod_6(class310_0, num13, num14, 3, ref bool_);
+						smethod_6(player, num13, num14, 3, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick0":
-						smethod_6(class310_0, num13, num14, 0, ref bool_);
+						smethod_6(player, num13, num14, 0, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick1":
-						smethod_6(class310_0, num13, num14, 1, ref bool_);
+						smethod_6(player, num13, num14, 1, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick5":
-						smethod_6(class310_0, num13, num14, 5, ref bool_);
+						smethod_6(player, num13, num14, 5, ref bool_);
 						break;
 
 					case "Movement_Scalar_Total":
-						class310_0.Stats.MoveSpeed = (float)Math.Round((num15 - 1f) * 100f, 1);
+						player.Stats.MoveSpeed = (float)Math.Round((num15 - 1f) * 100f, 1);
 						break;
 
 					case "Buff_Icon_Start_Tick2":
-						smethod_6(class310_0, num13, num14, 2, ref bool_);
+						smethod_6(player, num13, num14, 2, ref bool_);
 						break;
 
 					case "Experience_Next_Hi":
 						break;
 
 					case "Buff_Icon_Start_Tick4":
-						smethod_6(class310_0, num13, num14, 4, ref bool_);
+						smethod_6(player, num13, num14, 4, ref bool_);
 						break;
 
 					case "Thorns_Fixed":
-						class310_0.Defense.Thorns = (float)Math.Round(num15, 0);
+						player.Defense.Thorns = (float)Math.Round(num15, 0);
 						break;
 
 					case "Buff_Icon_Start_Tick6":
-						smethod_6(class310_0, num13, num14, 6, ref bool_);
+						smethod_6(player, num13, num14, 6, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick7":
-						smethod_6(class310_0, num13, num14, 7, ref bool_);
+						smethod_6(player, num13, num14, 7, ref bool_);
 						break;
 
 					case "Crit_Percent_Bonus_Uncapped":
@@ -1707,7 +1707,7 @@ internal class ActorCollector
 						break;
 
 					case "Level_Cap":
-						class310_0.CurrentLevelNormalCap = (uint)num14;
+						player.CurrentLevelNormalCap = (uint)num14;
 						break;
 
 					case "Damage_Shield":
@@ -1716,51 +1716,51 @@ internal class ActorCollector
 					case "Resource_Cur":
 						switch (num13) {
 							case 0u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
-									class310_0.Stats.ResourceCurMana = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
+									player.Stats.ResourceCurMana = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 1u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWizard) {
-									class310_0.Stats.ResourceCurArcane = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWizard) {
+									player.Stats.ResourceCurArcane = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 2u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
-									class310_0.Stats.ResourceCurFury = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
+									player.Stats.ResourceCurFury = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 3u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassMonk) {
-									class310_0.Stats.ResourceCurSpirit = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassMonk) {
+									player.Stats.ResourceCurSpirit = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 5u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceCurHatred = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceCurHatred = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 6u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceCurDiscipline = num15;
-									class310_0.Stats.ResourceCurSec = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceCurDiscipline = num15;
+									player.Stats.ResourceCurSec = num15;
 								}
 								break;
 							case 7u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
-									class310_0.Stats.ResourceCurWrath = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
+									player.Stats.ResourceCurWrath = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 8u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
-									class310_0.Stats.ResourceCurEssence = num15;
-									class310_0.Stats.ResourceCurPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
+									player.Stats.ResourceCurEssence = num15;
+									player.Stats.ResourceCurPri = num15;
 								}
 								break;
 							case 4u:
@@ -1768,166 +1768,166 @@ internal class ActorCollector
 						}
 						break;
 					case "Buff_Icon_End_Tick22":
-						smethod_7(class310_0, num13, num14, 22, ref bool_);
+						smethod_7(player, num13, num14, 22, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick21":
-						smethod_7(class310_0, num13, num14, 21, ref bool_);
+						smethod_7(player, num13, num14, 21, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick20":
-						smethod_7(class310_0, num13, num14, 20, ref bool_);
+						smethod_7(player, num13, num14, 20, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick24":
-						smethod_7(class310_0, num13, num14, 24, ref bool_);
+						smethod_7(player, num13, num14, 24, ref bool_);
 						break;
 
 					case "Damage_Percent_Reduction_From_Melee":
-						class310_0.Defense.DRMelee = num15;
+						player.Defense.DRMelee = num15;
 						break;
 
 					case "Buff_Icon_End_Tick23":
-						smethod_7(class310_0, num13, num14, 23, ref bool_);
+						smethod_7(player, num13, num14, 23, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick26":
-						smethod_7(class310_0, num13, num14, 26, ref bool_);
+						smethod_7(player, num13, num14, 26, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick31":
-						smethod_7(class310_0, num13, num14, 31, ref bool_);
+						smethod_7(player, num13, num14, 31, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick25":
-						smethod_7(class310_0, num13, num14, 25, ref bool_);
+						smethod_7(player, num13, num14, 25, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick27":
-						smethod_7(class310_0, num13, num14, 27, ref bool_);
+						smethod_7(player, num13, num14, 27, ref bool_);
 						break;
 
 					case "Magic_Find_Total":
-						class310_0.Stats.MagicFind = (float)Math.Round(num15 * 100f, 0);
+						player.Stats.MagicFind = (float)Math.Round(num15 * 100f, 0);
 						break;
 
 					case "Buff_Icon_End_Tick30":
-						smethod_7(class310_0, num13, num14, 30, ref bool_);
+						smethod_7(player, num13, num14, 30, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick19":
-						smethod_7(class310_0, num13, num14, 19, ref bool_);
+						smethod_7(player, num13, num14, 19, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick29":
-						smethod_7(class310_0, num13, num14, 29, ref bool_);
+						smethod_7(player, num13, num14, 29, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick28":
-						smethod_7(class310_0, num13, num14, 28, ref bool_);
+						smethod_7(player, num13, num14, 28, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick18":
-						smethod_7(class310_0, num13, num14, 18, ref bool_);
+						smethod_7(player, num13, num14, 18, ref bool_);
 						break;
 
 					case "Damage_Type_Cost_Reduction_Percent":
-						class310_0.float_4[num13] = num15;
+						player.float_4[num13] = num15;
 						break;
 
 					case "Backpack_Slots":
-						class310_0.InventorySpaceTotal = num14;
+						player.InventorySpaceTotal = num14;
 						break;
 
 					case "Participating_In_Tiered_Loot_Run":
-						class310_0.InGreaterRift = num14 == 1;
+						player.InGreaterRift = num14 == 1;
 						break;
 
 					case "Damage_Weapon_Min_Total_OffHand":
 						if (num13 == 0) {
-							class310_0.Offense.WeaponDamageMinPhysicalOffHand += num15;
+							player.Offense.WeaponDamageMinPhysicalOffHand += num15;
 						} else {
-							class310_0.Offense.WeaponDamageMinElementalOffHand += num15;
+							player.Offense.WeaponDamageMinElementalOffHand += num15;
 						}
 						break;
 
 					case "Experience_Bonus":
-						class310_0.Stats.ExpOnKill = (float)Math.Round(num15, 0);
+						player.Stats.ExpOnKill = (float)Math.Round(num15, 0);
 						break;
 
 					case "Crit_Percent_Base":
-						class310_0.Offense.CritBase = num15;
+						player.Offense.CritBase = num15;
 						break;
 
 					case "Buff_Icon_End_Tick11":
-						smethod_7(class310_0, num13, num14, 11, ref bool_);
+						smethod_7(player, num13, num14, 11, ref bool_);
 						break;
 
 					case "Damage_Weapon_Delta_Total_OffHand":
 						if (num13 == 0) {
-							class310_0.Offense.WeaponDamageAddPhysicalOffHand = num15;
+							player.Offense.WeaponDamageAddPhysicalOffHand = num15;
 						} else {
-							class310_0.Offense.WeaponDamageAddElementalOffHand += num15;
+							player.Offense.WeaponDamageAddElementalOffHand += num15;
 						}
 						break;
 
 					case "Buff_Icon_End_Tick13":
-						smethod_7(class310_0, num13, num14, 13, ref bool_);
+						smethod_7(player, num13, num14, 13, ref bool_);
 						break;
 
 					case "Experience_Bonus_Percent_Total":
-						class310_0.Stats.ExperiencePercentBonus = num15;
+						player.Stats.ExperiencePercentBonus = num15;
 						break;
 
 					case "Buff_Icon_End_Tick10":
-						smethod_7(class310_0, num13, num14, 10, ref bool_);
+						smethod_7(player, num13, num14, 10, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick14":
-						smethod_7(class310_0, num13, num14, 14, ref bool_);
+						smethod_7(player, num13, num14, 14, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick15":
-						smethod_7(class310_0, num13, num14, 15, ref bool_);
+						smethod_7(player, num13, num14, 15, ref bool_);
 						break;
 
 					case "Buff_Icon_End_Tick12":
-						smethod_7(class310_0, num13, num14, 12, ref bool_);
+						smethod_7(player, num13, num14, 12, ref bool_);
 						break;
 
 					case "Damage_Shield_Amount":
-						class310_0.Defense.CurShield = num15;
+						player.Defense.CurShield = num15;
 						break;
 
 					case "Attacks_Per_Second_Item_Total_MainHand":
-						class310_0.Offense.WeaponSpeedMainHand = num15;
+						player.Offense.WeaponSpeedMainHand = num15;
 						break;
 
 					case "Buff_Icon_End_Tick17":
-						smethod_7(class310_0, num13, num14, 17, ref bool_);
+						smethod_7(player, num13, num14, 17, ref bool_);
 						break;
 
 					case "Shared_Stash_Slots":
-						class310_0.Int32_2 = num14;
+						player.Int32_2 = num14;
 						break;
 
 					case "Skill_Charges":
-						class310_0.class112_0[num13] = num14;
+						player.class112_0[num13] = num14;
 						break;
 
 					case "Buff_Icon_End_Tick16":
-						smethod_7(class310_0, num13, num14, 16, ref bool_);
+						smethod_7(player, num13, num14, 16, ref bool_);
 						break;
 
 					case "Hitpoints_On_Hit":
-						class310_0.Defense.LifeOnHit = (float)Math.Floor(num15);
+						player.Defense.LifeOnHit = (float)Math.Floor(num15);
 						break;
 
 					case "Power_Cooldown_Reduction_Percent_All":
 						if (num13 == 1048575) {
-							class310_0.Stats.CooldownReduction = num15;
+							player.Stats.CooldownReduction = num15;
 						} else {
-							class310_0.dictionary_4[num13] = num14;
+							player.dictionary_4[num13] = num14;
 						}
 						break;
 
@@ -1936,11 +1936,11 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick20":
-						smethod_6(class310_0, num13, num14, 20, ref bool_);
+						smethod_6(player, num13, num14, 20, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick21":
-						smethod_6(class310_0, num13, num14, 21, ref bool_);
+						smethod_6(player, num13, num14, 21, ref bool_);
 						break;
 
 					case "Experience_Bonus_Percent_Super_Scalar_Total":
@@ -1948,63 +1948,63 @@ internal class ActorCollector
 						break;
 
 					case "Buff_Icon_Start_Tick23":
-						smethod_6(class310_0, num13, num14, 23, ref bool_);
+						smethod_6(player, num13, num14, 23, ref bool_);
 						break;
 
 					case "In_Tiered_Loot_Run_Level":
-						class310_0.InGreaterRiftRank = (uint)(num14 + 1);
+						player.InGreaterRiftRank = (uint)(num14 + 1);
 						break;
 
 					case "Intelligence_Total":
-						class310_0.Stats.Intelligence = (float)Math.Floor(num15);
+						player.Stats.Intelligence = (float)Math.Floor(num15);
 						break;
 
 					case "Buff_Icon_Start_Tick25":
-						smethod_6(class310_0, num13, num14, 25, ref bool_);
+						smethod_6(player, num13, num14, 25, ref bool_);
 						break;
 
 					case "Damage_Reduction_Total":
-						class310_0.Defense.DamageReduction = (float)Math.Round(num15 * 100f, 0);
+						player.Defense.DamageReduction = (float)Math.Round(num15 * 100f, 0);
 						break;
 
 					case "Buff_Icon_Start_Tick22":
-						smethod_6(class310_0, num13, num14, 22, ref bool_);
+						smethod_6(player, num13, num14, 22, ref bool_);
 						break;
 
 					case "IsRooted":
-						class310_0.Powers.Rooted = num14 == 1;
+						player.Powers.Rooted = num14 == 1;
 						break;
 
 					case "Buff_Icon_Start_Tick27":
-						smethod_6(class310_0, num13, num14, 27, ref bool_);
+						smethod_6(player, num13, num14, 27, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick24":
-						smethod_6(class310_0, num13, num14, 24, ref bool_);
+						smethod_6(player, num13, num14, 24, ref bool_);
 						break;
 
 					case "Class_Damage_Reduction_Percent":
-						class310_0.Defense.DRClass = num15;
+						player.Defense.DRClass = num15;
 						break;
 
 					case "Buff_Icon_Start_Tick29":
-						smethod_6(class310_0, num13, num14, 29, ref bool_);
+						smethod_6(player, num13, num14, 29, ref bool_);
 						break;
 
 					case "Buff_Icon_Start_Tick26":
-						smethod_6(class310_0, num13, num14, 26, ref bool_);
+						smethod_6(player, num13, num14, 26, ref bool_);
 						break;
 
 					case "Corpse_Resurrection_Disabled":
-						class310_0.bool_17 = num14 == 1;
+						player.bool_17 = num14 == 1;
 						break;
 
 					case "Hitpoints_Regen_Per_Second_Total":
-						class310_0.Defense.LifeRegen = num15;
+						player.Defense.LifeRegen = num15;
 						break;
 
 					case "Buff_Icon_Start_Tick28":
-						smethod_6(class310_0, num13, num14, 28, ref bool_);
+						smethod_6(player, num13, num14, 28, ref bool_);
 						break;
 
 					case "Rest_Experience_Hi":
@@ -2012,70 +2012,70 @@ internal class ActorCollector
 						break;
 
 					case "Power_Resource_Reduction":
-						class310_0.dictionary_3[num13] = num14;
+						player.dictionary_3[num13] = num14;
 						break;
 
 					case "Splash_Damage_Effect_Percent":
-						class310_0.Offense.AreaDamageBonus = (float)Math.Round(num15 * 100f, 1);
+						player.Offense.AreaDamageBonus = (float)Math.Round(num15 * 100f, 1);
 						break;
 
 					case "Power_Cooldown":
 						if (num14 > 0) {
 							SnoPower bySno = SnoData.Powers.GetBySno(num13);
 
-							if (bySno != null && class310_0.Powers.GetUsedSkill(bySno) is Skill @class) {
-								@class.CooldownFinishTick = num14;
+							if (bySno != null && player.Powers.GetUsedSkill(bySno) is Skill skill3) {
+								skill3.CooldownFinishTick = num14;
 							}
 						}
 						break;
 					case "Resource_Max_Total":
 						switch (num13) {
 							case 0u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
-									class310_0.Stats.ResourceMaxMana = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor) {
+									player.Stats.ResourceMaxMana = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 1u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWizard) {
-									class310_0.Stats.ResourceMaxArcane = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassWizard) {
+									player.Stats.ResourceMaxArcane = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 2u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
-									class310_0.Stats.ResourceMaxFury = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassBarbarian) {
+									player.Stats.ResourceMaxFury = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 3u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassMonk) {
-									class310_0.Stats.ResourceMaxSpirit = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassMonk) {
+									player.Stats.ResourceMaxSpirit = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 5u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceMaxHatred = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceMaxHatred = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 6u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-									class310_0.Stats.ResourceMaxDiscipline = num15;
-									class310_0.Stats.ResourceMaxSec = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+									player.Stats.ResourceMaxDiscipline = num15;
+									player.Stats.ResourceMaxSec = num15;
 								}
 								break;
 							case 7u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
-									class310_0.Stats.ResourceMaxWrath = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
+									player.Stats.ResourceMaxWrath = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 8u:
-								if (class310_0.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
-									class310_0.Stats.ResourceMaxEssence = num15;
-									class310_0.Stats.ResourceMaxPri = num15;
+								if (player.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
+									player.Stats.ResourceMaxEssence = num15;
+									player.Stats.ResourceMaxPri = num15;
 								}
 								break;
 							case 4u:
@@ -2086,160 +2086,160 @@ internal class ActorCollector
 						num6 = (uint)num14;
 						break;
 					case "Buff_Icon_Start_Tick31":
-						smethod_6(class310_0, num13, num14, 31, ref bool_);
+						smethod_6(player, num13, num14, 31, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick2":
-						smethod_7(class310_0, num13, num14, 2, ref bool_);
+						smethod_7(player, num13, num14, 2, ref bool_);
 						break;
 					case "Buff_Icon_Start_Tick30":
-						smethod_6(class310_0, num13, num14, 30, ref bool_);
+						smethod_6(player, num13, num14, 30, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick1":
-						smethod_7(class310_0, num13, num14, 1, ref bool_);
+						smethod_7(player, num13, num14, 1, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick0":
-						smethod_7(class310_0, num13, num14, 0, ref bool_);
+						smethod_7(player, num13, num14, 0, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick3":
-						smethod_7(class310_0, num13, num14, 3, ref bool_);
+						smethod_7(player, num13, num14, 3, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick7":
-						smethod_7(class310_0, num13, num14, 7, ref bool_);
+						smethod_7(player, num13, num14, 7, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick6":
-						smethod_7(class310_0, num13, num14, 6, ref bool_);
+						smethod_7(player, num13, num14, 6, ref bool_);
 						break;
 					case "Item_Power_Passive":
-						class310_0.class112_1[num13] = num15;
+						player.class112_1[num13] = num15;
 						break;
 					case "Attacks_Per_Second_Bonus":
-						class310_0.Offense.AttackSpeedBonus = num15;
+						player.Offense.AttackSpeedBonus = num15;
 						break;
 					case "Buff_Icon_End_Tick5":
-						smethod_7(class310_0, num13, num14, 5, ref bool_);
+						smethod_7(player, num13, num14, 5, ref bool_);
 						break;
 					case "Buff_Icon_End_Tick4":
-						smethod_7(class310_0, num13, num14, 4, ref bool_);
+						smethod_7(player, num13, num14, 4, ref bool_);
 						break;
 				}
 			} catch {
 			}
 		}
 		if (!flag) {
-			class310_0.Defense.CurShield = 0f;
+			player.Defense.CurShield = 0f;
 		}
-		if (!class310_0.bool_13) {
-			Skill[] class386_ = class310_0.class386_0;
-			foreach (Skill class4 in class386_) {
-				if (class4 != null) {
-					class4.OverrideSnoPower = null;
+		if (!player.SkillOverrideActive) {
+			Skill[] class386_ = player.SkillSlots;
+			foreach (Skill skill4 in class386_) {
+				if (skill4 != null) {
+					skill4.OverrideSnoPower = null;
 				}
 			}
 		}
-		if (class310_0.HeroClassDefinition == SnoData.Classes.ClassBarbarian || class310_0.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
-			class310_0.Stats.MainStat = class310_0.Stats.Strength;
+		if (player.HeroClassDefinition == SnoData.Classes.ClassBarbarian || player.HeroClassDefinition == SnoData.Classes.ClassCrusader) {
+			player.Stats.MainStat = player.Stats.Strength;
 		}
-		if (class310_0.HeroClassDefinition == SnoData.Classes.ClassMonk || class310_0.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
-			class310_0.Stats.MainStat = class310_0.Stats.Dexterity;
+		if (player.HeroClassDefinition == SnoData.Classes.ClassMonk || player.HeroClassDefinition == SnoData.Classes.ClassDemonHunter) {
+			player.Stats.MainStat = player.Stats.Dexterity;
 		}
-		if (class310_0.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor || class310_0.HeroClassDefinition == SnoData.Classes.ClassWizard || class310_0.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
-			class310_0.Stats.MainStat = class310_0.Stats.Intelligence;
+		if (player.HeroClassDefinition == SnoData.Classes.ClassWitchDoctor || player.HeroClassDefinition == SnoData.Classes.ClassWizard || player.HeroClassDefinition == SnoData.Classes.ClassNecromancer) {
+			player.Stats.MainStat = player.Stats.Intelligence;
 		}
-		if (class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_PierceTheVeil.Sno)) {
-			class310_0.Stats.ResourceCostReduction = 1f - 1.3f * (1f - class310_0.Stats.ResourceCostReduction);
+		if (player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_PierceTheVeil.Sno)) {
+			player.Stats.ResourceCostReduction = 1f - 1.3f * (1f - player.Stats.ResourceCostReduction);
 		}
-		if (class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
-			class310_0.Stats.ResourceCostReduction = 1f - 0.8f * (1f - class310_0.Stats.ResourceCostReduction);
+		if (player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
+			player.Stats.ResourceCostReduction = 1f - 0.8f * (1f - player.Stats.ResourceCostReduction);
 		}
-		Buff buff = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
+		Buff buff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
 		if (buff != null && buff.Active && buff != null && buff.IconCounts[2] > 0) {
-			class310_0.Stats.ResourceCostReduction = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - class310_0.Stats.ResourceCostReduction);
+			player.Stats.ResourceCostReduction = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - player.Stats.ResourceCostReduction);
 		}
-		if (class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.Necromancer_LandOfTheDead.Sno, 3)) {
-			class310_0.Stats.ResourceCostReduction = 1f;
+		if (player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.Necromancer_LandOfTheDead.Sno, 3)) {
+			player.Stats.ResourceCostReduction = 1f;
 		}
-		if (class310_0.Defense.HealthCur == 0f && !class310_0.IsDead) {
-			class310_0.LastDied.Restart();
+		if (player.Defense.HealthCur == 0f && !player.IsDead) {
+			player.LastDied.Restart();
 		}
-		class310_0.IsDead = class310_0.Defense.HealthCur == 0f;
-		if (class310_0.IsDead) {
+		player.IsDead = player.Defense.HealthCur == 0f;
+		if (player.IsDead) {
 			CoreCollector.PlayerCollector.Boolean_0 = true;
-			if (!class310_0.IsMe) {
+			if (!player.IsMe) {
 				CoreCollector.PlayerCollector.Boolean_1 = true;
 			}
 		}
-		if (num10 != class310_0.Int32_1) {
-			if (class310_0.Defense.HealthCur <= 0f && num10 > class310_0.Int32_1 && class310_0.IsMe) {
+		if (num10 != player.Int32_1) {
+			if (player.Defense.HealthCur <= 0f && num10 > player.Int32_1 && player.IsMe) {
 				num10++;
 				foreach (StatTracker item3 in CoreCollector.Trackers) {
 					item3.Death++;
 				}
 			}
-			class310_0.Int32_1 = num10;
+			player.Int32_1 = num10;
 		}
-		class310_0.Defense.HealthPct = ((!(class310_0.Defense.HealthMax > 0f) || class310_0.Defense.HealthCur <= 0f) ? 0f : (class310_0.Defense.HealthCur / class310_0.Defense.HealthMax * 100f));
-		class310_0.Offense.DamageMax = class310_0.Offense.DamageMin + num4;
-		class310_0.Offense.DamageMin += num3;
-		class310_0.Stats.ResourcePctArcane = ((!(class310_0.Stats.ResourceMaxArcane > 0f) || class310_0.Stats.ResourceCurArcane <= 0f) ? 0f : (class310_0.Stats.ResourceCurArcane / class310_0.Stats.ResourceMaxArcane * 100f));
-		class310_0.Stats.ResourcePctSpirit = ((!(class310_0.Stats.ResourceMaxSpirit > 0f) || class310_0.Stats.ResourceCurSpirit <= 0f) ? 0f : (class310_0.Stats.ResourceCurSpirit / class310_0.Stats.ResourceMaxSpirit * 100f));
-		class310_0.Stats.ResourcePctDiscipline = ((!(class310_0.Stats.ResourceMaxDiscipline > 0f) || class310_0.Stats.ResourceCurDiscipline <= 0f) ? 0f : (class310_0.Stats.ResourceCurDiscipline / class310_0.Stats.ResourceMaxDiscipline * 100f));
-		class310_0.Stats.ResourcePctFury = ((!(class310_0.Stats.ResourceMaxFury > 0f) || class310_0.Stats.ResourceCurFury <= 0f) ? 0f : (class310_0.Stats.ResourceCurFury / class310_0.Stats.ResourceMaxFury * 100f));
-		class310_0.Stats.ResourcePctHatred = ((!(class310_0.Stats.ResourceMaxHatred > 0f) || class310_0.Stats.ResourceCurHatred <= 0f) ? 0f : (class310_0.Stats.ResourceCurHatred / class310_0.Stats.ResourceMaxHatred * 100f));
-		class310_0.Stats.ResourcePctMana = ((!(class310_0.Stats.ResourceMaxMana > 0f) || class310_0.Stats.ResourceCurMana <= 0f) ? 0f : (class310_0.Stats.ResourceCurMana / class310_0.Stats.ResourceMaxMana * 100f));
-		class310_0.Stats.ResourcePctWrath = ((!(class310_0.Stats.ResourceMaxWrath > 0f) || class310_0.Stats.ResourceCurWrath <= 0f) ? 0f : (class310_0.Stats.ResourceCurWrath / class310_0.Stats.ResourceMaxWrath * 100f));
-		class310_0.Stats.ResourcePctEssence = ((!(class310_0.Stats.ResourceMaxEssence > 0f) || class310_0.Stats.ResourceCurEssence <= 0f) ? 0f : (class310_0.Stats.ResourceCurEssence / class310_0.Stats.ResourceMaxEssence * 100f));
-		class310_0.Stats.ResourcePctPri = ((!(class310_0.Stats.ResourceMaxPri > 0f) || class310_0.Stats.ResourceCurPri <= 0f) ? 0f : (class310_0.Stats.ResourceCurPri / class310_0.Stats.ResourceMaxPri * 100f));
-		class310_0.Stats.ResourcePctSec = ((!(class310_0.Stats.ResourceMaxSec > 0f) || class310_0.Stats.ResourceCurSec <= 0f) ? 0f : (class310_0.Stats.ResourceCurSec / class310_0.Stats.ResourceMaxSec * 100f));
-		class310_0.Offense.CriticalHitChance = (class310_0.Offense.CritBase + num + num2) * 100f;
-		if (class310_0.Offense.WeaponDamageMinPhysicalOffHand == 0f && class310_0.Offense.WeaponDamageMinElementalOffHand == 0f) {
-			class310_0.Offense.WeaponSpeedOffHand = 0f;
+		player.Defense.HealthPct = ((!(player.Defense.HealthMax > 0f) || player.Defense.HealthCur <= 0f) ? 0f : (player.Defense.HealthCur / player.Defense.HealthMax * 100f));
+		player.Offense.DamageMax = player.Offense.DamageMin + num4;
+		player.Offense.DamageMin += num3;
+		player.Stats.ResourcePctArcane = ((!(player.Stats.ResourceMaxArcane > 0f) || player.Stats.ResourceCurArcane <= 0f) ? 0f : (player.Stats.ResourceCurArcane / player.Stats.ResourceMaxArcane * 100f));
+		player.Stats.ResourcePctSpirit = ((!(player.Stats.ResourceMaxSpirit > 0f) || player.Stats.ResourceCurSpirit <= 0f) ? 0f : (player.Stats.ResourceCurSpirit / player.Stats.ResourceMaxSpirit * 100f));
+		player.Stats.ResourcePctDiscipline = ((!(player.Stats.ResourceMaxDiscipline > 0f) || player.Stats.ResourceCurDiscipline <= 0f) ? 0f : (player.Stats.ResourceCurDiscipline / player.Stats.ResourceMaxDiscipline * 100f));
+		player.Stats.ResourcePctFury = ((!(player.Stats.ResourceMaxFury > 0f) || player.Stats.ResourceCurFury <= 0f) ? 0f : (player.Stats.ResourceCurFury / player.Stats.ResourceMaxFury * 100f));
+		player.Stats.ResourcePctHatred = ((!(player.Stats.ResourceMaxHatred > 0f) || player.Stats.ResourceCurHatred <= 0f) ? 0f : (player.Stats.ResourceCurHatred / player.Stats.ResourceMaxHatred * 100f));
+		player.Stats.ResourcePctMana = ((!(player.Stats.ResourceMaxMana > 0f) || player.Stats.ResourceCurMana <= 0f) ? 0f : (player.Stats.ResourceCurMana / player.Stats.ResourceMaxMana * 100f));
+		player.Stats.ResourcePctWrath = ((!(player.Stats.ResourceMaxWrath > 0f) || player.Stats.ResourceCurWrath <= 0f) ? 0f : (player.Stats.ResourceCurWrath / player.Stats.ResourceMaxWrath * 100f));
+		player.Stats.ResourcePctEssence = ((!(player.Stats.ResourceMaxEssence > 0f) || player.Stats.ResourceCurEssence <= 0f) ? 0f : (player.Stats.ResourceCurEssence / player.Stats.ResourceMaxEssence * 100f));
+		player.Stats.ResourcePctPri = ((!(player.Stats.ResourceMaxPri > 0f) || player.Stats.ResourceCurPri <= 0f) ? 0f : (player.Stats.ResourceCurPri / player.Stats.ResourceMaxPri * 100f));
+		player.Stats.ResourcePctSec = ((!(player.Stats.ResourceMaxSec > 0f) || player.Stats.ResourceCurSec <= 0f) ? 0f : (player.Stats.ResourceCurSec / player.Stats.ResourceMaxSec * 100f));
+		player.Offense.CriticalHitChance = (player.Offense.CritBase + num + num2) * 100f;
+		if (player.Offense.WeaponDamageMinPhysicalOffHand == 0f && player.Offense.WeaponDamageMinElementalOffHand == 0f) {
+			player.Offense.WeaponSpeedOffHand = 0f;
 		}
-		class310_0.Offense.AttackSpeedMainHand = (class310_0.Offense.WeaponSpeedMainHand + class310_0.Offense.AttackSpeedBonus) * (1f + class310_0.Offense.AttackSpeedPercent);
-		if (class310_0.Offense.WeaponSpeedOffHand > 0f) {
-			class310_0.Offense.AttackSpeedOffHand = (class310_0.Offense.WeaponSpeedOffHand + class310_0.Offense.AttackSpeedBonus) * (1f + class310_0.Offense.AttackSpeedPercent);
-			class310_0.Offense.AttackSpeed = (class310_0.Offense.MainHandIsActive ? class310_0.Offense.AttackSpeedMainHand : class310_0.Offense.AttackSpeedOffHand);
+		player.Offense.AttackSpeedMainHand = (player.Offense.WeaponSpeedMainHand + player.Offense.AttackSpeedBonus) * (1f + player.Offense.AttackSpeedPercent);
+		if (player.Offense.WeaponSpeedOffHand > 0f) {
+			player.Offense.AttackSpeedOffHand = (player.Offense.WeaponSpeedOffHand + player.Offense.AttackSpeedBonus) * (1f + player.Offense.AttackSpeedPercent);
+			player.Offense.AttackSpeed = (player.Offense.MainHandIsActive ? player.Offense.AttackSpeedMainHand : player.Offense.AttackSpeedOffHand);
 		} else {
-			class310_0.Offense.AttackSpeed = class310_0.Offense.AttackSpeedMainHand;
+			player.Offense.AttackSpeed = player.Offense.AttackSpeedMainHand;
 		}
-		bool flag3 = class310_0.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.TaskerandTheo.Sno);
-		class310_0.Offense.AttackSpeedPets = (flag3 ? (class310_0.Offense.AttackSpeed * (1f + class310_0.class112_1.GetValueOrDefault(318731u))) : class310_0.Offense.AttackSpeed);
-		class310_0.Defense.ResAverage = (class310_0.Defense.ResPhysical + class310_0.Defense.ResFire + class310_0.Defense.ResLightning + class310_0.Defense.ResCold + class310_0.Defense.ResPoison + class310_0.Defense.ResArcane) / 6f;
-		class310_0.Defense.AverageDamageReductionFromType = 0f;
-		for (int num17 = 0; num17 < class310_0.Defense.DamageReductionFromType.Length; num17++) {
-			class310_0.Defense.AverageDamageReductionFromType += class310_0.Defense.DamageReductionFromType[num17];
+		bool flag3 = player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.TaskerandTheo.Sno);
+		player.Offense.AttackSpeedPets = (flag3 ? (player.Offense.AttackSpeed * (1f + player.class112_1.GetValueOrDefault(318731u))) : player.Offense.AttackSpeed);
+		player.Defense.ResAverage = (player.Defense.ResPhysical + player.Defense.ResFire + player.Defense.ResLightning + player.Defense.ResCold + player.Defense.ResPoison + player.Defense.ResArcane) / 6f;
+		player.Defense.AverageDamageReductionFromType = 0f;
+		for (int num17 = 0; num17 < player.Defense.DamageReductionFromType.Length; num17++) {
+			player.Defense.AverageDamageReductionFromType += player.Defense.DamageReductionFromType[num17];
 		}
-		class310_0.Defense.AverageDamageReductionFromType /= class310_0.Defense.DamageReductionFromType.Length;
-		float num18 = class310_0.CurrentLevelNormal;
-		class310_0.Defense.drArmor = ((class310_0.Defense.Armor > 0f) ? (class310_0.Defense.Armor / (class310_0.Defense.Armor + num18 * 50f)) : 0f);
-		class310_0.Defense.drResist = ((class310_0.Defense.ResAverage > 0f) ? (class310_0.Defense.ResAverage / (class310_0.Defense.ResAverage + num18 * 5f)) : 0f);
-		float num19 = (1f - class310_0.Defense.drArmor) * (1f - class310_0.Defense.drResist) * (1f - class310_0.Defense.DRClass) * (1f - class310_0.Defense.DRElite);
-		if (class310_0.Defense.AverageDamageReductionFromType > 0f) {
-			num19 *= 1f - class310_0.Defense.AverageDamageReductionFromType;
+		player.Defense.AverageDamageReductionFromType /= player.Defense.DamageReductionFromType.Length;
+		float currentLevelNormal = player.CurrentLevelNormal;
+		player.Defense.drArmor = ((player.Defense.Armor > 0f) ? (player.Defense.Armor / (player.Defense.Armor + currentLevelNormal * 50f)) : 0f);
+		player.Defense.drResist = ((player.Defense.ResAverage > 0f) ? (player.Defense.ResAverage / (player.Defense.ResAverage + currentLevelNormal * 5f)) : 0f);
+		float num19 = (1f - player.Defense.drArmor) * (1f - player.Defense.drResist) * (1f - player.Defense.DRClass) * (1f - player.Defense.DRElite);
+		if (player.Defense.AverageDamageReductionFromType > 0f) {
+			num19 *= 1f - player.Defense.AverageDamageReductionFromType;
 		}
-		if (class310_0.list_2.Any((SnoPower SnoPower_0) => SnoPower_0.Sno == 217968)) {
+		if (player.UsedPassives.Any((SnoPower snoPower) => snoPower.Sno == 217968)) {
 			num19 *= 0.85f;
 		}
-		Skill epiphany = class310_0.Powers.UsedMonkPowers.Epiphany;
+		Skill epiphany = player.Powers.UsedMonkPowers.Epiphany;
 		if (epiphany != null && epiphany.BuffIsActive && epiphany.Rune == 0) {
 			num19 *= 0.5f;
 		}
-		Buff buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
+		Buff buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
 		if (buff2 != null && buff2.Active) {
 			num19 *= 0.75f;
 		}
-		buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrinePowerBlessed.Sno);
+		buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrinePowerBlessed.Sno);
 		if (buff2 != null && buff2.Active) {
 			num19 *= 0.75f;
 		}
-		buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.SpiritGuards.Sno);
+		buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.SpiritGuards.Sno);
 		if (buff2 != null && buff2.IconCounts[1] >= 1) {
 			num19 *= 0.6f;
 		}
-		buff2 = class310_0.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Barbarian_IgnorePain.Sno);
+		buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Barbarian_IgnorePain.Sno);
 		if (buff2 != null && buff2.Active) {
 			num19 *= 0.5f;
 		}
-		buff2 = class310_0.Powers.GetBuff("P4_ItemPassive_Unique_Ring_014");
+		buff2 = player.Powers.GetBuff("P4_ItemPassive_Unique_Ring_014");
 		if (buff2 != null && buff2.Active) {
 			int num20 = 0;
 			foreach (Item item4 in CoreCollector.ItemCollector.Items.Values) {
@@ -2249,29 +2249,29 @@ internal class ActorCollector
 			}
 			if (num20 > 0) {
 				float item = num20;
-				class310_0.Offense.PlainDamageBonuses.Add((buff2.SnoPower, item));
+				player.Offense.PlainDamageBonuses.Add((buff2.SnoPower, item));
 			}
 		}
 		Skill callOfTheAncients = CoreCollector.LocalPlayer.Powers.UsedBarbarianPowers.CallOfTheAncients;
 		if (callOfTheAncients != null && callOfTheAncients.BuffIsActive && callOfTheAncients.Rune == 4) {
 			num19 *= 0.5f;
 		}
-		class310_0.Defense.drCombined = 1f - num19;
-		float num21 = ((class310_0.Defense.drCombined != 1f) ? (class310_0.Defense.HealthMax / (1f - class310_0.Defense.drCombined)) : 0f);
-		class310_0.Defense.EhpCur = ((class310_0.Defense.drCombined != 1f) ? (class310_0.Defense.HealthCur / (1f - class310_0.Defense.drCombined)) : 0f);
-		if (class310_0.Defense.EhpMax != num21) {
-			class310_0.Defense.EhpMax = num21;
+		player.Defense.drCombined = 1f - num19;
+		float num21 = ((player.Defense.drCombined != 1f) ? (player.Defense.HealthMax / (1f - player.Defense.drCombined)) : 0f);
+		player.Defense.EhpCur = ((player.Defense.drCombined != 1f) ? (player.Defense.HealthCur / (1f - player.Defense.drCombined)) : 0f);
+		if (player.Defense.EhpMax != num21) {
+			player.Defense.EhpMax = num21;
 		}
-		class310_0.Stats.ExperiencePercentBonus *= 100f;
+		player.Stats.ExperiencePercentBonus *= 100f;
 		if (num9 > 0f) {
-			class310_0.Stats.ExperiencePercentBonus *= num9;
+			player.Stats.ExperiencePercentBonus *= num9;
 		}
-		if (class310_0.CurrentLevelParagon + 1 >= SnoData.Experience.ParagonTableTotal.Length) {
-			class310_0.CurrentLevelParagon = 0u;
+		if (player.CurrentLevelParagon + 1 >= SnoData.Experience.ParagonTableTotal.Length) {
+			player.CurrentLevelParagon = 0u;
 		}
-		class310_0.bool_14 = class310_0.CurrentLevelNormal != 0;
-		if (CoreCollector.LocalPlayer.SnoArea != null && flag2 && class310_0.bool_14) {
-			if (class310_0.CurrentLevelNormal != class310_0.CurrentLevelNormalCap || num5 == uint.MaxValue || !num6.HasValue) {
+		player.bool_14 = player.CurrentLevelNormal != 0;
+		if (CoreCollector.LocalPlayer.SnoArea != null && flag2 && player.bool_14) {
+			if (player.CurrentLevelNormal != player.CurrentLevelNormalCap || num5 == uint.MaxValue || !num6.HasValue) {
 				goto IL_3e56;
 			}
 			if (num5 <= 0) {
@@ -2280,91 +2280,91 @@ internal class ActorCollector
 					goto IL_3e56;
 				}
 			}
-			long num24 = SnoData.Experience.ParagonTableTotal[class310_0.CurrentLevelParagon];
-			long num25 = SnoData.Experience.ParagonExpLevel[class310_0.CurrentLevelParagon + 1];
+			long num24 = SnoData.Experience.ParagonTableTotal[player.CurrentLevelParagon];
+			long num25 = SnoData.Experience.ParagonExpLevel[player.CurrentLevelParagon + 1];
 			long num26 = (num5 << 32) + num6.Value;
 			long num27 = num25 - num26;
 			long num28 = num24 + num27;
 			if (num27 >= 0 && num25 >= 0) {
-				class310_0.class362_0.Value = num28;
-				if (class310_0.class362_0.Value == num28 && class310_0.ParagonTotalExp != num28) {
-					class310_0.long_1 = num24;
-					class310_0.ParagonExpToNextLevel = num25;
-					class310_0.ParagonExpInThisLevel = num27;
-					class310_0.ParagonTotalExp = num28;
-					class310_0.CurrentLevelParagonDouble = (double)class310_0.CurrentLevelParagon + ((num25 > 0) ? ((double)num27 / (double)num25) : 0.0);
+				player.class362_0.Value = num28;
+				if (player.class362_0.Value == num28 && player.ParagonTotalExp != num28) {
+					player.long_1 = num24;
+					player.ParagonExpToNextLevel = num25;
+					player.ParagonExpInThisLevel = num27;
+					player.ParagonTotalExp = num28;
+					player.CurrentLevelParagonDouble = (double)player.CurrentLevelParagon + ((num25 > 0) ? ((double)num27 / (double)num25) : 0.0);
 				}
 			}
 		}
 		goto IL_3e9a;
 	IL_3e56:
-		class310_0.long_1 = 0L;
-		class310_0.ParagonExpToNextLevel = 0L;
-		class310_0.ParagonExpInThisLevel = 0L;
-		class310_0.long_6 = 0L;
-		class310_0.ParagonTotalExp = 0L;
-		class310_0.class362_0.ForceSet(0L);
-		class310_0.CurrentLevelParagonDouble = 0.0;
+		player.long_1 = 0L;
+		player.ParagonExpToNextLevel = 0L;
+		player.ParagonExpInThisLevel = 0L;
+		player.ParagonTotalExp2 = 0L;
+		player.ParagonTotalExp = 0L;
+		player.class362_0.ForceSet(0L);
+		player.CurrentLevelParagonDouble = 0.0;
 		goto IL_3e9a;
 	IL_3e9a:
-		class310_0.BonusPoolRemaining = (long)(((ulong)num7 << 32) + num8);
+		player.BonusPoolRemaining = (long)(((ulong)num7 << 32) + num8);
 		foreach (Skill item5 in list) {
 			item5.IsOnCooldown = item5.CooldownStartTick > 0 && item5.CooldownStartTick <= CoreCollector.D3Memory.GameTick && item5.CooldownFinishTick > CoreCollector.D3Memory.GameTick;
-			if (item5.IsOnCooldown && !class310_0.list_3.Contains(item5) && item5.CurrentSnoPower != null) {
+			if (item5.IsOnCooldown && !player.list_3.Contains(item5) && item5.CurrentSnoPower != null) {
 				try {
-					CoreCollector.OnCooldown?.Invoke(class310_0, item5);
+					CoreCollector.OnCooldown?.Invoke(player, item5);
 				} catch (Exception exception_) {
 					Logger.LogException(exception_.Message);
 				}
 			}
 		}
-		for (int num29 = 0; num29 < class310_0.list_3.Count; num29++) {
-			Skill playerSkill = class310_0.list_3[num29];
+		for (int num29 = 0; num29 < player.list_3.Count; num29++) {
+			Skill playerSkill = player.list_3[num29];
 			if (!playerSkill.IsOnCooldown && playerSkill.CurrentSnoPower != null) {
 				try {
-					CoreCollector.OnTrueCooldown?.Invoke(class310_0, playerSkill);
-				} catch (Exception exception_2) {
-					Logger.LogException(exception_2.Message);
+					CoreCollector.OnTrueCooldown?.Invoke(player, playerSkill);
+				} catch (Exception exception) {
+					Logger.LogException(exception.Message);
 				}
 			}
 		}
-		float num30 = class310_0.Offense.WeaponDamageMinPhysicalMainHand + class310_0.Offense.WeaponDamageAddPhysicalMainHand / 2f;
-		float num31 = class310_0.Offense.WeaponDamageMinElementalMainHand + class310_0.Offense.WeaponDamageAddElementalMainHand / 2f;
-		class310_0.Offense.WeaponBaseDamageMinAmainHand = class310_0.Offense.WeaponDamageMinPhysicalMainHand + class310_0.Offense.WeaponDamageMinElementalMainHand;
-		class310_0.Offense.WeaponBaseDamageMaxAmainHand = class310_0.Offense.WeaponDamageMinPhysicalMainHand + class310_0.Offense.WeaponDamageAddPhysicalMainHand + class310_0.Offense.WeaponDamageMinElementalMainHand + class310_0.Offense.WeaponDamageAddElementalMainHand;
-		class310_0.Offense.WeaponBaseDamageMinBmainHand = class310_0.Offense.WeaponDamageMinPhysicalMainHand + class310_0.Offense.DamageMin + class310_0.Offense.WeaponDamageMinElementalMainHand;
-		class310_0.Offense.WeaponBaseDamageMaxBmainHand = class310_0.Offense.WeaponDamageMinPhysicalMainHand + class310_0.Offense.WeaponDamageAddPhysicalMainHand + class310_0.Offense.DamageMax + class310_0.Offense.WeaponDamageMinElementalMainHand + class310_0.Offense.WeaponDamageAddElementalMainHand;
-		float num32 = class310_0.Offense.WeaponDamageMinPhysicalOffHand + class310_0.Offense.WeaponDamageAddPhysicalOffHand / 2f;
-		float num33 = class310_0.Offense.WeaponDamageMinElementalOffHand + class310_0.Offense.WeaponDamageAddElementalOffHand / 2f;
-		class310_0.Offense.WeaponBaseDamageMinAoffHand = class310_0.Offense.WeaponDamageMinPhysicalOffHand + class310_0.Offense.WeaponDamageMinElementalOffHand;
-		class310_0.Offense.WeaponBaseDamageMaxAoffHand = class310_0.Offense.WeaponDamageMinPhysicalOffHand + class310_0.Offense.WeaponDamageAddPhysicalOffHand + class310_0.Offense.WeaponDamageMinElementalOffHand + class310_0.Offense.WeaponDamageAddElementalOffHand;
-		class310_0.Offense.WeaponBaseDamageMinBoffHand = class310_0.Offense.WeaponDamageMinPhysicalOffHand + class310_0.Offense.DamageMin + class310_0.Offense.WeaponDamageMinElementalOffHand;
-		class310_0.Offense.WeaponBaseDamageMaxBoffHand = class310_0.Offense.WeaponDamageMinPhysicalOffHand + class310_0.Offense.WeaponDamageAddPhysicalOffHand + class310_0.Offense.DamageMax + class310_0.Offense.WeaponDamageMinElementalOffHand + class310_0.Offense.WeaponDamageAddElementalOffHand;
-		float num34 = (num30 + (class310_0.Offense.DamageMin + class310_0.Offense.DamageMax) / 2f + num31) * (1f + class310_0.Offense.CriticalHitChance / 100f * class310_0.Offense.CritDamage / 100f) * (1f + class310_0.Stats.MainStat / 100f) * (1f + class310_0.Offense.WeaponDamageIncreasedBySkills);
-		class310_0.Offense.WeaponDamageMainHand = (float)Math.Round(num34, 2, MidpointRounding.ToEven);
-		class310_0.Offense.SheetDpsMainHand = num34 * class310_0.Offense.AttackSpeedMainHand;
-		if (class310_0.Offense.AttackSpeedOffHand > 0f) {
-			float num35 = (num32 + (class310_0.Offense.DamageMin + class310_0.Offense.DamageMax) / 2f + num33) * (1f + class310_0.Offense.CriticalHitChance / 100f * class310_0.Offense.CritDamage / 100f) * (1f + class310_0.Stats.MainStat / 100f) * (1f + class310_0.Offense.WeaponDamageIncreasedBySkills);
-			class310_0.Offense.WeaponDamageSecondHand = (float)Math.Round(num35, 2, MidpointRounding.ToEven);
-			class310_0.Offense.SheetDpsOffHand = num35 * class310_0.Offense.AttackSpeedOffHand;
-			class310_0.Offense.SheetDps = (num34 + num35) / 2f * (class310_0.Offense.AttackSpeedMainHand + class310_0.Offense.AttackSpeedOffHand) / 2f;
+		float num30 = player.Offense.WeaponDamageMinPhysicalMainHand + player.Offense.WeaponDamageAddPhysicalMainHand / 2f;
+		float num31 = player.Offense.WeaponDamageMinElementalMainHand + player.Offense.WeaponDamageAddElementalMainHand / 2f;
+		player.Offense.WeaponBaseDamageMinAmainHand = player.Offense.WeaponDamageMinPhysicalMainHand + player.Offense.WeaponDamageMinElementalMainHand;
+		player.Offense.WeaponBaseDamageMaxAmainHand = player.Offense.WeaponDamageMinPhysicalMainHand + player.Offense.WeaponDamageAddPhysicalMainHand + player.Offense.WeaponDamageMinElementalMainHand + player.Offense.WeaponDamageAddElementalMainHand;
+		player.Offense.WeaponBaseDamageMinBmainHand = player.Offense.WeaponDamageMinPhysicalMainHand + player.Offense.DamageMin + player.Offense.WeaponDamageMinElementalMainHand;
+		player.Offense.WeaponBaseDamageMaxBmainHand = player.Offense.WeaponDamageMinPhysicalMainHand + player.Offense.WeaponDamageAddPhysicalMainHand + player.Offense.DamageMax + player.Offense.WeaponDamageMinElementalMainHand + player.Offense.WeaponDamageAddElementalMainHand;
+		float num32 = player.Offense.WeaponDamageMinPhysicalOffHand + player.Offense.WeaponDamageAddPhysicalOffHand / 2f;
+		float num33 = player.Offense.WeaponDamageMinElementalOffHand + player.Offense.WeaponDamageAddElementalOffHand / 2f;
+		player.Offense.WeaponBaseDamageMinAoffHand = player.Offense.WeaponDamageMinPhysicalOffHand + player.Offense.WeaponDamageMinElementalOffHand;
+		player.Offense.WeaponBaseDamageMaxAoffHand = player.Offense.WeaponDamageMinPhysicalOffHand + player.Offense.WeaponDamageAddPhysicalOffHand + player.Offense.WeaponDamageMinElementalOffHand + player.Offense.WeaponDamageAddElementalOffHand;
+		player.Offense.WeaponBaseDamageMinBoffHand = player.Offense.WeaponDamageMinPhysicalOffHand + player.Offense.DamageMin + player.Offense.WeaponDamageMinElementalOffHand;
+		player.Offense.WeaponBaseDamageMaxBoffHand = player.Offense.WeaponDamageMinPhysicalOffHand + player.Offense.WeaponDamageAddPhysicalOffHand + player.Offense.DamageMax + player.Offense.WeaponDamageMinElementalOffHand + player.Offense.WeaponDamageAddElementalOffHand;
+		float num34 = (num30 + (player.Offense.DamageMin + player.Offense.DamageMax) / 2f + num31) * (1f + player.Offense.CriticalHitChance / 100f * player.Offense.CritDamage / 100f) * (1f + player.Stats.MainStat / 100f) * (1f + player.Offense.WeaponDamageIncreasedBySkills);
+		player.Offense.WeaponDamageMainHand = (float)Math.Round(num34, 2, MidpointRounding.ToEven);
+		player.Offense.SheetDpsMainHand = num34 * player.Offense.AttackSpeedMainHand;
+		if (player.Offense.AttackSpeedOffHand > 0f) {
+			float num35 = (num32 + (player.Offense.DamageMin + player.Offense.DamageMax) / 2f + num33) * (1f + player.Offense.CriticalHitChance / 100f * player.Offense.CritDamage / 100f) * (1f + player.Stats.MainStat / 100f) * (1f + player.Offense.WeaponDamageIncreasedBySkills);
+			player.Offense.WeaponDamageSecondHand = (float)Math.Round(num35, 2, MidpointRounding.ToEven);
+			player.Offense.SheetDpsOffHand = num35 * player.Offense.AttackSpeedOffHand;
+			player.Offense.SheetDps = (num34 + num35) / 2f * (player.Offense.AttackSpeedMainHand + player.Offense.AttackSpeedOffHand) / 2f;
 		} else {
-			class310_0.Offense.SheetDps = class310_0.Offense.SheetDpsMainHand;
+			player.Offense.SheetDps = player.Offense.SheetDpsMainHand;
 		}
-		class310_0.float_6 = class310_0.Defense.LifeOnHit * class310_0.Offense.AttackSpeed + class310_0.Defense.LifeRegen;
+		player.float_6 = player.Defense.LifeOnHit * player.Offense.AttackSpeed + player.Defense.LifeRegen;
 	}
 
-	internal static void smethod_3(Player class310_0, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void smethod_3(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
-		Buff buff = class310_0.Powers.GetBuff(uint_0) as Buff;
+		Buff buff = player.Powers.GetBuff(uint_0) as Buff;
 		if (buff == null) {
 			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}
-			buff = new Buff(class310_0, bySno);
-			class310_0.powerSno2buff.Add(uint_0, buff);
-			class310_0.dictionary_1[bySno.Code] = buff;
+			buff = new Buff(player, bySno);
+			player.powerSno2buff.Add(uint_0, buff);
+			player.dictionary_1[bySno.Code] = buff;
 			bool_4 = true;
 		}
 		buff.IconCounts[int_5] = int_4;
@@ -2375,35 +2375,35 @@ internal class ActorCollector
 		}
 	}
 
-	internal static void smethod_6(Player class310_0, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void smethod_6(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(CoreCollector.D3Memory.GameTick - int_4) / 60.0) : 0.0);
-		Buff buff = class310_0.Powers.GetBuff(uint_0);
+		Buff buff = player.Powers.GetBuff(uint_0);
 		if (buff == null) {
 			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}
-			buff = new Buff(class310_0, bySno);
-			class310_0.powerSno2buff.Add(uint_0, buff);
-			class310_0.dictionary_1[bySno.Code] = buff;
+			buff = new Buff(player, bySno);
+			player.powerSno2buff.Add(uint_0, buff);
+			player.dictionary_1[bySno.Code] = buff;
 			bool_4 = true;
 		}
 		buff.TimeElapsedSeconds[int_5] = num;
 	}
 
-	internal static void smethod_7(Player class310_0, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void smethod_7(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(int_4 - CoreCollector.D3Memory.GameTick) / 60.0) : 0.0);
-		Buff buff = class310_0.Powers.GetBuff(uint_0);
+		Buff buff = player.Powers.GetBuff(uint_0);
 		if (buff == null) {
 			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
 			if (bySno == null) {
 				return;
 			}
-			buff = new Buff(class310_0, bySno);
-			class310_0.powerSno2buff.Add(uint_0, buff);
-			class310_0.dictionary_1[bySno.Code] = buff;
+			buff = new Buff(player, bySno);
+			player.powerSno2buff.Add(uint_0, buff);
+			player.dictionary_1[bySno.Code] = buff;
 			bool_4 = true;
 		}
 		buff.TimeLeftSeconds[int_5] = num;

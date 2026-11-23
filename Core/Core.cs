@@ -160,9 +160,9 @@ public static class Core
 					Overlay.Instance.ModuleStatTracker.Show = !Overlay.Instance.ModuleStatTracker.Show;
 					break;
 				case "resetSession":
-					if (CoreCollector.class340_0 != null && Overlay.Instance.ModuleStatTracker.Show) {
-						CoreCollector.class340_0.method_22();
-						CoreCollector.class340_1.method_22();
+					if (CoreCollector.Session != null && Overlay.Instance.ModuleStatTracker.Show) {
+						CoreCollector.Session.method_22();
+						CoreCollector.SessionAlwaysRunning.method_22();
 					}
 
 					break;

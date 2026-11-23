@@ -89,8 +89,8 @@ internal class ModulePlayerInfo : Module
 				if (playerSkill.SnoPower.NormalIconTextureId == 0) {
 					continue;
 				}
-				Texture @class = TextureManager.GetTextureById(playerSkill.SnoPower.NormalIconTextureId);
-				if (showSkillIcons && @class != null) {
+				Texture texture = TextureManager.GetTextureById(playerSkill.SnoPower.NormalIconTextureId);
+				if (showSkillIcons && texture != null) {
 					float num9 = num6 * (float)Math.Cos((double)((float)(num7 / 100 * ((i >= 3) ? 100 : 0) - 135 + (360 - num7) / 2) + 360f * num8) * Math.PI / 180.0);
 					float num10 = num6 * (float)Math.Sin((double)((float)(num7 / 100 * ((i >= 3) ? 100 : 0) - 135 + (360 - num7) / 2) + 360f * num8) * Math.PI / 180.0);
 					GameWindowManager.Window.WorldToScreenCoordinate(iplayer_0.FloorCoordinate.X + num9, iplayer_0.FloorCoordinate.Y + num10, iplayer_0.FloorCoordinate.Z, out var screenX, out var screenY);
@@ -99,7 +99,7 @@ internal class ModulePlayerInfo : Module
 					if (fadeSkillIcons) {
 						num11 = 1f - 0.85f / num4 * num5;
 					}
-					@class.Draw(rectangle, float_0 * num11);
+					texture.Draw(rectangle, float_0 * num11);
 					Core.Controller.Texture.BuffFrameTexture.Draw(rectangle, float_0 * num11);
 				}
 				DrawArcBar(iplayer_0, num6, 100, num7, num8, bool_9: false, cooldownFill, barBackground, num4, num5);
@@ -185,20 +185,20 @@ internal class ModulePlayerInfo : Module
 		return pathGeometry;
 	}
 
-	private void DrawArcBar(Player iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, RenderBrush class219_23, RenderBrush class219_24, float float_4, float float_5)
+	private void DrawArcBar(Player iplayer_0, float float_1, int int_2, float float_2, float float_3, bool bool_9, RenderBrush renderBrush, RenderBrush barBackground2, float resourceMaxPri, float resourceCurPri)
 	{
-		if (float_4 <= 0f || int_2 <= 1) {
+		if (resourceMaxPri <= 0f || int_2 <= 1) {
 			return;
 		}
 		try {
-			int num = ((float_5 > 0f) ? Convert.ToInt32(Math.Max(0.0, Math.Min(2147483647.0, Math.Min(int_2, Math.Floor(float_5 / float_4 * (float)int_2))))) : 0);
+			int num = ((resourceCurPri > 0f) ? Convert.ToInt32(Math.Max(0.0, Math.Min(2147483647.0, Math.Min(int_2, Math.Floor(resourceCurPri / resourceMaxPri * (float)int_2))))) : 0);
 			if (num < int_2 - 1) {
 				Geometry geometry = GetArcGeometry(iplayer_0, float_1, int_2, float_2, float_3, bool_9, num, bool_10: true);
-				class219_24.DrawGeometry(geometry);
+				barBackground2.DrawGeometry(geometry);
 			}
 			if (num > 0) {
 				Geometry geometry2 = GetArcGeometry(iplayer_0, float_1, int_2, float_2, float_3, bool_9, num, bool_10: false);
-				class219_23.DrawGeometry(geometry2);
+				renderBrush.DrawGeometry(geometry2);
 			}
 		} catch (Exception e) {
 			Logger.LogException(e.Message);

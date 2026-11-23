@@ -35,13 +35,13 @@ public class Banner(uint id, uint worldId, WorldCoordinate worldCoordinate)
 	}
 }
 
-internal class Door(uint uint_7, uint uint_8, SnoActor SnoActor_1) : MapObject(uint_7, uint_8, SnoActor_1)
+internal class Door(uint acdid, uint annId2, SnoActor snoActor2) : MapObject(acdid, annId2, snoActor2)
 {
 }
 
-public class HeadStone(uint uint_8, uint uint_9, SnoActor SnoActor_1, uint uint_10, Player iplayer_1) : Actor(uint_8, uint_9, SnoActor_1)
+public class HeadStone(uint acdid, uint annId3, SnoActor actor, uint annId2, Player iplayer_1) : Actor(acdid, annId3, actor)
 {
-	public uint PlayerActorAnnId { get; set; } = uint_10;
+	public uint PlayerActorAnnId { get; set; } = annId2;
 
 	public Player Player { get; set; } = iplayer_1;
 }
@@ -54,7 +54,7 @@ public class MapObject : Actor, IClickableActor
 
 	public bool? ShouldBeClicked { get; set; }
 
-	public MapObject(uint uint_7, uint uint_8, SnoActor SnoActor_1) : base(uint_7, uint_8, SnoActor_1)
+	public MapObject(uint acdid, uint annId2, SnoActor snoActor2) : base(acdid, annId2, snoActor2)
 	{
 		IsClickable = true;
 	}
@@ -194,9 +194,9 @@ public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActo
 	?? SnoQuest?.NameLocalized;
 }
 
-public class Monster(uint uint_7, uint uint_8, SnoActor SnoActor_1, SnoMonster SnoMonster_1) : Actor(uint_7, uint_8, SnoActor_1)
+public class Monster(uint acdid, uint annId2, SnoActor snoActor2, SnoMonster snoMonster2) : Actor(acdid, annId2, snoActor2)
 {
-	public SnoMonster SnoMonster { get; set; } = SnoMonster_1;
+	public SnoMonster SnoMonster { get; set; } = snoMonster2;
 
 	public Stopwatch LastSpeak { get; set; }
 
@@ -269,13 +269,13 @@ public class Monster(uint uint_7, uint uint_8, SnoActor SnoActor_1, SnoMonster S
 
 internal class MonsterObstacle : Monster
 {
-	public MonsterObstacle(uint uint_7, uint uint_8, SnoActor SnoActor_1) : base(uint_7, uint_8, SnoActor_1, SnoData.Monsters.SnoMonsterObstacle)
+	public MonsterObstacle(uint acdid, uint annId2, SnoActor snoActor2) : base(acdid, annId2, snoActor2, SnoData.Monsters.SnoMonsterObstacle)
 	{
 		base.MaxHealth = 1.0;
 	}
 }
 
-public class Portal(uint uint_8, uint uint_9, SnoActor SnoActor_1, SnoArea isnoArea_1, uint uint_10) : Actor(uint_8, uint_9, SnoActor_1)
+public class Portal(uint uint_8, uint uint_9, SnoActor snoActor2, SnoArea isnoArea_1, uint uint_10) : Actor(uint_8, uint_9, snoActor2)
 {
 	public SnoArea TargetArea { get; set; } = isnoArea_1;
 
@@ -314,15 +314,15 @@ public class Shrine : MapObject, IClickableActor
 
 	public bool IsPoolOfReflection => Type == ShrineType.PoolOfReflection;
 
-	public Shrine(uint uint_7, uint uint_8, ActorShrineTypeInfo actorShrineTypeInfo_0) : base(uint_7, uint_8, actorShrineTypeInfo_0.SnoActor)
+	public Shrine(uint acdid, uint annId2, ActorShrineTypeInfo actorShrineTypeInfo) : base(acdid, annId2, actorShrineTypeInfo.SnoActor)
 	{
-		Type = actorShrineTypeInfo_0.Type;
+		Type = actorShrineTypeInfo.Type;
 	}
 }
 
-internal class SkillEffect(uint uint_7, uint uint_8, SnoActor SnoActor_1, SkillEffectRule SkillEffectRule_1) : Actor(uint_7, uint_8, SnoActor_1)
+internal class SkillEffect(uint acdid, uint annId2, SnoActor snoActor2, SkillEffectRule skillEffectRule) : Actor(acdid, annId2, snoActor2)
 {
-	public SkillEffectRule SkillEffectRule { get; } = SkillEffectRule_1;
+	public SkillEffectRule SkillEffectRule { get; } = skillEffectRule;
 }
 
 public class TownBanner : Actor
@@ -331,9 +331,9 @@ public class TownBanner : Actor
 
 	public bool Usable { get; set; }
 
-	public TownBanner(uint uint_7, uint uint_8, SnoActor SnoActor_1) : base(uint_7, uint_8, SnoActor_1)
+	public TownBanner(uint acdid, uint annId2, SnoActor snoActor2) : base(acdid, annId2, snoActor2)
 	{
-		switch (SnoActor_1.Sno)
+		switch (snoActor2.Sno)
 		{
 		case ActorSnoEnum._banner_player_1:
 		case ActorSnoEnum._banner_player_1_act2:

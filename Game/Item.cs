@@ -11,28 +11,28 @@ public class Item : Actor
 	private readonly SnoItem isnoItem_0;
 
 	[CompilerGenerated]
-	private ItemQuality itemQuality_0;
+	private ItemQuality quality;
 
 	[CompilerGenerated]
-	private int int_1;
+	private int seed;
 
 	[CompilerGenerated]
-	private ItemLocation itemLocation_0;
+	private ItemLocation location;
 
 	[CompilerGenerated]
-	private bool bool_8;
+	private bool seenInInventory;
 
 	[CompilerGenerated]
-	private uint uint_7;
+	private uint socketHostAcdId;
 
 	[CompilerGenerated]
-	private int int_2;
+	private int inventoryX;
 
 	[CompilerGenerated]
-	private int int_3;
+	private int inventoryY;
 
 	[CompilerGenerated]
-	private bool bool_9;
+	private bool unidentified;
 
 	public bool bool_10;
 
@@ -46,26 +46,26 @@ public class Item : Actor
 	private bool bool_11;
 
 	[CompilerGenerated]
-	private string string_0;
+	private string itemUniqueId;
 
 	public bool bool_12;
 
 	[CompilerGenerated]
-	private string string_1;
+	private string rareName;
 
-	public readonly Dictionary<string, ItemStat> class112_0 = new Dictionary<string, ItemStat>();
-
-	[CompilerGenerated]
-	private uint uint_8;
+	public readonly Dictionary<string, ItemStat> StatList2 = new Dictionary<string, ItemStat>();
 
 	[CompilerGenerated]
-	private uint uint_9;
+	private uint enchantedAffixOriginal;
 
 	[CompilerGenerated]
-	private int int_4;
+	private uint enchantedAffixNew;
 
 	[CompilerGenerated]
-	private long long_0 = 1L;
+	private int enchantedAffixCounter;
+
+	[CompilerGenerated]
+	private long quantity = 1L;
 
 	public SnoItem SnoItem
 	{
@@ -113,12 +113,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return itemQuality_0;
+			return quality;
 		}
 		[CompilerGenerated]
 		set
 		{
-			itemQuality_0 = value;
+			quality = value;
 		}
 	}
 
@@ -127,12 +127,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_1;
+			return seed;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_1 = value;
+			seed = value;
 		}
 	}
 
@@ -141,12 +141,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return itemLocation_0;
+			return location;
 		}
 		[CompilerGenerated]
 		set
 		{
-			itemLocation_0 = value;
+			location = value;
 		}
 	}
 
@@ -155,42 +155,42 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_8;
+			return seenInInventory;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_8 = value;
+			seenInInventory = value;
 		}
 	}
 
-	public uint UInt32_0
+	public uint SocketHostAcdId
 	{
 		[CompilerGenerated]
 		get
 		{
-			return uint_7;
+			return socketHostAcdId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_7 = value;
+			socketHostAcdId = value;
 		}
 	}
 
-	public Item SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(UInt32_0, out var value) ? value : null;
+	public Item SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(SocketHostAcdId, out var value) ? value : null;
 
 	public int InventoryX
 	{
 		[CompilerGenerated]
 		get
 		{
-			return int_2;
+			return inventoryX;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_2 = value;
+			inventoryX = value;
 		}
 	}
 
@@ -199,12 +199,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_3;
+			return inventoryY;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_3 = value;
+			inventoryY = value;
 		}
 	}
 
@@ -213,12 +213,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_9;
+			return unidentified;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_9 = value;
+			unidentified = value;
 		}
 	}
 
@@ -269,12 +269,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return string_0;
+			return itemUniqueId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			string_0 = value;
+			itemUniqueId = value;
 		}
 	}
 
@@ -283,16 +283,16 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return string_1;
+			return rareName;
 		}
 		[CompilerGenerated]
 		set
 		{
-			string_1 = value;
+			rareName = value;
 		}
 	}
 
-	public IEnumerable<ItemStat> StatList => class112_0.Values;
+	public IEnumerable<ItemStat> StatList => StatList2.Values;
 
 	public ItemKeepDecision KeepDecision { get; internal set; }
 
@@ -305,12 +305,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_8;
+			return enchantedAffixOriginal;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_8 = value;
+			enchantedAffixOriginal = value;
 		}
 	}
 
@@ -319,12 +319,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_9;
+			return enchantedAffixNew;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_9 = value;
+			enchantedAffixNew = value;
 		}
 	}
 
@@ -333,12 +333,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_4;
+			return enchantedAffixCounter;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_4 = value;
+			enchantedAffixCounter = value;
 		}
 	}
 
@@ -347,12 +347,12 @@ public class Item : Actor
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return quantity;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_0 = value;
+			quantity = value;
 		}
 	}
 
@@ -464,8 +464,8 @@ public class Item : Actor
 
 	public int SocketCount => method_47("sock");
 
-	public Item(uint uint_10, uint uint_11, SnoItem isnoItem_1)
-		: base(uint_10, uint_11, isnoItem_1.SnoActor)
+	public Item(uint acdId2, uint annId2, SnoItem isnoItem_1)
+		: base(acdId2, annId2, isnoItem_1.SnoActor)
 	{
 		isnoItem_0 = isnoItem_1;
 	}
@@ -527,17 +527,17 @@ public class Item : Actor
 
 	public int CountsIntoSet(uint setId)
 	{
-		return class112_0.GetValueOrDefault("Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture))?.IntegerValue.Value ?? 0;
+		return StatList2.GetValueOrDefault("Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture))?.IntegerValue.Value ?? 0;
 	}
 
 	public void method_46(ItemStat iitemStat_0)
 	{
-		class112_0[iitemStat_0.Id] = iitemStat_0;
+		StatList2[iitemStat_0.Id] = iitemStat_0;
 	}
 
 	public int method_47(string string_2, int int_5 = 0)
 	{
-		ItemStat itemStat = class112_0.GetValueOrDefault(string_2);
+		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return int_5;
@@ -547,7 +547,7 @@ public class Item : Actor
 
 	public uint method_48(string string_2, uint uint_10 = 0u)
 	{
-		ItemStat itemStat = class112_0.GetValueOrDefault(string_2);
+		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return uint_10;

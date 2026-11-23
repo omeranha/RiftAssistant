@@ -13,15 +13,15 @@ public sealed class Experience
 		long num = 0L;
 		byte[] byte_ = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "experience_paragon.bin"));
 		int num2 = 0;
-		using DataReader @class = new DataReader(byte_);
-		while (@class.Stream.Position < @class.Stream.Length)
+		using DataReader dataReader = new DataReader(byte_);
+		while (dataReader.Stream.Position < dataReader.Stream.Length)
 		{
 			num2++;
 			if (num2 >= ParagonExpLevel.Length)
 			{
 				break;
 			}
-			long num3 = @class.method_12();
+			long num3 = dataReader.method_12();
 			ParagonExpLevel[num2] = num3;
 			num += num3;
 			ParagonTableTotal[num2] = num;

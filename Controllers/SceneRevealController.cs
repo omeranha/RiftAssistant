@@ -4,41 +4,41 @@ using System.Runtime.CompilerServices;
 public class SceneRevealController
 {
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool minimapEnabled;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool mapEnabled;
 
-	private float float_0;
+	private float mapOpacity;
 
-	private float float_1;
-
-	[CompilerGenerated]
-	private bool bool_2;
+	private float minimapOpacity;
 
 	[CompilerGenerated]
-	private SolidBrush solidBrush_0;
+	private bool minimapClip;
 
 	[CompilerGenerated]
-	private Brush brush_0;
+	private SolidBrush brushKnown;
 
 	[CompilerGenerated]
-	private bool bool_3;
+	private Brush brushUnknown;
 
 	[CompilerGenerated]
-	private Pen pen_0;
+	private bool displaySceneBorder;
+
+	[CompilerGenerated]
+	private Pen sceneBorderPen;
 
 	public bool MinimapEnabled
 	{
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return minimapEnabled;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_0 = value;
+			minimapEnabled = value;
 		}
 	}
 
@@ -47,12 +47,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return bool_1;
+			return mapEnabled;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_1 = value;
+			mapEnabled = value;
 		}
 	}
 
@@ -60,11 +60,11 @@ public class SceneRevealController
 	{
 		get
 		{
-			return float_0;
+			return mapOpacity;
 		}
 		set
 		{
-			float_0 = value / 255f;
+			mapOpacity = value / 255f;
 		}
 	}
 
@@ -72,11 +72,11 @@ public class SceneRevealController
 	{
 		get
 		{
-			return float_1;
+			return minimapOpacity;
 		}
 		set
 		{
-			float_1 = value / 255f;
+			minimapOpacity = value / 255f;
 		}
 	}
 
@@ -85,12 +85,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return bool_2;
+			return minimapClip;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_2 = value;
+			minimapClip = value;
 		}
 	}
 
@@ -99,12 +99,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return solidBrush_0;
+			return brushKnown;
 		}
 		[CompilerGenerated]
 		set
 		{
-			solidBrush_0 = value;
+			brushKnown = value;
 		}
 	}
 
@@ -113,12 +113,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return brush_0;
+			return brushUnknown;
 		}
 		[CompilerGenerated]
 		set
 		{
-			brush_0 = value;
+			brushUnknown = value;
 		}
 	}
 
@@ -127,12 +127,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return bool_3;
+			return displaySceneBorder;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_3 = value;
+			displaySceneBorder = value;
 		}
 	}
 
@@ -141,12 +141,12 @@ public class SceneRevealController
 		[CompilerGenerated]
 		get
 		{
-			return pen_0;
+			return sceneBorderPen;
 		}
 		[CompilerGenerated]
 		set
 		{
-			pen_0 = value;
+			sceneBorderPen = value;
 		}
 	}
 

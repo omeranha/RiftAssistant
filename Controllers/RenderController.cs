@@ -22,50 +22,50 @@ public class RenderController
 		}
 	}
 
-	public UiElement InGameBottomHudUiElement => CoreCollector.UiElements.class341_64;
+	public UiElement InGameBottomHudUiElement => CoreCollector.UiElements.InGameBottomHudUiElement;
 
 	public UiElement MonsterHpBarUiElement
 	{
 		get {
-			if (CoreCollector.UiElements.class341_179.Visible) {
-				return CoreCollector.UiElements.class341_179;
+			if (CoreCollector.UiElements.HpBarNormalProgressbar.Visible) {
+				return CoreCollector.UiElements.HpBarNormalProgressbar;
 			}
-			if (CoreCollector.UiElements.class341_180.Visible) {
-				return CoreCollector.UiElements.class341_180;
+			if (CoreCollector.UiElements.HpBarBountyProgressbar.Visible) {
+				return CoreCollector.UiElements.HpBarBountyProgressbar;
 			}
-			if (CoreCollector.UiElements.class341_183.Visible) {
-				return CoreCollector.UiElements.class341_183;
+			if (CoreCollector.UiElements.HpBarSpecialProgressbar.Visible) {
+				return CoreCollector.UiElements.HpBarSpecialProgressbar;
 			}
-			if (CoreCollector.UiElements.class341_182.Visible) {
-				return CoreCollector.UiElements.class341_182;
+			if (CoreCollector.UiElements.HpBarPlayerProgressbar.Visible) {
+				return CoreCollector.UiElements.HpBarPlayerProgressbar;
 			}
-			if (CoreCollector.UiElements.class341_181.Visible) {
-				return CoreCollector.UiElements.class341_181;
+			if (CoreCollector.UiElements.HpBarMinionProgressbar.Visible) {
+				return CoreCollector.UiElements.HpBarMinionProgressbar;
 			}
 			return null;
 		}
 	}
 
-	public UiElement MinimapUiElement => CoreCollector.UiElements.class341_85;
+	public UiElement MinimapUiElement => CoreCollector.UiElements.MinimapUiElement;
 
-	public UiElement NephalemRiftBarUiElement => CoreCollector.UiElements.class341_172;
+	public UiElement NephalemRiftBarUiElement => CoreCollector.UiElements.NephalemRiftBarUiElement;
 
-	public UiElement GreaterRiftBarUiElement => CoreCollector.UiElements.class341_173;
+	public UiElement GreaterRiftBarUiElement => CoreCollector.UiElements.GreaterRiftBarUiElement;
 
-	public UiElement ChallengeRiftBarUiElement => CoreCollector.UiElements.class341_174;
+	public UiElement ChallengeRiftBarUiElement => CoreCollector.UiElements.ChallengeRiftBarUiElement;
 
-	public UiElement ChallengeRiftAheadPanelUiElement => CoreCollector.UiElements.class341_175;
+	public UiElement ChallengeRiftAheadPanelUiElement => CoreCollector.UiElements.ChallengeRiftAheadPanelUiElement;
 
-	public UiElement ParagonLevelUpSplashTextUiElement => CoreCollector.UiElements.class341_90;
+	public UiElement ParagonLevelUpSplashTextUiElement => CoreCollector.UiElements.ParagonLevelUpSplashTextUiElement;
 
-	public UiElement BuffBarExtendedBuffsUiElement => CoreCollector.UiElements.class341_128;
+	public UiElement BuffBarExtendedBuffsUiElement => CoreCollector.UiElements.BuffBarExtendedBuffsUiElement;
 
 	public IEnumerable<UiElement> BuffBarUiElements
 	{
 		get {
 			string string_ = "Root.NormalLayer.buffs_backgroundScreen.buff_icon_wrapper.buff ";
 			List<string> list = new List<string>(30);
-			CoreCollector.UiElements.class341_127.method_3(string_, list);
+			CoreCollector.UiElements.BuffIconWrapper.method_3(string_, list);
 			for (int i = 0; i < list.Count; i++) {
 				string string_2 = list[i];
 				yield return CoreCollector.UiElements.CreateTemporary(string_2);
@@ -73,9 +73,9 @@ public class RenderController
 		}
 	}
 
-	public UiElement WorldMapUiElement => CoreCollector.UiElements.class341_86;
+	public UiElement WorldMapUiElement => CoreCollector.UiElements.WorldMapUiElement;
 
-	public UiElement ActMapUiElement => CoreCollector.UiElements.class341_88;
+	public UiElement ActMapUiElement => CoreCollector.UiElements.ActMapUiElement;
 
 	public UiElement SalvageTabButton => CoreCollector.UiElements.salvageTabButton;
 
@@ -91,13 +91,13 @@ public class RenderController
 
 	public bool UiHidden => CoreCollector.D3Memory.IsUiHidden;
 
-	public float MinimapScale => Overlay.Instance.float_3;
+	public float MinimapScale => Overlay.Instance.MinimapScale;
 
 	public IBrush CreateBrush(int a, int r, int g, int b, float strokeWidth, DashStyle dash = DashStyle.Solid, CapStyle startCap = CapStyle.Flat, CapStyle endCap = CapStyle.Flat)
 	{
-		RenderBrush @class = new RenderBrush(a, r, g, b, strokeWidth, dash, startCap, endCap);
-		brushes.Add(@class);
-		return @class;
+		RenderBrush renderBrush = new RenderBrush(a, r, g, b, strokeWidth, dash, startCap, endCap);
+		brushes.Add(renderBrush);
+		return renderBrush;
 	}
 
 	public IFont CreateFont(string fontFamily, float size, int a, int r, int g, int b, bool bold, bool italic, bool standardShadow)
@@ -154,7 +154,7 @@ public class RenderController
 	public UiElement GetPlayerSkillUiElement(ActionKey key)
 	{
 		if (key == ActionKey.Heal) {
-			return CoreCollector.UiElements.class341_143;
+			return CoreCollector.UiElements.GamePotion;
 		}
 		if (key >= ActionKey.LeftSkill && (int)key < CoreCollector.UiElements.class341_144.Length) {
 			return CoreCollector.UiElements.class341_144[(int)key];
@@ -234,29 +234,29 @@ public class RenderController
 	}
 
 	[DllImport("user32.dll")]
-	private static extern IntPtr GetWindowRect(IntPtr intptr_0, ref RECT rect);
+	private static extern IntPtr GetWindowRect(IntPtr handle, ref RECT rect);
 
 	[DllImport("gdi32.dll")]
-	private static extern bool BitBlt(IntPtr intptr_0, int int_2, int int_3, int int_4, int int_5, IntPtr intptr_1, int int_6, int int_7, int int_8);
+	private static extern bool BitBlt(IntPtr memDC, int int_2, int int_3, int width, int height, IntPtr windowDC, int int_6, int int_7, int int_8);
 
 	[DllImport("gdi32.dll")]
-	private static extern IntPtr CreateCompatibleBitmap(IntPtr intptr_0, int int_2, int int_3);
+	private static extern IntPtr CreateCompatibleBitmap(IntPtr windowDC, int width, int height);
 
 	[DllImport("gdi32.dll")]
-	private static extern IntPtr CreateCompatibleDC(IntPtr intptr_0);
+	private static extern IntPtr CreateCompatibleDC(IntPtr windowDC);
 
 	[DllImport("gdi32.dll")]
-	private static extern bool DeleteDC(IntPtr intptr_0);
+	private static extern bool DeleteDC(IntPtr memDC);
 
 	[DllImport("user32.dll")]
-	private static extern IntPtr GetWindowDC(IntPtr intptr_0);
+	private static extern IntPtr GetWindowDC(IntPtr handle);
 
 	[DllImport("user32.dll")]
-	private static extern IntPtr ReleaseDC(IntPtr intptr_0, IntPtr intptr_1);
+	private static extern IntPtr ReleaseDC(IntPtr handle, IntPtr windowDC);
 
 	[DllImport("gdi32.dll")]
-	private static extern bool DeleteObject(IntPtr intptr_0);
+	private static extern bool DeleteObject(IntPtr hBitmap);
 
 	[DllImport("gdi32.dll")]
-	private static extern IntPtr SelectObject(IntPtr intptr_0, IntPtr intptr_1);
+	private static extern IntPtr SelectObject(IntPtr memDC, IntPtr intptr_1);
 }

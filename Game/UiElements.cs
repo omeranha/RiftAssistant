@@ -10,201 +10,201 @@ using System.Text;
 
 internal class UiElements
 {
-	public UiElement class341_0;
+	public UiElement QuestNameValue;
 
-	public UiElement class341_1;
+	public UiElement DifficultyTextValue;
 
-	public UiElement class341_2;
+	public UiElement PlayGameButton;
 
-	public UiElement class341_3;
+	public UiElement ChangeQuestButton;
 
-	public UiElement class341_4;
+	public UiElement SwitchHero;
 
-	public UiElement class341_5;
+	public UiElement PortraitText;
 
-	public UiElement class341_6;
+	public UiElement BattleNetGameSettingsMainLayoutRootOverlayContainer;
 
-	public UiElement[] class341_7 = new UiElement[5];
+	public UiElement[] StashTabs = new UiElement[5];
 
-	public UiElement[] class341_8 = new UiElement[4];
+	public UiElement[] StashPages = new UiElement[4];
 
-	public UiElement class341_9;
+	public UiElement StashMainUiElement;
 
-	public UiElement class341_10;
+	public UiElement ButtonStash;
 
-	public UiElement class341_11;
+	public UiElement InventoryMainUiElement;
 
-	public UiElement class341_12;
+	public UiElement InventorySidePaneContainer;
 
-	public UiElement class341_13;
+	public UiElement InventoryItemsUiElement;
 
-	public UiElement class341_14;
+	public UiElement CharacterDetailsContainer;
 
-	public UiElement class341_15;
+	public UiElement FollowerMainUiElement;
 
-	public UiElement class341_16;
+	public UiElement InspectMainPage;
 
-	public UiElement class341_17;
+	public UiElement EquipmentManagerMainPage;
 
-	public UiElement class341_18;
+	public UiElement Details;
 
-	public UiElement class341_19;
+	public UiElement InventoryButtonHead;
 
-	public UiElement class341_20;
+	public UiElement InventoryButtonShoulders;
 
-	public UiElement class341_21;
+	public UiElement InventoryButtonNeck;
 
-	public UiElement class341_22;
+	public UiElement InventoryButtonHands;
 
-	public UiElement class341_23;
+	public UiElement InventoryButtonBracers;
 
-	public UiElement class341_24;
+	public UiElement InventoryButtonTorso;
 
-	public UiElement class341_25;
+	public UiElement InventoryButtonWaist;
 
-	public UiElement class341_26;
+	public UiElement InventoryButtonLegs;
 
-	public UiElement class341_27;
+	public UiElement InventoryButtonFeet;
 
-	public UiElement class341_28;
+	public UiElement InventoryButtonFingerLeft;
 
-	public UiElement class341_29;
+	public UiElement InventoryButtonFingerRight;
 
-	public UiElement class341_30;
+	public UiElement InventoryButtonArmLeft;
 
-	public UiElement class341_31;
+	public UiElement InventoryButtonArmRight;
 
-	public UiElement class341_32;
+	public UiElement HirelingSlotHead;
 
-	public UiElement class341_33;
+	public UiElement HirelingSlotShoulders;
 
-	public UiElement class341_34;
+	public UiElement HirelingSlotNeck;
 
-	public UiElement class341_35;
+	public UiElement HirelingSlotHands;
 
-	public UiElement class341_36;
+	public UiElement HirelingSlotBracers;
 
-	public UiElement class341_37;
+	public UiElement HirelingSlotTorso;
 
-	public UiElement class341_38;
+	public UiElement HirelingSlotWaist;
 
-	public UiElement class341_39;
+	public UiElement HirelingSlotLegs;
 
-	public UiElement class341_40;
+	public UiElement HirelingSlotFeet;
 
-	public UiElement class341_41;
+	public UiElement HirelingSlotRightFinger;
 
-	public UiElement class341_42;
+	public UiElement HirelingSlotLeftFinger;
 
-	public UiElement class341_43;
+	public UiElement HirelingSlotMainhand;
 
-	public UiElement class341_44;
+	public UiElement HirelingSlotOffhand;
 
-	public UiElement class341_45;
+	public UiElement HirelingSlotSpecial;
 
-	public UiElement class341_46;
+	public UiElement VendorDialogMainPagePanel;
 
-	public UiElement class341_47;
+	public UiElement ShopDialogMainPagePanel;
 
-	public UiElement class341_48;
+	public UiElement GoldText;
 
-	public UiElement class341_49;
+	public UiElement KanaisRecipesMain;
 
-	public UiElement class341_50;
+	public UiElement KanaisCollection;
 
-	public UiElement class341_51;
+	public UiElement SkillPaneMainLayoutRoot;
 
-	public UiElement class341_52;
+	public UiElement SkillsList;
 
-	public UiElement class341_53;
+	public UiElement PassiveSkillSelect;
 
-	public UiElement class341_54;
+	public UiElement ActiveSkillSelect;
 
-	public UiElement class341_55;
+	public UiElement ParagonPointSelect;
 
-	public UiElement class341_56;
+	public UiElement GamemenuBkgrnd;
 
-	public UiElement class341_57;
+	public UiElement ConversationDialogMain;
 
-	public UiElement class341_58;
+	public UiElement Clock;
 
-	public UiElement class341_59;
+	public UiElement ListTitle;
 
-	public UiElement class341_60;
+	public UiElement SubmitButton;
 
-	public UiElement class341_61;
+	public UiElement LoadScreenText;
 
-	public UiElement class341_62;
+	public UiElement Cutscene;
 
-	public UiElement class341_63;
+	public UiElement ScriptedSequence;
 
-	public UiElement class341_64;
+	public UiElement InGameBottomHudUiElement;
 
-	public UiElement class341_65;
+	public UiElement GameWindowHudOverlayClassic;
 
-	public UiElement class341_66;
+	public UiElement GameProgressBarHealthBall;
 
-	public UiElement class341_67;
+	public UiElement GameProgressBarManaBall;
 
-	public UiElement class341_68;
+	public UiElement Item2Stack;
 
-	public UiElement class341_69;
+	public UiElement TopWrapperStack;
 
-	public UiElement class341_70;
+	public UiElement FrameInstruction;
 
-	public UiElement class341_71;
+	public UiElement Item1Stack;
 
-	public UiElement class341_72;
+	public UiElement ChatMessagelist;
 
-	public UiElement class341_73;
+	public UiElement Item3Stack;
 
 	public UiElement chatOpened;
 
-	public UiElement class341_75;
+	public UiElement FriendsListContent;
 
-	public UiElement class341_76;
+	public UiElement GroupsListContent;
 
-	public UiElement class341_77;
+	public UiElement GuildFinderMainLayoutRootOverlayContainer;
 
-	public UiElement class341_78;
+	public UiElement BattleNetLeaderboardMainLayoutRootOverlayContainer;
 
-	public UiElement class341_79;
+	public UiElement BattleNetSeasonJourneyMainLayoutRootOverlayContainer;
 
-	public UiElement class341_80;
+	public UiElement BattleNetStoreMainLayoutRootOverlayContainer;
 
-	public UiElement class341_81;
+	public UiElement FrameBackground;
 
-	public UiElement class341_82;
+	public UiElement PrimaryFrameButtonExit;
 
-	public UiElement class341_83;
+	public UiElement DialogSendRealIdRequest;
 
-	public UiElement class341_84;
+	public UiElement MapDialogMainPage;
 
-	public UiElement class341_85;
+	public UiElement MinimapUiElement;
 
-	public UiElement class341_86;
+	public UiElement WorldMapUiElement;
 
-	public UiElement class341_87;
+	public UiElement Instructions;
 
-	public UiElement class341_88;
+	public UiElement ActMapUiElement;
 
-	public UiElement class341_89;
+	public UiElement GameOptionsMainLayoutRootOverlayContainer;
 
-	public UiElement class341_90;
+	public UiElement ParagonLevelUpSplashTextUiElement;
 
-	public UiElement class341_91;
+	public UiElement QuestrewardDialog;
 
-	public UiElement class341_92;
+	public UiElement QuestrewardDialogButtonExit;
 
-	public UiElement class341_93;
+	public UiElement BountyRewardMainLayoutRoot;
 
-	public UiElement class341_94;
+	public UiElement TieredRiftRewardMainLayoutRoot;
 
-	public UiElement class341_95;
+	public UiElement EventtextRegionTitle;
 
 	public UiElement[] class341_96;
 
-	public UiElement class341_97;
+	public UiElement ItemsListContent;
 
 	public UiElement class341_98;
 
@@ -214,29 +214,29 @@ internal class UiElements
 
 	public UiElement class341_101;
 
-	public UiElement class341_102;
+	public UiElement ButtonAcceptResurrection;
 
-	public UiElement class341_103;
+	public UiElement BossEnterMainStackWrapperAccept;
 
-	public UiElement class341_104;
+	public UiElement BossJoinPartyMainStackWrapperAccept;
 
-	public UiElement class341_105;
+	public UiElement RiftJoinPartyMainStackWrapperAccept;
 
-	public UiElement class341_106;
+	public UiElement DlgNewParagonButton;
 
-	public UiElement class341_107;
+	public UiElement Tab1;
 
-	public UiElement class341_108;
+	public UiElement Bonus0PointsSpent;
 
-	public UiElement class341_109;
+	public UiElement Bonus1PointsSpent;
 
-	public UiElement class341_110;
+	public UiElement Bonus0IncreaseStat;
 
-	public UiElement class341_111;
+	public UiElement Bonus1IncreaseStat;
 
-	public UiElement class341_112;
+	public UiElement PointsAvailable1;
 
-	public UiElement class341_113;
+	public UiElement AcceptParagonPointsButton;
 
 	public UiElement class341_114;
 
@@ -256,17 +256,17 @@ internal class UiElements
 
 	public UiElement class341_122;
 
-	public UiElement class341_123;
+	public UiElement RiftTierLevelCombo;
 
-	public UiElement class341_124;
+	public UiElement Arrow;
 
-	public UiElement class341_125;
+	public UiElement PartyOkButton;
 
-	public UiElement class341_126;
+	public UiElement Localmap;
 
-	public UiElement class341_127;
+	public UiElement BuffIconWrapper;
 
-	public UiElement class341_128;
+	public UiElement BuffBarExtendedBuffsUiElement;
 
 	public UiElement class341_129;
 
@@ -288,7 +288,7 @@ internal class UiElements
 
 	public UiElement class341_138;
 
-	public UiElement class341_139;
+	public UiElement Subdlg;
 
 	public UiElement class341_140;
 
@@ -296,7 +296,7 @@ internal class UiElements
 
 	public UiElement class341_142;
 
-	public UiElement class341_143;
+	public UiElement GamePotion;
 
 	public UiElement[] class341_144 = new UiElement[6];
 
@@ -306,77 +306,77 @@ internal class UiElements
 
 	public UiElement[] class341_147 = new UiElement[4];
 
-	public UiElement class341_148;
+	public UiElement BattleNetProfileMainLayoutRootOverlayContainer;
 
-	public UiElement class341_149;
+	public UiElement PlayerContextMenu;
 
-	public UiElement class341_150;
+	public UiElement InGamePortraitTooltip2;
 
-	public UiElement class341_151;
+	public UiElement TradeDialogMainPage;
 
-	public UiElement class341_152;
+	public UiElement TradeGoldAmountMine;
 
-	public UiElement class341_153;
+	public UiElement TradeGoldAmountOther;
 
-	public UiElement class341_154;
+	public UiElement DropDownContent;
 
-	public UiElement class341_155;
+	public UiElement Stackpanel;
 
-	public UiElement class341_156;
+	public UiElement BattleNetAchievementsMainLayoutRootOverlayContainer;
 
-	public UiElement class341_157;
+	public UiElement LatencyMeter;
 
-	public UiElement class341_158;
+	public UiElement Skill2Stack;
 
-	public UiElement class341_159;
+	public UiElement Banner2;
 
-	public UiElement class341_160;
+	public UiElement BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer;
 
-	public UiElement class341_161;
+	public UiElement InGamePetContextMenu;
 
-	public UiElement class341_162;
+	public UiElement Tooltip2;
 
-	public UiElement class341_163;
+	public UiElement HirelingDetailsContainer;
 
-	public UiElement class341_164;
+	public UiElement RiftDialogMainPage;
 
-	public UiElement class341_165;
+	public UiElement QuestloreDialogPanel;
 
-	public UiElement class341_166;
+	public UiElement RactorTag0;
 
-	public UiElement class341_167;
+	public UiElement InviteToPartyNotification;
 
-	public UiElement class341_168;
+	public UiElement LorePlayerDlgBackground;
 
-	public UiElement class341_169;
+	public UiElement LoreNotifyDlg;
 
-	public UiElement class341_170;
+	public UiElement JoinRequestNotification;
 
-	public UiElement class341_171;
+	public UiElement LeaveGameWindow;
 
-	public UiElement class341_172;
+	public UiElement NephalemRiftBarUiElement;
 
-	public UiElement class341_173;
+	public UiElement GreaterRiftBarUiElement;
 
-	public UiElement class341_174;
+	public UiElement ChallengeRiftBarUiElement;
 
-	public UiElement class341_175;
+	public UiElement ChallengeRiftAheadPanelUiElement;
 
-	public UiElement class341_176;
+	public UiElement GameTextLine0;
 
-	public UiElement class341_177;
+	public UiElement EventtextRegion;
 
-	public UiElement class341_178;
+	public UiElement GuildMainLayoutRootOverlayContainer;
 
-	public UiElement class341_179;
+	public UiElement HpBarNormalProgressbar;
 
-	public UiElement class341_180;
+	public UiElement HpBarBountyProgressbar;
 
-	public UiElement class341_181;
+	public UiElement HpBarMinionProgressbar;
 
-	public UiElement class341_182;
+	public UiElement HpBarPlayerProgressbar;
 
-	public UiElement class341_183;
+	public UiElement HpBarSpecialProgressbar;
 
 	private const int MaxUiElements = 32768;
 	private const int MaxChainDepth = 1000;
@@ -440,7 +440,7 @@ internal class UiElements
 
 		HandleDisconnectPopup();
 		ProcessChat(force);
-		if (class341_60.Visible) {
+		if (SubmitButton.Visible) {
 			CoreCollector.BattleTag = null;
 			CoreCollector.HeroCollector.method_2();
 		}
@@ -475,9 +475,9 @@ internal class UiElements
 
 	private void HandleDisconnectPopup()
 	{
-		if (!class341_59.Visible) return;
+		if (!ListTitle.Visible) return;
 
-		switch (class341_59.ReadText()) {
+		switch (ListTitle.ReadText()) {
 			case "NETWORK DISCONNECT":
 			case "ERROR":
 			case "LOST CONNECTION":
@@ -525,8 +525,8 @@ internal class UiElements
 		if (all.TryGetValue(path, out var existing)) return existing;
 
 		var element = new UiElement(path, requiredVisible, requiredHidden) {
-			float_0 = paddingX,
-			float_1 = paddingY
+			PaddingX = paddingX,
+			PaddingY = paddingY
 		};
 
 		Add(element);
@@ -560,8 +560,8 @@ internal class UiElements
 
 	public int GetSelectedStashPage()
 	{
-		for (int i = 0; i < class341_8.Length; i++) {
-			var tab = class341_8[i];
+		for (int i = 0; i < StashPages.Length; i++) {
+			var tab = StashPages[i];
 
 			tab.Refresh();
 
@@ -575,10 +575,10 @@ internal class UiElements
 
 	public int GetActiveStashTab()
 	{
-		if (!class341_9.Visible) return -1;
+		if (!StashMainUiElement.Visible) return -1;
 
-		for (int i = 0; i < class341_7.Length; i++) {
-			var tab = class341_7[i];
+		for (int i = 0; i < StashTabs.Length; i++) {
+			var tab = StashTabs[i];
 
 			tab.Refresh();
 
@@ -592,11 +592,11 @@ internal class UiElements
 
 	public int GetInactiveStashTab()
 	{
-		if (!class341_9.Visible)
+		if (!StashMainUiElement.Visible)
 			return -1;
 
-		for (int i = 0; i < class341_7.Length; i++) {
-			var tab = class341_7[i];
+		for (int i = 0; i < StashTabs.Length; i++) {
+			var tab = StashTabs[i];
 
 			tab.Refresh();
 
@@ -610,7 +610,7 @@ internal class UiElements
 
 	public string ReadChat(bool stripFormatting)
 	{
-		if (bucketCount == 0 || !class341_72.Visible) {
+		if (bucketCount == 0 || !ChatMessagelist.Visible) {
 			hasLastChatLine = false;
 			return null;
 		}
@@ -636,13 +636,13 @@ internal class UiElements
 
 	private long FindFirstChatTextAddress()
 	{
-		int childCount = class341_72.GetChildCount();
+		int childCount = ChatMessagelist.GetChildCount();
 		if ((uint)childCount > MaxChatLength) return 0;
 
 		int count = Math.Min(childCount, MaxChatScanEntries);
 
 		for (int i = 0; i < count; i++) {
-			long dataAddress = class341_72.ReadChildDataAddress(i);
+			long dataAddress = ChatMessagelist.ReadChildDataAddress(i);
 			if (dataAddress == 0) continue;
 
 			long textAddress = GameWindowManager.Read<long>(dataAddress + ChatTextPointerOffset);
@@ -701,13 +701,13 @@ internal class UiElements
 		if (bucketCount <= 0 || uiHash <= 0)
 			return;
 
-		if ((uint)element.int_1 >= bucketCount)
-			element.int_1 = ComputeBucket(element.int_0, uiHash);
+		if ((uint)element.Bucket >= bucketCount)
+			element.Bucket = ComputeBucket(element.int_0, uiHash);
 
-		if ((uint)element.int_1 >= bucketCount)
+		if ((uint)element.Bucket >= bucketCount)
 			return;
 
-		long current = buckets[element.int_1];
+		long current = buckets[element.Bucket];
 		int depth = 0;
 
 		while (current != 0 && depth++ < MaxChainDepth) {
@@ -723,9 +723,9 @@ internal class UiElements
 					if (element.Visible &&
 						!TryBuildRectangle(
 							element.Class75_0,
-							ref element.rectangleF_0,
-							element.float_0,
-							element.float_1)) {
+							ref element.rectangle,
+							element.PaddingX,
+							element.PaddingY)) {
 						element.Visible = false;
 					}
 
@@ -804,260 +804,260 @@ internal class UiElements
 
 	internal void SetupUiElements()
 	{
-		class341_64 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_window_hud_overlay");
-		class341_46 = Register("Root.NormalLayer.vendor_dialog_mainPage.panel", class341_64);
-		class341_0 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.CurrentQuestContainer.QuestNameValue");
-		class341_1 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.CurrentQuestContainer.DifficultyTextValue");
-		class341_2 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Menu.PlayGameButton", class341_0);
-		class341_3 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Menu.ChangeQuestButton", class341_0);
-		class341_4 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Slot1.LayoutRoot.SwitchHero", class341_0);
-		class341_5 = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Slot1.LayoutRoot.Portrait.text", class341_0);
-		class341_167 = Register("Root.TopLayer.BattleNetNotifications_main.Invite To Party Notification");
-		class341_170 = Register("Root.TopLayer.BattleNetNotifications_main.Join request Notification");
-		class341_171 = Register("Root.TopLayer.BattleNetNotifications_main.LayoutRoot.LeaveGameWindow", class341_64);
-		class341_89 = Register("Root.NormalLayer.GameOptions_main.LayoutRoot.OverlayContainer");
-		class341_90 = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.altLevelUp_splash.text");
-		class341_172 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.rift_container.rift_progress_bar", class341_64);
-		class341_173 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.greater_rift_container.rift_progress_bar", class341_64);
-		class341_174 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.challenge_rift_container.rift_progress_bar", class341_64);
-		class341_175 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.challenge_rift_container.challenge_sprint_time.challengeRift_sprintFrame", class341_64);
-		class341_176 = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.game_text_line0");
-		class341_177 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region");
+		InGameBottomHudUiElement = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_window_hud_overlay");
+		VendorDialogMainPagePanel = Register("Root.NormalLayer.vendor_dialog_mainPage.panel", InGameBottomHudUiElement);
+		QuestNameValue = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.CurrentQuestContainer.QuestNameValue");
+		DifficultyTextValue = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.CurrentQuestContainer.DifficultyTextValue");
+		PlayGameButton = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Menu.PlayGameButton", QuestNameValue);
+		ChangeQuestButton = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Menu.ChangeQuestButton", QuestNameValue);
+		SwitchHero = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Slot1.LayoutRoot.SwitchHero", QuestNameValue);
+		PortraitText = Register("Root.NormalLayer.BattleNetCampaign_main.LayoutRoot.Slot1.LayoutRoot.Portrait.text", QuestNameValue);
+		InviteToPartyNotification = Register("Root.TopLayer.BattleNetNotifications_main.Invite To Party Notification");
+		JoinRequestNotification = Register("Root.TopLayer.BattleNetNotifications_main.Join request Notification");
+		LeaveGameWindow = Register("Root.TopLayer.BattleNetNotifications_main.LayoutRoot.LeaveGameWindow", InGameBottomHudUiElement);
+		GameOptionsMainLayoutRootOverlayContainer = Register("Root.NormalLayer.GameOptions_main.LayoutRoot.OverlayContainer");
+		ParagonLevelUpSplashTextUiElement = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.altLevelUp_splash.text");
+		NephalemRiftBarUiElement = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.rift_container.rift_progress_bar", InGameBottomHudUiElement);
+		GreaterRiftBarUiElement = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.greater_rift_container.rift_progress_bar", InGameBottomHudUiElement);
+		ChallengeRiftBarUiElement = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.challenge_rift_container.rift_progress_bar", InGameBottomHudUiElement);
+		ChallengeRiftAheadPanelUiElement = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.stackpanel.rift_wrapper.challenge_rift_container.challenge_sprint_time.challengeRift_sprintFrame", InGameBottomHudUiElement);
+		GameTextLine0 = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.game_text_line0");
+		EventtextRegion = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region");
 		class341_96 = new UiElement[59];
-		class341_96[0] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item0.Item", class341_46);
-		class341_96[1] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item1.Item", class341_46);
-		class341_96[2] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item2.Item", class341_46);
-		class341_96[3] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item3.Item", class341_46);
-		class341_96[4] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item4.Item", class341_46);
-		class341_96[6] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item6.Item", class341_46);
-		class341_96[7] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item7.Item", class341_46);
-		class341_96[8] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item8.Item", class341_46);
-		class341_96[9] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item9.Item", class341_46);
-		class341_96[10] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item10.Item", class341_46);
-		class341_96[12] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item12.Item", class341_46);
-		class341_96[13] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item13.Item", class341_46);
-		class341_96[14] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item14.Item", class341_46);
-		class341_96[15] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item15.Item", class341_46);
-		class341_96[16] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item16.Item", class341_46);
-		class341_96[18] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item18.Item", class341_46);
-		class341_96[19] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item19.Item", class341_46);
-		class341_96[20] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item20.Item", class341_46);
-		class341_96[21] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item21.Item", class341_46);
-		class341_96[22] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item22.Item", class341_46);
-		class341_96[24] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item24.Item", class341_46);
-		class341_96[25] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item25.Item", class341_46);
-		class341_96[26] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item26.Item", class341_46);
-		class341_96[27] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item27.Item", class341_46);
-		class341_96[28] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item28.Item", class341_46);
-		class341_96[30] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item30.Item", class341_46);
-		class341_96[31] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item31.Item", class341_46);
-		class341_96[32] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item32.Item", class341_46);
-		class341_96[33] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item33.Item", class341_46);
-		class341_96[34] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item34.Item", class341_46);
-		class341_96[36] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item36.Item", class341_46);
-		class341_96[37] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item37.Item", class341_46);
-		class341_96[38] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item38.Item", class341_46);
-		class341_96[39] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item39.Item", class341_46);
-		class341_96[40] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item40.Item", class341_46);
-		class341_96[42] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item42.Item", class341_46);
-		class341_96[43] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item43.Item", class341_46);
-		class341_96[44] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item44.Item", class341_46);
-		class341_96[45] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item45.Item", class341_46);
-		class341_96[46] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item46.Item", class341_46);
-		class341_96[48] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item48.Item", class341_46);
-		class341_96[49] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item49.Item", class341_46);
-		class341_96[50] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item50.Item", class341_46);
-		class341_96[51] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item51.Item", class341_46);
-		class341_96[52] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item52.Item", class341_46);
-		class341_96[54] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item54.Item", class341_46);
-		class341_96[55] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item55.Item", class341_46);
-		class341_96[56] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item56.Item", class341_46);
-		class341_96[57] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item57.Item", class341_46);
-		class341_96[58] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item58.Item", class341_46);
-		class341_97 = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content", class341_46);
-		class341_6 = Register("Root.NormalLayer.BattleNetGameSettings_main.LayoutRoot.OverlayContainer", class341_0);
-		class341_61 = Register("Root.TopLayer.LoadScreenText");
-		class341_65 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_window_hud_overlay_classic");
-		class341_64.ReplacementWhenNotVisible = class341_65;
-		class341_65.ReplacementWhenNotVisible = class341_64;
-		class341_66 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_progressBar_healthBall");
-		class341_67 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_progressBar_manaBall");
-		class341_9 = Register("Root.NormalLayer.stash_dialog_mainPage.panel", class341_64);
-		class341_10 = Register("Root.NormalLayer.stash_dialog_mainPage.button_stash", class341_9);
-		for (int i = 0; i < class341_7.Length; i++) {
-			class341_7[i] = Register("Root.NormalLayer.stash_dialog_mainPage.tab_" + (i + 1).ToString("D", CultureInfo.InvariantCulture), class341_9);
+		class341_96[0] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item0.Item", VendorDialogMainPagePanel);
+		class341_96[1] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item1.Item", VendorDialogMainPagePanel);
+		class341_96[2] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item2.Item", VendorDialogMainPagePanel);
+		class341_96[3] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item3.Item", VendorDialogMainPagePanel);
+		class341_96[4] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow0._item4.Item", VendorDialogMainPagePanel);
+		class341_96[6] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item6.Item", VendorDialogMainPagePanel);
+		class341_96[7] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item7.Item", VendorDialogMainPagePanel);
+		class341_96[8] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item8.Item", VendorDialogMainPagePanel);
+		class341_96[9] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item9.Item", VendorDialogMainPagePanel);
+		class341_96[10] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow1._item10.Item", VendorDialogMainPagePanel);
+		class341_96[12] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item12.Item", VendorDialogMainPagePanel);
+		class341_96[13] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item13.Item", VendorDialogMainPagePanel);
+		class341_96[14] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item14.Item", VendorDialogMainPagePanel);
+		class341_96[15] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item15.Item", VendorDialogMainPagePanel);
+		class341_96[16] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow2._item16.Item", VendorDialogMainPagePanel);
+		class341_96[18] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item18.Item", VendorDialogMainPagePanel);
+		class341_96[19] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item19.Item", VendorDialogMainPagePanel);
+		class341_96[20] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item20.Item", VendorDialogMainPagePanel);
+		class341_96[21] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item21.Item", VendorDialogMainPagePanel);
+		class341_96[22] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow3._item22.Item", VendorDialogMainPagePanel);
+		class341_96[24] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item24.Item", VendorDialogMainPagePanel);
+		class341_96[25] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item25.Item", VendorDialogMainPagePanel);
+		class341_96[26] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item26.Item", VendorDialogMainPagePanel);
+		class341_96[27] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item27.Item", VendorDialogMainPagePanel);
+		class341_96[28] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow4._item28.Item", VendorDialogMainPagePanel);
+		class341_96[30] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item30.Item", VendorDialogMainPagePanel);
+		class341_96[31] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item31.Item", VendorDialogMainPagePanel);
+		class341_96[32] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item32.Item", VendorDialogMainPagePanel);
+		class341_96[33] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item33.Item", VendorDialogMainPagePanel);
+		class341_96[34] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow5._item34.Item", VendorDialogMainPagePanel);
+		class341_96[36] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item36.Item", VendorDialogMainPagePanel);
+		class341_96[37] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item37.Item", VendorDialogMainPagePanel);
+		class341_96[38] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item38.Item", VendorDialogMainPagePanel);
+		class341_96[39] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item39.Item", VendorDialogMainPagePanel);
+		class341_96[40] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow6._item40.Item", VendorDialogMainPagePanel);
+		class341_96[42] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item42.Item", VendorDialogMainPagePanel);
+		class341_96[43] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item43.Item", VendorDialogMainPagePanel);
+		class341_96[44] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item44.Item", VendorDialogMainPagePanel);
+		class341_96[45] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item45.Item", VendorDialogMainPagePanel);
+		class341_96[46] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow7._item46.Item", VendorDialogMainPagePanel);
+		class341_96[48] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item48.Item", VendorDialogMainPagePanel);
+		class341_96[49] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item49.Item", VendorDialogMainPagePanel);
+		class341_96[50] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item50.Item", VendorDialogMainPagePanel);
+		class341_96[51] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item51.Item", VendorDialogMainPagePanel);
+		class341_96[52] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow8._item52.Item", VendorDialogMainPagePanel);
+		class341_96[54] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item54.Item", VendorDialogMainPagePanel);
+		class341_96[55] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item55.Item", VendorDialogMainPagePanel);
+		class341_96[56] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item56.Item", VendorDialogMainPagePanel);
+		class341_96[57] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item57.Item", VendorDialogMainPagePanel);
+		class341_96[58] = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content._stackpanel._tilerow9._item58.Item", VendorDialogMainPagePanel);
+		ItemsListContent = Register("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.items_list._content", VendorDialogMainPagePanel);
+		BattleNetGameSettingsMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetGameSettings_main.LayoutRoot.OverlayContainer", QuestNameValue);
+		LoadScreenText = Register("Root.TopLayer.LoadScreenText");
+		GameWindowHudOverlayClassic = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_window_hud_overlay_classic");
+		InGameBottomHudUiElement.ReplacementWhenNotVisible = GameWindowHudOverlayClassic;
+		GameWindowHudOverlayClassic.ReplacementWhenNotVisible = InGameBottomHudUiElement;
+		GameProgressBarHealthBall = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_progressBar_healthBall");
+		GameProgressBarManaBall = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_progressBar_manaBall");
+		StashMainUiElement = Register("Root.NormalLayer.stash_dialog_mainPage.panel", InGameBottomHudUiElement);
+		ButtonStash = Register("Root.NormalLayer.stash_dialog_mainPage.button_stash", StashMainUiElement);
+		for (int i = 0; i < StashTabs.Length; i++) {
+			StashTabs[i] = Register("Root.NormalLayer.stash_dialog_mainPage.tab_" + (i + 1).ToString("D", CultureInfo.InvariantCulture), StashMainUiElement);
 		}
-		for (int j = 0; j < class341_8.Length; j++) {
-			class341_8[j] = Register("Root.NormalLayer.stash_dialog_mainPage.TabPageButtons.stash_pages.page_" + (j + 1).ToString("D", CultureInfo.InvariantCulture), class341_9);
+		for (int j = 0; j < StashPages.Length; j++) {
+			StashPages[j] = Register("Root.NormalLayer.stash_dialog_mainPage.TabPageButtons.stash_pages.page_" + (j + 1).ToString("D", CultureInfo.InvariantCulture), StashMainUiElement);
 		}
-		class341_17 = Register("Root.NormalLayer.equipmentManager_mainPage", class341_64);
-		class341_18 = Register("Root.NormalLayer.equipmentManager_mainPage.details", class341_64);
-		class341_129 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.gemcombine_dialog.craft_button", class341_46);
-		class341_130 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.craftarmor_dialog.craft_button", class341_46);
-		class341_131 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.craftweapons_dialog.craft_button", class341_46);
-		salvageButton = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_button", class341_46);
-		salvageTabButton = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_button", class341_46);
-		salvageNormal = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_normal_button", class341_46);
-		salvageMagic = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_magic_button", class341_46);
-		salvageRare = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_rare_button", class341_46);
-		class341_137 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.rewardChoicePane.Container.upgrade_button1", class341_64);
-		class341_138 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.rewardChoicePane.Container.Continue", class341_64);
-		class341_139 = Register("Root.TopLayer.confirmation.subdlg");
+		EquipmentManagerMainPage = Register("Root.NormalLayer.equipmentManager_mainPage", InGameBottomHudUiElement);
+		Details = Register("Root.NormalLayer.equipmentManager_mainPage.details", InGameBottomHudUiElement);
+		class341_129 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.gemcombine_dialog.craft_button", VendorDialogMainPagePanel);
+		class341_130 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.craftarmor_dialog.craft_button", VendorDialogMainPagePanel);
+		class341_131 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.craftweapons_dialog.craft_button", VendorDialogMainPagePanel);
+		salvageButton = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_button", VendorDialogMainPagePanel);
+		salvageTabButton = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_button", VendorDialogMainPagePanel);
+		salvageNormal = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_normal_button", VendorDialogMainPagePanel);
+		salvageMagic = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_magic_button", VendorDialogMainPagePanel);
+		salvageRare = Register("Root.NormalLayer.vendor_dialog_mainPage.salvage_dialog.salvage_all_wrapper.salvage_rare_button", VendorDialogMainPagePanel);
+		class341_137 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.rewardChoicePane.Container.upgrade_button1", InGameBottomHudUiElement);
+		class341_138 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.rewardChoicePane.Container.Continue", InGameBottomHudUiElement);
+		Subdlg = Register("Root.TopLayer.confirmation.subdlg");
 		class341_140 = new UiElement("Root.TopLayer.confirmation.subdlg.stack.wrap.button_ok");
-		class341_141 = new UiElement("Root.NormalLayer.BattleNetQuestSelection_main.LayoutRoot.OverlayContainer", class341_0);
-		class341_142 = new UiElement("Root.NormalLayer.BattleNetQuestSelection_main.LayoutRoot.OverlayContainer.SelectQuestButton", class341_0);
-		class341_60 = Register("Root.NormalLayer.BattleNetLogin_main.LayoutRoot.LoginContainer.SubmitButton");
-		class341_156 = Register("Root.NormalLayer.BattleNetAchievements_main.LayoutRoot.OverlayContainer");
-		class341_157 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.latency_meter");
-		class341_168 = Register("Root.NormalLayer.lore_player_dlg.background", class341_64);
-		class341_169 = Register("Root.NormalLayer.lore_notify_dlg", class341_64);
-		class341_95 = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.title", class341_64);
-		class341_154 = Register("Root.TopLayer.DropDown._content");
-		class341_155 = Register("Root.TopLayer.DropDown._content._stackpanel", class341_154);
-		class341_71 = Register("Root.TopLayer.item 1.stack");
-		class341_11 = Register("Root.NormalLayer.inventory_dialog_mainPage", class341_64);
-		class341_12 = Register("Root.NormalLayer.inventory_side_pane_container", class341_64);
-		class341_13 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_backpack", class341_11);
-		class341_19 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_head", class341_11, null, 1f, 1f);
-		class341_20 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_shoulders", class341_11, null, 1f, 1f);
-		class341_21 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_neck", class341_11, null, 1f, 1f);
-		class341_23 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_bracers", class341_11, null, 1f, 1f);
-		class341_24 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_torso", class341_11, null, 1f, 1f);
-		class341_22 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_hands", class341_11, null, 1f, 1f);
-		class341_25 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_waist", class341_11, null, 1f, 1f);
-		class341_26 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_legs", class341_11, null, 1f, 1f);
-		class341_27 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_feet", class341_11, null, 1f, 1f);
-		class341_28 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_fingerLeft", class341_11, null, 1f, 1f);
-		class341_29 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_fingerRight", class341_11, null, 1f, 1f);
-		class341_30 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_armLeft", class341_11, null, 1f, 1f);
-		class341_31 = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_armRight", class341_11, null, 1f, 1f);
-		class341_32 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_head", class341_15, null, 1f, 1f);
-		class341_33 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_shoulders", class341_15, null, 1f, 1f);
-		class341_34 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_neck", class341_15, null, 1f, 1f);
-		class341_36 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_bracers", class341_15, null, 1f, 1f);
-		class341_37 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_torso", class341_15, null, 1f, 1f);
-		class341_35 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_hands", class341_15, null, 1f, 1f);
-		class341_38 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_waist", class341_15, null, 1f, 1f);
-		class341_39 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_legs", class341_15, null, 1f, 1f);
-		class341_40 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_feet", class341_15, null, 1f, 1f);
-		class341_42 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_left_finger", class341_15, null, 1f, 1f);
-		class341_41 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_right_finger", class341_15, null, 1f, 1f);
-		class341_43 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_mainhand", class341_15, null, 1f, 1f);
-		class341_44 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_offhand", class341_15, null, 1f, 1f);
-		class341_45 = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_special", class341_15, null, 1f, 1f);
-		class341_14 = Register("Root.NormalLayer.character_details_container", class341_64);
-		class341_15 = Register("Root.NormalLayer.hireling_dialog_mainPage", class341_64);
-		class341_163 = Register("Root.NormalLayer.hireling_details_container", class341_15);
-		class341_164 = Register("Root.NormalLayer.rift_dialog_mainPage");
-		class341_49 = Register("Root.NormalLayer.Kanais_Recipes_main", class341_46);
-		class341_50 = Register("Root.NormalLayer.Kanais_Collection", class341_46);
+		class341_141 = new UiElement("Root.NormalLayer.BattleNetQuestSelection_main.LayoutRoot.OverlayContainer", QuestNameValue);
+		class341_142 = new UiElement("Root.NormalLayer.BattleNetQuestSelection_main.LayoutRoot.OverlayContainer.SelectQuestButton", QuestNameValue);
+		SubmitButton = Register("Root.NormalLayer.BattleNetLogin_main.LayoutRoot.LoginContainer.SubmitButton");
+		BattleNetAchievementsMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetAchievements_main.LayoutRoot.OverlayContainer");
+		LatencyMeter = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.latency_meter");
+		LorePlayerDlgBackground = Register("Root.NormalLayer.lore_player_dlg.background", InGameBottomHudUiElement);
+		LoreNotifyDlg = Register("Root.NormalLayer.lore_notify_dlg", InGameBottomHudUiElement);
+		EventtextRegionTitle = Register("Root.NormalLayer.eventtext_bkgrnd.eventtext_region.title", InGameBottomHudUiElement);
+		DropDownContent = Register("Root.TopLayer.DropDown._content");
+		Stackpanel = Register("Root.TopLayer.DropDown._content._stackpanel", DropDownContent);
+		Item1Stack = Register("Root.TopLayer.item 1.stack");
+		InventoryMainUiElement = Register("Root.NormalLayer.inventory_dialog_mainPage", InGameBottomHudUiElement);
+		InventorySidePaneContainer = Register("Root.NormalLayer.inventory_side_pane_container", InGameBottomHudUiElement);
+		InventoryItemsUiElement = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_backpack", InventoryMainUiElement);
+		InventoryButtonHead = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_head", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonShoulders = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_shoulders", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonNeck = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_neck", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonBracers = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_bracers", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonTorso = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_torso", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonHands = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_hands", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonWaist = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_waist", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonLegs = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_legs", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonFeet = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_feet", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonFingerLeft = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_fingerLeft", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonFingerRight = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_fingerRight", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonArmLeft = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_armLeft", InventoryMainUiElement, null, 1f, 1f);
+		InventoryButtonArmRight = Register("Root.NormalLayer.inventory_dialog_mainPage.inventory_button_armRight", InventoryMainUiElement, null, 1f, 1f);
+		HirelingSlotHead = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_head", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotShoulders = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_shoulders", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotNeck = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_neck", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotBracers = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_bracers", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotTorso = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_torso", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotHands = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_hands", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotWaist = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_waist", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotLegs = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_legs", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotFeet = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_feet", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotLeftFinger = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_left_finger", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotRightFinger = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_right_finger", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotMainhand = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_mainhand", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotOffhand = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_offhand", FollowerMainUiElement, null, 1f, 1f);
+		HirelingSlotSpecial = Register("Root.NormalLayer.hireling_dialog_mainPage.hireling_slot_special", FollowerMainUiElement, null, 1f, 1f);
+		CharacterDetailsContainer = Register("Root.NormalLayer.character_details_container", InGameBottomHudUiElement);
+		FollowerMainUiElement = Register("Root.NormalLayer.hireling_dialog_mainPage", InGameBottomHudUiElement);
+		HirelingDetailsContainer = Register("Root.NormalLayer.hireling_details_container", FollowerMainUiElement);
+		RiftDialogMainPage = Register("Root.NormalLayer.rift_dialog_mainPage");
+		KanaisRecipesMain = Register("Root.NormalLayer.Kanais_Recipes_main", VendorDialogMainPagePanel);
+		KanaisCollection = Register("Root.NormalLayer.Kanais_Collection", VendorDialogMainPagePanel);
 		Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer.ActList");
-		class341_16 = Register("Root.NormalLayer.inspect_mainPage", class341_64);
-		class341_47 = Register("Root.NormalLayer.shop_dialog_mainPage.panel", class341_64);
-		class341_48 = Register("Root.NormalLayer.shop_dialog_mainPage.gold_text", class341_47);
-		class341_51 = Register("Root.NormalLayer.SkillPane_main.LayoutRoot", class341_64);
-		class341_52 = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.SkillsList", class341_51);
-		class341_53 = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.PassiveSkillSelect", class341_51);
-		class341_54 = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.ActiveSkillSelect", class341_51);
-		class341_56 = Register("Root.NormalLayer.gamemenu_dialog.gamemenu_bkgrnd");
-		class341_57 = Register("Root.NormalLayer.conversation_dialog_main");
-		class341_58 = Register("Root.NormalLayer.minimap_dialog_backgroundScreen.minimap_dialog_pve.BoostWrapper.BoostsDifficultyStackPanel.clock", class341_64);
-		class341_59 = Register("Root.TopLayer.BattleNetModalNotifications_main.ModalNotification.Content.List.Title");
-		class341_62 = Register("Root.TopLayer.cutscene");
-		class341_63 = Register("Root.TopLayer.scripted_sequence");
-		class341_68 = Register("Root.TopLayer.item 2.stack");
-		class341_69 = Register("Root.TopLayer.item 2.stack.top_wrapper.stack", class341_68);
-		class341_70 = Register("Root.TopLayer.item 2.stack.frame_instruction", class341_68);
-		class341_73 = Register("Root.TopLayer.item 3.stack");
-		class341_72 = Register("Root.NormalLayer.chatoutput_dialog_backgroundScreen.chat_content.MessageListContainer.chat_messagelist");
+		InspectMainPage = Register("Root.NormalLayer.inspect_mainPage", InGameBottomHudUiElement);
+		ShopDialogMainPagePanel = Register("Root.NormalLayer.shop_dialog_mainPage.panel", InGameBottomHudUiElement);
+		GoldText = Register("Root.NormalLayer.shop_dialog_mainPage.gold_text", ShopDialogMainPagePanel);
+		SkillPaneMainLayoutRoot = Register("Root.NormalLayer.SkillPane_main.LayoutRoot", InGameBottomHudUiElement);
+		SkillsList = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.SkillsList", SkillPaneMainLayoutRoot);
+		PassiveSkillSelect = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.PassiveSkillSelect", SkillPaneMainLayoutRoot);
+		ActiveSkillSelect = Register("Root.NormalLayer.SkillPane_main.LayoutRoot.ActiveSkillSelect", SkillPaneMainLayoutRoot);
+		GamemenuBkgrnd = Register("Root.NormalLayer.gamemenu_dialog.gamemenu_bkgrnd");
+		ConversationDialogMain = Register("Root.NormalLayer.conversation_dialog_main");
+		Clock = Register("Root.NormalLayer.minimap_dialog_backgroundScreen.minimap_dialog_pve.BoostWrapper.BoostsDifficultyStackPanel.clock", InGameBottomHudUiElement);
+		ListTitle = Register("Root.TopLayer.BattleNetModalNotifications_main.ModalNotification.Content.List.Title");
+		Cutscene = Register("Root.TopLayer.cutscene");
+		ScriptedSequence = Register("Root.TopLayer.scripted_sequence");
+		Item2Stack = Register("Root.TopLayer.item 2.stack");
+		TopWrapperStack = Register("Root.TopLayer.item 2.stack.top_wrapper.stack", Item2Stack);
+		FrameInstruction = Register("Root.TopLayer.item 2.stack.frame_instruction", Item2Stack);
+		Item3Stack = Register("Root.TopLayer.item 3.stack");
+		ChatMessagelist = Register("Root.NormalLayer.chatoutput_dialog_backgroundScreen.chat_content.MessageListContainer.chat_messagelist");
 		chatOpened = Register("Root.NormalLayer.chatentry_dialog_backgroundScreen.chatentry_content.chat_editline");
-		class341_55 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect", class341_64);
-		class341_84 = Register("Root.NormalLayer.map_dialog_mainPage");
-		class341_85 = Register("Root.NormalLayer.minimap_dialog_backgroundScreen.minimap_dialog_pve.minimap_pve_main");
-		class341_126 = Register("Root.NormalLayer.map_dialog_mainPage.localmap", class341_84);
-		class341_86 = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer");
-		class341_87 = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer.instructions");
-		class341_88 = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer.WorldMap", class341_86);
-		class341_75 = Register("Root.NormalLayer.BattleNetFriendsList_main.LayoutRoot.OverlayContainer.FriendsListContent");
-		class341_76 = Register("Root.NormalLayer.GroupList_main.LayoutRoot.OverlayContainer.GroupsListContent");
-		class341_77 = Register("Root.NormalLayer.GuildFinder_main.LayoutRoot.OverlayContainer");
-		class341_78 = Register("Root.NormalLayer.BattleNetLeaderboard_main.LayoutRoot.OverlayContainer");
-		class341_79 = Register("Root.NormalLayer.BattleNetSeasonJourney_main.LayoutRoot.OverlayContainer");
-		class341_80 = Register("Root.NormalLayer.BattleNetStore_main.LayoutRoot.OverlayContainer");
-		class341_81 = Register("Root.NormalLayer.GreaterRifts_VictoryScreen.LayoutRoot.frame_background", class341_64);
-		class341_82 = Register("Root.NormalLayer.GreaterRifts_VictoryScreen.LayoutRoot.Primary_Frame.button_exit", class341_81);
-		class341_83 = Register("Root.TopLayer.BattleNetSocialDialogs_main.LayoutRoot.DialogSendRealIdRequest");
-		class341_127 = Register("Root.NormalLayer.buffs_backgroundScreen.buff_icon_wrapper", class341_64);
-		class341_128 = Register("Root.NormalLayer.buffs_backgroundScreen.ExtendedBuffHolderTemplate.ExtendedBuff.FirstBuff", class341_64);
-		class341_179 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_normal.progressbar", class341_64);
-		class341_180 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_bounty.progressbar", class341_64);
-		class341_181 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_minion.progressbar", class341_64);
-		class341_182 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_player.progressbar", class341_64);
-		class341_183 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_special.progressbar", class341_64);
-		class341_143 = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_potion", class341_64);
-		class341_144[0] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_activeSkillLeft", class341_64);
-		class341_144[1] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_activeSkillRight", class341_64);
-		class341_144[2] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_1", class341_64);
-		class341_144[3] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_2", class341_64);
-		class341_144[4] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_3", class341_64);
-		class341_144[5] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_4", class341_64);
-		class341_145[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.Frame", class341_64);
-		class341_145[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.Frame", class341_64);
-		class341_145[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.Frame", class341_64);
-		class341_145[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.Frame", class341_64);
-		class341_146[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.icon", class341_64);
-		class341_146[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.icon", class341_64);
-		class341_146[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.icon", class341_64);
-		class341_146[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.icon", class341_64);
-		class341_147[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.Background", class341_64);
-		class341_147[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.Background", class341_64);
-		class341_147[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.Background", class341_64);
-		class341_147[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.Background", class341_64);
-		class341_148 = Register("Root.NormalLayer.BattleNetProfile_main.LayoutRoot.OverlayContainer");
-		class341_149 = Register("Root.TopLayer.ContextMenus.PlayerContextMenu", class341_64);
-		class341_150 = Register("Root.TopLayer.in game portrait tooltip 2");
-		class341_151 = Register("Root.NormalLayer.trade_dialog_mainPage", class341_64);
-		class341_153 = Register("Root.NormalLayer.trade_dialog_mainPage.trade_gold_amount_other", class341_151);
-		class341_152 = Register("Root.NormalLayer.trade_dialog_mainPage.trade_gold_amount_mine", class341_151);
-		class341_158 = Register("Root.TopLayer.skill 2.stack");
-		class341_159 = Register("Root.TopLayer.banner 2", class341_64);
-		class341_160 = Register("Root.NormalLayer.BattleNetProfileBannerCustomization_main.LayoutRoot.OverlayContainer");
-		class341_161 = Register("Root.TopLayer.ContextMenus.InGamePetContextMenu", class341_64);
-		class341_162 = Register("Root.TopLayer.tooltip_dialog_background.tooltip_2");
-		class341_166 = Register("Root.NormalLayer.game_dialog_main.RActorTag0", class341_64);
-		class341_91 = Register("Root.NormalLayer.questreward_dialog", class341_64);
-		class341_92 = Register("Root.NormalLayer.questreward_dialog.button_exit", class341_91);
-		class341_93 = Register("Root.NormalLayer.BountyReward_main.LayoutRoot", class341_64);
-		class341_94 = Register("Root.NormalLayer.TieredRiftReward_main.LayoutRoot", class341_64);
-		class341_165 = Register("Root.NormalLayer.questlore_dialog.panel", class341_64);
-		class341_178 = Register("Root.NormalLayer.Guild_main.LayoutRoot.OverlayContainer", class341_64);
-		class341_98 = new UiElement("Root.NormalLayer.DurabilityIndicator", class341_64);
-		class341_99 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_at_corpse", class341_64);
-		class341_100 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_at_checkpoint", class341_64);
-		class341_101 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_in_town", class341_64);
-		class341_102 = Register("Root.NormalLayer.deathmenu_dialog.dialog_main.button_accept_resurrection", class341_64);
-		class341_106 = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.dlg_new_paragon.button", class341_64);
-		class341_107 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.tab_1", class341_55);
-		class341_112 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Points_Available_1", class341_55);
-		class341_108 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus0.PointsSpent", class341_55);
-		class341_110 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus0.IncreaseStat", class341_55);
-		class341_109 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus1.PointsSpent", class341_55);
-		class341_111 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus1.IncreaseStat", class341_55);
-		class341_113 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.AcceptParagonPointsButton", class341_55);
-		class341_103 = Register("Root.NormalLayer.boss_enter_main.stack.wrapper.Accept", class341_64);
-		class341_104 = Register("Root.NormalLayer.boss_join_party_main.stack.wrapper.Accept", class341_64);
+		ParagonPointSelect = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect", InGameBottomHudUiElement);
+		MapDialogMainPage = Register("Root.NormalLayer.map_dialog_mainPage");
+		MinimapUiElement = Register("Root.NormalLayer.minimap_dialog_backgroundScreen.minimap_dialog_pve.minimap_pve_main");
+		Localmap = Register("Root.NormalLayer.map_dialog_mainPage.localmap", MapDialogMainPage);
+		WorldMapUiElement = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer");
+		Instructions = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer.instructions");
+		ActMapUiElement = Register("Root.NormalLayer.WaypointMap_main.LayoutRoot.OverlayContainer.WorldMap", WorldMapUiElement);
+		FriendsListContent = Register("Root.NormalLayer.BattleNetFriendsList_main.LayoutRoot.OverlayContainer.FriendsListContent");
+		GroupsListContent = Register("Root.NormalLayer.GroupList_main.LayoutRoot.OverlayContainer.GroupsListContent");
+		GuildFinderMainLayoutRootOverlayContainer = Register("Root.NormalLayer.GuildFinder_main.LayoutRoot.OverlayContainer");
+		BattleNetLeaderboardMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetLeaderboard_main.LayoutRoot.OverlayContainer");
+		BattleNetSeasonJourneyMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetSeasonJourney_main.LayoutRoot.OverlayContainer");
+		BattleNetStoreMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetStore_main.LayoutRoot.OverlayContainer");
+		FrameBackground = Register("Root.NormalLayer.GreaterRifts_VictoryScreen.LayoutRoot.frame_background", InGameBottomHudUiElement);
+		PrimaryFrameButtonExit = Register("Root.NormalLayer.GreaterRifts_VictoryScreen.LayoutRoot.Primary_Frame.button_exit", FrameBackground);
+		DialogSendRealIdRequest = Register("Root.TopLayer.BattleNetSocialDialogs_main.LayoutRoot.DialogSendRealIdRequest");
+		BuffIconWrapper = Register("Root.NormalLayer.buffs_backgroundScreen.buff_icon_wrapper", InGameBottomHudUiElement);
+		BuffBarExtendedBuffsUiElement = Register("Root.NormalLayer.buffs_backgroundScreen.ExtendedBuffHolderTemplate.ExtendedBuff.FirstBuff", InGameBottomHudUiElement);
+		HpBarNormalProgressbar = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_normal.progressbar", InGameBottomHudUiElement);
+		HpBarBountyProgressbar = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_bounty.progressbar", InGameBottomHudUiElement);
+		HpBarMinionProgressbar = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_minion.progressbar", InGameBottomHudUiElement);
+		HpBarPlayerProgressbar = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_player.progressbar", InGameBottomHudUiElement);
+		HpBarSpecialProgressbar = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.hp_bar_special.progressbar", InGameBottomHudUiElement);
+		GamePotion = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_potion", InGameBottomHudUiElement);
+		class341_144[0] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_activeSkillLeft", InGameBottomHudUiElement);
+		class341_144[1] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_activeSkillRight", InGameBottomHudUiElement);
+		class341_144[2] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_1", InGameBottomHudUiElement);
+		class341_144[3] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_2", InGameBottomHudUiElement);
+		class341_144[4] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_3", InGameBottomHudUiElement);
+		class341_144[5] = Register("Root.NormalLayer.game_dialog_backgroundScreenPC.game_skill_hotbar_4", InGameBottomHudUiElement);
+		class341_145[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.Frame", InGameBottomHudUiElement);
+		class341_145[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.Frame", InGameBottomHudUiElement);
+		class341_145[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.Frame", InGameBottomHudUiElement);
+		class341_145[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.Frame", InGameBottomHudUiElement);
+		class341_146[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.icon", InGameBottomHudUiElement);
+		class341_146[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.icon", InGameBottomHudUiElement);
+		class341_146[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.icon", InGameBottomHudUiElement);
+		class341_146[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.icon", InGameBottomHudUiElement);
+		class341_147[0] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_0.Background", InGameBottomHudUiElement);
+		class341_147[1] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_1.Background", InGameBottomHudUiElement);
+		class341_147[2] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_2.Background", InGameBottomHudUiElement);
+		class341_147[3] = Register("Root.NormalLayer.portraits.stack.party_stack.portrait_3.Background", InGameBottomHudUiElement);
+		BattleNetProfileMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetProfile_main.LayoutRoot.OverlayContainer");
+		PlayerContextMenu = Register("Root.TopLayer.ContextMenus.PlayerContextMenu", InGameBottomHudUiElement);
+		InGamePortraitTooltip2 = Register("Root.TopLayer.in game portrait tooltip 2");
+		TradeDialogMainPage = Register("Root.NormalLayer.trade_dialog_mainPage", InGameBottomHudUiElement);
+		TradeGoldAmountOther = Register("Root.NormalLayer.trade_dialog_mainPage.trade_gold_amount_other", TradeDialogMainPage);
+		TradeGoldAmountMine = Register("Root.NormalLayer.trade_dialog_mainPage.trade_gold_amount_mine", TradeDialogMainPage);
+		Skill2Stack = Register("Root.TopLayer.skill 2.stack");
+		Banner2 = Register("Root.TopLayer.banner 2", InGameBottomHudUiElement);
+		BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer = Register("Root.NormalLayer.BattleNetProfileBannerCustomization_main.LayoutRoot.OverlayContainer");
+		InGamePetContextMenu = Register("Root.TopLayer.ContextMenus.InGamePetContextMenu", InGameBottomHudUiElement);
+		Tooltip2 = Register("Root.TopLayer.tooltip_dialog_background.tooltip_2");
+		RactorTag0 = Register("Root.NormalLayer.game_dialog_main.RActorTag0", InGameBottomHudUiElement);
+		QuestrewardDialog = Register("Root.NormalLayer.questreward_dialog", InGameBottomHudUiElement);
+		QuestrewardDialogButtonExit = Register("Root.NormalLayer.questreward_dialog.button_exit", QuestrewardDialog);
+		BountyRewardMainLayoutRoot = Register("Root.NormalLayer.BountyReward_main.LayoutRoot", InGameBottomHudUiElement);
+		TieredRiftRewardMainLayoutRoot = Register("Root.NormalLayer.TieredRiftReward_main.LayoutRoot", InGameBottomHudUiElement);
+		QuestloreDialogPanel = Register("Root.NormalLayer.questlore_dialog.panel", InGameBottomHudUiElement);
+		GuildMainLayoutRootOverlayContainer = Register("Root.NormalLayer.Guild_main.LayoutRoot.OverlayContainer", InGameBottomHudUiElement);
+		class341_98 = new UiElement("Root.NormalLayer.DurabilityIndicator", InGameBottomHudUiElement);
+		class341_99 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_at_corpse", InGameBottomHudUiElement);
+		class341_100 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_at_checkpoint", InGameBottomHudUiElement);
+		class341_101 = new UiElement("Root.NormalLayer.deathmenu_dialog.dialog_main.button_revive_in_town", InGameBottomHudUiElement);
+		ButtonAcceptResurrection = Register("Root.NormalLayer.deathmenu_dialog.dialog_main.button_accept_resurrection", InGameBottomHudUiElement);
+		DlgNewParagonButton = Register("Root.NormalLayer.game_notify_dialog_backgroundScreen.dlg_new_paragon.button", InGameBottomHudUiElement);
+		Tab1 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.tab_1", ParagonPointSelect);
+		PointsAvailable1 = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Points_Available_1", ParagonPointSelect);
+		Bonus0PointsSpent = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus0.PointsSpent", ParagonPointSelect);
+		Bonus0IncreaseStat = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus0.IncreaseStat", ParagonPointSelect);
+		Bonus1PointsSpent = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus1.PointsSpent", ParagonPointSelect);
+		Bonus1IncreaseStat = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.Bonuses.bonus1.IncreaseStat", ParagonPointSelect);
+		AcceptParagonPointsButton = Register("Root.NormalLayer.Paragon_main.LayoutRoot.ParagonPointSelect.AcceptParagonPointsButton", ParagonPointSelect);
+		BossEnterMainStackWrapperAccept = Register("Root.NormalLayer.boss_enter_main.stack.wrapper.Accept", InGameBottomHudUiElement);
+		BossJoinPartyMainStackWrapperAccept = Register("Root.NormalLayer.boss_join_party_main.stack.wrapper.Accept", InGameBottomHudUiElement);
 		class341_114 = new UiElement("Root.NormalLayer.BattleNetWhatsNew_main.LayoutRoot.OverlayContainer.PageHeader.CloseButton");
-		class341_115 = new UiElement("Root.TopLayer.ContextMenus.PlayerContextMenu.PlayerContextMenuContent.PlayerContextMenuList.InGameTeleportToPlayer", class341_64);
-		class341_116 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.accept_Button", class341_64);
-		confirmationMessage = Register("Root.TopLayer.confirmation.subdlg.stack.message", class341_64);
+		class341_115 = new UiElement("Root.TopLayer.ContextMenus.PlayerContextMenu.PlayerContextMenuContent.PlayerContextMenuList.InGameTeleportToPlayer", InGameBottomHudUiElement);
+		class341_116 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.accept_Button", InGameBottomHudUiElement);
+		confirmationMessage = Register("Root.TopLayer.confirmation.subdlg.stack.message", InGameBottomHudUiElement);
 		confirmationCancel = Register("Root.TopLayer.confirmation.subdlg.stack.wrap.button_cancel", confirmationMessage);
 		confirmationOk = Register("Root.TopLayer.confirmation.subdlg.stack.wrap.button_ok", confirmationMessage);
-		class341_105 = Register("Root.NormalLayer.rift_join_party_main.stack.wrapper.Accept", class341_64);
-		class341_120 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.upgrade_button", class341_64);
-		class341_121 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftRadioButtons.NephalemRiftButton", class341_164);
-		class341_122 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftRadioButtons.GreaterRiftButton", class341_164);
-		class341_123 = Register("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftTierLevelCombo", class341_164);
-		class341_124 = Register("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftTierLevelCombo.arrow", class341_164);
-		class341_125 = Register("Root.TopLayer.BattleNetNotifications_main.Invite To Party Notification.PartyOkButton", class341_167);
+		RiftJoinPartyMainStackWrapperAccept = Register("Root.NormalLayer.rift_join_party_main.stack.wrapper.Accept", InGameBottomHudUiElement);
+		class341_120 = new UiElement("Root.NormalLayer.vendor_dialog_mainPage.riftReward_dialog.LayoutRoot.gemUpgradePane.upgrade_button", InGameBottomHudUiElement);
+		class341_121 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftRadioButtons.NephalemRiftButton", RiftDialogMainPage);
+		class341_122 = new UiElement("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftRadioButtons.GreaterRiftButton", RiftDialogMainPage);
+		RiftTierLevelCombo = Register("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftTierLevelCombo", RiftDialogMainPage);
+		Arrow = Register("Root.NormalLayer.rift_dialog_mainPage.LayoutRoot.RiftTierLevelCombo.arrow", RiftDialogMainPage);
+		PartyOkButton = Register("Root.TopLayer.BattleNetNotifications_main.Invite To Party Notification.PartyOkButton", InviteToPartyNotification);
 	}
 }

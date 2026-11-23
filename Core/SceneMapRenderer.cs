@@ -157,7 +157,7 @@ internal class SceneMapRenderer
 
 	private float GetScaledZoomFactor()
 	{
-		return Overlay.Instance.float_3 * scaleFactor;
+		return Overlay.Instance.MinimapScale * scaleFactor;
 	}
 
 	private void GenerateMapTextures(float minX, float maxX, float minY, float maxY)
@@ -334,11 +334,11 @@ internal class SceneMapRenderer
 			for (int x = 0; x < mapTextureChunks.GetLength(0); x++) {
 				float currentZoom = GetScaledZoomFactor();
 				if (scaleFactor == 1f) {
-					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.float_7) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.float_8)) * currentZoom + (float)(y * maxBitmapSize));
+					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
 					renderTarget.Transform = blockTranslation * isoRotationInfo * panTranslation;
 					renderTarget.DrawBitmap(mapTextureChunks[x, y], mapOpacity, BitmapInterpolationMode.Linear);
 				} else {
-					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.float_7) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.float_8)) * currentZoom + (float)(y * maxBitmapSize));
+					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
 					Matrix3x2 resolutionScale = Matrix3x2.Scaling(1f / scaleFactor);
 					renderTarget.Transform = blockTranslation * isoRotationInfo * resolutionScale * panTranslation;
 					renderTarget.DrawBitmap(mapTextureChunks[x, y], mapOpacity, BitmapInterpolationMode.Linear);

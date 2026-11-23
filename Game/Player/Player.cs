@@ -8,42 +8,42 @@ using structs;
 public class Player : Actor
 {
 	[CompilerGenerated]
-	private uint uint_7;
+	private uint actorId;
 
 	[CompilerGenerated]
-	private int int_1;
+	private int index;
 
 	[CompilerGenerated]
-	private int int_2;
+	private int portraitIndex;
 
 	public bool bool_8;
 
 	[CompilerGenerated]
-	private bool bool_9;
+	private bool coordinateKnown;
 
 	[CompilerGenerated]
-	private uint uint_8;
+	private uint heroId;
 
 	[CompilerGenerated]
 	private Hero ihero_0;
 
 	[CompilerGenerated]
-	private string string_0;
+	private string heroName;
 
 	[CompilerGenerated]
-	private bool bool_10;
+	private bool heroIsHardcore;
 
 	[CompilerGenerated]
-	private bool bool_11;
+	private bool heroIsMale;
 
 	[CompilerGenerated]
-	private int int_3;
+	private int season;
 
 	[CompilerGenerated]
-	private bool bool_12;
+	private bool seasonal;
 
 	[CompilerGenerated]
-	private string string_1;
+	private string battleTagAbovePortrait;
 
 	[CompilerGenerated]
 	private HeroClassDefinition iheroClassDefinition_0;
@@ -75,12 +75,12 @@ public class Player : Actor
 	private readonly PlayerArmorySet[] iplayerArmorySet_0;
 
 	[CompilerGenerated]
-	private AnimSnoEnum animSnoEnum_0;
+	private AnimSnoEnum animation;
 
 	[CompilerGenerated]
-	private AcdAnimationState acdAnimationState_0;
+	private AcdAnimationState animationState;
 
-	internal long long_0;
+	internal long Gold;
 
 	[CompilerGenerated]
 	private SnoItem isnoItem_0;
@@ -94,62 +94,62 @@ public class Player : Actor
 	[CompilerGenerated]
 	private SnoItem isnoItem_3;
 
-	internal List<SnoItem> list_1 = new List<SnoItem>();
+	internal List<SnoItem> cubedItems = new List<SnoItem>();
 
 	internal Dictionary<string, SnoItem> dictionary_0 = new Dictionary<string, SnoItem>();
 
 	internal ulong ulong_0;
 
-	internal bool bool_13;
+	internal bool SkillOverrideActive;
 
-	internal readonly Skill[] class386_0 = new Skill[6];
+	internal readonly Skill[] SkillSlots = new Skill[6];
 
 	internal readonly SnoPower[] SnoPower_0 = new SnoPower[4];
 
-	internal readonly List<SnoPower> list_2 = new List<SnoPower>();
+	internal readonly List<SnoPower> UsedPassives = new List<SnoPower>();
 
 	internal readonly Stopwatch iwatch_1 = new();
 
 	[CompilerGenerated]
-	private uint uint_9;
+	private uint currentLevelNormal;
 
 	[CompilerGenerated]
-	private uint uint_10;
+	private uint currentLevelNormalCap;
 
 	[CompilerGenerated]
-	private uint uint_11;
+	private uint currentLevelParagon;
 
 	[CompilerGenerated]
-	private double double_3;
+	private double currentLevelParagonDouble;
 
 	internal bool bool_14;
 
 	public long long_1;
 
 	[CompilerGenerated]
-	private long long_2;
+	private long paragonExpInThisLevel;
 
 	[CompilerGenerated]
-	private long long_3;
+	private long paragonExpToNextLevel;
 
 	internal DebouncedValue<long> class362_0 = new DebouncedValue<long>(0L, 500);
 
 	[CompilerGenerated]
-	private long long_4;
+	private long paragonTotalExp;
 
 	[CompilerGenerated]
-	private float float_3;
+	private float bonusPoolPercent;
 
 	[CompilerGenerated]
-	private long long_5;
+	private long bonusPoolRemaining;
 
 	[CompilerGenerated]
-	private int int_4;
+	private int highestSoloRiftLevel;
 
 	[CompilerGenerated]
-	private int int_5;
+	private int highestHeroSoloRiftLevel;
 
-	internal long long_6;
+	internal long ParagonTotalExp2;
 
 	internal List<Skill> list_3 = new List<Skill>(30);
 
@@ -161,13 +161,13 @@ public class Player : Actor
 	private int int_6;
 
 	[CompilerGenerated]
-	private int int_7 = 60;
+	private int inventorySpaceTotal = 60;
 
 	[CompilerGenerated]
 	private int int_8;
 
 	[CompilerGenerated]
-	private bool bool_15;
+	private bool isDead;
 
 	[CompilerGenerated]
 	private HeadStone iheadStone_0;
@@ -187,21 +187,21 @@ public class Player : Actor
 	internal float[] float_5 = new float[9];
 
 	[CompilerGenerated]
-	private bool bool_16;
+	private bool inCombat;
 
 	[CompilerGenerated]
-	private int int_9;
+	private int loopingAnimationStartTick;
 
 	[CompilerGenerated]
-	private int int_10;
+	private int loopingAnimationEndTick;
 
 	public float float_6;
 
 	[CompilerGenerated]
-	private int int_11;
+	private int paragonPointsAvailableTotal;
 
 	[CompilerGenerated]
-	private readonly int[] int_12 = new int[4];
+	private readonly int[] paragonPointsAvailable = new int[4];
 
 	public readonly Dictionary<uint, int> class112_2 = new Dictionary<uint, int>();
 
@@ -212,22 +212,22 @@ public class Player : Actor
 	public const float float_7 = 5.5f;
 
 	[CompilerGenerated]
-	private bool bool_18;
+	private bool inGreaterRift;
 
 	[CompilerGenerated]
-	private uint uint_12;
+	private uint inGreaterRiftRank;
 
 	public uint ActorId
 	{
 		[CompilerGenerated]
 		get
 		{
-			return uint_7;
+			return actorId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_7 = value;
+			actorId = value;
 		}
 	}
 
@@ -236,12 +236,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_1;
+			return index;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_1 = value;
+			index = value;
 		}
 	}
 
@@ -250,12 +250,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_2;
+			return portraitIndex;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_2 = value;
+			portraitIndex = value;
 		}
 	}
 
@@ -268,12 +268,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_9;
+			return coordinateKnown;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_9 = value;
+			coordinateKnown = value;
 		}
 	}
 
@@ -294,12 +294,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_8;
+			return heroId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_8 = value;
+			heroId = value;
 		}
 	}
 
@@ -322,12 +322,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return string_0;
+			return heroName;
 		}
 		[CompilerGenerated]
 		set
 		{
-			string_0 = value;
+			heroName = value;
 		}
 	}
 
@@ -336,12 +336,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_10;
+			return heroIsHardcore;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_10 = value;
+			heroIsHardcore = value;
 		}
 	}
 
@@ -350,40 +350,40 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_11;
+			return heroIsMale;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_11 = value;
+			heroIsMale = value;
 		}
 	}
 
-	public int Int32_0
+	public int Season
 	{
 		[CompilerGenerated]
 		get
 		{
-			return int_3;
+			return season;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_3 = value;
+			season = value;
 		}
 	}
 
-	public bool Boolean_1
+	public bool Seasonal
 	{
 		[CompilerGenerated]
 		get
 		{
-			return bool_12;
+			return seasonal;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_12 = value;
+			seasonal = value;
 		}
 	}
 
@@ -392,12 +392,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return string_1;
+			return battleTagAbovePortrait;
 		}
 		[CompilerGenerated]
 		set
 		{
-			string_1 = value;
+			battleTagAbovePortrait = value;
 		}
 	}
 
@@ -497,12 +497,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return animSnoEnum_0;
+			return animation;
 		}
 		[CompilerGenerated]
 		set
 		{
-			animSnoEnum_0 = value;
+			animation = value;
 		}
 	}
 
@@ -511,12 +511,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return acdAnimationState_0;
+			return animationState;
 		}
 		[CompilerGenerated]
 		set
 		{
-			acdAnimationState_0 = value;
+			animationState = value;
 		}
 	}
 
@@ -576,19 +576,19 @@ public class Player : Actor
 		}
 	}
 
-	public IEnumerable<SnoItem> CubedItems => list_1;
+	public IEnumerable<SnoItem> CubedItems => cubedItems;
 
 	public uint CurrentLevelNormal
 	{
 		[CompilerGenerated]
 		get
 		{
-			return uint_9;
+			return currentLevelNormal;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_9 = value;
+			currentLevelNormal = value;
 		}
 	}
 
@@ -597,12 +597,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_10;
+			return currentLevelNormalCap;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_10 = value;
+			currentLevelNormalCap = value;
 		}
 	}
 
@@ -611,12 +611,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_11;
+			return currentLevelParagon;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_11 = value;
+			currentLevelParagon = value;
 		}
 	}
 
@@ -625,12 +625,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return double_3;
+			return currentLevelParagonDouble;
 		}
 		[CompilerGenerated]
 		set
 		{
-			double_3 = value;
+			currentLevelParagonDouble = value;
 		}
 	}
 
@@ -639,12 +639,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return long_2;
+			return paragonExpInThisLevel;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_2 = value;
+			paragonExpInThisLevel = value;
 		}
 	}
 
@@ -653,12 +653,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return long_3;
+			return paragonExpToNextLevel;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_3 = value;
+			paragonExpToNextLevel = value;
 		}
 	}
 
@@ -667,12 +667,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return long_4;
+			return paragonTotalExp;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_4 = value;
+			paragonTotalExp = value;
 		}
 	}
 
@@ -681,12 +681,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return float_3;
+			return bonusPoolPercent;
 		}
 		[CompilerGenerated]
 		set
 		{
-			float_3 = value;
+			bonusPoolPercent = value;
 		}
 	}
 
@@ -695,12 +695,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return long_5;
+			return bonusPoolRemaining;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_5 = value;
+			bonusPoolRemaining = value;
 		}
 	}
 
@@ -709,12 +709,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_4;
+			return highestSoloRiftLevel;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_4 = value;
+			highestSoloRiftLevel = value;
 		}
 	}
 
@@ -723,12 +723,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_5;
+			return highestHeroSoloRiftLevel;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_5 = value;
+			highestHeroSoloRiftLevel = value;
 		}
 	}
 
@@ -751,12 +751,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_7;
+			return inventorySpaceTotal;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_7 = value;
+			inventorySpaceTotal = value;
 		}
 	}
 
@@ -779,12 +779,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_15;
+			return isDead;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_15 = value;
+			isDead = value;
 		}
 	}
 
@@ -809,12 +809,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_16;
+			return inCombat;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_16 = value;
+			inCombat = value;
 		}
 	}
 
@@ -823,12 +823,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_9;
+			return loopingAnimationStartTick;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_9 = value;
+			loopingAnimationStartTick = value;
 		}
 	}
 
@@ -837,12 +837,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_10;
+			return loopingAnimationEndTick;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_10 = value;
+			loopingAnimationEndTick = value;
 		}
 	}
 
@@ -851,12 +851,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_11;
+			return paragonPointsAvailableTotal;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_11 = value;
+			paragonPointsAvailableTotal = value;
 		}
 	}
 
@@ -865,7 +865,7 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return int_12;
+			return paragonPointsAvailable;
 		}
 	}
 
@@ -874,12 +874,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_18;
+			return inGreaterRift;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_18 = value;
+			inGreaterRift = value;
 		}
 	}
 
@@ -888,12 +888,12 @@ public class Player : Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_12;
+			return inGreaterRiftRank;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_12 = value;
+			inGreaterRiftRank = value;
 		}
 	}
 
@@ -937,12 +937,12 @@ public class Player : Actor
 
 	public void method_58()
 	{
-		Skill[] array = class386_0;
-		foreach (Skill @class in array)
+		Skill[] skillSlots = SkillSlots;
+		foreach (Skill skill in skillSlots)
 		{
-			if (@class != null)
+			if (skill != null)
 			{
-				@class.OverrideSnoPower = null;
+				skill.OverrideSnoPower = null;
 			}
 		}
 		Offense.CritBase = 0f;

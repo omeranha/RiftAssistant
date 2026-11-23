@@ -75,7 +75,7 @@ internal class ModuleLobbyHeroes : Module
 	public void method_1()
 	{
 		bool bool_;
-		if (!(bool_ = !CoreCollector.IsGameReady && CoreCollector.UiElements.class341_0.Visible && !CoreCollector.UiElements.class341_148.Visible && !CoreCollector.UiElements.class341_6.Visible && !CoreCollector.UiElements.class341_156.Visible && !CoreCollector.UiElements.class341_77.Visible && !CoreCollector.UiElements.class341_56.Visible && CoreCollector.HeroCollector.HeroList.Any()))
+		if (!(bool_ = !CoreCollector.IsGameReady && CoreCollector.UiElements.QuestNameValue.Visible && !CoreCollector.UiElements.BattleNetProfileMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.BattleNetGameSettingsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible && !CoreCollector.UiElements.GamemenuBkgrnd.Visible && CoreCollector.HeroCollector.HeroList.Any()))
 		{
 			ihero_0 = null;
 			class340_0 = null;

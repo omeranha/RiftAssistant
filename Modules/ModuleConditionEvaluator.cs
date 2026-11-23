@@ -122,12 +122,12 @@ internal class ModuleConditionEvaluator
 		return shouldBeVisible;
 	}
 
-	internal bool EvaluateVisibility(Module class205_0, bool isParentVisible)
+	internal bool EvaluateVisibility(Module module, bool isParentVisible)
 	{
-		if (!class205_0.Show || !isParentVisible) {
+		if (!module.Show || !isParentVisible) {
 			return false;
 		}
-		if (class205_0.string_1 != null && (Overlay.Instance.class112_0.ContainsKey(class205_0.string_1) || class205_0.bool_3)) {
+		if (module.string_1 != null && (Overlay.Instance.class112_0.ContainsKey(module.string_1) || module.bool_3)) {
 			return false;
 		}
 		if ((onlyInTown && !CoreCollector.IsInTown) || (onlyOutTown && CoreCollector.IsInTown)) {

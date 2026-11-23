@@ -12,7 +12,7 @@ public sealed class Areas
 	[CompilerGenerated]
 	private readonly SnoAct[] isnoAct_0 = new SnoAct[5];
 
-	private readonly Dictionary<uint, SnoArea> dictionary_0 = new Dictionary<uint, SnoArea>(500);
+	private readonly Dictionary<uint, SnoArea> allAreas = new Dictionary<uint, SnoArea>(500);
 
 	public SnoAct[] AllActs
 	{
@@ -23,29 +23,29 @@ public sealed class Areas
 		}
 	}
 
-	public IEnumerable<SnoArea> AllAreas => dictionary_0.Values;
+	public IEnumerable<SnoArea> AllAreas => allAreas.Values;
 
 	public SnoArea GetSnoArea(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		allAreas.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	internal Areas()
 	{
-		using (DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "acts.bin"))))
+		using (DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "acts.bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint uint_ = @class.method_8();
-				int num = @class.method_11();
-				int num2 = @class.method_11();
+				uint uint_ = dataReader.method_8();
+				int num = dataReader.method_11();
+				int num2 = dataReader.method_11();
 				SnoAct snoAct = new SnoAct(uint_, num);
 				AllActs[num - 1] = snoAct;
 				for (int i = 0; i < num2; i++)
 				{
-					uint uint_2 = @class.method_8();
-					uint uint_3 = @class.method_8();
+					uint uint_2 = dataReader.method_8();
+					uint uint_3 = dataReader.method_8();
 					snoAct.Waypoints.Add(new SnoActWaypoint(uint_2, uint_3));
 				}
 			}
@@ -82,7 +82,7 @@ public sealed class Areas
 			bool bool_2 = array2[6] == "true";
 			uint uint_4 = uint.Parse(array2[7], CultureInfo.InvariantCulture);
 			SnoArea value = new SnoArea(num3, text2.ToLower(CultureInfo.InvariantCulture), int_, text3, string_, areaType_, bool_, string_2, bool_2, uint_4);
-			dictionary_0.Add(num3, value);
+			allAreas.Add(num3, value);
 		}
 	}
 }
@@ -107,24 +107,24 @@ public static class Custom
 
 	internal static uint GetAreaSno(Player player)
 	{
-		uint num = player.RawPlayerData.AreaSnoEncrypted;
-		if (num == uint.MaxValue && player.IsMe)
+		uint areaSnoEncrypted = player.RawPlayerData.AreaSnoEncrypted;
+		if (areaSnoEncrypted == uint.MaxValue && player.IsMe)
 		{
 			long int64_ = CoreCollector.DAF.LevelAreaAddress;
 			if (int64_ != 0L)
 			{
-				num = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
+				areaSnoEncrypted = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
 			}
 		}
-		return num;
+		return areaSnoEncrypted;
 	}
 
 	internal unsafe static void SetSnoAreaForPlayer(Player player)
 	{
-		uint num = player.RawPlayerData.AreaSnoEncrypted;
-		if (num != uint.MaxValue)
+		uint areaSnoEncrypted = player.RawPlayerData.AreaSnoEncrypted;
+		if (areaSnoEncrypted != uint.MaxValue)
 		{
-			player.SnoArea = SnoData.Areas.GetSnoArea(num);
+			player.SnoArea = SnoData.Areas.GetSnoArea(areaSnoEncrypted);
 			return;
 		}
 		if (player.IsMe)
@@ -132,18 +132,18 @@ public static class Custom
 			long int64_ = CoreCollector.DAF.LevelAreaAddress;
 			if (int64_ != 0L)
 			{
-				num = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
+				areaSnoEncrypted = GameWindowManager.Read<uint>(int64_ + Constants.LevelArea_AreaSno_Offset);
 			}
-			player.SnoArea = SnoData.Areas.GetSnoArea(num);
+			player.SnoArea = SnoData.Areas.GetSnoArea(areaSnoEncrypted);
 			return;
 		}
 		fixed (r_PlayerData* rawPlayerData = &player.RawPlayerData)
 		{
 			byte* ptr = (byte*)rawPlayerData;
 			ptr += Constants.PlayerData_HostAreaSno_Offset;
-			num = *(uint*)ptr;
+			areaSnoEncrypted = *(uint*)ptr;
 		}
-		if (SnoData.Areas.GetSnoArea(num) != null)
+		if (SnoData.Areas.GetSnoArea(areaSnoEncrypted) != null)
 		{
 			player.SnoArea = dummy_snoarea_unknown;
 		}
@@ -170,12 +170,12 @@ internal class Map
 
 	internal long[] long_2;
 
-	private int int_1;
+	private int mask;
 
 	public bool bool_0;
 
 	[CompilerGenerated]
-	private int int_2;
+	private int maxIndex;
 
 	private r_Map[] struct16_0 = new r_Map[1];
 
@@ -195,17 +195,17 @@ internal class Map
 		}
 	}
 
-	public int Int32_0
+	public int MaxIndex
 	{
 		[CompilerGenerated]
 		get
 		{
-			return int_2;
+			return maxIndex;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			int_2 = value;
+			maxIndex = value;
 		}
 	}
 
@@ -226,37 +226,37 @@ internal class Map
 		if (bool_0)
 		{
 			struct16_0[0] = GameWindowManager.Read<r_Map>(long_3);
-			Int32_0 = struct16_0[0].MaxIndex;
-			int_1 = struct16_0[0].Mask;
-			if (Int32_0 < -1 || Int32_0 > int_0)
+			MaxIndex = struct16_0[0].MaxIndex;
+			mask = struct16_0[0].Mask;
+			if (MaxIndex < -1 || MaxIndex > int_0)
 			{
-				Int32_0 = int_0;
+				MaxIndex = int_0;
 			}
 		}
 		else
 		{
-			Int32_0 = -1;
+			MaxIndex = -1;
 		}
 		if (class351_0 != null)
 		{
 			class351_0.Snapshot(struct16_0[0].PtrBucketAllocator);
 			return;
 		}
-		if (long_2 == null || long_2.Length < Int32_0 + 1 || Int32_0 == 0)
+		if (long_2 == null || long_2.Length < MaxIndex + 1 || MaxIndex == 0)
 		{
-			long_2 = new long[Int32_0 + 1];
+			long_2 = new long[MaxIndex + 1];
 		}
-		if (Int32_0 > -1)
+		if (MaxIndex > -1)
 		{
-			long_2 = GameWindowManager.ReadArray<long>(long_1, Int32_0 + 1);
+			long_2 = GameWindowManager.ReadArray<long>(long_1, MaxIndex + 1);
 		}
 	}
 
 	public long method_1(uint uint_0)
 	{
 		uint num = uint_0 ^ (uint_0 >> 12);
-		int num2 = (int)(int_1 & num);
-		if (long_2 != null && num2 > 0 && num2 <= Int32_0)
+		int num2 = (int)(mask & num);
+		if (long_2 != null && num2 > 0 && num2 <= MaxIndex)
 		{
 			return long_2[num2];
 		}
@@ -341,18 +341,18 @@ public class Scene
 
 	public uint UInt32_0 { get; set; }
 
-	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint uint_4, uint uint_5, uint uint_6, float float_7, float float_8, float float_9, float float_10, float float_11)
+	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint uint_4, uint sSceneID, uint uint_6, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
 	{
 		SnoScene = isnoScene_1;
 		SnoArea = isnoArea_1;
 		WorldSno = uint_4;
-		NavMeshId = uint_5;
+		NavMeshId = sSceneID;
 		SceneId = uint_6;
-		PosX = float_7;
-		PosY = float_8;
-		MaxX = float_9;
-		MaxY = float_10;
-		Z = float_11;
+		PosX = meshMinX;
+		PosY = meshMinY;
+		MaxX = meshMaxX;
+		MaxY = meshMaxY;
+		Z = meshMaxZ;
 		W = MaxX - PosX;
 		H = MaxY - PosY;
 		CalculatedPosId = PosX.ToString(CultureInfo.InvariantCulture) + PosY.ToString(CultureInfo.InvariantCulture);
@@ -361,32 +361,32 @@ public class Scene
 
 public sealed class Scenes
 {
-	private readonly Dictionary<uint, SnoScene> dictionary_0 = new Dictionary<uint, SnoScene>(3000);
+	private readonly Dictionary<uint, SnoScene> allScenes = new Dictionary<uint, SnoScene>(3000);
 
-	public IEnumerable<SnoScene> AllScenes => dictionary_0.Values;
+	public IEnumerable<SnoScene> AllScenes => allScenes.Values;
 
 	public SnoScene GetScene(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		allScenes.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	internal Scenes()
 	{
-		using (DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "scene.bin"))))
+		using (DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "scene.bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = @class.method_8();
-				int int_ = (int)@class.method_12();
-				int int_2 = @class.method_11();
-				int int_3 = @class.method_11();
-				int int_4 = @class.method_11();
-				int int_5 = @class.method_11();
-				int int_6 = (int)@class.method_12();
-				string string_ = @class.method_1();
+				uint num = dataReader.method_8();
+				int int_ = (int)dataReader.method_12();
+				int int_2 = dataReader.method_11();
+				int int_3 = dataReader.method_11();
+				int int_4 = dataReader.method_11();
+				int int_5 = dataReader.method_11();
+				int int_6 = (int)dataReader.method_12();
+				string string_ = dataReader.method_1();
 				SnoScene value = new SnoScene(num, int_, int_2, int_3, int_4, int_5, int_6, string_);
-				dictionary_0.Add(num, value);
+				allScenes.Add(num, value);
 			}
 		}
 		string[] array = SnoResourceHelper.GetSceneHints().Split('\n');

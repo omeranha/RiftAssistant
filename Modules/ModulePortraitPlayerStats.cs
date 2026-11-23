@@ -3,15 +3,15 @@ using SharpDX.DirectWrite;
 
 internal class ModulePortraitPlayerStats : Module
 {
-	private readonly bool bool_4;
+	private readonly bool showInfo;
 
-	private readonly bool bool_5;
+	private readonly bool ehp;
 
-	private readonly bool bool_6;
+	private readonly bool showRealDPS;
 
-	private readonly bool bool_7;
+	private readonly bool showRunDPS;
 
-	private readonly bool bool_8;
+	private readonly bool showTotalDPS;
 
 	private readonly RenderFont renderFont = new(255, 255, 255, 255, "Arial", false, false, 7f, Alignment.Center, true, false);
 
@@ -26,12 +26,12 @@ internal class ModulePortraitPlayerStats : Module
 	public ModulePortraitPlayerStats(Settings settings) : base(true)
 	{
 		Show = settings.Overlay.PortraitPlayerStats.Enabled;
-		bool_6 = settings.Overlay.PortraitPlayerStats.ShowRealDPS;
-		bool_7 = settings.Overlay.PortraitPlayerStats.ShowRunDPS;
-		bool_8 = settings.Overlay.PortraitPlayerStats.ShowTotalDPS;
-		bool_4 = settings.Overlay.PortraitPlayerStats.ShowInfo;
+		showRealDPS = settings.Overlay.PortraitPlayerStats.ShowRealDPS;
+		showRunDPS = settings.Overlay.PortraitPlayerStats.ShowRunDPS;
+		showTotalDPS = settings.Overlay.PortraitPlayerStats.ShowTotalDPS;
+		showInfo = settings.Overlay.PortraitPlayerStats.ShowInfo;
 		class219_0 = new RenderBrush(255, 0, 0, 0, 0f);
-		bool_5 = settings.Overlay.PortraitPlayerStats.EHP;
+		ehp = settings.Overlay.PortraitPlayerStats.EHP;
 		class219_1 = new RenderBrush(160, 0, 170, 0, 0f);
 		class219_2 = new RenderBrush(160, 100, 100, 100, 0f);
 		method_0(class219_0, class219_3, class219_2, class219_1, renderFont);
@@ -47,15 +47,15 @@ internal class ModulePortraitPlayerStats : Module
 			return;
 		}
 		int num = 0;
-		UiElement @class = CoreCollector.UiElements.class341_145[0];
-		if ((float)GameWindowManager.Window.CursorX >= @class.rectangleF_0.Left && (float)GameWindowManager.Window.CursorX <= @class.rectangleF_0.Right && (float)GameWindowManager.Window.CursorY >= @class.rectangleF_0.Top && (float)GameWindowManager.Window.CursorY <= @class.rectangleF_0.Bottom) {
+		UiElement uiElement = CoreCollector.UiElements.class341_145[0];
+		if ((float)GameWindowManager.Window.CursorX >= uiElement.rectangle.Left && (float)GameWindowManager.Window.CursorX <= uiElement.rectangle.Right && (float)GameWindowManager.Window.CursorY >= uiElement.rectangle.Top && (float)GameWindowManager.Window.CursorY <= uiElement.rectangle.Bottom) {
 			method_2();
 		}
-		float num2 = 0f;
+		float ehpMax = 0f;
 		foreach (Player item in CoreCollector.PlayerCollector.PlayersInGame) {
 			_ = item.Damage.CurrentDps;
-			if (item.HasValidActor && item.Defense.EhpMax > num2) {
-				num2 = item.Defense.EhpMax;
+			if (item.HasValidActor && item.Defense.EhpMax > ehpMax) {
+				ehpMax = item.Defense.EhpMax;
 			}
 		}
 		_ = GameWindowManager.Window.Size.Height / 400;
@@ -64,45 +64,45 @@ internal class ModulePortraitPlayerStats : Module
 				num++;
 			}
 			int num3 = ((!item2.IsMe) ? num : 0);
-			UiElement class2 = CoreCollector.UiElements.class341_145[num3];
-			if (bool_5 && CoreCollector.PlayerCollector.NumberOfPlayersInGame > 1) {
-				float num4 = class2.rectangleF_0.Width * 0.05f;
-				float num5 = class2.rectangleF_0.Height * 0.73f;
-				float left = class2.rectangleF_0.Left;
-				float num6 = class2.rectangleF_0.Top + class2.rectangleF_0.Height * 0.1f;
+			UiElement uiElement2 = CoreCollector.UiElements.class341_145[num3];
+			if (ehp && CoreCollector.PlayerCollector.NumberOfPlayersInGame > 1) {
+				float num4 = uiElement2.rectangle.Width * 0.05f;
+				float num5 = uiElement2.rectangle.Height * 0.73f;
+				float left = uiElement2.rectangle.Left;
+				float num6 = uiElement2.rectangle.Top + uiElement2.rectangle.Height * 0.1f;
 				left -= num4 + 2f;
 				left -= num4 + 2f;
-				if (bool_5 && item2.HasValidActor) {
+				if (ehp && item2.HasValidActor) {
 					class219_2.DrawRectangle(left, num6, num4, num5);
-					float num7 = num5 / num2 * item2.Defense.EhpMax;
+					float num7 = num5 / ehpMax * item2.Defense.EhpMax;
 					class219_1.DrawRectangle(left, num6 + num5 - num7, num4, num7);
 				}
 			}
-			if ((bool_8 || bool_7 || bool_6) && item2.IsMe) {
-				float num8 = class2.rectangleF_0.Right - class2.rectangleF_0.Width * 0.18f;
-				float num9 = class2.rectangleF_0.Top + class2.rectangleF_0.Height * 0.72f;
+			if ((showTotalDPS || showRunDPS || showRealDPS) && item2.IsMe) {
+				float num8 = uiElement2.rectangle.Right - uiElement2.rectangle.Width * 0.18f;
+				float num9 = uiElement2.rectangle.Top + uiElement2.rectangle.Height * 0.72f;
 				double currentDps = item2.Damage.CurrentDps;
 				double runDps = item2.Damage.RunDps;
 				TextLayout textLayout = renderFont.GetTextLayout(Formatting.ValueToString(item2.Damage.TotalDamage, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
-				if (bool_8) {
+				if (showTotalDPS) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
 				}
 				textLayout = renderFont.GetTextLayout(Formatting.ValueToString(runDps, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
-				if (bool_7) {
+				if (showRunDPS) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
 				}
 				textLayout = renderFont.GetTextLayout(Formatting.ValueToString(currentDps, ValueFormat.LongNumber));
 				num9 -= textLayout.Metrics.Height;
-				if (bool_6) {
+				if (showRealDPS) {
 					renderFont.DrawText(textLayout, num8 - (float)Math.Floor(textLayout.Metrics.Width), num9);
 				}
 			}
-			if (num3 == 0 && (float)GameWindowManager.Window.CursorX >= class2.rectangleF_0.Left && (float)GameWindowManager.Window.CursorX <= class2.rectangleF_0.Right && (float)GameWindowManager.Window.CursorY >= class2.rectangleF_0.Top && (float)GameWindowManager.Window.CursorY <= class2.rectangleF_0.Bottom) {
+			if (num3 == 0 && (float)GameWindowManager.Window.CursorX >= uiElement2.rectangle.Left && (float)GameWindowManager.Window.CursorX <= uiElement2.rectangle.Right && (float)GameWindowManager.Window.CursorY >= uiElement2.rectangle.Top && (float)GameWindowManager.Window.CursorY <= uiElement2.rectangle.Bottom) {
 				method_2();
 			}
-			if (!bool_4) {
+			if (!showInfo) {
 				continue;
 			}
 			string text = null;
@@ -129,8 +129,8 @@ internal class ModulePortraitPlayerStats : Module
 			}
 			if (text != null) {
 				TextLayout textLayout2 = renderFont.GetTextLayout(text);
-				float num10 = class2.rectangleF_0.Right + 2f + 1f;
-				float num11 = class2.rectangleF_0.Top + class2.rectangleF_0.Height * 0.71f;
+				float num10 = uiElement2.rectangle.Right + 2f + 1f;
+				float num11 = uiElement2.rectangle.Top + uiElement2.rectangle.Height * 0.71f;
 				class219_0.DrawRectangle(num10 - 3f, num11 - 2f, textLayout2.Metrics.Width + 6f, textLayout2.Metrics.Height + 5f);
 				renderFont.DrawText(textLayout2, num10, num11);
 			}

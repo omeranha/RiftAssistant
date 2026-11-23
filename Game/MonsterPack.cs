@@ -6,13 +6,13 @@ using SNO;
 public class MonsterPack
 {
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool isFullChampionPack;
 
 	[CompilerGenerated]
-	private SnoMonster SnoMonster_0;
+	private SnoMonster leadSnoMonster;
 
 	[CompilerGenerated]
-	private SnoMonster SnoMonster_1;
+	private SnoMonster minionSnoMonster;
 
 	[CompilerGenerated]
 	private string string_0;
@@ -21,16 +21,16 @@ public class MonsterPack
 	private string string_1;
 
 	[CompilerGenerated]
-	private List<SnoMonsterAffix> list_0;
+	private List<SnoMonsterAffix> affixSnoList;
 
 	[CompilerGenerated]
-	private readonly Dictionary<double, Monster> class112_0 = new Dictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> monstersAlive = new Dictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Dictionary<double, Monster> class112_1 = new Dictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> monstersKilled = new Dictionary<double, Monster>();
 
 	[CompilerGenerated]
-	private readonly Dictionary<double, Monster> class112_2 = new Dictionary<double, Monster>();
+	private readonly Dictionary<double, Monster> monstersUnknown = new Dictionary<double, Monster>();
 
 	public Stopwatch LastActive { get; } = new Stopwatch();
 
@@ -39,12 +39,12 @@ public class MonsterPack
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return isFullChampionPack;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_0 = value;
+			isFullChampionPack = value;
 		}
 	}
 
@@ -53,34 +53,34 @@ public class MonsterPack
 		[CompilerGenerated]
 		get
 		{
-			return SnoMonster_0;
+			return leadSnoMonster;
 		}
 		[CompilerGenerated]
 		set
 		{
-			SnoMonster_0 = value;
+			leadSnoMonster = value;
 		}
 	}
 
-	public IEnumerable<SnoMonsterAffix> AffixSnoList => List_0;
+	public IEnumerable<SnoMonsterAffix> AffixSnoList => AffixSnoList2;
 
-	public IEnumerable<Monster> MonstersAlive => Class112_0.Values;
+	public IEnumerable<Monster> MonstersAlive => MonstersAlive2.Values;
 
-	public IEnumerable<Monster> MonstersKilled => Class112_1.Values;
+	public IEnumerable<Monster> MonstersKilled => MonstersKilled2.Values;
 
-	public IEnumerable<Monster> MonstersUnknown => Class112_2.Values;
+	public IEnumerable<Monster> MonstersUnknown => MonstersUnknown2.Values;
 
 	public SnoMonster MinionSnoMonster
 	{
 		[CompilerGenerated]
 		get
 		{
-			return SnoMonster_1;
+			return minionSnoMonster;
 		}
 		[CompilerGenerated]
 		set
 		{
-			SnoMonster_1 = value;
+			minionSnoMonster = value;
 		}
 	}
 
@@ -112,44 +112,44 @@ public class MonsterPack
 		}
 	}
 
-	public List<SnoMonsterAffix> List_0
+	public List<SnoMonsterAffix> AffixSnoList2
 	{
 		[CompilerGenerated]
 		get
 		{
-			return list_0;
+			return affixSnoList;
 		}
 		[CompilerGenerated]
 		set
 		{
-			list_0 = value;
+			affixSnoList = value;
 		}
 	}
 
-	public Dictionary<double, Monster> Class112_0
+	public Dictionary<double, Monster> MonstersAlive2
 	{
 		[CompilerGenerated]
 		get
 		{
-			return class112_0;
+			return monstersAlive;
 		}
 	}
 
-	public Dictionary<double, Monster> Class112_1
+	public Dictionary<double, Monster> MonstersKilled2
 	{
 		[CompilerGenerated]
 		get
 		{
-			return class112_1;
+			return monstersKilled;
 		}
 	}
 
-	public Dictionary<double, Monster> Class112_2
+	public Dictionary<double, Monster> MonstersUnknown2
 	{
 		[CompilerGenerated]
 		get
 		{
-			return class112_2;
+			return monstersUnknown;
 		}
 	}
 }

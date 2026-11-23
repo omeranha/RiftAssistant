@@ -48,17 +48,17 @@ public sealed class Actors
 				dictionary_0.Add(actorSnoEnum, new SnoActor(actorSnoEnum, actorType_, actorKind_, bool_, text2, stringByCode, stringByCodeEnglish));
 			}
 		}
-		using (DataReader @class = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_actor_inventory_index.bin"))))
+		using (DataReader dataReader = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_actor_inventory_index.bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				ActorSnoEnum sno = (ActorSnoEnum)@class.method_8();
+				ActorSnoEnum sno = (ActorSnoEnum)dataReader.method_8();
 				SnoActor actor = GetActor(sno);
-				int num = @class.method_11();
+				int num = dataReader.method_11();
 				uint[] array3 = new uint[num];
 				for (int j = 0; j < num; j++)
 				{
-					array3[j] = @class.method_8();
+					array3[j] = dataReader.method_8();
 				}
 				if (actor != null)
 				{
@@ -158,15 +158,15 @@ public sealed class Actors
 		method_1(ShrineType.HealingWell, ActorSnoEnum._healthwell_global);
 	}
 
-	private void method_0(SkillEffectType skillEffectType_0, ActorSnoEnum actorSnoEnum_0, float float_0)
+	private void method_0(SkillEffectType skillEffectType, ActorSnoEnum actorSnoEnum, float float_0)
 	{
-		SkillEffectRule value = new SkillEffectRule(skillEffectType_0, GetActor(actorSnoEnum_0), float_0);
-		dictionary_1.Add(actorSnoEnum_0, value);
+		SkillEffectRule value = new SkillEffectRule(skillEffectType, GetActor(actorSnoEnum), float_0);
+		dictionary_1.Add(actorSnoEnum, value);
 	}
 
-	private void method_1(ShrineType shrineType_0, ActorSnoEnum actorSnoEnum_0)
+	private void method_1(ShrineType shrineType, ActorSnoEnum actorSnoEnum)
 	{
-		ActorShrineTypeInfo value = new ActorShrineTypeInfo(shrineType_0, GetActor(actorSnoEnum_0));
-		dictionary_2.Add(actorSnoEnum_0, value);
+		ActorShrineTypeInfo value = new ActorShrineTypeInfo(shrineType, GetActor(actorSnoEnum));
+		dictionary_2.Add(actorSnoEnum, value);
 	}
 }

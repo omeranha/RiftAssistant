@@ -8,7 +8,7 @@ using SNO;
 
 public sealed class Items
 {
-	private readonly Dictionary<uint, SnoItem> dictionary_0 = new Dictionary<uint, SnoItem>(3000);
+	private readonly Dictionary<uint, SnoItem> all = new Dictionary<uint, SnoItem>(3000);
 
 	private readonly Dictionary<uint, SnoItemType> dictionary_1 = new Dictionary<uint, SnoItemType>(200);
 
@@ -18,11 +18,11 @@ public sealed class Items
 
 	private readonly Dictionary<uint, SnoItemAffixGroup> dictionary_4 = new Dictionary<uint, SnoItemAffixGroup>(500);
 
-	public IEnumerable<SnoItem> All => dictionary_0.Values;
+	public IEnumerable<SnoItem> All => all.Values;
 
 	public SnoItem GetBySno(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		all.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -46,37 +46,37 @@ public sealed class Items
 
 	public bool SnoExits(uint sno)
 	{
-		return dictionary_0.ContainsKey(sno);
+		return all.ContainsKey(sno);
 	}
 
 	internal Items()
 	{
-		using (DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_types.bin"))))
+		using (DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_types.bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = @class.method_8();
-				string text = @class.method_1();
+				uint num = dataReader.method_8();
+				string text = dataReader.method_1();
 				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._itemtypenames, text);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._itemtypenames, text);
-				uint num2 = @class.method_8();
+				uint num2 = dataReader.method_8();
 				SnoItemType SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
 				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, SnoItemType_);
 				dictionary_1.Add(num, value);
 				dictionary_2.Add(text, value);
 			}
 		}
-		using (DataReader class2 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_affixes.bin"))))
+		using (DataReader dataReader2 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_affixes.bin"))))
 		{
-			while (class2.Stream.Position < class2.Stream.Length)
+			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				uint num3 = class2.method_8();
-				string code = string.Intern(class2.method_1());
+				uint num3 = dataReader2.method_8();
+				string code = string.Intern(dataReader2.method_1());
 				string stringByCode2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._affixes, code);
 				string stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._affixes, code);
-				uint uint_ = class2.method_8();
-				uint num4 = class2.method_8();
-				uint num5 = class2.method_8();
+				uint uint_ = dataReader2.method_8();
+				uint num4 = dataReader2.method_8();
+				uint num5 = dataReader2.method_8();
 				SnoItemAffixGroup snoItemAffixGroup = null;
 				SnoItemAffixGroup snoItemAffixGroup2 = null;
 				if (num4 != 0)
@@ -97,20 +97,20 @@ public sealed class Items
 						dictionary_4.Add(num5, snoItemAffixGroup2);
 					}
 				}
-				HeroClass heroClass_ = (HeroClass)class2.method_8();
-				bool bool_ = class2.method_18();
+				HeroClass heroClass_ = (HeroClass)dataReader2.method_8();
+				bool bool_ = dataReader2.method_18();
 				SnoItemAffix snoItemAffix = new SnoItemAffix(num3, stringByCode2, stringByCodeEnglish2, uint_, snoItemAffixGroup, snoItemAffixGroup2, heroClass_, bool_);
 				dictionary_3.Add(num3, snoItemAffix);
 				snoItemAffixGroup?.AddAffix(snoItemAffix);
 				snoItemAffixGroup2?.AddAffix(snoItemAffix);
-				byte b = class2.method_6();
+				byte b = dataReader2.method_6();
 				SnoItemMod[] array = new SnoItemMod[b];
 				for (int i = 0; i < b; i++)
 				{
-					AcdAttribute iattribute_ = SnoData.Attributes.ByIndex[class2.method_11()];
-					uint uint_2 = class2.method_8();
-					float float_ = class2.method_14();
-					float float_2 = class2.method_14();
+					AcdAttribute iattribute_ = SnoData.Attributes.ByIndex[dataReader2.method_11()];
+					uint uint_2 = dataReader2.method_8();
+					float float_ = dataReader2.method_14();
+					float float_2 = dataReader2.method_14();
 					array[i] = new SnoItemMod(iattribute_, uint_2, float_, float_2, snoItemAffix);
 				}
 				SnoItemMod[] mods = array;
@@ -168,7 +168,7 @@ public sealed class Items
 			string string_ = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._items, text3) ?? text3;
 			string string_2 = array3[17].ToLower(CultureInfo.InvariantCulture);
 			ItemLocation itemLocation_ = ((array3[18] != "-" && array3[18] != "") ? ((ItemLocation)Enum.Parse(typeof(ItemLocation), array3[18], ignoreCase: true)) : ItemLocation.Floor);
-			ItemLocation itemLocation_2 = ((array3[19] != "-" && array3[19] != "") ? ((ItemLocation)Enum.Parse(typeof(ItemLocation), array3[19], ignoreCase: true)) : ItemLocation.Floor);
+			ItemLocation itemLocation = ((array3[19] != "-" && array3[19] != "") ? ((ItemLocation)Enum.Parse(typeof(ItemLocation), array3[19], ignoreCase: true)) : ItemLocation.Floor);
 			string[] array4 = array3[20].ToLower(CultureInfo.InvariantCulture).Split('|');
 			if (array4 != null && array4.Length > 1)
 			{
@@ -190,8 +190,8 @@ public sealed class Items
 				snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-" + text3, "dummyactor-" + text3, "dummyactor-" + text3);
 				SnoData.Actors.dictionary_0.Add(actorSnoEnum, snoActor);
 			}
-			SnoItem snoItem = new SnoItem(uint_3, uint_4, uint_5, snoActor, uint_6, uint_7, int_, value2, int_2, int_3, int_4, int_5, int_6, int_7, text3, text4, string_, string_2, array4, itemLocation_, itemLocation_2, int_8, int_9, int_10, int_11, int_12, int_13, int_14, itemCraftQuality_);
-			dictionary_0.Add(snoItem.Sno, snoItem);
+			SnoItem snoItem = new SnoItem(uint_3, uint_4, uint_5, snoActor, uint_6, uint_7, int_, value2, int_2, int_3, int_4, int_5, int_6, int_7, text3, text4, string_, string_2, array4, itemLocation_, itemLocation, int_8, int_9, int_10, int_11, int_12, int_13, int_14, itemCraftQuality_);
+			all.Add(snoItem.Sno, snoItem);
 			if (num8 > 0)
 			{
 				SnoItemAffixGroupLink[] affixGroups = new SnoItemAffixGroupLink[num8];
@@ -254,7 +254,7 @@ public sealed class Items
 				continue;
 			}
 			bool flag = false;
-			foreach (SnoItem value3 in dictionary_0.Values)
+			foreach (SnoItem value3 in all.Values)
 			{
 				if (value3.NameEnglish.Equals(text5, StringComparison.InvariantCultureIgnoreCase))
 				{
@@ -268,12 +268,12 @@ public sealed class Items
 				Trace.WriteLine("unknown item for kanai db: " + text5);
 			}
 		}
-		using DataReader class3 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_socketed_effects.bin")));
-		while (class3.Stream.Position < class3.Stream.Length)
+		using DataReader dataReader3 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_socketed_effects.bin")));
+		while (dataReader3.Stream.Position < dataReader3.Stream.Length)
 		{
-			uint sno2 = class3.method_8();
-			uint sno3 = class3.method_8();
-			int num10 = class3.method_11();
+			uint sno2 = dataReader3.method_8();
+			uint sno3 = dataReader3.method_8();
+			int num10 = dataReader3.method_11();
 			SnoItem bySno = GetBySno(sno2);
 			if (bySno.SocketedEffects == null)
 			{
@@ -282,11 +282,11 @@ public sealed class Items
 			SnoItemMod[] array5 = new SnoItemMod[num10];
 			for (int l = 0; l < num10; l++)
 			{
-				int index = class3.method_11();
+				int index = dataReader3.method_11();
 				AcdAttribute iattribute_2 = SnoData.Attributes.ByIndex[index];
-				uint uint_9 = class3.method_8();
-				float float_5 = class3.method_14();
-				float float_6 = class3.method_14();
+				uint uint_9 = dataReader3.method_8();
+				float float_5 = dataReader3.method_14();
+				float float_6 = dataReader3.method_14();
 				array5[l] = new SnoItemMod(iattribute_2, uint_9, float_5, float_6, null);
 			}
 			SnoSocketedEffect item = new SnoSocketedEffect(GetSnoItemType(sno3), array5);

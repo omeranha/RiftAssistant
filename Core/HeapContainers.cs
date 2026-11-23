@@ -8,27 +8,27 @@ internal class Container
 	private readonly r_Container[] buffer = new r_Container[1];
 
 	[CompilerGenerated]
-	private short short_0;
+	private short maxIndex;
 
 	public readonly short _maxAllowedIndex;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool isValid;
 
 	[CompilerGenerated]
-	private long long_0;
+	private long dataAddress;
 
 	public short MaxIndex
 	{
 		[CompilerGenerated]
 		get
 		{
-			return short_0;
+			return maxIndex;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			short_0 = value;
+			maxIndex = value;
 		}
 	}
 
@@ -37,12 +37,12 @@ internal class Container
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return isValid;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			bool_0 = value;
+			isValid = value;
 		}
 	}
 
@@ -51,12 +51,12 @@ internal class Container
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return dataAddress;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			long_0 = value;
+			dataAddress = value;
 		}
 	}
 
@@ -90,9 +90,9 @@ internal class Container
 	}
 }
 
-internal class AllocatedBlock<T>(Allocator class351_1)
+internal class AllocatedBlock<T>(Allocator allocator)
 {
-	public readonly Allocator Allocator = class351_1;
+	public readonly Allocator Allocator = allocator;
 
 	internal byte[] bitMask;
 
@@ -114,7 +114,7 @@ internal class AllocatedBlock<T>(Allocator class351_1)
 
 internal class AllocationCache<T> where T : unmanaged
 {
-	private readonly int int_0;
+	private readonly int markerEntrySizeOf;
 
 	public AllocatedBlock<T>[] class354_0;
 
@@ -153,12 +153,12 @@ internal class AllocationCache<T> where T : unmanaged
 			}
 			return null;
 		}
-		return @class.Elements[(long_0 - @class.StartAddress) / int_0];
+		return @class.Elements[(long_0 - @class.StartAddress) / markerEntrySizeOf];
 	}
 
-	public AllocationCache(int int_2)
+	public AllocationCache(int markerEntrySizeOf)
 	{
-		int_0 = int_2;
+		markerEntrySizeOf = markerEntrySizeOf;
 	}
 
 	public void Snapshot(Allocator allocator)
@@ -246,22 +246,22 @@ internal class Allocator
 internal class MainBlock
 {
 	[CompilerGenerated]
-	private long long_0;
+	private long dataAddress;
 
 	[CompilerGenerated]
-	private int int_0;
+	private int size;
 
 	public long DataAddress
 	{
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return dataAddress;
 		}
 		[CompilerGenerated]
 		set
 		{
-			long_0 = value;
+			dataAddress = value;
 		}
 	}
 
@@ -270,12 +270,12 @@ internal class MainBlock
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return size;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_0 = value;
+			size = value;
 		}
 	}
 }
@@ -285,36 +285,36 @@ internal class ExpandableContainer
 	private readonly r_ExpandableContainer[] buffer = new r_ExpandableContainer[1];
 
 	[CompilerGenerated]
-	private short short_0;
+	private short maxIndex;
 
 	[CompilerGenerated]
-	private readonly int int_0;
+	private readonly int itemSize;
 
 	public readonly short _maxAllowedIndex;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool isValid;
 
 	[CompilerGenerated]
-	private long[] long_0 = new long[0];
+	private long[] blockPointers = new long[0];
 
 	[CompilerGenerated]
-	private int int_1;
+	private int blocksItemCapacity;
 
 	[CompilerGenerated]
-	private int int_2;
+	private int blockCount;
 
 	public short MaxIndex
 	{
 		[CompilerGenerated]
 		get
 		{
-			return short_0;
+			return maxIndex;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			short_0 = value;
+			maxIndex = value;
 		}
 	}
 
@@ -323,7 +323,7 @@ internal class ExpandableContainer
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return itemSize;
 		}
 	}
 
@@ -332,12 +332,12 @@ internal class ExpandableContainer
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return isValid;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			bool_0 = value;
+			isValid = value;
 		}
 	}
 
@@ -346,12 +346,12 @@ internal class ExpandableContainer
 		[CompilerGenerated]
 		get
 		{
-			return long_0;
+			return blockPointers;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			long_0 = value;
+			blockPointers = value;
 		}
 	}
 
@@ -360,12 +360,12 @@ internal class ExpandableContainer
 		[CompilerGenerated]
 		get
 		{
-			return int_1;
+			return blocksItemCapacity;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			int_1 = value;
+			blocksItemCapacity = value;
 		}
 	}
 
@@ -374,19 +374,19 @@ internal class ExpandableContainer
 		[CompilerGenerated]
 		get
 		{
-			return int_2;
+			return blockCount;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			int_2 = value;
+			blockCount = value;
 		}
 	}
 
 	public ExpandableContainer(short short_2, int int_3)
 	{
 		_maxAllowedIndex = short_2;
-		int_0 = int_3;
+		itemSize = int_3;
 	}
 
 	public void Snapshot(long long_1)
@@ -427,15 +427,15 @@ internal class ExpandableContainer
 		}
 	}
 
-	public long ElementAt(int int_3)
+	public long ElementAt(int fastAttribGroupID)
 	{
 		try
 		{
-			return BlockPointers[int_3 / BlocksItemCapacity] + ItemSize * (int_3 % BlocksItemCapacity);
+			return BlockPointers[fastAttribGroupID / BlocksItemCapacity] + ItemSize * (fastAttribGroupID % BlocksItemCapacity);
 		}
 		catch (Exception)
 		{
-			throw new Exception("container error: Index=" + int_3 + ", MaxItemsInArray=" + BlocksItemCapacity + ", ArrayCount=" + BlockCount);
+			throw new Exception("container error: Index=" + fastAttribGroupID + ", MaxItemsInArray=" + BlocksItemCapacity + ", ArrayCount=" + BlockCount);
 		}
 	}
 }

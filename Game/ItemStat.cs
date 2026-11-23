@@ -45,24 +45,24 @@ public class ItemStat
 		DoubleValue = double_1;
 	}
 
-	public ItemStat(string string_2, double double_1, int int_0)
+	public ItemStat(string string_2, double level, int level2)
 	{
 		Processor = SnoData.Attributes.GetAttributeProcessor(string_2);
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
-		DoubleValue = double_1;
-		IntegerValue = int_0;
+		DoubleValue = level;
+		IntegerValue = level2;
 	}
 
-	public ItemStat(string string_2, string string_3)
+	public ItemStat(string string_2, string nameLocalized)
 	{
 		Processor = SnoData.Attributes.GetAttributeProcessor(string_2);
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
 		DoubleValue = 0.0;
-		StringValue = string_3;
+		StringValue = nameLocalized;
 		IntegerValue = null;
 	}
 

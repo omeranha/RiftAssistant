@@ -8,182 +8,182 @@ using System.Text;
 internal class D3Memory
 {
 	[CompilerGenerated]
-	private static readonly int int_0 = 2976;
+	private static readonly int objectManagerSizeOf = 2976;
 
 	[CompilerGenerated]
-	private static readonly int int_1 = 84;
+	private static readonly int offsetObjectManagerRenderTick = 84;
 
 	[CompilerGenerated]
-	private static readonly int int_2 = 132;
+	private static readonly int offsetObjectManagerInGameFlag = 132;
 
 	[CompilerGenerated]
-	private static readonly int int_3 = 196;
+	private static readonly int offsetObjectManagerGameServerAddress = 196;
 
 	[CompilerGenerated]
-	private static readonly int int_4 = 384;
+	private static readonly int sizeOfGameState = 384;
 
 	[CompilerGenerated]
-	private static readonly int int_5 = 28;
+	private static readonly int offsetGameStateValidation3 = 28;
 
 	[CompilerGenerated]
-	private static readonly int int_6 = 108;
+	private static readonly int offsetGameStateLoadingScreenEnabled = 108;
 
 	[CompilerGenerated]
-	private static readonly int int_7 = 260;
+	private static readonly int offsetGameStateRiftProgressAccumulated = 260;
 
 	[CompilerGenerated]
-	private static readonly int int_8 = 280;
+	private static readonly int offsetGameStateValidation1 = 280;
 
 	[CompilerGenerated]
-	private static readonly int int_9 = 288;
+	private static readonly int offsetGameStateValidation2 = 288;
 
 	[CompilerGenerated]
-	private static readonly int int_10 = 348;
+	private static readonly int offsetGameStateIsGamePaused = 348;
 
 	[CompilerGenerated]
-	private static readonly int int_11 = 1976;
+	private static readonly int offsetObjectManagerStorage = 1976;
 
 	[CompilerGenerated]
-	private static readonly int int_12 = 4;
+	private static readonly int offsetStorageGameDifficulty = 4;
 
 	[CompilerGenerated]
-	private static readonly int int_13 = 288;
+	private static readonly int offsetStorageGameTick = 288;
 
 	[CompilerGenerated]
-	private static readonly int int_14 = 96;
+	private static readonly int offsetPlayerDataManagerElements = 96;
 
 	[CompilerGenerated]
-	private static readonly int int_15 = 384;
+	private static readonly int offsetStorageFastAttrib = 384;
 
 	[CompilerGenerated]
-	private static readonly int int_17 = 144;
+	private static readonly int offsetFastAttribFastAttribGroups = 144;
 
 	[CompilerGenerated]
-	private static readonly int int_18 = 440;
+	private static readonly int offsetStorageQuestManager = 440;
 
 	[CompilerGenerated]
-	private static readonly int int_19 = 528;
+	private static readonly int offsetStorageWaypointManager = 528;
 
 	[CompilerGenerated]
-	private static readonly int int_20 = 2592;
+	private static readonly int offsetObjectManagerActors = 2592;
 
 	[CompilerGenerated]
-	private static readonly int int_21 = 2720;
+	private static readonly int offsetObjectManagerScenes = 2720;
 
 	[CompilerGenerated]
-	private static readonly int int_22 = 2824;
+	private static readonly int offsetObjectManagerUIManager = 2824;
 
 	[CompilerGenerated]
-	private static readonly int int_23 = 9912;
+	private static readonly int offsetUIManagerSelectedActor1 = 9912;
 
 	[CompilerGenerated]
-	private static readonly int int_24 = 3680;
+	private static readonly int offsetUIManagerSelectedActor2 = 3680;
 
 	[CompilerGenerated]
-	private static readonly int int_25 = 2840;
+	private static readonly int offsetObjectManagerWorlds = 2840;
 
 	[CompilerGenerated]
-	private static readonly int int_26 = 0;
+	private static readonly int offsetPlayerLocalPlayerIndex = 0;
 
 	[CompilerGenerated]
-	private static readonly int int_27 = 41496;
+	private static readonly int offsetPlayerFloatingNumbers = 41496;
 
 	[CompilerGenerated]
-	private static readonly int int_28 = 32;
+	private static readonly int floatingNumAllocatorOffset2 = 32;
 
 	[CompilerGenerated]
-	private static readonly int int_29 = 41800;
+	private static readonly int offsetCircularBufferFree = 41800;
 
 	[CompilerGenerated]
-	private static readonly int int_30 = 41808;
+	private static readonly int offsetCircularBufferHead = 41808;
 
 	[CompilerGenerated]
-	private static readonly int int_31 = 41816;
+	private static readonly int offsetCircularBufferTail = 41816;
 
 	[CompilerGenerated]
-	private static readonly int int_32 = 41824;
+	private static readonly int offsetCircularBufferUsed = 41824;
 
 	[CompilerGenerated]
-	private static readonly int int_33 = 41832;
+	private static readonly int offsetCircularBufferBuffer = 41832;
 
 	[CompilerGenerated]
-	private static readonly int int_34 = 2936;
+	private static readonly int offsetObjectManagerTimedEvents = 2936;
 
 	[CompilerGenerated]
-	private static readonly int int_35 = 12;
+	private static readonly int unused = 12;
 
 	[CompilerGenerated]
-	private long long_0;
+	private long objectManagerStorageAddress;
 
 	[CompilerGenerated]
-	private long long_1;
+	private long uIManagerAddress;
 
 	[CompilerGenerated]
-	private long long_2;
+	private long questManagerAddress;
 
 	[CompilerGenerated]
-	private long long_3;
+	private long waypointManagerAddress;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool objectManagerGameStateHasValue;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool gameStateValueIsChallengeRiftGame;
 
 	[CompilerGenerated]
-	private int int_36;
+	private int gameStateLoadingScreenEnabledValue;
 
 	[CompilerGenerated]
-	private int int_37;
+	private int gameStatePausedValue;
 
 	[CompilerGenerated]
-	private float float_0;
+	private float gameStateRiftProgressAccumulatedValue;
 
 	[CompilerGenerated]
-	private readonly float float_1 = 650f;
+	private readonly float maxQuestProgress = 650f;
 
 	[CompilerGenerated]
-	private int int_38;
+	private int currentTimedEventStartTick;
 
 	[CompilerGenerated]
-	private int int_39;
+	private int currentTimedEventEndTick;
 
 	[CompilerGenerated]
-	private int int_40;
+	private int currentTimedEventEndTickMod;
 
 	[CompilerGenerated]
-	private bool bool_2;
+	private bool isUiHidden;
 
 	[CompilerGenerated]
-	private int int_41;
+	private int renderTick;
 
 	[CompilerGenerated]
-	private int int_42;
+	private int gameTick;
 
 	[CompilerGenerated]
-	private int int_43;
+	private int localPlayerIndex;
 
 	private int int_44;
 
 	private Stopwatch stopwatch_0 = new();
 
 	[CompilerGenerated]
-	private GameDifficulty gameDifficulty_0;
+	private GameDifficulty gameDifficulty;
 
 	[CompilerGenerated]
-	private BountyAct bountyAct_0;
+	private BountyAct actMapCurrentAct;
 
 	[CompilerGenerated]
-	private double double_0;
+	private double averageLatency;
 
 	[CompilerGenerated]
-	private double double_1;
+	private double currentLatency;
 
 	[CompilerGenerated]
-	private uint uint_0;
+	private uint selectedActor1AcdId;
 
 	[CompilerGenerated]
-	private uint uint_1;
+	private uint selectedActor2AcdId;
 
 	internal ExpandableContainer ACDContainer;
 
@@ -213,7 +213,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_0;
+			return objectManagerSizeOf;
 		}
 	}
 
@@ -221,7 +221,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_1;
+			return offsetObjectManagerRenderTick;
 		}
 	}
 
@@ -229,7 +229,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_2;
+			return offsetObjectManagerInGameFlag;
 		}
 	}
 
@@ -237,7 +237,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_3;
+			return offsetObjectManagerGameServerAddress;
 		}
 	}
 
@@ -245,7 +245,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_4;
+			return sizeOfGameState;
 		}
 	}
 
@@ -253,7 +253,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_5;
+			return offsetGameStateValidation3;
 		}
 	}
 
@@ -261,7 +261,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_6;
+			return offsetGameStateLoadingScreenEnabled;
 		}
 	}
 
@@ -269,7 +269,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_7;
+			return offsetGameStateRiftProgressAccumulated;
 		}
 	}
 
@@ -277,7 +277,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_8;
+			return offsetGameStateValidation1;
 		}
 	}
 
@@ -285,7 +285,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_9;
+			return offsetGameStateValidation2;
 		}
 	}
 
@@ -293,7 +293,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_10;
+			return offsetGameStateIsGamePaused;
 		}
 	}
 
@@ -301,7 +301,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_11;
+			return offsetObjectManagerStorage;
 		}
 	}
 
@@ -309,7 +309,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_12;
+			return offsetStorageGameDifficulty;
 		}
 	}
 
@@ -317,7 +317,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_13;
+			return offsetStorageGameTick;
 		}
 	}
 
@@ -325,7 +325,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_14;
+			return offsetPlayerDataManagerElements;
 		}
 	}
 
@@ -333,7 +333,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_15;
+			return offsetStorageFastAttrib;
 		}
 	}
 
@@ -341,7 +341,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_17;
+			return offsetFastAttribFastAttribGroups;
 		}
 	}
 
@@ -349,7 +349,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_18;
+			return offsetStorageQuestManager;
 		}
 	}
 
@@ -357,7 +357,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_19;
+			return offsetStorageWaypointManager;
 		}
 	}
 
@@ -365,7 +365,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_20;
+			return offsetObjectManagerActors;
 		}
 	}
 
@@ -373,7 +373,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_21;
+			return offsetObjectManagerScenes;
 		}
 	}
 
@@ -381,7 +381,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_22;
+			return offsetObjectManagerUIManager;
 		}
 	}
 
@@ -389,7 +389,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_23;
+			return offsetUIManagerSelectedActor1;
 		}
 	}
 
@@ -397,7 +397,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_24;
+			return offsetUIManagerSelectedActor2;
 		}
 	}
 
@@ -405,7 +405,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_25;
+			return offsetObjectManagerWorlds;
 		}
 	}
 
@@ -413,7 +413,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_26;
+			return offsetPlayerLocalPlayerIndex;
 		}
 	}
 
@@ -421,7 +421,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_27;
+			return offsetPlayerFloatingNumbers;
 		}
 	}
 
@@ -429,7 +429,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_28;
+			return floatingNumAllocatorOffset2;
 		}
 	}
 
@@ -437,7 +437,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_29;
+			return offsetCircularBufferFree;
 		}
 	}
 
@@ -445,7 +445,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_30;
+			return offsetCircularBufferHead;
 		}
 	}
 
@@ -453,7 +453,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_31;
+			return offsetCircularBufferTail;
 		}
 	}
 
@@ -461,7 +461,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_32;
+			return offsetCircularBufferUsed;
 		}
 	}
 
@@ -469,7 +469,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_33;
+			return offsetCircularBufferBuffer;
 		}
 	}
 
@@ -477,7 +477,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_34;
+			return offsetObjectManagerTimedEvents;
 		}
 	}
 
@@ -485,7 +485,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_35;
+			return unused;
 		}
 	}
 
@@ -493,11 +493,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return long_0;
+			return objectManagerStorageAddress;
 		}
 		[CompilerGenerated]
 		private set {
-			long_0 = value;
+			objectManagerStorageAddress = value;
 		}
 	}
 
@@ -505,11 +505,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return long_1;
+			return uIManagerAddress;
 		}
 		[CompilerGenerated]
 		private set {
-			long_1 = value;
+			uIManagerAddress = value;
 		}
 	}
 
@@ -517,11 +517,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return long_2;
+			return questManagerAddress;
 		}
 		[CompilerGenerated]
 		private set {
-			long_2 = value;
+			questManagerAddress = value;
 		}
 	}
 
@@ -529,11 +529,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return long_3;
+			return waypointManagerAddress;
 		}
 		[CompilerGenerated]
 		private set {
-			long_3 = value;
+			waypointManagerAddress = value;
 		}
 	}
 
@@ -541,11 +541,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return bool_0;
+			return objectManagerGameStateHasValue;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_0 = value;
+			objectManagerGameStateHasValue = value;
 		}
 	}
 
@@ -553,11 +553,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return bool_1;
+			return gameStateValueIsChallengeRiftGame;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_1 = value;
+			gameStateValueIsChallengeRiftGame = value;
 		}
 	}
 
@@ -565,11 +565,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_36;
+			return gameStateLoadingScreenEnabledValue;
 		}
 		[CompilerGenerated]
 		private set {
-			int_36 = value;
+			gameStateLoadingScreenEnabledValue = value;
 		}
 	}
 
@@ -577,11 +577,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_37;
+			return gameStatePausedValue;
 		}
 		[CompilerGenerated]
 		private set {
-			int_37 = value;
+			gameStatePausedValue = value;
 		}
 	}
 
@@ -589,11 +589,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return float_0;
+			return gameStateRiftProgressAccumulatedValue;
 		}
 		[CompilerGenerated]
 		private set {
-			float_0 = value;
+			gameStateRiftProgressAccumulatedValue = value;
 		}
 	}
 
@@ -601,7 +601,7 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return float_1;
+			return maxQuestProgress;
 		}
 	}
 
@@ -609,11 +609,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_38;
+			return currentTimedEventStartTick;
 		}
 		[CompilerGenerated]
 		private set {
-			int_38 = value;
+			currentTimedEventStartTick = value;
 		}
 	}
 
@@ -621,11 +621,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_39;
+			return currentTimedEventEndTick;
 		}
 		[CompilerGenerated]
 		private set {
-			int_39 = value;
+			currentTimedEventEndTick = value;
 		}
 	}
 
@@ -633,11 +633,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_40;
+			return currentTimedEventEndTickMod;
 		}
 		[CompilerGenerated]
 		private set {
-			int_40 = value;
+			currentTimedEventEndTickMod = value;
 		}
 	}
 
@@ -645,11 +645,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return bool_2;
+			return isUiHidden;
 		}
 		[CompilerGenerated]
 		private set {
-			bool_2 = value;
+			isUiHidden = value;
 		}
 	}
 
@@ -657,11 +657,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_41;
+			return renderTick;
 		}
 		[CompilerGenerated]
 		private set {
-			int_41 = value;
+			renderTick = value;
 		}
 	}
 
@@ -669,11 +669,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_42;
+			return gameTick;
 		}
 		[CompilerGenerated]
 		private set {
-			int_42 = value;
+			gameTick = value;
 		}
 	}
 
@@ -681,11 +681,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return int_43;
+			return localPlayerIndex;
 		}
 		[CompilerGenerated]
 		private set {
-			int_43 = value;
+			localPlayerIndex = value;
 		}
 	}
 
@@ -693,11 +693,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return gameDifficulty_0;
+			return gameDifficulty;
 		}
 		[CompilerGenerated]
 		private set {
-			gameDifficulty_0 = value;
+			gameDifficulty = value;
 		}
 	}
 
@@ -705,11 +705,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return bountyAct_0;
+			return actMapCurrentAct;
 		}
 		[CompilerGenerated]
 		private set {
-			bountyAct_0 = value;
+			actMapCurrentAct = value;
 		}
 	}
 
@@ -717,11 +717,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return double_0;
+			return averageLatency;
 		}
 		[CompilerGenerated]
 		private set {
-			double_0 = value;
+			averageLatency = value;
 		}
 	}
 
@@ -729,11 +729,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return double_1;
+			return currentLatency;
 		}
 		[CompilerGenerated]
 		private set {
-			double_1 = value;
+			currentLatency = value;
 		}
 	}
 
@@ -741,11 +741,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return uint_0;
+			return selectedActor1AcdId;
 		}
 		[CompilerGenerated]
 		private set {
-			uint_0 = value;
+			selectedActor1AcdId = value;
 		}
 	}
 
@@ -753,11 +753,11 @@ internal class D3Memory
 	{
 		[CompilerGenerated]
 		get {
-			return uint_1;
+			return selectedActor2AcdId;
 		}
 		[CompilerGenerated]
 		private set {
-			uint_1 = value;
+			selectedActor2AcdId = value;
 		}
 	}
 
@@ -893,10 +893,10 @@ internal class D3Memory
 		SelectedActor2_AcdId = GameWindowManager.Read<uint>(UIManagerAddress + Offset_UIManager_SelectedActor2);
 	}
 
-	private void CheckIsOnPTR(Process process_0)
+	private void CheckIsOnPTR(Process process)
 	{
 		try {
-			using ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(new SelectQuery("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process_0.Id));
+			using ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(new SelectQuery("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id));
 			ManagementObject managementObject = managementObjectSearcher.Get().Cast<ManagementObject>().FirstOrDefault();
 			if (managementObject != null) {
 				CommandLineArgs = (managementObject.Properties["CommandLine"].Value ?? "").ToString();

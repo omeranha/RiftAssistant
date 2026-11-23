@@ -10,13 +10,13 @@ public class PlayerPowerInfo
 	private Skill iplayerSkill_0;
 
 	[CompilerGenerated]
-	private bool bool_0;
+	private bool frozen;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool rooted;
 
 	[CompilerGenerated]
-	private bool bool_2;
+	private bool stunned;
 
 	[CompilerGenerated]
 	private readonly BarbarianPowerInfo ibarbarianPowerInfo_0;
@@ -40,24 +40,24 @@ public class PlayerPowerInfo
 	private readonly WizardPowerInfo iwizardPowerInfo_0;
 
 	[CompilerGenerated]
-	private readonly LegendaryPowerInfo LegendaryPowerInfo_0;
+	private readonly LegendaryPowerInfo usedLegendaryPowers;
 
 	[CompilerGenerated]
 	private readonly LegendaryGemInfo ilegendaryGemInfo_0;
 
 	public Skill HealthPotionSkill => iplayerSkill_0 ?? (iplayerSkill_0 = new Skill(class310_0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
 
-	public IEnumerable<Skill> CurrentSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0?.CurrentSnoPower != null);
+	public IEnumerable<Skill> CurrentSkills => class310_0.SkillSlots.Where((Skill skill) => skill?.CurrentSnoPower != null);
 
-	public IEnumerable<Skill> UsedSkills => class310_0.class386_0.Where((Skill class386_0) => class386_0 != null);
+	public IEnumerable<Skill> UsedSkills => class310_0.SkillSlots.Where((Skill skill) => skill != null);
 
-	public IEnumerable<SnoPower> UsedPassives => class310_0.list_2;
+	public IEnumerable<SnoPower> UsedPassives => class310_0.UsedPassives;
 
-	public Skill[] SkillSlots => class310_0.class386_0;
+	public Skill[] SkillSlots => class310_0.SkillSlots;
 
 	public SnoPower[] PassiveSlots => class310_0.SnoPower_0;
 
-	public bool SkillOverrideActive => class310_0.bool_13;
+	public bool SkillOverrideActive => class310_0.SkillOverrideActive;
 
 	public IEnumerable<Buff> AllBuffs => class310_0.powerSno2buff.Values;
 
@@ -66,12 +66,12 @@ public class PlayerPowerInfo
 		[CompilerGenerated]
 		get
 		{
-			return bool_0;
+			return frozen;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_0 = value;
+			frozen = value;
 		}
 	}
 
@@ -80,12 +80,12 @@ public class PlayerPowerInfo
 		[CompilerGenerated]
 		get
 		{
-			return bool_1;
+			return rooted;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_1 = value;
+			rooted = value;
 		}
 	}
 
@@ -94,12 +94,12 @@ public class PlayerPowerInfo
 		[CompilerGenerated]
 		get
 		{
-			return bool_2;
+			return stunned;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_2 = value;
+			stunned = value;
 		}
 	}
 
@@ -183,7 +183,7 @@ public class PlayerPowerInfo
 		[CompilerGenerated]
 		get
 		{
-			return LegendaryPowerInfo_0;
+			return usedLegendaryPowers;
 		}
 	}
 
@@ -196,18 +196,18 @@ public class PlayerPowerInfo
 		}
 	}
 
-	public PlayerPowerInfo(Player class310_1)
+	public PlayerPowerInfo(Player player)
 	{
-		class310_0 = class310_1;
-		ibarbarianPowerInfo_0 = new BarbarianPowerInfo(class310_1);
-		icrusaderPowerInfo_0 = new CrusaderPowerInfo(class310_1);
-		idemonHunterPowerInfo_0 = new DemonHunterPowerInfo(class310_1);
-		imonkPowerInfo_0 = new MonkPowerInfo(class310_1);
-		inecromancerPowerInfo_0 = new NecromancerPowerInfo(class310_1);
-		iwitchDoctorPowerInfo_0 = new WitchDoctorPowerInfo(class310_1);
-		iwizardPowerInfo_0 = new WizardPowerInfo(class310_1);
-		LegendaryPowerInfo_0 = new LegendaryPowerInfo(class310_1);
-		ilegendaryGemInfo_0 = new LegendaryGemInfo(class310_1);
+		class310_0 = player;
+		ibarbarianPowerInfo_0 = new BarbarianPowerInfo(player);
+		icrusaderPowerInfo_0 = new CrusaderPowerInfo(player);
+		idemonHunterPowerInfo_0 = new DemonHunterPowerInfo(player);
+		imonkPowerInfo_0 = new MonkPowerInfo(player);
+		inecromancerPowerInfo_0 = new NecromancerPowerInfo(player);
+		iwitchDoctorPowerInfo_0 = new WitchDoctorPowerInfo(player);
+		iwizardPowerInfo_0 = new WizardPowerInfo(player);
+		usedLegendaryPowers = new LegendaryPowerInfo(player);
+		ilegendaryGemInfo_0 = new LegendaryGemInfo(player);
 	}
 
 	public Skill GetUsedSkill(SnoPower snoPower)
@@ -220,15 +220,15 @@ public class PlayerPowerInfo
 		{
 			return HealthPotionSkill;
 		}
-		Skill[] class386_ = class310_0.class386_0;
+		Skill[] class386_ = class310_0.SkillSlots;
 		int num = 0;
-		Skill @class;
+		Skill skill;
 		while (true)
 		{
 			if (num < class386_.Length)
 			{
-				@class = class386_[num];
-				if (@class != null && @class.CurrentSnoPower == snoPower)
+				skill = class386_[num];
+				if (skill != null && skill.CurrentSnoPower == snoPower)
 				{
 					break;
 				}
@@ -237,7 +237,7 @@ public class PlayerPowerInfo
 			}
 			return null;
 		}
-		return @class;
+		return skill;
 	}
 
 	public Buff GetBuff(string code)

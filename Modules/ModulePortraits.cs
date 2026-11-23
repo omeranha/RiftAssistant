@@ -16,12 +16,12 @@ internal class ModulePortraits : Module
 				num++;
 			}
 			int num2 = ((!item.IsMe) ? num : 0);
-			UiElement @class = CoreCollector.UiElements.class341_145[num2];
-			Texture itexture_ = TextureManager.GetTextureById(@class.TextureSno);
-			UiElement class2 = CoreCollector.UiElements.class341_146[num2];
-			Texture itexture_2 = TextureManager.GetTextureById(class2.TextureSno);
-			UiElement class3 = CoreCollector.UiElements.class341_147[num2];
-			Texture itexture_3 = TextureManager.GetTextureById(class3.TextureSno);
+			UiElement uiElement = CoreCollector.UiElements.class341_145[num2];
+			Texture itexture_ = TextureManager.GetTextureById(uiElement.TextureSno);
+			UiElement uiElement2 = CoreCollector.UiElements.class341_146[num2];
+			Texture itexture_2 = TextureManager.GetTextureById(uiElement2.TextureSno);
+			UiElement uiElement3 = CoreCollector.UiElements.class341_147[num2];
+			Texture itexture_3 = TextureManager.GetTextureById(uiElement3.TextureSno);
 			float num3 = (float)GameWindowManager.Window.Size.Height * 0.0085f;
 			method_2(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, itexture_2, itexture_3);
 		}

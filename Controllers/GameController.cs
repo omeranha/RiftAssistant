@@ -4,7 +4,7 @@ using SNO;
 
 public class GameController
 {
-	public GameDifficulty GameDifficulty => CoreCollector.gameDifficulty_0;
+	public GameDifficulty GameDifficulty => CoreCollector.Unknown;
 
 	public long CurrentRealTimeMilliseconds => CoreCollector.CurrentRealTimeTicks / 10000;
 
@@ -44,9 +44,9 @@ public class GameController
 
 	public Player Me => CoreCollector.LocalPlayer;
 
-	public Quest[] Quests => [.. CoreCollector.Class376_0.class112_1.Values];
+	public Quest[] Quests => [.. CoreCollector.Class376_0.Quests.Values];
 
-	public Quest[] Bounties => [.. CoreCollector.Class376_0.class112_2.Values];
+	public Quest[] Bounties => [.. CoreCollector.Class376_0.Bounties.Values];
 
 	public Item[] Items => [.. CoreCollector.ItemCollector.Items.Values];
 
@@ -56,23 +56,23 @@ public class GameController
 
 	public int NumberOfPlayersInGame => CoreCollector.PlayerCollector.NumberOfPlayersInGame;
 
-	public bool IsEliteOnScreen => CoreCollector.ActorCollector.Boolean_2;
+	public bool IsEliteOnScreen => CoreCollector.ActorCollector.IsEliteOnScreen;
 
-	public bool IsEliteNearby => CoreCollector.ActorCollector.Boolean_1;
+	public bool IsEliteNearby => CoreCollector.ActorCollector.IsEliteNearby;
 
-	public bool IsGoblinOnScreen => CoreCollector.ActorCollector.Boolean_3;
+	public bool IsGoblinOnScreen => CoreCollector.ActorCollector.IsGoblinOnScreen;
 
 	public MonsterPriority MaxPriorityOnScreen => CoreCollector.ActorCollector.MonsterPriority_0;
 
 	public Actor[] Actors => CoreCollector.actorsSnapshot;
 
-	public Monster[] Monsters => [.. CoreCollector.ActorCollector.list_0];
+	public Monster[] Monsters => [.. CoreCollector.ActorCollector.Monsters];
 
-	public Monster[] AliveMonsters => [.. CoreCollector.ActorCollector.list_1];
+	public Monster[] AliveMonsters => [.. CoreCollector.ActorCollector.AliveMonsters];
 
-	public MonsterPack[] MonsterPacks => [.. CoreCollector.ActorCollector.list_2];
+	public MonsterPack[] MonsterPacks => [.. CoreCollector.ActorCollector.MonsterPacks];
 
-	public Shrine[] Shrines => [.. CoreCollector.ActorCollector.List_0];
+	public Shrine[] Shrines => [.. CoreCollector.ActorCollector.Shrines];
 
 	public Portal[] Portals => CoreCollector.portalsSnapshot;
 
@@ -80,21 +80,21 @@ public class GameController
 
 	public IClickableActor[] ResplendentChests => CoreCollector.ResplendentChestsSnapshot;
 
-	public IClickableActor[] Doors => [.. CoreCollector.ActorCollector.List_2];
+	public IClickableActor[] Doors => [.. CoreCollector.ActorCollector.Doors];
 
-	public SceneHint[] SceneHints => [.. CoreCollector.SceneCollector.list_0];
+	public SceneHint[] SceneHints => [.. CoreCollector.SceneCollector.SceneHints];
 
-	public Banner[] Banners => [.. CoreCollector.Class412_0.list_2];
+	public Banner[] Banners => [.. CoreCollector.Class412_0.Banners];
 
-	public Marker[] Markers => [.. CoreCollector.Class412_0.list_0];
+	public Marker[] Markers => [.. CoreCollector.Class412_0.Markers];
 
 	public Waypoint[] ActMapWaypoints => [.. CoreCollector.WaypointManager.MapWaypoints.Values];
 
 	public BountyAct ActMapCurrentAct => CoreCollector.D3Memory.ActMapCurrentAct;
 
-	public int InventorySpaceUsed => CoreCollector.ItemCollector.int_0;
+	public int InventorySpaceUsed => CoreCollector.ItemCollector.InventorySpaceUsed;
 
-	public double ExperiencePerHourToday => CoreCollector.class340_7.GainedExperiencePerHourPlay;
+	public double ExperiencePerHourToday => CoreCollector.CurrentHeroToday.GainedExperiencePerHourPlay;
 
 	public Monster SelectedMonster1 => CoreCollector.ActorCollector.IMonster_0;
 
@@ -102,23 +102,23 @@ public class GameController
 
 	public Actor SelectedActor => CoreCollector.ActorCollector.IActor_0;
 
-	public StatTracker CurrentAccountTotalOnCurrentDifficulty => CoreCollector.class340_8;
+	public StatTracker CurrentAccountTotalOnCurrentDifficulty => CoreCollector.CurrentAccountTotalOnCurrentDifficulty;
 
-	public StatTracker CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.class340_9;
+	public StatTracker CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.CurrentAccountYesterdayOnCurrentDifficulty;
 
-	public StatTracker CurrentAccountTodayOnCurrentDifficulty => CoreCollector.class340_10;
+	public StatTracker CurrentAccountTodayOnCurrentDifficulty => CoreCollector.CurrentAccountTodayOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroTotal => CoreCollector.class340_5;
+	public StatTracker CurrentHeroTotal => CoreCollector.CurrentHeroTotal;
 
-	public StatTracker CurrentHeroYesterday => CoreCollector.class340_6;
+	public StatTracker CurrentHeroYesterday => CoreCollector.CurrentHeroYesterday;
 
-	public StatTracker CurrentHeroToday => CoreCollector.class340_7;
+	public StatTracker CurrentHeroToday => CoreCollector.CurrentHeroToday;
 
-	public StatTracker CurrentHeroTotalOnCurrentDifficulty => CoreCollector.class340_11;
+	public StatTracker CurrentHeroTotalOnCurrentDifficulty => CoreCollector.CurrentHeroTotalOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.class340_12;
+	public StatTracker CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.CurrentHeroYesterdayOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroTodayOnCurrentDifficulty => CoreCollector.class340_13;
+	public StatTracker CurrentHeroTodayOnCurrentDifficulty => CoreCollector.CurrentHeroTodayOnCurrentDifficulty;
 
 	public GameController()
 	{

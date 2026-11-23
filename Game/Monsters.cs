@@ -8,7 +8,7 @@ using SNO;
 public sealed class Monsters
 {
 	[CompilerGenerated]
-	private readonly SnoMonster SnoMonster_0;
+	private readonly SnoMonster snoMonsterObstacle;
 
 	private readonly Dictionary<uint, SnoMonsterAffix> dictionary_0 = new Dictionary<uint, SnoMonsterAffix>(100);
 
@@ -21,7 +21,7 @@ public sealed class Monsters
 		[CompilerGenerated]
 		get
 		{
-			return SnoMonster_0;
+			return snoMonsterObstacle;
 		}
 	}
 
@@ -47,12 +47,12 @@ public sealed class Monsters
 	{
 		byte[] byte_ = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_monster_affixes.bin"));
 		HashSet<uint> hashSet = new HashSet<uint> { 484610u, 484627u, 484628u, 484629u, 484630u, 484631u, 484632u };
-		using (DataReader @class = new DataReader(byte_))
+		using (DataReader dataReader = new DataReader(byte_))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint num = @class.method_8();
-				string code = @class.method_1();
+				uint num = dataReader.method_8();
+				string code = dataReader.method_1();
 				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._monsteraffixnames, code);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._monsteraffixnames, code);
 				if (Enum.IsDefined(typeof(MonsterAffix), num))
@@ -93,6 +93,6 @@ public sealed class Monsters
 			}
 		}
 		SnoActor snoActor_ = new SnoActor((ActorSnoEnum)0u, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-monster-obstacle", "dummyactor-monster-obstacle", "dummyactor-monster-obstacle");
-		SnoMonster_0 = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
+		snoMonsterObstacle = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
 	}
 }

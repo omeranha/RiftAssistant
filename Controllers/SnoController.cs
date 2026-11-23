@@ -6,7 +6,7 @@ using SNO;
 public class SnoController
 {
 	[CompilerGenerated]
-	private readonly SnoPowerList SnoPowerList_0 = new SnoPowerList();
+	private readonly SnoPowerList snoPowers = new SnoPowerList();
 
 	[CompilerGenerated]
 	private readonly SnoQuestList isnoQuestList_0 = new SnoQuestList();
@@ -21,7 +21,7 @@ public class SnoController
 		[CompilerGenerated]
 		get
 		{
-			return SnoPowerList_0;
+			return snoPowers;
 		}
 	}
 

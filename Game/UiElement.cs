@@ -19,24 +19,24 @@ public class UiElement
 
 	internal UiElement iuiElement_1;
 
-	public int int_1 = -1;
+	public int Bucket = -1;
 
 	public bool bool_0;
 
-	public RectangleF rectangleF_0;
+	public RectangleF rectangle;
 
-	public float float_0;
+	public float PaddingX;
 
-	public float float_1;
+	public float PaddingY;
 
 	[CompilerGenerated]
 	private UiElementData class75_0 = new UiElementData();
 
 	[CompilerGenerated]
-	private readonly string string_0;
+	private readonly string path;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool visible;
 
 	[CompilerGenerated]
 	private UiElement iuiElement_2;
@@ -56,7 +56,7 @@ public class UiElement
 	{
 		[CompilerGenerated]
 		get {
-			return string_0;
+			return path;
 		}
 	}
 
@@ -64,15 +64,15 @@ public class UiElement
 	{
 		[CompilerGenerated]
 		get {
-			return bool_1;
+			return visible;
 		}
 		[CompilerGenerated]
 		set {
-			bool_1 = value;
+			visible = value;
 		}
 	}
 
-	public RectangleF Rectangle => rectangleF_0;
+	public RectangleF Rectangle => rectangle;
 
 	public int AnimState
 	{
@@ -114,12 +114,12 @@ public class UiElement
 		}
 	}
 
-	public UiElement(string string_1, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
+	public UiElement(string path2, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
 	{
-		string_0 = string_1;
-		ulong_0 = smethod_0(string_1.ToLower(CultureInfo.InvariantCulture));
+		path = path2;
+		ulong_0 = smethod_0(path2.ToLower(CultureInfo.InvariantCulture));
 		int_0 = (int)ulong_0;
-		rectangleF_0 = default(RectangleF);
+		rectangle = default(RectangleF);
 		iuiElement_0 = iuiElement_3;
 		iuiElement_1 = iuiElement_4;
 	}
@@ -168,12 +168,12 @@ public class UiElement
 		return null;
 	}
 
-	public string method_2(Encoding encoding_0 = null)
+	public string method_2(Encoding encoding = null)
 	{
 		if (Class75_0.UnknownPtr2 != 0L) {
 			long num = GameWindowManager.Read<long>(Class75_0.UnknownPtr2 + 2656);
 			if (num != 0L) {
-				return GameWindowManager.ReadString(num, 256, encoding_0 ?? Encoding.ASCII, true);
+				return GameWindowManager.ReadString(num, 256, encoding ?? Encoding.ASCII, true);
 			}
 		}
 		return null;
@@ -212,13 +212,13 @@ public class UiElement
 		return GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * index + 520);
 	}
 
-	internal UiElementData? method_6(string string_1, string string_2, out string string_3, Encoding encoding_0 = null)
+	internal UiElementData? method_6(string string_1, string string_2, out string string_3, Encoding encoding = null)
 	{
 		int num = 0;
 		string text;
 		while (true) {
 			if (num < Class75_0.ChildCount) {
-				text = GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * num + 8, 512, encoding_0 ?? Encoding.ASCII, true);
+				text = GameWindowManager.ReadString(Class75_0.ChildEntries + 536 * num + 8, 512, encoding ?? Encoding.ASCII, true);
 				if ((string_1 == null || text.StartsWith(string_1, StringComparison.InvariantCultureIgnoreCase)) && (string_2 == null || text.EndsWith(string_2, StringComparison.InvariantCultureIgnoreCase))) {
 					break;
 				}
@@ -229,9 +229,9 @@ public class UiElement
 			return null;
 		}
 		long num2 = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * num + 520);
-		var @class = GameWindowManager.Read<UiElementData>(num2);
+		var uiElementData = GameWindowManager.Read<UiElementData>(num2);
 		string_3 = text;
-		return @class;
+		return uiElementData;
 	}
 
 	public List<(string Text, int Top, int Bottom)> GetChildTextMetrics(Encoding encoding = null)
@@ -256,8 +256,8 @@ public class UiElement
 
 	public bool CoordinateInsideRectangle(int x, int y)
 	{
-		if ((float)x >= Rectangle.Left && (float)y >= Rectangle.Top && (float)x < Rectangle.Left + rectangleF_0.Width) {
-			return (float)y < Rectangle.Top + rectangleF_0.Height;
+		if ((float)x >= Rectangle.Left && (float)y >= Rectangle.Top && (float)x < Rectangle.Left + rectangle.Width) {
+			return (float)y < Rectangle.Top + rectangle.Height;
 		}
 		return false;
 	}

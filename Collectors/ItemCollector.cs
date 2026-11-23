@@ -22,7 +22,7 @@ internal class ItemCollector
 		return KeepDecisionFilter?.Invoke(item, decision) ?? decision;
 	}
 
-	public readonly List<Item> list_0 = new List<Item>();
+	public readonly List<Item> ItemsInStash = new List<Item>();
 
 	public readonly List<Item> list_1 = new List<Item>();
 
@@ -30,11 +30,11 @@ internal class ItemCollector
 
 	public Item Item_0;
 
-	public double double_0;
+	public double CentralXyDistanceToMe;
 
-	public double double_1;
+	public double ZDistanceToMeAbsolute;
 
-	public readonly List<Item> list_2 = new List<Item>();
+	public readonly List<Item> ItemsInInventory = new List<Item>();
 
 	public Item Item_1;
 
@@ -42,7 +42,7 @@ internal class ItemCollector
 
 	public readonly List<Item> list_3 = new List<Item>();
 
-	public int int_0;
+	public int InventorySpaceUsed;
 
 	public bool bool_0;
 
@@ -76,15 +76,15 @@ internal class ItemCollector
 		Items.Clear();
 		Item_1 = null;
 		Item_2 = null;
-		list_0.Clear();
+		ItemsInStash.Clear();
 		list_1.Clear();
 		iworldCoordinate_0 = null;
 		Item_0 = null;
-		double_0 = 0.0;
-		double_1 = 0.0;
-		list_2.Clear();
+		CentralXyDistanceToMe = 0.0;
+		ZDistanceToMeAbsolute = 0.0;
+		ItemsInInventory.Clear();
 		list_3.Clear();
-		int_0 = 0;
+		InventorySpaceUsed = 0;
 		Array.Clear(int_1, 0, int_1.Length);
 	}
 
@@ -195,29 +195,29 @@ internal class ItemCollector
 				item.InventoryX = struct7_.ItemSlotX;
 				item.InventoryY = struct7_.ItemSlotY;
 			}
-			uint uInt32_ = item.UInt32_0;
-			item.UInt32_0 = struct7_.SocketHostAcdId;
-			if (flag2 && uInt32_ != item.UInt32_0) {
+			uint uInt32_ = item.SocketHostAcdId;
+			item.SocketHostAcdId = struct7_.SocketHostAcdId;
+			if (flag2 && uInt32_ != item.SocketHostAcdId) {
 				Items.TryGetValue(uInt32_, out var item2);
 				if (item2 != null && !list_5.Contains(item2)) {
 					list_5.Add(item2 as Item);
 				}
-				Items.TryGetValue(item.UInt32_0, out var item3);
+				Items.TryGetValue(item.SocketHostAcdId, out var item3);
 				if (item3 != null && !list_5.Contains(item3)) {
 					list_5.Add(item3 as Item);
 				}
 			}
 			Items[acdId] = item;
 			if (itemLocation == ItemLocation.Inventory) {
-				int_0 += item.SnoItem.ItemWidth * item.SnoItem.ItemHeight;
+				InventorySpaceUsed += item.SnoItem.ItemWidth * item.SnoItem.ItemHeight;
 			}
 			if (snoItem.Kind == ItemKind.loot || snoItem.Kind == ItemKind.uberstuff || snoItem.Kind == ItemKind.gem || snoItem.Kind == ItemKind.craft || snoItem.Kind == ItemKind.healthglobe || snoItem.Kind == ItemKind.powerglobe || snoItem.Kind == ItemKind.rift_orb || snoItem.Kind == ItemKind.potion || snoItem.Kind == ItemKind.book) {
 				switch (itemLocation) {
 					case ItemLocation.Inventory:
-						list_2.Add(item);
+						ItemsInInventory.Add(item);
 						break;
 					case ItemLocation.Stash: {
-							list_0.Add(item);
+							ItemsInStash.Add(item);
 							int num = item.InventoryY / 10;
 							if (num < int_1.Length) {
 								int_1[num] += item.SnoItem.ItemWidth * item.SnoItem.ItemHeight;
@@ -249,8 +249,8 @@ internal class ItemCollector
 						OnItemPicked?.Invoke(this, new ItemLocationChanged {
 							Item = item
 						});
-					} catch (Exception exception_2) {
-						Logger.LogException(exception_2.Message);
+					} catch (Exception exception) {
+						Logger.LogException(exception.Message);
 					}
 					continue;
 				}
@@ -260,14 +260,14 @@ internal class ItemCollector
 						From = itemLocation2,
 						To = itemLocation
 					});
-				} catch (Exception exception_3) {
-					Logger.LogException(exception_3.Message);
+				} catch (Exception exception2) {
+					Logger.LogException(exception2.Message);
 				}
 				continue;
 			}
 			class112_1[annId] = item;
-			if (itemLocation == ItemLocation.Inventory && CoreCollector.IsInTown && CoreCollector.UiElements.class341_47.Visible) {
-				string text = CoreCollector.UiElements.class341_48.ReadText();
+			if (itemLocation == ItemLocation.Inventory && CoreCollector.IsInTown && CoreCollector.UiElements.ShopDialogMainPagePanel.Visible) {
+				string text = CoreCollector.UiElements.GoldText.ReadText();
 				if (text != null && text.Contains("{icon:x1_shard}")) {
 					int num2 = item.method_47("picked_up_time", -1);
 					if (num2 > -1 && num2 > CoreCollector.D3Memory.GameTick - 240) {
@@ -277,8 +277,8 @@ internal class ItemCollector
 								item = item,
 								gambled = true
 							});
-						} catch (Exception exception_4) {
-							Logger.LogException(exception_4.Message);
+						} catch (Exception exception3) {
+							Logger.LogException(exception3.Message);
 						}
 					}
 				}
@@ -289,16 +289,16 @@ internal class ItemCollector
 						item = item,
 						gambled = false
 					});
-				} catch (Exception exception_5) {
-					Logger.LogException(exception_5.Message);
+				} catch (Exception exception4) {
+					Logger.LogException(exception4.Message);
 				}
 			}
 		}
-		foreach (Item item5 in list_1.Where((Item Item_0) => Item_0.Quality == ItemQuality.Legendary && Item_0.SnoItem.Sno != 2603730171u)) {
-			if (iworldCoordinate_0 == null || item5.CentralXyDistanceToMe < double_0) {
+		foreach (Item item5 in list_1.Where((Item item4) => item4.Quality == ItemQuality.Legendary && item4.SnoItem.Sno != 2603730171u)) {
+			if (iworldCoordinate_0 == null || item5.CentralXyDistanceToMe < CentralXyDistanceToMe) {
 				iworldCoordinate_0 = item5.FloorCoordinate;
-				double_0 = item5.CentralXyDistanceToMe;
-				double_1 = item5.ZDistanceToMeAbsolute;
+				CentralXyDistanceToMe = item5.CentralXyDistanceToMe;
+				ZDistanceToMeAbsolute = item5.ZDistanceToMeAbsolute;
 				Item_0 = item5;
 			}
 		}
@@ -312,80 +312,80 @@ internal class ItemCollector
 		}
 		foreach (Item item10 in Items.Values) {
 			if (item10.Location != ItemLocation.Floor && item10.Location != ItemLocation.Merchant && item10.Location != ItemLocation.MerchantAvaibleItemsForPurchase && item10.Location != ItemLocation.MerchantBuyback) {
-				Item obj = item10 as Item;
-				if (obj != null && !obj.bool_12) {
+				Item item4 = item10 as Item;
+				if (item4 != null && !item4.bool_12) {
 					(item10 as Item)?.method_45();
 				}
 			}
 		}
 	}
 
-	private bool method_2(r_ACD struct7_0, Item class309_0, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation_0)
+	private bool method_2(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation)
 	{
-		if (!method_3(class309_0, isnoItem_0)) {
+		if (!method_3(item, isnoItem_0)) {
 			Logger.LogException("can't read item stats");
 			return false;
 		}
-		method_4(class309_0, bool_1, itemLocation_0);
-		if ((int)class309_0.Quality >= 6 && (int)class309_0.Quality <= 8) {
-			if (struct7_0.rare_item_stringlist_id != uint.MaxValue && (class309_0.RareName == null || bool_1)) {
+		method_4(item, bool_1, itemLocation);
+		if ((int)item.Quality >= 6 && (int)item.Quality <= 8) {
+			if (acd.rare_item_stringlist_id != uint.MaxValue && (item.RareName == null || bool_1)) {
 				string text = null;
 				string text2 = null;
-				if (struct7_0.rare_item_prefix_or_suffix == 0) {
-					text = SnoData.Strings.GetStringByIndex(struct7_0.rare_item_stringlist_id, struct7_0.rare_item_stringlist_index);
+				if (acd.rare_item_prefix_or_suffix == 0) {
+					text = SnoData.Strings.GetStringByIndex(acd.rare_item_stringlist_id, acd.rare_item_stringlist_index);
 					if (isnoItem_0.SuffixStringSno != 0) {
-						text2 = SnoData.Strings.GetStringByIndex(isnoItem_0.SuffixStringSno, struct7_0.rare_item_otherlist_index);
+						text2 = SnoData.Strings.GetStringByIndex(isnoItem_0.SuffixStringSno, acd.rare_item_otherlist_index);
 					}
 				} else {
-					text2 = SnoData.Strings.GetStringByIndex(struct7_0.rare_item_stringlist_id, struct7_0.rare_item_stringlist_index);
+					text2 = SnoData.Strings.GetStringByIndex(acd.rare_item_stringlist_id, acd.rare_item_stringlist_index);
 					if (isnoItem_0.PrefixStringSno != 0) {
-						text = SnoData.Strings.GetStringByIndex(isnoItem_0.PrefixStringSno, struct7_0.rare_item_otherlist_index);
+						text = SnoData.Strings.GetStringByIndex(isnoItem_0.PrefixStringSno, acd.rare_item_otherlist_index);
 					}
 				}
-				class309_0.RareName = (text + " " + text2).Trim();
+				item.RareName = (text + " " + text2).Trim();
 			}
-		} else if ((int)class309_0.Quality >= 3 && (int)class309_0.Quality <= 5 && class309_0.Affixes != null && (class309_0.RareName == null || bool_1)) {
-			if (class309_0.Affixes.Length == 1) {
-				SnoItemAffix snoItemAffix = class309_0.Affixes[0];
+		} else if ((int)item.Quality >= 3 && (int)item.Quality <= 5 && item.Affixes != null && (item.RareName == null || bool_1)) {
+			if (item.Affixes.Length == 1) {
+				SnoItemAffix snoItemAffix = item.Affixes[0];
 				if (snoItemAffix.BaseAffixId != uint.MaxValue) {
 					snoItemAffix = SnoData.Items.GetSnoItemAffix(snoItemAffix.BaseAffixId);
 				}
 				if (snoItemAffix != null && snoItemAffix.NameLocalized != null) {
-					class309_0.RareName = (snoItemAffix.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (isnoItem_0.NameLocalized + " " + snoItemAffix.NameLocalized) : (snoItemAffix.NameLocalized + " " + isnoItem_0.NameLocalized));
+					item.RareName = (snoItemAffix.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (isnoItem_0.NameLocalized + " " + snoItemAffix.NameLocalized) : (snoItemAffix.NameLocalized + " " + isnoItem_0.NameLocalized));
 				} else {
 					Trace.WriteLine("???");
 				}
 			}
-			if (class309_0.Affixes.Length == 2) {
-				SnoItemAffix snoItemAffix2 = class309_0.Affixes[0];
+			if (item.Affixes.Length == 2) {
+				SnoItemAffix snoItemAffix2 = item.Affixes[0];
 				if (snoItemAffix2.BaseAffixId != uint.MaxValue) {
 					snoItemAffix2 = SnoData.Items.GetSnoItemAffix(snoItemAffix2.BaseAffixId);
 				}
-				SnoItemAffix snoItemAffix3 = class309_0.Affixes[1];
+				SnoItemAffix snoItemAffix3 = item.Affixes[1];
 				if (snoItemAffix3.BaseAffixId != uint.MaxValue) {
 					snoItemAffix3 = SnoData.Items.GetSnoItemAffix(snoItemAffix3.BaseAffixId);
 				}
 				if (snoItemAffix2 != null && snoItemAffix3 != null && snoItemAffix2.NameLocalized != null && snoItemAffix3.NameLocalized != null) {
-					class309_0.RareName = (snoItemAffix3.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (snoItemAffix2.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix3.NameLocalized) : (snoItemAffix3.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix2.NameLocalized));
+					item.RareName = (snoItemAffix3.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (snoItemAffix2.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix3.NameLocalized) : (snoItemAffix3.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix2.NameLocalized));
 				} else {
 					Trace.WriteLine("???");
 				}
 			}
-			if (class309_0.Affixes.Length == 0 || class309_0.Affixes.Length > 2) {
+			if (item.Affixes.Length == 0 || item.Affixes.Length > 2) {
 				Trace.WriteLine("???");
 			}
 		}
 		return true;
 	}
 
-	private bool method_3(Item class309_0, SnoItem isnoItem_0)
+	private bool method_3(Item item2, SnoItem isnoItem_0)
 	{
-		if (class309_0 == null) {
+		if (item2 == null) {
 			return false;
 		}
-		class309_0.class112_0.Clear();
-		class309_0.method_46(new ItemStat("name", isnoItem_0.NameLocalized));
-		class309_0.method_46(new ItemStat("ilvl", isnoItem_0.Level, isnoItem_0.Level));
+		item2.StatList2.Clear();
+		item2.method_46(new ItemStat("name", isnoItem_0.NameLocalized));
+		item2.method_46(new ItemStat("ilvl", isnoItem_0.Level, isnoItem_0.Level));
 		double num = -1.0;
 		double num2 = -1.0;
 		double num3 = -1.0;
@@ -396,7 +396,7 @@ internal class ItemCollector
 		double num7 = -1.0;
 		double num8 = -1.0;
 		double num9 = -1.0;
-		class309_0.Quantity = -1L;
+		item2.Quantity = -1L;
 		list_6.Clear();
 		if (!CoreCollector.ACDCollector.method_12(list_6)) {
 			return false;
@@ -418,15 +418,15 @@ internal class ItemCollector
 				flag = true;
 				double val2 = ((acdAttribute.ValueType == AttributeValueType._int) ? ((double)r_AttributeEntry2.int_0) : ((double)r_AttributeEntry2.float_0));
 				double num11 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val2));
-				class309_0.method_46(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.int_0));
+				item2.method_46(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.int_0));
 				if (acdAttribute.ValueType == AttributeValueType._int) {
 					int val3 = item.ProcessInt(r_AttributeEntry2.int_0);
 					val2 = Math.Min(int.MaxValue, Math.Max(int.MinValue, val3));
-					class309_0.method_46(new ItemStat(item, val2, val3));
+					item2.method_46(new ItemStat(item, val2, val3));
 				} else {
 					double val4 = item.ProcessDouble(r_AttributeEntry2.float_0);
 					val2 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val4));
-					class309_0.method_46(new ItemStat(item, val2, 0));
+					item2.method_46(new ItemStat(item, val2, 0));
 				}
 				string code = item.Code;
 				switch (code) {
@@ -443,7 +443,7 @@ internal class ItemCollector
 						num = val2;
 						break;
 					case "quantity_lo":
-						class309_0.Quantity = r_AttributeEntry2.int_0;
+						item2.Quantity = r_AttributeEntry2.int_0;
 						break;
 					case "offh_dmg_add":
 						num5 = val2;
@@ -472,35 +472,35 @@ internal class ItemCollector
 			}
 			if (!flag) {
 				if (acdAttribute.ValueType == AttributeValueType._int) {
-					class309_0.method_46(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.int_0, r_AttributeEntry2.int_0));
+					item2.method_46(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.int_0, r_AttributeEntry2.int_0));
 				} else {
 					float num13 = Math.Min(2.1474836E+09f, Math.Max(-2.1474836E+09f, r_AttributeEntry2.float_0));
-					class309_0.method_46(new ItemStat(acdAttribute, uint_0, num13));
+					item2.method_46(new ItemStat(acdAttribute, uint_0, num13));
 				}
 				switch (acdAttribute.Code) {
 					case "EnchantedAffixCount":
-						class309_0.EnchantedAffixCounter = r_AttributeEntry2.int_0;
+						item2.EnchantedAffixCounter = r_AttributeEntry2.int_0;
 						break;
 					case "EnchantedAffixNew":
-						class309_0.EnchantedAffixNew = (uint)r_AttributeEntry2.int_0;
+						item2.EnchantedAffixNew = (uint)r_AttributeEntry2.int_0;
 						break;
 					case "EnchantedAffixOld":
-						class309_0.EnchantedAffixOriginal = (uint)r_AttributeEntry2.int_0;
+						item2.EnchantedAffixOriginal = (uint)r_AttributeEntry2.int_0;
 						break;
 				}
 			}
 		}
 		if (num > 0.0 && num2 > 0.0 && num3 > -1.0) {
 			double num14 = Math.Round((num + num2) * num3 / 2.0, MidpointRounding.AwayFromZero);
-			class309_0.method_46(new ItemStat("dps", num14));
+			item2.method_46(new ItemStat("dps", num14));
 		}
 		if (num4 > -1.0 || num5 > -1.0) {
 			double num15 = Math.Round(((num4 == -1.0) ? 0.0 : num4) + ((num5 == -1.0) ? 0.0 : num5) / 2.0, MidpointRounding.AwayFromZero);
-			class309_0.method_46(new ItemStat("dps", num15));
+			item2.method_46(new ItemStat("dps", num15));
 		}
 		if (num6 > 0.0) {
-			class309_0.method_46(new ItemStat("main_stat", num6));
-			class309_0.method_46(new ItemStat("main_stat_vita", num6 + Math.Max(0.0, val)));
+			item2.method_46(new ItemStat("main_stat", num6));
+			item2.method_46(new ItemStat("main_stat_vita", num6 + Math.Max(0.0, val)));
 		}
 		if (num7 > 0.0 || num9 > 0.0) {
 			double num16 = 0.0;
@@ -510,7 +510,7 @@ internal class ItemCollector
 			if (num9 > 0.0) {
 				num16 += (double)Convert.ToInt32(Math.Round(num9 / 10.0, MidpointRounding.AwayFromZero));
 			}
-			class309_0.method_46(new ItemStat("allres_armor", num16));
+			item2.method_46(new ItemStat("allres_armor", num16));
 		}
 		if (num7 > 0.0 || num9 > 0.0 || num8 > 0.0) {
 			double num17 = 0.0;
@@ -523,25 +523,25 @@ internal class ItemCollector
 			if (num8 > 0.0) {
 				num17 += num8;
 			}
-			class309_0.method_46(new ItemStat("allres_anyres", num17));
+			item2.method_46(new ItemStat("allres_anyres", num17));
 		}
-		class309_0.Seed = class309_0.method_47("seed");
-		class309_0.Quality = (ItemQuality)class309_0.method_47("quality");
+		item2.Seed = item2.method_47("seed");
+		item2.Quality = (ItemQuality)item2.method_47("quality");
 		return true;
 	}
 
-	private void method_4(Item class309_0, bool bool_1, ItemLocation itemLocation_0)
+	private void method_4(Item item, bool bool_1, ItemLocation itemLocation)
 	{
-		if (class309_0.Unidentified && !bool_1) {
+		if (item.Unidentified && !bool_1) {
 			return;
 		}
 		List<SnoItemAffix> list = null;
-		for (long num = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].affix_list_ptr; num != 0L; num = GameWindowManager.Read<long>(num + IntPtr.Size * 2)) {
-			uint num2 = GameWindowManager.Read<uint>(num);
-			if (class309_0.EnchantedAffixOriginal != 0 && class309_0.EnchantedAffixOriginal == num2) {
-				num2 = class309_0.EnchantedAffixNew;
+		for (long affixListPtr = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].affix_list_ptr; affixListPtr != 0L; affixListPtr = GameWindowManager.Read<long>(affixListPtr + IntPtr.Size * 2)) {
+			uint enchantedAffixNew = GameWindowManager.Read<uint>(affixListPtr);
+			if (item.EnchantedAffixOriginal != 0 && item.EnchantedAffixOriginal == enchantedAffixNew) {
+				enchantedAffixNew = item.EnchantedAffixNew;
 			}
-			SnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(num2);
+			SnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(enchantedAffixNew);
 			if (snoItemAffix != null) {
 				(list ?? (list = new List<SnoItemAffix>())).Add(snoItemAffix);
 				for (int i = 0; i < snoItemAffix.Mods.Length; i++) {
@@ -549,34 +549,34 @@ internal class ItemCollector
 				}
 			}
 		}
-		if (class309_0.SnoItem.Mods != null) {
-			SnoItemMod[] mods = class309_0.SnoItem.Mods;
+		if (item.SnoItem.Mods != null) {
+			SnoItemMod[] mods = item.SnoItem.Mods;
 			foreach (SnoItemMod isnoItemMod_1 in mods) {
 			}
 		}
-		class309_0.Affixes = list?.ToArray();
+		item.Affixes = list?.ToArray();
 	}
 
-	public void method_6(Item Item_3)
+	public void method_6(Item item2)
 	{
-		if (!(Item_3 is Item item)) {
+		if (!(item2 is Item item)) {
 			return;
 		}
-		CoreCollector.ACDCollector.SetIndexFromAcdId(Item_3.AcdId);
+		CoreCollector.ACDCollector.SetIndexFromAcdId(item2.AcdId);
 		int num = CoreCollector.ACDCollector.method_9(SnoData.Attributes.Map.Attribute__JewelRank, 1048575u, 0);
 		if (num != 0) {
-			ItemStat itemStat = item.class112_0.GetValueOrDefault("jewel_rank");
+			ItemStat itemStat = item.StatList2.GetValueOrDefault("jewel_rank");
 			if (itemStat == null || itemStat.IntegerValue != num) {
-				item.class112_0["jewel_rank"] = new ItemStat("jewel_rank", num, num);
+				item.StatList2["jewel_rank"] = new ItemStat("jewel_rank", num, num);
 			}
 		}
 	}
 
-	public Item method_7(SnoItem isnoItem_0, ItemQuality itemQuality_0, ItemLocation itemLocation_0, long long_0)
+	public Item method_7(SnoItem isnoItem_0, ItemQuality itemQuality, ItemLocation itemLocation, long long_0)
 	{
 		return new Item(0u, 0u, isnoItem_0) {
-			Quality = itemQuality_0,
-			Location = itemLocation_0,
+			Quality = itemQuality,
+			Location = itemLocation,
 			Quantity = long_0
 		};
 	}

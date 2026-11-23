@@ -156,9 +156,9 @@ internal class DAF
 		Logger.Info("[ERROR] can't find realm.");
 	}
 
-	private bool method_9(long long_10)
+	private bool method_9(long realmAddress)
 	{
-		string text = GameWindowManager.ReadString(long_10 + Offset_Realm_ServerGateway, 128, Encoding.UTF8, true);
+		string text = GameWindowManager.ReadString(realmAddress + Offset_Realm_ServerGateway, 128, Encoding.UTF8, true);
 		if (!string.IsNullOrEmpty(text)) {
 			return text.Contains("actual.battle.net");
 		}
@@ -181,8 +181,8 @@ internal class DAF
 				AcdManagerAddress = num;
 			}
 			AcdManager_ACDs_Offset = int_;
-			int int_2 = localHeapCache.GetSizeOfBlock(AcdManagerAddress);
-			blockValidateFuncs["AcdManagerAddress"] = () => localHeapCache.VerifyBlock(AcdManagerAddress, int_2);
+			int sizeOfBlock = localHeapCache.GetSizeOfBlock(AcdManagerAddress);
+			blockValidateFuncs["AcdManagerAddress"] = () => localHeapCache.VerifyBlock(AcdManagerAddress, sizeOfBlock);
 			return;
 		}
 		AcdManagerAddress = 0L;
@@ -206,8 +206,8 @@ internal class DAF
 			if (num != PlayerDataManagerAddress) {
 				PlayerDataManagerAddress = num;
 			}
-			int int_2 = localHeapCache.GetSizeOfBlock(PlayerDataManagerAddress);
-			blockValidateFuncs["PlayerDataManagerAddress"] = () => localHeapCache.ReadUInt32(PlayerDataManagerAddress, 40L) == CoreCollector.Magic_600DF00D && localHeapCache.VerifyBlock(PlayerDataManagerAddress, int_2);
+			int sizeOfBlock = localHeapCache.GetSizeOfBlock(PlayerDataManagerAddress);
+			blockValidateFuncs["PlayerDataManagerAddress"] = () => localHeapCache.ReadUInt32(PlayerDataManagerAddress, 40L) == CoreCollector.Magic_600DF00D && localHeapCache.VerifyBlock(PlayerDataManagerAddress, sizeOfBlock);
 			return;
 		}
 		PlayerDataManagerAddress = 0L;
@@ -221,16 +221,16 @@ internal class DAF
 			if (num != PlayerAddress) {
 				PlayerAddress = num;
 			}
-			int int_2 = localHeapCache.GetSizeOfBlock(PlayerAddress);
-			blockValidateFuncs["PlayerAddress"] = () => method_13(PlayerAddress) && localHeapCache.VerifyBlock(PlayerAddress, int_2);
+			int sizeOfBlock = localHeapCache.GetSizeOfBlock(PlayerAddress);
+			blockValidateFuncs["PlayerAddress"] = () => method_13(PlayerAddress) && localHeapCache.VerifyBlock(PlayerAddress, sizeOfBlock);
 			return;
 		}
 		PlayerAddress = 0L;
 	}
 
-	private bool method_13(long long_10)
+	private bool method_13(long playerAddress)
 	{
-		long long_11 = long_10 + D3Memory.Offset_Player_FloatingNumbers + D3Memory.FloatingNumAllocatorOffset2;
+		long long_11 = playerAddress + D3Memory.Offset_Player_FloatingNumbers + D3Memory.FloatingNumAllocatorOffset2;
 		return localHeapCache.ReadUInt32(long_11, 40L) == CoreCollector.Magic_600DF00D;
 	}
 
@@ -258,8 +258,8 @@ internal class DAF
 			if (num != ObjectManagerAddress) {
 				ObjectManagerAddress = num;
 			}
-			int int_3 = localHeapCache.GetSizeOfBlock(ObjectManagerAddress);
-			blockValidateFuncs["ObjectManagerAddress"] = () => localHeapCache.VerifyBlock(ObjectManagerAddress, int_3);
+			int sizeOfBlock3 = localHeapCache.GetSizeOfBlock(ObjectManagerAddress);
+			blockValidateFuncs["ObjectManagerAddress"] = () => localHeapCache.VerifyBlock(ObjectManagerAddress, sizeOfBlock3);
 			return true;
 		}
 		ObjectManagerAddress = 0L;
@@ -288,25 +288,25 @@ internal class DAF
 		GameStateAddress = 0L;
 	}
 
-	internal bool method_17(long long_10, long long_11)
+	internal bool method_17(long gameStateAddress, long long_11)
 	{
-		long num = localHeapCache.ReadInt64(long_10, D3Memory.Offset_GameState_Validation1);
-		long num2 = localHeapCache.ReadInt64(long_10, D3Memory.Offset_GameState_Validation2);
+		long num = localHeapCache.ReadInt64(gameStateAddress, D3Memory.Offset_GameState_Validation1);
+		long num2 = localHeapCache.ReadInt64(gameStateAddress, D3Memory.Offset_GameState_Validation2);
 		if (num <= long_11 || num2 <= long_11) {
 			return false;
 		}
 		if (num != num2 - 40) {
 			return false;
 		}
-		if (localHeapCache.ReadInt32(long_10, D3Memory.Offset_GameState_Validation3) != 0)
+		if (localHeapCache.ReadInt32(gameStateAddress, D3Memory.Offset_GameState_Validation3) != 0)
 		{
 			return false;
 		}
-		int num3 = GameWindowManager.Read<int>(long_10 + D3Memory.Offset_GameState_LoadingScreenEnabled);
+		int num3 = GameWindowManager.Read<int>(gameStateAddress + D3Memory.Offset_GameState_LoadingScreenEnabled);
 		if (num3 != 0 && num3 != 1) {
 			return false;
 		}
-		int num4 = GameWindowManager.Read<int>(long_10 + D3Memory.Offset_GameState_IsGamePaused);
+		int num4 = GameWindowManager.Read<int>(gameStateAddress + D3Memory.Offset_GameState_IsGamePaused);
 		if (num4 != 0) {
 			return num4 == 1;
 		}
@@ -337,8 +337,8 @@ internal class DAF
 			if (num2 != BattleNetClientAddress) {
 				BattleNetClientAddress = num2;
 			}
-			int int_0 = localHeapCache.GetSizeOfBlock(BattleNetClientAddress);
-			blockValidateFuncs["BattleNetClientAddress"] = () => localHeapCache.VerifyBlock(BattleNetClientAddress, int_0);
+			int sizeOfBlock3 = localHeapCache.GetSizeOfBlock(BattleNetClientAddress);
+			blockValidateFuncs["BattleNetClientAddress"] = () => localHeapCache.VerifyBlock(BattleNetClientAddress, sizeOfBlock3);
 			return;
 		}
 		BattleNetClientAddress = 0L;
@@ -348,28 +348,28 @@ internal class DAF
 	{
 		int int_ = AlignedSize(2432, 32);
 		IEnumerable<long> mainBlocksWithSize = localHeapCache.GetMainBlocksWithSize(int_);
-		AreaContainer class66_0 = new();
+		AreaContainer areaContainer = new();
 		long num = mainBlocksWithSize.Where(delegate (long long_0) {
-			class66_0 = GameWindowManager.Read<AreaContainer>(long_0);
-			if (localHeapCache.GetSizeOfBlock(class66_0.PrimaryAreaPtr) == 0) {
+			areaContainer = GameWindowManager.Read<AreaContainer>(long_0);
+			if (localHeapCache.GetSizeOfBlock(areaContainer.PrimaryAreaPtr) == 0) {
 				return false;
 			}
-			if (localHeapCache.GetSizeOfBlock(class66_0.SecondaryAreaPtr) == 0) {
+			if (localHeapCache.GetSizeOfBlock(areaContainer.SecondaryAreaPtr) == 0) {
 				return false;
 			}
-			long num2 = GameWindowManager.Read<long>(class66_0.PrimaryAreaPtr + 8);
+			long num2 = GameWindowManager.Read<long>(areaContainer.PrimaryAreaPtr + 8);
 			if (GameWindowManager.Read<uint>(num2 + 40) != CoreCollector.Magic_600DF00D) {
 				return false;
 			}
-			long num3 = GameWindowManager.Read<long>(class66_0.SecondaryAreaPtr + 8);
+			long num3 = GameWindowManager.Read<long>(areaContainer.SecondaryAreaPtr + 8);
 			return GameWindowManager.Read<uint>(num3 + 40) == CoreCollector.Magic_600DF00D;
 		}).FirstOrDefault();
 		if (num != 0L) {
 			if (num != LevelAreaAddress) {
 				LevelAreaAddress = num;
 			}
-			int int_2 = localHeapCache.GetSizeOfBlock(LevelAreaAddress);
-			blockValidateFuncs["LevelAreaAddress"] = () => localHeapCache.VerifyBlock(LevelAreaAddress, int_2);
+			int sizeOfBlock = localHeapCache.GetSizeOfBlock(LevelAreaAddress);
+			blockValidateFuncs["LevelAreaAddress"] = () => localHeapCache.VerifyBlock(LevelAreaAddress, sizeOfBlock);
 		} else {
 			LevelAreaAddress = 0L;
 		}
@@ -398,8 +398,8 @@ internal class DAF
 			if (num != TrickleManagerAddress) {
 				TrickleManagerAddress = num;
 			}
-			int int_3 = localHeapCache.GetSizeOfBlock(TrickleManagerAddress);
-			blockValidateFuncs["TrickleManagerAddress"] = () => localHeapCache.VerifyBlock(TrickleManagerAddress, int_3);
+			int sizeOfBlock2 = localHeapCache.GetSizeOfBlock(TrickleManagerAddress);
+			blockValidateFuncs["TrickleManagerAddress"] = () => localHeapCache.VerifyBlock(TrickleManagerAddress, sizeOfBlock2);
 			return;
 		}
 		TrickleManagerAddress = 0L;

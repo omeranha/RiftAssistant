@@ -5,13 +5,13 @@ using SNO;
 
 public sealed class Quests
 {
-	private readonly Dictionary<uint, SnoQuest> dictionary_0 = new Dictionary<uint, SnoQuest>(500);
+	private readonly Dictionary<uint, SnoQuest> all = new Dictionary<uint, SnoQuest>(500);
 
-	public IEnumerable<SnoQuest> All => dictionary_0.Values;
+	public IEnumerable<SnoQuest> All => all.Values;
 
 	public SnoQuest GetQuest(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		all.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -94,7 +94,7 @@ public sealed class Quests
 					snoQuest.method_0(new SnoQuestStep(snoQuest, uint_, stringByCode4, stringByCodeEnglish4, stringByCode5, stringByCodeEnglish5, stringByCode6, stringByCodeEnglish6));
 				}
 			}
-			dictionary_0.Add(num2, snoQuest);
+			all.Add(num2, snoQuest);
 		}
 	}
 }

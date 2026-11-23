@@ -13,9 +13,9 @@ public class InventoryController
 		}
 	}
 
-	public int MaxStashPageCount => CoreCollector.UiElements.class341_8.Length;
+	public int MaxStashPageCount => CoreCollector.UiElements.StashPages.Length;
 
-	public int MaxStashTabCountPerPage => CoreCollector.UiElements.class341_7.Length;
+	public int MaxStashTabCountPerPage => CoreCollector.UiElements.StashTabs.Length;
 
 	public int SelectedStashPageIndex => CoreCollector.UiElements.GetSelectedStashPage();
 
@@ -23,27 +23,27 @@ public class InventoryController
 
 	public int HoveredStashTabIndex => CoreCollector.UiElements.GetInactiveStashTab();
 
-	public Item[] ItemsInStash => [.. CoreCollector.ItemCollector.list_0];
+	public Item[] ItemsInStash => [.. CoreCollector.ItemCollector.ItemsInStash];
 
-	public Item[] ItemsInInventory => [.. CoreCollector.ItemCollector.list_2];
+	public Item[] ItemsInInventory => [.. CoreCollector.ItemCollector.ItemsInInventory];
 
-	public UiElement StashMainUiElement => CoreCollector.UiElements.class341_9;
+	public UiElement StashMainUiElement => CoreCollector.UiElements.StashMainUiElement;
 
-	public UiElement InventoryMainUiElement => CoreCollector.UiElements.class341_11;
+	public UiElement InventoryMainUiElement => CoreCollector.UiElements.InventoryMainUiElement;
 
-	public UiElement InventoryItemsUiElement => CoreCollector.UiElements.class341_13;
+	public UiElement InventoryItemsUiElement => CoreCollector.UiElements.InventoryItemsUiElement;
 
-	public UiElement FollowerMainUiElement => CoreCollector.UiElements.class341_15;
+	public UiElement FollowerMainUiElement => CoreCollector.UiElements.FollowerMainUiElement;
 
 	public Item HoveredItem
 	{
 		get
 		{
-			if (!CoreCollector.UiElements.class341_68.Visible)
+			if (!CoreCollector.UiElements.Item2Stack.Visible)
 			{
 				return null;
 			}
-			return CoreCollector.ItemCollector.Items.TryGetValue(CoreCollector.UiElements.class341_162.AcdId, out var value) ? value : null;
+			return CoreCollector.ItemCollector.Items.TryGetValue(CoreCollector.UiElements.Tooltip2.AcdId, out var value) ? value : null;
 		}
 	}
 
@@ -54,45 +54,45 @@ public class InventoryController
 
 	public UiElement GetStashPageUiElement(int index)
 	{
-		return CoreCollector.UiElements.class341_8[index];
+		return CoreCollector.UiElements.StashPages[index];
 	}
 
 	public UiElement GetStashTabUiElement(int index)
 	{
-		return CoreCollector.UiElements.class341_7[index];
+		return CoreCollector.UiElements.StashTabs[index];
 	}
 
 	public UiElement GetEquippedItemUiElement(ItemLocation location)
 	{
 		return location switch
 		{
-			ItemLocation.Head => CoreCollector.UiElements.class341_19, 
-			ItemLocation.Torso => CoreCollector.UiElements.class341_24, 
-			ItemLocation.RightHand => CoreCollector.UiElements.class341_31, 
-			ItemLocation.LeftHand => CoreCollector.UiElements.class341_30, 
-			ItemLocation.Hands => CoreCollector.UiElements.class341_22, 
-			ItemLocation.Waist => CoreCollector.UiElements.class341_25, 
-			ItemLocation.Feet => CoreCollector.UiElements.class341_27, 
-			ItemLocation.Shoulders => CoreCollector.UiElements.class341_20, 
-			ItemLocation.Legs => CoreCollector.UiElements.class341_26, 
-			ItemLocation.Bracers => CoreCollector.UiElements.class341_23, 
-			ItemLocation.LeftRing => CoreCollector.UiElements.class341_29, 
-			ItemLocation.RightRing => CoreCollector.UiElements.class341_28, 
-			ItemLocation.Neck => CoreCollector.UiElements.class341_21, 
-			ItemLocation.PetRightHand => CoreCollector.UiElements.class341_44, 
-			ItemLocation.PetLeftHand => CoreCollector.UiElements.class341_43, 
-			ItemLocation.PetSpecial => CoreCollector.UiElements.class341_45, 
-			ItemLocation.PetNeck => CoreCollector.UiElements.class341_34, 
-			ItemLocation.PetRightRing => CoreCollector.UiElements.class341_41, 
-			ItemLocation.PetLeftRing => CoreCollector.UiElements.class341_42, 
-			ItemLocation.PetHead => CoreCollector.UiElements.class341_32, 
-			ItemLocation.PetTorso => CoreCollector.UiElements.class341_37, 
-			ItemLocation.PetHands => CoreCollector.UiElements.class341_35, 
-			ItemLocation.PetWaist => CoreCollector.UiElements.class341_38, 
-			ItemLocation.PetFeet => CoreCollector.UiElements.class341_40, 
-			ItemLocation.PetShoulders => CoreCollector.UiElements.class341_33, 
-			ItemLocation.PetLegs => CoreCollector.UiElements.class341_39, 
-			ItemLocation.PetBracers => CoreCollector.UiElements.class341_36, 
+			ItemLocation.Head => CoreCollector.UiElements.InventoryButtonHead, 
+			ItemLocation.Torso => CoreCollector.UiElements.InventoryButtonTorso, 
+			ItemLocation.RightHand => CoreCollector.UiElements.InventoryButtonArmRight, 
+			ItemLocation.LeftHand => CoreCollector.UiElements.InventoryButtonArmLeft, 
+			ItemLocation.Hands => CoreCollector.UiElements.InventoryButtonHands, 
+			ItemLocation.Waist => CoreCollector.UiElements.InventoryButtonWaist, 
+			ItemLocation.Feet => CoreCollector.UiElements.InventoryButtonFeet, 
+			ItemLocation.Shoulders => CoreCollector.UiElements.InventoryButtonShoulders, 
+			ItemLocation.Legs => CoreCollector.UiElements.InventoryButtonLegs, 
+			ItemLocation.Bracers => CoreCollector.UiElements.InventoryButtonBracers, 
+			ItemLocation.LeftRing => CoreCollector.UiElements.InventoryButtonFingerRight, 
+			ItemLocation.RightRing => CoreCollector.UiElements.InventoryButtonFingerLeft, 
+			ItemLocation.Neck => CoreCollector.UiElements.InventoryButtonNeck, 
+			ItemLocation.PetRightHand => CoreCollector.UiElements.HirelingSlotOffhand, 
+			ItemLocation.PetLeftHand => CoreCollector.UiElements.HirelingSlotMainhand, 
+			ItemLocation.PetSpecial => CoreCollector.UiElements.HirelingSlotSpecial, 
+			ItemLocation.PetNeck => CoreCollector.UiElements.HirelingSlotNeck, 
+			ItemLocation.PetRightRing => CoreCollector.UiElements.HirelingSlotRightFinger, 
+			ItemLocation.PetLeftRing => CoreCollector.UiElements.HirelingSlotLeftFinger, 
+			ItemLocation.PetHead => CoreCollector.UiElements.HirelingSlotHead, 
+			ItemLocation.PetTorso => CoreCollector.UiElements.HirelingSlotTorso, 
+			ItemLocation.PetHands => CoreCollector.UiElements.HirelingSlotHands, 
+			ItemLocation.PetWaist => CoreCollector.UiElements.HirelingSlotWaist, 
+			ItemLocation.PetFeet => CoreCollector.UiElements.HirelingSlotFeet, 
+			ItemLocation.PetShoulders => CoreCollector.UiElements.HirelingSlotShoulders, 
+			ItemLocation.PetLegs => CoreCollector.UiElements.HirelingSlotLegs, 
+			ItemLocation.PetBracers => CoreCollector.UiElements.HirelingSlotBracers, 
 			_ => null, 
 		};
 	}
@@ -128,11 +128,11 @@ public class InventoryController
 
 	public UiElement GetHoveredItemMainUiElement()
 	{
-		return CoreCollector.UiElements.class341_68;
+		return CoreCollector.UiElements.Item2Stack;
 	}
 
 	public UiElement GetHoveredItemTopUiElement()
 	{
-		return CoreCollector.UiElements.class341_69;
+		return CoreCollector.UiElements.TopWrapperStack;
 	}
 }

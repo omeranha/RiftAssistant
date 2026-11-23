@@ -9,16 +9,16 @@ public class Actor
 	internal List<r_AttributeEntry> list_0 = new List<r_AttributeEntry>();
 
 	[CompilerGenerated]
-	private int int_0;
+	private int createdAtInGameTick;
 
 	[CompilerGenerated]
-	private GizmoType gizmoType_0 = GizmoType.Invalid;
+	private GizmoType gizmoType = GizmoType.Invalid;
 
 	[CompilerGenerated]
-	private uint uint_0;
+	private uint worldId;
 
 	[CompilerGenerated]
-	private uint uint_1;
+	private uint worldSno;
 
 	[CompilerGenerated]
 	private SnoWorld isnoWorld_0;
@@ -27,13 +27,13 @@ public class Actor
 	private Scene iscene_0;
 
 	[CompilerGenerated]
-	private uint uint_2;
+	private uint acdId;
 
 	[CompilerGenerated]
-	private uint uint_3;
+	private uint annId;
 
 	[CompilerGenerated]
-	private SnoActor SnoActor_0;
+	private SnoActor snoActor;
 
 	[CompilerGenerated]
 	private readonly WorldCoordinate iworldCoordinate_0;
@@ -42,68 +42,68 @@ public class Actor
 	private readonly WorldCoordinate iworldCoordinate_1;
 
 	[CompilerGenerated]
-	private float float_0;
+	private float radiusScaled;
 
 	[CompilerGenerated]
-	private float float_1;
+	private float radiusBottom;
 
 	private readonly ScreenCoordinate ScreenCoordinate_0;
 
 	private bool bool_0;
 
 	[CompilerGenerated]
-	private bool bool_1;
+	private bool isOnScreen;
 
 	[CompilerGenerated]
-	private double double_0;
+	private double centralXyDistanceToMe;
 
 	[CompilerGenerated]
-	private double double_1;
+	private double normalizedXyDistanceToMe;
 
 	[CompilerGenerated]
-	private double double_2;
+	private double zDistanceToMeAbsolute;
 
 	[CompilerGenerated]
-	private float float_2;
+	private float hitpoints;
 
 	[CompilerGenerated]
-	private bool bool_2;
+	private bool isSelected;
 
 	[CompilerGenerated]
-	private uint uint_4;
+	private uint summonerId;
 
 	[CompilerGenerated]
-	private uint uint_5;
+	private uint summonerAcdDynamicId;
 
 	[CompilerGenerated]
 	private bool bool_3;
 
 	[CompilerGenerated]
-	private bool bool_4;
+	private bool untargetable;
 
 	[CompilerGenerated]
-	private bool bool_5;
+	private bool isClickable;
 
 	[CompilerGenerated]
-	private bool bool_6;
+	private bool isDisabled;
 
 	[CompilerGenerated]
-	private bool bool_7;
+	private bool isOperated;
 
 	[CompilerGenerated]
-	private uint uint_6;
+	private uint amount;
 
 	public int CreatedAtInGameTick
 	{
 		[CompilerGenerated]
 		get
 		{
-			return int_0;
+			return createdAtInGameTick;
 		}
 		[CompilerGenerated]
 		set
 		{
-			int_0 = value;
+			createdAtInGameTick = value;
 		}
 	}
 
@@ -112,12 +112,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return gizmoType_0;
+			return gizmoType;
 		}
 		[CompilerGenerated]
 		set
 		{
-			gizmoType_0 = value;
+			gizmoType = value;
 		}
 	}
 
@@ -126,12 +126,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_0;
+			return worldId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_0 = value;
+			worldId = value;
 		}
 	}
 
@@ -140,12 +140,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_1;
+			return worldSno;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_1 = value;
+			worldSno = value;
 		}
 	}
 
@@ -182,12 +182,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_2;
+			return acdId;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			uint_2 = value;
+			acdId = value;
 		}
 	}
 
@@ -196,12 +196,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_3;
+			return annId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_3 = value;
+			annId = value;
 		}
 	}
 
@@ -210,12 +210,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return SnoActor_0;
+			return snoActor;
 		}
 		[CompilerGenerated]
 		set
 		{
-			SnoActor_0 = value;
+			snoActor = value;
 		}
 	}
 
@@ -242,12 +242,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return float_0;
+			return radiusScaled;
 		}
 		[CompilerGenerated]
 		set
 		{
-			float_0 = value;
+			radiusScaled = value;
 		}
 	}
 
@@ -256,12 +256,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return float_1;
+			return radiusBottom;
 		}
 		[CompilerGenerated]
 		set
 		{
-			float_1 = value;
+			radiusBottom = value;
 		}
 	}
 
@@ -270,12 +270,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_1;
+			return isOnScreen;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			bool_1 = value;
+			isOnScreen = value;
 		}
 	}
 
@@ -284,12 +284,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return double_0;
+			return centralXyDistanceToMe;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			double_0 = value;
+			centralXyDistanceToMe = value;
 		}
 	}
 
@@ -298,12 +298,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return double_1;
+			return normalizedXyDistanceToMe;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			double_1 = value;
+			normalizedXyDistanceToMe = value;
 		}
 	}
 
@@ -312,12 +312,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return double_2;
+			return zDistanceToMeAbsolute;
 		}
 		[CompilerGenerated]
 		private set
 		{
-			double_2 = value;
+			zDistanceToMeAbsolute = value;
 		}
 	}
 
@@ -326,12 +326,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return float_2;
+			return hitpoints;
 		}
 		[CompilerGenerated]
 		set
 		{
-			float_2 = value;
+			hitpoints = value;
 		}
 	}
 
@@ -340,12 +340,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_2;
+			return isSelected;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_2 = value;
+			isSelected = value;
 		}
 	}
 
@@ -354,12 +354,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_4;
+			return summonerId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_4 = value;
+			summonerId = value;
 		}
 	}
 
@@ -368,12 +368,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_5;
+			return summonerAcdDynamicId;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_5 = value;
+			summonerAcdDynamicId = value;
 		}
 	}
 
@@ -396,12 +396,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_4;
+			return untargetable;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_4 = value;
+			untargetable = value;
 		}
 	}
 
@@ -410,12 +410,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_5;
+			return isClickable;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_5 = value;
+			isClickable = value;
 		}
 	}
 
@@ -424,12 +424,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_6;
+			return isDisabled;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_6 = value;
+			isDisabled = value;
 		}
 	}
 
@@ -438,12 +438,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return bool_7;
+			return isOperated;
 		}
 		[CompilerGenerated]
 		set
 		{
-			bool_7 = value;
+			isOperated = value;
 		}
 	}
 
@@ -452,12 +452,12 @@ public class Actor
 		[CompilerGenerated]
 		get
 		{
-			return uint_6;
+			return amount;
 		}
 		[CompilerGenerated]
 		set
 		{
-			uint_6 = value;
+			amount = value;
 		}
 	}
 
@@ -485,21 +485,21 @@ public class Actor
 		}
 	}
 
-	public Actor(uint uint_7, uint uint_8, SnoActor SnoActor_1)
+	public Actor(uint acdid, uint annId2, SnoActor snoActor2)
 	{
-		AcdId = uint_7;
-		AnnId = uint_8;
-		SnoActor = SnoActor_1;
+		AcdId = acdid;
+		AnnId = annId2;
+		SnoActor = snoActor2;
 		iworldCoordinate_0 = Window.CreateWorldCoordinate(0f, 0f, 0f);
 		iworldCoordinate_1 = Window.CreateWorldCoordinate(0f, 0f, 0f);
 		ScreenCoordinate_0 = Window.CreateScreenCoordinate(0f, 0f);
 	}
 
-	public void method_24(float float_3, float float_4, float float_5)
+	public void method_24(float positionX, float positionY, float positionZ)
 	{
-		CollisionCoordinate.Set(float_3, float_4, float_5);
-		FloorCoordinate.Set(float_3, float_4, float_5);
-		if (float_3 == 0f && float_4 == 0f && float_5 == 0f)
+		CollisionCoordinate.Set(positionX, positionY, positionZ);
+		FloorCoordinate.Set(positionX, positionY, positionZ);
+		if (positionX == 0f && positionY == 0f && positionZ == 0f)
 		{
 			IsOnScreen = false;
 			CentralXyDistanceToMe = 0.0;

@@ -6,11 +6,11 @@ using SNO;
 public sealed class Attributes
 {
 	[CompilerGenerated]
-	private readonly AttributeMap attributeMap_0;
+	private readonly AttributeMap map;
 
 	public readonly List<AcdAttribute> ByIndex = new List<AcdAttribute>();
 
-	private readonly Dictionary<string, AcdAttribute> dictionary_0 = new Dictionary<string, AcdAttribute>();
+	private readonly Dictionary<string, AcdAttribute> all = new Dictionary<string, AcdAttribute>();
 
 	private readonly Dictionary<string, AttributeProcessor> dictionary_1 = new Dictionary<string, AttributeProcessor>();
 
@@ -19,11 +19,11 @@ public sealed class Attributes
 		[CompilerGenerated]
 		get
 		{
-			return attributeMap_0;
+			return map;
 		}
 	}
 
-	public IEnumerable<AcdAttribute> All => dictionary_0.Values;
+	public IEnumerable<AcdAttribute> All => all.Values;
 
 	public AcdAttribute GetAttributeByIndex(int index)
 	{
@@ -32,7 +32,7 @@ public sealed class Attributes
 
 	public AcdAttribute GetAttributeByCode(string code)
 	{
-		dictionary_0.TryGetValue(code, out var value);
+		all.TryGetValue(code, out var value);
 		return value;
 	}
 
@@ -44,20 +44,20 @@ public sealed class Attributes
 
 	internal Attributes()
 	{
-		using (DataReader @class = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attributes.bin"))))
+		using (DataReader dataReader = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attributes.bin"))))
 		{
-			while (@class.Stream.Position < @class.Stream.Length)
+			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
-				uint uint_ = @class.method_8();
-				string string_ = @class.method_1();
-				AttributeValueType attributeValueType_ = (AttributeValueType)@class.method_6();
+				uint uint_ = dataReader.method_8();
+				string string_ = dataReader.method_1();
+				AttributeValueType attributeValueType_ = (AttributeValueType)dataReader.method_6();
 				Dictionary<uint, string> dictionary = new Dictionary<uint, string>();
-				@class.method_11();
-				int num = @class.method_11();
+				dataReader.method_11();
+				int num = dataReader.method_11();
 				for (int i = 0; i < num; i++)
 				{
-					int key = @class.method_11();
-					string code = @class.method_1();
+					int key = dataReader.method_11();
+					string code = dataReader.method_1();
 					string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._attributedescriptions, code);
 					stringByCode = stringByCode.Replace("{value", "{VALUE").Replace("{Value", "{VALUE").Replace("*100}|1|", "*100|1|")
 						.Replace("|+|}]", "|+|]")
@@ -74,21 +74,21 @@ public sealed class Attributes
 				}
 				AcdAttribute acdAttribute = new AcdAttribute(string_, uint_, attributeValueType_, dictionary);
 				ByIndex.Add(acdAttribute);
-				if (!dictionary_0.ContainsKey(acdAttribute.Code))
+				if (!all.ContainsKey(acdAttribute.Code))
 				{
-					dictionary_0.Add(acdAttribute.Code, acdAttribute);
+					all.Add(acdAttribute.Code, acdAttribute);
 				}
 			}
 		}
-		using (DataReader class2 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attribute_order_pri.bin"))))
+		using (DataReader dataReader2 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attribute_order_pri.bin"))))
 		{
 			int num2 = 0;
-			while (class2.Stream.Position < class2.Stream.Length)
+			while (dataReader2.Stream.Position < dataReader2.Stream.Length)
 			{
-				int index = class2.method_7();
-				int mod = class2.method_7();
-				int num3 = class2.method_7();
-				int mod2 = class2.method_7();
+				int index = dataReader2.method_7();
+				int mod = dataReader2.method_7();
+				int num3 = dataReader2.method_7();
+				int mod2 = dataReader2.method_7();
 				num2++;
 				AcdAttribute acdAttribute2 = ByIndex[index];
 				int modLowestOrderIndex = acdAttribute2.GetModLowestOrderIndex(mod);
@@ -110,15 +110,15 @@ public sealed class Attributes
 				}
 			}
 		}
-		using (DataReader class3 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attribute_order_sec.bin"))))
+		using (DataReader dataReader3 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "actor_attribute_order_sec.bin"))))
 		{
 			int num2 = 0;
-			while (class3.Stream.Position < class3.Stream.Length)
+			while (dataReader3.Stream.Position < dataReader3.Stream.Length)
 			{
-				int index2 = class3.method_7();
-				int mod3 = class3.method_7();
-				int num4 = class3.method_7();
-				int mod4 = class3.method_7();
+				int index2 = dataReader3.method_7();
+				int mod3 = dataReader3.method_7();
+				int num4 = dataReader3.method_7();
+				int mod4 = dataReader3.method_7();
 				num2++;
 				AcdAttribute acdAttribute3 = ByIndex[index2];
 				int modLowestOrderIndex2 = acdAttribute3.GetModLowestOrderIndex(mod3);
@@ -140,7 +140,7 @@ public sealed class Attributes
 				}
 			}
 		}
-		attributeMap_0 = new AttributeMap(this);
+		map = new AttributeMap(this);
 		dictionary_1.Add("groups", new AttributeProcessor(0, "groups", null, 0u, 0.0, 0));
 		dictionary_1.Add("name", new AttributeProcessor(1, "name", null, 0u, 0.0, 0));
 		dictionary_1.Add("name_int", new AttributeProcessor(2, "name_int", null, 0u, 0.0, 0));
@@ -249,12 +249,12 @@ public sealed class Attributes
 		method_0(103, "bound_to_acdid", "Item_Bound_To_ACD", uint.MaxValue, null, 0);
 	}
 
-	private void method_0(byte byte_0, string string_0, string string_1, uint uint_0, double? nullable_0, int int_0)
+	private void method_0(byte byte_0, string string_0, string string_1, uint maxValue, double? nullable_0, int int_0)
 	{
 		AcdAttribute attributeByCode = GetAttributeByCode(string_1);
 		if (attributeByCode != null)
 		{
-			AttributeProcessor attributeProcessor = new AttributeProcessor(byte_0, string_0, attributeByCode, uint_0, nullable_0, int_0);
+			AttributeProcessor attributeProcessor = new AttributeProcessor(byte_0, string_0, attributeByCode, maxValue, nullable_0, int_0);
 			dictionary_1.Add(attributeProcessor.Code, attributeProcessor);
 			attributeByCode.AddProcessor(attributeProcessor);
 		}

@@ -44,14 +44,14 @@ internal class LocalHeapCache
 		smallblocksnode_data = null;
 	}
 
-	public void Init(long long_2)
+	public void Init(long ptrMemoryManager)
 	{
 		// Reset arrays instead of clearing dictionaries
 		blockEntriesCount = 0;
 		mainBlocksCount = 0;
 		smallBlocksBySizeCount = 0;
 		
-		long address = GameWindowManager.Read<long>(long_2, true);
+		long address = GameWindowManager.Read<long>(ptrMemoryManager, true);
 		memoryManager = GameWindowManager.Read<r_MemoryManager>(address);
 		if (memoryManager.IsInitialized != 1)
 		{
@@ -64,18 +64,18 @@ internal class LocalHeapCache
 			throw new Exception("validation failed: local heap");
 		}
 		
-		long num = localHeap.FirstNodeAddress;
+		long firstNodeAddress = localHeap.FirstNodeAddress;
 		int num2 = 0;
 		int num3;
 		
-		for (; num <= localHeap.LastNodeAddress; num += 32 + num3)
+		for (; firstNodeAddress <= localHeap.LastNodeAddress; firstNodeAddress += 32 + num3)
 		{
-			uint uint_ = GameWindowManager.Read<uint>(num + 24);
+			uint uint_ = GameWindowManager.Read<uint>(firstNodeAddress + 24);
 			num3 = (int)(uint_ >> 1);
 			
 			if ((uint_ & 1) == 1)
 			{
-				long num4 = num + 32;
+				long num4 = firstNodeAddress + 32;
 				
 				if (num2 == 0)
 				{
@@ -220,17 +220,17 @@ internal class LocalHeapCache
 		return 0;
 	}
 
-	public int ReadInt32(long long_2, long long_3)
+	public int ReadInt32(long address, long offsetGameStateValidation3)
 	{
-		if (smallblocksnode_data != null && long_2 >= smallblocksnode_address && long_2 <= smallblocksnode_address + smallblocksnode_size)
+		if (smallblocksnode_data != null && address >= smallblocksnode_address && address <= smallblocksnode_address + smallblocksnode_size)
 		{
-			long num = long_2 - smallblocksnode_address + long_3;
+			long num = address - smallblocksnode_address + offsetGameStateValidation3;
 			if (num % 8 == 0L)
 			{
 				return (int)smallblocksnode_data[num / 8];
 			}
 		}
-		return GameWindowManager.Read<int>(long_2 + long_3);
+		return GameWindowManager.Read<int>(address + offsetGameStateValidation3);
 	}
 
 	public uint ReadUInt32(long long_2, long long_3)
@@ -288,10 +288,10 @@ internal class LocalHeapCache
 		return true;
 	}
 
-	public bool VerifyBlock(long long_2, int int_1)
+	public bool VerifyBlock(long long_2, int blockSize)
 	{
 		uint num = GameWindowManager.Read<uint>(long_2 - 8);
-		if (int_1 == (int)(num >> 1))
+		if (blockSize == (int)(num >> 1))
 		{
 			return (num & 1) == 1;
 		}

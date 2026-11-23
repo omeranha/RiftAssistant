@@ -32,25 +32,25 @@ internal static class CoreCollector
 	private static readonly MarkerCollector class412_0;
 
 	[CompilerGenerated]
-	private static readonly HeroCollector class420_0;
+	private static readonly HeroCollector heroCollector;
 
 	[CompilerGenerated]
-	private static readonly ItemCollector class414_0;
+	private static readonly ItemCollector itemCollector;
 
 	[CompilerGenerated]
-	private static readonly SceneCollector class374_0;
+	private static readonly SceneCollector sceneCollector;
 
 	[CompilerGenerated]
-	private static readonly ACDCollector class430_0;
+	private static readonly ACDCollector aCDCollector;
 
 	[CompilerGenerated]
-	private static readonly ActorCollector class422_0;
+	private static readonly ActorCollector actorCollector;
 
 	[CompilerGenerated]
-	private static readonly PlayerCollector class408_0;
+	private static readonly PlayerCollector playerCollector;
 
 	[CompilerGenerated]
-	private static DAF class313_0;
+	private static DAF daf;
 
 	public static bool CanReadMemory;
 
@@ -74,7 +74,7 @@ internal static class CoreCollector
 
 	public static string BattleTag;
 
-	public static GameDifficulty gameDifficulty_0;
+	public static GameDifficulty Unknown;
 
 	private static int int_0;
 
@@ -88,9 +88,9 @@ internal static class CoreCollector
 
 	public static List<StatTracker> Trackers = [];
 
-	public static StatTracker class340_0;
+	public static StatTracker Session;
 
-	public static StatTracker class340_1;
+	public static StatTracker SessionAlwaysRunning;
 
 	public static StatTracker class340_2;
 
@@ -98,23 +98,23 @@ internal static class CoreCollector
 
 	public static StatTracker class340_4;
 
-	public static StatTracker class340_5;
+	public static StatTracker CurrentHeroTotal;
 
-	public static StatTracker class340_6;
+	public static StatTracker CurrentHeroYesterday;
 
-	public static StatTracker class340_7;
+	public static StatTracker CurrentHeroToday;
 
-	public static StatTracker class340_8;
+	public static StatTracker CurrentAccountTotalOnCurrentDifficulty;
 
-	public static StatTracker class340_9;
+	public static StatTracker CurrentAccountYesterdayOnCurrentDifficulty;
 
-	public static StatTracker class340_10;
+	public static StatTracker CurrentAccountTodayOnCurrentDifficulty;
 
-	public static StatTracker class340_11;
+	public static StatTracker CurrentHeroTotalOnCurrentDifficulty;
 
-	public static StatTracker class340_12;
+	public static StatTracker CurrentHeroYesterdayOnCurrentDifficulty;
 
-	public static StatTracker class340_13;
+	public static StatTracker CurrentHeroTodayOnCurrentDifficulty;
 
 	public static RunTracker class364_0;
 
@@ -176,7 +176,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class420_0;
+			return heroCollector;
 		}
 	}
 
@@ -184,7 +184,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class414_0;
+			return itemCollector;
 		}
 	}
 
@@ -192,7 +192,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class374_0;
+			return sceneCollector;
 		}
 	}
 
@@ -200,7 +200,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class430_0;
+			return aCDCollector;
 		}
 	}
 
@@ -208,7 +208,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class422_0;
+			return actorCollector;
 		}
 	}
 
@@ -216,7 +216,7 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class408_0;
+			return playerCollector;
 		}
 	}
 
@@ -226,11 +226,11 @@ internal static class CoreCollector
 	{
 		[CompilerGenerated]
 		get {
-			return class313_0;
+			return daf;
 		}
 		[CompilerGenerated]
 		private set {
-			class313_0 = value;
+			daf = value;
 		}
 	}
 
@@ -244,23 +244,23 @@ internal static class CoreCollector
 	static CoreCollector()
 	{
 		Magic_600DF00D = 1611526157u;
-		gameDifficulty_0 = GameDifficulty.unknown;
+		Unknown = GameDifficulty.unknown;
 		uiElements = new UiElements();
 		class335_0 = new FloatingNumberManager();
 		class376_0 = new QuestManager();
 		class412_0 = new MarkerCollector();
-		class420_0 = new HeroCollector();
-		class414_0 = new ItemCollector();
-		class374_0 = new SceneCollector();
-		class430_0 = new ACDCollector();
-		class422_0 = new ActorCollector();
-		class408_0 = new PlayerCollector();
+		heroCollector = new HeroCollector();
+		itemCollector = new ItemCollector();
+		sceneCollector = new SceneCollector();
+		aCDCollector = new ACDCollector();
+		actorCollector = new ActorCollector();
+		playerCollector = new PlayerCollector();
 		GameSettingsManager = new GameSettingsManager();
 		UiElements.SetupUiElements();
 		LocalPlayer = new Player(0);
 		GameWindowManager.Update();
-		class340_0 = new StatTracker("session", false, "SESSION", (string)null);
-		class340_1 = new StatTracker("session_abs", true, "SESSION (abs)", (string)null) {
+		Session = new StatTracker("session", false, "SESSION", (string)null);
+		SessionAlwaysRunning = new StatTracker("session_abs", true, "SESSION (abs)", (string)null) {
 			AlwaysRunning = true
 		};
 		D3Memory = new D3Memory();
@@ -296,15 +296,15 @@ internal static class CoreCollector
 			class340_2 = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total");
 			class340_3 = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			class340_4 = new StatTracker(BattleTag, bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_5 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total");
-			class340_6 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_7 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_8 = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total_" + gameDifficulty_0);
-			class340_9 = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + gameDifficulty_0.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_10 = new StatTracker(BattleTag, bool_1: true, "today", "total_" + gameDifficulty_0.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_11 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total_" + gameDifficulty_0);
-			class340_12 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + gameDifficulty_0.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			class340_13 = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + gameDifficulty_0.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTotal = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total");
+			CurrentHeroYesterday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroToday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentAccountTotalOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total_" + Unknown);
+			CurrentAccountYesterdayOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentAccountTodayOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTotalOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total_" + Unknown);
+			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			SnoArea snoArea = LocalPlayer.SnoArea;
 			if (snoArea == null) {
 				obj = null;
@@ -320,15 +320,15 @@ internal static class CoreCollector
 		class340_2 = null;
 		class340_3 = null;
 		class340_4 = null;
-		class340_5 = null;
-		class340_6 = null;
-		class340_7 = null;
-		class340_8 = null;
-		class340_9 = null;
-		class340_10 = null;
-		class340_11 = null;
-		class340_12 = null;
-		class340_13 = null;
+		CurrentHeroTotal = null;
+		CurrentHeroYesterday = null;
+		CurrentHeroToday = null;
+		CurrentAccountTotalOnCurrentDifficulty = null;
+		CurrentAccountYesterdayOnCurrentDifficulty = null;
+		CurrentAccountTodayOnCurrentDifficulty = null;
+		CurrentHeroTotalOnCurrentDifficulty = null;
+		CurrentHeroYesterdayOnCurrentDifficulty = null;
+		CurrentHeroTodayOnCurrentDifficulty = null;
 		if (class364_0 != null) {
 			smethod_3();
 		}
@@ -342,19 +342,19 @@ internal static class CoreCollector
 			class364_0.UpdateCurrentArea(isnoArea_);
 		}
 		Trackers.Clear();
-		Trackers.Add(class340_0);
-		Trackers.Add(class340_1);
+		Trackers.Add(Session);
+		Trackers.Add(SessionAlwaysRunning);
 		Trackers.Add(class364_0.RunStatTracker);
 		Trackers.Add(class364_0.CurrentArea.AreaStats);
 		Trackers.Add(class340_2);
 		Trackers.Add(class340_4);
-		Trackers.Add(class340_5);
-		Trackers.Add(class340_7);
+		Trackers.Add(CurrentHeroTotal);
+		Trackers.Add(CurrentHeroToday);
 		Trackers.Add(class364_0.CurrentArea.AreaTotalStats);
-		Trackers.Add(class340_8);
-		Trackers.Add(class340_10);
-		Trackers.Add(class340_11);
-		Trackers.Add(class340_13);
+		Trackers.Add(CurrentAccountTotalOnCurrentDifficulty);
+		Trackers.Add(CurrentAccountTodayOnCurrentDifficulty);
+		Trackers.Add(CurrentHeroTotalOnCurrentDifficulty);
+		Trackers.Add(CurrentHeroTodayOnCurrentDifficulty);
 		Trackers.Add(class364_0.CurrentArea.AreaTotalDifficultyStats);
 	}
 
@@ -477,7 +477,7 @@ internal static class CoreCollector
 					ClearGameServerContext("invalid attrib struct");
 					return;
 				}
-				if (IsGameReady && !UiElements.class341_58.Visible && !UiElements.class341_62.Visible && !UiElements.class341_63.Visible) {
+				if (IsGameReady && !UiElements.Clock.Visible && !UiElements.Cutscene.Visible && !UiElements.ScriptedSequence.Visible) {
 					ClearGameServerContext("no difficulty label");
 					return;
 				}
@@ -573,27 +573,27 @@ internal static class CoreCollector
 				IsGameReady = true;
 				try {
 					Class412_0.Collect();
-				} catch (Exception exception_8) {
-					Logger.LogException(exception_8.Message);
+				} catch (Exception exception) {
+					Logger.LogException(exception.Message);
 				}
 				try {
 					Class335_0.Update(LocalPlayer as Player);
-				} catch (Exception exception_9) {
-					Logger.LogException(exception_9.Message);
+				} catch (Exception exception2) {
+					Logger.LogException(exception2.Message);
 				}
 				try {
 					WaypointManager.Update();
-				} catch (Exception exception_10) {
-					Logger.LogException(exception_10.Message);
+				} catch (Exception exception3) {
+					Logger.LogException(exception3.Message);
 				}
 				try {
 					Class376_0.method_0();
-				} catch (Exception exception_11) {
-					Logger.LogException(exception_11.Message);
+				} catch (Exception exception4) {
+					Logger.LogException(exception4.Message);
 				}
 				IsInTown = snoArea?.IsTown ?? false;
-				if (flag3 || gameDifficulty_0 == GameDifficulty.unknown || class364_0 == null) {
-					gameDifficulty_0 = D3Memory.GameDifficulty;
+				if (flag3 || Unknown == GameDifficulty.unknown || class364_0 == null) {
+					Unknown = D3Memory.GameDifficulty;
 				}
 				string gameServerIP = GameServerIP;
 				if (gameServerIP == null || !gameServerIP.Contains(".")) {
@@ -604,23 +604,23 @@ internal static class CoreCollector
 					SceneCollector.method_4();
 					try {
 						SceneCollector.Collect();
-					} catch (Exception exception_12) {
-						Logger.LogException(exception_12.Message);
+					} catch (Exception exception5) {
+						Logger.LogException(exception5.Message);
 					}
 					ActorCollector.stopwatch_0 = null;
-					ActorCollector.Int32_0 = 0;
+					ActorCollector.Act = 0;
 					try {
 						OnNewArea?.Invoke(null, EventArgs.Empty);
-					} catch (Exception exception_13) {
-						Logger.LogException(exception_13.Message);
+					} catch (Exception exception6) {
+						Logger.LogException(exception6.Message);
 					}
 					Player[] iPlayer_ = PlayerCollector.PlayerSlots;
 					for (int i = 0; i < iPlayer_.Length; i++) {
-						Player obj = (Player)iPlayer_[i];
-						obj.long_6 = 0L;
-						obj.ParagonTotalExp = 0L;
-						obj.class362_0.ForceSet(0L);
-						obj.long_0 = 0L;
+						Player player2 = (Player)iPlayer_[i];
+						player2.ParagonTotalExp2 = 0L;
+						player2.ParagonTotalExp = 0L;
+						player2.class362_0.ForceSet(0L);
+						player2.Gold = 0L;
 					}
 					smethod_1(bool_7: false, bool_8: true);
 				}
@@ -654,37 +654,37 @@ internal static class CoreCollector
 			stopwatch_1.Restart();
 			try {
 				ItemCollector.method_1();
-			} catch (Exception exception_14) {
-				Logger.LogException(exception_14.Message);
+			} catch (Exception exception7) {
+				Logger.LogException(exception7.Message);
 			}
 			Player[] iPlayer_2 = PlayerCollector.PlayerSlots;
 			for (int j = 0; j < iPlayer_2.Length; j++) {
-				Player class310_0 = (Player)iPlayer_2[j];
-				if (class310_0.IsDeadSafeCheck && class310_0.CoordinateKnown) {
-					HeadStone @class = ActorCollector.List_1.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == class310_0.AnnId) as HeadStone;
-					if (@class != null) {
-						class310_0.HeadStone = @class;
+				Player player3 = (Player)iPlayer_2[j];
+				if (player3.IsDeadSafeCheck && player3.CoordinateKnown) {
+					HeadStone headStone = ActorCollector.List_1.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == player3.AnnId) as HeadStone;
+					if (headStone != null) {
+						player3.HeadStone = headStone;
 					}
-					if (@class != null) {
+					if (headStone != null) {
 						continue;
 					}
-					if (class310_0.HeadStone == null) {
-						@class = new HeadStone(0u, 0u, SnoData.Actors.GetActor(ActorSnoEnum._playerheadstone), class310_0.AnnId, class310_0);
-						@class.method_24(class310_0.FloorCoordinate.X, class310_0.FloorCoordinate.Y, class310_0.FloorCoordinate.Z);
-						class310_0.HeadStone = @class;
+					if (player3.HeadStone == null) {
+						headStone = new HeadStone(0u, 0u, SnoData.Actors.GetActor(ActorSnoEnum._playerheadstone), player3.AnnId, player3);
+						headStone.method_24(player3.FloorCoordinate.X, player3.FloorCoordinate.Y, player3.FloorCoordinate.Z);
+						player3.HeadStone = headStone;
 						continue;
 					}
-					@class = class310_0.HeadStone as HeadStone;
-					ActorCollector.List_1.Add(@class);
-					if (@class.PlayerActorAnnId == 0) {
-						@class.PlayerActorAnnId = class310_0.AnnId;
-						@class.Player = class310_0;
+					headStone = player3.HeadStone as HeadStone;
+					ActorCollector.List_1.Add(headStone);
+					if (headStone.PlayerActorAnnId == 0) {
+						headStone.PlayerActorAnnId = player3.AnnId;
+						headStone.Player = player3;
 					}
 				} else {
-					class310_0.HeadStone = null;
+					player3.HeadStone = null;
 				}
 			}
-			if (!UiElements.class341_56.Visible && !UiElements.class341_148.Visible && !UiElements.class341_156.Visible && !UiElements.class341_77.Visible) {
+			if (!UiElements.GamemenuBkgrnd.Visible && !UiElements.BattleNetProfileMainLayoutRootOverlayContainer.Visible && !UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible && !UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible) {
 				SnoArea snoArea2 = LocalPlayer.SnoArea;
 				if (snoArea2 != null && snoArea2.Type == AreaType.Normal && LocalPlayer.SnoArea.Sno != 405915) {
 					foreach (StatTracker item in Trackers) {
@@ -702,8 +702,8 @@ internal static class CoreCollector
 			foreach (StatTracker item3 in Trackers) {
 				item3.Stop();
 			}
-		} catch (Exception exception_15) {
-			Logger.LogException(exception_15.Message);
+		} catch (Exception exception8) {
+			Logger.LogException(exception8.Message);
 		}
 	}
 
@@ -726,15 +726,15 @@ internal static class CoreCollector
 				specialArea_0 = SpecialArea.UberFight;
 			}
 		} else {
-			Quest quest = Class376_0.class112_1.GetValueOrDefault(337492u);
+			Quest quest = Class376_0.Quests.GetValueOrDefault(337492u);
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 13 || quest.QuestStepId == 16 || quest.QuestStepId == 34)) {
 				specialArea_0 = SpecialArea.GreaterRift;
 			}
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 1 || quest.QuestStepId == 3 || quest.QuestStepId == 10)) {
 				specialArea_0 = SpecialArea.Rift;
-			} else if (UiElements.class341_172.Visible) {
+			} else if (UiElements.NephalemRiftBarUiElement.Visible) {
 				specialArea_0 = SpecialArea.Rift;
-			} else if (UiElements.class341_173.Visible) {
+			} else if (UiElements.GreaterRiftBarUiElement.Visible) {
 				specialArea_0 = SpecialArea.GreaterRift;
 			} else {
 				specialArea_0 = SpecialArea.None;
@@ -742,13 +742,13 @@ internal static class CoreCollector
 		}
 	}
 
-	public unsafe static PointF smethod_7(byte[] byte_0, int int_1, int int_2, SnoPower SnoPower_0 = null, Player iplayer_1 = null)
+	public unsafe static PointF smethod_7(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player iplayer_1 = null)
 	{
 		if (int_2 == 0) {
 			return new PointF(0f, 0f);
 		}
 		int num = int_1 + int_2;
-		fixed (byte* ptr = byte_0) {
+		fixed (byte* ptr = formulaData) {
 			Stack<PointF> stack = new Stack<PointF>();
 			while (int_1 < num) {
 				byte b = ptr[int_1];
@@ -827,10 +827,10 @@ internal static class CoreCollector
 											ACDCollector.SetIndexFromAcdId(iplayer_1.AcdId);
 											uint uint_ = 1048575u;
 											if (acdAttribute.Code.StartsWith("Rune_")) {
-												uint_ = SnoPower_0.Sno;
+												uint_ = snoPower.Sno;
 											}
 											if (acdAttribute.Code.StartsWith("Buff_Icon_")) {
-												uint_ = SnoPower_0.Sno;
+												uint_ = snoPower.Sno;
 											}
 											num7 = ACDCollector.method_7(acdAttribute, uint_);
 										} else {

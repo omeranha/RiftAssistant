@@ -52,19 +52,19 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 		}
 	}
 
-	static bool IsRunning(Stopwatch stopwatch_1)
+	static bool IsRunning(Stopwatch stopwatch)
 	{
-		return stopwatch_1.IsRunning;
+		return stopwatch.IsRunning;
 	}
 
-	static long GetElapsedMilliseconds(Stopwatch stopwatch_1)
+	static long GetElapsedMilliseconds(Stopwatch stopwatch)
 	{
-		return stopwatch_1.ElapsedMilliseconds;
+		return stopwatch.ElapsedMilliseconds;
 	}
 
-	static void StopTimer(Stopwatch stopwatch_1)
+	static void StopTimer(Stopwatch stopwatch)
 	{
-		stopwatch_1.Stop();
+		stopwatch.Stop();
 	}
 
 	static Stopwatch StartNewTimer()
@@ -72,8 +72,8 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 		return Stopwatch.StartNew();
 	}
 
-	static void RestartTimer(Stopwatch stopwatch_1)
+	static void RestartTimer(Stopwatch stopwatch)
 	{
-		stopwatch_1.Restart();
+		stopwatch.Restart();
 	}
 }
