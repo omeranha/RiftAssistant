@@ -10,15 +10,21 @@ A Diablo III overlay.
 
 ## Project layout
 
-* `App`: entry point, settings, logging and resources
-* `Engine`: game memory reading and the main loop
-* `Collectors`: turn raw memory into game objects each frame
-* `Model`: game objects, UI elements and enums
-* `Sno`: game data tables, `Generated`: large generated lookup tables
-* `Rendering` and `Modules`: the Direct2D overlay and its built-in panels
-* `Controllers`: the API that plugins see (`Controller`)
-* `Plugins` and `PluginHost`: the plugin interfaces and the host that compiles and runs them
+* `Src`: the application source
+  * `App`: entry point, settings, logging and resources
+  * `Engine`: game memory reading and the main loop
+  * `Memory`: raw structures read from the game
+  * `Collectors`: turn raw memory into game objects each frame
+  * `Model`: game objects, UI elements and enums
+  * `Sno`: game data tables, `Generated`: large generated lookup tables
+  * `Rendering` and `Modules`: the Direct2D overlay and its built-in panels
+  * `Input`: raw input, mouse blocking and hotkeys
+  * `Tracking`: session and run statistics
+  * `Controllers`: the API that plugins see (`Controller`)
+  * `Plugins` and `PluginHost`: the plugin interfaces and the host that compiles and runs them
 * `PluginScripts`: the plugin sources that ship in releases, see `docs/PLUGIN_API.md`
+* `config`: pickit rule files copied next to the executable
+* `docs`: documentation
 * `tests`: unit tests, including a check that every plugin in PluginScripts compiles
 
 Run the tests with `dotnet test tests/RiftAssistant.Tests`.
