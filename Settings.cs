@@ -1,4 +1,3 @@
-﻿using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -46,6 +45,15 @@ public sealed class Settings
 	public bool AutoTerminate { get; set; } = false;
 	public int OverlayFps { get; set; } = 60;
 	public OverlaySettings Overlay { get; set; } = new();
+	public InventoryLockSettings InventoryLock { get; set; } = new();
+}
+
+public sealed class InventoryLockSettings
+{
+	public int LeftColumn { get; set; } = -1;
+	public int TopRow { get; set; } = -1;
+	public int RightColumn { get; set; } = -1;
+	public int BottomRow { get; set; } = -1;
 }
 
 public sealed class OverlaySettings

@@ -41,6 +41,8 @@ internal class ActorCollector
 
 	public List<MonsterPack> list_2 = new List<MonsterPack>();
 
+	internal readonly PerSecCounter MonsterHitpointDecrease = new();
+
 	public List<Actor> list_3 = new List<Actor>(1000);
 
 	[CompilerGenerated]
@@ -822,6 +824,7 @@ internal class ActorCollector
 				list_2.RemoveAt(num12);
 			}
 		}
+		MonsterHitpointDecrease.Add(num5);
 		foreach (Actor item11 in list_3.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
 			foreach (Monster item12 in list_1) {
 				if (item12.SummonerAcdDynamicId == item11.SummonerId) {

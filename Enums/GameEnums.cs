@@ -860,3 +860,10 @@ public enum WorldLayer
 	Ground,
 	Map
 }
+
+public enum ItemKeepDecision
+{
+	LooksGood,
+	Irrelevant,
+	DefinitelyBad
+}

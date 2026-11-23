@@ -34,6 +34,7 @@ public static class Core
 		Settings = SettingsManager.Load();
 		HotkeyList = Hotkeys.Load();
 		SnoData.Load();
+		Pickit.Load();
 
 		Controller = new Controller();
 		CoreCollector.Controller = Controller;

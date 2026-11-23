@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using SNO;
@@ -292,6 +293,12 @@ public class Item : Actor
 	}
 
 	public IEnumerable<ItemStat> StatList => class112_0.IEnumerable_0;
+
+	public ItemKeepDecision KeepDecision { get; internal set; }
+
+	public Stopwatch LastSpeak { get; set; }
+
+	public bool IsInventoryLocked => Core.Controller.Inventory.IsLocked(this);
 
 	public uint EnchantedAffixOriginal
 	{

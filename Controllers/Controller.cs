@@ -19,6 +19,12 @@ public class Controller
 
 	private readonly TrackerController trackerController = new TrackerController();
 
+	private readonly StatController statController = new StatController();
+
+	private readonly SoundController soundController = new SoundController();
+
+	private readonly InputController inputController = new InputController();
+
 	public TextureController Texture => textureController;
 
 	public RenderController Render => renderController;
@@ -34,6 +40,12 @@ public class Controller
 	public SnoController Sno => snoController;
 
 	public TrackerController Tracker => trackerController;
+
+	public StatController Stat => statController;
+
+	public SoundController Sound => soundController;
+
+	public InputController Input => inputController;
 
 	public string BattleTag => CoreCollector.BattleTag;
 

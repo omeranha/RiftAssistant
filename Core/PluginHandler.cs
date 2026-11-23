@@ -19,6 +19,7 @@ internal class PluginHandler
 	private AssemblyLoadContext loadContext;
 	private WeakReference loadContextReference;
 	private readonly Lock pluginLock = new();
+	private volatile IMouseClickBlocker[] mouseBlockers = [];
 	private readonly MetadataReference[] references;
 
 	public readonly List<IPlugin> Plugins = [];
@@ -53,6 +54,7 @@ internal class PluginHandler
 		actors.OnPortalFound += (_, portal) => Dispatch<IPortalFoundHandler>(h => h.OnPortalFound(portal));
 		CoreCollector.OnCooldown += (_, skill) => Dispatch<ISkillCooldownHandler>(h => h.OnCooldown(skill, false));
 		CoreCollector.OnTrueCooldown += (_, skill) => Dispatch<ISkillCooldownHandler>(h => h.OnCooldown(skill, true));
+		CoreCollector.ItemCollector.KeepDecisionFilter = ApplyKeepDecisionHandlers;
 		CoreCollector.UiElements.ChatChanged += (_, e) => Dispatch<IChatLineChangedHandler>(h => h.OnChatLineChanged(e.Current, e.Previous));
 	}
 
@@ -71,6 +73,7 @@ internal class PluginHandler
 			}
 
 			UnloadPlugins();
+			if (reloading) Pickit.Load();
 
 			var pluginFiles = Directory.GetFiles(pluginDir, "*.cs", SearchOption.AllDirectories);
 			var success = CompilePlugins(pluginFiles);
@@ -98,11 +101,36 @@ internal class PluginHandler
 		}
 
 		foreach (var handler in handlers) {
+			long start = Stopwatch.GetTimestamp();
 			action(handler);
+			if (handler is IPlugin plugin) Core.Controller?.Stat.Measure(plugin, typeof(T).Name, start);
 		}
 	}
 
 	// Runs on the low-level mouse hook thread, so it must not take pluginLock: a plugin reload holds it while compiling.
+	private ItemKeepDecision ApplyKeepDecisionHandlers(Item item, ItemKeepDecision decision)
+	{
+		List<IItemKeepDecisionHandler> handlers;
+		lock (pluginLock) {
+			handlers = [.. GetPlugins<IItemKeepDecisionHandler>()];
+		}
+
+		foreach (var handler in handlers) {
+			decision = handler.CalculateItemKeepDecision(item, decision);
+		}
+
+		return decision;
+	}
+
+	internal bool ShouldBlockMouse(MouseButtons button, int x, int y)
+	{
+		foreach (var blocker in mouseBlockers) {
+			if (blocker.Enabled && blocker.MouseClickShouldBeBlocked(button, x, y)) return true;
+		}
+
+		return false;
+	}
+
 	internal IEnumerable<T> GetPlugins<T>()
 	{
 		return Plugins.Where(p => p.Enabled).OfType<T>();
@@ -214,6 +242,7 @@ internal class PluginHandler
 					Plugins.Add(plugin);
 				}
 			}
+			mouseBlockers = [.. Plugins.OfType<IMouseClickBlocker>()];
 			Logger.Info($"{Plugins.Count} plugins loaded");
 			return true;
 		} catch (Exception ex) {
@@ -251,6 +280,7 @@ internal class PluginHandler
 
 	private void UnloadPlugins()
 	{
+		mouseBlockers = [];
 		Plugins.Clear();
 
 		if (loadContext == null) return;

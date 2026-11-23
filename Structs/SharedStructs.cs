@@ -23,6 +23,19 @@ internal class ChatChanged : EventArgs
 	public string Previous;
 }
 
+[StructLayout(LayoutKind.Explicit, Pack = 1, Size = 52)]
+internal struct SoundSettings
+{
+	[FieldOffset(0)]
+	public float MasterVolume;
+
+	[FieldOffset(4)]
+	public float EffectsVolume;
+
+	[FieldOffset(48)]
+	public bool Muted;
+}
+
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
 internal struct FrameRateSettings
 {

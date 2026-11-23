@@ -36,6 +36,8 @@ internal class Overlay
 
 	public static Overlay Instance;
 
+	internal readonly PerSecCounter RenderCounter = new();
+
 	private readonly Controller controller;
 
 	public readonly Form Frm;
@@ -471,6 +473,7 @@ internal class Overlay
 					break;
 			}
 			float_4 = float_2 / 2f;
+			RenderCounter.StartMeasure();
 			renderTarget.BeginDraw();
 			renderTarget.Clear(SharpDX.Color.Transparent);
 			class208_0.SetHint(null, null);
@@ -515,6 +518,7 @@ internal class Overlay
 				ResetStatusDrawPosition();
 			}
 			renderTarget.EndDraw();
+			RenderCounter.EndMeasure();
 			swapChain_0.Present(1, PresentFlags.None);
 			if (stopwatch_0.ElapsedMilliseconds >= 1000) {
 				stopwatch_0.Restart();

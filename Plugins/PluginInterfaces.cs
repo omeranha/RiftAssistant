@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Forms;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
@@ -187,4 +188,31 @@ public interface ITransparent
 public interface ITransparentCollection
 {
 	IEnumerable<ITransparent> GetTransparents();
+}
+
+public interface IPerfCounter
+{
+	double LastCount { get; }
+
+	double LastValue { get; }
+}
+
+public interface IMouseClickBlocker : IPlugin
+{
+	bool MouseClickShouldBeBlocked(MouseButtons button, int x, int y);
+}
+
+public interface IItemKeepDecisionHandler : IPlugin
+{
+	ItemKeepDecision CalculateItemKeepDecision(Item item, ItemKeepDecision previousDecision);
+}
+
+public static class StopwatchExtensions
+{
+	public static bool TimerTest(this Stopwatch watch, long milliseconds)
+	{
+		if (milliseconds == 0 || (!watch.IsRunning && watch.ElapsedTicks == 0)) return true;
+
+		return watch.ElapsedMilliseconds >= milliseconds;
+	}
 }

@@ -198,6 +198,8 @@ public class Monster(uint uint_7, uint uint_8, SnoActor SnoActor_1, SnoMonster S
 {
 	public SnoMonster SnoMonster { get; set; } = SnoMonster_1;
 
+	public Stopwatch LastSpeak { get; set; }
+
 	public uint UInt32_0 => SnoMonster?.Sno ?? 0;
 
 	public MonsterPack Pack { get; set; }

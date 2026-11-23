@@ -36,6 +36,8 @@ internal class GameSettingsManager
 		IsFullscreen = videoSettings.bool_1;
 		WindowMode = ((videoSettings.int_12 == 0) ? WindowMode.Windowed : videoSettings.windowMode_0);
 
+		Core.Controller?.Sound.Update(GameWindowManager.Read<SoundSettings>(AddressList.SoundSettingsAddress, true));
+
 	}
 
 	public static Vk ToVk(KeyBinding keyBinding)

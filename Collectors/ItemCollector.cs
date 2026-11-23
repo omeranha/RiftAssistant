@@ -14,6 +14,14 @@ internal class ItemCollector
 {
 	public readonly Dictionary<uint, Item> Items = [];
 
+	internal Func<Item, ItemKeepDecision, ItemKeepDecision> KeepDecisionFilter { get; set; }
+
+	internal ItemKeepDecision DecideKeep(Item item)
+	{
+		var decision = Pickit.Evaluate(item);
+		return KeepDecisionFilter?.Invoke(item, decision) ?? decision;
+	}
+
 	public readonly List<Item> list_0 = new List<Item>();
 
 	public readonly List<Item> list_1 = new List<Item>();
@@ -116,8 +124,10 @@ internal class ItemCollector
 			if (snoItem.Kind == ItemKind.potion && itemLocation == ItemLocation.Inventory) {
 				bool_0 = true;
 			}
+			bool decideKeep = false;
 			bool flag4 = struct7_.Unidentified == 1;
 			if (item != null && item.Unidentified && !flag4) {
+				decideKeep = true;
 				if (struct7_.affix_list_ptr == 0L) {
 					continue;
 				}
@@ -127,6 +137,7 @@ internal class ItemCollector
 				list_4.Add(item);
 			}
 			if (item == null) {
+				decideKeep = true;
 				item = new Item(acdId, annId, snoItem) {
 					Unidentified = flag4
 				};
@@ -157,6 +168,9 @@ internal class ItemCollector
 			item.Unidentified = flag4;
 			if (flag2 && (itemLocation != itemLocation2 || flag4 != flag5)) {
 				class112_2[item.AcdId] = item;
+			}
+			if (decideKeep) {
+				item.KeepDecision = DecideKeep(item);
 			}
 			if (itemLocation == ItemLocation.Floor) {
 				item.InventoryX = -1;

@@ -1,11 +1,18 @@
-using System.Collections.Generic;
 using System.Drawing;
-using Plugins;
 using SNO;
 
 
 public class InventoryController
 {
+	public Rectangle InventoryLockArea {
+		get {
+			var lockArea = Core.Settings.InventoryLock;
+			if (lockArea.LeftColumn < 0 || lockArea.TopRow < 0 || lockArea.RightColumn < lockArea.LeftColumn || lockArea.BottomRow < lockArea.TopRow) return Rectangle.Empty;
+
+			return new Rectangle(lockArea.LeftColumn, lockArea.TopRow, lockArea.RightColumn - lockArea.LeftColumn + 1, lockArea.BottomRow - lockArea.TopRow + 1);
+		}
+	}
+
 	public int MaxStashPageCount => CoreCollector.UiElements.class341_8.Length;
 
 	public int MaxStashTabCountPerPage => CoreCollector.UiElements.class341_7.Length;
@@ -88,6 +95,15 @@ public class InventoryController
 			ItemLocation.PetBracers => CoreCollector.UiElements.class341_36, 
 			_ => null, 
 		};
+	}
+
+	internal bool IsLocked(Item item)
+	{
+		var lockArea = InventoryLockArea;
+		if (item.Location != ItemLocation.Inventory || lockArea.IsEmpty) return false;
+
+		var itemArea = new Rectangle(item.InventoryX, item.InventoryY, item.SnoItem.ItemWidth, item.SnoItem.ItemHeight);
+		return lockArea.IntersectsWith(itemArea);
 	}
 
 	public RectangleF GetItemRect(Item item)
