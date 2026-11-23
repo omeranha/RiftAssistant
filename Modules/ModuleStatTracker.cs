@@ -8,13 +8,12 @@ sealed class StatColumn
 {
 	public bool Enabled;
 	public string Header;
-	public string Unit;
 
 	public RenderFont HeaderFont;
 	public RenderBrush HeaderBrush;
 
 	public Func<StatTracker, string> TotalValue;
-	public Func<StatTracker, string> RateValue;
+	public Func<StatTracker, string> RateValue = static _ => string.Empty;
 }
 
 internal class ModuleStatTracker : Module
@@ -366,7 +365,7 @@ internal class ModuleStatTracker : Module
 		foreach (var column in columns) {
 			if (!column.Enabled) continue;
 			DrawCell(num19++ * 2, column.HeaderFont, column.Header, num5, null, Alignment.Center, 2, column.HeaderBrush);
-			DrawCell(num19++ * 2, class221_3, column.Unit, num5, null, Alignment.Center, 2, null);
+			DrawCell(num19++ * 2, class221_3, null, num5, null, Alignment.Center, 2, null);
 		}
 		currentRowY += num6;
 		for (int k = 0; k < trackers.Count; k++) {

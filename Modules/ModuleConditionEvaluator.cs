@@ -127,9 +127,6 @@ internal class ModuleConditionEvaluator
 		if (!module.Show || !isParentVisible) {
 			return false;
 		}
-		if (module.string_1 != null && (Overlay.Instance.class112_0.ContainsKey(module.string_1) || module.bool_3)) {
-			return false;
-		}
 		if ((onlyInTown && !CoreCollector.IsInTown) || (onlyOutTown && CoreCollector.IsInTown)) {
 			return false;
 		}

@@ -22,7 +22,6 @@ internal abstract class Module : IDisposable
 
 	public int int_1 = 130;
 
-	public string string_1;
 
 	public bool bool_3 = true;
 
