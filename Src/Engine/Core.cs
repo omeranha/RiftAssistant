@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -35,7 +36,7 @@ public static class Core
 		KeyboardCapture.Start();
 		SettingsManager.Load();
 		HotkeyList = Hotkeys.Load();
-		SnoData.Load();
+		LoadGameData();
 		ItemFilter.Load();
 
 		Controller = new Controller();
@@ -77,6 +78,15 @@ public static class Core
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
 		CoreCollector.Update();
+	}
+
+	private static void LoadGameData()
+	{
+		try {
+			SnoData.Load();
+		} catch (Exception ex) when (ex is not StartupException) {
+			throw new StartupException($"The game data could not be loaded.\n\n{ex.GetType().Name}: {ex.Message}\n\nThe files in {Path.Combine(Program.AppDir, "data")} may be damaged or belong to a different release. Replace the data folder with the one from the release zip.", ex);
+		}
 	}
 
 	private static void ApplySettings()

@@ -28,12 +28,16 @@ internal static class Program
 			File.Delete(Path.Combine(LogFolder, "info.txt"));
 			File.Delete(Path.Combine(LogFolder, "exceptions.txt"));
 
+			StartupChecks.Run();
 			StartTray();
 			Core.Init();
 			Core.MainLoop();
+		} catch (StartupException ex) {
+			Logger.LogException(ex.ToString());
+			MessageBox.Show($"{ex.Message}\n\nLogs: {LogFolder}", "RiftAssistant cannot start", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		} catch (Exception ex) {
-			Logger.LogException(ex.Message);
-			MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+			Logger.LogException(ex.ToString());
+			MessageBox.Show($"RiftAssistant stopped because of an unexpected error:\n\n{ex.GetType().Name}: {ex.Message}\n\nThe full details are in:\n{Path.Combine(LogFolder, "exceptions.txt")}", "RiftAssistant", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 

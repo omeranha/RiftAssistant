@@ -19,6 +19,7 @@ internal class PluginHandler
 {
 	private AssemblyLoadContext loadContext;
 	private WeakReference loadContextReference;
+	private const int MaxListedErrors = 6;
 	private const string PluginGlobalUsings = "global using RiftAssistant; global using RiftAssistant.Collectors; global using RiftAssistant.Controllers; global using RiftAssistant.Engine; global using RiftAssistant.Input; global using RiftAssistant.Memory; global using RiftAssistant.Model; global using RiftAssistant.Modules; global using RiftAssistant.PluginHost; global using RiftAssistant.Rendering; global using RiftAssistant.Sno; global using RiftAssistant.Tracking; global using Plugins;";
 
 	private readonly Lock pluginLock = new();
@@ -74,10 +75,14 @@ internal class PluginHandler
 
 		return [.. paths.Values.Select(path => MetadataReference.CreateFromFile(path))];
 	}
+
 	internal void LoadPlugins(bool reloading = false)
 	{
 		var pluginDir = Path.Combine(Program.AppDir, "plugins");
-		if (!Directory.Exists(pluginDir)) return;
+		if (!Directory.Exists(pluginDir)) {
+			Logger.Info($"plugins folder not found at {pluginDir}, no plugins were loaded");
+			return;
+		}
 
 		Errored = false;
 		Reloaded = false;
@@ -183,7 +188,10 @@ internal class PluginHandler
 			combinedSource.Append(typeof(IPlugin).Assembly.ManifestModule.ModuleVersionId);
 			combinedSource.Append(typeof(Controller).Assembly.ManifestModule.ModuleVersionId);
 
-			if (sources.Count == 0) return false;
+			if (sources.Count == 0) {
+				Logger.Info($"no .cs files found in {pluginsDir}, no plugins were loaded");
+				return false;
+			}
 
 			var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(combinedSource.ToString()));
 			var hash = Convert.ToHexString(bytes).ToLowerInvariant();
@@ -233,15 +241,21 @@ internal class PluginHandler
 				var result = compilation.Emit(peStream);
 				if (!result.Success) {
 					Logger.Info($"plugins compilation failed after {stopwatch.ElapsedMilliseconds} ms");
+					var errors = new List<string>();
 					foreach (var diagnostic in result.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error)) {
 						var location = diagnostic.Location.GetLineSpan();
 						string file = Path.GetFileName(location.Path);
 						int line = location.StartLinePosition.Line + 1;
 						int column = location.StartLinePosition.Character + 1;
 						Logger.LogException($"[Plugin: {file}] {diagnostic.Id}: {diagnostic.GetMessage()} (line {line}, col {column})");
+						errors.Add($"{file} line {line}: {diagnostic.Id} {diagnostic.GetMessage()}");
 					}
 
-					MessageBox.Show("Plugin compilation failed.\nCheck logs for details.", "Compilation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					string listed = string.Join("\n", errors.Take(MaxListedErrors));
+					string more = errors.Count > MaxListedErrors ? $"\n... and {errors.Count - MaxListedErrors} more" : "";
+					MessageBox.Show(
+						$"{errors.Count} error(s) while compiling the plugins in:\n{pluginsDir}\n\n{listed}{more}\n\nAll errors are in:\n{Path.Combine(Program.LogFolder, "exceptions.txt")}\n\nRiftAssistant will close. Fix or remove the plugin files listed above, then start it again.",
+						"Plugin compilation failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Core.Exit();
 					return false;
 				}
@@ -265,8 +279,8 @@ internal class PluginHandler
 			Logger.Info($"{Plugins.Count} plugins loaded");
 			return true;
 		} catch (Exception ex) {
-			Logger.LogException(ex.Message);
-			MessageBox.Show($"An error occurred while loading plugins.\n{ex.Message}", "Plugin Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			Logger.LogException(ex.ToString());
+			MessageBox.Show($"An error occurred while loading the plugins.\n\n{ex.GetType().Name}: {ex.Message}\n\nThe full details are in:\n{Path.Combine(Program.LogFolder, "exceptions.txt")}", "Plugin error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			Core.Exit();
 			return false;
 		}
