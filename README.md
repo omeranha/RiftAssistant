@@ -5,7 +5,7 @@ A Diablo III overlay for Windows. It reads the game's memory, draws on top of th
 ## Features
 
 * Overlay panels: lobby heroes, player info, portrait stats (real, run and total DPS, EHP), skill cooldowns, health and resource bars, cursor hints and a session stat tracker
-* Plugin system: `.cs` files compiled with Roslyn at startup and reloadable at runtime, see [docs/PLUGIN_API.md](docs/PLUGIN_API.md)
+* Plugin system: `.cs` files compiled with Roslyn at startup and reloadable at runtime, see [Src/PluginApi/PLUGIN_API.md](Src/PluginApi/PLUGIN_API.md)
 * Item filter: JSON rules that mark each item as keep or sell, editable while the program runs
 * In-game settings menu and a tray icon with reload and exit
 * Configurable hotkeys
@@ -79,10 +79,9 @@ Set `Language` in `settings/settings.json` and restart. The supported codes are 
   * `Input`: raw input, mouse blocking and hotkeys
   * `Tracking`: session and run statistics
   * `Controllers`: the API that plugins see (`Controller`)
-  * `Plugins` and `PluginHost`: the plugin interfaces and the host that compiles and runs them
+  * `PluginApi`: the interfaces plugins implement, the host that compiles and runs the plugins, and the API doc
 * `plugins`: the plugin sources. They are distributed with releases and are not tracked in git.
 * `config`: the default item filter rules (embedded in the executable) and the item filter rule format notes
-* `docs`: documentation
 
 ## Disclaimer
 
