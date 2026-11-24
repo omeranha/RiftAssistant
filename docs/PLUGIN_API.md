@@ -67,18 +67,18 @@ Original handlers keep their names. Differences:
 
 - `IKeyEventHandler.OnKeyEvent(InputEvent)` and `InputEventHandler.OnInputEvent(InputEvent)` receive the `InputEvent` struct: `Key` (`Vk`), `Down`, modifier flags, `Is(Vk, bool down)`.
 - `IMouseClickBlocker.MouseClickShouldBeBlocked(MouseButtons, x, y)`: return true to swallow a click. `x` and `y` are relative to the game window. A blocked press also blocks its release. The handler runs on the mouse hook thread and must return quickly.
-- `IItemKeepDecisionHandler.CalculateItemKeepDecision(Item, ItemKeepDecision previous)`: adjust the pickit result. Handlers are chained in plugin order.
+- `IItemKeepDecisionHandler.CalculateItemKeepDecision(Item, ItemKeepDecision previous)`: adjust the item filter result. Handlers are chained in plugin order.
 
 ## Item keep decision
 
 `Item.KeepDecision` is `LooksGood`, `Irrelevant` or `DefinitelyBad`. It is computed once when an item is first seen and again when it gets identified.
 
 1. Unidentified items and the Demonic Trebuchet key are `LooksGood`.
-2. Otherwise the first matching rule in `config/pickit_sc_70.ini` (softcore) or `config/pickit_hc_70.ini` (hardcore) decides. `pickit_sc_override.ini` and `pickit_hc_override.ini` replace them when present. The file format is described in `config/pickit_readme.txt`.
+2. Otherwise the first matching rule in `settings/item_filter_sc.json` (softcore) or `settings/item_filter_hc.json` (hardcore) decides. A missing file is created from the defaults built into the executable. The file format is described in `config/item_filter_readme.txt`.
 3. No matching rule gives `Irrelevant`.
 4. `IItemKeepDecisionHandler` plugins adjust the result.
 
-Pickit files are reloaded together with the plugins. Known limitation: the `cubed` and `can_cubed` conditions are not supported and never match.
+Item filter files are reloaded together with the plugins and also when they change on disk while the program runs (checked once per second), and every item is re-evaluated. Known limitation: the `cubed` and `can_cubed` conditions are not supported and never match.
 
 ## Inventory lock
 

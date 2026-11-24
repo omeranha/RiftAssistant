@@ -76,7 +76,7 @@ internal class PluginHandler
 			}
 
 			UnloadPlugins();
-			if (reloading) Pickit.Load();
+			if (reloading) ItemFilter.Load();
 
 			var pluginFiles = Directory.GetFiles(pluginDir, "*.cs", SearchOption.AllDirectories);
 			var success = CompilePlugins(pluginFiles);

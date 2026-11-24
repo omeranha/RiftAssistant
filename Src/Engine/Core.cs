@@ -35,7 +35,7 @@ public static class Core
 		Settings = SettingsManager.Load();
 		HotkeyList = Hotkeys.Load();
 		SnoData.Load();
-		Pickit.Load();
+		ItemFilter.Load();
 
 		Controller = new Controller();
 		CoreCollector.Controller = Controller;
@@ -196,6 +196,7 @@ public static class Core
 			}
 
 			CoreCollector.Update();
+			ItemFilter.ReloadIfChanged();
 			Overlay overlay = Overlay.Instance;
 			bool visible = GameWindowManager.Window.IsForeground && overlay.State != OverlayDisplayState.Hidden;
 			if (overlay.Frm.Visible != visible) {

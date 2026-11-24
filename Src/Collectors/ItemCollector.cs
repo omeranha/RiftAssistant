@@ -16,7 +16,7 @@ internal class ItemCollector
 
 	internal ItemKeepDecision DecideKeep(Item item)
 	{
-		var decision = Pickit.Evaluate(item);
+		var decision = ItemFilter.Evaluate(item);
 		return KeepDecisionFilter?.Invoke(item, decision) ?? decision;
 	}
 

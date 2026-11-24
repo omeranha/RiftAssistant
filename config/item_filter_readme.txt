@@ -1,16 +1,32 @@
-﻿
-"PICKIT" DOES NOT RELATED TO "PICK UP" SOMETHING.
-THIS FILE EVALUATES ITEMS AND RESULTS A LOGICAL VALUE MEANING "KEEP" OR "SELL"
+THE ITEM FILTER EVALUATES ITEMS AND RESULTS IN A LOGICAL VALUE MEANING "KEEP" OR "SELL"
+
+FILES
+-----
+The rules live in settings/item_filter_sc.json (softcore) and settings/item_filter_hc.json (hardcore), next to the other settings.
+A file that does not exist is created from the defaults built into the executable, so deleting a file resets it.
+Files are checked once per second while the program runs and are reloaded as soon as they change. There is no need to restart.
+If a file cannot be parsed, the error is written to logs/exceptions.txt and the previous rules stay active.
+A single rule with an error is skipped and logged, the other rules still apply.
+The JSON may contain // comments and trailing commas. Unknown property names are an error, so typos do not silently disable a rule.
+
+FORMAT
+------
+{
+	"Definitions": { "name": "condition & condition" },
+	"Rules": [
+		{ "Comment": "optional note", "Group": "helm", "Decision": "Keep", "Enabled": true, "Conditions": ["main_stat+700", "*name*"] }
+	]
+}
 
 - Rules are evaluated in order, from top to bottom.
-- If a line evaluates true, then the item is considered "KEEP" and the evaluation of this file is stopped.
-- If none of the lines was evaluated true, the item is considered "SELL".
-- There is no need to start a "keep" line with a + sign, because it is the default modifier.
-- "FORCE SELL" modifier: a "-" sign at the very beginning of a line means if the line evaluates true, then the item is considered "SELL" and the evaluation of this file is stopped
-- If a lines begins with ";" sign then the line is "commented out" and will be not evaluated.
-
-You can search for item group names in \doc\items.txt
-
+- If a rule matches (the item is in its Group and all Conditions are true) and its Decision is "Keep", the item is considered "KEEP" and the evaluation is stopped.
+- If a rule matches and its Decision is "Sell", the item is considered "SELL" (force sell) and the evaluation is stopped.
+- If no rule matches, the item is considered "SELL".
+- Decision is "Keep" or "Sell". It defaults to "Keep".
+- Enabled defaults to true. Set it to false to turn a rule off without deleting it.
+- Group is an item group name, or "all" to match every item.
+- Conditions are all required (logical AND). Each entry is one condition, or a *definition* reference.
+- Definitions are reusable condition snippets. Writing *name* inside a condition replaces it with the definition text, which may contain several conditions joined by &.
 operators:
 +   more or equal
 =   strict equal
