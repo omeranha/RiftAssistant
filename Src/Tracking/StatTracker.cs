@@ -688,7 +688,7 @@ public class StatTracker
 		}
 		if (string_2 != null)
 		{
-			string text = Path.Combine(Program.AppDir, "stat_tracker");
+			string text = Program.StatTrackerFolder;
 			Directory.CreateDirectory(text);
 			string text2 = Path.Combine(text, battleTag + "_" + string_2 + ".xml");
 			if (File.Exists(text2))
@@ -709,7 +709,7 @@ public class StatTracker
 		}
 		for (int i = 0; i < list_0.Count; i++)
 		{
-			string text = Path.Combine(Program.AppDir, "stat_tracker");
+			string text = Program.StatTrackerFolder;
 			Directory.CreateDirectory(text);
 			string text2 = Path.Combine(text, battleTag + "_" + list_0[i] + ".xml");
 			if (File.Exists(text2))
@@ -789,7 +789,7 @@ public class StatTracker
 		if (string_2 != null)
 		{
 			/*
-			string text = Path.Combine(Program.AppDir, "stat_tracker");
+			string text = Program.StatTrackerFolder;
 			Directory.CreateDirectory(text);
 			string text2 = Path.Combine(text, Id + "_" + string_2 + ".xml");
 			Class96 @class = new Class96();

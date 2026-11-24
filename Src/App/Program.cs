@@ -8,8 +8,12 @@ namespace RiftAssistant;
 internal static class Program
 {
 	public static string AppDir = Path.GetDirectoryName(Environment.ProcessPath);
-	public static readonly string SettingsFolder = Path.Combine(AppDir, "settings");
-	public static readonly string LogFolder = Path.Combine(AppDir, "logs");
+	public static readonly string UserDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RiftAssistant");
+	public static readonly string SettingsFolder = Path.Combine(UserDataFolder, "settings");
+	public static readonly string LogFolder = Path.Combine(UserDataFolder, "logs");
+	public static readonly string StatTrackerFolder = Path.Combine(UserDataFolder, "stat_tracker");
+	public static readonly string ScreenshotFolder = Path.Combine(UserDataFolder, "screenshots");
+	public static readonly string CacheFolder = Path.Combine(UserDataFolder, "cache");
 
 	private static Thread trayThread;
 
@@ -20,6 +24,7 @@ internal static class Program
 		Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 		Directory.CreateDirectory(LogFolder);
 		try {
+			LegacyUserData.Migrate();
 			File.Delete(Path.Combine(LogFolder, "info.txt"));
 			File.Delete(Path.Combine(LogFolder, "exceptions.txt"));
 

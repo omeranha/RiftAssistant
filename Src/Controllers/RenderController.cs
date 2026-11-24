@@ -216,8 +216,8 @@ public class RenderController
 			oldBitmap = SelectObject(memDC, hBitmap);
 			BitBlt(memDC, 0, 0, width, height, windowDC, 0, 0, 0x00CC0020); // SRCCOPY
 			using System.Drawing.Bitmap bitmap = System.Drawing.Image.FromHbitmap(hBitmap);
-			Directory.CreateDirectory(Path.Combine(Program.AppDir, "screenshots"));
-			var path = Path.Combine(Program.AppDir, "screenshots", filePath);
+			Directory.CreateDirectory(Program.ScreenshotFolder);
+			var path = Path.Combine(Program.ScreenshotFolder, filePath);
 			bitmap.Save(path, ImageFormat.Png);
 		} finally {
 			if (oldBitmap != IntPtr.Zero)

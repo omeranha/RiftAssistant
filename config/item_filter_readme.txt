@@ -2,10 +2,10 @@ THE ITEM FILTER EVALUATES ITEMS AND RESULTS IN A LOGICAL VALUE MEANING "KEEP" OR
 
 FILES
 -----
-The rules live in settings/item_filter_sc.json (softcore) and settings/item_filter_hc.json (hardcore), next to the other settings.
+The rules live in %LOCALAPPDATA%\RiftAssistant\settings\item_filter_sc.json (softcore) and item_filter_hc.json (hardcore), next to the other settings.
 A file that does not exist is created from the defaults built into the executable, so deleting a file resets it.
 Files are checked once per second while the program runs and are reloaded as soon as they change. There is no need to restart.
-If a file cannot be parsed, the error is written to logs/exceptions.txt and the previous rules stay active.
+If a file cannot be parsed, the error is written to logs\exceptions.txt in the same folder and the previous rules stay active.
 A single rule with an error is skipped and logged, the other rules still apply.
 The JSON may contain // comments and trailing commas. Unknown property names are an error, so typos do not silently disable a rule.
 

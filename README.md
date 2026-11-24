@@ -47,16 +47,20 @@ Hotkeys are stored in `settings/hotkeys.json`.
 
 ## Configuration
 
-All files are created with defaults on first run, next to the executable.
+Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the program folder with a new release keeps them. The files are created with defaults on first run. On the first run with an empty `%LOCALAPPDATA%\RiftAssistant`, an existing `settings`, `stat_tracker` or `screenshots` folder next to the executable is copied there once.
 
-| File | Purpose |
+| Path in `%LOCALAPPDATA%\RiftAssistant` | Purpose |
 | --- | --- |
 | `settings/settings.json` | Language, overlay options, FPS, batched memory reads, inventory lock area |
 | `settings/hotkeys.json` | Hotkey bindings |
 | `settings/item_filter_sc.json` | Softcore item filter rules |
 | `settings/item_filter_hc.json` | Hardcore item filter rules |
-| `plugins/` | Plugin sources, loaded at startup |
+| `stat_tracker/` | Saved stat tracker sessions |
+| `screenshots/` | Screenshots taken by plugins |
+| `cache/` | Compiled plugin cache |
 | `logs/` | `info.txt` and `exceptions.txt`, cleared on each start |
+
+The plugin sources are in the `plugins` folder next to the executable and are loaded at startup.
 
 The item filter files are checked once per second and reloaded when they change. A file with errors is logged and the previous rules stay active. Deleting a file restores the defaults. The rule format is described in [config/item_filter_readme.txt](config/item_filter_readme.txt).
 

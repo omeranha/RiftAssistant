@@ -174,8 +174,9 @@ internal class PluginHandler
 
 			var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(combinedSource.ToString()));
 			var hash = Convert.ToHexString(bytes).ToLowerInvariant();
-			string outputPath = Path.Combine(Program.AppDir, $"compiled_plugins_{hash}.dll");
-			foreach (var file in Directory.GetFiles(Program.AppDir, "compiled_plugins_*")) {
+			Directory.CreateDirectory(Program.CacheFolder);
+			string outputPath = Path.Combine(Program.CacheFolder, $"compiled_plugins_{hash}.dll");
+			foreach (var file in Directory.GetFiles(Program.CacheFolder, "compiled_plugins_*")) {
 				if (file == outputPath) continue;
 
 				try {

@@ -1,6 +1,6 @@
 # Plugin API
 
-Plugins are `.cs` files in the `plugins` folder next to the executable. The plugin sources are distributed with releases and are not part of the repository. They are compiled with Roslyn at startup (cached by source hash) and can be reloaded at runtime. A compile error is logged to `logs/exceptions.txt`.
+Plugins are `.cs` files in the `plugins` folder next to the executable. The plugin sources are distributed with releases and are not part of the repository. They are compiled with Roslyn at startup (cached by source hash) and can be reloaded at runtime. A compile error is logged to `logs/exceptions.txt` in `%LOCALAPPDATA%\RiftAssistant`. Settings files such as `settings/settings.json` live in that folder too.
 
 Differences from the original TurboHUD plugin API are listed at the end.
 
