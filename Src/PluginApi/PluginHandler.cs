@@ -32,8 +32,7 @@ internal class PluginHandler
 
 	internal PluginHandler()
 	{
-		references = [.. AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
-			.Select(a => a.Location).Distinct(StringComparer.OrdinalIgnoreCase).Where(File.Exists).Select(path => MetadataReference.CreateFromFile(path))];
+		references = BuildReferences();
 
 		var overlay = Overlay.Instance;
 		overlay.PaintWorld_Ground += (_, _) => Dispatch<IInGameWorldPainter>(h => h.PaintWorld(WorldLayer.Ground));
@@ -61,6 +60,20 @@ internal class PluginHandler
 		CoreCollector.UiElements.ChatChanged += (_, e) => Dispatch<IChatLineChangedHandler>(h => h.OnChatLineChanged(e.Current, e.Previous));
 	}
 
+	// Loaded assemblies alone miss framework assemblies the host has not touched yet, for example System.Windows.Extensions (System.Media.SoundPlayer).
+	internal static MetadataReference[] BuildReferences()
+	{
+		var paths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+		foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+			if (!assembly.IsDynamic && !string.IsNullOrWhiteSpace(assembly.Location) && File.Exists(assembly.Location)) paths.TryAdd(assembly.GetName().Name, assembly.Location);
+		}
+
+		foreach (string path in ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator)) {
+			if (path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) && File.Exists(path)) paths.TryAdd(Path.GetFileNameWithoutExtension(path), path);
+		}
+
+		return [.. paths.Values.Select(path => MetadataReference.CreateFromFile(path))];
+	}
 	internal void LoadPlugins(bool reloading = false)
 	{
 		var pluginDir = Path.Combine(Program.AppDir, "plugins");
