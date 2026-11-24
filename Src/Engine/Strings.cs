@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -5,6 +6,9 @@ namespace RiftAssistant.Engine;
 
 internal sealed class Strings
 {
+	private const string DefaultLanguage = "enUS";
+	private static readonly string[] SupportedLanguages = ["deDE", "enUS", "esES", "esMX", "frFR", "itIT", "koKR", "plPL", "ptBR", "ptPT", "ruRU", "zhCN", "zhTW"];
+
 	public readonly string Language;
 
 	private readonly Dictionary<string, string> dictionary_0 = new Dictionary<string, string>();
@@ -114,7 +118,7 @@ internal sealed class Strings
 				}
 			}
 		}
-		if (Language != "enUS")
+		if (Language != DefaultLanguage)
 		{
 			byte[] byte_ = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "strings_enUS.bin"));
 			dictionary_3 = new Dictionary<StringListSnoEnum, Dictionary<string, string>>();
@@ -151,21 +155,20 @@ internal sealed class Strings
 
 	public static string LoadLanguage()
 	{
-		string result = "enUS";
-		string path = Path.Combine(Program.AppDir, "data", "selected_language.txt");
-		if (File.Exists(path))
-		{
-			string[] array = File.ReadAllLines(path);
-			for (int i = 0; i < array.Length; i++)
-			{
-				string text = array[i].Trim();
-				if (!string.IsNullOrWhiteSpace(text) && !text.StartsWith("//") && File.Exists(Path.Combine(Program.AppDir, "data", "strings_" + text + ".bin")))
-				{
-					result = text;
-					break;
-				}
-			}
+		string requested = SettingsManager.Current.Language?.Trim();
+		if (string.IsNullOrEmpty(requested)) return DefaultLanguage;
+
+		string language = Array.Find(SupportedLanguages, code => string.Equals(code, requested, StringComparison.OrdinalIgnoreCase));
+		if (language == null) {
+			Logger.Info($"Unknown language '{requested}' in settings.json, using {DefaultLanguage}. Supported: {string.Join(", ", SupportedLanguages)}");
+			return DefaultLanguage;
 		}
-		return result;
+
+		if (!File.Exists(Path.Combine(Program.AppDir, "data", $"strings_{language}.bin"))) {
+			Logger.Info($"strings_{language}.bin not found in the data folder, using {DefaultLanguage}");
+			return DefaultLanguage;
+		}
+
+		return language;
 	}
 }

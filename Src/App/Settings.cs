@@ -44,6 +44,7 @@ internal static class SettingsManager
 public sealed class Settings
 {
 	public string DiabloWindowTitle { get; set; } = "Diablo III";
+	public string Language { get; set; } = "enUS";
 	public bool AutoTerminate { get; set; } = false;
 	public int OverlayFps { get; set; } = 60;
 	public bool BatchedMemoryReads { get; set; } = true;
