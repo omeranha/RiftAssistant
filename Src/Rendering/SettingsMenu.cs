@@ -6,7 +6,17 @@ namespace RiftAssistant.Rendering;
 
 public class SettingsMenu
 {
-	public bool ShowMenu { get; set; } = false;
+	private bool showMenu;
+	private readonly List<IMenuOption> builtInOptions = [];
+
+	public bool ShowMenu
+	{
+		get => showMenu;
+		set {
+			showMenu = value;
+			if (!value) KeyboardCapture.End();
+		}
+	}
 
 	private readonly RenderBrush background = new(200, 0, 0, 0, 0f);
 
@@ -57,17 +67,31 @@ public class SettingsMenu
 		layoutNeedsUpdate = true;
 	}
 
+	internal void AddBuiltInOption(IMenuOption option)
+	{
+		builtInOptions.Add(option);
+		layoutNeedsUpdate = true;
+	}
+
+	internal void InvalidateLayout()
+	{
+		layoutNeedsUpdate = true;
+	}
+
+	private IEnumerable<IMenuOption> AllOptions => [.. builtInOptions, .. MenuOptions];
+
 	public void RecalculateLayout()
 	{
 		if (!layoutNeedsUpdate) return;
 		layoutNeedsUpdate = false;
 
-		int currentYOffset = 40;
+		int currentYOffset = 85;
 		int maxWidth = 300;
-		foreach (var option in MenuOptions) {
+		foreach (var option in AllOptions) {
 			int currentXOffset = 10;
+			bool compact = option is ICompactMenuOption;
 
-			currentYOffset += ROW_PADDING;
+			currentYOffset += compact ? 0 : ROW_PADDING;
 
 			foreach (var component in option.GetComponents()) {
 				component.Bounds = new RectangleF(currentXOffset, currentYOffset, component.Bounds.Width,component.Bounds.Height);
@@ -76,7 +100,7 @@ public class SettingsMenu
 				currentYOffset += (int)(component.Bounds.Height + 5);
 			}
 
-			currentYOffset += 15;
+			currentYOffset += compact ? 2 : 15;
 		}
 
 		Width = maxWidth;
@@ -95,6 +119,8 @@ public class SettingsMenu
 		}
 
 		if (isMouseClicked) {
+			KeyboardCapture.End();
+
 			float closeX = X + Width - closeButton.Bounds.Width - 5;
 			float closeY = Y + 5;
 			if (mouseX >= closeX && mouseX <= closeX + closeButton.Bounds.Width &&
@@ -118,7 +144,7 @@ public class SettingsMenu
 
 			if (Core.PluginListMenu.HandleInput(mouseX, mouseY, isMouseClicked)) return true;
 
-			foreach (var option in MenuOptions) {
+			foreach (var option in AllOptions) {
 				foreach (var component in option.GetComponents()) {
 
 					float worldX = X + component.Bounds.Left;
@@ -152,9 +178,10 @@ public class SettingsMenu
 		reloadPluginsButton.Draw((int)(X + Width - reloadPluginsButton.Bounds.Width - 5), Y + 55);
 
 		titleFont.DrawText("Settings", X + 10, Y + 10);
-		foreach (var option in MenuOptions) {
+		KeyboardCapture.EndIfStale();
+		foreach (var option in AllOptions) {
 			var components = option.GetComponents();
-			if (components.Count > 0) {
+			if (components.Count > 0 && option is not ICompactMenuOption) {
 				float categoryY = Y + components[0].Bounds.Top - ROW_PADDING;
 				defaultFont.DrawText(option.Name, X + 10, categoryY);
 			}

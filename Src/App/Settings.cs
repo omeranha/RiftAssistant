@@ -59,6 +59,12 @@ internal static class SettingsManager
 		lastWriteUtc = File.GetLastWriteTimeUtc(FilePath);
 	}
 
+	public static void Reset()
+	{
+		Current = new Settings();
+		NotifyChanged();
+	}
+
 	public static void NotifyChanged()
 	{
 		lastChange = Stopwatch.GetTimestamp();

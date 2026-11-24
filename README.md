@@ -45,6 +45,17 @@ The debug build is written to `bin/Debug/net10.0-windows/win-x64`. Publishing pr
 
 Hotkeys are stored in `settings/hotkeys.json`.
 
+## Settings menu
+
+Press `F12` to open the settings menu. Click a section to expand it, one section at a time. Every change is applied immediately and saved to `settings/settings.json` half a second later. If you edit `settings.json` by hand while the program runs, the overlay and the menu pick the change up within a second.
+
+* **General**: the language (applied after a restart) and the game window title. Click the title box, type, then press `Enter` to apply or `Esc` to cancel. Keys typed in the box do not reach the game.
+* **Performance**, **Overlay**, **Skill cooldowns**, **Portrait stats**, **Stat tracker** and **Stat tracker columns**: the overlay options.
+* **Inventory lock**: the protected inventory area.
+* **Files**: open the settings folder, or reset all settings (click twice to confirm).
+
+The item filter rules are edited in their JSON files, because they are too long for the overlay. They reload while the program runs.
+
 ## Configuration
 
 Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the program folder with a new release keeps them. The files are created with defaults on first run. On the first run with an empty `%LOCALAPPDATA%\RiftAssistant`, an existing `settings`, `stat_tracker` or `screenshots` folder next to the executable is copied there once.

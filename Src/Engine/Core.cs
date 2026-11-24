@@ -32,6 +32,7 @@ public static class Core
 		RawInput.MouseEvent += e => PluginHandler.DispatchKeyEvent(e);
 		RawInput.KeyboardEvent += OnKeyboardEvent;
 		MouseBlocker.Start();
+		KeyboardCapture.Start();
 		SettingsManager.Load();
 		HotkeyList = Hotkeys.Load();
 		SnoData.Load();
@@ -70,6 +71,7 @@ public static class Core
 		Overlay.Instance.InitializeModulesFromConfig(Settings);
 
 		SettingsMenu = new(Settings);
+		SettingsMenuOptions.Register(SettingsMenu);
 		PluginHandler = new PluginHandler();
 		PluginHandler.LoadPlugins();
 		PluginListMenu = new PluginListMenu();
@@ -151,6 +153,8 @@ public static class Core
 
 	private static void OnKeyboardEvent(InputEvent e)
 	{
+		if (KeyboardCapture.SuppressesInput) return;
+
 		PluginHandler?.DispatchKeyEvent(new InputEvent(e.Key, e.Down, e.Shift, e.Ctrl, e.Alt));
 
 		if (!e.Down) return;
