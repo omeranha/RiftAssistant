@@ -12,7 +12,7 @@ public static class Core
 {
 	private static float OverlayFrameInterval => 1000f / Settings.OverlayFps;
 
-	public static Settings Settings { get; private set; } = new();
+	public static Settings Settings => SettingsManager.Current;
 
 	public static IReadOnlyList<Hotkey> HotkeyList { get; private set; }
 
@@ -32,7 +32,7 @@ public static class Core
 		RawInput.MouseEvent += e => PluginHandler.DispatchKeyEvent(e);
 		RawInput.KeyboardEvent += OnKeyboardEvent;
 		MouseBlocker.Start();
-		Settings = SettingsManager.Load();
+		SettingsManager.Load();
 		HotkeyList = Hotkeys.Load();
 		SnoData.Load();
 		ItemFilter.Load();
@@ -63,6 +63,7 @@ public static class Core
 			}
 		};
 
+		SettingsManager.Changed += ApplySettings;
 		GameWindowManager.Window.WindowTitle = Settings.DiabloWindowTitle;
 		CoreCollector.ClearAllCaches();
 		Overlay.Instance.RecreateSharedFonts();
@@ -74,6 +75,12 @@ public static class Core
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
 		CoreCollector.Update();
+	}
+
+	private static void ApplySettings()
+	{
+		GameWindowManager.Window.WindowTitle = Settings.DiabloWindowTitle;
+		Overlay.Instance.ApplySettings(Settings);
 	}
 
 	private static void ProcessLoot(object sender, LootGenerated e)
@@ -190,6 +197,7 @@ public static class Core
 	public static void MainLoop()
 	{
 		while (running) {
+			SettingsManager.Tick();
 			if (!GameWindowManager.Update()) {
 				Thread.Sleep((int)OverlayFrameInterval);
 				continue;
@@ -224,6 +232,7 @@ public static class Core
 	internal static void Exit()
 	{
 		running = false;
+		SettingsManager.Flush();
 		Clear();
 		TrayIconManager.Hide();
 		Application.ExitThread();

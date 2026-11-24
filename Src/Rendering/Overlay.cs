@@ -133,6 +133,8 @@ internal class Overlay
 
 	internal readonly List<Module> modules = [];
 
+	private bool statTrackerEnabled;
+
 	public void ResetStatusDrawPosition()
 	{
 		statusX = 3f;
@@ -421,6 +423,18 @@ internal class Overlay
 		class221_13 = new RenderFont(160, 150, 255, 150, "Arial", false, false, 8f, Alignment.Left, false, true);
 	}
 
+	internal void ApplySettings(Settings settings)
+	{
+		bool keepStatTrackerVisibility = ModuleStatTracker != null && statTrackerEnabled == settings.Overlay.StatTracker.Enabled;
+		bool statTrackerVisible = ModuleStatTracker != null && ModuleStatTracker.Show;
+		foreach (Module item in modules.ToArray()) {
+			item.Dispose();
+		}
+
+		InitializeModulesFromConfig(settings);
+		if (keepStatTrackerVisibility) ModuleStatTracker.Show = statTrackerVisible;
+	}
+
 	internal void InitializeModulesFromConfig(Settings settings)
 	{
 		cursorHintModule = new ModuleCursorHint();
@@ -430,6 +444,7 @@ internal class Overlay
 		portraitsModule = new ModulePortraits();
 
 		var statTracker = settings.Overlay.StatTracker;
+		statTrackerEnabled = statTracker.Enabled;
 		ModuleStatTracker = new ModuleStatTracker(statTracker);
 
 		lobbyHeroesModule = new ModuleLobbyHeroes(settings);

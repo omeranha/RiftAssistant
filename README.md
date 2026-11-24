@@ -62,7 +62,7 @@ Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the 
 
 The plugin sources are in the `plugins` folder next to the executable and are loaded at startup.
 
-The item filter files are checked once per second and reloaded when they change. A file with errors is logged and the previous rules stay active. Deleting a file restores the defaults. The rule format is described in [config/item_filter_readme.txt](config/item_filter_readme.txt).
+Changes to `settings.json` and to the item filter files are picked up within a second while the program runs. A `settings.json` or item filter file with errors is logged and the previous values stay active. Deleting an item filter file restores the defaults. The rule format is described in [config/item_filter_readme.txt](config/item_filter_readme.txt).
 
 Plugins are reloaded from the tray menu or the settings menu.
 
