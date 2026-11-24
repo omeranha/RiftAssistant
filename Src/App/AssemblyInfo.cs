@@ -10,4 +10,3 @@ using System.Security;
 [assembly: SecurityRules(SecurityRuleSet.Level1)]
 [assembly: CLSCompliant(false)]
 [assembly: SupportedOSPlatform("windows")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("RiftAssistant.Tests")]

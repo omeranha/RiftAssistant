@@ -113,4 +113,4 @@ All plugin sources from TurboHUD 1.4.3.0 (`Default` and `Enhanced`) compile agai
 
 ## Public API surface
 
-Plugins are compiled against the public types of the application assembly. Only types a plugin can reach (the game model, the SNO data types, enums, the controllers and the interfaces in `Plugins`) are public; everything else is internal. `tests/RiftAssistant.Tests/PublicApi.txt` lists the approved public types and a test fails when the list changes. After a deliberate change, run the tests once with `UPDATE_PUBLIC_API=1` to refresh it.
+Plugins are compiled against the public types of the application assembly. Only types a plugin can reach (the game model, the SNO data types, enums, the controllers and the interfaces in `Plugins`) are public; everything else is internal.
