@@ -248,6 +248,41 @@ internal sealed class MenuActionButton(Func<string> label, Action onClick) : Men
 	}
 }
 
+internal sealed class MenuHotkeyRow(string label, Func<string> describe, Action<CapturedKey> assign) : MenuRow
+{
+	private const float ValueWidth = 110f;
+
+	private int captureId;
+	private bool capturing;
+
+	protected override void DrawRow(float x, float y)
+	{
+		if (capturing && !KeyboardCapture.IsCurrent(captureId)) capturing = false;
+
+		MenuStyle.DrawLabel(label, x, y, Bounds.Height);
+		MenuStyle.DrawBox(ValueSlot(), capturing ? "press a key..." : describe(), capturing);
+	}
+
+	public override bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
+	{
+		if (!isMouseClicked || !Contains(ValueSlot(), mouseX, mouseY)) return false;
+
+		captureId = KeyboardCapture.Begin(OnKey);
+		capturing = true;
+		return true;
+	}
+
+	private bool OnKey(CapturedKey key)
+	{
+		if (key.Key == Vk.ESCAPE) return true;
+
+		assign(key);
+		return true;
+	}
+
+	private RectangleF ValueSlot() => Slot(Bounds.Width - ValueWidth, ValueWidth);
+}
+
 internal sealed class MenuHint(Func<string> text) : MenuRow
 {
 	public MenuHint(string text) : this(() => text)

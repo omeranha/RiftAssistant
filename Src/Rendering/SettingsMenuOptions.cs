@@ -9,9 +9,18 @@ namespace RiftAssistant.Rendering;
 internal static class SettingsMenuOptions
 {
 	private static readonly TimeSpan ResetConfirmWindow = TimeSpan.FromSeconds(4);
+	private static readonly Dictionary<string, string> HotkeyLabels = new() {
+		["openSettings"] = "Open settings",
+		["hideOverlay"] = "Hide overlay",
+		["statTracker"] = "Toggle stat tracker",
+		["resetSession"] = "Reset session",
+		["exit"] = "Exit"
+	};
+
 	private static readonly List<SettingsSection> Sections = [];
 	private static SettingsMenu menu;
 	private static long resetArmedAt = -1;
+	private static string hotkeyMessage = "";
 
 	private static Settings Current => SettingsManager.Current;
 
@@ -83,6 +92,12 @@ internal static class SettingsMenuOptions
 			Number("Bottom row", s => s.InventoryLock.BottomRow, (s, v) => s.InventoryLock.BottomRow = v, -1, 5, 1)
 		]);
 
+		AddSection("Hotkeys", [
+			.. Core.HotkeyList.Select(hotkey => (IUIComponent)new MenuHotkeyRow(HotkeyLabels.GetValueOrDefault(hotkey.Name, hotkey.Name), () => Hotkeys.Describe(hotkey), key => AssignHotkey(hotkey, key))),
+			new MenuHint(() => hotkeyMessage),
+			new MenuActionButton(() => "Reset hotkeys", ResetHotkeys)
+		]);
+
 		AddSection("Files", [
 			new MenuActionButton(() => "Open settings folder", OpenSettingsFolder),
 			new MenuActionButton(() => IsResetArmed() ? "Click again to reset all settings" : "Reset all settings", ResetSettings)
@@ -134,6 +149,28 @@ internal static class SettingsMenuOptions
 		}
 
 		return [.. languages];
+	}
+
+	private static void AssignHotkey(Hotkey hotkey, CapturedKey key)
+	{
+		string[] modifiers = [.. new[] { (key.Ctrl, "ctrl"), (key.Alt, "alt"), (key.Shift, "shift") }.Where(modifier => modifier.Item1).Select(modifier => modifier.Item2)];
+		var conflict = Core.HotkeyList.FirstOrDefault(other => other != hotkey && other.Key == key.Key && other.Modifiers.Order().SequenceEqual(modifiers.Order()));
+		if (conflict != null) {
+			hotkeyMessage = $"{Hotkeys.Describe(conflict)} is already used by {HotkeyLabels.GetValueOrDefault(conflict.Name, conflict.Name)}";
+			return;
+		}
+
+		hotkey.Key = key.Key;
+		hotkey.Modifiers = modifiers;
+		hotkeyMessage = "";
+		Hotkeys.Save(Core.HotkeyList);
+	}
+
+	private static void ResetHotkeys()
+	{
+		Hotkeys.ResetToDefaults(Core.HotkeyList);
+		hotkeyMessage = "";
+		Hotkeys.Save(Core.HotkeyList);
 	}
 
 	private static void OpenSettingsFolder()
