@@ -194,8 +194,6 @@ internal sealed class Conditions
 	public bool OnlyInTown { get; set; }
 	public bool OnlyAtMaxLevel { get; set; }
 	public bool OnlyIdle { get; set; }
-	public string MouseNear { get; set; } = "";
-	public string MouseFar { get; set; } = "";
 	public string ActiveBuffs { get; set; } = "";
 }
 

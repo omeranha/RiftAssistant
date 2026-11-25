@@ -1,6 +1,3 @@
-using System.Globalization;
-using SharpDX;
-
 namespace RiftAssistant.Modules;
 
 internal class ModuleConditionEvaluator
@@ -12,10 +9,6 @@ internal class ModuleConditionEvaluator
 	private readonly bool onlyAtMaxLevel;
 
 	private readonly bool onlyIdle;
-
-	private RectangleF? mouseNearRect;
-
-	private RectangleF? mouseFarRect;
 
 	private readonly SnoPower[] requiredBuffPowers;
 
@@ -52,30 +45,6 @@ internal class ModuleConditionEvaluator
 				} else {
 					requiredBuffStacks[i] = -1;
 				}
-			}
-		}
-
-		string mouseNearStr = conditions.MouseNear;
-		if (mouseNearStr != null) {
-			string[] rectData = mouseNearStr.Split(',');
-			if (rectData.Length == 4 &&
-				float.TryParse(rectData[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var x) &&
-				float.TryParse(rectData[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var y) &&
-				float.TryParse(rectData[2], NumberStyles.Any, CultureInfo.InvariantCulture, out var width) &&
-				float.TryParse(rectData[3], NumberStyles.Any, CultureInfo.InvariantCulture, out var height)) {
-				mouseNearRect = new RectangleF(x, y, width, height);
-			}
-		}
-
-		string mouseFarStr = conditions.MouseFar;
-		if (mouseFarStr != null) {
-			string[] rectData = mouseFarStr.Split(',');
-			if (rectData.Length == 4 &&
-				float.TryParse(rectData[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var x) &&
-				float.TryParse(rectData[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var y) &&
-				float.TryParse(rectData[2], NumberStyles.Any, CultureInfo.InvariantCulture, out var width) &&
-				float.TryParse(rectData[3], NumberStyles.Any, CultureInfo.InvariantCulture, out var height)) {
-				mouseFarRect = new RectangleF(x, y, width, height);
 			}
 		}
 	}
