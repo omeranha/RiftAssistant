@@ -544,8 +544,25 @@ internal class Overlay
 			form_0_SizeChanged(null, EventArgs.Empty);
 		} catch (Exception exception) {
 			Logger.LogException(exception.ToString());
+			RecoverRenderTarget();
 		}
 		return true;
+	}
+
+	private void RecoverRenderTarget()
+	{
+		if (clipLayer != null) {
+			try {
+				EndClip();
+			} catch (SharpDXException) {
+				clipLayer = null;
+			}
+		}
+
+		try {
+			renderTarget.EndDraw();
+		} catch (SharpDXException) {
+		}
 	}
 
 	private void CleanupFontCache()

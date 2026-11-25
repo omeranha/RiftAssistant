@@ -123,7 +123,12 @@ internal class PluginHandler
 
 		foreach (var handler in handlers) {
 			long start = Stopwatch.GetTimestamp();
-			action(handler);
+			try {
+				action(handler);
+			} catch (Exception ex) {
+				Logger.LogException($"[Plugin: {handler.GetType().Name}] {typeof(T).Name} failed: {ex}");
+			}
+
 			if (handler is IPlugin plugin) Core.Controller?.Stat.Measure(plugin, typeof(T).Name, start);
 		}
 	}
@@ -161,13 +166,30 @@ internal class PluginHandler
 	{
 		if (!GameWindowManager.Window.IsForeground) return;
 
-		List<InputEventHandler> handlers;
+		bool isMouseButton = e.Key is Vk.LBUTTON or Vk.RBUTTON or Vk.MBUTTON;
+		List<InputEventHandler> inputHandlers;
+		List<IKeyEventHandler> keyHandlers;
 		lock (pluginLock) {
-			handlers = [.. Plugins.Where(p => p.Enabled).OfType<InputEventHandler>()];
+			var enabled = Plugins.Where(p => p.Enabled).ToList();
+			inputHandlers = [.. enabled.OfType<InputEventHandler>()];
+			keyHandlers = isMouseButton ? [] : [.. enabled.OfType<IKeyEventHandler>()];
 		}
 
-		foreach (var handler in handlers) {
-			handler.OnInputEvent(e);
+		foreach (var handler in inputHandlers) {
+			RunInputHandler(handler, nameof(InputEventHandler.OnInputEvent), () => handler.OnInputEvent(e));
+		}
+
+		foreach (var handler in keyHandlers) {
+			RunInputHandler(handler, nameof(IKeyEventHandler.OnKeyEvent), () => handler.OnKeyEvent(e));
+		}
+	}
+
+	private static void RunInputHandler(IPlugin plugin, string method, Action call)
+	{
+		try {
+			call();
+		} catch (Exception ex) {
+			Logger.LogException($"[Plugin: {plugin.GetType().Name}] {method} failed: {ex}");
 		}
 	}
 
