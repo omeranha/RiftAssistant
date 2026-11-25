@@ -102,23 +102,23 @@ public class GameController
 
 	public Actor SelectedActor => CoreCollector.ActorCollector.IActor_0;
 
-	public StatTracker CurrentAccountTotalOnCurrentDifficulty => CoreCollector.CurrentAccountTotalOnCurrentDifficulty;
+	public IStatTracker CurrentAccountTotalOnCurrentDifficulty => CoreCollector.CurrentAccountTotalOnCurrentDifficulty;
 
-	public StatTracker CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.CurrentAccountYesterdayOnCurrentDifficulty;
+	public IStatTracker CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.CurrentAccountYesterdayOnCurrentDifficulty;
 
-	public StatTracker CurrentAccountTodayOnCurrentDifficulty => CoreCollector.CurrentAccountTodayOnCurrentDifficulty;
+	public IStatTracker CurrentAccountTodayOnCurrentDifficulty => CoreCollector.CurrentAccountTodayOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroTotal => CoreCollector.CurrentHeroTotal;
+	public IStatTracker CurrentHeroTotal => CoreCollector.CurrentHeroTotal;
 
-	public StatTracker CurrentHeroYesterday => CoreCollector.CurrentHeroYesterday;
+	public IStatTracker CurrentHeroYesterday => CoreCollector.CurrentHeroYesterday;
 
-	public StatTracker CurrentHeroToday => CoreCollector.CurrentHeroToday;
+	public IStatTracker CurrentHeroToday => CoreCollector.CurrentHeroToday;
 
-	public StatTracker CurrentHeroTotalOnCurrentDifficulty => CoreCollector.CurrentHeroTotalOnCurrentDifficulty;
+	public IStatTracker CurrentHeroTotalOnCurrentDifficulty => CoreCollector.CurrentHeroTotalOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.CurrentHeroYesterdayOnCurrentDifficulty;
+	public IStatTracker CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.CurrentHeroYesterdayOnCurrentDifficulty;
 
-	public StatTracker CurrentHeroTodayOnCurrentDifficulty => CoreCollector.CurrentHeroTodayOnCurrentDifficulty;
+	public IStatTracker CurrentHeroTodayOnCurrentDifficulty => CoreCollector.CurrentHeroTodayOnCurrentDifficulty;
 
 	public GameController()
 	{

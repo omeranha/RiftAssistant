@@ -2,11 +2,11 @@ namespace RiftAssistant.Controllers;
 
 public class TrackerController
 {
-	public StatTracker Session => CoreCollector.Session;
+	public IStatTracker Session => CoreCollector.Session;
 
-	public StatTracker SessionAlwaysRunning => CoreCollector.SessionAlwaysRunning;
+	public IStatTracker SessionAlwaysRunning => CoreCollector.SessionAlwaysRunning;
 
-	public StatTracker CurrentAccountTotal
+	public IStatTracker CurrentAccountTotal
 	{
 		get
 		{
@@ -18,7 +18,7 @@ public class TrackerController
 		}
 	}
 
-	public StatTracker CurrentAccountLastMonth
+	public IStatTracker CurrentAccountLastMonth
 	{
 		get
 		{
@@ -30,7 +30,7 @@ public class TrackerController
 		}
 	}
 
-	public StatTracker CurrentAccountLastWeek
+	public IStatTracker CurrentAccountLastWeek
 	{
 		get
 		{
@@ -42,7 +42,7 @@ public class TrackerController
 		}
 	}
 
-	public StatTracker CurrentAccountYesterday
+	public IStatTracker CurrentAccountYesterday
 	{
 		get
 		{
@@ -54,7 +54,7 @@ public class TrackerController
 		}
 	}
 
-	public StatTracker CurrentAccountToday
+	public IStatTracker CurrentAccountToday
 	{
 		get
 		{

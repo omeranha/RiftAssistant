@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace RiftAssistant.Tracking;
 
-public class StatTracker
+internal sealed class StatTracker : IStatTracker
 {
 	private const double MillisecondsPerSecond = 1000.0;
 	private const double MillisecondsPerHour = 3_600_000.0;

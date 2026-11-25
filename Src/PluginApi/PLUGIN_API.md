@@ -84,6 +84,10 @@ Item filter files are reloaded together with the plugins and also when they chan
 
 `Settings.InventoryLock` in `settings/settings.json` (`LeftColumn`, `TopRow`, `RightColumn`, `BottomRow`, all `-1` when unused) defines a protected inventory area. `Assistant.Inventory.InventoryLockArea` returns it as a `Rectangle` and `Item.IsInventoryLocked` is true for items that overlap it.
 
+## Stat trackers
+
+`Assistant.Tracker` (`Session`, `CurrentAccountToday`, ...) and `Assistant.Game` (`CurrentHeroToday`, `CurrentHeroTotalOnCurrentDifficulty`, ...) return `IStatTracker`, as in the original API. The interface is read-only: counters, times, and the per-hour and per-second rates. Plugins cannot change, reset or save a tracker, and the tracker class itself is internal. The values are stored in `stat_tracker/` and the "today" trackers start fresh at midnight.
+
 ## Differences from the original API
 
 | Original | Now |
