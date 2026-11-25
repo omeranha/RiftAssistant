@@ -1,4 +1,4 @@
-#nullable enable annotations
+﻿#nullable enable annotations
 #nullable disable warnings
 using System;
 using System.Collections.Generic;
@@ -223,6 +223,7 @@ public static class Core
 			SettingsManager.Tick();
 			StatTrackerAutosave.Tick();
 			if (!GameWindowManager.Update()) {
+				HideOverlay();
 				Delay((int)OverlayFrameInterval);
 				continue;
 			}
@@ -241,6 +242,12 @@ public static class Core
 
 			Delay((int)OverlayFrameInterval);
 		}
+	}
+
+	private static void HideOverlay()
+	{
+		var form = Overlay.Instance?.Frm;
+		if (form != null && form.Visible) form.Visible = false;
 	}
 
 	internal static bool Delay(int milliseconds)
@@ -295,3 +302,4 @@ public static class Core
 		return result;
 	}
 }
+
