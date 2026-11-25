@@ -297,7 +297,7 @@ internal class PluginHandler
 			if (plugin == null) return null;
 		} catch (Exception ex) {
 			Logger.Info($"[ERROR] instantiating plugin {name} {ex.Message}");
-			Logger.LogException(ex.Message);
+			Logger.LogException(ex.ToString());
 			return null;
 		}
 
@@ -306,7 +306,7 @@ internal class PluginHandler
 			return plugin;
 		} catch (Exception ex) {
 			Logger.Info($"[ERROR] loading plugin {name} {ex.Message}");
-			Logger.LogException($"[Plugin: {name}] {ex.Message}");
+			Logger.LogException($"[Plugin: {name}] {ex}");
 			return null;
 		}
 	}

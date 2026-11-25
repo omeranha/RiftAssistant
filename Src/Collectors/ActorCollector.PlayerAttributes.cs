@@ -1179,7 +1179,7 @@ internal partial class ActorCollector
 				try {
 					CoreCollector.OnCooldown?.Invoke(player, item5);
 				} catch (Exception exception_) {
-					Logger.LogException(exception_.Message);
+					Logger.LogException(exception_.ToString());
 				}
 			}
 		}
@@ -1189,7 +1189,7 @@ internal partial class ActorCollector
 				try {
 					CoreCollector.OnTrueCooldown?.Invoke(player, playerSkill);
 				} catch (Exception exception) {
-					Logger.LogException(exception.Message);
+					Logger.LogException(exception.ToString());
 				}
 			}
 		}

@@ -440,7 +440,7 @@ internal partial class ActorCollector
 					try {
 						onMonsterKilled?.Invoke(this, monster);
 					} catch (Exception exception_) {
-						Logger.LogException(exception_.Message);
+						Logger.LogException(exception_.ToString());
 					}
 					continue;
 				}
@@ -628,7 +628,7 @@ internal partial class ActorCollector
 						try {
 							onMonsterKilled?.Invoke(this, monster2);
 						} catch (Exception exception) {
-							Logger.LogException(exception.Message);
+							Logger.LogException(exception.ToString());
 						}
 					}
 					if (monster2 != null) {
@@ -834,7 +834,7 @@ internal partial class ActorCollector
 		try {
 			EventHandler_0?.Invoke(this, EventArgs.Empty);
 		} catch (Exception exception2) {
-			Logger.LogException(exception2.Message);
+			Logger.LogException(exception2.ToString());
 		}
 		return true;
 	}

@@ -56,12 +56,12 @@ public static class Core
 
 		Application.ThreadException += (_, e) => {
 			if (e.Exception != null) {
-				Logger.LogException(e.Exception.Message);
+				Logger.LogException(e.Exception.ToString());
 			}
 		};
 		AppDomain.CurrentDomain.UnhandledException += (_, e) => {
 			if (e.ExceptionObject is Exception ex) {
-				Logger.LogException(ex.Message);
+				Logger.LogException(ex.ToString());
 			}
 		};
 

@@ -378,7 +378,7 @@ internal class PlayerCollector
 			CoreCollector.FloatingNumberManager.Clear(player);
 			return false;
 		} catch (Exception exception_) {
-			Logger.LogException(exception_.Message);
+			Logger.LogException(exception_.ToString());
 		}
 		return false;
 	}

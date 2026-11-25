@@ -435,7 +435,7 @@ internal static class CoreCollector
 				UiElements.Refresh(memoryValid);
 				GameSettingsManager.Refresh();
 			} catch (Exception ex) {
-				Logger.LogException(ex.Message);
+				Logger.LogException(ex.ToString());
 			}
 
 			Hero hero = HeroCollector.HeroList.FirstOrDefault();
@@ -548,7 +548,7 @@ internal static class CoreCollector
 						actorsSnapshot[i] = actor;
 					}
 				} catch (Exception ex) {
-					Logger.LogException(ex.Message);
+					Logger.LogException(ex.ToString());
 				}
 
 				if (LocalPlayer.SnoArea == null) {
@@ -574,22 +574,22 @@ internal static class CoreCollector
 				try {
 					MarkerCollector.Collect();
 				} catch (Exception exception) {
-					Logger.LogException(exception.Message);
+					Logger.LogException(exception.ToString());
 				}
 				try {
 					FloatingNumberManager.Update(LocalPlayer as Player);
 				} catch (Exception exception2) {
-					Logger.LogException(exception2.Message);
+					Logger.LogException(exception2.ToString());
 				}
 				try {
 					WaypointManager.Update();
 				} catch (Exception exception3) {
-					Logger.LogException(exception3.Message);
+					Logger.LogException(exception3.ToString());
 				}
 				try {
 					QuestManager.Refresh();
 				} catch (Exception exception4) {
-					Logger.LogException(exception4.Message);
+					Logger.LogException(exception4.ToString());
 				}
 				IsInTown = snoArea?.IsTown ?? false;
 				if (flag3 || Unknown == GameDifficulty.unknown || RunTracker == null) {
@@ -605,14 +605,14 @@ internal static class CoreCollector
 					try {
 						SceneCollector.Collect();
 					} catch (Exception exception5) {
-						Logger.LogException(exception5.Message);
+						Logger.LogException(exception5.ToString());
 					}
 					ActorCollector.stopwatch_0 = null;
 					ActorCollector.Act = 0;
 					try {
 						OnNewArea?.Invoke(null, EventArgs.Empty);
 					} catch (Exception exception6) {
-						Logger.LogException(exception6.Message);
+						Logger.LogException(exception6.ToString());
 					}
 					Player[] iPlayer_ = PlayerCollector.PlayerSlots;
 					for (int i = 0; i < iPlayer_.Length; i++) {
@@ -655,7 +655,7 @@ internal static class CoreCollector
 			try {
 				ItemCollector.Collect();
 			} catch (Exception exception7) {
-				Logger.LogException(exception7.Message);
+				Logger.LogException(exception7.ToString());
 			}
 			Player[] iPlayer_2 = PlayerCollector.PlayerSlots;
 			for (int j = 0; j < iPlayer_2.Length; j++) {
@@ -703,7 +703,7 @@ internal static class CoreCollector
 				item3.Stop();
 			}
 		} catch (Exception exception8) {
-			Logger.LogException(exception8.Message);
+			Logger.LogException(exception8.ToString());
 		}
 	}
 

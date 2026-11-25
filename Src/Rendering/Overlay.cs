@@ -162,13 +162,13 @@ internal class Overlay
 		try {
 			mapRenderer.RenderMap();
 		} catch (Exception exception_) {
-			Logger.LogException(exception_.Message);
+			Logger.LogException(exception_.ToString());
 		}
 		renderTarget.Transform = transform;
 		try {
 			PaintWorld_Map?.Invoke(this, EventArgs.Empty);
 		} catch (Exception exception) {
-			Logger.LogException(exception.Message);
+			Logger.LogException(exception.ToString());
 		}
 		if (ActiveMapMode == MapMode.Minimap) {
 			if (Core.Controller.SceneReveal.MinimapClip) {
@@ -540,10 +540,10 @@ internal class Overlay
 				CleanupFontCache();
 			}
 		} catch (SharpDXException exception_) {
-			Logger.LogException(exception_.Message);
+			Logger.LogException(exception_.ToString());
 			form_0_SizeChanged(null, EventArgs.Empty);
 		} catch (Exception exception) {
-			Logger.LogException(exception.Message);
+			Logger.LogException(exception.ToString());
 		}
 		return true;
 	}

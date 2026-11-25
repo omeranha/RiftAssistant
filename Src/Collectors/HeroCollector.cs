@@ -116,7 +116,7 @@ internal class HeroCollector
 		}
 		catch (Exception exception_)
 		{
-			Logger.LogException(exception_.Message);
+			Logger.LogException(exception_.ToString());
 		}
 		heroList.TryGetValue(num3, out var value);
 		IHero_0 = value;

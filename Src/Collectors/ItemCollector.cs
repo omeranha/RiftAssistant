@@ -248,7 +248,7 @@ internal class ItemCollector
 							Item = item
 						});
 					} catch (Exception exception) {
-						Logger.LogException(exception.Message);
+						Logger.LogException(exception.ToString());
 					}
 					continue;
 				}
@@ -259,7 +259,7 @@ internal class ItemCollector
 						To = itemLocation
 					});
 				} catch (Exception exception2) {
-					Logger.LogException(exception2.Message);
+					Logger.LogException(exception2.ToString());
 				}
 				continue;
 			}
@@ -276,7 +276,7 @@ internal class ItemCollector
 								gambled = true
 							});
 						} catch (Exception exception3) {
-							Logger.LogException(exception3.Message);
+							Logger.LogException(exception3.ToString());
 						}
 					}
 				}
@@ -288,7 +288,7 @@ internal class ItemCollector
 						gambled = false
 					});
 				} catch (Exception exception4) {
-					Logger.LogException(exception4.Message);
+					Logger.LogException(exception4.ToString());
 				}
 			}
 		}

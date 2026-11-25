@@ -203,7 +203,7 @@ internal class ModulePlayerInfo : Module
 				renderBrush.DrawGeometry(geometry2);
 			}
 		} catch (Exception e) {
-			Logger.LogException(e.Message);
+			Logger.LogException(e.ToString());
 		}
 	}
 }

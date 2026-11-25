@@ -179,7 +179,7 @@ internal partial class ActorCollector
 				try {
 					OnPortalFound?.Invoke(this, portal);
 				} catch (Exception exception_) {
-					Logger.LogException(exception_.Message);
+					Logger.LogException(exception_.ToString());
 				}
 			}
 			return portal;

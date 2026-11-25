@@ -253,10 +253,10 @@ internal class SceneMapRenderer
 				Application.Exit();
 				Environment.Exit(0);
 			} catch (Exception ex) {
-				Logger.LogException(ex.Message);
+				Logger.LogException(ex.ToString());
 			}
 		} catch (Exception ex) {
-			Logger.LogException(ex.Message);
+			Logger.LogException(ex.ToString());
 		}
 		currentMapMode = Overlay.Instance.ActiveMapMode;
 	}

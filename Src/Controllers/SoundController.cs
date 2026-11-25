@@ -42,7 +42,7 @@ public class SoundController
 
 			synthesizer.SpeakAsync(text);
 		} catch (Exception ex) {
-			Logger.LogException(ex.Message);
+			Logger.LogException(ex.ToString());
 		}
 	}
 
@@ -61,7 +61,7 @@ public class SoundController
 			player.Load();
 			return player;
 		} catch (Exception ex) {
-			Logger.LogException(ex.Message);
+			Logger.LogException(ex.ToString());
 			return null;
 		}
 	}
