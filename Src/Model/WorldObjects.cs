@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -39,7 +41,7 @@ internal class Door(uint acdid, uint annId2, SnoActor snoActor2) : MapObject(acd
 {
 }
 
-public class HeadStone(uint acdid, uint annId3, SnoActor actor, uint annId2, Player player) : Actor(acdid, annId3, actor)
+public class HeadStone(uint acdid, uint annId3, SnoActor? actor, uint annId2, Player? player) : Actor(acdid, annId3, actor)
 {
 	public uint PlayerActorAnnId { get; set; } = annId2;
 
@@ -66,11 +68,11 @@ public class MapObject : Actor, IClickableActor
 	}
 }
 
-public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActor, WorldCoordinate worldCoordinate, uint textureSno, int textureFrameIndex)
+public class Marker(string id, uint worldId, SnoQuest? snoQuest, SnoActor? snoActor, WorldCoordinate worldCoordinate, uint textureSno, int textureFrameIndex)
 {
 	private readonly string id = id;
-	private SnoActor snoActor = snoActor;
-	private readonly SnoQuest snoQuest = snoQuest;
+	private SnoActor? snoActor = snoActor;
+	private readonly SnoQuest? snoQuest = snoQuest;
 	private readonly uint worldId = worldId;
 	private readonly WorldCoordinate worldCoordinate = worldCoordinate;
 	private uint textureSno = textureSno;
@@ -87,7 +89,7 @@ public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActo
 		}
 	}
 
-	public SnoActor SnoActor
+	public SnoActor? SnoActor
 	{
 		get {
 			return snoActor;
@@ -97,7 +99,7 @@ public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActo
 		}
 	}
 
-	public SnoQuest SnoQuest
+	public SnoQuest? SnoQuest
 	{
 		get {
 			return snoQuest;
@@ -188,7 +190,7 @@ public class Marker(string id, uint worldId, SnoQuest snoQuest, SnoActor snoActo
 		}
 	}
 
-	public string Name =>
+	public string? Name =>
 	SnoActor?.NameLocalized
 	?? SnoData.Monsters.GetMonster(SnoActor?.Sno ?? 0)?.NameLocalized
 	?? SnoQuest?.NameLocalized;
@@ -275,7 +277,7 @@ internal class MonsterObstacle : Monster
 	}
 }
 
-public class Portal(uint acdid, uint annId, SnoActor snoActor2, SnoArea snoArea, uint uint_10) : Actor(acdid, annId, snoActor2)
+public class Portal(uint acdid, uint annId, SnoActor snoActor2, SnoArea? snoArea, uint uint_10) : Actor(acdid, annId, snoActor2)
 {
 	public SnoArea TargetArea { get; set; } = snoArea;
 

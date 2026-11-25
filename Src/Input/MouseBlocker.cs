@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -21,7 +23,7 @@ internal static partial class MouseBlocker
 
 	private static readonly LowLevelMouseProc _proc = HookCallback;
 	private static IntPtr _hookID = IntPtr.Zero;
-	private static Thread _hookThread;
+	private static Thread? _hookThread;
 	private static uint hookThreadId;
 
 	public static void Start()
@@ -53,7 +55,7 @@ internal static partial class MouseBlocker
 	private static IntPtr SetHook(LowLevelMouseProc proc)
 	{
 		using (Process curProcess = Process.GetCurrentProcess())
-		using (ProcessModule curModule = curProcess.MainModule) {
+		using (ProcessModule? curModule = curProcess.MainModule) {
 			return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
 		}
 	}

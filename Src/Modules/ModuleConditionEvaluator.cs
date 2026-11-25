@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 namespace RiftAssistant.Modules;
 
 internal class ModuleConditionEvaluator
@@ -14,7 +16,7 @@ internal class ModuleConditionEvaluator
 
 	private readonly int[] requiredBuffStacks;
 
-	public ModuleConditionEvaluator(Conditions conditions)
+	public ModuleConditionEvaluator(Conditions? conditions)
 	{
 		if (conditions == null || !conditions.Enabled) {
 			return;
@@ -109,7 +111,7 @@ internal class ModuleConditionEvaluator
 			bool flag = false;
 			for (int i = 0; i < requiredBuffPowers.Length; i++) {
 				SnoPower snoPower = requiredBuffPowers[i];
-				Buff buff = CoreCollector.LocalPlayer.Powers.GetBuff(snoPower.Sno);
+				Buff? buff = CoreCollector.LocalPlayer.Powers.GetBuff(snoPower.Sno);
 				if (buff != null && buff.Active) {
 					int num = requiredBuffStacks[i];
 					if (num == -1 || buff.IconCounts[num] >= 1) {

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -91,7 +93,7 @@ internal class ModulePlayerInfo : Module
 				if (playerSkill.SnoPower.NormalIconTextureId == 0) {
 					continue;
 				}
-				Texture texture = TextureManager.GetTextureById(playerSkill.SnoPower.NormalIconTextureId);
+				Texture? texture = TextureManager.GetTextureById(playerSkill.SnoPower.NormalIconTextureId);
 				if (showSkillIcons && texture != null) {
 					float num9 = num6 * (float)Math.Cos((double)((float)(num7 / 100 * ((i >= 3) ? 100 : 0) - 135 + (360 - num7) / 2) + 360f * num8) * Math.PI / 180.0);
 					float num10 = num6 * (float)Math.Sin((double)((float)(num7 / 100 * ((i >= 3) ? 100 : 0) - 135 + (360 - num7) / 2) + 360f * num8) * Math.PI / 180.0);

@@ -265,9 +265,9 @@ public interface IStatTrackerCore
 
 public interface IStatTracker : IStatTrackerCore
 {
-	string Id { get; }
-	string Title { get; }
-	SnoArea SnoArea { get; }
+	string? Id { get; }
+	string? Title { get; }
+	SnoArea? SnoArea { get; }
 	bool AlwaysRunning { get; }
 	bool IsMainTimerRunning { get; }
 	bool IsTownTimerRunning { get; }

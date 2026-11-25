@@ -7,7 +7,7 @@ public class PlayerPowerInfo
 {
 	private readonly Player player0;
 
-	private Skill skill0;
+	private Skill skill0 = null!;
 
 	public Skill HealthPotionSkill => skill0 ?? (skill0 = new Skill(player0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
 
@@ -75,7 +75,7 @@ public class PlayerPowerInfo
 		UsedLegendaryGems = new LegendaryGemInfo(player);
 	}
 
-	public Skill GetUsedSkill(SnoPower snoPower)
+	public Skill? GetUsedSkill(SnoPower snoPower)
 	{
 		if (snoPower == null)
 		{
@@ -105,13 +105,13 @@ public class PlayerPowerInfo
 		return skill;
 	}
 
-	public Buff GetBuff(string code)
+	public Buff? GetBuff(string code)
 	{
 		player0.buffsByKey.TryGetValue(code, out var value);
 		return value;
 	}
 
-	public Buff GetBuff(uint sno)
+	public Buff? GetBuff(uint sno)
 	{
 		player0.powerSno2buff.TryGetValue(sno, out var value);
 		return value;

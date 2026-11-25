@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Collections.Generic;
 using System.IO;
 
@@ -21,13 +23,13 @@ internal sealed class Attributes
 		return ByIndex[index];
 	}
 
-	public AcdAttribute GetAttributeByCode(string code)
+	public AcdAttribute? GetAttributeByCode(string code)
 	{
 		all.TryGetValue(code, out var value);
 		return value;
 	}
 
-	public AttributeProcessor GetAttributeProcessor(string code)
+	public AttributeProcessor? GetAttributeProcessor(string code)
 	{
 		attributeProcessorsByKey.TryGetValue(code, out var value);
 		return value;
@@ -49,7 +51,7 @@ internal sealed class Attributes
 				{
 					int key = dataReader.ReadPackedInt32();
 					string code = dataReader.ReadString();
-					string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._attributedescriptions, code);
+					string? stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._attributedescriptions, code);
 					stringByCode = stringByCode.Replace("{value", "{VALUE").Replace("{Value", "{VALUE").Replace("*100}|1|", "*100|1|")
 						.Replace("|+|}]", "|+|]")
 						.Replace(" * 100", "*100")
@@ -242,7 +244,7 @@ internal sealed class Attributes
 
 	private void AddProcessor(byte byte_0, string string_0, string code, uint maxValue, double? nullable_0, int int_0)
 	{
-		AcdAttribute attributeByCode = GetAttributeByCode(code);
+		AcdAttribute? attributeByCode = GetAttributeByCode(code);
 		if (attributeByCode != null)
 		{
 			AttributeProcessor attributeProcessor = new AttributeProcessor(byte_0, string_0, attributeByCode, maxValue, nullable_0, int_0);

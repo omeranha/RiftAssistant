@@ -11,7 +11,7 @@ public class Hero
 
 	public string BattleTag { get; }
 
-	public HeroClassDefinition ClassDefinition { get; }
+	public HeroClassDefinition? ClassDefinition { get; }
 
 	public ulong AccountIdHi { get; }
 
@@ -39,7 +39,7 @@ public class Hero
 
 	public DateTime LastPlayedDT { get; set; } = DateTime.MinValue;
 
-	public SnoQuestStep QuestStep { get; set; }
+	public SnoQuestStep? QuestStep { get; set; }
 
 	public Hero(uint uint_1, string string_2, string battleTag, uint uint_2, long long_1, bool hardcore, bool isMale, int season2, bool seasonal, ulong accountIdHi, ulong accountIdLo)
 	{

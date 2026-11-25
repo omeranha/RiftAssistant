@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 
@@ -19,15 +21,15 @@ public class Actor
 
 	public uint WorldSno { get; set; }
 
-	public SnoWorld SnoWorld { get; set; }
+	public SnoWorld? SnoWorld { get; set; }
 
-	public Scene Scene { get; set; }
+	public Scene? Scene { get; set; }
 
 	public uint AcdId { get; private set; }
 
 	public uint AnnId { get; set; }
 
-	public SnoActor SnoActor { get; set; }
+	public SnoActor? SnoActor { get; set; }
 
 	public WorldCoordinate CollisionCoordinate { get; }
 
@@ -152,7 +154,7 @@ public class Actor
 		return defaultValue;
 	}
 
-	public int GetAttributeValueAsInt(AcdAttribute attribute, uint modifier, int defaultValue = int.MaxValue)
+	public int GetAttributeValueAsInt(AcdAttribute? attribute, uint modifier, int defaultValue = int.MaxValue)
 	{
 		uint id = attribute.GetId(modifier);
 		foreach (r_AttributeEntry item in attributeEntries)

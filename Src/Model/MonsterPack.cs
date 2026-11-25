@@ -10,7 +10,7 @@ public class MonsterPack
 
 	public bool IsFullChampionPack { get; set; }
 
-	public SnoMonster LeadSnoMonster { get; set; }
+	public SnoMonster LeadSnoMonster { get; set; } = null!;
 
 	public IEnumerable<SnoMonsterAffix> AffixSnoList => AffixSnoList2;
 
@@ -20,13 +20,13 @@ public class MonsterPack
 
 	public IEnumerable<Monster> MonstersUnknown => MonstersUnknown2.Values;
 
-	public SnoMonster MinionSnoMonster { get; set; }
+	public SnoMonster MinionSnoMonster { get; set; } = null!;
 
-	public string String_0 { get; set; }
+	public string String_0 { get; set; } = null!;
 
-	public string String_1 { get; set; }
+	public string String_1 { get; set; } = null!;
 
-	public List<SnoMonsterAffix> AffixSnoList2 { get; set; }
+	public List<SnoMonsterAffix> AffixSnoList2 { get; set; } = null!;
 
 	public Dictionary<double, Monster> MonstersAlive2 { get; } = new Dictionary<double, Monster>();
 

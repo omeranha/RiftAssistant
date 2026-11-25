@@ -10,7 +10,7 @@ internal abstract class Module : IDisposable
 
 	public float opacity;
 
-	public ITransparent[] transparents;
+	public ITransparent[] transparents = null!;
 
 	public bool bool_1 = true;
 
@@ -25,7 +25,7 @@ internal abstract class Module : IDisposable
 
 	public bool bool_3 = true;
 
-	protected Module(bool enabled, Conditions conditions = null)
+	protected Module(bool enabled, Conditions? conditions = null)
 	{
 		Overlay.Instance.modules.Add(this);
 		Show = enabled;

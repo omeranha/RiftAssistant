@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 namespace RiftAssistant.Modules;
 
 internal class ModulePortraits : Module
@@ -19,17 +21,17 @@ internal class ModulePortraits : Module
 			}
 			int num2 = ((!item.IsMe) ? num : 0);
 			UiElement uiElement = CoreCollector.UiElements.uiElements145[num2];
-			Texture itexture_ = TextureManager.GetTextureById(uiElement.TextureSno);
+			Texture? itexture_ = TextureManager.GetTextureById(uiElement.TextureSno);
 			UiElement uiElement2 = CoreCollector.UiElements.uiElements146[num2];
-			Texture textureById = TextureManager.GetTextureById(uiElement2.TextureSno);
+			Texture? textureById = TextureManager.GetTextureById(uiElement2.TextureSno);
 			UiElement uiElement3 = CoreCollector.UiElements.uiElements147[num2];
-			Texture texture3 = TextureManager.GetTextureById(uiElement3.TextureSno);
+			Texture? texture3 = TextureManager.GetTextureById(uiElement3.TextureSno);
 			float num3 = (float)GameWindowManager.Window.Size.Height * 0.0085f;
 			DrawPortrait(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, textureById, texture3);
 		}
 	}
 
-	private void DrawPortrait(float float_1, float float_2, Texture texture, Texture texture1, Texture texture2)
+	private void DrawPortrait(float float_1, float float_2, Texture? texture, Texture? texture1, Texture? texture2)
 	{
 		float num = (float)GameWindowManager.Window.Size.Height * 0.143f;
 		float num2 = texture.Width / texture.Height * num;

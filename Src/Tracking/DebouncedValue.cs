@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Diagnostics;
 
 namespace RiftAssistant.Tracking;

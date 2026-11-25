@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using SharpDX;
 using SharpDX.Direct2D1;
@@ -6,7 +8,7 @@ namespace RiftAssistant.Rendering;
 
 internal class RenderBrush : ITransparent, IDisposable, IBrush
 {
-	private readonly Lazy<SharpDX.Direct2D1.Brush> brush;
+	private readonly Lazy<SharpDX.Direct2D1.Brush>? brush;
 
 	public readonly float InitialStrokeWidth;
 

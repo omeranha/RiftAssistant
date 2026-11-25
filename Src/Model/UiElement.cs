@@ -14,9 +14,9 @@ public class UiElement
 
 	internal readonly int hash;
 
-	internal UiElement uiElement0;
+	internal UiElement? uiElement0;
 
-	internal UiElement uiElement1;
+	internal UiElement? uiElement1;
 
 	public int Bucket = -1;
 
@@ -64,9 +64,9 @@ public class UiElement
 
 	public uint AcdId => GameWindowManager.Read<uint>(long_0 + 3248);
 
-	public UiElement ReplacementWhenNotVisible { get; internal set; }
+	public UiElement ReplacementWhenNotVisible { get; internal set; } = null!;
 
-	public UiElement(string path2, UiElement inGameBottomHudUiElement = null, UiElement requiredHidden = null)
+	public UiElement(string path2, UiElement? inGameBottomHudUiElement = null, UiElement? requiredHidden = null)
 	{
 		Path = path2;
 		hashPath = HashPath(path2.ToLower(CultureInfo.InvariantCulture));
@@ -86,7 +86,7 @@ public class UiElement
 		return num;
 	}
 
-	public string ReadText(Encoding encoding = null, bool removeColors = false)
+	public string? ReadText(Encoding? encoding = null, bool removeColors = false)
 	{
 		if (Class75_0.UnknownPtr1 != 0L) {
 			string text = GameWindowManager.ReadString(Class75_0.UnknownPtr1, 256, encoding ?? Encoding.ASCII, false);
@@ -153,7 +153,7 @@ public class UiElement
 		return GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * index + 520);
 	}
 
-	public List<(string Text, int Top, int Bottom)> GetChildTextMetrics(Encoding encoding = null)
+	public List<(string Text, int Top, int Bottom)> GetChildTextMetrics(Encoding? encoding = null)
 	{
 		var list = new List<(string Text, int Top, int Bottom)>();
 		for (int i = 0; i < Class75_0.ChildCount; i++) {

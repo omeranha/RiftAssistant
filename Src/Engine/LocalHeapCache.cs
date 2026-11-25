@@ -16,7 +16,7 @@ internal class LocalHeapCache
 	private class SmallBlockGroup
 	{
 		public int Size;
-		public long[] Entries;
+		public long[] Entries = null!;
 		public int Count;
 	}
 
@@ -29,7 +29,7 @@ internal class LocalHeapCache
 	
 	private long smallblocksnode_address;
 	private int smallblocksnode_size;
-	private long[] smallblocksnode_data;
+	private long[]? smallblocksnode_data;
 	
 	// Use arrays for small blocks by size instead of Dictionary<List<long>>
 	private SmallBlockGroup[] smallBlocksBySize = new SmallBlockGroup[100]; // Pre-allocated

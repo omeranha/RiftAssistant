@@ -6,7 +6,7 @@ public class TrackerController
 
 	public IStatTracker SessionAlwaysRunning => CoreCollector.SessionAlwaysRunning;
 
-	public IStatTracker CurrentAccountTotal
+	public IStatTracker? CurrentAccountTotal
 	{
 		get
 		{
@@ -18,7 +18,7 @@ public class TrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountLastMonth
+	public IStatTracker? CurrentAccountLastMonth
 	{
 		get
 		{
@@ -30,7 +30,7 @@ public class TrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountLastWeek
+	public IStatTracker? CurrentAccountLastWeek
 	{
 		get
 		{
@@ -42,7 +42,7 @@ public class TrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountYesterday
+	public IStatTracker? CurrentAccountYesterday
 	{
 		get
 		{
@@ -54,7 +54,7 @@ public class TrackerController
 		}
 	}
 
-	public IStatTracker CurrentAccountToday
+	public IStatTracker? CurrentAccountToday
 	{
 		get
 		{

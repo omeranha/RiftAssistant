@@ -7,7 +7,7 @@ namespace RiftAssistant;
 
 internal static class Program
 {
-	public static readonly string AppDir = Path.GetDirectoryName(Environment.ProcessPath);
+	public static readonly string? AppDir = Path.GetDirectoryName(Environment.ProcessPath);
 	public static readonly string UserDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RiftAssistant");
 	public static readonly string SettingsFolder = Path.Combine(UserDataFolder, "settings");
 	public static readonly string LogFolder = Path.Combine(UserDataFolder, "logs");
@@ -17,7 +17,7 @@ internal static class Program
 
 	private static readonly TimeSpan TrayJoinTimeout = TimeSpan.FromMilliseconds(500);
 
-	private static Thread trayThread;
+	private static Thread trayThread = null!;
 
 	[STAThread]
 	private static void Main()

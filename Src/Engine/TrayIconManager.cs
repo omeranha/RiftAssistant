@@ -6,15 +6,15 @@ namespace RiftAssistant.Engine;
 
 internal static class TrayIconManager
 {
-	private static NotifyIcon trayIcon;
-	private static Control dispatcher;
+	private static NotifyIcon trayIcon = null!;
+	private static Control dispatcher = null!;
 
 	public static void Initialize()
 	{
 		dispatcher = new Control();
 		_ = dispatcher.Handle;
 		Assembly assembly = Assembly.GetExecutingAssembly();
-		using Stream stream = assembly.GetManifestResourceStream("RiftAssistant.rift_assistant.ico");
+		using Stream? stream = assembly.GetManifestResourceStream("RiftAssistant.rift_assistant.ico");
 		trayIcon = new NotifyIcon {
 			Icon = AppResources.Icon,
 			Text = "Rift Assistant",

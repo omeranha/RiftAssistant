@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
@@ -22,11 +24,11 @@ internal class AppResources
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	internal static CultureInfo CultureInfo { get; set; }
 
-	internal static Bitmap BuffFrame => (Bitmap)ResourceManager.GetObject("BuffFrame", CultureInfo);
+	internal static Bitmap? BuffFrame => (Bitmap)ResourceManager.GetObject("BuffFrame", CultureInfo);
 
-	internal static Bitmap DebuffFrame => (Bitmap)ResourceManager.GetObject("DebuffFrame", CultureInfo);
+	internal static Bitmap? DebuffFrame => (Bitmap)ResourceManager.GetObject("DebuffFrame", CultureInfo);
 
-	internal static Bitmap SpawnDecoy => (Bitmap)ResourceManager.GetObject("itempassive_unique_ring_724_spawndecoy_x1", CultureInfo);
+	internal static Bitmap? SpawnDecoy => (Bitmap)ResourceManager.GetObject("itempassive_unique_ring_724_spawndecoy_x1", CultureInfo);
 
-	internal static Icon Icon => (Icon)ResourceManager.GetObject("rift_assistant", CultureInfo);
+	internal static Icon? Icon => (Icon)ResourceManager.GetObject("rift_assistant", CultureInfo);
 }

@@ -53,10 +53,10 @@ internal class FloatingNumberManager
 		FloatingNumberCache.Snapshot(CoreCollector.D3Memory.FloatingNumberAllocator);
 		bool isFirstTick = eventCache.Count == 0 && ignoredEvents.Count == 0;
 
-		Buff conduitBuff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrified.Sno);
+		Buff? conduitBuff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrified.Sno);
 		bool hasPylon = conduitBuff != null && conduitBuff.LastActive.ElapsedMilliseconds <= 3000;
 		if (!hasPylon) {
-			Buff riftConduit = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrifiedTieredRift.Sno);
+			Buff? riftConduit = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_PagesBuffElectrifiedTieredRift.Sno);
 			hasPylon = riftConduit != null && riftConduit.LastActive.ElapsedMilliseconds <= 3000;
 		}
 
@@ -65,9 +65,9 @@ internal class FloatingNumberManager
 		}
 
 		lastGameTick = CoreCollector.D3Memory.GameTick;
-		List<CombatNumberEvent> damageList = damageDealtEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var dmgList) ? dmgList : null;
-		List<CombatNumberEvent> damageTakenList = damageTakenEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var dmgTakenList) ? dmgTakenList : null;
-		List<CombatNumberEvent> healingList = healingEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var healList) ? healList : null;
+		List<CombatNumberEvent>? damageList = damageDealtEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var dmgList) ? dmgList : null;
+		List<CombatNumberEvent>? damageTakenList = damageTakenEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var dmgTakenList) ? dmgTakenList : null;
+		List<CombatNumberEvent>? healingList = healingEvents.TryGetValue(CoreCollector.D3Memory.GameTick, out var healList) ? healList : null;
 		bool hasNewDamage = false;
 		foreach (r_FloatingNumber item in FloatingNumberCache.GetItems()) {
 			if (item.int_0 == 0) continue;

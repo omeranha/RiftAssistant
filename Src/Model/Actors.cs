@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,19 +15,19 @@ internal sealed class Actors
 
 	private readonly Dictionary<ActorSnoEnum, ActorShrineTypeInfo> actorShrineTypeInfosByActorSnoEnum = new Dictionary<ActorSnoEnum, ActorShrineTypeInfo>();
 
-	public SnoActor GetActor(ActorSnoEnum sno)
+	public SnoActor? GetActor(ActorSnoEnum sno)
 	{
 		snoActorsByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SkillEffectRule GetSkillEffectRule(ActorSnoEnum sno)
+	public SkillEffectRule? GetSkillEffectRule(ActorSnoEnum sno)
 	{
 		skillEffectRulesByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public ActorShrineTypeInfo GetActorShrineTypeInfo(ActorSnoEnum sno)
+	public ActorShrineTypeInfo? GetActorShrineTypeInfo(ActorSnoEnum sno)
 	{
 		actorShrineTypeInfosByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
@@ -44,8 +46,8 @@ internal sealed class Actors
 				ActorKind actorKind_ = (ActorKind)Enum.Parse(typeof(ActorKind), array2[2], ignoreCase: true);
 				bool bool_ = array2[3] == "static";
 				ActorType actorType_ = ((array2.Length > 4) ? ((ActorType)Enum.Parse(typeof(ActorType), array2[4], ignoreCase: true)) : ActorType.Invalid);
-				string stringByCode = SnoData.Strings.GetStringByCode(text2);
-				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(text2);
+				string? stringByCode = SnoData.Strings.GetStringByCode(text2);
+				string? stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(text2);
 				snoActorsByActorSnoEnum.Add(actorSnoEnum, new SnoActor(actorSnoEnum, actorType_, actorKind_, bool_, text2, stringByCode, stringByCodeEnglish));
 			}
 		}
@@ -54,7 +56,7 @@ internal sealed class Actors
 			while (dataReader.Stream.Position < dataReader.Stream.Length)
 			{
 				ActorSnoEnum sno = (ActorSnoEnum)dataReader.ReadUInt32();
-				SnoActor actor = GetActor(sno);
+				SnoActor? actor = GetActor(sno);
 				int num = dataReader.ReadPackedInt32();
 				uint[] array3 = new uint[num];
 				for (int j = 0; j < num; j++)

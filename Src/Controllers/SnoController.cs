@@ -17,12 +17,12 @@ public class SnoController
 
 	public SnoItemList SnoItems { get; } = new SnoItemList();
 
-	public SnoPower GetSnoPower(uint sno)
+	public SnoPower? GetSnoPower(uint sno)
 	{
 		return SnoData.Powers.GetBySno(sno);
 	}
 
-	public SnoQuest GetSnoQuest(uint sno)
+	public SnoQuest? GetSnoQuest(uint sno)
 	{
 		return SnoData.Quests.GetQuest(sno);
 	}

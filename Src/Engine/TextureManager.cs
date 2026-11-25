@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,12 +21,12 @@ internal static class TextureManager
 
 	private static readonly Dictionary<uint, long> sceneSnoToLastAccessTicks = [];
 
-	public static Texture GetItemTexture(SnoItem snoItem)
+	public static Texture? GetItemTexture(SnoItem snoItem)
 	{
 		return GetItemTexture(snoItem, HeroClass.Wizard, isFemale: true);
 	}
 
-	public static Texture GetItemTexture(SnoItem snoItem, HeroClass heroClass, bool isFemale)
+	public static Texture? GetItemTexture(SnoItem snoItem, HeroClass heroClass, bool isFemale)
 	{
 		uint[] textureMap = snoItem.SnoActor.TextureMap;
 		if (textureMap == null) {
@@ -49,7 +51,7 @@ internal static class TextureManager
 		return null;
 	}
 
-	public static Texture GetTextureByName(string textureName)
+	public static Texture? GetTextureByName(string textureName)
 	{
 		return GetTextureById(HashTextureName(textureName, bool_0: false));
 	}
@@ -64,7 +66,7 @@ internal static class TextureManager
 		return num;
 	}
 
-	public static Texture GetTextureById(uint textureId)
+	public static Texture? GetTextureById(uint textureId)
 	{
 		if (textureIdToTexture.TryGetValue(textureId, out Texture atlasTex) && atlasTex != null) {
 			return atlasTex;
@@ -72,13 +74,13 @@ internal static class TextureManager
 
 		switch (textureId) {
 			case 2078949389u: {
-					Bitmap buffFrame = AppResources.BuffFrame;
+					Bitmap? buffFrame = AppResources.BuffFrame;
 					Texture texture = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
 					textureIdToTexture[textureId] = texture;
 					return texture;
 				}
 			case 948845718u: {
-					Bitmap debuffFrame = AppResources.DebuffFrame;
+					Bitmap? debuffFrame = AppResources.DebuffFrame;
 					Texture texture2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
 					textureIdToTexture[textureId] = texture2;
 					return texture2;
@@ -103,7 +105,7 @@ internal static class TextureManager
 		}
 	}
 
-	public static Texture GetTextureBySnoAndAnim(uint snoId, int animState)
+	public static Texture? GetTextureBySnoAndAnim(uint snoId, int animState)
 	{
 		if (animState < 0) {
 			animState = 0;
@@ -115,7 +117,7 @@ internal static class TextureManager
 		return GetTextureById(textureIndexEntryBySnoIdWithAnimState.Value.Id);
 	}
 
-	public static SharpDX.Direct2D1.Bitmap GetSceneMinimapBitmap(SnoScene scene)
+	public static SharpDX.Direct2D1.Bitmap? GetSceneMinimapBitmap(SnoScene scene)
 	{
 		string text = sceneSnoToMinimapPath[scene.Sno];
 		if (string.IsNullOrEmpty(text)) {

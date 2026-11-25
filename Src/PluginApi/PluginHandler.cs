@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,7 +19,7 @@ namespace RiftAssistant.PluginHost;
 
 internal class PluginHandler
 {
-	private AssemblyLoadContext loadContext;
+	private AssemblyLoadContext? loadContext;
 	private WeakReference loadContextReference;
 	private const int MaxListedErrors = 6;
 	private const string PluginGlobalUsings = "global using RiftAssistant; global using RiftAssistant.Collectors; global using RiftAssistant.Controllers; global using RiftAssistant.Engine; global using RiftAssistant.Input; global using RiftAssistant.Memory; global using RiftAssistant.Model; global using RiftAssistant.Modules; global using RiftAssistant.PluginHost; global using RiftAssistant.Rendering; global using RiftAssistant.Sno; global using RiftAssistant.Tracking; global using Plugins;";
@@ -229,7 +231,7 @@ internal class PluginHandler
 			}
 
 			var stopwatch = Stopwatch.StartNew();
-			Assembly assembly = null;
+			Assembly? assembly = null;
 
 			loadContext = new AssemblyLoadContext("PluginContext", isCollectible: true);
 			loadContextReference = new WeakReference(loadContext);
@@ -308,11 +310,11 @@ internal class PluginHandler
 		}
 	}
 
-	private IPlugin CreateAndLoadPlugin(Type type)
+	private IPlugin? CreateAndLoadPlugin(Type type)
 	{
 		if (!typeof(IPlugin).IsAssignableFrom(type) || type.IsAbstract) return null;
 
-		IPlugin plugin;
+		IPlugin? plugin;
 		var name = type.FullName;
 		try {
 			plugin = Activator.CreateInstance(type) as IPlugin;

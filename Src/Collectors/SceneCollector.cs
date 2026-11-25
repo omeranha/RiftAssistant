@@ -17,9 +17,9 @@ internal class SceneCollector
 
 	private readonly AllocationCache<r_SceneRevealInfo> class352_0 = new AllocationCache<r_SceneRevealInfo>(88);
 
-	internal r_Scene[] Buffer_Scenes { get; private set; }
+	internal r_Scene[] Buffer_Scenes { get; private set; } = null!;
 
-	internal r_World[] Buffer_Worlds { get; private set; }
+	internal r_World[] Buffer_Worlds { get; private set; } = null!;
 
 	public IEnumerable<Scene> GetScenes(uint worldId)
 	{
@@ -30,7 +30,7 @@ internal class SceneCollector
 		return Enumerable.Empty<Scene>();
 	}
 
-	public Scene GetScene(uint worldId, uint sSceneIDEncrypted)
+	public Scene? GetScene(uint worldId, uint sSceneIDEncrypted)
 	{
 		if (scenesByKeysByKey.TryGetValue(worldId, out var value) && value.TryGetValue(sSceneIDEncrypted, out var value2))
 		{
@@ -84,7 +84,7 @@ internal class SceneCollector
 			{
 				continue;
 			}
-			SnoArea snoArea = SnoData.Areas.GetSnoArea(r_Scene2.LevelAreaSNO);
+			SnoArea? snoArea = SnoData.Areas.GetSnoArea(r_Scene2.LevelAreaSNO);
 			if (snoArea == null)
 			{
 				continue;
@@ -117,7 +117,7 @@ internal class SceneCollector
 				value = new Dictionary<uint, Scene>();
 				scenesByKeysByKey.Add(r_Scene2.SWorldID, value);
 			}
-			SnoScene scene = SnoData.Scenes.GetScene(r_Scene2.SceneSno);
+			SnoScene? scene = SnoData.Scenes.GetScene(r_Scene2.SceneSno);
 			if (scene != null)
 			{
 				uint uint_ = GetWorldSno(r_Scene2.SWorldID);
@@ -155,7 +155,7 @@ internal class SceneCollector
 						value4 = new Dictionary<uint, Scene>();
 						scenesByKeysByKey.Add(item.uint_2, value4);
 					}
-					SnoScene scene2 = SnoData.Scenes.GetScene(item.sno);
+					SnoScene? scene2 = SnoData.Scenes.GetScene(item.sno);
 					if (scene2 != null)
 					{
 						uint worldSno = GetWorldSno(item.uint_2);

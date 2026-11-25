@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
@@ -25,7 +27,7 @@ public partial class RenderController
 
 	public UiElement InGameBottomHudUiElement => CoreCollector.UiElements.InGameBottomHudUiElement;
 
-	public UiElement MonsterHpBarUiElement
+	public UiElement? MonsterHpBarUiElement
 	{
 		get {
 			if (CoreCollector.UiElements.HpBarNormalProgressbar.Visible) {
@@ -113,9 +115,9 @@ public partial class RenderController
 		return transparent;
 	}
 
-	public UiElement GetUiElement(string path)
+	public UiElement? GetUiElement(string path)
 	{
-		UiElement uiElement = null;
+		UiElement? uiElement = null;
 		switch (path) {
 			case "*portrait-p3":
 				uiElement = CoreCollector.UiElements.uiElements145[3];
@@ -152,7 +154,7 @@ public partial class RenderController
 		return CoreCollector.UiElements.Register(path, collectOnlyWhenThisIsVisible, collectOnlyWhenThisIsInvisible, inflateXby, inflateYby);
 	}
 
-	public UiElement GetPlayerSkillUiElement(ActionKey key)
+	public UiElement? GetPlayerSkillUiElement(ActionKey key)
 	{
 		if (key == ActionKey.Heal) {
 			return CoreCollector.UiElements.GamePotion;
@@ -178,7 +180,7 @@ public partial class RenderController
 		return CoreCollector.UiElements.confirmationOk.Visible;
 	}
 
-	public void SetHint(string text, string specialLocation = null)
+	public void SetHint(string text, string? specialLocation = null)
 	{
 		Overlay.Instance.cursorHintModule?.SetHint(text, specialLocation);
 	}

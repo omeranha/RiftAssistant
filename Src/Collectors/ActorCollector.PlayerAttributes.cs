@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -268,7 +270,7 @@ internal partial class ActorCollector
 
 					case "Power_Cooldown_Start":
 						if (num14 > 0) {
-							SnoPower bySno3 = SnoData.Powers.GetBySno(num13);
+							SnoPower? bySno3 = SnoData.Powers.GetBySno(num13);
 
 							if (bySno3 != null && player.Powers.GetUsedSkill(bySno3) is Skill skill) {
 								skill.CooldownStartTick = num14;
@@ -444,7 +446,7 @@ internal partial class ActorCollector
 
 					case "Skill_From_Item":
 						if (num14 == 1) {
-							SnoPower bySno2 = SnoData.Powers.GetBySno(num13);
+							SnoPower? bySno2 = SnoData.Powers.GetBySno(num13);
 
 							if (bySno2 != null) {
 								player.UsedPassives.Add(bySno2);
@@ -886,7 +888,7 @@ internal partial class ActorCollector
 
 					case "Power_Cooldown":
 						if (num14 > 0) {
-							SnoPower bySno = SnoData.Powers.GetBySno(num13);
+							SnoPower? bySno = SnoData.Powers.GetBySno(num13);
 
 							if (bySno != null && player.Powers.GetUsedSkill(bySno) is Skill skill3) {
 								skill3.CooldownFinishTick = num14;
@@ -1016,7 +1018,7 @@ internal partial class ActorCollector
 		if (player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
 			player.Stats.ResourceCostReduction = 1f - 0.8f * (1f - player.Stats.ResourceCostReduction);
 		}
-		Buff buff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
+		Buff? buff = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
 		if (buff != null && buff.Active && buff != null && buff.IconCounts[2] > 0) {
 			player.Stats.ResourceCostReduction = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - player.Stats.ResourceCostReduction);
 		}
@@ -1084,11 +1086,11 @@ internal partial class ActorCollector
 		if (player.UsedPassives.Any((SnoPower snoPower) => snoPower.Sno == 217968)) {
 			num19 *= 0.85f;
 		}
-		Skill epiphany = player.Powers.UsedMonkPowers.Epiphany;
+		Skill? epiphany = player.Powers.UsedMonkPowers.Epiphany;
 		if (epiphany != null && epiphany.BuffIsActive && epiphany.Rune == 0) {
 			num19 *= 0.5f;
 		}
-		Buff buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
+		Buff? buff2 = player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Generic_ShrineDesecratedBlessed.Sno);
 		if (buff2 != null && buff2.Active) {
 			num19 *= 0.75f;
 		}
@@ -1117,7 +1119,7 @@ internal partial class ActorCollector
 				player.Offense.PlainDamageBonuses.Add((buff2.SnoPower, item));
 			}
 		}
-		Skill callOfTheAncients = CoreCollector.LocalPlayer.Powers.UsedBarbarianPowers.CallOfTheAncients;
+		Skill? callOfTheAncients = CoreCollector.LocalPlayer.Powers.UsedBarbarianPowers.CallOfTheAncients;
 		if (callOfTheAncients != null && callOfTheAncients.BuffIsActive && callOfTheAncients.Rune == 4) {
 			num19 *= 0.5f;
 		}
@@ -1212,9 +1214,9 @@ internal partial class ActorCollector
 
 	internal static void SetBuffIconCount(Player player, uint sno, int iconCounts, int int_5, ref bool bool_4)
 	{
-		Buff buff = player.Powers.GetBuff(sno) as Buff;
+		Buff? buff = player.Powers.GetBuff(sno) as Buff;
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(sno);
+			SnoPower? bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}
@@ -1234,9 +1236,9 @@ internal partial class ActorCollector
 	internal static void SetBuffTimeElapsed(Player player, uint sno, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(CoreCollector.D3Memory.GameTick - int_4) / 60.0) : 0.0);
-		Buff buff = player.Powers.GetBuff(sno);
+		Buff? buff = player.Powers.GetBuff(sno);
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(sno);
+			SnoPower? bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}
@@ -1251,9 +1253,9 @@ internal partial class ActorCollector
 	internal static void SetBuffTimeLeft(Player player, uint sno, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(int_4 - CoreCollector.D3Memory.GameTick) / 60.0) : 0.0);
-		Buff buff = player.Powers.GetBuff(sno);
+		Buff? buff = player.Powers.GetBuff(sno);
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(sno);
+			SnoPower? bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}

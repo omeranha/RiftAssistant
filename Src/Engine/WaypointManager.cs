@@ -8,7 +8,7 @@ internal class WaypointManager
 {
 	public Dictionary<ulong, Waypoint> MapWaypoints { get; internal set; } = new(80);
 
-	private r_Waypoint[] waypoints;
+	private r_Waypoint[] waypoints = null!;
 	private readonly Stopwatch stopwatch = new();
 	private int delay;
 
@@ -42,7 +42,7 @@ internal class WaypointManager
 
 				uint num3 = (uint_ << 10) + r_Waypoint2.uint_0;
 				if (!MapWaypoints.TryGetValue(num3, out var value) || value == null) {
-					SnoArea snoArea = SnoData.Areas.GetSnoArea(uint_);
+					SnoArea? snoArea = SnoData.Areas.GetSnoArea(uint_);
 					if (snoArea == null) continue;
 
 					value = new Waypoint(snoArea, (BountyAct)r_Waypoint2.uint_0, new PointF(r_Waypoint2.int_0, r_Waypoint2.int_1));

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,7 +100,7 @@ internal class PlayerCollector
 					if (string.IsNullOrEmpty(player.BattleTagAbovePortrait) || flag2) {
 						UiElement temporary = CoreCollector.UiElements.CreateTemporary("Root.NormalLayer.portraits.stack.party_stack.portrait_" + player.PortraitIndex.ToString("D", CultureInfo.InvariantCulture) + ".text");
 						player.BattleTagAbovePortrait = temporary.ReadText(Encoding.UTF8, removeColors: true);
-						string battleTagAbovePortrait = player.BattleTagAbovePortrait;
+						string? battleTagAbovePortrait = player.BattleTagAbovePortrait;
 						if (battleTagAbovePortrait != null && battleTagAbovePortrait.Contains("\n")) {
 							player.BattleTagAbovePortrait = player.BattleTagAbovePortrait.Substring(player.BattleTagAbovePortrait.IndexOf("\n") + 1);
 						}
@@ -109,7 +111,7 @@ internal class PlayerCollector
 					}
 					for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
 						Skill skill = player.SkillSlots[(int)actionKey];
-						SnoPower snoPower = skill?.SnoPower;
+						SnoPower? snoPower = skill?.SnoPower;
 						uint num5 = 0u;
 						int num6 = 0;
 						switch (actionKey) {
@@ -151,7 +153,7 @@ internal class PlayerCollector
 						uint* struct33_ = pData->struct33_0;
 						for (int i = 0; i < 4; i++) {
 							uint sno = struct33_[i];
-							SnoPower bySno = SnoData.Powers.GetBySno(sno);
+							SnoPower? bySno = SnoData.Powers.GetBySno(sno);
 							if (player.SnoPowers0[i] != bySno) {
 								player.SnoPowers0[i] = bySno;
 							}
@@ -205,7 +207,7 @@ internal class PlayerCollector
 					if (heroId2 != 0 && heroId2 != uint.MaxValue) {
 						if (heroId != heroId2) {
 							player.HeroId = heroId2;
-							Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.GetHero(heroId2) : null));
+							Hero? hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.GetHero(heroId2) : null));
 							if (hero != null) {
 								player.HeroName = hero.Name;
 								player.Season = hero.Season;
@@ -228,7 +230,7 @@ internal class PlayerCollector
 								return false;
 							}
 						}
-						HeroClassDefinition heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
+						HeroClassDefinition? heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
 						if (heroClassByInternalIndex != null) {
 							player.HeroClassDefinition = heroClassByInternalIndex;
 							Custom.SetSnoAreaForPlayer(player);
@@ -278,7 +280,7 @@ internal class PlayerCollector
 										for (int l = 0; l < 512; l++) {
 											uint num9 = struct34_2[l];
 											if (num9 != uint.MaxValue) {
-												SnoItem bySno2 = SnoData.Items.GetBySno(num9);
+												SnoItem? bySno2 = SnoData.Items.GetBySno(num9);
 												if (bySno2 != null) {
 													player.cubedItems.Add(bySno2);
 													player.snoItemsByKey[bySno2.NameLocalized] = bySno2;

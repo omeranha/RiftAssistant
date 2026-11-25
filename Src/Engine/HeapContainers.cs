@@ -49,9 +49,9 @@ internal class AllocatedBlock<T>(Allocator allocator)
 {
 	public readonly Allocator Allocator = allocator;
 
-	internal byte[] bitMask;
+	internal byte[] bitMask = null!;
 
-	public T[] Elements { get; set; }
+	public T[] Elements { get; set; } = null!;
 
 	public r_Block Block { get; set; }
 
@@ -71,7 +71,7 @@ internal class AllocationCache<T> where T : unmanaged
 {
 	private readonly int elementSize;
 
-	public AllocatedBlock<T>[] class354_0;
+	public AllocatedBlock<T>[] class354_0 = null!;
 
 	public int int_1;
 

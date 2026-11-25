@@ -16,7 +16,7 @@ internal sealed class ItemFilterConfig
 
 internal sealed class ItemFilterRuleConfig
 {
-	public string Comment { get; set; }
+	public string Comment { get; set; } = null!;
 	public string Group { get; set; } = "all";
 	public ItemFilterDecision Decision { get; set; } = ItemFilterDecision.Keep;
 	public bool Enabled { get; set; } = true;

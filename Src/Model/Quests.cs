@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +12,7 @@ internal sealed class Quests
 
 	public IEnumerable<SnoQuest> All => all.Values;
 
-	public SnoQuest GetQuest(uint sno)
+	public SnoQuest? GetQuest(uint sno)
 	{
 		all.TryGetValue(sno, out var value);
 		return value;
@@ -43,19 +45,19 @@ internal sealed class Quests
 			}
 			StringListSnoEnum snoEnum = (StringListSnoEnum)num3;
 			int num4 = int.Parse(array2[3], CultureInfo.InvariantCulture);
-			string stringByCode = SnoData.Strings.GetStringByCode(snoEnum, "Name");
-			string stringByCode2 = SnoData.Strings.GetStringByCode(snoEnum, "Description");
-			string stringByCode3 = SnoData.Strings.GetStringByCode(snoEnum, "UnassignedStepBNetTitle");
-			string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Name");
-			string stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Description");
-			string stringByCodeEnglish3 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "UnassignedStepBNetTitle");
+			string? stringByCode = SnoData.Strings.GetStringByCode(snoEnum, "Name");
+			string? stringByCode2 = SnoData.Strings.GetStringByCode(snoEnum, "Description");
+			string? stringByCode3 = SnoData.Strings.GetStringByCode(snoEnum, "UnassignedStepBNetTitle");
+			string? stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Name");
+			string? stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Description");
+			string? stringByCodeEnglish3 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "UnassignedStepBNetTitle");
 			QuestType questType = (QuestType)Enum.Parse(typeof(QuestType), array2[5], ignoreCase: true);
 			QuestEventType questEventType_ = (QuestEventType)Enum.Parse(typeof(QuestEventType), array2[6], ignoreCase: true);
 			int num5 = int.Parse(array2[7]);
 			int int_ = int.Parse(array2[8]);
 			BountyAct bountyAct_ = BountyAct.None;
 			BountyType bountyType_ = BountyType.None;
-			SnoArea isnoArea_ = null;
+			SnoArea? isnoArea_ = null;
 			if (questType == QuestType.Bounty)
 			{
 				array2 = array[num].Split('\t');
@@ -65,7 +67,7 @@ internal sealed class Quests
 				isnoArea_ = SnoData.Areas.GetSnoArea(uint.Parse(array2[2], CultureInfo.InvariantCulture));
 				num++;
 			}
-			SnoAct snoAct = ((num4 > 0) ? SnoData.Areas.AllActs[num4 - 1] : null);
+			SnoAct? snoAct = ((num4 > 0) ? SnoData.Areas.AllActs[num4 - 1] : null);
 			SnoQuest snoQuest = new SnoQuest(string_, num2, snoAct, stringByCode, stringByCodeEnglish, stringByCode2, stringByCodeEnglish2, questType, questEventType_, int_, stringByCode3, stringByCodeEnglish3, bountyAct_, bountyType_, isnoArea_);
 			if (snoAct != null)
 			{
@@ -86,12 +88,12 @@ internal sealed class Quests
 				{
 					array2 = text.Split('\t');
 					uint uint_ = uint.Parse(array2[1]);
-					string stringByCode4 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "Splash");
-					string stringByCodeEnglish4 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "Splash");
-					string stringByCode5 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetTitle");
-					string stringByCodeEnglish5 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetTitle");
-					string stringByCode6 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
-					string stringByCodeEnglish6 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
+					string? stringByCode4 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "Splash");
+					string? stringByCodeEnglish4 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "Splash");
+					string? stringByCode5 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetTitle");
+					string? stringByCodeEnglish5 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetTitle");
+					string? stringByCode6 = SnoData.Strings.GetStringByCode(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
+					string? stringByCodeEnglish6 = SnoData.Strings.GetStringByCodeEnglish(snoEnum, "Step" + uint_.ToString("D", CultureInfo.InvariantCulture) + "BNetText");
 					snoQuest.AddStep(new SnoQuestStep(snoQuest, uint_, stringByCode4, stringByCodeEnglish4, stringByCode5, stringByCodeEnglish5, stringByCode6, stringByCodeEnglish6));
 				}
 			}

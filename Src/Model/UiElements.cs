@@ -9,293 +9,293 @@ namespace RiftAssistant.Model;
 
 internal partial class UiElements
 {
-	public UiElement QuestNameValue;
+	public UiElement QuestNameValue = null!;
 
-	public UiElement DifficultyTextValue;
+	public UiElement DifficultyTextValue = null!;
 
-	public UiElement PlayGameButton;
+	public UiElement PlayGameButton = null!;
 
-	public UiElement ChangeQuestButton;
+	public UiElement ChangeQuestButton = null!;
 
-	public UiElement SwitchHero;
+	public UiElement SwitchHero = null!;
 
-	public UiElement PortraitText;
+	public UiElement PortraitText = null!;
 
-	public UiElement BattleNetGameSettingsMainLayoutRootOverlayContainer;
+	public UiElement BattleNetGameSettingsMainLayoutRootOverlayContainer = null!;
 
 	public UiElement[] StashTabs = new UiElement[5];
 
 	public UiElement[] StashPages = new UiElement[4];
 
-	public UiElement StashMainUiElement;
+	public UiElement StashMainUiElement = null!;
 
-	public UiElement ButtonStash;
+	public UiElement ButtonStash = null!;
 
-	public UiElement InventoryMainUiElement;
+	public UiElement InventoryMainUiElement = null!;
 
-	public UiElement InventorySidePaneContainer;
+	public UiElement InventorySidePaneContainer = null!;
 
-	public UiElement InventoryItemsUiElement;
+	public UiElement InventoryItemsUiElement = null!;
 
-	public UiElement CharacterDetailsContainer;
+	public UiElement CharacterDetailsContainer = null!;
 
-	public UiElement FollowerMainUiElement;
+	public UiElement FollowerMainUiElement = null!;
 
-	public UiElement InspectMainPage;
+	public UiElement InspectMainPage = null!;
 
-	public UiElement EquipmentManagerMainPage;
+	public UiElement EquipmentManagerMainPage = null!;
 
-	public UiElement Details;
+	public UiElement Details = null!;
 
-	public UiElement InventoryButtonHead;
+	public UiElement InventoryButtonHead = null!;
 
-	public UiElement InventoryButtonShoulders;
+	public UiElement InventoryButtonShoulders = null!;
 
-	public UiElement InventoryButtonNeck;
+	public UiElement InventoryButtonNeck = null!;
 
-	public UiElement InventoryButtonHands;
+	public UiElement InventoryButtonHands = null!;
 
-	public UiElement InventoryButtonBracers;
+	public UiElement InventoryButtonBracers = null!;
 
-	public UiElement InventoryButtonTorso;
+	public UiElement InventoryButtonTorso = null!;
 
-	public UiElement InventoryButtonWaist;
+	public UiElement InventoryButtonWaist = null!;
 
-	public UiElement InventoryButtonLegs;
+	public UiElement InventoryButtonLegs = null!;
 
-	public UiElement InventoryButtonFeet;
+	public UiElement InventoryButtonFeet = null!;
 
-	public UiElement InventoryButtonFingerLeft;
+	public UiElement InventoryButtonFingerLeft = null!;
 
-	public UiElement InventoryButtonFingerRight;
+	public UiElement InventoryButtonFingerRight = null!;
 
-	public UiElement InventoryButtonArmLeft;
+	public UiElement InventoryButtonArmLeft = null!;
 
-	public UiElement InventoryButtonArmRight;
+	public UiElement InventoryButtonArmRight = null!;
 
-	public UiElement HirelingSlotHead;
+	public UiElement HirelingSlotHead = null!;
 
-	public UiElement HirelingSlotShoulders;
+	public UiElement HirelingSlotShoulders = null!;
 
-	public UiElement HirelingSlotNeck;
+	public UiElement HirelingSlotNeck = null!;
 
-	public UiElement HirelingSlotHands;
+	public UiElement HirelingSlotHands = null!;
 
-	public UiElement HirelingSlotBracers;
+	public UiElement HirelingSlotBracers = null!;
 
-	public UiElement HirelingSlotTorso;
+	public UiElement HirelingSlotTorso = null!;
 
-	public UiElement HirelingSlotWaist;
+	public UiElement HirelingSlotWaist = null!;
 
-	public UiElement HirelingSlotLegs;
+	public UiElement HirelingSlotLegs = null!;
 
-	public UiElement HirelingSlotFeet;
+	public UiElement HirelingSlotFeet = null!;
 
-	public UiElement HirelingSlotRightFinger;
+	public UiElement HirelingSlotRightFinger = null!;
 
-	public UiElement HirelingSlotLeftFinger;
+	public UiElement HirelingSlotLeftFinger = null!;
 
-	public UiElement HirelingSlotMainhand;
+	public UiElement HirelingSlotMainhand = null!;
 
-	public UiElement HirelingSlotOffhand;
+	public UiElement HirelingSlotOffhand = null!;
 
-	public UiElement HirelingSlotSpecial;
+	public UiElement HirelingSlotSpecial = null!;
 
-	public UiElement VendorDialogMainPagePanel;
+	public UiElement VendorDialogMainPagePanel = null!;
 
-	public UiElement ShopDialogMainPagePanel;
+	public UiElement ShopDialogMainPagePanel = null!;
 
-	public UiElement GoldText;
+	public UiElement GoldText = null!;
 
-	public UiElement KanaisRecipesMain;
+	public UiElement KanaisRecipesMain = null!;
 
-	public UiElement KanaisCollection;
+	public UiElement KanaisCollection = null!;
 
-	public UiElement SkillPaneMainLayoutRoot;
+	public UiElement SkillPaneMainLayoutRoot = null!;
 
-	public UiElement SkillsList;
+	public UiElement SkillsList = null!;
 
-	public UiElement PassiveSkillSelect;
+	public UiElement PassiveSkillSelect = null!;
 
-	public UiElement ActiveSkillSelect;
+	public UiElement ActiveSkillSelect = null!;
 
-	public UiElement ParagonPointSelect;
+	public UiElement ParagonPointSelect = null!;
 
-	public UiElement GamemenuBkgrnd;
+	public UiElement GamemenuBkgrnd = null!;
 
-	public UiElement ConversationDialogMain;
+	public UiElement ConversationDialogMain = null!;
 
-	public UiElement Clock;
+	public UiElement Clock = null!;
 
-	public UiElement ListTitle;
+	public UiElement ListTitle = null!;
 
-	public UiElement SubmitButton;
+	public UiElement SubmitButton = null!;
 
-	public UiElement LoadScreenText;
+	public UiElement LoadScreenText = null!;
 
-	public UiElement Cutscene;
+	public UiElement Cutscene = null!;
 
-	public UiElement ScriptedSequence;
+	public UiElement ScriptedSequence = null!;
 
-	public UiElement InGameBottomHudUiElement;
+	public UiElement InGameBottomHudUiElement = null!;
 
-	public UiElement GameWindowHudOverlayClassic;
+	public UiElement GameWindowHudOverlayClassic = null!;
 
-	public UiElement GameProgressBarHealthBall;
+	public UiElement GameProgressBarHealthBall = null!;
 
-	public UiElement GameProgressBarManaBall;
+	public UiElement GameProgressBarManaBall = null!;
 
-	public UiElement Item2Stack;
+	public UiElement Item2Stack = null!;
 
-	public UiElement TopWrapperStack;
+	public UiElement TopWrapperStack = null!;
 
-	public UiElement FrameInstruction;
+	public UiElement FrameInstruction = null!;
 
-	public UiElement Item1Stack;
+	public UiElement Item1Stack = null!;
 
-	public UiElement ChatMessagelist;
+	public UiElement ChatMessagelist = null!;
 
-	public UiElement Item3Stack;
+	public UiElement Item3Stack = null!;
 
-	public UiElement chatOpened;
+	public UiElement chatOpened = null!;
 
-	public UiElement FriendsListContent;
+	public UiElement FriendsListContent = null!;
 
-	public UiElement GroupsListContent;
+	public UiElement GroupsListContent = null!;
 
-	public UiElement GuildFinderMainLayoutRootOverlayContainer;
+	public UiElement GuildFinderMainLayoutRootOverlayContainer = null!;
 
-	public UiElement BattleNetLeaderboardMainLayoutRootOverlayContainer;
+	public UiElement BattleNetLeaderboardMainLayoutRootOverlayContainer = null!;
 
-	public UiElement BattleNetSeasonJourneyMainLayoutRootOverlayContainer;
+	public UiElement BattleNetSeasonJourneyMainLayoutRootOverlayContainer = null!;
 
-	public UiElement BattleNetStoreMainLayoutRootOverlayContainer;
+	public UiElement BattleNetStoreMainLayoutRootOverlayContainer = null!;
 
-	public UiElement FrameBackground;
+	public UiElement FrameBackground = null!;
 
-	public UiElement PrimaryFrameButtonExit;
+	public UiElement PrimaryFrameButtonExit = null!;
 
-	public UiElement DialogSendRealIdRequest;
+	public UiElement DialogSendRealIdRequest = null!;
 
-	public UiElement MapDialogMainPage;
+	public UiElement MapDialogMainPage = null!;
 
-	public UiElement MinimapUiElement;
+	public UiElement MinimapUiElement = null!;
 
-	public UiElement WorldMapUiElement;
+	public UiElement WorldMapUiElement = null!;
 
-	public UiElement Instructions;
+	public UiElement Instructions = null!;
 
-	public UiElement ActMapUiElement;
+	public UiElement ActMapUiElement = null!;
 
-	public UiElement GameOptionsMainLayoutRootOverlayContainer;
+	public UiElement GameOptionsMainLayoutRootOverlayContainer = null!;
 
-	public UiElement ParagonLevelUpSplashTextUiElement;
+	public UiElement ParagonLevelUpSplashTextUiElement = null!;
 
-	public UiElement QuestrewardDialog;
+	public UiElement QuestrewardDialog = null!;
 
-	public UiElement QuestrewardDialogButtonExit;
+	public UiElement QuestrewardDialogButtonExit = null!;
 
-	public UiElement BountyRewardMainLayoutRoot;
+	public UiElement BountyRewardMainLayoutRoot = null!;
 
-	public UiElement TieredRiftRewardMainLayoutRoot;
+	public UiElement TieredRiftRewardMainLayoutRoot = null!;
 
-	public UiElement EventtextRegionTitle;
+	public UiElement EventtextRegionTitle = null!;
 
-	public UiElement[] uiElements;
+	public UiElement[] uiElements = null!;
 
-	public UiElement ItemsListContent;
+	public UiElement ItemsListContent = null!;
 
-	public UiElement durabilityIndicator;
+	public UiElement durabilityIndicator = null!;
 
-	public UiElement buttonReviveAtCorpse;
+	public UiElement buttonReviveAtCorpse = null!;
 
-	public UiElement buttonReviveAtCheckpoint;
+	public UiElement buttonReviveAtCheckpoint = null!;
 
-	public UiElement buttonReviveInTown;
+	public UiElement buttonReviveInTown = null!;
 
-	public UiElement ButtonAcceptResurrection;
+	public UiElement ButtonAcceptResurrection = null!;
 
-	public UiElement BossEnterMainStackWrapperAccept;
+	public UiElement BossEnterMainStackWrapperAccept = null!;
 
-	public UiElement BossJoinPartyMainStackWrapperAccept;
+	public UiElement BossJoinPartyMainStackWrapperAccept = null!;
 
-	public UiElement RiftJoinPartyMainStackWrapperAccept;
+	public UiElement RiftJoinPartyMainStackWrapperAccept = null!;
 
-	public UiElement DlgNewParagonButton;
+	public UiElement DlgNewParagonButton = null!;
 
-	public UiElement Tab1;
+	public UiElement Tab1 = null!;
 
-	public UiElement Bonus0PointsSpent;
+	public UiElement Bonus0PointsSpent = null!;
 
-	public UiElement Bonus1PointsSpent;
+	public UiElement Bonus1PointsSpent = null!;
 
-	public UiElement Bonus0IncreaseStat;
+	public UiElement Bonus0IncreaseStat = null!;
 
-	public UiElement Bonus1IncreaseStat;
+	public UiElement Bonus1IncreaseStat = null!;
 
-	public UiElement PointsAvailable1;
+	public UiElement PointsAvailable1 = null!;
 
-	public UiElement AcceptParagonPointsButton;
+	public UiElement AcceptParagonPointsButton = null!;
 
-	public UiElement closeButton;
+	public UiElement closeButton = null!;
 
-	public UiElement inGameTeleportToPlayer;
+	public UiElement inGameTeleportToPlayer = null!;
 
-	public UiElement acceptButton;
+	public UiElement acceptButton = null!;
 
-	public UiElement confirmationMessage;
+	public UiElement confirmationMessage = null!;
 
-	public UiElement confirmationOk;
+	public UiElement confirmationOk = null!;
 
-	public UiElement confirmationCancel;
+	public UiElement confirmationCancel = null!;
 
-	public UiElement upgradeButton;
+	public UiElement upgradeButton = null!;
 
-	public UiElement nephalemRiftButton;
+	public UiElement nephalemRiftButton = null!;
 
-	public UiElement greaterRiftButton;
+	public UiElement greaterRiftButton = null!;
 
-	public UiElement RiftTierLevelCombo;
+	public UiElement RiftTierLevelCombo = null!;
 
-	public UiElement Arrow;
+	public UiElement Arrow = null!;
 
-	public UiElement PartyOkButton;
+	public UiElement PartyOkButton = null!;
 
-	public UiElement Localmap;
+	public UiElement Localmap = null!;
 
-	public UiElement BuffIconWrapper;
+	public UiElement BuffIconWrapper = null!;
 
-	public UiElement BuffBarExtendedBuffsUiElement;
+	public UiElement BuffBarExtendedBuffsUiElement = null!;
 
-	public UiElement craftButton;
+	public UiElement craftButton = null!;
 
-	public UiElement craftarmorDialogCraftButton;
+	public UiElement craftarmorDialogCraftButton = null!;
 
-	public UiElement craftweaponsDialogCraftButton;
+	public UiElement craftweaponsDialogCraftButton = null!;
 
-	public UiElement salvageButton;
+	public UiElement salvageButton = null!;
 
-	public UiElement salvageTabButton;
+	public UiElement salvageTabButton = null!;
 
-	public UiElement salvageNormal;
+	public UiElement salvageNormal = null!;
 
-	public UiElement salvageMagic;
+	public UiElement salvageMagic = null!;
 
-	public UiElement salvageRare;
+	public UiElement salvageRare = null!;
 
-	public UiElement upgradeButton1;
+	public UiElement upgradeButton1 = null!;
 
-	public UiElement class341_138;
+	public UiElement class341_138 = null!;
 
-	public UiElement Subdlg;
+	public UiElement Subdlg = null!;
 
-	public UiElement buttonOk;
+	public UiElement buttonOk = null!;
 
-	public UiElement overlayContainer;
+	public UiElement overlayContainer = null!;
 
-	public UiElement selectQuestButton;
+	public UiElement selectQuestButton = null!;
 
-	public UiElement GamePotion;
+	public UiElement GamePotion = null!;
 
 	public UiElement[] uiElements144 = new UiElement[6];
 
@@ -305,77 +305,77 @@ internal partial class UiElements
 
 	public UiElement[] uiElements147 = new UiElement[4];
 
-	public UiElement BattleNetProfileMainLayoutRootOverlayContainer;
+	public UiElement BattleNetProfileMainLayoutRootOverlayContainer = null!;
 
-	public UiElement PlayerContextMenu;
+	public UiElement PlayerContextMenu = null!;
 
-	public UiElement InGamePortraitTooltip2;
+	public UiElement InGamePortraitTooltip2 = null!;
 
-	public UiElement TradeDialogMainPage;
+	public UiElement TradeDialogMainPage = null!;
 
-	public UiElement TradeGoldAmountMine;
+	public UiElement TradeGoldAmountMine = null!;
 
-	public UiElement TradeGoldAmountOther;
+	public UiElement TradeGoldAmountOther = null!;
 
-	public UiElement DropDownContent;
+	public UiElement DropDownContent = null!;
 
-	public UiElement Stackpanel;
+	public UiElement Stackpanel = null!;
 
-	public UiElement BattleNetAchievementsMainLayoutRootOverlayContainer;
+	public UiElement BattleNetAchievementsMainLayoutRootOverlayContainer = null!;
 
-	public UiElement LatencyMeter;
+	public UiElement LatencyMeter = null!;
 
-	public UiElement Skill2Stack;
+	public UiElement Skill2Stack = null!;
 
-	public UiElement Banner2;
+	public UiElement Banner2 = null!;
 
-	public UiElement BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer;
+	public UiElement BattleNetProfileBannerCustomizationMainLayoutRootOverlayContainer = null!;
 
-	public UiElement InGamePetContextMenu;
+	public UiElement InGamePetContextMenu = null!;
 
-	public UiElement Tooltip2;
+	public UiElement Tooltip2 = null!;
 
-	public UiElement HirelingDetailsContainer;
+	public UiElement HirelingDetailsContainer = null!;
 
-	public UiElement RiftDialogMainPage;
+	public UiElement RiftDialogMainPage = null!;
 
-	public UiElement QuestloreDialogPanel;
+	public UiElement QuestloreDialogPanel = null!;
 
-	public UiElement RactorTag0;
+	public UiElement RactorTag0 = null!;
 
-	public UiElement InviteToPartyNotification;
+	public UiElement InviteToPartyNotification = null!;
 
-	public UiElement LorePlayerDlgBackground;
+	public UiElement LorePlayerDlgBackground = null!;
 
-	public UiElement LoreNotifyDlg;
+	public UiElement LoreNotifyDlg = null!;
 
-	public UiElement JoinRequestNotification;
+	public UiElement JoinRequestNotification = null!;
 
-	public UiElement LeaveGameWindow;
+	public UiElement LeaveGameWindow = null!;
 
-	public UiElement NephalemRiftBarUiElement;
+	public UiElement NephalemRiftBarUiElement = null!;
 
-	public UiElement GreaterRiftBarUiElement;
+	public UiElement GreaterRiftBarUiElement = null!;
 
-	public UiElement ChallengeRiftBarUiElement;
+	public UiElement ChallengeRiftBarUiElement = null!;
 
-	public UiElement ChallengeRiftAheadPanelUiElement;
+	public UiElement ChallengeRiftAheadPanelUiElement = null!;
 
-	public UiElement GameTextLine0;
+	public UiElement GameTextLine0 = null!;
 
-	public UiElement EventtextRegion;
+	public UiElement EventtextRegion = null!;
 
-	public UiElement GuildMainLayoutRootOverlayContainer;
+	public UiElement GuildMainLayoutRootOverlayContainer = null!;
 
-	public UiElement HpBarNormalProgressbar;
+	public UiElement HpBarNormalProgressbar = null!;
 
-	public UiElement HpBarBountyProgressbar;
+	public UiElement HpBarBountyProgressbar = null!;
 
-	public UiElement HpBarMinionProgressbar;
+	public UiElement HpBarMinionProgressbar = null!;
 
-	public UiElement HpBarPlayerProgressbar;
+	public UiElement HpBarPlayerProgressbar = null!;
 
-	public UiElement HpBarSpecialProgressbar;
+	public UiElement HpBarSpecialProgressbar = null!;
 
 	private const int MaxUiElements = 32768;
 	private const int MaxChainDepth = 1000;
@@ -390,7 +390,7 @@ internal partial class UiElements
 
 	private int bucketCount;
 	private int uiHash;
-	private long[] buckets;
+	private long[] buckets = null!;
 
 	public int RefreshIntervalMs { get; set; }
 
@@ -429,7 +429,7 @@ internal partial class UiElements
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	private static bool IsVisible(UiElement element)
+	private static bool IsVisible(UiElement? element)
 	{
 		if (element == null) return true;
 
@@ -485,7 +485,7 @@ internal partial class UiElements
 		return result;
 	}
 
-	public UiElement Register(string path, UiElement requiredVisible = null, UiElement requiredHidden = null, float paddingX = 0f, float paddingY = 0f) {
+	public UiElement Register(string path, UiElement? requiredVisible = null, UiElement? requiredHidden = null, float paddingX = 0f, float paddingY = 0f) {
 		if (all.TryGetValue(path, out var existing)) return existing;
 
 		var element = new UiElement(path, requiredVisible, requiredHidden) {

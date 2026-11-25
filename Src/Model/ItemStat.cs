@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Globalization;
 
 namespace RiftAssistant.Model;
@@ -6,11 +8,11 @@ public class ItemStat
 {
 	public string Id { get; set; }
 
-	public AcdAttribute Attribute { get; set; }
+	public AcdAttribute? Attribute { get; set; }
 
 	public uint Modifier { get; set; }
 
-	public AttributeProcessor Processor { get; set; }
+	public AttributeProcessor? Processor { get; set; }
 
 	public double DoubleValue { get; set; }
 

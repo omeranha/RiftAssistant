@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 
 namespace RiftAssistant.Model;
@@ -8,15 +10,15 @@ public class Skill
 
 	public Player Player => player;
 
-	public SnoPower SnoPower { get; set; }
+	public SnoPower? SnoPower { get; set; }
 
 	public byte Rune { get; set; }
 
 	public ActionKey Key { get; set; }
 
-	public SnoPower OverrideSnoPower { get; set; }
+	public SnoPower? OverrideSnoPower { get; set; }
 
-	public SnoPower CurrentSnoPower
+	public SnoPower? CurrentSnoPower
 	{
 		get {
 			if (player.SkillOverrideActive && this != player.Powers.HealthPotionSkill) {
@@ -26,7 +28,7 @@ public class Skill
 		}
 	}
 
-	public string RuneNameLocalized
+	public string? RuneNameLocalized
 	{
 		get {
 			if (Rune != byte.MaxValue) {
@@ -36,7 +38,7 @@ public class Skill
 		}
 	}
 
-	public string RuneNameEnglish
+	public string? RuneNameEnglish
 	{
 		get {
 			if (Rune != byte.MaxValue) {
@@ -91,7 +93,7 @@ public class Skill
 
 	public bool BuffIsActive => player.Powers.GetBuff(SnoPower.Sno)?.Active ?? false;
 
-	public Buff Buff => player.Powers.GetBuff(SnoPower.Sno);
+	public Buff? Buff => player.Powers.GetBuff(SnoPower.Sno);
 
 	public int Charges
 	{
@@ -114,7 +116,7 @@ public class Skill
 
 	public Vk Keybind { get; set; } = Vk.None;
 
-	public Skill(Player player, SnoPower snoPower, byte rune, ActionKey actionKey)
+	public Skill(Player player, SnoPower? snoPower, byte rune, ActionKey actionKey)
 	{
 		this.player = player;
 		this.SnoPower = snoPower;
@@ -178,7 +180,7 @@ public class Skill
 		if (Player.Powers.BuffIsActive(Core.Controller.Sno.SnoPowers.WitchDoctor_Passive_BloodRitual.Sno)) {
 			num4 = 1f - 0.8f * (1f - num4);
 		}
-		Buff buff = Player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
+		Buff? buff = Player.Powers.GetBuff(Core.Controller.Sno.SnoPowers.Necromancer_Devour.Sno);
 		if (buff != null && buff.Active && buff != null && buff.IconCounts[2] > 0) {
 			num4 = 1f - (1f - (float)buff.IconCounts[2] * 0.02f) * (1f - num4);
 		}

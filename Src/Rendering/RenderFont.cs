@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using SharpDX;
@@ -8,7 +10,7 @@ namespace RiftAssistant.Rendering;
 
 public class RenderFont : ITransparent, IFont, IDisposable
 {
-	internal class TextLayoutCacheEntry(RenderFont font, string text)
+	internal class TextLayoutCacheEntry(RenderFont font, string? text)
 	{
 		public readonly RenderFont Font = font;
 		public TextLayout Layout = new(Overlay.Instance.directWriteFactory, text, font.GetTextFormat(), font.MaxWidth, font.MaxHeight);
@@ -109,7 +111,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		return Math.Max(num, 6f);
 	}
 
-	private TextFormat GetTextFormat()
+	private TextFormat? GetTextFormat()
 	{
 		float scaledSize = GetScaledFontSize();
 		if (TextFormat == null || TextFormat.FontSize != scaledSize) {
@@ -142,7 +144,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		}
 	}
 
-	public TextLayout GetTextLayout(string text)
+	public TextLayout GetTextLayout(string? text)
 	{
 		return RetrieveTextLayout(text, true);
 	}
@@ -152,7 +154,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		return RetrieveTextLayout(text, false);
 	}
 
-	public TextLayout RetrieveTextLayout(string text, bool useCache = true)
+	public TextLayout RetrieveTextLayout(string? text, bool useCache = true)
 	{
 		WordWrapping expectedWrapping = WordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap;
 
@@ -220,7 +222,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 			return;
 		}
 
-		TextFormat textFormat = GetTextFormat();
+		TextFormat? textFormat = GetTextFormat();
 		if (shadowBrush != null) {
 			if (HeavyShadow) {
 				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x - 1f, y, 2000f, 50f), shadowBrush.Value);

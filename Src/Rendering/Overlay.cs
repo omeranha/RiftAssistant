@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,15 +29,15 @@ internal class Overlay
 
 	public SwapChain swapChain;
 
-	public Surface surface;
+	public Surface? surface;
 
-	internal RenderTarget renderTarget;
+	internal RenderTarget? renderTarget;
 
 	public SwapChainDescription swapChainDescription;
 
 	public RenderTargetProperties renderTargetProperties;
 
-	private Layer clipLayer;
+	private Layer? clipLayer;
 
 	public static Overlay Instance { get; private set; }
 
@@ -207,7 +209,7 @@ internal class Overlay
 		};
 	}
 
-	private void form_0_SizeChanged(object sender, EventArgs e)
+	private void form_0_SizeChanged(object? sender, EventArgs e)
 	{
 		DisposeRenderTargets();
 		swapChain.ResizeBuffers(swapChainDescription.BufferCount, 0, 0, Format.Unknown, SwapChainFlags.None);
@@ -278,7 +280,7 @@ internal class Overlay
 		}
 	}
 
-	public SharpDX.Direct2D1.Bitmap ToDirect2DBitmap(System.Drawing.Bitmap bitmap, bool bool_0 = false)
+	public SharpDX.Direct2D1.Bitmap ToDirect2DBitmap(System.Drawing.Bitmap? bitmap, bool bool_0 = false)
 	{
 		if (bool_0) {
 			bitmap.MakeTransparent(System.Drawing.Color.Black);
@@ -293,7 +295,7 @@ internal class Overlay
 		return result;
 	}
 
-	public void DisposeRenders(params IDisposable[] barBackground)
+	public void DisposeRenders(params IDisposable[]? barBackground)
 	{
 		for (int i = 0; i < barBackground.Length; i++) {
 			barBackground[i]?.Dispose();

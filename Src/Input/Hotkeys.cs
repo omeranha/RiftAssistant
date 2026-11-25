@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace RiftAssistant.Input;
 
-public sealed class Hotkey(string name, string key, string[] modifiers = null)
+public sealed class Hotkey(string name, string key, string[]? modifiers = null)
 {
 	public string Name = name;
 	public string[] Modifiers = modifiers ?? Array.Empty<string>();

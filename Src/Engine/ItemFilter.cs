@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,7 +31,7 @@ internal static class ItemFilter
 
 	internal abstract record Condition;
 
-	internal sealed record StatCondition(string Code, char Operator, double Number, string Text) : Condition;
+	internal sealed record StatCondition(string Code, char Operator, double Number, string? Text) : Condition;
 
 	internal sealed record AtLeastCondition(int Required, Condition[] Conditions) : Condition;
 
@@ -116,7 +118,7 @@ internal static class ItemFilter
 		return [.. rules];
 	}
 
-	private static string ResolveAttribute(string code)
+	private static string? ResolveAttribute(string code)
 	{
 		return SnoData.Attributes.GetAttributeProcessor(code)?.Code;
 	}

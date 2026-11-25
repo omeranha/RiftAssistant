@@ -2,47 +2,47 @@ namespace RiftAssistant.Controllers;
 
 public class TextureController
 {
-	public Texture EmptySocketTexture => GetTexture("GemSocket32");
+	public Texture? EmptySocketTexture => GetTexture("GemSocket32");
 
-	public Texture UnidTexture => GetTexture("ItemStatus_Unidentified");
+	public Texture? UnidTexture => GetTexture("ItemStatus_Unidentified");
 
-	public Texture KanaiCubeTexture => GetTexture("Marker_KanaisCube");
+	public Texture? KanaiCubeTexture => GetTexture("Marker_KanaisCube");
 
-	public Texture ButtonTextureGray => GetTexture(3253023435u);
+	public Texture? ButtonTextureGray => GetTexture(3253023435u);
 
-	public Texture ButtonTextureBlue => GetTexture(3834792285u);
+	public Texture? ButtonTextureBlue => GetTexture(3834792285u);
 
-	public Texture ButtonTextureOrange => GetTexture(1227300027u);
+	public Texture? ButtonTextureOrange => GetTexture(1227300027u);
 
-	public Texture BackgroundTextureOrange => GetTexture(2823360744u);
+	public Texture? BackgroundTextureOrange => GetTexture(2823360744u);
 
-	public Texture BackgroundTextureGreen => GetTexture(64720473u);
+	public Texture? BackgroundTextureGreen => GetTexture(64720473u);
 
-	public Texture BackgroundTextureYellow => GetTexture(2135735351u);
+	public Texture? BackgroundTextureYellow => GetTexture(2135735351u);
 
-	public Texture BackgroundTextureBlue => GetTexture(1753848494u);
+	public Texture? BackgroundTextureBlue => GetTexture(1753848494u);
 
-	public Texture Button2TextureGray => GetTexture(1889271890u);
+	public Texture? Button2TextureGray => GetTexture(1889271890u);
 
-	public Texture Button2TextureOrange => GetTexture(1780664260u);
+	public Texture? Button2TextureOrange => GetTexture(1780664260u);
 
-	public Texture Button2TextureBrown => GetTexture(2825893160u);
+	public Texture? Button2TextureBrown => GetTexture(2825893160u);
 
-	public Texture BuffFrameTexture => GetTexture("buff_frame");
+	public Texture? BuffFrameTexture => GetTexture("buff_frame");
 
-	public Texture DebuffFrameTexture => GetTexture("debuff_frame");
+	public Texture? DebuffFrameTexture => GetTexture("debuff_frame");
 
-	public Texture InventorySlotTexture => GetTexture("InventoryGrid_Slot");
+	public Texture? InventorySlotTexture => GetTexture("InventoryGrid_Slot");
 
-	public Texture InventoryLegendaryBackgroundSmall => GetTexture("Quality_Small_Inventory_Legendary");
+	public Texture? InventoryLegendaryBackgroundSmall => GetTexture("Quality_Small_Inventory_Legendary");
 
-	public Texture InventoryLegendaryBackgroundLarge => GetTexture("Quality_Large_Inventory_Legendary");
+	public Texture? InventoryLegendaryBackgroundLarge => GetTexture("Quality_Large_Inventory_Legendary");
 
-	public Texture InventorySetBackgroundSmall => GetTexture("Quality_Small_Inventory_Set");
+	public Texture? InventorySetBackgroundSmall => GetTexture("Quality_Small_Inventory_Set");
 
-	public Texture InventorySetBackgroundLarge => GetTexture("Quality_Large_Inventory_Set");
+	public Texture? InventorySetBackgroundLarge => GetTexture("Quality_Large_Inventory_Set");
 
-	public Texture GetItemBackgroundTexture(Item item)
+	public Texture? GetItemBackgroundTexture(Item item)
 	{
 		switch ((ItemCraftQuality)((item.SnoItem.CraftQuality == ItemCraftQuality.None) ? ((int)item.Quality) : ((int)item.SnoItem.CraftQuality)))
 		{
@@ -66,22 +66,22 @@ public class TextureController
 		}
 	}
 
-	public Texture GetTexture(string name)
+	public Texture? GetTexture(string name)
 	{
 		return TextureManager.GetTextureByName(name);
 	}
 
-	public Texture GetTexture(uint id)
+	public Texture? GetTexture(uint id)
 	{
 		return TextureManager.GetTextureById(id);
 	}
 
-	public Texture GetTexture(uint textureSno, int frameIndex)
+	public Texture? GetTexture(uint textureSno, int frameIndex)
 	{
 		return TextureManager.GetTextureById(textureSno);
 	}
 
-	public Texture GetItemTexture(SnoItem snoItem)
+	public Texture? GetItemTexture(SnoItem snoItem)
 	{
 		return TextureManager.GetItemTexture(snoItem, CoreCollector.LocalPlayer?.HeroClassDefinition?.HeroClass ?? HeroClass.Wizard, CoreCollector.LocalPlayer?.HeroIsMale ?? true);
 	}

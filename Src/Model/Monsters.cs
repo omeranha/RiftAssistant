@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,19 +18,19 @@ internal sealed class Monsters
 
 	public SnoMonster SnoMonsterObstacle { get; }
 
-	public SnoMonster GetMonster(ActorSnoEnum sno)
+	public SnoMonster? GetMonster(ActorSnoEnum sno)
 	{
 		snoMonstersByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoMonsterAffix GetMonsterAffix(uint sno)
+	public SnoMonsterAffix? GetMonsterAffix(uint sno)
 	{
 		snoMonsterAffixesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoMonster GetMonsterByStringId(uint stringId)
+	public SnoMonster? GetMonsterByStringId(uint stringId)
 	{
 		snoMonstersByKey.TryGetValue(stringId, out var value);
 		return value;
@@ -44,8 +46,8 @@ internal sealed class Monsters
 			{
 				uint num = dataReader.ReadUInt32();
 				string code = dataReader.ReadString();
-				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._monsteraffixnames, code);
-				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._monsteraffixnames, code);
+				string? stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._monsteraffixnames, code);
+				string? stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._monsteraffixnames, code);
 				if (Enum.IsDefined(typeof(MonsterAffix), num))
 				{
 					snoMonsterAffixesByKey.Add(num, new SnoMonsterAffix(num, (MonsterAffix)num, stringByCode, stringByCodeEnglish));
@@ -64,14 +66,14 @@ internal sealed class Monsters
 				string text2 = array2[3];
 				MonsterPriority monsterPriority = (MonsterPriority)Enum.Parse(typeof(MonsterPriority), array2[4], ignoreCase: true);
 				float float_ = float.Parse(array2[5], CultureInfo.InvariantCulture);
-				string stringById = SnoData.Strings.GetStringById(StringListSnoEnum._monsters, num3);
-				string stringByIdEnglish = SnoData.Strings.GetStringByIdEnglish(StringListSnoEnum._monsters, num3);
+				string? stringById = SnoData.Strings.GetStringById(StringListSnoEnum._monsters, num3);
+				string? stringByIdEnglish = SnoData.Strings.GetStringByIdEnglish(StringListSnoEnum._monsters, num3);
 				if (num3 == 0 && hashSet.Contains(num2))
 				{
 					stringById = SnoData.Strings.GetStringById(StringListSnoEnum._monsters, 3553387842u);
 					stringByIdEnglish = SnoData.Strings.GetStringByIdEnglish(StringListSnoEnum._monsters, 3553387842u);
 				}
-				SnoActor snoActor = SnoData.Actors.GetActor(actorSnoEnum);
+				SnoActor? snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 				if (snoActor == null)
 				{
 					snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, isStatic: false, "dummyactor-" + text2, "dummyactor-" + text2, "dummyactor-" + text2);

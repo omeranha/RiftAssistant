@@ -9,13 +9,13 @@ internal sealed class StatTracker : IStatTracker
 	private const double MillisecondsPerSecond = 1000.0;
 	private const double MillisecondsPerHour = 3_600_000.0;
 
-	private readonly string persistenceKey;
+	private readonly string? persistenceKey;
 	private readonly Stopwatch mainTimer = new();
 	private readonly Stopwatch townTimer = new();
 	private long loadedElapsedMilliseconds;
 	private long loadedTownMilliseconds;
 
-	public StatTracker(string id, bool startRunning, string title, string persistenceKey = null)
+	public StatTracker(string? id, bool startRunning, string title, string? persistenceKey = null)
 	{
 		Id = id;
 		Title = title;
@@ -24,7 +24,7 @@ internal sealed class StatTracker : IStatTracker
 		if (persistenceKey != null) LoadFrom(persistenceKey);
 	}
 
-	public StatTracker(string id, bool startRunning, string title, IReadOnlyList<string> persistenceKeys)
+	public StatTracker(string? id, bool startRunning, string title, IReadOnlyList<string> persistenceKeys)
 	{
 		Id = id;
 		Title = title;
@@ -34,11 +34,11 @@ internal sealed class StatTracker : IStatTracker
 		}
 	}
 
-	public string Id { get; }
+	public string? Id { get; }
 
-	public string Title { get; set; }
+	public string? Title { get; set; }
 
-	public SnoArea SnoArea { get; set; }
+	public SnoArea? SnoArea { get; set; }
 
 	public bool AlwaysRunning { get; set; }
 
@@ -168,9 +168,9 @@ internal sealed class StatTracker : IStatTracker
 		StatTrackerStorage.Write(StatTrackerStorage.PathFor(Id, persistenceKey), ToSnapshot());
 	}
 
-	public string FormatTownTime(ValueFormat valueFormat = ValueFormat.LongTime) => FormatTime(TownElapsedMilliseconds, valueFormat);
+	public string? FormatTownTime(ValueFormat valueFormat = ValueFormat.LongTime) => FormatTime(TownElapsedMilliseconds, valueFormat);
 
-	public string FormatPlayTime(ValueFormat valueFormat = ValueFormat.LongTime) => FormatTime(PlayElapsedMilliseconds, valueFormat);
+	public string? FormatPlayTime(ValueFormat valueFormat = ValueFormat.LongTime) => FormatTime(PlayElapsedMilliseconds, valueFormat);
 
 	internal void StartIfStopped()
 	{
@@ -269,7 +269,7 @@ internal sealed class StatTracker : IStatTracker
 		return playTime > 1 ? value / playTime * MillisecondsPerSecond : 0.0;
 	}
 
-	private static string FormatTime(long milliseconds, ValueFormat valueFormat)
+	private static string? FormatTime(long milliseconds, ValueFormat valueFormat)
 	{
 		if (milliseconds < 1000) milliseconds = 0;
 		return Formatting.ValueToString(milliseconds * TimeSpan.TicksPerMillisecond, valueFormat);

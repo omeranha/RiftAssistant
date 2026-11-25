@@ -1,3 +1,4 @@
+#nullable disable
 namespace RiftAssistant.Model;
 
 public enum ActorSnoEnum : uint

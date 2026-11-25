@@ -47,7 +47,7 @@ public class Controller
 
 	public InputController Input => inputController;
 
-	public string BattleTag => CoreCollector.BattleTag;
+	public string? BattleTag => CoreCollector.BattleTag;
 
 	public IEnumerable<Hero> AccountHeroes => CoreCollector.HeroCollector.HeroList;
 

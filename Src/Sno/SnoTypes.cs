@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -37,7 +39,7 @@ public sealed class AcdAttribute
 		return Index | (modifier << 12);
 	}
 
-	public string GetDescription(uint modifier)
+	public string? GetDescription(uint modifier)
 	{
 		dictionary_0.TryGetValue(modifier, out var value);
 		if (value == null && dictionary_0.Count > 0)
@@ -69,9 +71,9 @@ public sealed class ActorShrineTypeInfo
 
 	public ShrineType Type { get; }
 
-	public SnoActor SnoActor { get; }
+	public SnoActor? SnoActor { get; }
 
-	internal ActorShrineTypeInfo(ShrineType shrineType, SnoActor actor)
+	internal ActorShrineTypeInfo(ShrineType shrineType, SnoActor? actor)
 	{
 		Type = shrineType;
 		SnoActor = actor;
@@ -85,7 +87,7 @@ public sealed class AttributeProcessor
 
 	public string Code { get; }
 
-	public AcdAttribute Attribute { get; }
+	public AcdAttribute? Attribute { get; }
 
 	public uint Modifier { get; }
 
@@ -93,7 +95,7 @@ public sealed class AttributeProcessor
 
 	public int RoundDecimals { get; }
 
-	internal AttributeProcessor(byte compactId, string code, AcdAttribute attribute, uint maxValue, double? multiplier, int roundDecimals)
+	internal AttributeProcessor(byte compactId, string code, AcdAttribute? attribute, uint maxValue, double? multiplier, int roundDecimals)
 	{
 		CompactId = compactId;
 		Code = code;
@@ -238,7 +240,7 @@ public sealed class HeroClassDefinition
 
 	public string FullCode { get; }
 
-	public string Name { get; }
+	public string? Name { get; }
 
 	public ActorSnoEnum MaleActorSno { get; }
 
@@ -248,9 +250,9 @@ public sealed class HeroClassDefinition
 
 	public string PrimaryResourceName { get; }
 
-	public string SecondaryResourceName { get; }
+	public string? SecondaryResourceName { get; }
 
-	internal HeroClassDefinition(HeroClass heroClass2, string code, string fullCode, string stringByCode, bool isRanged, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string primaryResourceName, string secondaryResourceName)
+	internal HeroClassDefinition(HeroClass heroClass2, string code, string fullCode, string? stringByCode, bool isRanged, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string primaryResourceName, string? secondaryResourceName)
 	{
 		HeroClass = heroClass2;
 		Code = code;
@@ -502,11 +504,11 @@ internal sealed class SkillEffectRule
 
 	public SkillEffectType Type { get; }
 
-	public SnoActor SnoActor { get; }
+	public SnoActor? SnoActor { get; }
 
 	public float Radius { get; }
 
-	internal SkillEffectRule(SkillEffectType skillEffectType, SnoActor actor, float radius)
+	internal SkillEffectRule(SkillEffectType skillEffectType, SnoActor? actor, float radius)
 	{
 		Type = skillEffectType;
 		SnoActor = actor;
@@ -547,13 +549,13 @@ public sealed class SnoActor
 
 	public string Code { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
 	public uint[] TextureMap { get; set; }
 
-	internal SnoActor(ActorSnoEnum actorSnoEnum, ActorType invalid, ActorKind none, bool isStatic, string code, string stringByCode, string stringByCodeEnglish)
+	internal SnoActor(ActorSnoEnum actorSnoEnum, ActorType invalid, ActorKind none, bool isStatic, string code, string? stringByCode, string? stringByCodeEnglish)
 	{
 		Sno = actorSnoEnum;
 		Kind = none;
@@ -585,9 +587,9 @@ public class SnoArea
 
 	public string Code { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
 	public AreaType Type { get; }
 
@@ -603,9 +605,9 @@ public class SnoArea
 
 	public uint HostAreaSno { get; }
 
-	public SnoArea HostSnoArea => null;
+	public SnoArea? HostSnoArea => null;
 
-	internal SnoArea(uint sno, string code, int act, string nameLocalized, string nameEnglish, AreaType areaType, bool isRandom, string areaGroupInWorld, bool isTown, uint hostAreaSno)
+	internal SnoArea(uint sno, string code, int act, string? nameLocalized, string? nameEnglish, AreaType areaType, bool isRandom, string areaGroupInWorld, bool isTown, uint hostAreaSno)
 	{
 		Sno = sno;
 		Code = code;
@@ -689,15 +691,15 @@ public class SnoItemAffix
 
 	public uint Id { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
 	public uint BaseAffixId { get; }
 
-	public SnoItemAffixGroup SnoAffixGroup1 { get; }
+	public SnoItemAffixGroup? SnoAffixGroup1 { get; }
 
-	public SnoItemAffixGroup SnoAffixGroup2 { get; }
+	public SnoItemAffixGroup? SnoAffixGroup2 { get; }
 
 	public SnoItemMod[] Mods { get; set; }
 
@@ -705,7 +707,7 @@ public class SnoItemAffix
 
 	public bool Minor { get; set; }
 
-	internal SnoItemAffix(uint uint_2, string stringByCode2, string stringByCodeEnglish2, uint baseAffixId, SnoItemAffixGroup snoItemAffixGroup, SnoItemAffixGroup snoItemAffixGroup3, HeroClass heroClass2, bool minor)
+	internal SnoItemAffix(uint uint_2, string? stringByCode2, string? stringByCodeEnglish2, uint baseAffixId, SnoItemAffixGroup? snoItemAffixGroup, SnoItemAffixGroup? snoItemAffixGroup3, HeroClass heroClass2, bool minor)
 	{
 		Id = uint_2;
 		NameLocalized = stringByCode2;
@@ -719,7 +721,7 @@ public class SnoItemAffix
 
 	public override string ToString()
 	{
-		string nameLocalized2 = NameLocalized;
+		string? nameLocalized2 = NameLocalized;
 		SnoItemMod[] mods = Mods;
 		foreach (SnoItemMod snoItemMod in mods)
 		{
@@ -757,13 +759,13 @@ public class SnoItemAffixGroup
 public class SnoItemAffixGroupLink
 {
 
-	public SnoItemAffixGroup Group { get; }
+	public SnoItemAffixGroup? Group { get; }
 
 	public int Level { get; }
 
 	public int Flag { get; }
 
-	internal SnoItemAffixGroupLink(SnoItemAffixGroup isnoItemAffixGroup_1, int level, int int_3)
+	internal SnoItemAffixGroupLink(SnoItemAffixGroup? isnoItemAffixGroup_1, int level, int int_3)
 	{
 		Group = isnoItemAffixGroup_1;
 		Level = level;
@@ -779,7 +781,7 @@ public class SnoItemAffixGroupLink
 public class SnoItemMod
 {
 
-	public AcdAttribute Attribute { get; }
+	public AcdAttribute? Attribute { get; }
 
 	public uint Modifier { get; }
 
@@ -787,9 +789,9 @@ public class SnoItemMod
 
 	public float Max { get; }
 
-	public SnoItemAffix Affix { get; }
+	public SnoItemAffix? Affix { get; }
 
-	internal SnoItemMod(AcdAttribute attribute, uint modifier, float float_2, float float_3, SnoItemAffix affix)
+	internal SnoItemMod(AcdAttribute? attribute, uint modifier, float float_2, float float_3, SnoItemAffix? affix)
 	{
 		Attribute = attribute;
 		Modifier = modifier;
@@ -811,13 +813,13 @@ public sealed class SnoItemType
 
 	public string Code { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
-	public SnoItemType ParentSnoType { get; set; }
+	public SnoItemType? ParentSnoType { get; set; }
 
-	internal SnoItemType(uint uint_1, string code, string stringByCode, string stringByCodeEnglish, SnoItemType snoItemType)
+	internal SnoItemType(uint uint_1, string code, string? stringByCode, string? stringByCodeEnglish, SnoItemType? snoItemType)
 	{
 		Id = uint_1;
 		Code = code;
@@ -841,9 +843,9 @@ public sealed class SnoMonster
 
 	public string Code { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
 	public bool IsUnique { get; }
 
@@ -851,7 +853,7 @@ public sealed class SnoMonster
 
 	public float RiftProgression { get; }
 
-	internal SnoMonster(SnoActor snoActor2, uint sno, string code, string stringById, string stringByIdEnglish, MonsterPriority monsterPriority, bool isUnique, float riftProgression)
+	internal SnoMonster(SnoActor snoActor2, uint sno, string code, string? stringById, string? stringByIdEnglish, MonsterPriority monsterPriority, bool isUnique, float riftProgression)
 	{
 		SnoActor = snoActor2;
 		Sno = sno;
@@ -875,7 +877,7 @@ public sealed class SnoMonsterAffix
 
 	public string NameEnglish { get; }
 
-	internal SnoMonsterAffix(uint uint_1, MonsterAffix monsterAffix, string stringByCode, string stringByCodeEnglish)
+	internal SnoMonsterAffix(uint uint_1, MonsterAffix monsterAffix, string? stringByCode, string? stringByCodeEnglish)
 	{
 		Id = uint_1;
 		Affix = monsterAffix;
@@ -898,15 +900,15 @@ public sealed class SnoQuest
 
 	public uint Sno { get; }
 
-	public string NameLocalized { get; }
+	public string? NameLocalized { get; }
 
-	public string NameEnglish { get; }
+	public string? NameEnglish { get; }
 
-	public string DescriptionLocalized { get; }
+	public string? DescriptionLocalized { get; }
 
-	public string DescriptionEnglish { get; }
+	public string? DescriptionEnglish { get; }
 
-	public SnoAct SnoAct { get; }
+	public SnoAct? SnoAct { get; }
 
 	public QuestType Type { get; }
 
@@ -914,25 +916,25 @@ public sealed class SnoQuest
 
 	public int UnassignedStepId { get; }
 
-	public string UnassignedStepBnetTitleLocalized { get; }
+	public string? UnassignedStepBnetTitleLocalized { get; }
 
-	public string UnassignedStepBnetTitleEnglish { get; }
+	public string? UnassignedStepBnetTitleEnglish { get; }
 
 	public BountyAct BountyAct { get; }
 
 	public BountyType BountyType { get; }
 
-	public SnoArea BountySnoArea { get; }
+	public SnoArea? BountySnoArea { get; }
 
 	public IEnumerable<SnoQuestStep> Steps => steps.Values;
 
-	public SnoQuestStep GetStep(uint stepId)
+	public SnoQuestStep? GetStep(uint stepId)
 	{
 		steps.TryGetValue(stepId, out var value);
 		return value;
 	}
 
-	internal SnoQuest(string code, uint sno, SnoAct snoAct, string stringByCode, string stringByCodeEnglish, string stringByCode2, string stringByCodeEnglish2, QuestType questType, QuestEventType questEventType, int unassignedStepId, string stringByCode3, string stringByCodeEnglish3, BountyAct bountyAct2, BountyType bountyType2, SnoArea bountySnoArea)
+	internal SnoQuest(string code, uint sno, SnoAct? snoAct, string? stringByCode, string? stringByCodeEnglish, string? stringByCode2, string? stringByCodeEnglish2, QuestType questType, QuestEventType questEventType, int unassignedStepId, string? stringByCode3, string? stringByCodeEnglish3, BountyAct bountyAct2, BountyType bountyType2, SnoArea? bountySnoArea)
 	{
 		Code = code;
 		Sno = sno;
@@ -964,19 +966,19 @@ public class SnoQuestStep
 
 	public uint Id { get; }
 
-	public string SplashLocalized { get; }
+	public string? SplashLocalized { get; }
 
-	public string SplashEnglish { get; }
+	public string? SplashEnglish { get; }
 
-	public string BnetTitleLocalized { get; }
+	public string? BnetTitleLocalized { get; }
 
-	public string BnetTitleEnglish { get; }
+	public string? BnetTitleEnglish { get; }
 
-	public string BnetTextLocalized { get; }
+	public string? BnetTextLocalized { get; }
 
-	public string BnetTextEnglish { get; }
+	public string? BnetTextEnglish { get; }
 
-	internal SnoQuestStep(SnoQuest snoQuest, uint uint_1, string stringByCode4, string stringByCodeEnglish4, string stringByCode5, string stringByCodeEnglish5, string stringByCode6, string stringByCodeEnglish6)
+	internal SnoQuestStep(SnoQuest snoQuest, uint uint_1, string? stringByCode4, string? stringByCodeEnglish4, string? stringByCode5, string? stringByCodeEnglish5, string? stringByCode6, string? stringByCodeEnglish6)
 	{
 		SnoQuest = snoQuest;
 		Id = uint_1;
@@ -991,52 +993,52 @@ public class SnoQuestStep
 
 internal static class SnoResourceHelper
 {
-	public static string GetWorlds()
+	public static string? GetWorlds()
 	{
 		return GameResources.Worlds;
 	}
 
-	public static string GetPowerStats()
+	public static string? GetPowerStats()
 	{
 		return GameResources.PowerStats;
 	}
 
-	public static string GetPowerRuneIconOverrides()
+	public static string? GetPowerRuneIconOverrides()
 	{
 		return GameResources.PowerRuneIconOverrides;
 	}
 
-	public static string GetSceneHints()
+	public static string? GetSceneHints()
 	{
 		return GameResources.SceneHints;
 	}
 
-	public static string GetQuests()
+	public static string? GetQuests()
 	{
 		return GameResources.Quest;
 	}
 
-	public static string GetMonsters()
+	public static string? GetMonsters()
 	{
 		return GameResources.Monster;
 	}
 
-	public static string GetLevelAreas()
+	public static string? GetLevelAreas()
 	{
 		return GameResources.Levelarea;
 	}
 
-	public static string GetItems()
+	public static string? GetItems()
 	{
 		return GameResources.GamebalanceItems;
 	}
 
-	public static string GetKanaiItems()
+	public static string? GetKanaiItems()
 	{
 		return GameResources.GamebalanceKanai;
 	}
 
-	public static string GetActors()
+	public static string? GetActors()
 	{
 		return GameResources.Actor;
 	}
@@ -1146,11 +1148,11 @@ public class SnoScene
 public class SnoSocketedEffect
 {
 
-	public SnoItemType SnoItemType { get; }
+	public SnoItemType? SnoItemType { get; }
 
 	public SnoItemMod[] Mods { get; }
 
-	internal SnoSocketedEffect(SnoItemType snoItemType2, SnoItemMod[] mods)
+	internal SnoSocketedEffect(SnoItemType? snoItemType2, SnoItemMod[] mods)
 	{
 		SnoItemType = snoItemType2;
 		Mods = mods;
@@ -1214,7 +1216,7 @@ public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 
 	public List<SnoScene> SnoScenes { get; } = new List<SnoScene>();
 
-	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea snoArea)
+	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea? snoArea)
 		: base(float_6, float_7, float_8, float_9, snoArea)
 	{
 	}
@@ -1223,9 +1225,9 @@ public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 public sealed class SnoWorldSceneInfoStatic : SnoWorldSceneInfo
 {
 
-	public SnoScene SnoScene { get; }
+	public SnoScene? SnoScene { get; }
 
-	internal SnoWorldSceneInfoStatic(float float_6, float float_7, float float_8, float float_9, SnoArea snoArea, SnoScene snoScene)
+	internal SnoWorldSceneInfoStatic(float float_6, float float_7, float float_8, float float_9, SnoArea? snoArea, SnoScene? snoScene)
 		: base(float_6, float_7, float_8, float_9, snoArea)
 	{
 		SnoScene = snoScene;

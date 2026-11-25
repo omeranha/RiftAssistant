@@ -35,7 +35,7 @@ public class InventoryController
 
 	public UiElement FollowerMainUiElement => CoreCollector.UiElements.FollowerMainUiElement;
 
-	public Item HoveredItem
+	public Item? HoveredItem
 	{
 		get
 		{
@@ -62,7 +62,7 @@ public class InventoryController
 		return CoreCollector.UiElements.StashTabs[index];
 	}
 
-	public UiElement GetEquippedItemUiElement(ItemLocation location)
+	public UiElement? GetEquippedItemUiElement(ItemLocation location)
 	{
 		return location switch
 		{
@@ -121,7 +121,7 @@ public class InventoryController
 		return ItemUIExtensions.CalculateInventorySlotRect(x, y, width, height);
 	}
 
-	public SnoItem GetSnoItem(uint sno)
+	public SnoItem? GetSnoItem(uint sno)
 	{
 		return SnoData.Items.GetBySno(sno);
 	}

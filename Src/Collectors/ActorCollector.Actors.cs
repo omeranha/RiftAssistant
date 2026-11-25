@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +11,7 @@ internal partial class ActorCollector
 	{
 		List<SnoMonsterAffix> affixSnoList = monster.AffixSnoList;
 		affixSnoList?.Clear();
-		SnoMonsterAffix monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_0);
+		SnoMonsterAffix? monsterAffix = SnoData.Monsters.GetMonsterAffix(acd.monster_affix_id_0);
 		if (monsterAffix != null) {
 			(affixSnoList ?? (affixSnoList = new List<SnoMonsterAffix>())).Add(monsterAffix);
 		}
@@ -47,7 +49,7 @@ internal partial class ActorCollector
 		}
 	}
 
-	private Actor CreateActor(uint acdid, uint annId, SnoActor snoActor, GizmoType gizmoType, uint uint_2)
+	private Actor? CreateActor(uint acdid, uint annId, SnoActor snoActor, GizmoType gizmoType, uint uint_2)
 	{
 		if (snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch && snoActor.Sno != ActorSnoEnum._x1_westm_bridge && snoActor.Sno != ActorSnoEnum._a3dun_keep_bridge_switch_b) {
 			if (snoActor.Sno == ActorSnoEnum._a3dun_keep_bridge) {
@@ -59,7 +61,7 @@ internal partial class ActorCollector
 			if (snoActor.Sno == ActorSnoEnum._trdun_crypt_skeleton_king_throne_parts) {
 				return null;
 			}
-			SkillEffectRule skillEffectRule = SnoData.Actors.GetSkillEffectRule(snoActor.Sno);
+			SkillEffectRule? skillEffectRule = SnoData.Actors.GetSkillEffectRule(snoActor.Sno);
 			if (skillEffectRule != null) {
 				if ((skillEffectRule.Type == SkillEffectType.fetish || skillEffectRule.Type == SkillEffectType.zombiedog || skillEffectRule.Type == SkillEffectType.gargantuan || skillEffectRule.Type == SkillEffectType.sentry || skillEffectRule.Type == SkillEffectType.hydra) && uint_2 != CoreCollector.LocalPlayer.SummonerId) {
 					return null;
@@ -86,7 +88,7 @@ internal partial class ActorCollector
 				}
 				return new SkillEffect(acdid, annId, snoActor, skillEffectRule);
 			}
-			ActorShrineTypeInfo actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(snoActor.Sno);
+			ActorShrineTypeInfo? actorShrineTypeInfo = SnoData.Actors.GetActorShrineTypeInfo(snoActor.Sno);
 			if (actorShrineTypeInfo != null) {
 				return new Shrine(acdid, annId, actorShrineTypeInfo);
 			}
@@ -144,7 +146,7 @@ internal partial class ActorCollector
 							return new Door(acdid, annId, snoActor);
 						case GizmoType.Headstone: {
 								uint uIntAttribute = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
-								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uIntAttribute);
+								Player? iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uIntAttribute);
 								return new HeadStone(acdid, annId, snoActor, uIntAttribute, iplayer_);
 							}
 						default:
@@ -166,7 +168,7 @@ internal partial class ActorCollector
 				}
 				return new MonsterObstacle(acdid, annId, snoActor);
 			}
-			SnoArea snoArea = null;
+			SnoArea? snoArea = null;
 			long ptr_portal_info = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].ptr_portal_info;
 			uint uint_4 = 0u;
 			if (ptr_portal_info != 0L) {
@@ -205,7 +207,7 @@ internal partial class ActorCollector
 			return false;
 		}
 		if (actor is SkillEffect skillEffect) {
-			List<SkillEffect> list = SkillEffectsByType.GetValueOrDefault(skillEffect.SkillEffectRule.Type);
+			List<SkillEffect>? list = SkillEffectsByType.GetValueOrDefault(skillEffect.SkillEffectRule.Type);
 			if (list == null) {
 				list = new List<SkillEffect>();
 				SkillEffectsByType[skillEffect.SkillEffectRule.Type] = list;
@@ -257,12 +259,12 @@ internal partial class ActorCollector
 			return true;
 		}
 		if (actor is TownBanner) {
-			TownBanner townBanner = actor as TownBanner;
+			TownBanner? townBanner = actor as TownBanner;
 			TownBanners[townBanner.Index] = townBanner;
 			townBanner.Usable = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
 		}
 		if (actor is HeadStone) {
-			HeadStone item = actor as HeadStone;
+			HeadStone? item = actor as HeadStone;
 			HeadStones.Add(item);
 			return true;
 		}

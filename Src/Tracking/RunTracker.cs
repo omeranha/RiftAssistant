@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,7 +21,7 @@ internal class RunTracker
 
 	public readonly int HeroCollectorValue;
 
-	public readonly string GameServerIp;
+	public readonly string? GameServerIp;
 
 	public readonly StatTracker RunStatTracker;
 
@@ -39,7 +41,7 @@ internal class RunTracker
 
 	public readonly StringBuilder LogBuilder = new();
 
-	internal RunTracker(SnoArea initialArea)
+	internal RunTracker(SnoArea? initialArea)
 	{
 		StartTime = DateTime.Now;
 		StartGameTick = CoreCollector.D3Memory.GameTick;
@@ -55,13 +57,13 @@ internal class RunTracker
 		UpdateCurrentArea(initialArea);
 	}
 
-	internal void UpdateCurrentArea(SnoArea snoArea)
+	internal void UpdateCurrentArea(SnoArea? snoArea)
 	{
 		if (CurrentArea != null) {
 			CurrentArea.AreaStats.Stop();
 			CurrentArea.RecordExitStats();
 		}
-		AreaTracker areaTracker = null;
+		AreaTracker? areaTracker = null;
 		for (int i = 0; i < VisitedAreas.Count; i++) {
 			if (VisitedAreas[i].SnoArea.NameLocalized == snoArea.NameLocalized) {
 				areaTracker = VisitedAreas[i];

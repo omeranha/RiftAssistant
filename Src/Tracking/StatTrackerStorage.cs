@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,13 +55,13 @@ internal static class StatTrackerStorage
 	private static readonly AutoResetEvent WorkAvailable = new(false);
 	private static Thread writerThread;
 
-	public static string PathFor(string id, string key)
+	public static string PathFor(string? id, string key)
 	{
 		return Path.Combine(Program.StatTrackerFolder, $"{SanitizeFileName(id)}_{SanitizeFileName(key)}.json");
 	}
 
 	// A snapshot that is still waiting for the writer thread is newer than the file, so it is returned first.
-	public static StatTrackerSnapshot Read(string path)
+	public static StatTrackerSnapshot? Read(string path)
 	{
 		lock (Gate) {
 			if (Pending.TryGetValue(path, out var pending)) return pending;
@@ -126,8 +128,8 @@ internal static class StatTrackerStorage
 	{
 		lock (DrainLock) {
 			while (true) {
-				string path = null;
-				StatTrackerSnapshot snapshot = null;
+				string? path = null;
+				StatTrackerSnapshot? snapshot = null;
 				lock (Gate) {
 					foreach (var pair in Pending) {
 						(path, snapshot) = (pair.Key, pair.Value);
@@ -146,7 +148,7 @@ internal static class StatTrackerStorage
 		}
 	}
 
-	private static bool TryWriteFile(string path, StatTrackerSnapshot snapshot)
+	private static bool TryWriteFile(string path, StatTrackerSnapshot? snapshot)
 	{
 		try {
 			Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -160,7 +162,7 @@ internal static class StatTrackerStorage
 		}
 	}
 
-	private static string SanitizeFileName(string name)
+	private static string SanitizeFileName(string? name)
 	{
 		var builder = new StringBuilder(name.Length);
 		foreach (char c in name) {

@@ -1,10 +1,12 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.IO;
 using System.Linq;
 
 namespace RiftAssistant;
 
-internal sealed class StartupException(string message, Exception inner = null) : Exception(message, inner);
+internal sealed class StartupException(string message, Exception? inner = null) : Exception(message, inner);
 
 internal static class StartupChecks
 {

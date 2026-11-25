@@ -9,11 +9,11 @@ internal class ModuleCursorHint : Module
 
 	public static readonly RenderFont renderFont = new RenderFont(255, 255, 255, 255, "Arial", false, false, 7f, Alignment.Center, true, false);
 
-	private string hint;
+	private string? hint;
 
-	private string cachedHint;
+	private string cachedHint = null!;
 
-	private string location;
+	private string? location;
 
 	private int maxWidth = -1;
 
@@ -32,7 +32,7 @@ internal class ModuleCursorHint : Module
 		base.Dispose();
 	}
 
-	public void SetHint(string text, string location, int maxWidth = -1)
+	public void SetHint(string? text, string? location, int maxWidth = -1)
 	{
 		this.hint = text;
 		this.location = location;

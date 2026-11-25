@@ -36,10 +36,10 @@ internal static unsafe partial class RawInput
 	private const int WM_SYSKEYDOWN = 0x0104;
 	private const int WM_SYSKEYUP = 0x0105;
 
-	public static event Action<InputEvent> KeyboardEvent;
-	public static event Action<InputEvent> MouseEvent;
+	public static event Action<InputEvent>? KeyboardEvent;
+	public static event Action<InputEvent>? MouseEvent;
 
-	private static Thread thread;
+	private static Thread? thread;
 	private static uint threadId;
 	private static IntPtr hwnd;
 

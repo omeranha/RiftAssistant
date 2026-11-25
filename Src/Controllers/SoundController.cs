@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -51,7 +53,7 @@ public partial class SoundController
 		synthesizer?.SpeakAsyncCancelAll();
 	}
 
-	public SoundPlayer LoadSoundPlayer(string fileName)
+	public SoundPlayer? LoadSoundPlayer(string fileName)
 	{
 		string path = Path.Combine(Program.AppDir, "sounds", fileName);
 		if (!File.Exists(path)) return null;

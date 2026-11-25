@@ -14,15 +14,15 @@ internal class HeroCollector
 
 	private readonly Dictionary<uint, Hero> heroList = new Dictionary<uint, Hero>();
 
-	public EventHandler OnHeroesCollected { get; set; }
+	public EventHandler OnHeroesCollected { get; set; } = null!;
 
-	public Hero IHero_0 { get; private set; }
+	public Hero? IHero_0 { get; private set; }
 
 	internal int Int32_0 { get; private set; }
 
 	public IEnumerable<Hero> HeroList => heroList.Values;
 
-	public Hero GetHero(uint heroId2)
+	public Hero? GetHero(uint heroId2)
 	{
 		heroList.TryGetValue(heroId2, out var value);
 		return value;
@@ -91,7 +91,7 @@ internal class HeroCollector
 		}
 		try
 		{
-			Hero hero = GetHero(uint_) as Hero;
+			Hero? hero = GetHero(uint_) as Hero;
 			if (hero == null)
 			{
 				string text = GameWindowManager.ReadString(hero2.long_3, 64, Encoding.UTF8, true);

@@ -4,23 +4,23 @@ public class SnoPower
 {
 	internal uint sno;
 	private readonly string code;
-	private readonly string nameLocalized;
-	private readonly string nameEnglish;
-	private readonly string descriptionLocalized;
-	private readonly string descriptionEnglish;
-	private string[] runeNamesLocalized;
-	private string[] runeNamesEnglish;
-	private int[] iconIndexes;
+	private readonly string? nameLocalized;
+	private readonly string? nameEnglish;
+	private readonly string? descriptionLocalized;
+	private readonly string? descriptionEnglish;
+	private string[] runeNamesLocalized = null!;
+	private string[] runeNamesEnglish = null!;
+	private int[] iconIndexes = null!;
 	private bool hasKnownRunesValues;
-	private int[] elementalDamageTypesByRune;
-	private int[] weaponDamageMultipliersByRune;
-	private float[] dotSecondsByRune;
-	private int[] resourceCostsByRune;
-	private PowerResourceCostType[] powerResourceCostTypeByRune;
-	private double[] baseCoolDownByRune;
+	private int[] elementalDamageTypesByRune = null!;
+	private int[] weaponDamageMultipliersByRune = null!;
+	private float[] dotSecondsByRune = null!;
+	private int[] resourceCostsByRune = null!;
+	private PowerResourceCostType[] powerResourceCostTypeByRune = null!;
+	private double[] baseCoolDownByRune = null!;
 	private readonly SnoPowerIcon[] snoPowerIcon = new SnoPowerIcon[32];
 	private uint normalIconTextureId;
-	private SnoPower isnoPower;
+	private SnoPower? isnoPower;
 
 	public uint Sno
 	{
@@ -39,28 +39,28 @@ public class SnoPower
 		}
 	}
 
-	public string NameLocalized
+	public string? NameLocalized
 	{
 		get {
 			return nameLocalized;
 		}
 	}
 
-	public string NameEnglish
+	public string? NameEnglish
 	{
 		get {
 			return nameEnglish;
 		}
 	}
 
-	public string DescriptionLocalized
+	public string? DescriptionLocalized
 	{
 		get {
 			return descriptionLocalized;
 		}
 	}
 
-	public string DescriptionEnglish
+	public string? DescriptionEnglish
 	{
 		get {
 			return descriptionEnglish;
@@ -184,7 +184,7 @@ public class SnoPower
 		}
 	}
 
-	public SnoPower SynergyPower
+	public SnoPower? SynergyPower
 	{
 		get {
 			return isnoPower;
@@ -194,7 +194,7 @@ public class SnoPower
 		}
 	}
 
-	internal SnoPower(uint sno, string code, string nameLocalized, string nameEnglish, string descriptionLocalized, string descriptionEnglish)
+	internal SnoPower(uint sno, string code, string? nameLocalized, string? nameEnglish, string? descriptionLocalized, string? descriptionEnglish)
 	{
 		this.code = code;
 		this.nameLocalized = nameLocalized;

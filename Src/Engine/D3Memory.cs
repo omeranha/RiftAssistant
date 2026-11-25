@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -27,11 +29,11 @@ internal class D3Memory
 
 	internal Allocator FloatingNumberAllocator;
 
-	public string CommandLineArgs;
+	public string? CommandLineArgs;
 
 	public bool? isOnPTR;
 
-	public string ServerGateway;
+	public string? ServerGateway;
 
 	private int int_45 = -1;
 
@@ -285,11 +287,11 @@ internal class D3Memory
 		SelectedActor2_AcdId = GameWindowManager.Read<uint>(UIManagerAddress + Offset_UIManager_SelectedActor2);
 	}
 
-	private void CheckIsOnPTR(Process process)
+	private void CheckIsOnPTR(Process? process)
 	{
 		try {
 			using ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(new SelectQuery("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id));
-			ManagementObject managementObject = managementObjectSearcher.Get().Cast<ManagementObject>().FirstOrDefault();
+			ManagementObject? managementObject = managementObjectSearcher.Get().Cast<ManagementObject>().FirstOrDefault();
 			if (managementObject != null) {
 				CommandLineArgs = (managementObject.Properties["CommandLine"].Value ?? "").ToString();
 				isOnPTR = CommandLineArgs.Contains("OnlineService.PTR=true");

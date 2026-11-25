@@ -25,7 +25,7 @@ internal static class SettingsManager
 
 	public static Settings Current { get; private set; } = new();
 
-	public static event Action Changed;
+	public static event Action? Changed;
 
 	public static Settings Load()
 	{
@@ -49,7 +49,7 @@ internal static class SettingsManager
 		}
 	}
 
-	public static void Save(Settings settings = null)
+	public static void Save(Settings? settings = null)
 	{
 		settings ??= Current;
 		Directory.CreateDirectory(Program.SettingsFolder);

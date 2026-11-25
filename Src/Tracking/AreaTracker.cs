@@ -7,7 +7,7 @@ internal class AreaTracker
 {
 	public readonly RunTracker Run;
 
-	public readonly SnoArea SnoArea;
+	public readonly SnoArea? SnoArea;
 
 	public readonly DateTime StartTime;
 
@@ -25,9 +25,9 @@ internal class AreaTracker
 
 	public long EndParagonExp;
 
-	public string AreaNameLocalized;
+	public string? AreaNameLocalized;
 
-	internal AreaTracker(RunTracker runTracker, SnoArea snoArea, string areaNameLocalized, string areaSnoString)
+	internal AreaTracker(RunTracker runTracker, SnoArea? snoArea, string? areaNameLocalized, string areaSnoString)
 	{
 		Run = runTracker;
 		AreaNameLocalized = areaNameLocalized;

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 #define TRACE
 using System;
 using System.Collections.Generic;
@@ -30,17 +32,17 @@ internal static class CoreCollector
 
 	public static bool IsInTown { get; private set; }
 
-	public static string BattleTag;
+	public static string? BattleTag;
 
 	public static GameDifficulty Unknown { get; private set; }
 
 	private static int int_0;
 
-	private static SnoArea LastSnoArea;
+	private static SnoArea? LastSnoArea;
 
 	public static SpecialArea CurrentSpecialArea { get; private set; }
 
-	public static string GameServerIP { get; private set; }
+	public static string? GameServerIP { get; private set; }
 
 	public static readonly D3Memory D3Memory;
 
@@ -50,31 +52,31 @@ internal static class CoreCollector
 
 	public static readonly StatTracker SessionAlwaysRunning;
 
-	public static StatTracker AccountTotal { get; private set; }
+	public static StatTracker? AccountTotal { get; private set; }
 
-	public static StatTracker AccountYesterday { get; private set; }
+	public static StatTracker? AccountYesterday { get; private set; }
 
-	public static StatTracker AccountToday { get; private set; }
+	public static StatTracker? AccountToday { get; private set; }
 
-	public static StatTracker CurrentHeroTotal { get; private set; }
+	public static StatTracker? CurrentHeroTotal { get; private set; }
 
-	public static StatTracker CurrentHeroYesterday { get; private set; }
+	public static StatTracker? CurrentHeroYesterday { get; private set; }
 
-	public static StatTracker CurrentHeroToday { get; private set; }
+	public static StatTracker? CurrentHeroToday { get; private set; }
 
-	public static StatTracker CurrentAccountTotalOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentAccountTotalOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentAccountYesterdayOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentAccountYesterdayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentAccountTodayOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentAccountTodayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroTotalOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentHeroTotalOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroYesterdayOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentHeroYesterdayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroTodayOnCurrentDifficulty { get; private set; }
+	public static StatTracker? CurrentHeroTodayOnCurrentDifficulty { get; private set; }
 
-	public static RunTracker RunTracker { get; private set; }
+	public static RunTracker? RunTracker { get; private set; }
 
 	public static Controller Controller { get; set; }
 
@@ -185,7 +187,7 @@ internal static class CoreCollector
 			CurrentHeroTotalOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "HERO TOTAL", "total_" + Unknown);
 			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			SnoArea currentSnoArea = LocalPlayer.SnoArea?.HostSnoArea ?? LocalPlayer.SnoArea;
+			SnoArea? currentSnoArea = LocalPlayer.SnoArea?.HostSnoArea ?? LocalPlayer.SnoArea;
 			if (RunTracker == null) {
 				RunTracker = new RunTracker(currentSnoArea);
 			} else {
@@ -304,7 +306,7 @@ internal static class CoreCollector
 				Logger.LogException(ex.ToString());
 			}
 
-			Hero hero = HeroCollector.HeroList.FirstOrDefault();
+			Hero? hero = HeroCollector.HeroList.FirstOrDefault();
 			if (hero != null) {
 				BattleTag ??= hero.BattleTag;
 			} else {
@@ -459,7 +461,7 @@ internal static class CoreCollector
 				if (flag3 || Unknown == GameDifficulty.unknown || RunTracker == null) {
 					Unknown = D3Memory.GameDifficulty;
 				}
-				string gameServerIP = GameServerIP;
+				string? gameServerIP = GameServerIP;
 				if (gameServerIP == null || !gameServerIP.Contains(".")) {
 					GameServerIP = D3Memory.ReadGameServerIP();
 				}
@@ -523,7 +525,7 @@ internal static class CoreCollector
 			for (int j = 0; j < playerSlots.Length; j++) {
 				Player player3 = (Player)playerSlots[j];
 				if (player3.IsDeadSafeCheck && player3.CoordinateKnown) {
-					HeadStone headStone = ActorCollector.HeadStones.Find((HeadStone headStone0) => headStone0.PlayerActorAnnId == player3.AnnId) as HeadStone;
+					HeadStone? headStone = ActorCollector.HeadStones.Find((HeadStone headStone0) => headStone0.PlayerActorAnnId == player3.AnnId) as HeadStone;
 					if (headStone != null) {
 						player3.HeadStone = headStone;
 					}
@@ -588,7 +590,7 @@ internal static class CoreCollector
 				CurrentSpecialArea = SpecialArea.UberFight;
 			}
 		} else {
-			Quest quest = QuestManager.Quests.GetValueOrDefault(337492u);
+			Quest? quest = QuestManager.Quests.GetValueOrDefault(337492u);
 			if (quest != null && quest.State == QuestState.started && (quest.QuestStepId == 13 || quest.QuestStepId == 16 || quest.QuestStepId == 34)) {
 				CurrentSpecialArea = SpecialArea.GreaterRift;
 			}
@@ -604,7 +606,7 @@ internal static class CoreCollector
 		}
 	}
 
-	public unsafe static PointF EvaluatePowerFormula(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player player = null)
+	public unsafe static PointF EvaluatePowerFormula(byte[] formulaData, int int_1, int int_2, SnoPower? snoPower = null, Player? player = null)
 	{
 		if (int_2 == 0) {
 			return new PointF(0f, 0f);

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -57,7 +59,7 @@ public class Item : Actor
 
 	public uint SocketHostAcdId { get; set; }
 
-	public Item SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(SocketHostAcdId, out var value) ? value : null;
+	public Item? SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(SocketHostAcdId, out var value) ? value : null;
 
 	public int InventoryX { get; set; }
 
@@ -65,7 +67,7 @@ public class Item : Actor
 
 	public bool Unidentified { get; set; }
 
-	public SnoItemAffix[] Affixes { get; set; }
+	public SnoItemAffix[]? Affixes { get; set; }
 
 	public Item[] ItemsInSocket { get; set; }
 
@@ -205,14 +207,14 @@ public class Item : Actor
 		SnoItem = snoItem;
 	}
 
-	public SnoSocketedEffect GetSocketedEffect()
+	public SnoSocketedEffect? GetSocketedEffect()
 	{
 		if (SnoItem.SocketedEffects == null)
 		{
 			return null;
 		}
-		SnoSocketedEffect snoSocketedEffect = null;
-		SnoSocketedEffect snoSocketedEffect2 = null;
+		SnoSocketedEffect? snoSocketedEffect = null;
+		SnoSocketedEffect? snoSocketedEffect2 = null;
 		foreach (SnoSocketedEffect socketedEffect in SnoItem.SocketedEffects)
 		{
 			if (socketedEffect.SnoItemType == null)
@@ -247,7 +249,7 @@ public class Item : Actor
 			(Unidentified ? 1 : 0).ToString("D", CultureInfo.InvariantCulture),
 			null
 		};
-		SnoItemAffix[] affixes = Affixes;
+		SnoItemAffix[]? affixes = Affixes;
 		obj[6] = ((affixes != null) ? affixes.Length : 0).ToString("D", CultureInfo.InvariantCulture);
 		ItemUniqueId = string.Concat(obj);
 		if (ItemsInSocket != null)
@@ -272,7 +274,7 @@ public class Item : Actor
 
 	public int GetStatInt(string string_2, int int_5 = 0)
 	{
-		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
+		ItemStat? itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return int_5;
@@ -282,7 +284,7 @@ public class Item : Actor
 
 	public uint GetStatUInt(string string_2, uint uint_10 = 0u)
 	{
-		ItemStat itemStat = StatList2.GetValueOrDefault(string_2);
+		ItemStat? itemStat = StatList2.GetValueOrDefault(string_2);
 		if (itemStat == null)
 		{
 			return uint_10;

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.IO;
 using System.Text;
@@ -6,9 +8,9 @@ namespace RiftAssistant.Engine;
 
 internal class DataReader : IDisposable
 {
-	protected Stream stream;
+	protected Stream? stream;
 
-	private byte[] buffer16 = new byte[16];
+	private byte[]? buffer16 = new byte[16];
 
 	private static readonly Encoding encoder = Encoding.UTF8;
 
@@ -18,11 +20,11 @@ internal class DataReader : IDisposable
 
 	private static readonly int charBufferSize = encoder.GetMaxCharCount(bufferSize);
 
-	private byte[] byteBuffer = new byte[bufferSize];
+	private byte[]? byteBuffer = new byte[bufferSize];
 
-	private char[] charBuffer = new char[charBufferSize];
+	private char[]? charBuffer = new char[charBufferSize];
 
-	public Stream Stream => stream;
+	public Stream? Stream => stream;
 
 	public DataReader() { }
 

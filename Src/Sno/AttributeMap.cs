@@ -4,109 +4,109 @@ namespace RiftAssistant.Sno;
 
 internal sealed class AttributeMap
 {
-	public AcdAttribute Attribute__Hitpoints_Cur;
+	public AcdAttribute? Attribute__Hitpoints_Cur;
 
-	public AcdAttribute Attribute__Hitpoints_Max_Total;
+	public AcdAttribute? Attribute__Hitpoints_Max_Total;
 
-	public AcdAttribute Attribute__ItemStackQuantityLo;
+	public AcdAttribute? Attribute__ItemStackQuantityLo;
 
-	public AcdAttribute Attribute__ItemStackQuantityHi;
+	public AcdAttribute? Attribute__ItemStackQuantityHi;
 
-	public AcdAttribute Attribute__JewelRank;
+	public AcdAttribute? Attribute__JewelRank;
 
-	public AcdAttribute Attribute__Gold;
+	public AcdAttribute? Attribute__Gold;
 
-	public AcdAttribute Attribute__Untargetable;
+	public AcdAttribute? Attribute__Untargetable;
 
-	public AcdAttribute Attribute__Burrowed;
+	public AcdAttribute? Attribute__Burrowed;
 
-	public AcdAttribute Attribute__Invulnerable;
+	public AcdAttribute? Attribute__Invulnerable;
 
-	public AcdAttribute Attribute__Stealthed;
+	public AcdAttribute? Attribute__Stealthed;
 
-	public AcdAttribute Attribute__Hidden;
+	public AcdAttribute? Attribute__Hidden;
 
-	public AcdAttribute Attribute__Frozen;
+	public AcdAttribute? Attribute__Frozen;
 
-	public AcdAttribute Attribute__Chilled;
+	public AcdAttribute? Attribute__Chilled;
 
-	public AcdAttribute Attribute__Slow;
+	public AcdAttribute? Attribute__Slow;
 
-	public AcdAttribute Attribute__Stunned;
+	public AcdAttribute? Attribute__Stunned;
 
-	public AcdAttribute Attribute__Blind;
+	public AcdAttribute? Attribute__Blind;
 
-	public AcdAttribute Attribute__Bleeding;
+	public AcdAttribute? Attribute__Bleeding;
 
-	public AcdAttribute Attribute__Chest_Open;
+	public AcdAttribute? Attribute__Chest_Open;
 
-	public AcdAttribute Attribute__Gizmo_Has_Been_Operated;
+	public AcdAttribute? Attribute__Gizmo_Has_Been_Operated;
 
-	public AcdAttribute Attribute__gizmo_disabled_by_script;
+	public AcdAttribute? Attribute__gizmo_disabled_by_script;
 
-	public AcdAttribute Attribute__Gizmo_State;
+	public AcdAttribute? Attribute__Gizmo_State;
 
-	public AcdAttribute Attribute__Deleted_On_Server;
+	public AcdAttribute? Attribute__Deleted_On_Server;
 
-	public AcdAttribute Attribute__Banner_Usable;
+	public AcdAttribute? Attribute__Banner_Usable;
 
-	public AcdAttribute Attribute__Is_NPC;
+	public AcdAttribute? Attribute__Is_NPC;
 
-	public AcdAttribute Attribute__NPC_Is_Operatable;
+	public AcdAttribute? Attribute__NPC_Is_Operatable;
 
-	public AcdAttribute Attribute__TeamID;
+	public AcdAttribute? Attribute__TeamID;
 
-	public AcdAttribute Attribute__Pet_Type;
+	public AcdAttribute? Attribute__Pet_Type;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_a;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_a;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_b;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_b;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_c;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_c;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_d;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_d;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_e;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_e;
 
-	public AcdAttribute Attribute__power_buff_0_visual_effect_none;
+	public AcdAttribute? Attribute__power_buff_0_visual_effect_none;
 
-	public AcdAttribute Attribute__power_buff_1_visual_effect_none;
+	public AcdAttribute? Attribute__power_buff_1_visual_effect_none;
 
-	public AcdAttribute Attribute__power_buff_2_visual_effect_none;
+	public AcdAttribute? Attribute__power_buff_2_visual_effect_none;
 
-	public AcdAttribute Attribute__power_buff_2_visual_effect_a;
+	public AcdAttribute? Attribute__power_buff_2_visual_effect_a;
 
-	public AcdAttribute Attribute__power_buff_3_visual_effect_none;
+	public AcdAttribute? Attribute__power_buff_3_visual_effect_none;
 
-	public AcdAttribute Attribute__power_buff_3_visual_effect_b;
+	public AcdAttribute? Attribute__power_buff_3_visual_effect_b;
 
-	public AcdAttribute Attribute__power_buff_4_visual_effect_c;
+	public AcdAttribute? Attribute__power_buff_4_visual_effect_c;
 
-	public AcdAttribute Attribute__power_buff_4_visual_effect_none;
+	public AcdAttribute? Attribute__power_buff_4_visual_effect_none;
 
-	public AcdAttribute Attribute__power_buff_5_visual_effect_d;
+	public AcdAttribute? Attribute__power_buff_5_visual_effect_d;
 
-	public AcdAttribute Attribute__power_buff_6_visual_effect_e;
+	public AcdAttribute? Attribute__power_buff_6_visual_effect_e;
 
-	public AcdAttribute Attribute__summoned_by_acdid;
+	public AcdAttribute? Attribute__summoned_by_acdid;
 
-	public AcdAttribute Attribute__summoner_id;
+	public AcdAttribute? Attribute__summoner_id;
 
-	public AcdAttribute Attribute__rune_a;
+	public AcdAttribute? Attribute__rune_a;
 
-	public AcdAttribute Attribute__rune_b;
+	public AcdAttribute? Attribute__rune_b;
 
-	public AcdAttribute Attribute__rune_c;
+	public AcdAttribute? Attribute__rune_c;
 
-	public AcdAttribute Attribute__rune_d;
+	public AcdAttribute? Attribute__rune_d;
 
-	public AcdAttribute Attribute__rune_e;
+	public AcdAttribute? Attribute__rune_e;
 
-	public AcdAttribute Attribute__dot_dps;
+	public AcdAttribute? Attribute__dot_dps;
 
-	public AcdAttribute Attribute__headstone_player_ann;
+	public AcdAttribute? Attribute__headstone_player_ann;
 
-	public AcdAttribute Attribute__Set_Item_Discount;
+	public AcdAttribute? Attribute__Set_Item_Discount;
 
 	internal AttributeMap(Attributes attributes)
 	{

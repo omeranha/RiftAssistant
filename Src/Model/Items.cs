@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 #define TRACE
 using System;
 using System.Collections.Generic;
@@ -21,25 +23,25 @@ internal sealed class Items
 
 	public IEnumerable<SnoItem> All => all.Values;
 
-	public SnoItem GetBySno(uint sno)
+	public SnoItem? GetBySno(uint sno)
 	{
 		all.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoItemType GetSnoItemType(uint sno)
+	public SnoItemType? GetSnoItemType(uint sno)
 	{
 		snoItemTypesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoItemAffix GetSnoItemAffix(uint sno)
+	public SnoItemAffix? GetSnoItemAffix(uint sno)
 	{
 		snoItemAffixesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoItemAffixGroup GetSnoItemAffixGroup(uint sno)
+	public SnoItemAffixGroup? GetSnoItemAffixGroup(uint sno)
 	{
 		snoItemAffixGroupsByKey.TryGetValue(sno, out var value);
 		return value;
@@ -58,10 +60,10 @@ internal sealed class Items
 			{
 				uint num = dataReader.ReadUInt32();
 				string text = dataReader.ReadString();
-				string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._itemtypenames, text);
-				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._itemtypenames, text);
+				string? stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._itemtypenames, text);
+				string? stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._itemtypenames, text);
 				uint num2 = dataReader.ReadUInt32();
-				SnoItemType SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
+				SnoItemType? SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
 				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, SnoItemType_);
 				snoItemTypesByKey.Add(num, value);
 				snoItemTypesByKey2.Add(text, value);
@@ -73,13 +75,13 @@ internal sealed class Items
 			{
 				uint num3 = dataReader2.ReadUInt32();
 				string code = string.Intern(dataReader2.ReadString());
-				string stringByCode2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._affixes, code);
-				string stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._affixes, code);
+				string? stringByCode2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._affixes, code);
+				string? stringByCodeEnglish2 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._affixes, code);
 				uint uint_ = dataReader2.ReadUInt32();
 				uint num4 = dataReader2.ReadUInt32();
 				uint num5 = dataReader2.ReadUInt32();
-				SnoItemAffixGroup snoItemAffixGroup = null;
-				SnoItemAffixGroup snoItemAffixGroup2 = null;
+				SnoItemAffixGroup? snoItemAffixGroup = null;
+				SnoItemAffixGroup? snoItemAffixGroup2 = null;
 				if (num4 != 0)
 				{
 					snoItemAffixGroup = GetSnoItemAffixGroup(num4);
@@ -185,7 +187,7 @@ internal sealed class Items
 			int int_13 = int.Parse(array3[28], CultureInfo.InvariantCulture);
 			int int_14 = int.Parse(array3[29], CultureInfo.InvariantCulture);
 			ItemCraftQuality itemCraftQuality_ = (ItemCraftQuality)Enum.Parse(typeof(ItemCraftQuality), array3[30], ignoreCase: true);
-			SnoActor snoActor = SnoData.Actors.GetActor(actorSnoEnum);
+			SnoActor? snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 			if (snoActor == null)
 			{
 				snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, isStatic: false, "dummyactor-" + text3, "dummyactor-" + text3, "dummyactor-" + text3);
@@ -207,7 +209,7 @@ internal sealed class Items
 					}
 					array3 = text2.Split('\t');
 					uint sno = uint.Parse(array3[1], CultureInfo.InvariantCulture);
-					SnoItemAffixGroup snoItemAffixGroup3 = GetSnoItemAffixGroup(sno);
+					SnoItemAffixGroup? snoItemAffixGroup3 = GetSnoItemAffixGroup(sno);
 					int int_15 = int.Parse(array3[2], CultureInfo.InvariantCulture);
 					int int_16 = int.Parse(array3[3], CultureInfo.InvariantCulture);
 					snoItem.AffixGroups[j] = new SnoItemAffixGroupLink(snoItemAffixGroup3, int_15, int_16);
@@ -229,7 +231,7 @@ internal sealed class Items
 				}
 				array3 = text2.Split('\t');
 				string code2 = array3[1];
-				AcdAttribute attributeByCode = SnoData.Attributes.GetAttributeByCode(code2);
+				AcdAttribute? attributeByCode = SnoData.Attributes.GetAttributeByCode(code2);
 				uint uint_8 = uint.Parse(array3[2], CultureInfo.InvariantCulture);
 				float float_3 = float.Parse(array3[3], CultureInfo.InvariantCulture);
 				float float_4 = float.Parse(array3[4], CultureInfo.InvariantCulture);
@@ -275,7 +277,7 @@ internal sealed class Items
 			uint sno2 = dataReader3.ReadUInt32();
 			uint sno3 = dataReader3.ReadUInt32();
 			int num10 = dataReader3.ReadPackedInt32();
-			SnoItem bySno = GetBySno(sno2);
+			SnoItem? bySno = GetBySno(sno2);
 			if (bySno.SocketedEffects == null)
 			{
 				bySno.SocketedEffects = new List<SnoSocketedEffect>();

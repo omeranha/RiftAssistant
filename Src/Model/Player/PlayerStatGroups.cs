@@ -12,53 +12,53 @@ public class PlayerArmorySet(Player player, int int_1)
 
 	public int Index { get; set; } = int_1;
 
-	public string Name { get; set; }
+	public string Name { get; set; } = null!;
 
 	public uint PotionAnnId => ArmorySet.armoryPotion.PotionAnnId;
 
 	public List<uint> itemAnnIds = new List<uint>();
 
-	public SnoItem PotionSno => SnoData.Items.GetBySno(ArmorySet.armoryPotion.sno);
+	public SnoItem? PotionSno => SnoData.Items.GetBySno(ArmorySet.armoryPotion.sno);
 
-	public SnoItem CubeSnoItem1 => SnoData.Items.GetBySno(ArmorySet.uint_4);
+	public SnoItem? CubeSnoItem1 => SnoData.Items.GetBySno(ArmorySet.uint_4);
 
-	public SnoItem CubeSnoItem2 => SnoData.Items.GetBySno(ArmorySet.uint_5);
+	public SnoItem? CubeSnoItem2 => SnoData.Items.GetBySno(ArmorySet.uint_5);
 
-	public SnoItem CubeSnoItem3 => SnoData.Items.GetBySno(ArmorySet.uint_6);
+	public SnoItem? CubeSnoItem3 => SnoData.Items.GetBySno(ArmorySet.uint_6);
 
-	public SnoItem CubeSnoItem4 => SnoData.Items.GetBySno(ArmorySet.uint_7);
+	public SnoItem? CubeSnoItem4 => SnoData.Items.GetBySno(ArmorySet.uint_7);
 
-	public SnoPower LeftSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill.sno);
+	public SnoPower? LeftSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill.sno);
 
 	public byte LeftSkillRune => (byte)ArmorySet.armorySkill.uint_1;
 
-	public SnoPower RightSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill1.sno);
+	public SnoPower? RightSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill1.sno);
 
 	public byte RightSkillRune => (byte)ArmorySet.armorySkill1.uint_1;
 
-	public SnoPower Skill1SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill2.sno);
+	public SnoPower? Skill1SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill2.sno);
 
 	public byte Skill1Rune => (byte)ArmorySet.armorySkill2.uint_1;
 
-	public SnoPower Skill2SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill3.sno);
+	public SnoPower? Skill2SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill3.sno);
 
 	public byte Skill2Rune => (byte)ArmorySet.armorySkill3.uint_1;
 
-	public SnoPower Skill3SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill4.sno);
+	public SnoPower? Skill3SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill4.sno);
 
 	public byte Skill3Rune => (byte)ArmorySet.armorySkill4.uint_1;
 
-	public SnoPower Skill4SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill5.sno);
+	public SnoPower? Skill4SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill5.sno);
 
 	public byte Skill4Rune => (byte)ArmorySet.armorySkill5.uint_1;
 
-	public SnoPower PassiveSnoPower1 => SnoData.Powers.GetBySno(ArmorySet.sno);
+	public SnoPower? PassiveSnoPower1 => SnoData.Powers.GetBySno(ArmorySet.sno);
 
-	public SnoPower PassiveSnoPower2 => SnoData.Powers.GetBySno(ArmorySet.uint_1);
+	public SnoPower? PassiveSnoPower2 => SnoData.Powers.GetBySno(ArmorySet.uint_1);
 
-	public SnoPower PassiveSnoPower3 => SnoData.Powers.GetBySno(ArmorySet.uint_2);
+	public SnoPower? PassiveSnoPower3 => SnoData.Powers.GetBySno(ArmorySet.uint_2);
 
-	public SnoPower PassiveSnoPower4 => SnoData.Powers.GetBySno(ArmorySet.uint_3);
+	public SnoPower? PassiveSnoPower4 => SnoData.Powers.GetBySno(ArmorySet.uint_3);
 
 	public IEnumerable<uint> ItemAnnIds => itemAnnIds;
 

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,19 +27,19 @@ internal sealed class Strings
 
 	private readonly Dictionary<uint, List<string>> dictionary_6 = new Dictionary<uint, List<string>>();
 
-	public string GetStringByCode(string code)
+	public string? GetStringByCode(string code)
 	{
 		dictionary_0.TryGetValue(code, out var value);
 		return value;
 	}
 
-	public string GetStringByCodeEnglish(string code)
+	public string? GetStringByCodeEnglish(string code)
 	{
 		dictionary_1.TryGetValue(code, out var value);
 		return value;
 	}
 
-	public string GetStringByCode(StringListSnoEnum snoEnum, string code)
+	public string? GetStringByCode(StringListSnoEnum snoEnum, string code)
 	{
 		if (!dictionary_2.TryGetValue(snoEnum, out var value))
 		{
@@ -47,7 +49,7 @@ internal sealed class Strings
 		return value2;
 	}
 
-	public string GetStringByCodeEnglish(StringListSnoEnum snoEnum, string code)
+	public string? GetStringByCodeEnglish(StringListSnoEnum snoEnum, string code)
 	{
 		if (!dictionary_3.TryGetValue(snoEnum, out var value))
 		{
@@ -57,7 +59,7 @@ internal sealed class Strings
 		return value2;
 	}
 
-	public string GetStringById(StringListSnoEnum snoEnum, uint id)
+	public string? GetStringById(StringListSnoEnum snoEnum, uint id)
 	{
 		if (!dictionary_4.TryGetValue(snoEnum, out var value))
 		{
@@ -67,7 +69,7 @@ internal sealed class Strings
 		return value2;
 	}
 
-	public string GetStringByIdEnglish(StringListSnoEnum snoEnum, uint id)
+	public string? GetStringByIdEnglish(StringListSnoEnum snoEnum, uint id)
 	{
 		if (!dictionary_5.TryGetValue(snoEnum, out var value))
 		{
@@ -155,10 +157,10 @@ internal sealed class Strings
 
 	public static string LoadLanguage()
 	{
-		string requested = SettingsManager.Current.Language?.Trim();
+		string? requested = SettingsManager.Current.Language?.Trim();
 		if (string.IsNullOrEmpty(requested)) return DefaultLanguage;
 
-		string language = Array.Find(SupportedLanguages, code => string.Equals(code, requested, StringComparison.OrdinalIgnoreCase));
+		string? language = Array.Find(SupportedLanguages, code => string.Equals(code, requested, StringComparison.OrdinalIgnoreCase));
 		if (language == null) {
 			Logger.Info($"Unknown language '{requested}' in settings.json, using {DefaultLanguage}. Supported: {string.Join(", ", SupportedLanguages)}");
 			return DefaultLanguage;

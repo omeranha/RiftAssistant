@@ -20,9 +20,9 @@ internal struct AreaContainer
 
 internal class ChatChanged : EventArgs
 {
-	public string Current;
+	public string? Current;
 
-	public string Previous;
+	public string? Previous;
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 52)]
@@ -105,7 +105,7 @@ public readonly struct InputEvent
 
 internal class ItemLocationChanged : EventArgs
 {
-	public Item Item;
+	public Item Item = null!;
 
 	public ItemLocation From;
 
@@ -114,7 +114,7 @@ internal class ItemLocationChanged : EventArgs
 
 internal class LootGenerated : EventArgs
 {
-	public Item item;
+	public Item item = null!;
 
 	public bool gambled;
 }

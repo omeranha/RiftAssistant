@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -30,7 +32,7 @@ internal class SceneMapRenderer
 
 	private int maxBitmapSize = -1;
 
-	private SharpDX.Direct2D1.Bitmap[,] mapTextureChunks;
+	private SharpDX.Direct2D1.Bitmap[,]? mapTextureChunks;
 
 	private uint lastWorldId = uint.MaxValue;
 
@@ -70,7 +72,7 @@ internal class SceneMapRenderer
 	private bool CalculateMapBounds(out float minX, out float maxX, out float minY, out float maxY)
 	{
 		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.GetScenes(CoreCollector.LocalPlayer.WorldId);
-		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
+		SnoArea? currentArea = CoreCollector.LocalPlayer.SnoArea;
 		bool mapUpdated = false;
 
 		minX = float.MaxValue;
@@ -126,7 +128,7 @@ internal class SceneMapRenderer
 		return mapUpdated;
 	}
 
-	private void DrawScene(float offsetX, float offsetY, float width, float height, SnoScene scene, Graphics graphics)
+	private void DrawScene(float offsetX, float offsetY, float width, float height, SnoScene? scene, Graphics graphics)
 	{
 		float zoom = GetScaledZoomFactor();
 
@@ -168,7 +170,7 @@ internal class SceneMapRenderer
 		}
 
 		IEnumerable<Scene> activeScenes = CoreCollector.SceneCollector.GetScenes(CoreCollector.LocalPlayer.WorldId);
-		SnoArea currentArea = CoreCollector.LocalPlayer.SnoArea;
+		SnoArea? currentArea = CoreCollector.LocalPlayer.SnoArea;
 
 		int bitmapWidth = Convert.ToInt32((maxX - minX) * currentZoom);
 		int bitmapHeight = Convert.ToInt32((maxY - minY) * currentZoom);
@@ -201,7 +203,7 @@ internal class SceneMapRenderer
 
 						if (!renderedSceneCache.Contains(cacheKey)) {
 							if (sceneInfo is SnoWorldSceneInfoStatic) {
-								SnoScene snoScene = (sceneInfo as SnoWorldSceneInfoStatic).SnoScene;
+								SnoScene? snoScene = (sceneInfo as SnoWorldSceneInfoStatic).SnoScene;
 								DrawScene(offsetX, offsetY, sceneInfo.W, sceneInfo.H, snoScene as SnoScene, graphics);
 								renderedSceneCache.Add(cacheKey);
 							} else if (Overlay.Instance.ActiveMapMode != MapMode.PermaMap) {

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 #define TRACE
 using System;
 using System.Collections.Generic;
@@ -24,9 +26,9 @@ internal class ItemCollector
 
 	public readonly List<Item> list_1 = new List<Item>();
 
-	public WorldCoordinate floorCoordinate;
+	public WorldCoordinate? floorCoordinate;
 
-	public Item Item_0;
+	public Item? Item_0;
 
 	public double CentralXyDistanceToMe;
 
@@ -34,9 +36,9 @@ internal class ItemCollector
 
 	public readonly List<Item> ItemsInInventory = new List<Item>();
 
-	public Item Item_1;
+	public Item? Item_1;
 
-	public Item Item_2;
+	public Item? Item_2;
 
 	public readonly List<Item> list_3 = new List<Item>();
 
@@ -113,8 +115,8 @@ internal class ItemCollector
 			if (itemLocation == ItemLocation.MerchantBuyback || itemLocation >= ItemLocation.VendorToken || (itemLocation == ItemLocation.Floor && struct7_.SWorldID_Encrypted == 0)) {
 				continue;
 			}
-			Item item = itemsByAnnId.GetValueOrDefault(annId);
-			SnoItem snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
+			Item? item = itemsByAnnId.GetValueOrDefault(annId);
+			SnoItem? snoItem = ((item == null) ? SnoData.Items.GetBySno(struct7_.GBID) : item.SnoItem);
 			if (snoItem == null || (itemLocation == ItemLocation.Floor && struct7_.PositionX == 0f && double.IsNaN(struct7_.PositionY))) {
 				continue;
 			}
@@ -265,7 +267,7 @@ internal class ItemCollector
 			}
 			itemsByAnnId[annId] = item;
 			if (itemLocation == ItemLocation.Inventory && CoreCollector.IsInTown && CoreCollector.UiElements.ShopDialogMainPagePanel.Visible) {
-				string text = CoreCollector.UiElements.GoldText.ReadText();
+				string? text = CoreCollector.UiElements.GoldText.ReadText();
 				if (text != null && text.Contains("{icon:x1_shard}")) {
 					int statInt = item.GetStatInt("picked_up_time", -1);
 					if (statInt > -1 && statInt > CoreCollector.D3Memory.GameTick - 240) {
@@ -327,8 +329,8 @@ internal class ItemCollector
 		ReadItemAffixes(item, bool_1);
 		if ((int)item.Quality >= 6 && (int)item.Quality <= 8) {
 			if (acd.rare_item_stringlist_id != uint.MaxValue && (item.RareName == null || bool_1)) {
-				string text = null;
-				string text2 = null;
+				string? text = null;
+				string? text2 = null;
 				if (acd.rare_item_prefix_or_suffix == 0) {
 					text = SnoData.Strings.GetStringByIndex(acd.rare_item_stringlist_id, acd.rare_item_stringlist_index);
 					if (snoItem.SuffixStringSno != 0) {
@@ -344,7 +346,7 @@ internal class ItemCollector
 			}
 		} else if ((int)item.Quality >= 3 && (int)item.Quality <= 5 && item.Affixes != null && (item.RareName == null || bool_1)) {
 			if (item.Affixes.Length == 1) {
-				SnoItemAffix snoItemAffix = item.Affixes[0];
+				SnoItemAffix? snoItemAffix = item.Affixes[0];
 				if (snoItemAffix.BaseAffixId != uint.MaxValue) {
 					snoItemAffix = SnoData.Items.GetSnoItemAffix(snoItemAffix.BaseAffixId);
 				}
@@ -355,11 +357,11 @@ internal class ItemCollector
 				}
 			}
 			if (item.Affixes.Length == 2) {
-				SnoItemAffix snoItemAffix2 = item.Affixes[0];
+				SnoItemAffix? snoItemAffix2 = item.Affixes[0];
 				if (snoItemAffix2.BaseAffixId != uint.MaxValue) {
 					snoItemAffix2 = SnoData.Items.GetSnoItemAffix(snoItemAffix2.BaseAffixId);
 				}
-				SnoItemAffix snoItemAffix3 = item.Affixes[1];
+				SnoItemAffix? snoItemAffix3 = item.Affixes[1];
 				if (snoItemAffix3.BaseAffixId != uint.MaxValue) {
 					snoItemAffix3 = SnoData.Items.GetSnoItemAffix(snoItemAffix3.BaseAffixId);
 				}
@@ -533,13 +535,13 @@ internal class ItemCollector
 		if (item.Unidentified && !bool_1) {
 			return;
 		}
-		List<SnoItemAffix> list = null;
+		List<SnoItemAffix>? list = null;
 		for (long affixListPtr = CoreCollector.ACDCollector.Buffer_ACDs[CoreCollector.ACDCollector.AcdIndexCur].affix_list_ptr; affixListPtr != 0L; affixListPtr = GameWindowManager.Read<long>(affixListPtr + IntPtr.Size * 2)) {
 			uint enchantedAffixNew = GameWindowManager.Read<uint>(affixListPtr);
 			if (item.EnchantedAffixOriginal != 0 && item.EnchantedAffixOriginal == enchantedAffixNew) {
 				enchantedAffixNew = item.EnchantedAffixNew;
 			}
-			SnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(enchantedAffixNew);
+			SnoItemAffix? snoItemAffix = SnoData.Items.GetSnoItemAffix(enchantedAffixNew);
 			if (snoItemAffix != null) {
 				(list ?? (list = new List<SnoItemAffix>())).Add(snoItemAffix);
 			}

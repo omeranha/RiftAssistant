@@ -15,7 +15,7 @@ public static class Formatting
 		(1e3,  "k",  "#,0.0{0}", "#,0{0}")
 	};
 
-	public static string ValueToString(long value, ValueFormat format)
+	public static string? ValueToString(long value, ValueFormat format)
 	{
 		if (value < 0)
 			return "-" + ValueToString(-(double)value, format);
@@ -23,7 +23,7 @@ public static class Formatting
 		return ValueToString((double)value, format);
 	}
 
-	public static string ValueToString(double value, ValueFormat format)
+	public static string? ValueToString(double value, ValueFormat format)
 	{
 		if (value < 0)
 			return "-" + ValueToString(-value, format);

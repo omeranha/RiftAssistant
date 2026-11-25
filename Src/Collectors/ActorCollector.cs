@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,11 +12,11 @@ internal partial class ActorCollector
 {
 	private readonly Dictionary<uint, Actor> actorsByAcdId = new Dictionary<uint, Actor>(1000);
 
-	public Stopwatch stopwatch = new();
+	public Stopwatch? stopwatch = new();
 
 	private Stopwatch stopwatch1 = new();
 
-	public FollowerClass CurrentFollower;
+	public FollowerClass? CurrentFollower;
 
 	public List<Monster> Monsters = new List<Monster>();
 
@@ -26,11 +28,11 @@ internal partial class ActorCollector
 
 	public List<Actor> AllActors = new List<Actor>(1000);
 
-	public Monster IMonster_0 { get; private set; }
+	public Monster? IMonster_0 { get; private set; }
 
-	public Monster IMonster_1 { get; private set; }
+	public Monster? IMonster_1 { get; private set; }
 
-	public Actor IActor_0 { get; private set; }
+	public Actor? IActor_0 { get; private set; }
 
 	public EventHandler EventHandler_0 { get; set; }
 
@@ -64,11 +66,11 @@ internal partial class ActorCollector
 
 	public TownBanner[] TownBanners { get; } = new TownBanner[4];
 
-	public Actor IActor_1 { get; private set; }
+	public Actor? IActor_1 { get; private set; }
 
-	public Actor IActor_2 { get; private set; }
+	public Actor? IActor_2 { get; private set; }
 
-	public Actor IActor_3 { get; private set; }
+	public Actor? IActor_3 { get; private set; }
 
 	public WorldCoordinate IWorldCoordinate_0 { get; internal set; }
 
@@ -150,7 +152,7 @@ internal partial class ActorCollector
 				}
 				uint acdid = ptr->AcdIdEncrypted;
 				if (acdid == uint.MaxValue) {
-					Actor actor = actorsByAcdId.GetValueOrDefault(actorId);
+					Actor? actor = actorsByAcdId.GetValueOrDefault(actorId);
 					if (actor == null || !(actor is Monster { CurHealth: > 0.0 } monster)) {
 						continue;
 					}
@@ -200,8 +202,8 @@ internal partial class ActorCollector
 				if (annId == uint.MaxValue) {
 					continue;
 				}
-				Actor actor2 = actorsByAcdId.GetValueOrDefault(gparam_);
-				SnoActor snoActor;
+				Actor? actor2 = actorsByAcdId.GetValueOrDefault(gparam_);
+				SnoActor? snoActor;
 				if (actor2 == null) {
 					snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 					if (snoActor == null) {
@@ -279,8 +281,8 @@ internal partial class ActorCollector
 					continue;
 				}
 				bool flag2 = false;
-				Monster monster2 = null;
-				SnoMonster snoMonster2 = null;
+				Monster? monster2 = null;
+				SnoMonster? snoMonster2 = null;
 				if (actor2 == null) {
 					snoMonster2 = SnoData.Monsters.GetMonster(actorSnoEnum);
 					if (snoMonster2 != null) {
@@ -502,7 +504,7 @@ internal partial class ActorCollector
 						continue;
 					}
 					string concat = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
-					MonsterPack monsterPack2 = MonsterPacks.Find((MonsterPack monsterPack) => (monsterPack as MonsterPack)?.String_1 == concat && monsterPack.MinionSnoMonster == monster3.SnoMonster) as MonsterPack;
+					MonsterPack? monsterPack2 = MonsterPacks.Find((MonsterPack monsterPack) => (monsterPack as MonsterPack)?.String_1 == concat && monsterPack.MinionSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack2 == null) {
 						foreach (MonsterPack item9 in MonsterPacks) {
 							bool flag5 = true;
@@ -533,7 +535,7 @@ internal partial class ActorCollector
 					monster3.Pack = monsterPack2;
 				} else {
 					string string_1 = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
-					MonsterPack monsterPack4 = MonsterPacks.Find((MonsterPack monsterPack0) => (monsterPack0 as MonsterPack)?.String_0 == string_1 && monsterPack0.LeadSnoMonster == monster3.SnoMonster) as MonsterPack;
+					MonsterPack? monsterPack4 = MonsterPacks.Find((MonsterPack monsterPack0) => (monsterPack0 as MonsterPack)?.String_0 == string_1 && monsterPack0.LeadSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack4 == null) {
 						monsterPack4 = new MonsterPack {
 							AffixSnoList2 = monster3.AffixSnoList.ToList(),

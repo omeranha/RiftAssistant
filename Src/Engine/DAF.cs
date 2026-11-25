@@ -7,7 +7,7 @@ namespace RiftAssistant.Engine;
 
 internal class DAF
 {
-	internal LocalHeapCache localHeapCache;
+	internal LocalHeapCache localHeapCache = null!;
 
 	private readonly Dictionary<string, Func<bool>> blockValidateFuncs = [];
 

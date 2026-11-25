@@ -36,7 +36,7 @@ public static class Logger
 		ExceptionCount++;
 		try {
 			string path = Path.Combine(Program.LogFolder, "exceptions.txt");
-			string line = ReduceRepeats(message);
+			string? line = ReduceRepeats(message);
 			if (line != null) File.AppendAllText(path, line);
 			Overlay.Instance?.DrawStatus($"{ExceptionCount} Exception(s)", Overlay.Instance.StatusMessage);
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public static class Logger
 	}
 
 	// The collectors and plugin painters can fail on every frame, so a message that was already written is summarized instead of written again.
-	private static string ReduceRepeats(string message)
+	private static string? ReduceRepeats(string message)
 	{
 		lock (RepeatLock) {
 			if (RepeatStates.Count >= MaxTrackedMessages) RepeatStates.Clear();

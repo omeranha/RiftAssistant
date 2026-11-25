@@ -7,7 +7,7 @@ internal class QuestManager
 {
 	private readonly Allocator allocator = new Allocator(512, "rQuestAllocator");
 
-	private r_Quest[] quests;
+	private r_Quest[] quests = null!;
 
 	private readonly Dictionary<uint, Quest> questsByKey = new Dictionary<uint, Quest>();
 
@@ -53,12 +53,12 @@ internal class QuestManager
 		if (uint_ == uint.MaxValue) {
 			return;
 		}
-		SnoQuest quest = SnoData.Quests.GetQuest(uint_);
+		SnoQuest? quest = SnoData.Quests.GetQuest(uint_);
 		if (quest == null) {
 			return;
 		}
 		try {
-			Quest quest3 = questsByKey.GetValueOrDefault(uint_);
+			Quest? quest3 = questsByKey.GetValueOrDefault(uint_);
 			if (quest3 == null) {
 				quest3 = new Quest(quest);
 				questsByKey[uint_] = quest3;

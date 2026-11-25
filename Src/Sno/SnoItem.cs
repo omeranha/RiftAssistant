@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -31,13 +33,13 @@ public sealed class SnoItem
 
 	public string MainGroupCode { get; }
 
-	public string[] GroupCodes { get; }
+	public string[]? GroupCodes { get; }
 
 	public ItemLocation UsedLocation1 { get; } = ItemLocation.Floor;
 
 	public ItemLocation UsedLocation2 { get; } = ItemLocation.Floor;
 
-	public SnoItemType SnoItemType { get; }
+	public SnoItemType? SnoItemType { get; }
 
 	public int StackSize { get; }
 
@@ -75,11 +77,11 @@ public sealed class SnoItem
 
 	public int DropSmartCrusader { get; }
 
-	public SnoPower LegendaryPower
+	public SnoPower? LegendaryPower
 	{
 		get {
 			if (Mods != null) {
-				SnoItemMod snoItemMod = Array.Find(Mods, (SnoItemMod snoItemMod0) => snoItemMod0.Attribute?.Code == "Item_Power_Passive");
+				SnoItemMod? snoItemMod = Array.Find(Mods, (SnoItemMod snoItemMod0) => snoItemMod0.Attribute?.Code == "Item_Power_Passive");
 				if (snoItemMod != null) {
 					return SnoData.Powers.GetBySno(snoItemMod.Modifier);
 				}
@@ -90,7 +92,7 @@ public sealed class SnoItem
 
 	public bool IsEthereal => Code.StartsWith("P71_Ethereal");
 
-	internal SnoItem(uint sno, uint baseItemSno, uint setItemBonusesSno, SnoActor snoActor2, uint prefixStringSno, uint suffixStringSno, int level, SnoItemType snoItemType2, int stackSize, int goldPrice, int unsocketPrice, int requiredLevel, int itemWidth, int itemHeight, string code, string nameLocalized, string nameEnglish, string mainGroupCode, string[] groupCodes, ItemLocation itemLocation, ItemLocation itemLocation2, int dropWeight, int dropSmartDemonHunter, int dropSmartBarbarian, int dropSmartWizard, int dropSmartWitchDoctor, int dropSmartMonk, int dropSmartCrusader, ItemCraftQuality itemCraftQuality)
+	internal SnoItem(uint sno, uint baseItemSno, uint setItemBonusesSno, SnoActor snoActor2, uint prefixStringSno, uint suffixStringSno, int level, SnoItemType? snoItemType2, int stackSize, int goldPrice, int unsocketPrice, int requiredLevel, int itemWidth, int itemHeight, string code, string nameLocalized, string nameEnglish, string mainGroupCode, string[]? groupCodes, ItemLocation itemLocation, ItemLocation itemLocation2, int dropWeight, int dropSmartDemonHunter, int dropSmartBarbarian, int dropSmartWizard, int dropSmartWitchDoctor, int dropSmartMonk, int dropSmartCrusader, ItemCraftQuality itemCraftQuality)
 	{
 		Sno = sno;
 		BaseItemSno = baseItemSno;

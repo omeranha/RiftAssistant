@@ -54,7 +54,7 @@ internal partial class UiElements
 		return Depends(element.uiElement0, candidates) || Depends(element.uiElement1, candidates);
 	}
 
-	private static bool Depends(UiElement dependency, HashSet<UiElement> candidates)
+	private static bool Depends(UiElement? dependency, HashSet<UiElement> candidates)
 	{
 		return dependency != null && (candidates.Contains(dependency) || (dependency.ReplacementWhenNotVisible != null && candidates.Contains(dependency.ReplacementWhenNotVisible)));
 	}

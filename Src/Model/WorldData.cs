@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +17,7 @@ internal sealed class Areas
 
 	public IEnumerable<SnoArea> AllAreas => allAreas.Values;
 
-	public SnoArea GetSnoArea(uint sno)
+	public SnoArea? GetSnoArea(uint sno)
 	{
 		allAreas.TryGetValue(sno, out var value);
 		return value;
@@ -51,8 +53,8 @@ internal sealed class Areas
 			uint num3 = uint.Parse(array2[0], CultureInfo.InvariantCulture);
 			int int_ = int.Parse(array2[1]);
 			string text2 = array2[2];
-			string text3 = SnoData.Strings.GetStringByCode(StringListSnoEnum._levelareanames, text2);
-			string string_ = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._levelareanames, text2);
+			string? text3 = SnoData.Strings.GetStringByCode(StringListSnoEnum._levelareanames, text2);
+			string? string_ = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._levelareanames, text2);
 			if (text3 != null)
 			{
 				if (text2 == "A4_dun_Hell_Portal_01" || text2 == "A4_dun_Hell_Portal_02")
@@ -234,7 +236,7 @@ public class Quest(SnoQuest quest)
 
 	public uint QuestStepId { get; set; }
 
-	public SnoQuestStep QuestStep { get; set; }
+	public SnoQuestStep? QuestStep { get; set; }
 
 	public QuestState State { get; set; }
 
@@ -275,7 +277,7 @@ public class Scene
 {
 	public SnoScene SnoScene { get; set; }
 
-	public SnoArea SnoArea { get; set; }
+	public SnoArea? SnoArea { get; set; }
 
 	public uint WorldSno { get; set; }
 
@@ -301,7 +303,7 @@ public class Scene
 
 	public uint UInt32_0 { get; set; }
 
-	public Scene(SnoScene snoScene, SnoArea snoArea, uint worldSno, uint sSceneID, uint sceneId, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
+	public Scene(SnoScene snoScene, SnoArea? snoArea, uint worldSno, uint sSceneID, uint sceneId, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
 	{
 		SnoScene = snoScene;
 		SnoArea = snoArea;
@@ -325,7 +327,7 @@ internal sealed class Scenes
 
 	public IEnumerable<SnoScene> AllScenes => allScenes.Values;
 
-	public SnoScene GetScene(uint sno)
+	public SnoScene? GetScene(uint sno)
 	{
 		allScenes.TryGetValue(sno, out var value);
 		return value;
@@ -362,7 +364,7 @@ internal sealed class Scenes
 				string[] array2 = text.Split('\t');
 				uint sno = uint.Parse(array2[0], CultureInfo.InvariantCulture);
 				string string_2 = array2[1];
-				SnoScene scene = GetScene(sno);
+				SnoScene? scene = GetScene(sno);
 				if (scene != null)
 				{
 					(scene as SnoScene).Hint = new SceneHint(string_2);
@@ -376,7 +378,7 @@ internal sealed class Worlds
 {
 	private readonly Dictionary<uint, SnoWorld> snoWorldsByKey = new Dictionary<uint, SnoWorld>(500);
 
-	public SnoWorld GetWorld(uint sno)
+	public SnoWorld? GetWorld(uint sno)
 	{
 		snoWorldsByKey.TryGetValue(sno, out var value);
 		return value;
@@ -401,7 +403,7 @@ internal sealed class Worlds
 			for (int i = 1; i < array2.Length; i++)
 			{
 				uint sno = uint.Parse(array2[i], CultureInfo.InvariantCulture);
-				SnoArea snoArea = SnoData.Areas.GetSnoArea(sno);
+				SnoArea? snoArea = SnoData.Areas.GetSnoArea(sno);
 				snoWorld.SnoAreas.Add(snoArea);
 				(snoArea as SnoArea).SnoWorld = snoWorld;
 			}
@@ -423,11 +425,11 @@ internal sealed class Worlds
 				float float_3 = float.Parse(array2[2], CultureInfo.InvariantCulture);
 				float float_4 = float.Parse(array2[3], CultureInfo.InvariantCulture);
 				uint sno2 = uint.Parse(array2[4], CultureInfo.InvariantCulture);
-				SnoArea snoArea2 = SnoData.Areas.GetSnoArea(sno2);
+				SnoArea? snoArea2 = SnoData.Areas.GetSnoArea(sno2);
 				if (array2.Length == 6)
 				{
 					uint sno3 = uint.Parse(array2[5], CultureInfo.InvariantCulture);
-					SnoScene scene = SnoData.Scenes.GetScene(sno3);
+					SnoScene? scene = SnoData.Scenes.GetScene(sno3);
 					SnoWorldSceneInfoStatic item = new SnoWorldSceneInfoStatic(float_, float_2, float_3, float_4, snoArea2, scene);
 					snoWorld.SceneInfos.Add(item);
 					continue;
@@ -437,7 +439,7 @@ internal sealed class Worlds
 				for (int k = 5; k < array2.Length; k++)
 				{
 					uint sno4 = uint.Parse(array2[k], CultureInfo.InvariantCulture);
-					SnoScene scene2 = SnoData.Scenes.GetScene(sno4);
+					SnoScene? scene2 = SnoData.Scenes.GetScene(sno4);
 					snoWorldSceneInfoRandom.SnoScenes.Add(scene2);
 				}
 			}

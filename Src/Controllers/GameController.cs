@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Linq;
 
 namespace RiftAssistant.Controllers;
@@ -20,7 +22,7 @@ public class GameController
 
 	public MapMode MapMode => Overlay.Instance.ActiveMapMode;
 
-	public string ServerIpAddress => CoreCollector.GameServerIP;
+	public string? ServerIpAddress => CoreCollector.GameServerIP;
 
 	public SpecialArea SpecialArea => CoreCollector.CurrentSpecialArea;
 
@@ -96,29 +98,29 @@ public class GameController
 
 	public double ExperiencePerHourToday => CoreCollector.CurrentHeroToday.GainedExperiencePerHourPlay;
 
-	public Monster SelectedMonster1 => CoreCollector.ActorCollector.IMonster_0;
+	public Monster? SelectedMonster1 => CoreCollector.ActorCollector.IMonster_0;
 
-	public Monster SelectedMonster2 => CoreCollector.ActorCollector.IMonster_1;
+	public Monster? SelectedMonster2 => CoreCollector.ActorCollector.IMonster_1;
 
-	public Actor SelectedActor => CoreCollector.ActorCollector.IActor_0;
+	public Actor? SelectedActor => CoreCollector.ActorCollector.IActor_0;
 
-	public IStatTracker CurrentAccountTotalOnCurrentDifficulty => CoreCollector.CurrentAccountTotalOnCurrentDifficulty;
+	public IStatTracker? CurrentAccountTotalOnCurrentDifficulty => CoreCollector.CurrentAccountTotalOnCurrentDifficulty;
 
-	public IStatTracker CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.CurrentAccountYesterdayOnCurrentDifficulty;
+	public IStatTracker? CurrentAccountYesterdayOnCurrentDifficulty => CoreCollector.CurrentAccountYesterdayOnCurrentDifficulty;
 
-	public IStatTracker CurrentAccountTodayOnCurrentDifficulty => CoreCollector.CurrentAccountTodayOnCurrentDifficulty;
+	public IStatTracker? CurrentAccountTodayOnCurrentDifficulty => CoreCollector.CurrentAccountTodayOnCurrentDifficulty;
 
-	public IStatTracker CurrentHeroTotal => CoreCollector.CurrentHeroTotal;
+	public IStatTracker? CurrentHeroTotal => CoreCollector.CurrentHeroTotal;
 
-	public IStatTracker CurrentHeroYesterday => CoreCollector.CurrentHeroYesterday;
+	public IStatTracker? CurrentHeroYesterday => CoreCollector.CurrentHeroYesterday;
 
-	public IStatTracker CurrentHeroToday => CoreCollector.CurrentHeroToday;
+	public IStatTracker? CurrentHeroToday => CoreCollector.CurrentHeroToday;
 
-	public IStatTracker CurrentHeroTotalOnCurrentDifficulty => CoreCollector.CurrentHeroTotalOnCurrentDifficulty;
+	public IStatTracker? CurrentHeroTotalOnCurrentDifficulty => CoreCollector.CurrentHeroTotalOnCurrentDifficulty;
 
-	public IStatTracker CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.CurrentHeroYesterdayOnCurrentDifficulty;
+	public IStatTracker? CurrentHeroYesterdayOnCurrentDifficulty => CoreCollector.CurrentHeroYesterdayOnCurrentDifficulty;
 
-	public IStatTracker CurrentHeroTodayOnCurrentDifficulty => CoreCollector.CurrentHeroTodayOnCurrentDifficulty;
+	public IStatTracker? CurrentHeroTodayOnCurrentDifficulty => CoreCollector.CurrentHeroTodayOnCurrentDifficulty;
 
 	public GameController()
 	{

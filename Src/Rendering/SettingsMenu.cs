@@ -201,7 +201,7 @@ public class MenuCheckbox(string label, bool initialState, int width = 200, int 
 	public RectangleF Bounds { get; set; } = new(0, 0, width, height);
 	public string Label { get; set; } = label;
 	public bool IsChecked { get; set; } = initialState;
-	public Action<bool> OnToggled { get; set; }
+	public Action<bool> OnToggled { get; set; } = null!;
 
 	private readonly RenderFont font = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Left, false, false);
 	private readonly RenderFont checkFont = new(255, 255, 255, 255, "Arial", true, false, 8f, Alignment.Center, false, false);
@@ -248,7 +248,7 @@ internal class MenuButton : IUIComponent
 {
 	public RectangleF Bounds { get; set; }
 	public string Label { get; set; }
-	public Action OnClick { get; set; }
+	public Action OnClick { get; set; } = null!;
 
 	private readonly RenderFont font = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Center, false, false);
 	private readonly RenderBrush borderBrush = new(255, 128, 128, 128, 0f);

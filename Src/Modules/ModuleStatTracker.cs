@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -169,7 +171,7 @@ internal sealed class ModuleStatTracker : Module
 
 	private static int Round(float value) => Convert.ToInt32(value);
 
-	private RenderBrush AccentFill(Accent accent)
+	private RenderBrush? AccentFill(Accent accent)
 	{
 		return accent switch {
 			Accent.Experience => experienceFill,
@@ -194,7 +196,7 @@ internal sealed class ModuleStatTracker : Module
 
 	private void DropStaleRows()
 	{
-		List<StatTracker> stale = null;
+		List<StatTracker>? stale = null;
 		foreach (var pair in rows) {
 			if (pair.Value.Generation != refreshGeneration) (stale ??= []).Add(pair.Key);
 		}
@@ -253,12 +255,12 @@ internal sealed class ModuleStatTracker : Module
 		AddTracker(lobby.statTracker9);
 	}
 
-	private void AddTracker(StatTracker tracker)
+	private void AddTracker(StatTracker? tracker)
 	{
 		if (tracker != null) trackers.Add(tracker);
 	}
 
-	private void DrawCell(int columnIndex, RenderFont font, string text, float height, Alignment alignment, int columnSpan, RenderBrush fill)
+	private void DrawCell(int columnIndex, RenderFont font, string? text, float height, Alignment alignment, int columnSpan, RenderBrush? fill)
 	{
 		int width = columnWidths[columnIndex];
 		while (--columnSpan > 0) {
@@ -303,8 +305,8 @@ internal sealed class ModuleStatTracker : Module
 	{
 		public readonly string[] Totals = new string[columnCount];
 		public readonly string[] Rates = new string[columnCount];
-		public string TownTime = "";
-		public string PlayTime = "";
+		public string? TownTime = "";
+		public string? PlayTime = "";
 		public int Generation;
 
 		public void Refresh(StatTracker tracker, ColumnDefinition[] columns)

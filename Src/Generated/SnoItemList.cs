@@ -1,3 +1,4 @@
+#nullable disable
 namespace RiftAssistant.Sno;
 
 public class SnoItemList

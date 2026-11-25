@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -40,13 +42,13 @@ internal sealed class Powers
 
 	public IEnumerable<SnoPower> All => all.Values;
 
-	public SnoPower GetBySno(uint sno)
+	public SnoPower? GetBySno(uint sno)
 	{
 		snoPowersByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
-	public SnoPower GetByCode(string code)
+	public SnoPower? GetByCode(string code)
 	{
 		all.TryGetValue(code, out var value);
 		return value;
@@ -114,12 +116,12 @@ internal sealed class Powers
 			{
 				uint num2 = dataReader2.ReadUInt32();
 				string text = dataReader2.ReadString();
-				string text2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._powers, text + "_name");
+				string? text2 = SnoData.Strings.GetStringByCode(StringListSnoEnum._powers, text + "_name");
 				if (string.IsNullOrEmpty(text2))
 				{
 					text2 = null;
 				}
-				string text3 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._powers, text + "_name");
+				string? text3 = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._powers, text + "_name");
 				if (string.IsNullOrEmpty(text3))
 				{
 				 text3 = null;
@@ -128,7 +130,7 @@ internal sealed class Powers
 				for (int j = 0; j < 32; j++)
 				{
 					string text4 = text + "_" + j.ToString("D", CultureInfo.InvariantCulture);
-					string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4);
+					string? stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bufftooltips, text4);
 					if (!string.IsNullOrEmpty(stringByCode))
 					{
 						stringByCode = SnoData.ReplaceNewlines(stringByCode);
@@ -234,7 +236,7 @@ internal sealed class Powers
 			if (!text5.StartsWith("//", ignoreCase: false, CultureInfo.InvariantCulture) && !string.IsNullOrEmpty(text5))
 			{
 				string[] array3 = text5.Split('\t');
-				SnoPower bySno = GetBySno(uint.Parse(array3[0]));
+				SnoPower? bySno = GetBySno(uint.Parse(array3[0]));
 				if (bySno != null)
 				{
 					int num8 = int.Parse(array3[1]);
@@ -256,7 +258,7 @@ internal sealed class Powers
 			if (!text6.StartsWith("//", ignoreCase: false, CultureInfo.InvariantCulture) && !string.IsNullOrEmpty(text6))
 			{
 				string[] array4 = text6.Split('\t');
-				SnoPower bySno2 = GetBySno(uint.Parse(array4[0]));
+				SnoPower? bySno2 = GetBySno(uint.Parse(array4[0]));
 				int num9 = int.Parse(array4[1]);
 				bySno2.IconIndexes[num9] = int.Parse(array4[2]);
 			}
@@ -280,14 +282,14 @@ internal sealed class Powers
 		return result;
 	}
 
-	private SnoPower Create(string code, string name, string category, uint snoId)
+	private SnoPower Create(string code, string? name, string? category, uint snoId)
 	{
-		string localizedDesc =
+		string? localizedDesc =
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code + "_simple_desc")) ??
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code + "_desc")) ??
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCode(code));
 
-		string englishDesc =
+		string? englishDesc =
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code + "_simple_desc")) ??
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code + "_desc")) ??
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code));

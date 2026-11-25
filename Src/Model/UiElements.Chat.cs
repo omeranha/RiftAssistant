@@ -15,7 +15,7 @@ internal partial class UiElements
 
 	private const int ChatLineBufferSize = 1024;
 
-	private string lastChat;
+	private string? lastChat;
 
 	private readonly Stopwatch chatPollTimer = Stopwatch.StartNew();
 
@@ -27,7 +27,7 @@ internal partial class UiElements
 
 	private static readonly long ChatTextPointerOffset = (long)Marshal.OffsetOf<UiElementData>(nameof(UiElementData.UnknownPtr1));
 
-	public EventHandler<ChatChanged> ChatChanged;
+	public EventHandler<ChatChanged> ChatChanged = null!;
 
 	private void ProcessChat(bool force)
 	{
@@ -36,7 +36,7 @@ internal partial class UiElements
 
 		chatPollTimer.Restart();
 
-		string current = ReadChat(true);
+		string? current = ReadChat(true);
 		if (current == lastChat) return;
 
 		ChatChanged?.Invoke(this, new ChatChanged {
@@ -46,7 +46,7 @@ internal partial class UiElements
 		lastChat = current;
 	}
 
-	public string ReadChat(bool stripFormatting)
+	public string? ReadChat(bool stripFormatting)
 	{
 		if (bucketCount == 0 || !ChatMessagelist.Visible) {
 			hasLastChatLine = false;
@@ -90,7 +90,7 @@ internal partial class UiElements
 		return 0;
 	}
 
-	private static string SanitizeChat(string text, bool stripFormatting)
+	private static string? SanitizeChat(string text, bool stripFormatting)
 	{
 		if (string.IsNullOrEmpty(text))	return null;
 

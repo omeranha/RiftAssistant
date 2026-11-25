@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,27 +11,27 @@ namespace RiftAssistant.Modules;
 
 internal class ModuleLobbyHeroes : Module
 {
-	public Hero hero0;
+	public Hero? hero0;
 
-	internal StatTracker currentAccountTotal;
+	internal StatTracker? currentAccountTotal;
 
-	internal StatTracker currentAccountLastMonth;
+	internal StatTracker? currentAccountLastMonth;
 
-	internal StatTracker currentAccountLastWeek;
+	internal StatTracker? currentAccountLastWeek;
 
-	internal StatTracker currentAccountYesterday;
+	internal StatTracker? currentAccountYesterday;
 
-	internal StatTracker currentAccountToday;
+	internal StatTracker? currentAccountToday;
 
-	internal StatTracker tracker;
+	internal StatTracker? tracker;
 
-	internal StatTracker statTracker6;
+	internal StatTracker? statTracker6;
 
-	internal StatTracker statTracker7;
+	internal StatTracker? statTracker7;
 
-	internal StatTracker statTracker8;
+	internal StatTracker? statTracker8;
 
-	internal StatTracker statTracker9;
+	internal StatTracker? statTracker9;
 
 	private readonly RenderBrush renderBrush;
 
@@ -130,7 +132,7 @@ internal class ModuleLobbyHeroes : Module
 		float num7 = num6;
 		float num8 = 2f;
 		float num9 = (float)GameWindowManager.Window.Size.Height / 100f;
-		Hero hero2 = null;
+		Hero? hero2 = null;
 		for (int num10 = 0; num10 < list.Count; num10++)
 		{
 			Hero hero3 = list[num10];
@@ -145,7 +147,7 @@ internal class ModuleLobbyHeroes : Module
 			int num12 = num2;
 			transparent.DrawText(textLayout2, num7, num12);
 			string text2 = hero3.ClassDefinition.Code.ToLowerInvariant();
-			Texture portraitTexture = TextureManager.GetTextureByName("Portrait_" + text2.Substring(0, 1).ToUpperInvariant() + text2.Substring(1) + (hero3.IsMale ? "_Male" : "_Female"));
+			Texture? portraitTexture = TextureManager.GetTextureByName("Portrait_" + text2.Substring(0, 1).ToUpperInvariant() + text2.Substring(1) + (hero3.IsMale ? "_Male" : "_Female"));
 			portraitTexture.Draw(rectangle);
 			TextLayout textLayout3 = renderFont4.GetTextLayout(hero3.Level.ToString("D", CultureInfo.InvariantCulture));
 			renderFont4.DrawText(textLayout3, rectangle.Left, rectangle.Top + (float)num * 0.1f);
@@ -154,13 +156,13 @@ internal class ModuleLobbyHeroes : Module
 			if (hero3.Seasonal)
 			{
 				RectangleF rectangle2 = new RectangleF(rectangle.Left + (float)num * 0.6f, rectangle.Bottom - (float)num * 0.5f, (float)num * 0.6f, (float)num * 0.6f);
-				Texture seasonIcon = TextureManager.GetTextureByName("BattleNet_SeasonIcon");
+				Texture? seasonIcon = TextureManager.GetTextureByName("BattleNet_SeasonIcon");
 				seasonIcon.Draw(rectangle2, 2f);
 			}
 			if (hero3.Hardcore)
 			{
 				RectangleF rectangle3 = new RectangleF(rectangle.Left, rectangle.Bottom - (float)num * 0.5f, (float)num * 0.6f, (float)num * 0.6f);
-				Texture hardcoreIcon = TextureManager.GetTextureByName("BattleNet_HardcoreIcon");
+				Texture? hardcoreIcon = TextureManager.GetTextureByName("BattleNet_HardcoreIcon");
 				hardcoreIcon.Draw(rectangle3, 2f);
 			}
 			num7 += array[num10].Metrics.Width + num6;

@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,12 +25,12 @@ internal static partial class KeyboardCapture
 
 	private static readonly LowLevelKeyboardProc proc = HookCallback;
 	private static readonly HashSet<int> swallowedKeys = [];
-	private static volatile Func<CapturedKey, bool> handler;
+	private static volatile Func<CapturedKey, bool>? handler;
 	private static int captureId;
 	private static long startedAt;
 	private static long endedAt = -1;
 	private static IntPtr hookId = IntPtr.Zero;
-	private static Thread hookThread;
+	private static Thread? hookThread;
 	private static uint hookThreadId;
 
 	public static bool IsActive => handler != null;

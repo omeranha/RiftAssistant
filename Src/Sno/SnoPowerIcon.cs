@@ -6,7 +6,7 @@ public struct SnoPowerIcon
 
 	public string TitleLocalized;
 
-	public string DescriptionLocalized;
+	public string? DescriptionLocalized;
 
 	public uint TextureId;
 

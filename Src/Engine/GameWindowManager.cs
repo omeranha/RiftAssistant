@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Buffers;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace RiftAssistant.Engine;
 internal static partial class GameWindowManager
 {
 	public static readonly Window Window = new();
-	public static Process Process { get; private set; }
+	public static Process? Process { get; private set; }
 	public static IntPtr ProcessHandle { get; private set; } = IntPtr.Zero;
 	public static IntPtr MainModuleHandle { get; private set; } = IntPtr.Zero;
 
@@ -221,7 +223,7 @@ internal static partial class GameWindowManager
 	}
 
 	[LibraryImport("user32.dll", EntryPoint = "FindWindowW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-	private static partial IntPtr FindWindow(string className, string windowName);
+	private static partial IntPtr FindWindow(string? className, string? windowName);
 
 	[LibraryImport("user32.dll", SetLastError = true)]
 	private static partial IntPtr GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);

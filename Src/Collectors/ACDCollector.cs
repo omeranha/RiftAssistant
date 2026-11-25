@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 
@@ -131,7 +133,7 @@ internal class ACDCollector
 		return float_0;
 	}
 
-	public double ReadDoubleAttribute(AcdAttribute frozen, uint sno, double double_0 = -1.0)
+	public double ReadDoubleAttribute(AcdAttribute? frozen, uint sno, double double_0 = -1.0)
 	{
 		if (!attributeMapUpdated)
 		{
@@ -162,7 +164,7 @@ internal class ACDCollector
 		return double_0;
 	}
 
-	public int ReadIntAttribute(AcdAttribute acdAttribute, uint modifier, int int_2 = -1)
+	public int ReadIntAttribute(AcdAttribute? acdAttribute, uint modifier, int int_2 = -1)
 	{
 		if (!attributeMapUpdated)
 		{
@@ -189,7 +191,7 @@ internal class ACDCollector
 		return int_2;
 	}
 
-	public uint ReadUIntAttribute(AcdAttribute acdAttribute, uint modifier, uint uint_1 = uint.MaxValue)
+	public uint ReadUIntAttribute(AcdAttribute? acdAttribute, uint modifier, uint uint_1 = uint.MaxValue)
 	{
 		if (acdAttribute == null && modifier == 97)
 		{
@@ -234,7 +236,7 @@ internal class ACDCollector
 		{
 			return false;
 		}
-		AllocatedBlock<r_AttributeEntry> @class = null;
+		AllocatedBlock<r_AttributeEntry>? @class = null;
 		int int32_ = AttributeMap.MaxIndex;
 		for (int i = 0; i <= int32_; i++)
 		{

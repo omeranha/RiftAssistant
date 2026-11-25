@@ -107,7 +107,7 @@ internal class ModulePortraitPlayerStats : Module
 			if (!showInfo) {
 				continue;
 			}
-			string text = null;
+			string? text = null;
 			if (!item2.HasValidActor) {
 				if (item2.SnoArea != Core.Controller.Game.Me.SnoArea) {
 					if (item2.SnoArea != null) {

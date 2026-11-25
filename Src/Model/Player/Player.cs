@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -93,7 +95,7 @@ public class Player : Actor
 
 	public uint HeroId { get; set; }
 
-	public Hero Hero { get; set; }
+	public Hero? Hero { get; set; }
 
 	public string HeroName { get; set; }
 
@@ -105,11 +107,11 @@ public class Player : Actor
 
 	public bool Seasonal { get; set; }
 
-	public string BattleTagAbovePortrait { get; set; }
+	public string? BattleTagAbovePortrait { get; set; }
 
-	public HeroClassDefinition HeroClassDefinition { get; set; }
+	public HeroClassDefinition? HeroClassDefinition { get; set; }
 
-	public SnoArea SnoArea { get; set; }
+	public SnoArea? SnoArea { get; set; }
 
 	public PlayerDefense Defense { get; }
 
@@ -129,13 +131,13 @@ public class Player : Actor
 
 	public AcdAnimationState AnimationState { get; set; }
 
-	public SnoItem CubeSnoItem1 { get; set; }
+	public SnoItem? CubeSnoItem1 { get; set; }
 
-	public SnoItem CubeSnoItem2 { get; set; }
+	public SnoItem? CubeSnoItem2 { get; set; }
 
-	public SnoItem CubeSnoItem3 { get; set; }
+	public SnoItem? CubeSnoItem3 { get; set; }
 
-	public SnoItem CubeSnoItem4 { get; set; }
+	public SnoItem? CubeSnoItem4 { get; set; }
 
 	public IEnumerable<SnoItem> CubedItems => cubedItems;
 
@@ -169,7 +171,7 @@ public class Player : Actor
 
 	public bool IsDead { get; set; }
 
-	public HeadStone HeadStone { get; set; }
+	public HeadStone? HeadStone { get; set; }
 
 	public Stopwatch LastDied { get; } = new Stopwatch();
 

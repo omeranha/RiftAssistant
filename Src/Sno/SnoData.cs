@@ -1,3 +1,5 @@
+#nullable enable annotations
+#nullable disable warnings
 using System.Collections.Generic;
 using System.IO;
 
@@ -114,7 +116,7 @@ internal static class SnoData
 		}
 	}
 
-	internal static string ReplaceNewlines(string stringByCode, string newValue = "<br>")
+	internal static string? ReplaceNewlines(string? stringByCode, string newValue = "<br>")
 	{
 		return stringByCode?.Replace("\n", newValue);
 	}
