@@ -1136,42 +1136,33 @@ internal partial class ActorCollector
 		}
 		player.bool_14 = player.CurrentLevelNormal != 0;
 		if (CoreCollector.LocalPlayer.SnoArea != null && flag2 && player.bool_14) {
-			if (player.CurrentLevelNormal != player.CurrentLevelNormalCap || num5 == uint.MaxValue || !num6.HasValue) {
-				goto IL_3e56;
-			}
-			if (num5 <= 0) {
-				long? num22 = num6;
-				if (!(num22 > 0L)) {
-					goto IL_3e56;
-				}
-			}
-			long num24 = SnoData.Experience.ParagonTableTotal[player.CurrentLevelParagon];
-			long num25 = SnoData.Experience.ParagonExpLevel[player.CurrentLevelParagon + 1];
-			long num26 = (num5 << 32) + num6.Value;
-			long num27 = num25 - num26;
-			long num28 = num24 + num27;
-			if (num27 >= 0 && num25 >= 0) {
-				player.class362_0.Value = num28;
-				if (player.class362_0.Value == num28 && player.ParagonTotalExp != num28) {
-					player.long_1 = num24;
-					player.ParagonExpToNextLevel = num25;
-					player.ParagonExpInThisLevel = num27;
-					player.ParagonTotalExp = num28;
-					player.CurrentLevelParagonDouble = (double)player.CurrentLevelParagon + ((num25 > 0) ? ((double)num27 / (double)num25) : 0.0);
+			bool resetParagonExperience = player.CurrentLevelNormal != player.CurrentLevelNormalCap || num5 == uint.MaxValue || !num6.HasValue || (num5 <= 0 && !(num6 > 0L));
+			if (resetParagonExperience) {
+				player.long_1 = 0L;
+				player.ParagonExpToNextLevel = 0L;
+				player.ParagonExpInThisLevel = 0L;
+				player.ParagonTotalExp2 = 0L;
+				player.ParagonTotalExp = 0L;
+				player.class362_0.ForceSet(0L);
+				player.CurrentLevelParagonDouble = 0.0;
+			} else {
+				long num24 = SnoData.Experience.ParagonTableTotal[player.CurrentLevelParagon];
+				long num25 = SnoData.Experience.ParagonExpLevel[player.CurrentLevelParagon + 1];
+				long num26 = (num5 << 32) + num6.Value;
+				long num27 = num25 - num26;
+				long num28 = num24 + num27;
+				if (num27 >= 0 && num25 >= 0) {
+					player.class362_0.Value = num28;
+					if (player.class362_0.Value == num28 && player.ParagonTotalExp != num28) {
+						player.long_1 = num24;
+						player.ParagonExpToNextLevel = num25;
+						player.ParagonExpInThisLevel = num27;
+						player.ParagonTotalExp = num28;
+						player.CurrentLevelParagonDouble = (double)player.CurrentLevelParagon + ((num25 > 0) ? ((double)num27 / (double)num25) : 0.0);
+					}
 				}
 			}
 		}
-		goto IL_3e9a;
-	IL_3e56:
-		player.long_1 = 0L;
-		player.ParagonExpToNextLevel = 0L;
-		player.ParagonExpInThisLevel = 0L;
-		player.ParagonTotalExp2 = 0L;
-		player.ParagonTotalExp = 0L;
-		player.class362_0.ForceSet(0L);
-		player.CurrentLevelParagonDouble = 0.0;
-		goto IL_3e9a;
-	IL_3e9a:
 		player.BonusPoolRemaining = (long)(((ulong)num7 << 32) + num8);
 		foreach (Skill item5 in list) {
 			item5.IsOnCooldown = item5.CooldownStartTick > 0 && item5.CooldownStartTick <= CoreCollector.D3Memory.GameTick && item5.CooldownFinishTick > CoreCollector.D3Memory.GameTick;

@@ -60,253 +60,244 @@ internal class PlayerCollector
 			if (flag2 = stopwatch_0.ElapsedMilliseconds >= 1000) {
 				stopwatch_0.Restart();
 			}
-			int num2 = 0;
-			Player player;
-			while (true) {
-				if (num2 < PlayerSlots.Length) {
-					player = PlayerSlots[num2] as Player;
-					long num3 = CoreCollector.DAF.PlayerDataManagerAddress + D3Memory.Offset_PlayerDataManager_Elements + num2 * Constants.PlayerData_SizeOf;
-					bool isInGame = player.IsInGame;
-					uint heroId = player.HeroId;
-					player.RawPlayerData = GameWindowManager.Read<r_PlayerData>(num3, size: Constants.PlayerData_SizeOf);
-					player.CoordinateKnown = false;
-					if (player.IsInGame) {
-						player.Defense.HealthPct = player.RawPlayerData.LifePercentage * 100f;
-						if (player.RawPlayerData.LifePercentage == 0f && !player.IsDead) {
-							player.LastDied.Restart();
-						}
-						player.IsDead = player.RawPlayerData.LifePercentage == 0f;
-						if (player.IsDead) {
-							CoreCollector.PlayerCollector.Boolean_0 = true;
-							if (!player.IsMe) {
-								CoreCollector.PlayerCollector.Boolean_1 = true;
-							}
-						}
-						if (player.Materials.Gold > 1) {
-							if (player.Materials.Gold >= player.Gold) {
-								long num4 = player.Materials.Gold - player.Gold;
-								if (num4 > 0 && num4 < 100000000 && player.Gold > 0) {
-									foreach (StatTracker item in CoreCollector.Trackers) {
-										item.GainedGold += num4;
-									}
-								}
-							}
-							player.Gold = player.Materials.Gold;
-						}
-						NumberOfPlayersInGame++;
+			for (int num2 = 0; num2 < PlayerSlots.Length; num2++) {
+				Player player = PlayerSlots[num2] as Player;
+				long num3 = CoreCollector.DAF.PlayerDataManagerAddress + D3Memory.Offset_PlayerDataManager_Elements + num2 * Constants.PlayerData_SizeOf;
+				bool isInGame = player.IsInGame;
+				uint heroId = player.HeroId;
+				player.RawPlayerData = GameWindowManager.Read<r_PlayerData>(num3, size: Constants.PlayerData_SizeOf);
+				player.CoordinateKnown = false;
+				if (player.IsInGame) {
+					player.Defense.HealthPct = player.RawPlayerData.LifePercentage * 100f;
+					if (player.RawPlayerData.LifePercentage == 0f && !player.IsDead) {
+						player.LastDied.Restart();
+					}
+					player.IsDead = player.RawPlayerData.LifePercentage == 0f;
+					if (player.IsDead) {
+						CoreCollector.PlayerCollector.Boolean_0 = true;
 						if (!player.IsMe) {
-							num++;
+							CoreCollector.PlayerCollector.Boolean_1 = true;
 						}
-						player.PortraitIndex = ((!player.IsMe) ? num : 0);
-						if (string.IsNullOrEmpty(player.BattleTagAbovePortrait) || flag2) {
-							UiElement temporary = CoreCollector.UiElements.CreateTemporary("Root.NormalLayer.portraits.stack.party_stack.portrait_" + player.PortraitIndex.ToString("D", CultureInfo.InvariantCulture) + ".text");
-							player.BattleTagAbovePortrait = temporary.ReadText(Encoding.UTF8, removeColors: true);
-							string battleTagAbovePortrait = player.BattleTagAbovePortrait;
-							if (battleTagAbovePortrait != null && battleTagAbovePortrait.Contains("\n")) {
-								player.BattleTagAbovePortrait = player.BattleTagAbovePortrait.Substring(player.BattleTagAbovePortrait.IndexOf("\n") + 1);
-							}
-							player.bool_8 = true;
-						}
-						if (!isInGame && player.IsMe) {
-							CoreCollector.FloatingNumberManager.Clear(player);
-						}
-						for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
-							Skill skill = player.SkillSlots[(int)actionKey];
-							SnoPower snoPower = skill?.SnoPower;
-							uint num5 = 0u;
-							int num6 = 0;
-							switch (actionKey) {
-								case ActionKey.LeftSkill:
-									num5 = player.RawPlayerData.struct30_0.uint_0;
-									num6 = player.RawPlayerData.struct30_0.int_0;
-									break;
-								case ActionKey.RightSkill:
-									num5 = player.RawPlayerData.struct30_1.uint_0;
-									num6 = player.RawPlayerData.struct30_1.int_0;
-									break;
-								case ActionKey.Skill1:
-									num5 = player.RawPlayerData.struct30_2.uint_0;
-									num6 = player.RawPlayerData.struct30_2.int_0;
-									break;
-								case ActionKey.Skill2:
-									num5 = player.RawPlayerData.struct30_3.uint_0;
-									num6 = player.RawPlayerData.struct30_3.int_0;
-									break;
-								case ActionKey.Skill3:
-									num5 = player.RawPlayerData.struct30_4.uint_0;
-									num6 = player.RawPlayerData.struct30_4.int_0;
-									break;
-								case ActionKey.Skill4:
-									num5 = player.RawPlayerData.struct30_5.uint_0;
-									num6 = player.RawPlayerData.struct30_5.int_0;
-									break;
-							}
-							if (num6 == -1) {
-								num6 = 255;
-							}
-							if (snoPower == null || snoPower.Sno != num5 || skill.Rune != num6) {
-								snoPower = SnoData.Powers.GetBySno(num5);
-								player.SkillSlots[(int)actionKey] = ((snoPower == null) ? null : new Skill(player, snoPower, (byte)num6, actionKey));
-							}
-						}
-						player.UsedPassives.Clear();
-						fixed (r_PlayerData* pData = &player.RawPlayerData) {
-							uint* struct33_ = pData->struct33_0;
-							for (int i = 0; i < 4; i++) {
-								uint sno = struct33_[i];
-								SnoPower bySno = SnoData.Powers.GetBySno(sno);
-								if (player.SnoPower_0[i] != bySno) {
-									player.SnoPower_0[i] = bySno;
-								}
-								if (bySno != null) {
-									player.UsedPassives.Add(bySno);
+					}
+					if (player.Materials.Gold > 1) {
+						if (player.Materials.Gold >= player.Gold) {
+							long num4 = player.Materials.Gold - player.Gold;
+							if (num4 > 0 && num4 < 100000000 && player.Gold > 0) {
+								foreach (StatTracker item in CoreCollector.Trackers) {
+									item.GainedGold += num4;
 								}
 							}
 						}
-						if (flag) {
-							fixed (r_PlayerData* pData2 = &player.RawPlayerData) {
-								(player.ArmorySets[0] as PlayerArmorySet).Name = DecodeString(pData2->struct28_0.struct29_0, 52);
-								(player.ArmorySets[1] as PlayerArmorySet).Name = DecodeString(pData2->struct28_1.struct29_0, 52);
-								(player.ArmorySets[2] as PlayerArmorySet).Name = DecodeString(pData2->struct28_2.struct29_0, 52);
-								(player.ArmorySets[3] as PlayerArmorySet).Name = DecodeString(pData2->struct28_3.struct29_0, 52);
-								(player.ArmorySets[4] as PlayerArmorySet).Name = DecodeString(pData2->struct28_4.struct29_0, 52);
-								(player.ArmorySets[5] as PlayerArmorySet).Name = DecodeString(pData2->struct28_5.struct29_0, 52);
-								(player.ArmorySets[6] as PlayerArmorySet).Name = DecodeString(pData2->struct28_6.struct29_0, 52);
-								(player.ArmorySets[7] as PlayerArmorySet).Name = DecodeString(pData2->struct28_7.struct29_0, 52);
-								(player.ArmorySets[8] as PlayerArmorySet).Name = DecodeString(pData2->struct28_8.struct29_0, 52);
-								(player.ArmorySets[9] as PlayerArmorySet).Name = DecodeString(pData2->struct28_9.struct29_0, 52);
+						player.Gold = player.Materials.Gold;
+					}
+					NumberOfPlayersInGame++;
+					if (!player.IsMe) {
+						num++;
+					}
+					player.PortraitIndex = ((!player.IsMe) ? num : 0);
+					if (string.IsNullOrEmpty(player.BattleTagAbovePortrait) || flag2) {
+						UiElement temporary = CoreCollector.UiElements.CreateTemporary("Root.NormalLayer.portraits.stack.party_stack.portrait_" + player.PortraitIndex.ToString("D", CultureInfo.InvariantCulture) + ".text");
+						player.BattleTagAbovePortrait = temporary.ReadText(Encoding.UTF8, removeColors: true);
+						string battleTagAbovePortrait = player.BattleTagAbovePortrait;
+						if (battleTagAbovePortrait != null && battleTagAbovePortrait.Contains("\n")) {
+							player.BattleTagAbovePortrait = player.BattleTagAbovePortrait.Substring(player.BattleTagAbovePortrait.IndexOf("\n") + 1);
+						}
+						player.bool_8 = true;
+					}
+					if (!isInGame && player.IsMe) {
+						CoreCollector.FloatingNumberManager.Clear(player);
+					}
+					for (ActionKey actionKey = ActionKey.LeftSkill; actionKey <= ActionKey.Skill4; actionKey++) {
+						Skill skill = player.SkillSlots[(int)actionKey];
+						SnoPower snoPower = skill?.SnoPower;
+						uint num5 = 0u;
+						int num6 = 0;
+						switch (actionKey) {
+							case ActionKey.LeftSkill:
+								num5 = player.RawPlayerData.struct30_0.uint_0;
+								num6 = player.RawPlayerData.struct30_0.int_0;
+								break;
+							case ActionKey.RightSkill:
+								num5 = player.RawPlayerData.struct30_1.uint_0;
+								num6 = player.RawPlayerData.struct30_1.int_0;
+								break;
+							case ActionKey.Skill1:
+								num5 = player.RawPlayerData.struct30_2.uint_0;
+								num6 = player.RawPlayerData.struct30_2.int_0;
+								break;
+							case ActionKey.Skill2:
+								num5 = player.RawPlayerData.struct30_3.uint_0;
+								num6 = player.RawPlayerData.struct30_3.int_0;
+								break;
+							case ActionKey.Skill3:
+								num5 = player.RawPlayerData.struct30_4.uint_0;
+								num6 = player.RawPlayerData.struct30_4.int_0;
+								break;
+							case ActionKey.Skill4:
+								num5 = player.RawPlayerData.struct30_5.uint_0;
+								num6 = player.RawPlayerData.struct30_5.int_0;
+								break;
+						}
+						if (num6 == -1) {
+							num6 = 255;
+						}
+						if (snoPower == null || snoPower.Sno != num5 || skill.Rune != num6) {
+							snoPower = SnoData.Powers.GetBySno(num5);
+							player.SkillSlots[(int)actionKey] = ((snoPower == null) ? null : new Skill(player, snoPower, (byte)num6, actionKey));
+						}
+					}
+					player.UsedPassives.Clear();
+					fixed (r_PlayerData* pData = &player.RawPlayerData) {
+						uint* struct33_ = pData->struct33_0;
+						for (int i = 0; i < 4; i++) {
+							uint sno = struct33_[i];
+							SnoPower bySno = SnoData.Powers.GetBySno(sno);
+							if (player.SnoPower_0[i] != bySno) {
+								player.SnoPower_0[i] = bySno;
 							}
-							(player.ArmorySets[0] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_0;
-							(player.ArmorySets[1] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_1;
-							(player.ArmorySets[2] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_2;
-							(player.ArmorySets[3] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_3;
-							(player.ArmorySets[4] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_4;
-							(player.ArmorySets[5] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_5;
-							(player.ArmorySets[6] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_6;
-							(player.ArmorySets[7] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_7;
-							(player.ArmorySets[8] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_8;
-							(player.ArmorySets[9] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_9;
-							for (int j = 0; j < 10; j++) {
-								PlayerArmorySet playerArmorySet = player.ArmorySets[j] as PlayerArmorySet;
-								playerArmorySet.itemAnnIds.Clear();
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_0.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_1.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_2.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_3.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_4.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_5.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_6.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_7.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_8.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_9.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_10.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_11.uint_0);
-								playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_12.uint_0);
+							if (bySno != null) {
+								player.UsedPassives.Add(bySno);
 							}
 						}
-						uint heroId2 = player.RawPlayerData.HeroId;
-						if (heroId2 != 0 && heroId2 != uint.MaxValue) {
-							if (heroId != heroId2) {
-								player.HeroId = heroId2;
-								Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.GetHero(heroId2) : null));
-								if (hero != null) {
-									player.HeroName = hero.Name;
-									player.Season = hero.Season;
-									player.HeroIsHardcore = hero.Hardcore;
-									player.HeroIsMale = hero.IsMale;
-									player.Seasonal = hero.Seasonal;
-								} else {
-									fixed (r_PlayerData* pData3 = &player.RawPlayerData) {
-										player.HeroName = new string(pData3->struct35_0) ?? "";
-									}
-									player.Season = 0;
-									player.HeroIsHardcore = false;
-									player.HeroIsMale = true;
-								}
-								if (string.IsNullOrEmpty(player.HeroName)) {
-									if (!player.IsMe) {
-										player.ResetHero();
-										goto IL_0f38;
-									}
-									return false;
-								}
-							}
-							HeroClassDefinition heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
-							if (heroClassByInternalIndex != null) {
-								player.HeroClassDefinition = heroClassByInternalIndex;
-								Custom.SetSnoAreaForPlayer(player);
-								if (player.SnoArea == null && player.IsMe) {
-									return false;
-								}
-								uint acdIdEncrypted = player.RawPlayerData.AcdIdEncrypted;
-								uint actorIdEncrypted = player.RawPlayerData.ActorIdEncrypted;
-								player.SetAcdId(acdIdEncrypted);
-								player.ActorId = actorIdEncrypted;
-								if (!player.HasValidActor) {
-									player.ResetActor();
-									if (player.IsMe) {
-										return false;
-									}
-								} else {
-									uint usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno1;
-									if (player.CubeSnoItem1 == null || player.CubeSnoItem1.Sno != usedKanaiItemSno) {
-										player.CubeSnoItem1 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
-									}
-									usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno2;
-									if (player.CubeSnoItem2 == null || player.CubeSnoItem2.Sno != usedKanaiItemSno) {
-										player.CubeSnoItem2 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
-									}
-									usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno3;
-									if (player.CubeSnoItem3 == null || player.CubeSnoItem3.Sno != usedKanaiItemSno) {
-										player.CubeSnoItem3 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
-									}
-									usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno4;
-									if (player.CubeSnoItem4 == null || player.CubeSnoItem4.Sno != usedKanaiItemSno) {
-										player.CubeSnoItem4 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
-									}
-									ulong num7 = 0uL;
-									fixed (r_PlayerData* pData4 = &player.RawPlayerData) {
-										uint* struct34_ = pData4->struct34_0;
-										for (int k = 0; k < 512; k++) {
-											uint num8 = struct34_[k];
-											num7 += num8;
-										}
-									}
-									if (num7 != player.ulong_0) {
-										player.ulong_0 = num7;
-										player.cubedItems.Clear();
-										player.dictionary_0.Clear();
-										fixed (r_PlayerData* pData5 = &player.RawPlayerData) {
-											uint* struct34_2 = pData5->struct34_0;
-											for (int l = 0; l < 512; l++) {
-												uint num9 = struct34_2[l];
-												if (num9 != uint.MaxValue) {
-													SnoItem bySno2 = SnoData.Items.GetBySno(num9);
-													if (bySno2 != null) {
-														player.cubedItems.Add(bySno2);
-														player.dictionary_0[bySno2.NameLocalized] = bySno2;
-													}
-												}
-											}
-										}
-									}
-									if (player.ParagonTotalExp > 0 && player.bool_14 && player.HasValidActor && player.FloorCoordinate.IsValid && player.bool_8 && CoreCollector.RunTracker != null && player.SnoArea != null) {
-										if (player.ParagonTotalExp2 > 0 && player.ParagonTotalExp2 < player.ParagonTotalExp) {
-											long num10 = player.ParagonTotalExp - player.ParagonTotalExp2;
-											if (num10 != 0L && player.IsMe) {
-												foreach (StatTracker item2 in CoreCollector.Trackers) {
-													item2.GainedExperience += num10;
-												}
-											}
-										}
-										player.ParagonTotalExp2 = player.ParagonTotalExp;
-									}
-								}
+					}
+					if (flag) {
+						fixed (r_PlayerData* pData2 = &player.RawPlayerData) {
+							(player.ArmorySets[0] as PlayerArmorySet).Name = DecodeString(pData2->struct28_0.struct29_0, 52);
+							(player.ArmorySets[1] as PlayerArmorySet).Name = DecodeString(pData2->struct28_1.struct29_0, 52);
+							(player.ArmorySets[2] as PlayerArmorySet).Name = DecodeString(pData2->struct28_2.struct29_0, 52);
+							(player.ArmorySets[3] as PlayerArmorySet).Name = DecodeString(pData2->struct28_3.struct29_0, 52);
+							(player.ArmorySets[4] as PlayerArmorySet).Name = DecodeString(pData2->struct28_4.struct29_0, 52);
+							(player.ArmorySets[5] as PlayerArmorySet).Name = DecodeString(pData2->struct28_5.struct29_0, 52);
+							(player.ArmorySets[6] as PlayerArmorySet).Name = DecodeString(pData2->struct28_6.struct29_0, 52);
+							(player.ArmorySets[7] as PlayerArmorySet).Name = DecodeString(pData2->struct28_7.struct29_0, 52);
+							(player.ArmorySets[8] as PlayerArmorySet).Name = DecodeString(pData2->struct28_8.struct29_0, 52);
+							(player.ArmorySets[9] as PlayerArmorySet).Name = DecodeString(pData2->struct28_9.struct29_0, 52);
+						}
+						(player.ArmorySets[0] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_0;
+						(player.ArmorySets[1] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_1;
+						(player.ArmorySets[2] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_2;
+						(player.ArmorySets[3] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_3;
+						(player.ArmorySets[4] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_4;
+						(player.ArmorySets[5] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_5;
+						(player.ArmorySets[6] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_6;
+						(player.ArmorySets[7] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_7;
+						(player.ArmorySets[8] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_8;
+						(player.ArmorySets[9] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_9;
+						for (int j = 0; j < 10; j++) {
+							PlayerArmorySet playerArmorySet = player.ArmorySets[j] as PlayerArmorySet;
+							playerArmorySet.itemAnnIds.Clear();
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_0.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_1.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_2.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_3.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_4.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_5.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_6.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_7.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_8.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_9.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_10.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_11.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_12.uint_0);
+						}
+					}
+					uint heroId2 = player.RawPlayerData.HeroId;
+					if (heroId2 != 0 && heroId2 != uint.MaxValue) {
+						if (heroId != heroId2) {
+							player.HeroId = heroId2;
+							Hero hero = (player.Hero = (player.IsMe ? CoreCollector.HeroCollector.GetHero(heroId2) : null));
+							if (hero != null) {
+								player.HeroName = hero.Name;
+								player.Season = hero.Season;
+								player.HeroIsHardcore = hero.Hardcore;
+								player.HeroIsMale = hero.IsMale;
+								player.Seasonal = hero.Seasonal;
 							} else {
+								fixed (r_PlayerData* pData3 = &player.RawPlayerData) {
+									player.HeroName = new string(pData3->struct35_0) ?? "";
+								}
+								player.Season = 0;
+								player.HeroIsHardcore = false;
+								player.HeroIsMale = true;
+							}
+							if (string.IsNullOrEmpty(player.HeroName)) {
+								if (!player.IsMe) {
+									player.ResetHero();
+									continue;
+								}
+								return false;
+							}
+						}
+						HeroClassDefinition heroClassByInternalIndex = SnoData.Classes.GetHeroClassByInternalIndex(player.RawPlayerData.HeroClass);
+						if (heroClassByInternalIndex != null) {
+							player.HeroClassDefinition = heroClassByInternalIndex;
+							Custom.SetSnoAreaForPlayer(player);
+							if (player.SnoArea == null && player.IsMe) {
+								return false;
+							}
+							uint acdIdEncrypted = player.RawPlayerData.AcdIdEncrypted;
+							uint actorIdEncrypted = player.RawPlayerData.ActorIdEncrypted;
+							player.SetAcdId(acdIdEncrypted);
+							player.ActorId = actorIdEncrypted;
+							if (!player.HasValidActor) {
+								player.ResetActor();
 								if (player.IsMe) {
 									return false;
 								}
-								player.ResetHero();
+							} else {
+								uint usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno1;
+								if (player.CubeSnoItem1 == null || player.CubeSnoItem1.Sno != usedKanaiItemSno) {
+									player.CubeSnoItem1 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
+								}
+								usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno2;
+								if (player.CubeSnoItem2 == null || player.CubeSnoItem2.Sno != usedKanaiItemSno) {
+									player.CubeSnoItem2 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
+								}
+								usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno3;
+								if (player.CubeSnoItem3 == null || player.CubeSnoItem3.Sno != usedKanaiItemSno) {
+									player.CubeSnoItem3 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
+								}
+								usedKanaiItemSno = player.RawPlayerData.UsedKanaiItemSno4;
+								if (player.CubeSnoItem4 == null || player.CubeSnoItem4.Sno != usedKanaiItemSno) {
+									player.CubeSnoItem4 = ((usedKanaiItemSno == uint.MaxValue) ? null : SnoData.Items.GetBySno(usedKanaiItemSno));
+								}
+								ulong num7 = 0uL;
+								fixed (r_PlayerData* pData4 = &player.RawPlayerData) {
+									uint* struct34_ = pData4->struct34_0;
+									for (int k = 0; k < 512; k++) {
+										uint num8 = struct34_[k];
+										num7 += num8;
+									}
+								}
+								if (num7 != player.ulong_0) {
+									player.ulong_0 = num7;
+									player.cubedItems.Clear();
+									player.dictionary_0.Clear();
+									fixed (r_PlayerData* pData5 = &player.RawPlayerData) {
+										uint* struct34_2 = pData5->struct34_0;
+										for (int l = 0; l < 512; l++) {
+											uint num9 = struct34_2[l];
+											if (num9 != uint.MaxValue) {
+												SnoItem bySno2 = SnoData.Items.GetBySno(num9);
+												if (bySno2 != null) {
+													player.cubedItems.Add(bySno2);
+													player.dictionary_0[bySno2.NameLocalized] = bySno2;
+												}
+											}
+										}
+									}
+								}
+								if (player.ParagonTotalExp > 0 && player.bool_14 && player.HasValidActor && player.FloorCoordinate.IsValid && player.bool_8 && CoreCollector.RunTracker != null && player.SnoArea != null) {
+									if (player.ParagonTotalExp2 > 0 && player.ParagonTotalExp2 < player.ParagonTotalExp) {
+										long num10 = player.ParagonTotalExp - player.ParagonTotalExp2;
+										if (num10 != 0L && player.IsMe) {
+											foreach (StatTracker item2 in CoreCollector.Trackers) {
+												item2.GainedExperience += num10;
+											}
+										}
+									}
+									player.ParagonTotalExp2 = player.ParagonTotalExp;
+								}
 							}
 						} else {
 							if (player.IsMe) {
@@ -316,18 +307,19 @@ internal class PlayerCollector
 						}
 					} else {
 						if (player.IsMe) {
-							break;
+							return false;
 						}
 						player.ResetHero();
 					}
-					goto IL_0f38;
+				} else {
+					if (player.IsMe) {
+						CoreCollector.FloatingNumberManager.Clear(player);
+						return false;
+					}
+					player.ResetHero();
 				}
-				return true;
-			IL_0f38:
-				num2++;
 			}
-			CoreCollector.FloatingNumberManager.Clear(player);
-			return false;
+			return true;
 		} catch (Exception exception_) {
 			Logger.LogException(exception_.ToString());
 		}

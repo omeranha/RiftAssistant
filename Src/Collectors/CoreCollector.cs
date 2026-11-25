@@ -174,7 +174,6 @@ internal static class CoreCollector
 				item2.Save();
 			}
 		}
-		object obj;
 		if (bool_8) {
 			DateTime now = DateTime.Now;
 			trackerDay = now.Date;
@@ -190,15 +189,28 @@ internal static class CoreCollector
 			CurrentHeroTotalOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "HERO TOTAL", "total_" + Unknown);
 			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			SnoArea snoArea = LocalPlayer.SnoArea;
-			if (snoArea != null) {
-				obj = snoArea.HostSnoArea;
-				if (obj != null) {
-					goto IL_03dd;
-				}
+			SnoArea currentSnoArea = LocalPlayer.SnoArea?.HostSnoArea ?? LocalPlayer.SnoArea;
+			if (RunTracker == null) {
+				RunTracker = new RunTracker(currentSnoArea);
+			} else {
+				RunTracker.UpdateCurrentArea(currentSnoArea);
 			}
-			obj = LocalPlayer.SnoArea;
-			goto IL_03dd;
+			Trackers.Clear();
+			Trackers.Add(Session);
+			Trackers.Add(SessionAlwaysRunning);
+			Trackers.Add(RunTracker.RunStatTracker);
+			Trackers.Add(RunTracker.CurrentArea.AreaStats);
+			Trackers.Add(AccountTotal);
+			Trackers.Add(AccountToday);
+			Trackers.Add(CurrentHeroTotal);
+			Trackers.Add(CurrentHeroToday);
+			Trackers.Add(RunTracker.CurrentArea.AreaTotalStats);
+			Trackers.Add(CurrentAccountTotalOnCurrentDifficulty);
+			Trackers.Add(CurrentAccountTodayOnCurrentDifficulty);
+			Trackers.Add(CurrentHeroTotalOnCurrentDifficulty);
+			Trackers.Add(CurrentHeroTodayOnCurrentDifficulty);
+			Trackers.Add(RunTracker.CurrentArea.AreaTotalDifficultyStats);
+			return;
 		}
 		AccountTotal = null;
 		AccountYesterday = null;
@@ -216,29 +228,6 @@ internal static class CoreCollector
 			ResetGameState();
 		}
 		Trackers.Clear();
-		return;
-	IL_03dd:
-		SnoArea isnoArea_ = (SnoArea)obj;
-		if (RunTracker == null) {
-			RunTracker = new RunTracker(isnoArea_);
-		} else {
-			RunTracker.UpdateCurrentArea(isnoArea_);
-		}
-		Trackers.Clear();
-		Trackers.Add(Session);
-		Trackers.Add(SessionAlwaysRunning);
-		Trackers.Add(RunTracker.RunStatTracker);
-		Trackers.Add(RunTracker.CurrentArea.AreaStats);
-		Trackers.Add(AccountTotal);
-		Trackers.Add(AccountToday);
-		Trackers.Add(CurrentHeroTotal);
-		Trackers.Add(CurrentHeroToday);
-		Trackers.Add(RunTracker.CurrentArea.AreaTotalStats);
-		Trackers.Add(CurrentAccountTotalOnCurrentDifficulty);
-		Trackers.Add(CurrentAccountTodayOnCurrentDifficulty);
-		Trackers.Add(CurrentHeroTotalOnCurrentDifficulty);
-		Trackers.Add(CurrentHeroTodayOnCurrentDifficulty);
-		Trackers.Add(RunTracker.CurrentArea.AreaTotalDifficultyStats);
 	}
 
 	internal static void ClearGameServerContext()
@@ -518,26 +507,20 @@ internal static class CoreCollector
 					ResetStatTrackers(bool_7: true, bool_8: true);
 				}
 				UpdateSpecialArea();
-				if (IsGameReady) {
-					if (D3Memory.GameDifficulty < GameDifficulty.t1 && CurrentSpecialArea == SpecialArea.None) {
-						Player localPlayer = LocalPlayer;
-						if (localPlayer == null || localPlayer.SnoArea?.Sno != 288482) {
-							Player localPlayer2 = LocalPlayer;
-							boolean_ = localPlayer2 != null && localPlayer2.SnoArea?.HostAreaSno == 288482;
-							goto IL_0bc6;
-						}
-					}
-					boolean_ = true;
-				} else {
+				Player gameLocalPlayer = LocalPlayer;
+				if (!IsGameReady) {
 					boolean_ = false;
+				} else if (D3Memory.GameDifficulty < GameDifficulty.t1 && CurrentSpecialArea == SpecialArea.None && (gameLocalPlayer == null || gameLocalPlayer.SnoArea?.Sno != 288482)) {
+					boolean_ = gameLocalPlayer != null && gameLocalPlayer.SnoArea?.HostAreaSno == 288482;
+				} else {
+					boolean_ = true;
 				}
-				goto IL_0bc6;
+			} else {
+				Logger.Info("[ERROR] force daf scan due to invalid containers [" + D3Memory.ActorContainer.MaxIndex + ", " + D3Memory.ACDContainer.MaxIndex + ", " + D3Memory.SceneContainer.MaxIndex + ", " + D3Memory.WorldContainer.MaxIndex + ", " + D3Memory.FastAttribGroupContainer.MaxIndex + ", " + (D3Memory.AttribAllocator.RawAllocator.GoodFood == Magic_600DF00D) + "]");
+				DAF.ClearObjectManagerAddr();
+				ClearGameServerContext();
+				return;
 			}
-			Logger.Info("[ERROR] force daf scan due to invalid containers [" + D3Memory.ActorContainer.MaxIndex + ", " + D3Memory.ACDContainer.MaxIndex + ", " + D3Memory.SceneContainer.MaxIndex + ", " + D3Memory.WorldContainer.MaxIndex + ", " + D3Memory.FastAttribGroupContainer.MaxIndex + ", " + (D3Memory.AttribAllocator.RawAllocator.GoodFood == Magic_600DF00D) + "]");
-			DAF.ClearObjectManagerAddr();
-			ClearGameServerContext();
-			return;
-		IL_0bc6:
 			stopwatch_0.Restart();
 			stopwatch_1.Restart();
 			try {

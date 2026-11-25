@@ -204,26 +204,23 @@ internal partial class ActorCollector
 				SnoActor snoActor;
 				if (actor2 == null) {
 					snoActor = SnoData.Actors.GetActor(actorSnoEnum);
-					if (snoActor != null) {
-						goto IL_04b0;
+					if (snoActor == null) {
+						continue;
 					}
-					continue;
+				} else {
+					if (actor2.AcdId != acdid) {
+						actor2.SetAcdId(acdid);
+					}
+					snoActor = actor2.SnoActor;
+					if (snoActor.Sno != actorSnoEnum) {
+						actor2 = null;
+						actorsByAcdId.Remove(gparam_);
+						snoActor = SnoData.Actors.GetActor(actorSnoEnum);
+						if (snoActor == null) {
+							continue;
+						}
+					}
 				}
-				if (actor2.AcdId != acdid) {
-					actor2.SetAcdId(acdid);
-				}
-				snoActor = actor2.SnoActor;
-				if (snoActor.Sno == actorSnoEnum) {
-					goto IL_04b0;
-				}
-				actor2 = null;
-				actorsByAcdId.Remove(gparam_);
-				snoActor = SnoData.Actors.GetActor(actorSnoEnum);
-				if (snoActor != null) {
-					goto IL_04b0;
-				}
-				goto end_IL_019d;
-			IL_04b0:
 				if (!CoreCollector.ACDCollector.EnsureAttributeMap()) {
 					continue;
 				}
@@ -471,7 +468,6 @@ internal partial class ActorCollector
 				} else {
 					monster2.Attackable = false;
 				}
-			end_IL_019d:;
 			}
 		}
 		if (num6 > 30) {
