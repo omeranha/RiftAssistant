@@ -1,51 +1,21 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Controllers;
 
 public class SnoController
 {
-	[CompilerGenerated]
-	private readonly SnoPowerList snoPowers = new SnoPowerList();
-
-	[CompilerGenerated]
-	private readonly SnoQuestList isnoQuestList_0 = new SnoQuestList();
-
-	[CompilerGenerated]
-	private readonly SnoItemList isnoItemList_0 = new SnoItemList();
 
 	public AttributeList Attributes => new AttributeList();
 
-	public SnoPowerList SnoPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoPowers;
-		}
-	}
+	public SnoPowerList SnoPowers { get; } = new SnoPowerList();
 
 	public IEnumerable<SnoPower> AllSnoPower => SnoData.Powers.All;
 
-	public SnoQuestList SnoQuests
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoQuestList_0;
-		}
-	}
+	public SnoQuestList SnoQuests { get; } = new SnoQuestList();
 
 	public IEnumerable<SnoQuest> AllSnoQuest => SnoData.Quests.All;
 
-	public SnoItemList SnoItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemList_0;
-		}
-	}
+	public SnoItemList SnoItems { get; } = new SnoItemList();
 
 	public SnoPower GetSnoPower(uint sno)
 	{

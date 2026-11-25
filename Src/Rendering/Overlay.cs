@@ -41,8 +41,6 @@ internal class Overlay
 
 	internal readonly PerSecCounter RenderCounter = new();
 
-	private readonly Controller controller;
-
 	public readonly Form Frm;
 
 	public readonly SharpDX.Direct2D1.Factory direct2DFactory;
@@ -302,9 +300,8 @@ internal class Overlay
 		}
 	}
 
-	public Overlay(Controller controller)
+	public Overlay()
 	{
-		this.controller = controller;
 		Instance = this;
 		Frm = new FormOverlay();
 		Frm.SetBounds(0, 0, 0, 0);

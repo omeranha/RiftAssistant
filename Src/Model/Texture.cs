@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
@@ -8,9 +7,6 @@ namespace RiftAssistant.Model;
 
 public class Texture : ITransparent
 {
-	[CompilerGenerated]
-	private float opacity;
-
 	private readonly Lazy<Bitmap> bitmap;
 
 	private readonly RawRectangleF? rectF;
@@ -21,17 +17,13 @@ public class Texture : ITransparent
 
 	public float Height => rectF.Value.Bottom - rectF.Value.Top - 1f;
 
-	public float Opacity
-	{
-		get => opacity;
-		set => opacity = value;
-	}
+	public float Opacity { get; set; }
 
 	public Texture(Lazy<Bitmap> lazy_1, int int_0, int int_1, int int_2, int int_3)
 	{
 		bitmap = lazy_1;
 		rectF = new RawRectangleF(int_0, int_1, int_0 + int_2, int_1 + int_3);
-		opacity = 1f;
+		Opacity = 1f;
 	}
 
 	public void Draw(RectangleF rectangle, float opacity = 1f)

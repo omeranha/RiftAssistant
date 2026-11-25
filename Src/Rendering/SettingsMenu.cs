@@ -20,7 +20,6 @@ public class SettingsMenu
 
 	private readonly RenderBrush background = new(200, 0, 0, 0, 0f);
 
-	private readonly Settings settings;
 	private bool layoutNeedsUpdate = true;
 
 	public int Width { get; private set; } = 300;
@@ -41,10 +40,8 @@ public class SettingsMenu
 
 	private const int ROW_PADDING = 15;
 
-	public SettingsMenu(Settings settings)
+	public SettingsMenu()
 	{
-		this.settings = settings;
-
 		closeButton = new MenuButton("X") {
 			OnClick = () => ShowMenu = false
 		};

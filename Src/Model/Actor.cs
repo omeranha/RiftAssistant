@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
@@ -8,458 +7,63 @@ public class Actor
 {
 	internal List<r_AttributeEntry> list_0 = new List<r_AttributeEntry>();
 
-	[CompilerGenerated]
-	private int createdAtInGameTick;
-
-	[CompilerGenerated]
-	private GizmoType gizmoType = GizmoType.Invalid;
-
-	[CompilerGenerated]
-	private uint worldId;
-
-	[CompilerGenerated]
-	private uint worldSno;
-
-	[CompilerGenerated]
-	private SnoWorld isnoWorld_0;
-
-	[CompilerGenerated]
-	private Scene iscene_0;
-
-	[CompilerGenerated]
-	private uint acdId;
-
-	[CompilerGenerated]
-	private uint annId;
-
-	[CompilerGenerated]
-	private SnoActor snoActor;
-
-	[CompilerGenerated]
-	private readonly WorldCoordinate iworldCoordinate_0;
-
-	[CompilerGenerated]
-	private readonly WorldCoordinate iworldCoordinate_1;
-
-	[CompilerGenerated]
-	private float radiusScaled;
-
-	[CompilerGenerated]
-	private float radiusBottom;
-
 	private readonly ScreenCoordinate ScreenCoordinate_0;
 
 	private bool bool_0;
 
-	[CompilerGenerated]
-	private bool isOnScreen;
+	public int CreatedAtInGameTick { get; set; }
 
-	[CompilerGenerated]
-	private double centralXyDistanceToMe;
+	public GizmoType GizmoType { get; set; } = GizmoType.Invalid;
 
-	[CompilerGenerated]
-	private double normalizedXyDistanceToMe;
+	public uint WorldId { get; set; }
 
-	[CompilerGenerated]
-	private double zDistanceToMeAbsolute;
+	public uint WorldSno { get; set; }
 
-	[CompilerGenerated]
-	private float hitpoints;
+	public SnoWorld SnoWorld { get; set; }
 
-	[CompilerGenerated]
-	private bool isSelected;
+	public Scene Scene { get; set; }
 
-	[CompilerGenerated]
-	private uint summonerId;
+	public uint AcdId { get; private set; }
 
-	[CompilerGenerated]
-	private uint summonerAcdDynamicId;
+	public uint AnnId { get; set; }
 
-	[CompilerGenerated]
-	private bool bool_3;
+	public SnoActor SnoActor { get; set; }
 
-	[CompilerGenerated]
-	private bool untargetable;
+	public WorldCoordinate CollisionCoordinate { get; }
 
-	[CompilerGenerated]
-	private bool isClickable;
+	public WorldCoordinate FloorCoordinate { get; }
 
-	[CompilerGenerated]
-	private bool isDisabled;
+	public float RadiusScaled { get; set; }
 
-	[CompilerGenerated]
-	private bool isOperated;
+	public float RadiusBottom { get; set; }
 
-	[CompilerGenerated]
-	private uint amount;
+	public bool IsOnScreen { get; private set; }
 
-	public int CreatedAtInGameTick
-	{
-		[CompilerGenerated]
-		get
-		{
-			return createdAtInGameTick;
-		}
-		[CompilerGenerated]
-		set
-		{
-			createdAtInGameTick = value;
-		}
-	}
+	public double CentralXyDistanceToMe { get; private set; }
 
-	public GizmoType GizmoType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gizmoType;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gizmoType = value;
-		}
-	}
+	public double NormalizedXyDistanceToMe { get; private set; }
 
-	public uint WorldId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return worldId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			worldId = value;
-		}
-	}
+	public double ZDistanceToMeAbsolute { get; private set; }
 
-	public uint WorldSno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return worldSno;
-		}
-		[CompilerGenerated]
-		set
-		{
-			worldSno = value;
-		}
-	}
+	public float Hitpoints { get; set; }
 
-	public SnoWorld SnoWorld
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoWorld_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoWorld_0 = value;
-		}
-	}
+	public bool IsSelected { get; set; }
 
-	public Scene Scene
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iscene_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iscene_0 = value;
-		}
-	}
+	public uint SummonerId { get; set; }
 
-	public uint AcdId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return acdId;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			acdId = value;
-		}
-	}
+	public uint SummonerAcdDynamicId { get; set; }
 
-	public uint AnnId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return annId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			annId = value;
-		}
-	}
+	public bool Boolean_0 { get; set; }
 
-	public SnoActor SnoActor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoActor;
-		}
-		[CompilerGenerated]
-		set
-		{
-			snoActor = value;
-		}
-	}
+	public bool Untargetable { get; set; }
 
-	public WorldCoordinate CollisionCoordinate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iworldCoordinate_0;
-		}
-	}
+	public bool IsClickable { get; set; }
 
-	public WorldCoordinate FloorCoordinate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iworldCoordinate_1;
-		}
-	}
+	public bool IsDisabled { get; set; }
 
-	public float RadiusScaled
-	{
-		[CompilerGenerated]
-		get
-		{
-			return radiusScaled;
-		}
-		[CompilerGenerated]
-		set
-		{
-			radiusScaled = value;
-		}
-	}
+	public bool IsOperated { get; set; }
 
-	public float RadiusBottom
-	{
-		[CompilerGenerated]
-		get
-		{
-			return radiusBottom;
-		}
-		[CompilerGenerated]
-		set
-		{
-			radiusBottom = value;
-		}
-	}
-
-	public bool IsOnScreen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isOnScreen;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			isOnScreen = value;
-		}
-	}
-
-	public double CentralXyDistanceToMe
-	{
-		[CompilerGenerated]
-		get
-		{
-			return centralXyDistanceToMe;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			centralXyDistanceToMe = value;
-		}
-	}
-
-	public double NormalizedXyDistanceToMe
-	{
-		[CompilerGenerated]
-		get
-		{
-			return normalizedXyDistanceToMe;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			normalizedXyDistanceToMe = value;
-		}
-	}
-
-	public double ZDistanceToMeAbsolute
-	{
-		[CompilerGenerated]
-		get
-		{
-			return zDistanceToMeAbsolute;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			zDistanceToMeAbsolute = value;
-		}
-	}
-
-	public float Hitpoints
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hitpoints;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hitpoints = value;
-		}
-	}
-
-	public bool IsSelected
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isSelected;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isSelected = value;
-		}
-	}
-
-	public uint SummonerId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return summonerId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			summonerId = value;
-		}
-	}
-
-	public uint SummonerAcdDynamicId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return summonerAcdDynamicId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			summonerAcdDynamicId = value;
-		}
-	}
-
-	public bool Boolean_0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bool_3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bool_3 = value;
-		}
-	}
-
-	public bool Untargetable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return untargetable;
-		}
-		[CompilerGenerated]
-		set
-		{
-			untargetable = value;
-		}
-	}
-
-	public bool IsClickable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isClickable;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isClickable = value;
-		}
-	}
-
-	public bool IsDisabled
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isDisabled;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isDisabled = value;
-		}
-	}
-
-	public bool IsOperated
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isOperated;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isOperated = value;
-		}
-	}
-
-	public uint Amount
-	{
-		[CompilerGenerated]
-		get
-		{
-			return amount;
-		}
-		[CompilerGenerated]
-		set
-		{
-			amount = value;
-		}
-	}
+	public uint Amount { get; set; }
 
 	public bool DisplayOnOverlay
 	{
@@ -490,8 +94,8 @@ public class Actor
 		AcdId = acdid;
 		AnnId = annId2;
 		SnoActor = snoActor2;
-		iworldCoordinate_0 = Window.CreateWorldCoordinate(0f, 0f, 0f);
-		iworldCoordinate_1 = Window.CreateWorldCoordinate(0f, 0f, 0f);
+		CollisionCoordinate = Window.CreateWorldCoordinate(0f, 0f, 0f);
+		FloorCoordinate = Window.CreateWorldCoordinate(0f, 0f, 0f);
 		ScreenCoordinate_0 = Window.CreateScreenCoordinate(0f, 0f);
 	}
 

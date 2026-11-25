@@ -1,80 +1,19 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 public class Item : Actor
 {
-	[CompilerGenerated]
-	private readonly SnoItem isnoItem_0;
-
-	[CompilerGenerated]
-	private ItemQuality quality;
-
-	[CompilerGenerated]
-	private int seed;
-
-	[CompilerGenerated]
-	private ItemLocation location;
-
-	[CompilerGenerated]
-	private bool seenInInventory;
-
-	[CompilerGenerated]
-	private uint socketHostAcdId;
-
-	[CompilerGenerated]
-	private int inventoryX;
-
-	[CompilerGenerated]
-	private int inventoryY;
-
-	[CompilerGenerated]
-	private bool unidentified;
 
 	public bool bool_10;
 
-	[CompilerGenerated]
-	private SnoItemAffix[] isnoItemAffix_0;
-
-	[CompilerGenerated]
-	private Item[] iitem_0;
-
-	[CompilerGenerated]
-	private bool bool_11;
-
-	[CompilerGenerated]
-	private string itemUniqueId;
-
 	public bool bool_12;
-
-	[CompilerGenerated]
-	private string rareName;
 
 	public readonly Dictionary<string, ItemStat> StatList2 = new Dictionary<string, ItemStat>();
 
-	[CompilerGenerated]
-	private uint enchantedAffixOriginal;
-
-	[CompilerGenerated]
-	private uint enchantedAffixNew;
-
-	[CompilerGenerated]
-	private int enchantedAffixCounter;
-
-	[CompilerGenerated]
-	private long quantity = 1L;
-
-	public SnoItem SnoItem
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItem_0;
-		}
-	}
+	public SnoItem SnoItem { get; }
 
 	public string FullNameLocalized
 	{
@@ -108,189 +47,33 @@ public class Item : Actor
 		}
 	}
 
-	public ItemQuality Quality
-	{
-		[CompilerGenerated]
-		get
-		{
-			return quality;
-		}
-		[CompilerGenerated]
-		set
-		{
-			quality = value;
-		}
-	}
+	public ItemQuality Quality { get; set; }
 
-	public int Seed
-	{
-		[CompilerGenerated]
-		get
-		{
-			return seed;
-		}
-		[CompilerGenerated]
-		set
-		{
-			seed = value;
-		}
-	}
+	public int Seed { get; set; }
 
-	public ItemLocation Location
-	{
-		[CompilerGenerated]
-		get
-		{
-			return location;
-		}
-		[CompilerGenerated]
-		set
-		{
-			location = value;
-		}
-	}
+	public ItemLocation Location { get; set; }
 
-	public bool SeenInInventory
-	{
-		[CompilerGenerated]
-		get
-		{
-			return seenInInventory;
-		}
-		[CompilerGenerated]
-		set
-		{
-			seenInInventory = value;
-		}
-	}
+	public bool SeenInInventory { get; set; }
 
-	public uint SocketHostAcdId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return socketHostAcdId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			socketHostAcdId = value;
-		}
-	}
+	public uint SocketHostAcdId { get; set; }
 
 	public Item SocketedInto => CoreCollector.ItemCollector.Items.TryGetValue(SocketHostAcdId, out var value) ? value : null;
 
-	public int InventoryX
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inventoryX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inventoryX = value;
-		}
-	}
+	public int InventoryX { get; set; }
 
-	public int InventoryY
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inventoryY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inventoryY = value;
-		}
-	}
+	public int InventoryY { get; set; }
 
-	public bool Unidentified
-	{
-		[CompilerGenerated]
-		get
-		{
-			return unidentified;
-		}
-		[CompilerGenerated]
-		set
-		{
-			unidentified = value;
-		}
-	}
+	public bool Unidentified { get; set; }
 
-	public SnoItemAffix[] Affixes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemAffix_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItemAffix_0 = value;
-		}
-	}
+	public SnoItemAffix[] Affixes { get; set; }
 
-	public Item[] ItemsInSocket
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iitem_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iitem_0 = value;
-		}
-	}
+	public Item[] ItemsInSocket { get; set; }
 
-	public bool Boolean_1
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bool_11;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bool_11 = value;
-		}
-	}
+	public bool Boolean_1 { get; set; }
 
-	public string ItemUniqueId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return itemUniqueId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			itemUniqueId = value;
-		}
-	}
+	public string ItemUniqueId { get; set; }
 
-	public string RareName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rareName;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rareName = value;
-		}
-	}
+	public string RareName { get; set; }
 
 	public IEnumerable<ItemStat> StatList => StatList2.Values;
 
@@ -300,61 +83,13 @@ public class Item : Actor
 
 	public bool IsInventoryLocked => Core.Controller.Inventory.IsLocked(this);
 
-	public uint EnchantedAffixOriginal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return enchantedAffixOriginal;
-		}
-		[CompilerGenerated]
-		set
-		{
-			enchantedAffixOriginal = value;
-		}
-	}
+	public uint EnchantedAffixOriginal { get; set; }
 
-	public uint EnchantedAffixNew
-	{
-		[CompilerGenerated]
-		get
-		{
-			return enchantedAffixNew;
-		}
-		[CompilerGenerated]
-		set
-		{
-			enchantedAffixNew = value;
-		}
-	}
+	public uint EnchantedAffixNew { get; set; }
 
-	public int EnchantedAffixCounter
-	{
-		[CompilerGenerated]
-		get
-		{
-			return enchantedAffixCounter;
-		}
-		[CompilerGenerated]
-		set
-		{
-			enchantedAffixCounter = value;
-		}
-	}
+	public int EnchantedAffixCounter { get; set; }
 
-	public long Quantity
-	{
-		[CompilerGenerated]
-		get
-		{
-			return quantity;
-		}
-		[CompilerGenerated]
-		set
-		{
-			quantity = value;
-		}
-	}
+	public long Quantity { get; set; } = 1L;
 
 	public bool IsNormal
 	{
@@ -467,7 +202,7 @@ public class Item : Actor
 	public Item(uint acdId2, uint annId2, SnoItem isnoItem_1)
 		: base(acdId2, annId2, isnoItem_1.SnoActor)
 	{
-		isnoItem_0 = isnoItem_1;
+		SnoItem = isnoItem_1;
 	}
 
 	public SnoSocketedEffect GetSocketedEffect()

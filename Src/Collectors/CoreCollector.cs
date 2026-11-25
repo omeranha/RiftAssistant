@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,42 +13,6 @@ namespace RiftAssistant.Collectors;
 internal static class CoreCollector
 {
 	public static readonly uint Magic_600DF00D;
-
-	[CompilerGenerated]
-	private static EventHandler gameStateReset;
-
-	[CompilerGenerated]
-	private static readonly UiElements uiElements;
-
-	[CompilerGenerated]
-	private static readonly FloatingNumberManager floatingNumberManager;
-
-	[CompilerGenerated]
-	private static readonly QuestManager questManager;
-
-	[CompilerGenerated]
-	private static readonly MarkerCollector markerCollector;
-
-	[CompilerGenerated]
-	private static readonly HeroCollector heroCollector;
-
-	[CompilerGenerated]
-	private static readonly ItemCollector itemCollector;
-
-	[CompilerGenerated]
-	private static readonly SceneCollector sceneCollector;
-
-	[CompilerGenerated]
-	private static readonly ACDCollector aCDCollector;
-
-	[CompilerGenerated]
-	private static readonly ActorCollector actorCollector;
-
-	[CompilerGenerated]
-	private static readonly PlayerCollector playerCollector;
-
-	[CompilerGenerated]
-	private static DAF daf;
 
 	public static bool CanReadMemory;
 
@@ -125,113 +88,33 @@ internal static class CoreCollector
 
 	public static EventHandler OnNewArea { get; set; }
 
-	public static EventHandler GameStateReset
-	{
-		[CompilerGenerated]
-		get {
-			return gameStateReset;
-		}
-		[CompilerGenerated]
-		set {
-			gameStateReset = value;
-		}
-	}
+	public static EventHandler GameStateReset { get; set; }
 
 	public static EventHandler<SnoArea> OnFalseNewArea { get; set; }
 
-	public static UiElements UiElements
-	{
-		[CompilerGenerated]
-		get {
-			return uiElements;
-		}
-	}
+	public static UiElements UiElements { get; }
 
-	public static FloatingNumberManager FloatingNumberManager
-	{
-		[CompilerGenerated]
-		get {
-			return floatingNumberManager;
-		}
-	}
+	public static FloatingNumberManager FloatingNumberManager { get; }
 
-	public static QuestManager QuestManager
-	{
-		[CompilerGenerated]
-		get {
-			return questManager;
-		}
-	}
+	public static QuestManager QuestManager { get; }
 
-	public static MarkerCollector MarkerCollector
-	{
-		[CompilerGenerated]
-		get {
-			return markerCollector;
-		}
-	}
+	public static MarkerCollector MarkerCollector { get; }
 
-	public static HeroCollector HeroCollector
-	{
-		[CompilerGenerated]
-		get {
-			return heroCollector;
-		}
-	}
+	public static HeroCollector HeroCollector { get; }
 
-	public static ItemCollector ItemCollector
-	{
-		[CompilerGenerated]
-		get {
-			return itemCollector;
-		}
-	}
+	public static ItemCollector ItemCollector { get; }
 
-	public static SceneCollector SceneCollector
-	{
-		[CompilerGenerated]
-		get {
-			return sceneCollector;
-		}
-	}
+	public static SceneCollector SceneCollector { get; }
 
-	public static ACDCollector ACDCollector
-	{
-		[CompilerGenerated]
-		get {
-			return aCDCollector;
-		}
-	}
+	public static ACDCollector ACDCollector { get; }
 
-	public static ActorCollector ActorCollector
-	{
-		[CompilerGenerated]
-		get {
-			return actorCollector;
-		}
-	}
+	public static ActorCollector ActorCollector { get; }
 
-	public static PlayerCollector PlayerCollector
-	{
-		[CompilerGenerated]
-		get {
-			return playerCollector;
-		}
-	}
+	public static PlayerCollector PlayerCollector { get; }
 
 	public static GameSettingsManager GameSettingsManager { get; set; }
 
-	internal static DAF DAF
-	{
-		[CompilerGenerated]
-		get {
-			return daf;
-		}
-		[CompilerGenerated]
-		private set {
-			daf = value;
-		}
-	}
+	internal static DAF DAF { get; private set; }
 
 	public static WaypointManager WaypointManager { get; } = new();
 
@@ -244,16 +127,16 @@ internal static class CoreCollector
 	{
 		Magic_600DF00D = 1611526157u;
 		Unknown = GameDifficulty.unknown;
-		uiElements = new UiElements();
-		floatingNumberManager = new FloatingNumberManager();
-		questManager = new QuestManager();
-		markerCollector = new MarkerCollector();
-		heroCollector = new HeroCollector();
-		itemCollector = new ItemCollector();
-		sceneCollector = new SceneCollector();
-		aCDCollector = new ACDCollector();
-		actorCollector = new ActorCollector();
-		playerCollector = new PlayerCollector();
+		UiElements = new UiElements();
+		FloatingNumberManager = new FloatingNumberManager();
+		QuestManager = new QuestManager();
+		MarkerCollector = new MarkerCollector();
+		HeroCollector = new HeroCollector();
+		ItemCollector = new ItemCollector();
+		SceneCollector = new SceneCollector();
+		ACDCollector = new ACDCollector();
+		ActorCollector = new ActorCollector();
+		PlayerCollector = new PlayerCollector();
 		GameSettingsManager = new GameSettingsManager();
 		UiElements.SetupUiElements();
 		LocalPlayer = new Player(0);
@@ -308,9 +191,7 @@ internal static class CoreCollector
 			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			SnoArea snoArea = LocalPlayer.SnoArea;
-			if (snoArea == null) {
-				obj = null;
-			} else {
+			if (snoArea != null) {
 				obj = snoArea.HostSnoArea;
 				if (obj != null) {
 					goto IL_03dd;
@@ -360,7 +241,7 @@ internal static class CoreCollector
 		Trackers.Add(RunTracker.CurrentArea.AreaTotalDifficultyStats);
 	}
 
-	internal static void ClearGameServerContext(string string_3)
+	internal static void ClearGameServerContext()
 	{
 		bool_1 = true;
 		IsGameReady = false;
@@ -428,7 +309,7 @@ internal static class CoreCollector
 				D3Memory.isOnPTR = null;
 				D3Memory.ServerGateway = null;
 				ClearAllCaches();
-				ClearGameServerContext("client is not running");
+				ClearGameServerContext();
 				return;
 			}
 
@@ -465,11 +346,11 @@ internal static class CoreCollector
 			IsLoading = D3Memory.GameState_LoadingScreenEnabled_Value != 0;
 			if (!GameStateValid) {
 				FloatingNumberManager.Clear(LocalPlayer as Player);
-				ClearGameServerContext("!CurrentInGame");
+				ClearGameServerContext();
 				return;
 			}
 			if (IsLoading || D3Memory.ActorContainer.MaxIndex == -1) {
-				ClearGameServerContext("loading");
+				ClearGameServerContext();
 				return;
 			}
 			bool boolean_;
@@ -477,21 +358,21 @@ internal static class CoreCollector
 				if (D3Memory.AttribAllocator.RawAllocator.ElementSize != 16) {
 					Logger.Info("[ERROR] force daf scan due to attrib struct size mismatch");
 					DAF.ClearObjectManagerAddr();
-					ClearGameServerContext("invalid attrib struct");
+					ClearGameServerContext();
 					return;
 				}
 				if (IsGameReady && !UiElements.Clock.Visible && !UiElements.Cutscene.Visible && !UiElements.ScriptedSequence.Visible) {
-					ClearGameServerContext("no difficulty label");
+					ClearGameServerContext();
 					return;
 				}
 
 				try {
 					if (!SceneCollector.Collect()) {
-						ClearGameServerContext("scene collect exception");
+						ClearGameServerContext();
 						return;
 					}
 					if (!PlayerCollector.Collect(memoryValid)) {
-						ClearGameServerContext("player collect exception");
+						ClearGameServerContext();
 						return;
 					}
 
@@ -555,7 +436,7 @@ internal static class CoreCollector
 				}
 
 				if (LocalPlayer.SnoArea == null) {
-					ClearGameServerContext("unknown area");
+					ClearGameServerContext();
 					return;
 				}
 
@@ -654,7 +535,7 @@ internal static class CoreCollector
 			}
 			Logger.Info("[ERROR] force daf scan due to invalid containers [" + D3Memory.ActorContainer.MaxIndex + ", " + D3Memory.ACDContainer.MaxIndex + ", " + D3Memory.SceneContainer.MaxIndex + ", " + D3Memory.WorldContainer.MaxIndex + ", " + D3Memory.FastAttribGroupContainer.MaxIndex + ", " + (D3Memory.AttribAllocator.RawAllocator.GoodFood == Magic_600DF00D) + "]");
 			DAF.ClearObjectManagerAddr();
-			ClearGameServerContext("invalid containers");
+			ClearGameServerContext();
 			return;
 		IL_0bc6:
 			stopwatch_0.Restart();

@@ -2,23 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Sno;
 
 public sealed class AcdAttribute
 {
-	[CompilerGenerated]
-	private readonly string code;
-
-	[CompilerGenerated]
-	private readonly uint index;
-
-	[CompilerGenerated]
-	private readonly AttributeValueType valueType;
-
-	[CompilerGenerated]
-	private bool orderIndexPrimary = true;
 
 	private readonly Dictionary<uint, string> dictionary_0;
 
@@ -26,54 +14,21 @@ public sealed class AcdAttribute
 
 	private readonly Dictionary<int, int> dictionary_1 = new Dictionary<int, int>();
 
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
+	public string Code { get; }
 
-	public uint Index
-	{
-		[CompilerGenerated]
-		get
-		{
-			return index;
-		}
-	}
+	public uint Index { get; }
 
-	public AttributeValueType ValueType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return valueType;
-		}
-	}
+	public AttributeValueType ValueType { get; }
 
 	public IEnumerable<AttributeProcessor> Processors => processors;
 
-	public bool OrderIndexPrimary
-	{
-		[CompilerGenerated]
-		get
-		{
-			return orderIndexPrimary;
-		}
-		[CompilerGenerated]
-		internal set
-		{
-			orderIndexPrimary = value;
-		}
-	}
+	public bool OrderIndexPrimary { get; internal set; } = true;
 
 	internal AcdAttribute(string string_1, uint uint_1, AttributeValueType attributeValueType, Dictionary<uint, string> dictionary_2)
 	{
-		code = string_1;
-		index = uint_1;
-		valueType = attributeValueType;
+		Code = string_1;
+		Index = uint_1;
+		ValueType = attributeValueType;
 		dictionary_0 = dictionary_2;
 	}
 
@@ -111,119 +66,41 @@ public sealed class AcdAttribute
 
 public sealed class ActorShrineTypeInfo
 {
-	[CompilerGenerated]
-	private readonly ShrineType type;
 
-	[CompilerGenerated]
-	private readonly SnoActor snoActor;
+	public ShrineType Type { get; }
 
-	public ShrineType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return type;
-		}
-	}
-
-	public SnoActor SnoActor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoActor;
-		}
-	}
+	public SnoActor SnoActor { get; }
 
 	internal ActorShrineTypeInfo(ShrineType shrineType, SnoActor actor)
 	{
-		type = shrineType;
-		snoActor = actor;
+		Type = shrineType;
+		SnoActor = actor;
 	}
 }
 
 public sealed class AttributeProcessor
 {
-	[CompilerGenerated]
-	private readonly byte compactId;
 
-	[CompilerGenerated]
-	private readonly string code;
+	public byte CompactId { get; }
 
-	[CompilerGenerated]
-	private readonly AcdAttribute iattribute_0;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly uint modifier;
+	public AcdAttribute Attribute { get; }
 
-	[CompilerGenerated]
-	private readonly double? multiplier;
+	public uint Modifier { get; }
 
-	[CompilerGenerated]
-	private readonly int roundDecimals;
+	public double? Multiplier { get; }
 
-	public byte CompactId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return compactId;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public AcdAttribute Attribute
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iattribute_0;
-		}
-	}
-
-	public uint Modifier
-	{
-		[CompilerGenerated]
-		get
-		{
-			return modifier;
-		}
-	}
-
-	public double? Multiplier
-	{
-		[CompilerGenerated]
-		get
-		{
-			return multiplier;
-		}
-	}
-
-	public int RoundDecimals
-	{
-		[CompilerGenerated]
-		get
-		{
-			return roundDecimals;
-		}
-	}
+	public int RoundDecimals { get; }
 
 	internal AttributeProcessor(byte byte_1, string string_1, AcdAttribute iattribute_1, uint maxValue, double? nullable_1, int int_1)
 	{
-		compactId = byte_1;
-		code = string_1;
-		iattribute_0 = iattribute_1;
-		modifier = maxValue;
-		multiplier = nullable_1;
-		roundDecimals = int_1;
+		CompactId = byte_1;
+		Code = string_1;
+		Attribute = iattribute_1;
+		Modifier = maxValue;
+		Multiplier = nullable_1;
+		RoundDecimals = int_1;
 	}
 
 	public double ProcessDouble(double dv)
@@ -290,24 +167,14 @@ internal sealed class FollowerClass
 
 	public readonly ActorSnoEnum ActorSno;
 
-	[CompilerGenerated]
-	private readonly FollowerClassEnum classEnum;
-
-	public FollowerClassEnum ClassEnum
-	{
-		[CompilerGenerated]
-		get
-		{
-			return classEnum;
-		}
-	}
+	public FollowerClassEnum ClassEnum { get; }
 
 	public FollowerClass(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
 	{
 		Code = string_0;
 		Name = string_1;
 		ActorSno = actorSnoEnum;
-		classEnum = followerClassEnum;
+		ClassEnum = followerClassEnum;
 	}
 }
 
@@ -364,125 +231,36 @@ public enum GameBalanceType
 
 public sealed class HeroClassDefinition
 {
-	[CompilerGenerated]
-	private readonly HeroClass heroClass;
 
-	[CompilerGenerated]
-	private readonly string code;
+	public HeroClass HeroClass { get; }
 
-	[CompilerGenerated]
-	private readonly string fullCode;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly string name;
+	public string FullCode { get; }
 
-	[CompilerGenerated]
-	private readonly ActorSnoEnum maleActorSno;
+	public string Name { get; }
 
-	[CompilerGenerated]
-	private readonly ActorSnoEnum femaleActorSno;
+	public ActorSnoEnum MaleActorSno { get; }
 
-	[CompilerGenerated]
-	private readonly bool isRanged;
+	public ActorSnoEnum FemaleActorSno { get; }
 
-	[CompilerGenerated]
-	private readonly string primaryResourceName;
+	public bool IsRanged { get; }
 
-	[CompilerGenerated]
-	private readonly string secondaryResourceName;
+	public string PrimaryResourceName { get; }
 
-	public HeroClass HeroClass
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroClass;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public string FullCode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fullCode;
-		}
-	}
-
-	public string Name
-	{
-		[CompilerGenerated]
-		get
-		{
-			return name;
-		}
-	}
-
-	public ActorSnoEnum MaleActorSno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maleActorSno;
-		}
-	}
-
-	public ActorSnoEnum FemaleActorSno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return femaleActorSno;
-		}
-	}
-
-	public bool IsRanged
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isRanged;
-		}
-	}
-
-	public string PrimaryResourceName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return primaryResourceName;
-		}
-	}
-
-	public string SecondaryResourceName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return secondaryResourceName;
-		}
-	}
+	public string SecondaryResourceName { get; }
 
 	internal HeroClassDefinition(HeroClass heroClass2, string string_5, string string_6, string stringByCode, bool bool_1, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_8, string string_9)
 	{
-		heroClass = heroClass2;
-		code = string_5;
-		fullCode = string_6;
-		name = stringByCode;
-		isRanged = bool_1;
-		maleActorSno = actorSnoEnum;
-		femaleActorSno = actorSnoEnum2;
-		primaryResourceName = string_8;
-		secondaryResourceName = string_9;
+		HeroClass = heroClass2;
+		Code = string_5;
+		FullCode = string_6;
+		Name = stringByCode;
+		IsRanged = bool_1;
+		MaleActorSno = actorSnoEnum;
+		FemaleActorSno = actorSnoEnum2;
+		PrimaryResourceName = string_8;
+		SecondaryResourceName = string_9;
 	}
 }
 
@@ -666,60 +444,21 @@ public enum MonsterType : uint
 
 public sealed class NavCell
 {
-	[CompilerGenerated]
-	private readonly float minX;
 
-	[CompilerGenerated]
-	private readonly float minY;
+	public float MinX { get; }
 
-	[CompilerGenerated]
-	private readonly float maxX;
+	public float MinY { get; }
 
-	[CompilerGenerated]
-	private readonly float maxY;
+	public float MaxX { get; }
 
-	public float MinX
-	{
-		[CompilerGenerated]
-		get
-		{
-			return minX;
-		}
-	}
-
-	public float MinY
-	{
-		[CompilerGenerated]
-		get
-		{
-			return minY;
-		}
-	}
-
-	public float MaxX
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxX;
-		}
-	}
-
-	public float MaxY
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxY;
-		}
-	}
+	public float MaxY { get; }
 
 	internal NavCell(float float_4, float float_5, float float_6, float float_7)
 	{
-		minX = float_4;
-		minY = float_5;
-		maxX = float_6;
-		maxY = float_7;
+		MinX = float_4;
+		MinY = float_5;
+		MaxX = float_6;
+		MaxY = float_7;
 	}
 }
 
@@ -747,268 +486,82 @@ public enum NavCellFlags : ushort
 
 public class SceneHint
 {
-	[CompilerGenerated]
-	private readonly string hint;
 
-	[CompilerGenerated]
-	private WorldCoordinate iworldCoordinate_0;
+	public string Hint { get; }
 
-	public string Hint
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hint;
-		}
-	}
-
-	public WorldCoordinate FloorCoordinate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iworldCoordinate_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iworldCoordinate_0 = value;
-		}
-	}
+	public WorldCoordinate FloorCoordinate { get; set; }
 
 	public SceneHint(string string_1)
 	{
-		hint = string_1;
+		Hint = string_1;
 	}
 }
 
 internal sealed class SkillEffectRule
 {
-	[CompilerGenerated]
-	private readonly SkillEffectType type;
 
-	[CompilerGenerated]
-	private readonly SnoActor snoActor;
+	public SkillEffectType Type { get; }
 
-	[CompilerGenerated]
-	private readonly float radius;
+	public SnoActor SnoActor { get; }
 
-	public SkillEffectType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return type;
-		}
-	}
-
-	public SnoActor SnoActor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoActor;
-		}
-	}
-
-	public float Radius
-	{
-		[CompilerGenerated]
-		get
-		{
-			return radius;
-		}
-	}
+	public float Radius { get; }
 
 	internal SkillEffectRule(SkillEffectType skillEffectType, SnoActor actor, float float_1)
 	{
-		type = skillEffectType;
-		snoActor = actor;
-		radius = float_1;
+		Type = skillEffectType;
+		SnoActor = actor;
+		Radius = float_1;
 	}
 }
 
 public class SnoAct
 {
-	[CompilerGenerated]
-	private readonly uint sno;
 
-	[CompilerGenerated]
-	private readonly int index;
+	public uint Sno { get; }
 
-	[CompilerGenerated]
-	private readonly List<SnoQuest> mainQuests = new List<SnoQuest>();
+	public int Index { get; }
 
-	[CompilerGenerated]
-	private readonly List<SnoQuest> bounties = new List<SnoQuest>();
+	public List<SnoQuest> MainQuests { get; } = new List<SnoQuest>();
 
-	[CompilerGenerated]
-	private readonly List<SnoActWaypoint> waypoints = new List<SnoActWaypoint>();
+	public List<SnoQuest> Bounties { get; } = new List<SnoQuest>();
 
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
-
-	public int Index
-	{
-		[CompilerGenerated]
-		get
-		{
-			return index;
-		}
-	}
-
-	public List<SnoQuest> MainQuests
-	{
-		[CompilerGenerated]
-		get
-		{
-			return mainQuests;
-		}
-	}
-
-	public List<SnoQuest> Bounties
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bounties;
-		}
-	}
-
-	public List<SnoActWaypoint> Waypoints
-	{
-		[CompilerGenerated]
-		get
-		{
-			return waypoints;
-		}
-	}
+	public List<SnoActWaypoint> Waypoints { get; } = new List<SnoActWaypoint>();
 
 	internal SnoAct(uint uint_1, int int_1)
 	{
-		sno = uint_1;
-		index = int_1;
+		Sno = uint_1;
+		Index = int_1;
 	}
 }
 
 public sealed class SnoActor
 {
-	[CompilerGenerated]
-	private readonly ActorSnoEnum sno;
 
-	[CompilerGenerated]
-	private readonly ActorKind kind;
+	public ActorSnoEnum Sno { get; }
 
-	[CompilerGenerated]
-	private readonly ActorType type;
+	public ActorKind Kind { get; }
 
-	[CompilerGenerated]
-	private readonly bool isStatic;
+	public ActorType Type { get; }
 
-	[CompilerGenerated]
-	private readonly string code;
+	public bool IsStatic { get; }
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	[CompilerGenerated]
-	private uint[] textureMap;
+	public string NameEnglish { get; }
 
-	public ActorSnoEnum Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
-
-	public ActorKind Kind
-	{
-		[CompilerGenerated]
-		get
-		{
-			return kind;
-		}
-	}
-
-	public ActorType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return type;
-		}
-	}
-
-	public bool IsStatic
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isStatic;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
-
-	public uint[] TextureMap
-	{
-		[CompilerGenerated]
-		get
-		{
-			return textureMap;
-		}
-		[CompilerGenerated]
-		set
-		{
-			textureMap = value;
-		}
-	}
+	public uint[] TextureMap { get; set; }
 
 	internal SnoActor(ActorSnoEnum actorSnoEnum, ActorType invalid, ActorKind none, bool bool_1, string string_3, string stringByCode, string stringByCodeEnglish)
 	{
-		sno = actorSnoEnum;
-		kind = none;
-		type = invalid;
-		isStatic = bool_1;
-		code = string_3;
-		nameLocalized = stringByCode;
-		nameEnglish = stringByCodeEnglish;
+		Sno = actorSnoEnum;
+		Kind = none;
+		Type = invalid;
+		IsStatic = bool_1;
+		Code = string_3;
+		NameLocalized = stringByCode;
+		NameEnglish = stringByCodeEnglish;
 	}
 }
 
@@ -1027,157 +580,43 @@ public sealed class SnoActWaypoint
 
 public class SnoArea
 {
-	[CompilerGenerated]
-	private readonly uint sno;
 
-	[CompilerGenerated]
-	private readonly string code;
+	public uint Sno { get; }
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	[CompilerGenerated]
-	private readonly AreaType type;
+	public string NameEnglish { get; }
 
-	[CompilerGenerated]
-	private readonly bool isRandom;
+	public AreaType Type { get; }
 
-	[CompilerGenerated]
-	private readonly bool isTown;
+	public bool IsRandom { get; }
 
-	[CompilerGenerated]
-	private readonly int act;
+	public bool IsTown { get; }
 
-	[CompilerGenerated]
-	private readonly string areaGroupInWorld = "";
+	public int Act { get; }
 
-	[CompilerGenerated]
-	private SnoWorld isnoWorld_0;
+	public string AreaGroupInWorld { get; } = "";
 
-	[CompilerGenerated]
-	private readonly uint hostAreaSno;
+	public SnoWorld SnoWorld { get; set; }
 
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
-
-	public AreaType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return type;
-		}
-	}
-
-	public bool IsRandom
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isRandom;
-		}
-	}
-
-	public bool IsTown
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isTown;
-		}
-	}
-
-	public int Act
-	{
-		[CompilerGenerated]
-		get
-		{
-			return act;
-		}
-	}
-
-	public string AreaGroupInWorld
-	{
-		[CompilerGenerated]
-		get
-		{
-			return areaGroupInWorld;
-		}
-	}
-
-	public SnoWorld SnoWorld
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoWorld_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoWorld_0 = value;
-		}
-	}
-
-	public uint HostAreaSno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hostAreaSno;
-		}
-	}
+	public uint HostAreaSno { get; }
 
 	public SnoArea HostSnoArea => null;
 
 	internal SnoArea(uint uint_2, string string_4, int int_1, string string_5, string string_6, AreaType areaType, bool bool_2, string string_7, bool bool_3, uint uint_3)
 	{
-		sno = uint_2;
-		code = string_4;
-		act = int_1;
-		nameLocalized = string_5;
-		nameEnglish = string_6;
-		type = areaType;
-		isRandom = bool_2;
-		areaGroupInWorld = string_7;
-		isTown = bool_3;
-		hostAreaSno = uint_3;
+		Sno = uint_2;
+		Code = string_4;
+		Act = int_1;
+		NameLocalized = string_5;
+		NameEnglish = string_6;
+		Type = areaType;
+		IsRandom = bool_2;
+		AreaGroupInWorld = string_7;
+		IsTown = bool_3;
+		HostAreaSno = uint_3;
 	}
 }
 
@@ -1247,133 +686,34 @@ public enum SNOGroupID
 
 public class SnoItemAffix
 {
-	[CompilerGenerated]
-	private readonly uint id;
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public uint Id { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	[CompilerGenerated]
-	private readonly uint baseAffixId;
+	public string NameEnglish { get; }
 
-	[CompilerGenerated]
-	private readonly SnoItemAffixGroup isnoItemAffixGroup_0;
+	public uint BaseAffixId { get; }
 
-	[CompilerGenerated]
-	private readonly SnoItemAffixGroup isnoItemAffixGroup_1;
+	public SnoItemAffixGroup SnoAffixGroup1 { get; }
 
-	[CompilerGenerated]
-	private SnoItemMod[] isnoItemMod_0;
+	public SnoItemAffixGroup SnoAffixGroup2 { get; }
 
-	[CompilerGenerated]
-	private readonly HeroClass heroClass;
+	public SnoItemMod[] Mods { get; set; }
 
-	[CompilerGenerated]
-	private bool minor;
+	public HeroClass HeroClass { get; }
 
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
-
-	public uint BaseAffixId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return baseAffixId;
-		}
-	}
-
-	public SnoItemAffixGroup SnoAffixGroup1
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemAffixGroup_0;
-		}
-	}
-
-	public SnoItemAffixGroup SnoAffixGroup2
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemAffixGroup_1;
-		}
-	}
-
-	public SnoItemMod[] Mods
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemMod_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItemMod_0 = value;
-		}
-	}
-
-	public HeroClass HeroClass
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroClass;
-		}
-	}
-
-	public bool Minor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return minor;
-		}
-		[CompilerGenerated]
-		set
-		{
-			minor = value;
-		}
-	}
+	public bool Minor { get; set; }
 
 	internal SnoItemAffix(uint uint_2, string stringByCode2, string stringByCodeEnglish2, uint uint_3, SnoItemAffixGroup isnoItemAffixGroup_2, SnoItemAffixGroup isnoItemAffixGroup_3, HeroClass heroClass2, bool bool_1)
 	{
-		id = uint_2;
-		nameLocalized = stringByCode2;
-		nameEnglish = stringByCodeEnglish2;
-		baseAffixId = uint_3;
-		isnoItemAffixGroup_0 = isnoItemAffixGroup_2;
-		isnoItemAffixGroup_1 = isnoItemAffixGroup_3;
-		heroClass = heroClass2;
+		Id = uint_2;
+		NameLocalized = stringByCode2;
+		NameEnglish = stringByCodeEnglish2;
+		BaseAffixId = uint_3;
+		SnoAffixGroup1 = isnoItemAffixGroup_2;
+		SnoAffixGroup2 = isnoItemAffixGroup_3;
+		HeroClass = heroClass2;
 		Minor = bool_1;
 	}
 
@@ -1391,25 +731,16 @@ public class SnoItemAffix
 
 public class SnoItemAffixGroup
 {
-	[CompilerGenerated]
-	private readonly uint id;
 
 	private readonly List<SnoItemAffix> affixes = new List<SnoItemAffix>();
 
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
+	public uint Id { get; }
 
 	public IEnumerable<SnoItemAffix> Affixes => affixes;
 
 	internal SnoItemAffixGroup(uint uint_1)
 	{
-		id = uint_1;
+		Id = uint_1;
 	}
 
 	public override string ToString()
@@ -1425,47 +756,18 @@ public class SnoItemAffixGroup
 
 public class SnoItemAffixGroupLink
 {
-	[CompilerGenerated]
-	private readonly SnoItemAffixGroup isnoItemAffixGroup_0;
 
-	[CompilerGenerated]
-	private readonly int level;
+	public SnoItemAffixGroup Group { get; }
 
-	[CompilerGenerated]
-	private readonly int int_1;
+	public int Level { get; }
 
-	public SnoItemAffixGroup Group
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemAffixGroup_0;
-		}
-	}
-
-	public int Level
-	{
-		[CompilerGenerated]
-		get
-		{
-			return level;
-		}
-	}
-
-	public int Flag
-	{
-		[CompilerGenerated]
-		get
-		{
-			return int_1;
-		}
-	}
+	public int Flag { get; }
 
 	internal SnoItemAffixGroupLink(SnoItemAffixGroup isnoItemAffixGroup_1, int int_2, int int_3)
 	{
-		isnoItemAffixGroup_0 = isnoItemAffixGroup_1;
-		level = int_2;
-		int_1 = int_3;
+		Group = isnoItemAffixGroup_1;
+		Level = int_2;
+		Flag = int_3;
 	}
 
 	public override string ToString()
@@ -1476,73 +778,24 @@ public class SnoItemAffixGroupLink
 
 public class SnoItemMod
 {
-	[CompilerGenerated]
-	private readonly AcdAttribute iattribute_0;
 
-	[CompilerGenerated]
-	private readonly uint modifier;
+	public AcdAttribute Attribute { get; }
 
-	[CompilerGenerated]
-	private readonly float min;
+	public uint Modifier { get; }
 
-	[CompilerGenerated]
-	private readonly float max;
+	public float Min { get; }
 
-	[CompilerGenerated]
-	private readonly SnoItemAffix isnoItemAffix_0;
+	public float Max { get; }
 
-	public AcdAttribute Attribute
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iattribute_0;
-		}
-	}
-
-	public uint Modifier
-	{
-		[CompilerGenerated]
-		get
-		{
-			return modifier;
-		}
-	}
-
-	public float Min
-	{
-		[CompilerGenerated]
-		get
-		{
-			return min;
-		}
-	}
-
-	public float Max
-	{
-		[CompilerGenerated]
-		get
-		{
-			return max;
-		}
-	}
-
-	public SnoItemAffix Affix
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemAffix_0;
-		}
-	}
+	public SnoItemAffix Affix { get; }
 
 	internal SnoItemMod(AcdAttribute iattribute_1, uint uint_1, float float_2, float float_3, SnoItemAffix isnoItemAffix_1)
 	{
-		iattribute_0 = iattribute_1;
-		modifier = uint_1;
-		min = float_2;
-		max = float_3;
-		isnoItemAffix_0 = isnoItemAffix_1;
+		Attribute = iattribute_1;
+		Modifier = uint_1;
+		Min = float_2;
+		Max = float_3;
+		Affix = isnoItemAffix_1;
 	}
 
 	public override string ToString()
@@ -1553,77 +806,23 @@ public class SnoItemMod
 
 public sealed class SnoItemType
 {
-	[CompilerGenerated]
-	private readonly uint id;
 
-	[CompilerGenerated]
-	private readonly string code;
+	public uint Id { get; }
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	[CompilerGenerated]
-	private SnoItemType parentSnoType;
+	public string NameEnglish { get; }
 
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
-
-	public SnoItemType ParentSnoType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return parentSnoType;
-		}
-		[CompilerGenerated]
-		set
-		{
-			parentSnoType = value;
-		}
-	}
+	public SnoItemType ParentSnoType { get; set; }
 
 	internal SnoItemType(uint uint_1, string string_3, string stringByCode, string stringByCodeEnglish, SnoItemType snoItemType)
 	{
-		id = uint_1;
-		code = string_3;
-		nameLocalized = stringByCode;
-		nameEnglish = stringByCodeEnglish;
+		Id = uint_1;
+		Code = string_3;
+		NameLocalized = stringByCode;
+		NameEnglish = stringByCodeEnglish;
 		ParentSnoType = snoItemType;
 	}
 
@@ -1635,171 +834,53 @@ public sealed class SnoItemType
 
 public sealed class SnoMonster
 {
-	[CompilerGenerated]
-	private readonly SnoActor snoActor;
 
-	[CompilerGenerated]
-	private readonly uint sno;
+	public SnoActor SnoActor { get; }
 
-	[CompilerGenerated]
-	private readonly string code;
+	public uint Sno { get; }
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public string Code { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	[CompilerGenerated]
-	private readonly bool isUnique;
+	public string NameEnglish { get; }
 
-	[CompilerGenerated]
-	private readonly MonsterPriority priority;
+	public bool IsUnique { get; }
 
-	[CompilerGenerated]
-	private readonly float riftProgression;
+	public MonsterPriority Priority { get; }
 
-	public SnoActor SnoActor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoActor;
-		}
-	}
-
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
-
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
-
-	public bool IsUnique
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isUnique;
-		}
-	}
-
-	public MonsterPriority Priority
-	{
-		[CompilerGenerated]
-		get
-		{
-			return priority;
-		}
-	}
-
-	public float RiftProgression
-	{
-		[CompilerGenerated]
-		get
-		{
-			return riftProgression;
-		}
-	}
+	public float RiftProgression { get; }
 
 	internal SnoMonster(SnoActor snoActor2, uint uint_1, string string_3, string stringById, string stringByIdEnglish, MonsterPriority monsterPriority, bool bool_1, float float_1)
 	{
-		snoActor = snoActor2;
-		sno = uint_1;
-		code = string_3;
-		nameLocalized = stringById;
-		nameEnglish = stringByIdEnglish;
-		priority = monsterPriority;
-		isUnique = bool_1;
-		riftProgression = float_1;
+		SnoActor = snoActor2;
+		Sno = uint_1;
+		Code = string_3;
+		NameLocalized = stringById;
+		NameEnglish = stringByIdEnglish;
+		Priority = monsterPriority;
+		IsUnique = bool_1;
+		RiftProgression = float_1;
 	}
 }
 
 public sealed class SnoMonsterAffix
 {
-	[CompilerGenerated]
-	private readonly uint id;
 
-	[CompilerGenerated]
-	private readonly MonsterAffix affix;
+	public uint Id { get; }
 
-	[CompilerGenerated]
-	private readonly string nameLocalized;
+	public MonsterAffix Affix { get; }
 
-	[CompilerGenerated]
-	private readonly string nameEnglish;
+	public string NameLocalized { get; }
 
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
-
-	public MonsterAffix Affix
-	{
-		[CompilerGenerated]
-		get
-		{
-			return affix;
-		}
-	}
-
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
-
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
+	public string NameEnglish { get; }
 
 	internal SnoMonsterAffix(uint uint_1, MonsterAffix monsterAffix, string stringByCode, string stringByCodeEnglish)
 	{
-		id = uint_1;
-		affix = monsterAffix;
-		nameLocalized = stringByCode ?? monsterAffix.ToString();
-		nameEnglish = stringByCodeEnglish ?? monsterAffix.ToString();
+		Id = uint_1;
+		Affix = monsterAffix;
+		NameLocalized = stringByCode ?? monsterAffix.ToString();
+		NameEnglish = stringByCodeEnglish ?? monsterAffix.ToString();
 	}
 
 	public override string ToString()
@@ -1810,187 +891,38 @@ public sealed class SnoMonsterAffix
 
 public sealed class SnoQuest
 {
-	[CompilerGenerated]
-	private readonly string code;
-
-	[CompilerGenerated]
-	private readonly uint sno;
-
-	[CompilerGenerated]
-	private readonly string nameLocalized;
-
-	[CompilerGenerated]
-	private readonly string nameEnglish;
-
-	[CompilerGenerated]
-	private readonly string descriptionLocalized;
-
-	[CompilerGenerated]
-	private readonly string descriptionEnglish;
-
-	[CompilerGenerated]
-	private readonly SnoAct isnoAct_0;
-
-	[CompilerGenerated]
-	private readonly QuestType type;
-
-	[CompilerGenerated]
-	private readonly QuestEventType eventType;
-
-	[CompilerGenerated]
-	private readonly int unassignedStepId;
-
-	[CompilerGenerated]
-	private readonly string unassignedStepBnetTitleLocalized;
-
-	[CompilerGenerated]
-	private readonly string unassignedStepBnetTitleEnglish;
-
-	[CompilerGenerated]
-	private readonly BountyAct bountyAct;
-
-	[CompilerGenerated]
-	private readonly BountyType bountyType;
-
-	[CompilerGenerated]
-	private readonly SnoArea isnoArea_0;
 
 	private readonly Dictionary<uint, SnoQuestStep> steps = [];
 
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
+	public string Code { get; }
 
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
+	public uint Sno { get; }
 
-	public string NameLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameLocalized;
-		}
-	}
+	public string NameLocalized { get; }
 
-	public string NameEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nameEnglish;
-		}
-	}
+	public string NameEnglish { get; }
 
-	public string DescriptionLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return descriptionLocalized;
-		}
-	}
+	public string DescriptionLocalized { get; }
 
-	public string DescriptionEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return descriptionEnglish;
-		}
-	}
+	public string DescriptionEnglish { get; }
 
-	public SnoAct SnoAct
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoAct_0;
-		}
-	}
+	public SnoAct SnoAct { get; }
 
-	public QuestType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return type;
-		}
-	}
+	public QuestType Type { get; }
 
-	public QuestEventType EventType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eventType;
-		}
-	}
+	public QuestEventType EventType { get; }
 
-	public int UnassignedStepId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return unassignedStepId;
-		}
-	}
+	public int UnassignedStepId { get; }
 
-	public string UnassignedStepBnetTitleLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return unassignedStepBnetTitleLocalized;
-		}
-	}
+	public string UnassignedStepBnetTitleLocalized { get; }
 
-	public string UnassignedStepBnetTitleEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return unassignedStepBnetTitleEnglish;
-		}
-	}
+	public string UnassignedStepBnetTitleEnglish { get; }
 
-	public BountyAct BountyAct
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bountyAct;
-		}
-	}
+	public BountyAct BountyAct { get; }
 
-	public BountyType BountyType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bountyType;
-		}
-	}
+	public BountyType BountyType { get; }
 
-	public SnoArea BountySnoArea
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoArea_0;
-		}
-	}
+	public SnoArea BountySnoArea { get; }
 
 	public IEnumerable<SnoQuestStep> Steps => steps.Values;
 
@@ -2002,21 +934,21 @@ public sealed class SnoQuest
 
 	internal SnoQuest(string string_7, uint uint_1, SnoAct isnoAct_1, string stringByCode, string stringByCodeEnglish, string stringByCode2, string stringByCodeEnglish2, QuestType questType, QuestEventType questEventType, int int_1, string stringByCode3, string stringByCodeEnglish3, BountyAct bountyAct2, BountyType bountyType2, SnoArea isnoArea_1)
 	{
-		code = string_7;
-		sno = uint_1;
-		isnoAct_0 = isnoAct_1;
-		nameLocalized = stringByCode;
-		nameEnglish = stringByCodeEnglish;
-		descriptionLocalized = stringByCode2;
-		descriptionEnglish = stringByCodeEnglish2;
-		bountyAct = bountyAct2;
-		bountyType = bountyType2;
-		isnoArea_0 = isnoArea_1;
-		type = questType;
-		eventType = questEventType;
-		unassignedStepId = int_1;
-		unassignedStepBnetTitleLocalized = stringByCode3;
-		unassignedStepBnetTitleEnglish = stringByCodeEnglish3;
+		Code = string_7;
+		Sno = uint_1;
+		SnoAct = isnoAct_1;
+		NameLocalized = stringByCode;
+		NameEnglish = stringByCodeEnglish;
+		DescriptionLocalized = stringByCode2;
+		DescriptionEnglish = stringByCodeEnglish2;
+		BountyAct = bountyAct2;
+		BountyType = bountyType2;
+		BountySnoArea = isnoArea_1;
+		Type = questType;
+		EventType = questEventType;
+		UnassignedStepId = int_1;
+		UnassignedStepBnetTitleLocalized = stringByCode3;
+		UnassignedStepBnetTitleEnglish = stringByCodeEnglish3;
 	}
 
 	internal void AddStep(SnoQuestStep isnoQuestStep_0)
@@ -2027,112 +959,33 @@ public sealed class SnoQuest
 
 public class SnoQuestStep
 {
-	[CompilerGenerated]
-	private readonly SnoQuest isnoQuest_0;
 
-	[CompilerGenerated]
-	private readonly uint id;
+	public SnoQuest SnoQuest { get; }
 
-	[CompilerGenerated]
-	private readonly string splashLocalized;
+	public uint Id { get; }
 
-	[CompilerGenerated]
-	private readonly string splashEnglish;
+	public string SplashLocalized { get; }
 
-	[CompilerGenerated]
-	private readonly string bnetTitleLocalized;
+	public string SplashEnglish { get; }
 
-	[CompilerGenerated]
-	private readonly string bnetTitleEnglish;
+	public string BnetTitleLocalized { get; }
 
-	[CompilerGenerated]
-	private readonly string bnetTextLocalized;
+	public string BnetTitleEnglish { get; }
 
-	[CompilerGenerated]
-	private readonly string bnetTextEnglish;
+	public string BnetTextLocalized { get; }
 
-	public SnoQuest SnoQuest
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoQuest_0;
-		}
-	}
-
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
-
-	public string SplashLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return splashLocalized;
-		}
-	}
-
-	public string SplashEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return splashEnglish;
-		}
-	}
-
-	public string BnetTitleLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bnetTitleLocalized;
-		}
-	}
-
-	public string BnetTitleEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bnetTitleEnglish;
-		}
-	}
-
-	public string BnetTextLocalized
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bnetTextLocalized;
-		}
-	}
-
-	public string BnetTextEnglish
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bnetTextEnglish;
-		}
-	}
+	public string BnetTextEnglish { get; }
 
 	internal SnoQuestStep(SnoQuest isnoQuest_1, uint uint_1, string stringByCode4, string stringByCodeEnglish4, string stringByCode5, string stringByCodeEnglish5, string stringByCode6, string stringByCodeEnglish6)
 	{
-		isnoQuest_0 = isnoQuest_1;
-		id = uint_1;
-		splashLocalized = stringByCode4;
-		splashEnglish = stringByCodeEnglish4;
-		bnetTitleLocalized = stringByCode5;
-		bnetTitleEnglish = stringByCodeEnglish5;
-		bnetTextLocalized = stringByCode6;
-		bnetTextEnglish = stringByCodeEnglish6;
+		SnoQuest = isnoQuest_1;
+		Id = uint_1;
+		SplashLocalized = stringByCode4;
+		SplashEnglish = stringByCodeEnglish4;
+		BnetTitleLocalized = stringByCode5;
+		BnetTitleEnglish = stringByCodeEnglish5;
+		BnetTextLocalized = stringByCode6;
+		BnetTextEnglish = stringByCodeEnglish6;
 	}
 }
 
@@ -2191,14 +1044,6 @@ internal static class SnoResourceHelper
 
 public class SnoScene
 {
-	[CompilerGenerated]
-	private readonly uint sno;
-
-	[CompilerGenerated]
-	private readonly string code;
-
-	[CompilerGenerated]
-	private SceneHint hint;
 
 	public readonly int NavCellBinPosition;
 
@@ -2220,37 +1065,11 @@ public class SnoScene
 
 	private static Stream fileStream2;
 
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
+	public uint Sno { get; }
 
-	public string Code
-	{
-		[CompilerGenerated]
-		get
-		{
-			return code;
-		}
-	}
+	public string Code { get; }
 
-	public SceneHint Hint
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hint;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hint = value;
-		}
-	}
+	public SceneHint Hint { get; set; }
 
 	private static Stream Stream_0 => fileStream ?? (fileStream = new FileStream(Path.Combine(Program.AppDir, "data", "scene_cell.bin"), FileMode.Open, FileAccess.Read, FileShare.Read));
 
@@ -2258,8 +1077,8 @@ public class SnoScene
 
 	internal SnoScene(uint uint_1, int int_0, int int_1, int int_2, int int_3, int int_4, int int_5, string string_1)
 	{
-		sno = uint_1;
-		code = string_1;
+		Sno = uint_1;
+		Code = string_1;
 		NavCellBinPosition = int_0;
 		NavCellSavedCount = int_1;
 		NavSquareW = int_2;
@@ -2326,200 +1145,74 @@ public class SnoScene
 
 public class SnoSocketedEffect
 {
-	[CompilerGenerated]
-	private readonly SnoItemType snoItemType;
 
-	[CompilerGenerated]
-	private readonly SnoItemMod[] isnoItemMod_0;
+	public SnoItemType SnoItemType { get; }
 
-	public SnoItemType SnoItemType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoItemType;
-		}
-	}
-
-	public SnoItemMod[] Mods
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItemMod_0;
-		}
-	}
+	public SnoItemMod[] Mods { get; }
 
 	internal SnoSocketedEffect(SnoItemType snoItemType2, SnoItemMod[] isnoItemMod_1)
 	{
-		snoItemType = snoItemType2;
-		isnoItemMod_0 = isnoItemMod_1;
+		SnoItemType = snoItemType2;
+		Mods = isnoItemMod_1;
 	}
 }
 
 public sealed class SnoWorld
 {
-	[CompilerGenerated]
-	private readonly uint sno;
-
-	[CompilerGenerated]
-	private readonly List<SnoArea> snoAreas = new List<SnoArea>();
 
 	public List<SnoWorldSceneInfo> SceneInfos = new List<SnoWorldSceneInfo>();
 
-	public uint Sno
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sno;
-		}
-	}
+	public uint Sno { get; }
 
-	public List<SnoArea> SnoAreas
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoAreas;
-		}
-	}
+	public List<SnoArea> SnoAreas { get; } = new List<SnoArea>();
 
 	internal SnoWorld(uint uint_1)
 	{
-		sno = uint_1;
+		Sno = uint_1;
 	}
 }
 
 public class SnoWorldSceneInfo
 {
-	[CompilerGenerated]
-	private readonly float posX;
 
-	[CompilerGenerated]
-	private readonly float posY;
+	public float PosX { get; }
 
-	[CompilerGenerated]
-	private readonly float maxX;
+	public float PosY { get; }
 
-	[CompilerGenerated]
-	private readonly float maxY;
+	public float MaxX { get; }
 
-	[CompilerGenerated]
-	private readonly float w;
+	public float MaxY { get; }
 
-	[CompilerGenerated]
-	private readonly float h;
+	public float W { get; }
 
-	[CompilerGenerated]
-	private readonly SnoArea isnoArea_0;
+	public float H { get; }
 
-	[CompilerGenerated]
-	private readonly string calculatedPosId;
+	public SnoArea SnoArea { get; }
 
-	public float PosX
-	{
-		[CompilerGenerated]
-		get
-		{
-			return posX;
-		}
-	}
-
-	public float PosY
-	{
-		[CompilerGenerated]
-		get
-		{
-			return posY;
-		}
-	}
-
-	public float MaxX
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxX;
-		}
-	}
-
-	public float MaxY
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxY;
-		}
-	}
-
-	public float W
-	{
-		[CompilerGenerated]
-		get
-		{
-			return w;
-		}
-	}
-
-	public float H
-	{
-		[CompilerGenerated]
-		get
-		{
-			return h;
-		}
-	}
-
-	public SnoArea SnoArea
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoArea_0;
-		}
-	}
-
-	public string CalculatedPosId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return calculatedPosId;
-		}
-	}
+	public string CalculatedPosId { get; }
 
 	internal SnoWorldSceneInfo(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
 	{
-		posX = float_6;
-		posY = float_7;
-		maxX = float_8;
-		maxY = float_9;
-		w = MaxX - PosX;
-		h = MaxY - PosY;
-		isnoArea_0 = isnoArea_1;
+		PosX = float_6;
+		PosY = float_7;
+		MaxX = float_8;
+		MaxY = float_9;
+		W = MaxX - PosX;
+		H = MaxY - PosY;
+		SnoArea = isnoArea_1;
 		if (isnoArea_1.SnoWorld.Sno == 332336)
 		{
-			posX = PosX - 2580f;
-			posY = PosY - 2280f;
+			PosX = PosX - 2580f;
+			PosY = PosY - 2280f;
 		}
-		calculatedPosId = PosX.ToString(CultureInfo.InvariantCulture) + PosY.ToString(CultureInfo.InvariantCulture);
+		CalculatedPosId = PosX.ToString(CultureInfo.InvariantCulture) + PosY.ToString(CultureInfo.InvariantCulture);
 	}
 }
 
 public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 {
-	[CompilerGenerated]
-	private readonly List<SnoScene> snoScenes = new List<SnoScene>();
 
-	public List<SnoScene> SnoScenes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoScenes;
-		}
-	}
+	public List<SnoScene> SnoScenes { get; } = new List<SnoScene>();
 
 	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
 		: base(float_6, float_7, float_8, float_9, isnoArea_1)
@@ -2529,22 +1222,13 @@ public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 
 public sealed class SnoWorldSceneInfoStatic : SnoWorldSceneInfo
 {
-	[CompilerGenerated]
-	private readonly SnoScene isnoScene_0;
 
-	public SnoScene SnoScene
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoScene_0;
-		}
-	}
+	public SnoScene SnoScene { get; }
 
 	internal SnoWorldSceneInfoStatic(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1, SnoScene isnoScene_1)
 		: base(float_6, float_7, float_8, float_9, isnoArea_1)
 	{
-		isnoScene_0 = isnoScene_1;
+		SnoScene = isnoScene_1;
 	}
 }
 

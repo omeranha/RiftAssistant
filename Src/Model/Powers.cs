@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 internal sealed class Powers
 {
-	[CompilerGenerated]
-	private readonly byte[] formulaData;
 
 	private readonly Dictionary<uint, SnoPower> dictionary_0 = [];
 
@@ -39,14 +36,7 @@ internal sealed class Powers
 
 	private readonly int int_1 = "TAG_POWER_BUFF_".Length;
 
-	public byte[] FormulaData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return formulaData;
-		}
-	}
+	public byte[] FormulaData { get; }
 
 	public IEnumerable<SnoPower> All => all.Values;
 
@@ -101,7 +91,7 @@ internal sealed class Powers
 
 	internal Powers()
 	{
-		formulaData = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "power_formula_data.bin"));
+		FormulaData = File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "power_formula_data.bin"));
 		using (MemoryStream stream_ = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_power_formulas.bin"))))
 		{
 			DataReader dataReader = new(stream_);

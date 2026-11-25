@@ -1,73 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 
 namespace RiftAssistant.Collectors;
 
 internal class ACDCollector
 {
-	[CompilerGenerated]
-	private readonly Map attributeMap = new Map(2048, bool_1: false);
-
-	[CompilerGenerated]
-	private int attributeMapFlags;
-
-	[CompilerGenerated]
-	private readonly AllocationCache<r_AttributeEntry> attributeAllocationCache = new AllocationCache<r_AttributeEntry>(16);
 
 	public int AcdIndexCur;
 
-	[CompilerGenerated]
-	private r_ACD[] bufferACDs;
-
 	private bool attributeMapUpdated;
 
-	internal Map AttributeMap
-	{
-		[CompilerGenerated]
-		get
-		{
-			return attributeMap;
-		}
-	}
+	internal Map AttributeMap { get; } = new Map(2048, bool_1: false);
 
-	internal int AttributeMapFlags
-	{
-		[CompilerGenerated]
-		get
-		{
-			return attributeMapFlags;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			attributeMapFlags = value;
-		}
-	}
+	internal int AttributeMapFlags { get; private set; }
 
-	internal AllocationCache<r_AttributeEntry> AttributeAllocationCache
-	{
-		[CompilerGenerated]
-		get
-		{
-			return attributeAllocationCache;
-		}
-	}
+	internal AllocationCache<r_AttributeEntry> AttributeAllocationCache { get; } = new AllocationCache<r_AttributeEntry>(16);
 
-	internal r_ACD[] Buffer_ACDs
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bufferACDs;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			bufferACDs = value;
-		}
-	}
+	internal r_ACD[] Buffer_ACDs { get; private set; }
 
 	internal void Collect()
 	{

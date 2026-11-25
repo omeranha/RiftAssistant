@@ -129,7 +129,7 @@ internal class ItemCollector
 				if (struct7_.affix_list_ptr == 0L) {
 					continue;
 				}
-				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true, itemLocation)) {
+				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true)) {
 					continue;
 				}
 				list_4.Add(item);
@@ -140,7 +140,7 @@ internal class ItemCollector
 					Unidentified = flag4
 				};
 				list_4.Add(item);
-				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: false, itemLocation)) {
+				if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: false)) {
 					continue;
 				}
 			} else {
@@ -148,7 +148,7 @@ internal class ItemCollector
 					item.SetAcdId(acdId);
 				}
 				if (flag && ((item.Location >= ItemLocation.Inventory && item.Location <= ItemLocation.Neck) || (CoreCollector.ActorCollector.IActor_1 != null && item.SnoItem.MainGroupCode == "gems_unique"))) {
-					if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true, itemLocation)) {
+					if (!CoreCollector.ACDCollector.EnsureAttributeMap() || !ReadItem(struct7_, item, snoItem, bool_1: true)) {
 						continue;
 					}
 					list_4.Add(item);
@@ -318,13 +318,13 @@ internal class ItemCollector
 		}
 	}
 
-	private bool ReadItem(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1, ItemLocation itemLocation)
+	private bool ReadItem(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1)
 	{
 		if (!ReadItemStats(item, isnoItem_0)) {
 			Logger.LogException("can't read item stats");
 			return false;
 		}
-		ReadItemAffixes(item, bool_1, itemLocation);
+		ReadItemAffixes(item, bool_1);
 		if ((int)item.Quality >= 6 && (int)item.Quality <= 8) {
 			if (acd.rare_item_stringlist_id != uint.MaxValue && (item.RareName == null || bool_1)) {
 				string text = null;
@@ -528,7 +528,7 @@ internal class ItemCollector
 		return true;
 	}
 
-	private void ReadItemAffixes(Item item, bool bool_1, ItemLocation itemLocation)
+	private void ReadItemAffixes(Item item, bool bool_1)
 	{
 		if (item.Unidentified && !bool_1) {
 			return;
@@ -542,14 +542,6 @@ internal class ItemCollector
 			SnoItemAffix snoItemAffix = SnoData.Items.GetSnoItemAffix(enchantedAffixNew);
 			if (snoItemAffix != null) {
 				(list ?? (list = new List<SnoItemAffix>())).Add(snoItemAffix);
-				for (int i = 0; i < snoItemAffix.Mods.Length; i++) {
-					SnoItemMod isnoItemMod_0 = snoItemAffix.Mods[i];
-				}
-			}
-		}
-		if (item.SnoItem.Mods != null) {
-			SnoItemMod[] mods = item.SnoItem.Mods;
-			foreach (SnoItemMod isnoItemMod_1 in mods) {
 			}
 		}
 		item.Affixes = list?.ToArray();

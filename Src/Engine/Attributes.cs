@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Engine;
 
 internal sealed class Attributes
 {
-	[CompilerGenerated]
-	private readonly AttributeMap map;
 
 	public readonly List<AcdAttribute> ByIndex = new List<AcdAttribute>();
 
@@ -15,14 +12,7 @@ internal sealed class Attributes
 
 	private readonly Dictionary<string, AttributeProcessor> dictionary_1 = new Dictionary<string, AttributeProcessor>();
 
-	public AttributeMap Map
-	{
-		[CompilerGenerated]
-		get
-		{
-			return map;
-		}
-	}
+	public AttributeMap Map { get; }
 
 	public IEnumerable<AcdAttribute> All => all.Values;
 
@@ -141,7 +131,7 @@ internal sealed class Attributes
 				}
 			}
 		}
-		map = new AttributeMap(this);
+		Map = new AttributeMap(this);
 		dictionary_1.Add("groups", new AttributeProcessor(0, "groups", null, 0u, 0.0, 0));
 		dictionary_1.Add("name", new AttributeProcessor(1, "name", null, 0u, 0.0, 0));
 		dictionary_1.Add("name_int", new AttributeProcessor(2, "name_int", null, 0u, 0.0, 0));

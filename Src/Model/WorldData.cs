@@ -3,25 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 internal sealed class Areas
 {
-	[CompilerGenerated]
-	private readonly SnoAct[] isnoAct_0 = new SnoAct[5];
 
 	private readonly Dictionary<uint, SnoArea> allAreas = new Dictionary<uint, SnoArea>(500);
 
-	public SnoAct[] AllActs
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoAct_0;
-		}
-	}
+	public SnoAct[] AllActs { get; } = new SnoAct[5];
 
 	public IEnumerable<SnoArea> AllAreas => allAreas.Values;
 
@@ -163,9 +153,6 @@ internal class Map
 {
 	public readonly int int_0;
 
-	[CompilerGenerated]
-	private long long_0;
-
 	private long long_1;
 
 	internal long[] long_2;
@@ -174,40 +161,13 @@ internal class Map
 
 	public bool bool_0;
 
-	[CompilerGenerated]
-	private int maxIndex;
-
 	private r_Map[] struct16_0 = new r_Map[1];
 
 	public readonly Allocator class351_0;
 
-	public long Int64_0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return long_0;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			long_0 = value;
-		}
-	}
+	public long Int64_0 { get; private set; }
 
-	public int MaxIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxIndex;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			maxIndex = value;
-		}
-	}
+	public int MaxIndex { get; private set; }
 
 	public Map(int int_3, bool bool_1 = true)
 	{

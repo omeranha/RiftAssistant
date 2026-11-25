@@ -1,98 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 public class Player : Actor
 {
-	[CompilerGenerated]
-	private uint actorId;
-
-	[CompilerGenerated]
-	private int index;
-
-	[CompilerGenerated]
-	private int portraitIndex;
 
 	public bool bool_8;
 
-	[CompilerGenerated]
-	private bool coordinateKnown;
-
-	[CompilerGenerated]
-	private uint heroId;
-
-	[CompilerGenerated]
-	private Hero ihero_0;
-
-	[CompilerGenerated]
-	private string heroName;
-
-	[CompilerGenerated]
-	private bool heroIsHardcore;
-
-	[CompilerGenerated]
-	private bool heroIsMale;
-
-	[CompilerGenerated]
-	private int season;
-
-	[CompilerGenerated]
-	private bool seasonal;
-
-	[CompilerGenerated]
-	private string battleTagAbovePortrait;
-
-	[CompilerGenerated]
-	private HeroClassDefinition iheroClassDefinition_0;
-
-	[CompilerGenerated]
-	private SnoArea isnoArea_0;
-
-	[CompilerGenerated]
-	private readonly PlayerDefense iplayerDefenseInfo_0;
-
-	[CompilerGenerated]
-	private readonly PlayerOffense iplayerOffenseInfo_0 = new PlayerOffense();
-
-	[CompilerGenerated]
-	private readonly PlayerDamage iplayerDamageInfo_0 = new PlayerDamage();
-
-	[CompilerGenerated]
-	private readonly PlayerStats iplayerStatInfo_0 = new PlayerStats();
-
-	[CompilerGenerated]
-	private readonly PlayerMaterialInfo iplayerMaterialInfo_0;
-
-	[CompilerGenerated]
-	private readonly PlayerPowerInfo iplayerPowerInfo_0;
-
 	internal r_PlayerData RawPlayerData;
 
-	[CompilerGenerated]
-	private readonly PlayerArmorySet[] iplayerArmorySet_0;
-
-	[CompilerGenerated]
-	private AnimSnoEnum animation;
-
-	[CompilerGenerated]
-	private AcdAnimationState animationState;
-
 	internal long Gold;
-
-	[CompilerGenerated]
-	private SnoItem isnoItem_0;
-
-	[CompilerGenerated]
-	private SnoItem isnoItem_1;
-
-	[CompilerGenerated]
-	private SnoItem isnoItem_2;
-
-	[CompilerGenerated]
-	private SnoItem isnoItem_3;
 
 	internal List<SnoItem> cubedItems = new List<SnoItem>();
 
@@ -110,44 +29,11 @@ public class Player : Actor
 
 	internal readonly Stopwatch iwatch_1 = new();
 
-	[CompilerGenerated]
-	private uint currentLevelNormal;
-
-	[CompilerGenerated]
-	private uint currentLevelNormalCap;
-
-	[CompilerGenerated]
-	private uint currentLevelParagon;
-
-	[CompilerGenerated]
-	private double currentLevelParagonDouble;
-
 	internal bool bool_14;
 
 	public long long_1;
 
-	[CompilerGenerated]
-	private long paragonExpInThisLevel;
-
-	[CompilerGenerated]
-	private long paragonExpToNextLevel;
-
 	internal DebouncedValue<long> class362_0 = new DebouncedValue<long>(0L, 500);
-
-	[CompilerGenerated]
-	private long paragonTotalExp;
-
-	[CompilerGenerated]
-	private float bonusPoolPercent;
-
-	[CompilerGenerated]
-	private long bonusPoolRemaining;
-
-	[CompilerGenerated]
-	private int highestSoloRiftLevel;
-
-	[CompilerGenerated]
-	private int highestHeroSoloRiftLevel;
 
 	internal long ParagonTotalExp2;
 
@@ -156,21 +42,6 @@ public class Player : Actor
 	internal readonly Dictionary<string, Buff> dictionary_1 = new Dictionary<string, Buff>(30);
 
 	internal readonly Dictionary<uint, Buff> powerSno2buff = new Dictionary<uint, Buff>(30);
-
-	[CompilerGenerated]
-	private int int_6;
-
-	[CompilerGenerated]
-	private int inventorySpaceTotal = 60;
-
-	[CompilerGenerated]
-	private int int_8;
-
-	[CompilerGenerated]
-	private bool isDead;
-
-	[CompilerGenerated]
-	private HeadStone iheadStone_0;
 
 	internal Dictionary<uint, int> dictionary_3 = new Dictionary<uint, int>();
 
@@ -186,22 +57,7 @@ public class Player : Actor
 
 	internal float[] float_5 = new float[9];
 
-	[CompilerGenerated]
-	private bool inCombat;
-
-	[CompilerGenerated]
-	private int loopingAnimationStartTick;
-
-	[CompilerGenerated]
-	private int loopingAnimationEndTick;
-
 	public float float_6;
-
-	[CompilerGenerated]
-	private int paragonPointsAvailableTotal;
-
-	[CompilerGenerated]
-	private readonly int[] paragonPointsAvailable = new int[4];
 
 	public readonly Dictionary<uint, int> class112_2 = new Dictionary<uint, int>();
 
@@ -211,71 +67,17 @@ public class Player : Actor
 
 	public const float float_7 = 5.5f;
 
-	[CompilerGenerated]
-	private bool inGreaterRift;
+	public uint ActorId { get; set; }
 
-	[CompilerGenerated]
-	private uint inGreaterRiftRank;
+	public int Index { get; set; }
 
-	public uint ActorId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return actorId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			actorId = value;
-		}
-	}
-
-	public int Index
-	{
-		[CompilerGenerated]
-		get
-		{
-			return index;
-		}
-		[CompilerGenerated]
-		set
-		{
-			index = value;
-		}
-	}
-
-	public int PortraitIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return portraitIndex;
-		}
-		[CompilerGenerated]
-		set
-		{
-			portraitIndex = value;
-		}
-	}
+	public int PortraitIndex { get; set; }
 
 	public bool IsMe => Index == CoreCollector.D3Memory.LocalPlayerIndex;
 
 	public bool IsInGame => RawPlayerData.IsInGameFlag == 2;
 
-	public bool CoordinateKnown
-	{
-		[CompilerGenerated]
-		get
-		{
-			return coordinateKnown;
-		}
-		[CompilerGenerated]
-		set
-		{
-			coordinateKnown = value;
-		}
-	}
+	public bool CoordinateKnown { get; set; }
 
 	public bool HasValidActor
 	{
@@ -289,613 +91,101 @@ public class Player : Actor
 		}
 	}
 
-	public uint HeroId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			heroId = value;
-		}
-	}
+	public uint HeroId { get; set; }
 
-	public Hero Hero
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ihero_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ihero_0 = value;
-		}
-	}
+	public Hero Hero { get; set; }
 
-	public string HeroName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroName;
-		}
-		[CompilerGenerated]
-		set
-		{
-			heroName = value;
-		}
-	}
+	public string HeroName { get; set; }
 
-	public bool HeroIsHardcore
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroIsHardcore;
-		}
-		[CompilerGenerated]
-		set
-		{
-			heroIsHardcore = value;
-		}
-	}
+	public bool HeroIsHardcore { get; set; }
 
-	public bool HeroIsMale
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heroIsMale;
-		}
-		[CompilerGenerated]
-		set
-		{
-			heroIsMale = value;
-		}
-	}
+	public bool HeroIsMale { get; set; }
 
-	public int Season
-	{
-		[CompilerGenerated]
-		get
-		{
-			return season;
-		}
-		[CompilerGenerated]
-		set
-		{
-			season = value;
-		}
-	}
+	public int Season { get; set; }
 
-	public bool Seasonal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return seasonal;
-		}
-		[CompilerGenerated]
-		set
-		{
-			seasonal = value;
-		}
-	}
+	public bool Seasonal { get; set; }
 
-	public string BattleTagAbovePortrait
-	{
-		[CompilerGenerated]
-		get
-		{
-			return battleTagAbovePortrait;
-		}
-		[CompilerGenerated]
-		set
-		{
-			battleTagAbovePortrait = value;
-		}
-	}
+	public string BattleTagAbovePortrait { get; set; }
 
-	public HeroClassDefinition HeroClassDefinition
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iheroClassDefinition_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iheroClassDefinition_0 = value;
-		}
-	}
+	public HeroClassDefinition HeroClassDefinition { get; set; }
 
-	public SnoArea SnoArea
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoArea_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoArea_0 = value;
-		}
-	}
+	public SnoArea SnoArea { get; set; }
 
-	public PlayerDefense Defense
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerDefenseInfo_0;
-		}
-	}
+	public PlayerDefense Defense { get; }
 
-	public PlayerOffense Offense
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerOffenseInfo_0;
-		}
-	}
+	public PlayerOffense Offense { get; } = new PlayerOffense();
 
-	public PlayerDamage Damage
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerDamageInfo_0;
-		}
-	}
+	public PlayerDamage Damage { get; } = new PlayerDamage();
 
-	public PlayerStats Stats
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerStatInfo_0;
-		}
-	}
+	public PlayerStats Stats { get; } = new PlayerStats();
 
-	public PlayerMaterialInfo Materials
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerMaterialInfo_0;
-		}
-	}
+	public PlayerMaterialInfo Materials { get; }
 
-	public PlayerPowerInfo Powers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerPowerInfo_0;
-		}
-	}
+	public PlayerPowerInfo Powers { get; }
 
-	public PlayerArmorySet[] ArmorySets
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iplayerArmorySet_0;
-		}
-	}
+	public PlayerArmorySet[] ArmorySets { get; }
 
-	public AnimSnoEnum Animation
-	{
-		[CompilerGenerated]
-		get
-		{
-			return animation;
-		}
-		[CompilerGenerated]
-		set
-		{
-			animation = value;
-		}
-	}
+	public AnimSnoEnum Animation { get; set; }
 
-	public AcdAnimationState AnimationState
-	{
-		[CompilerGenerated]
-		get
-		{
-			return animationState;
-		}
-		[CompilerGenerated]
-		set
-		{
-			animationState = value;
-		}
-	}
+	public AcdAnimationState AnimationState { get; set; }
 
-	public SnoItem CubeSnoItem1
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItem_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItem_0 = value;
-		}
-	}
+	public SnoItem CubeSnoItem1 { get; set; }
 
-	public SnoItem CubeSnoItem2
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItem_1;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItem_1 = value;
-		}
-	}
+	public SnoItem CubeSnoItem2 { get; set; }
 
-	public SnoItem CubeSnoItem3
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItem_2;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItem_2 = value;
-		}
-	}
+	public SnoItem CubeSnoItem3 { get; set; }
 
-	public SnoItem CubeSnoItem4
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoItem_3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoItem_3 = value;
-		}
-	}
+	public SnoItem CubeSnoItem4 { get; set; }
 
 	public IEnumerable<SnoItem> CubedItems => cubedItems;
 
-	public uint CurrentLevelNormal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return currentLevelNormal;
-		}
-		[CompilerGenerated]
-		set
-		{
-			currentLevelNormal = value;
-		}
-	}
+	public uint CurrentLevelNormal { get; set; }
 
-	public uint CurrentLevelNormalCap
-	{
-		[CompilerGenerated]
-		get
-		{
-			return currentLevelNormalCap;
-		}
-		[CompilerGenerated]
-		set
-		{
-			currentLevelNormalCap = value;
-		}
-	}
+	public uint CurrentLevelNormalCap { get; set; }
 
-	public uint CurrentLevelParagon
-	{
-		[CompilerGenerated]
-		get
-		{
-			return currentLevelParagon;
-		}
-		[CompilerGenerated]
-		set
-		{
-			currentLevelParagon = value;
-		}
-	}
+	public uint CurrentLevelParagon { get; set; }
 
-	public double CurrentLevelParagonDouble
-	{
-		[CompilerGenerated]
-		get
-		{
-			return currentLevelParagonDouble;
-		}
-		[CompilerGenerated]
-		set
-		{
-			currentLevelParagonDouble = value;
-		}
-	}
+	public double CurrentLevelParagonDouble { get; set; }
 
-	public long ParagonExpInThisLevel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonExpInThisLevel;
-		}
-		[CompilerGenerated]
-		set
-		{
-			paragonExpInThisLevel = value;
-		}
-	}
+	public long ParagonExpInThisLevel { get; set; }
 
-	public long ParagonExpToNextLevel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonExpToNextLevel;
-		}
-		[CompilerGenerated]
-		set
-		{
-			paragonExpToNextLevel = value;
-		}
-	}
+	public long ParagonExpToNextLevel { get; set; }
 
-	public long ParagonTotalExp
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonTotalExp;
-		}
-		[CompilerGenerated]
-		set
-		{
-			paragonTotalExp = value;
-		}
-	}
+	public long ParagonTotalExp { get; set; }
 
-	public float BonusPoolPercent
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bonusPoolPercent;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bonusPoolPercent = value;
-		}
-	}
+	public float BonusPoolPercent { get; set; }
 
-	public long BonusPoolRemaining
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bonusPoolRemaining;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bonusPoolRemaining = value;
-		}
-	}
+	public long BonusPoolRemaining { get; set; }
 
-	public int HighestSoloRiftLevel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return highestSoloRiftLevel;
-		}
-		[CompilerGenerated]
-		set
-		{
-			highestSoloRiftLevel = value;
-		}
-	}
+	public int HighestSoloRiftLevel { get; set; }
 
-	public int HighestHeroSoloRiftLevel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return highestHeroSoloRiftLevel;
-		}
-		[CompilerGenerated]
-		set
-		{
-			highestHeroSoloRiftLevel = value;
-		}
-	}
+	public int HighestHeroSoloRiftLevel { get; set; }
 
-	internal int Int32_1
-	{
-		[CompilerGenerated]
-		get
-		{
-			return int_6;
-		}
-		[CompilerGenerated]
-		set
-		{
-			int_6 = value;
-		}
-	}
+	internal int Int32_1 { get; set; }
 
-	public int InventorySpaceTotal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inventorySpaceTotal;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inventorySpaceTotal = value;
-		}
-	}
+	public int InventorySpaceTotal { get; set; } = 60;
 
-	internal int Int32_2
-	{
-		[CompilerGenerated]
-		get
-		{
-			return int_8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			int_8 = value;
-		}
-	}
+	internal int Int32_2 { get; set; }
 
-	public bool IsDead
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isDead;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isDead = value;
-		}
-	}
+	public bool IsDead { get; set; }
 
-	public HeadStone HeadStone
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iheadStone_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iheadStone_0 = value;
-		}
-	}
+	public HeadStone HeadStone { get; set; }
 
 	public Stopwatch LastDied { get; } = new Stopwatch();
 
-	public bool InCombat
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inCombat;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inCombat = value;
-		}
-	}
+	public bool InCombat { get; set; }
 
-	public int LoopingAnimationStartTick
-	{
-		[CompilerGenerated]
-		get
-		{
-			return loopingAnimationStartTick;
-		}
-		[CompilerGenerated]
-		set
-		{
-			loopingAnimationStartTick = value;
-		}
-	}
+	public int LoopingAnimationStartTick { get; set; }
 
-	public int LoopingAnimationEndTick
-	{
-		[CompilerGenerated]
-		get
-		{
-			return loopingAnimationEndTick;
-		}
-		[CompilerGenerated]
-		set
-		{
-			loopingAnimationEndTick = value;
-		}
-	}
+	public int LoopingAnimationEndTick { get; set; }
 
-	public int ParagonPointsAvailableTotal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonPointsAvailableTotal;
-		}
-		[CompilerGenerated]
-		set
-		{
-			paragonPointsAvailableTotal = value;
-		}
-	}
+	public int ParagonPointsAvailableTotal { get; set; }
 
-	public int[] ParagonPointsAvailable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonPointsAvailable;
-		}
-	}
+	public int[] ParagonPointsAvailable { get; } = new int[4];
 
-	public bool InGreaterRift
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inGreaterRift;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inGreaterRift = value;
-		}
-	}
+	public bool InGreaterRift { get; set; }
 
-	public uint InGreaterRiftRank
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inGreaterRiftRank;
-		}
-		[CompilerGenerated]
-		set
-		{
-			inGreaterRiftRank = value;
-		}
-	}
+	public uint InGreaterRiftRank { get; set; }
 
 	public bool IsInTown => SnoArea?.IsTown ?? false;
 
@@ -916,9 +206,9 @@ public class Player : Actor
 	public Player(int int_14) : base(0u, 0u, null)
 	{
 		Index = int_14;
-		iplayerDefenseInfo_0 = new PlayerDefense(this);
-		iplayerPowerInfo_0 = new PlayerPowerInfo(this);
-		iplayerMaterialInfo_0 = new PlayerMaterialInfo(this);
+		Defense = new PlayerDefense(this);
+		Powers = new PlayerPowerInfo(this);
+		Materials = new PlayerMaterialInfo(this);
 		PlayerArmorySet[] array =
 		[
 			new PlayerArmorySet(this, 0),
@@ -932,7 +222,7 @@ public class Player : Actor
 			new PlayerArmorySet(this, 8),
 			new PlayerArmorySet(this, 9)
 		];
-		iplayerArmorySet_0 = array;
+		ArmorySets = array;
 	}
 
 	public void ResetStats()

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace RiftAssistant.Model;
@@ -29,48 +28,11 @@ public class UiElement
 
 	public float PaddingY;
 
-	[CompilerGenerated]
-	private UiElementData class75_0 = new UiElementData();
+	internal UiElementData Class75_0 { get; set; } = new UiElementData();
 
-	[CompilerGenerated]
-	private readonly string path;
+	public string Path { get; }
 
-	[CompilerGenerated]
-	private bool visible;
-
-	[CompilerGenerated]
-	private UiElement iuiElement_2;
-
-	internal UiElementData Class75_0
-	{
-		get {
-			return class75_0;
-		}
-		set
-		{
-			class75_0 = value;
-		}
-	}
-
-	public string Path
-	{
-		[CompilerGenerated]
-		get {
-			return path;
-		}
-	}
-
-	public bool Visible
-	{
-		[CompilerGenerated]
-		get {
-			return visible;
-		}
-		[CompilerGenerated]
-		set {
-			visible = value;
-		}
-	}
+	public bool Visible { get; set; }
 
 	public RectangleF Rectangle => rectangle;
 
@@ -102,21 +64,11 @@ public class UiElement
 
 	public uint AcdId => GameWindowManager.Read<uint>(long_0 + 3248);
 
-	public UiElement ReplacementWhenNotVisible
-	{
-		[CompilerGenerated]
-		get {
-			return iuiElement_2;
-		}
-		[CompilerGenerated]
-		internal set {
-			iuiElement_2 = value;
-		}
-	}
+	public UiElement ReplacementWhenNotVisible { get; internal set; }
 
 	public UiElement(string path2, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
 	{
-		path = path2;
+		Path = path2;
 		ulong_0 = HashPath(path2.ToLower(CultureInfo.InvariantCulture));
 		int_0 = (int)ulong_0;
 		rectangle = default(RectangleF);
@@ -204,10 +156,9 @@ public class UiElement
 	public List<(string Text, int Top, int Bottom)> GetChildTextMetrics(Encoding encoding = null)
 	{
 		var list = new List<(string Text, int Top, int Bottom)>();
-		UiElementData uiData = new();
 		for (int i = 0; i < Class75_0.ChildCount; i++) {
 			long address = GameWindowManager.Read<long>(Class75_0.ChildEntries + 536 * i + 520);
-			uiData = GameWindowManager.Read<UiElementData>(address);
+			var uiData = GameWindowManager.Read<UiElementData>(address);
 			if (uiData.UnknownPtr1 == 0L) {
 				continue;
 			}

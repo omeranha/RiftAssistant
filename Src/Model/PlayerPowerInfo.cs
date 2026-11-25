@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
@@ -9,42 +8,6 @@ public class PlayerPowerInfo
 	private readonly Player class310_0;
 
 	private Skill iplayerSkill_0;
-
-	[CompilerGenerated]
-	private bool frozen;
-
-	[CompilerGenerated]
-	private bool rooted;
-
-	[CompilerGenerated]
-	private bool stunned;
-
-	[CompilerGenerated]
-	private readonly BarbarianPowerInfo ibarbarianPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly CrusaderPowerInfo icrusaderPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly DemonHunterPowerInfo idemonHunterPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly MonkPowerInfo imonkPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly NecromancerPowerInfo inecromancerPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly WitchDoctorPowerInfo iwitchDoctorPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly WizardPowerInfo iwizardPowerInfo_0;
-
-	[CompilerGenerated]
-	private readonly LegendaryPowerInfo usedLegendaryPowers;
-
-	[CompilerGenerated]
-	private readonly LegendaryGemInfo ilegendaryGemInfo_0;
 
 	public Skill HealthPotionSkill => iplayerSkill_0 ?? (iplayerSkill_0 = new Skill(class310_0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
 
@@ -62,47 +25,11 @@ public class PlayerPowerInfo
 
 	public IEnumerable<Buff> AllBuffs => class310_0.powerSno2buff.Values;
 
-	public bool Frozen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return frozen;
-		}
-		[CompilerGenerated]
-		set
-		{
-			frozen = value;
-		}
-	}
+	public bool Frozen { get; set; }
 
-	public bool Rooted
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rooted;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rooted = value;
-		}
-	}
+	public bool Rooted { get; set; }
 
-	public bool Stunned
-	{
-		[CompilerGenerated]
-		get
-		{
-			return stunned;
-		}
-		[CompilerGenerated]
-		set
-		{
-			stunned = value;
-		}
-	}
+	public bool Stunned { get; set; }
 
 	public bool CantMove
 	{
@@ -116,99 +43,36 @@ public class PlayerPowerInfo
 		}
 	}
 
-	public BarbarianPowerInfo UsedBarbarianPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ibarbarianPowerInfo_0;
-		}
-	}
+	public BarbarianPowerInfo UsedBarbarianPowers { get; }
 
-	public CrusaderPowerInfo UsedCrusaderPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return icrusaderPowerInfo_0;
-		}
-	}
+	public CrusaderPowerInfo UsedCrusaderPowers { get; }
 
-	public DemonHunterPowerInfo UsedDemonHunterPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return idemonHunterPowerInfo_0;
-		}
-	}
+	public DemonHunterPowerInfo UsedDemonHunterPowers { get; }
 
-	public MonkPowerInfo UsedMonkPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return imonkPowerInfo_0;
-		}
-	}
+	public MonkPowerInfo UsedMonkPowers { get; }
 
-	public NecromancerPowerInfo UsedNecromancerPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return inecromancerPowerInfo_0;
-		}
-	}
+	public NecromancerPowerInfo UsedNecromancerPowers { get; }
 
-	public WitchDoctorPowerInfo UsedWitchDoctorPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iwitchDoctorPowerInfo_0;
-		}
-	}
+	public WitchDoctorPowerInfo UsedWitchDoctorPowers { get; }
 
-	public WizardPowerInfo UsedWizardPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iwizardPowerInfo_0;
-		}
-	}
+	public WizardPowerInfo UsedWizardPowers { get; }
 
-	public LegendaryPowerInfo UsedLegendaryPowers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return usedLegendaryPowers;
-		}
-	}
+	public LegendaryPowerInfo UsedLegendaryPowers { get; }
 
-	public LegendaryGemInfo UsedLegendaryGems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ilegendaryGemInfo_0;
-		}
-	}
+	public LegendaryGemInfo UsedLegendaryGems { get; }
 
 	public PlayerPowerInfo(Player player)
 	{
 		class310_0 = player;
-		ibarbarianPowerInfo_0 = new BarbarianPowerInfo(player);
-		icrusaderPowerInfo_0 = new CrusaderPowerInfo(player);
-		idemonHunterPowerInfo_0 = new DemonHunterPowerInfo(player);
-		imonkPowerInfo_0 = new MonkPowerInfo(player);
-		inecromancerPowerInfo_0 = new NecromancerPowerInfo(player);
-		iwitchDoctorPowerInfo_0 = new WitchDoctorPowerInfo(player);
-		iwizardPowerInfo_0 = new WizardPowerInfo(player);
-		usedLegendaryPowers = new LegendaryPowerInfo(player);
-		ilegendaryGemInfo_0 = new LegendaryGemInfo(player);
+		UsedBarbarianPowers = new BarbarianPowerInfo(player);
+		UsedCrusaderPowers = new CrusaderPowerInfo(player);
+		UsedDemonHunterPowers = new DemonHunterPowerInfo(player);
+		UsedMonkPowers = new MonkPowerInfo(player);
+		UsedNecromancerPowers = new NecromancerPowerInfo(player);
+		UsedWitchDoctorPowers = new WitchDoctorPowerInfo(player);
+		UsedWizardPowers = new WizardPowerInfo(player);
+		UsedLegendaryPowers = new LegendaryPowerInfo(player);
+		UsedLegendaryGems = new LegendaryGemInfo(player);
 	}
 
 	public Skill GetUsedSkill(SnoPower snoPower)

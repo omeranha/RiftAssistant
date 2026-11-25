@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 
 namespace RiftAssistant.Collectors;
@@ -11,22 +10,7 @@ internal partial class ActorCollector
 {
 	private readonly Dictionary<uint, Actor> actorsByAcdId = new Dictionary<uint, Actor>(1000);
 
-	[CompilerGenerated]
-	private Monster imonster_0;
-
-	[CompilerGenerated]
-	private Monster imonster_1;
-
-	[CompilerGenerated]
-	private Actor iactor_0;
-
-	[CompilerGenerated]
-	private readonly bool[] bool_0 = new bool[5];
-
 	public Stopwatch stopwatch_0 = new();
-
-	[CompilerGenerated]
-	private int act;
 
 	private Stopwatch stopwatch_1 = new();
 
@@ -42,92 +26,11 @@ internal partial class ActorCollector
 
 	public List<Actor> AllActors = new List<Actor>(1000);
 
-	[CompilerGenerated]
-	private int int_2;
+	public Monster IMonster_0 { get; private set; }
 
-	[CompilerGenerated]
-	private bool isEliteNearby;
+	public Monster IMonster_1 { get; private set; }
 
-	[CompilerGenerated]
-	private bool isEliteOnScreen;
-
-	[CompilerGenerated]
-	private MonsterPriority monsterPriority_0;
-
-	[CompilerGenerated]
-	private bool isGoblinOnScreen;
-
-	[CompilerGenerated]
-	private readonly Dictionary<SkillEffectType, List<SkillEffect>> skillEffectsByType = new Dictionary<SkillEffectType, List<SkillEffect>>();
-
-	[CompilerGenerated]
-	private readonly Dictionary<uint, Portal> portalsByAnnId = new Dictionary<uint, Portal>();
-
-	[CompilerGenerated]
-	private readonly List<Shrine> shrines = new List<Shrine>();
-
-	[CompilerGenerated]
-	private readonly List<HeadStone> headStones = new List<HeadStone>();
-
-	[CompilerGenerated]
-	private readonly List<IClickableActor> doors = new List<IClickableActor>();
-
-	[CompilerGenerated]
-	private readonly TownBanner[] itownBanner_0 = new TownBanner[4];
-
-	[CompilerGenerated]
-	private Actor iactor_1;
-
-	[CompilerGenerated]
-	private Actor iactor_2;
-
-	[CompilerGenerated]
-	private Actor iactor_3;
-
-	[CompilerGenerated]
-	private WorldCoordinate iworldCoordinate_0;
-
-	[CompilerGenerated]
-	private int act2;
-
-	[CompilerGenerated]
-	private r_Actor[] bufferActors;
-
-	public Monster IMonster_0
-	{
-		[CompilerGenerated]
-		get {
-			return imonster_0;
-		}
-		[CompilerGenerated]
-		private set {
-			imonster_0 = value;
-		}
-	}
-
-	public Monster IMonster_1
-	{
-		[CompilerGenerated]
-		get {
-			return imonster_1;
-		}
-		[CompilerGenerated]
-		private set {
-			imonster_1 = value;
-		}
-	}
-
-	public Actor IActor_0
-	{
-		[CompilerGenerated]
-		get {
-			return iactor_0;
-		}
-		[CompilerGenerated]
-		private set {
-			iactor_0 = value;
-		}
-	}
+	public Actor IActor_0 { get; private set; }
 
 	public EventHandler EventHandler_0 { get; set; }
 
@@ -135,205 +38,43 @@ internal partial class ActorCollector
 
 	public EventHandler<Portal> OnPortalFound { get; set; }
 
-	public bool[] Boolean_0
-	{
-		[CompilerGenerated]
-		get {
-			return bool_0;
-		}
-	}
+	public bool[] Boolean_0 { get; } = new bool[5];
 
-	public int Act
-	{
-		[CompilerGenerated]
-		get {
-			return act;
-		}
-		[CompilerGenerated]
-		internal set {
-			act = value;
-		}
-	}
+	public int Act { get; internal set; }
 
-	public int Int32_1
-	{
-		[CompilerGenerated]
-		get {
-			return int_2;
-		}
-		[CompilerGenerated]
-		private set {
-			int_2 = value;
-		}
-	}
+	public int Int32_1 { get; private set; }
 
-	public bool IsEliteNearby
-	{
-		[CompilerGenerated]
-		get {
-			return isEliteNearby;
-		}
-		[CompilerGenerated]
-		private set {
-			isEliteNearby = value;
-		}
-	}
+	public bool IsEliteNearby { get; private set; }
 
-	public bool IsEliteOnScreen
-	{
-		[CompilerGenerated]
-		get {
-			return isEliteOnScreen;
-		}
-		[CompilerGenerated]
-		private set {
-			isEliteOnScreen = value;
-		}
-	}
+	public bool IsEliteOnScreen { get; private set; }
 
-	public MonsterPriority MonsterPriority_0
-	{
-		[CompilerGenerated]
-		get {
-			return monsterPriority_0;
-		}
-		[CompilerGenerated]
-		private set {
-			monsterPriority_0 = value;
-		}
-	}
+	public MonsterPriority MonsterPriority_0 { get; private set; }
 
-	public bool IsGoblinOnScreen
-	{
-		[CompilerGenerated]
-		get {
-			return isGoblinOnScreen;
-		}
-		[CompilerGenerated]
-		private set {
-			isGoblinOnScreen = value;
-		}
-	}
+	public bool IsGoblinOnScreen { get; private set; }
 
-	public Dictionary<SkillEffectType, List<SkillEffect>> SkillEffectsByType
-	{
-		[CompilerGenerated]
-		get {
-			return skillEffectsByType;
-		}
-	}
+	public Dictionary<SkillEffectType, List<SkillEffect>> SkillEffectsByType { get; } = new Dictionary<SkillEffectType, List<SkillEffect>>();
 
-	public Dictionary<uint, Portal> PortalsByAnnId
-	{
-		[CompilerGenerated]
-		get {
-			return portalsByAnnId;
-		}
-	}
+	public Dictionary<uint, Portal> PortalsByAnnId { get; } = new Dictionary<uint, Portal>();
 
-	public List<Shrine> Shrines
-	{
-		[CompilerGenerated]
-		get {
-			return shrines;
-		}
-	}
+	public List<Shrine> Shrines { get; } = new List<Shrine>();
 
-	public List<HeadStone> HeadStones
-	{
-		[CompilerGenerated]
-		get {
-			return headStones;
-		}
-	}
+	public List<HeadStone> HeadStones { get; } = new List<HeadStone>();
 
-	public List<IClickableActor> Doors
-	{
-		[CompilerGenerated]
-		get {
-			return doors;
-		}
-	}
+	public List<IClickableActor> Doors { get; } = new List<IClickableActor>();
 
-	public TownBanner[] ITownBanner_0
-	{
-		[CompilerGenerated]
-		get {
-			return itownBanner_0;
-		}
-	}
+	public TownBanner[] ITownBanner_0 { get; } = new TownBanner[4];
 
-	public Actor IActor_1
-	{
-		[CompilerGenerated]
-		get {
-			return iactor_1;
-		}
-		[CompilerGenerated]
-		private set {
-			iactor_1 = value;
-		}
-	}
+	public Actor IActor_1 { get; private set; }
 
-	public Actor IActor_2
-	{
-		[CompilerGenerated]
-		get {
-			return iactor_2;
-		}
-		[CompilerGenerated]
-		private set {
-			iactor_2 = value;
-		}
-	}
+	public Actor IActor_2 { get; private set; }
 
-	public Actor IActor_3
-	{
-		[CompilerGenerated]
-		get {
-			return iactor_3;
-		}
-		[CompilerGenerated]
-		private set {
-			iactor_3 = value;
-		}
-	}
+	public Actor IActor_3 { get; private set; }
 
-	public WorldCoordinate IWorldCoordinate_0
-	{
-		[CompilerGenerated]
-		get {
-			return iworldCoordinate_0;
-		}
-		[CompilerGenerated]
-		internal set {
-			iworldCoordinate_0 = value;
-		}
-	}
+	public WorldCoordinate IWorldCoordinate_0 { get; internal set; }
 
-	public int Act2
-	{
-		[CompilerGenerated]
-		get {
-			return act2;
-		}
-		[CompilerGenerated]
-		internal set {
-			act2 = value;
-		}
-	}
+	public int Act2 { get; internal set; }
 
-	internal r_Actor[] BufferActors
-	{
-		[CompilerGenerated]
-		get {
-			return bufferActors;
-		}
-		[CompilerGenerated]
-		private set {
-			bufferActors = value;
-		}
-	}
+	internal r_Actor[] BufferActors { get; private set; }
 
 	internal void ClearActors()
 	{

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Engine;
 
@@ -8,58 +7,13 @@ internal class Container
 {
 	private readonly r_Container[] buffer = new r_Container[1];
 
-	[CompilerGenerated]
-	private short maxIndex;
-
 	public readonly short _maxAllowedIndex;
 
-	[CompilerGenerated]
-	private bool isValid;
+	public short MaxIndex { get; private set; }
 
-	[CompilerGenerated]
-	private long dataAddress;
+	public bool IsValid { get; private set; }
 
-	public short MaxIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxIndex;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			maxIndex = value;
-		}
-	}
-
-	public bool IsValid
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isValid;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			isValid = value;
-		}
-	}
-
-	public long DataAddress
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dataAddress;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			dataAddress = value;
-		}
-	}
+	public long DataAddress { get; private set; }
 
 	public Container(short short_2)
 	{
@@ -246,148 +200,34 @@ internal class Allocator
 
 internal class MainBlock
 {
-	[CompilerGenerated]
-	private long dataAddress;
 
-	[CompilerGenerated]
-	private int size;
+	public long DataAddress { get; set; }
 
-	public long DataAddress
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dataAddress;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dataAddress = value;
-		}
-	}
-
-	public int Size
-	{
-		[CompilerGenerated]
-		get
-		{
-			return size;
-		}
-		[CompilerGenerated]
-		set
-		{
-			size = value;
-		}
-	}
+	public int Size { get; set; }
 }
 
 internal class ExpandableContainer
 {
 	private readonly r_ExpandableContainer[] buffer = new r_ExpandableContainer[1];
 
-	[CompilerGenerated]
-	private short maxIndex;
-
-	[CompilerGenerated]
-	private readonly int itemSize;
-
 	public readonly short _maxAllowedIndex;
 
-	[CompilerGenerated]
-	private bool isValid;
+	public short MaxIndex { get; private set; }
 
-	[CompilerGenerated]
-	private long[] blockPointers = new long[0];
+	public int ItemSize { get; }
 
-	[CompilerGenerated]
-	private int blocksItemCapacity;
+	public bool IsValid { get; private set; }
 
-	[CompilerGenerated]
-	private int blockCount;
+	public long[] BlockPointers { get; private set; } = new long[0];
 
-	public short MaxIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return maxIndex;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			maxIndex = value;
-		}
-	}
+	public int BlocksItemCapacity { get; private set; }
 
-	public int ItemSize
-	{
-		[CompilerGenerated]
-		get
-		{
-			return itemSize;
-		}
-	}
-
-	public bool IsValid
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isValid;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			isValid = value;
-		}
-	}
-
-	public long[] BlockPointers
-	{
-		[CompilerGenerated]
-		get
-		{
-			return blockPointers;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			blockPointers = value;
-		}
-	}
-
-	public int BlocksItemCapacity
-	{
-		[CompilerGenerated]
-		get
-		{
-			return blocksItemCapacity;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			blocksItemCapacity = value;
-		}
-	}
-
-	public int BlockCount
-	{
-		[CompilerGenerated]
-		get
-		{
-			return blockCount;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			blockCount = value;
-		}
-	}
+	public int BlockCount { get; private set; }
 
 	public ExpandableContainer(short short_2, int int_3)
 	{
 		_maxAllowedIndex = short_2;
-		itemSize = int_3;
+		ItemSize = int_3;
 	}
 
 	public void Snapshot(long long_1)

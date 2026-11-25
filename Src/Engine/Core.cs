@@ -41,7 +41,7 @@ public static class Core
 
 		Controller = new Controller();
 		CoreCollector.Controller = Controller;
-		new Overlay(Controller);
+		new Overlay();
 
 		CoreCollector.ItemCollector.OnLootGenerated += ProcessLoot;
 
@@ -71,7 +71,7 @@ public static class Core
 		Overlay.Instance.RecreateSharedFonts();
 		Overlay.Instance.InitializeModulesFromConfig(Settings);
 
-		SettingsMenu = new(Settings);
+		SettingsMenu = new();
 		SettingsMenuOptions.Register(SettingsMenu);
 		SettingsButton = new SettingsButton();
 		PluginHandler = new PluginHandler();

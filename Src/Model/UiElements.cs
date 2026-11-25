@@ -1,8 +1,8 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace RiftAssistant.Model;
@@ -463,7 +463,7 @@ internal partial class UiElements
 			case "NETWORK DISCONNECT":
 			case "ERROR":
 			case "LOST CONNECTION":
-				CoreCollector.ClearGameServerContext("disconnect notification");
+				CoreCollector.ClearGameServerContext();
 				break;
 		}
 	}
@@ -471,12 +471,11 @@ internal partial class UiElements
 	internal List<UiElement> EnumerateUi()
 	{
 		var result = new List<UiElement>();
-		var node = new HashNode();
 		for (int i = 0; i < bucketCount; i++) {
 			long current = buckets[i];
 			int depth = 0;
 			while (current != 0 && depth++ < 100) {
-				node = GameWindowManager.Read<HashNode>(current);
+				var node = GameWindowManager.Read<HashNode>(current);
 				string path = GameWindowManager.ReadString(node.Value + 56, 512, Encoding.ASCII, true);
 				result.Add(CreateTemporary(path));
 				current = node.Next;

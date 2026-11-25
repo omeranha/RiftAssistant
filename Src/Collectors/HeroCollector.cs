@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 
@@ -8,62 +7,18 @@ namespace RiftAssistant.Collectors;
 
 internal class HeroCollector
 {
-	[CompilerGenerated]
-	private EventHandler onHeroesCollected;
-
-	[CompilerGenerated]
-	private Hero ihero_0;
 
 	public const int season_number_dontuse = -1;
-
-	[CompilerGenerated]
-	private int int_1;
 
 	private readonly r_Hero[] buffer = new r_Hero[1];
 
 	private readonly Dictionary<uint, Hero> heroList = new Dictionary<uint, Hero>();
 
-	public EventHandler OnHeroesCollected
-	{
-		[CompilerGenerated]
-		get
-		{
-			return onHeroesCollected;
-		}
-		[CompilerGenerated]
-		set
-		{
-			onHeroesCollected = value;
-		}
-	}
+	public EventHandler OnHeroesCollected { get; set; }
 
-	public Hero IHero_0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ihero_0;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			ihero_0 = value;
-		}
-	}
+	public Hero IHero_0 { get; private set; }
 
-	internal int Int32_0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return int_1;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			int_1 = value;
-		}
-	}
+	internal int Int32_0 { get; private set; }
 
 	public IEnumerable<Hero> HeroList => heroList.Values;
 

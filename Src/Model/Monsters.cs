@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 internal sealed class Monsters
 {
-	[CompilerGenerated]
-	private readonly SnoMonster snoMonsterObstacle;
 
 	private readonly Dictionary<uint, SnoMonsterAffix> dictionary_0 = new Dictionary<uint, SnoMonsterAffix>(100);
 
@@ -17,14 +14,7 @@ internal sealed class Monsters
 
 	private readonly Dictionary<uint, SnoMonster> dictionary_2 = new Dictionary<uint, SnoMonster>(3000);
 
-	public SnoMonster SnoMonsterObstacle
-	{
-		[CompilerGenerated]
-		get
-		{
-			return snoMonsterObstacle;
-		}
-	}
+	public SnoMonster SnoMonsterObstacle { get; }
 
 	public SnoMonster GetMonster(ActorSnoEnum sno)
 	{
@@ -94,6 +84,6 @@ internal sealed class Monsters
 			}
 		}
 		SnoActor snoActor_ = new SnoActor((ActorSnoEnum)0u, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-monster-obstacle", "dummyactor-monster-obstacle", "dummyactor-monster-obstacle");
-		snoMonsterObstacle = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
+		SnoMonsterObstacle = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
 	}
 }

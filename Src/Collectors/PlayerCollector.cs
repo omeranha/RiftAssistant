@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 
@@ -15,63 +14,15 @@ internal class PlayerCollector
 
 	private Stopwatch stopwatch_1 = new();
 
-	[CompilerGenerated]
-	private readonly Player[] iplayer_0 = new Player[4];
-
-	[CompilerGenerated]
-	private int numberOfPlayersInGame;
-
-	[CompilerGenerated]
-	private bool bool_0;
-
-	[CompilerGenerated]
-	private bool bool_1;
-
-	public Player[] PlayerSlots
-	{
-		[CompilerGenerated]
-		get {
-			return iplayer_0;
-		}
-	}
+	public Player[] PlayerSlots { get; } = new Player[4];
 
 	public IEnumerable<Player> PlayersInGame => PlayerSlots.Where((Player iplayer_0) => iplayer_0.IsInGame && iplayer_0.SnoArea != null && iplayer_0.BattleTagAbovePortrait != null && iplayer_0.HeroClassDefinition != null);
 
-	public int NumberOfPlayersInGame
-	{
-		[CompilerGenerated]
-		get {
-			return numberOfPlayersInGame;
-		}
-		[CompilerGenerated]
-		private set {
-			numberOfPlayersInGame = value;
-		}
-	}
+	public int NumberOfPlayersInGame { get; private set; }
 
-	public bool Boolean_0
-	{
-		[CompilerGenerated]
-		get {
-			return bool_0;
-		}
-		[CompilerGenerated]
-		set {
-			bool_0 = value;
-		}
-	}
+	public bool Boolean_0 { get; set; }
 
-	public bool Boolean_1
-	{
-		[CompilerGenerated]
-		get {
-			return bool_1;
-		}
-		[CompilerGenerated]
-		set {
-			bool_1 = value;
-		}
-	}
+	public bool Boolean_1 { get; set; }
 
 	public PlayerCollector()
 	{

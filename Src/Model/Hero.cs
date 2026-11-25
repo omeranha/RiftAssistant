@@ -1,273 +1,58 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace RiftAssistant.Model;
 
 public class Hero
 {
-	[CompilerGenerated]
-	private readonly uint id;
 
-	[CompilerGenerated]
-	private readonly string name;
+	public uint Id { get; }
 
-	[CompilerGenerated]
-	private readonly string battleTag;
+	public string Name { get; }
 
-	[CompilerGenerated]
-	private readonly HeroClassDefinition iheroClassDefinition_0;
+	public string BattleTag { get; }
 
-	[CompilerGenerated]
-	private readonly ulong accountIdHi;
+	public HeroClassDefinition ClassDefinition { get; }
 
-	[CompilerGenerated]
-	private readonly ulong accountIdLo;
+	public ulong AccountIdHi { get; }
 
-	[CompilerGenerated]
-	private int flags;
+	public ulong AccountIdLo { get; }
 
-	[CompilerGenerated]
-	private int level;
+	public int Flags { get; set; }
 
-	[CompilerGenerated]
-	private int paragonLevel;
+	public int Level { get; set; }
 
-	[CompilerGenerated]
-	private int playedSeconds;
+	public int ParagonLevel { get; set; }
 
-	[CompilerGenerated]
-	private readonly bool hardcore;
+	public int PlayedSeconds { get; set; }
 
-	[CompilerGenerated]
-	private readonly bool isMale;
+	public bool Hardcore { get; }
 
-	[CompilerGenerated]
-	private readonly int season;
+	public bool IsMale { get; }
 
-	[CompilerGenerated]
-	private readonly bool seasonal;
+	public int Season { get; }
 
-	[CompilerGenerated]
-	private readonly DateTime createdDT;
+	public bool Seasonal { get; }
 
-	[CompilerGenerated]
-	private long lastPlayed;
+	public DateTime CreatedDT { get; }
 
-	[CompilerGenerated]
-	private DateTime lastPlayedDT = DateTime.MinValue;
+	public long LastPlayed { get; set; }
 
-	[CompilerGenerated]
-	private SnoQuestStep isnoQuestStep_0;
+	public DateTime LastPlayedDT { get; set; } = DateTime.MinValue;
 
-	public uint Id
-	{
-		[CompilerGenerated]
-		get
-		{
-			return id;
-		}
-	}
-
-	public string Name
-	{
-		[CompilerGenerated]
-		get
-		{
-			return name;
-		}
-	}
-
-	public string BattleTag
-	{
-		[CompilerGenerated]
-		get
-		{
-			return battleTag;
-		}
-	}
-
-	public HeroClassDefinition ClassDefinition
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iheroClassDefinition_0;
-		}
-	}
-
-	public ulong AccountIdHi
-	{
-		[CompilerGenerated]
-		get
-		{
-			return accountIdHi;
-		}
-	}
-
-	public ulong AccountIdLo
-	{
-		[CompilerGenerated]
-		get
-		{
-			return accountIdLo;
-		}
-	}
-
-	public int Flags
-	{
-		[CompilerGenerated]
-		get
-		{
-			return flags;
-		}
-		[CompilerGenerated]
-		set
-		{
-			flags = value;
-		}
-	}
-
-	public int Level
-	{
-		[CompilerGenerated]
-		get
-		{
-			return level;
-		}
-		[CompilerGenerated]
-		set
-		{
-			level = value;
-		}
-	}
-
-	public int ParagonLevel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return paragonLevel;
-		}
-		[CompilerGenerated]
-		set
-		{
-			paragonLevel = value;
-		}
-	}
-
-	public int PlayedSeconds
-	{
-		[CompilerGenerated]
-		get
-		{
-			return playedSeconds;
-		}
-		[CompilerGenerated]
-		set
-		{
-			playedSeconds = value;
-		}
-	}
-
-	public bool Hardcore
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hardcore;
-		}
-	}
-
-	public bool IsMale
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isMale;
-		}
-	}
-
-	public int Season
-	{
-		[CompilerGenerated]
-		get
-		{
-			return season;
-		}
-	}
-
-	public bool Seasonal
-	{
-		[CompilerGenerated]
-		get
-		{
-			return seasonal;
-		}
-	}
-
-	public DateTime CreatedDT
-	{
-		[CompilerGenerated]
-		get
-		{
-			return createdDT;
-		}
-	}
-
-	public long LastPlayed
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lastPlayed;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lastPlayed = value;
-		}
-	}
-
-	public DateTime LastPlayedDT
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lastPlayedDT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lastPlayedDT = value;
-		}
-	}
-
-	public SnoQuestStep QuestStep
-	{
-		[CompilerGenerated]
-		get
-		{
-			return isnoQuestStep_0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			isnoQuestStep_0 = value;
-		}
-	}
+	public SnoQuestStep QuestStep { get; set; }
 
 	public Hero(uint uint_1, string string_2, string string_3, uint uint_2, long long_1, bool bool_3, bool bool_4, int season2, bool bool_5, ulong ulong_2, ulong ulong_3)
 	{
-		id = uint_1;
-		name = string_2;
-		battleTag = string_3;
-		iheroClassDefinition_0 = SnoData.Classes.GetHeroClassByInternalIndex(uint_2);
-		createdDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long_1 / 1000).ToLocalTime();
-		hardcore = bool_3;
-		isMale = bool_4;
-		season = season2;
-		seasonal = bool_5;
-		accountIdHi = ulong_2;
-		accountIdLo = ulong_3;
+		Id = uint_1;
+		Name = string_2;
+		BattleTag = string_3;
+		ClassDefinition = SnoData.Classes.GetHeroClassByInternalIndex(uint_2);
+		CreatedDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long_1 / 1000).ToLocalTime();
+		Hardcore = bool_3;
+		IsMale = bool_4;
+		Season = season2;
+		Seasonal = bool_5;
+		AccountIdHi = ulong_2;
+		AccountIdLo = ulong_3;
 	}
 }
