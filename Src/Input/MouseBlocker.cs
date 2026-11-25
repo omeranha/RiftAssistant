@@ -88,12 +88,13 @@ internal static class MouseBlocker
 		if (Overlay.Instance == null || GameWindowManager.Window.Handle == IntPtr.Zero || Overlay.Instance.State == OverlayDisplayState.Hidden || !GameWindowManager.Window.IsForeground) return false;
 
 		var point = Marshal.PtrToStructure<MSLLHOOKSTRUCT>(lParam).pt;
-		bool blocked = button == MouseButtons.Left && Core.SettingsMenu != null && Core.SettingsMenu.ShowMenu && Core.SettingsMenu.HandleInput(point.x, point.y, true);
+		var window = GameWindowManager.Window;
+		int x = point.x - window.Offset.X;
+		int y = point.y - window.Offset.Y;
+		bool blocked = button == MouseButtons.Left && Core.SettingsButton != null && Core.SettingsButton.HandleClick(x, y);
+		blocked = blocked || (button == MouseButtons.Left && Core.SettingsMenu != null && Core.SettingsMenu.ShowMenu && Core.SettingsMenu.HandleInput(x, y, true));
 
 		if (!blocked) {
-			var window = GameWindowManager.Window;
-			int x = point.x - window.Offset.X;
-			int y = point.y - window.Offset.Y;
 			blocked = x >= 0 && y >= 0 && x < window.Size.Width && y < window.Size.Height && Core.PluginHandler != null && Core.PluginHandler.ShouldBlockMouse(button, x, y);
 		}
 

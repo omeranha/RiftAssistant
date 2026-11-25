@@ -44,7 +44,8 @@ internal static class SettingsMenuOptions
 		AddSection("Overlay", [
 			Toggle("Lobby heroes", s => s.Overlay.EnableLobbyHeroes, (s, v) => s.Overlay.EnableLobbyHeroes = v),
 			Toggle("Health bar", s => s.Overlay.ShowHealthBar, (s, v) => s.Overlay.ShowHealthBar = v),
-			Toggle("Resources bar", s => s.Overlay.ShowResourcesBar, (s, v) => s.Overlay.ShowResourcesBar = v)
+			Toggle("Resources bar", s => s.Overlay.ShowResourcesBar, (s, v) => s.Overlay.ShowResourcesBar = v),
+			Toggle("Settings button", s => s.Overlay.ShowSettingsButton, (s, v) => s.Overlay.ShowSettingsButton = v)
 		]);
 
 		AddSection("Skill cooldowns", [

@@ -47,10 +47,10 @@ Hotkeys are stored in `settings/hotkeys.json` and can be changed in the settings
 
 ## Settings menu
 
-Press `F12` to open the settings menu. Click a section to expand it, one section at a time. Every change is applied immediately and saved to `settings/settings.json` half a second later. If you edit `settings.json` by hand while the program runs, the overlay and the menu pick the change up within a second.
+Press `F12`, or click the **Settings** button in the bottom-right corner of the game window, to open the settings menu. The button can be turned off under **Overlay**. Click a section to expand it, one section at a time. Every change is applied immediately and saved to `settings/settings.json` half a second later. If you edit `settings.json` by hand while the program runs, the overlay and the menu pick the change up within a second.
 
 * **General**: the language (applied after a restart) and the game window title. Click the title box, type, then press `Enter` to apply or `Esc` to cancel. Keys typed in the box do not reach the game.
-* **Performance**, **Overlay**, **Skill cooldowns**, **Portrait stats**, **Stat tracker** and **Stat tracker columns**: the overlay options.
+* **Performance**, **Overlay** (including the Settings button), **Skill cooldowns**, **Portrait stats**, **Stat tracker** and **Stat tracker columns**: the overlay options.
 * **Inventory lock**: the protected inventory area.
 * **Hotkeys**: click a hotkey, then press the new key combination. Esc cancels, and a combination that another hotkey already uses is rejected. **Reset hotkeys** restores the defaults.
 * **Files**: open the settings folder, or reset all settings (click twice to confirm).

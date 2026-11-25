@@ -19,6 +19,7 @@ internal static class MenuStyle
 	public static readonly RenderFont HintFont = new(255, 160, 160, 160, "Arial", false, false, 7f, Alignment.Left, false, false);
 	public static readonly RenderBrush Fill = new(255, 64, 64, 64, 0f);
 	public static readonly RenderBrush ActiveFill = new(255, 40, 70, 110, 0f);
+	public static readonly RenderBrush HoverFill = new(255, 90, 90, 90, 0f);
 	public static readonly RenderBrush Outline = new(255, 128, 128, 128, 1f);
 
 	public static void DrawBox(RectangleF rectangle, string text, bool active = false)

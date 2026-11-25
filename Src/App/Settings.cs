@@ -169,6 +169,8 @@ public sealed class OverlaySettings
 
 	public bool ShowResourcesBar { get; set; } = true;
 
+	public bool ShowSettingsButton { get; set; } = true;
+
 	public SkillCooldowns SkillCooldowns { get; set; } = new();
 
 	public PortraitPlayerStats PortraitPlayerStats { get; set; } = new();

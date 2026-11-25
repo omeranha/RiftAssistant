@@ -21,6 +21,8 @@ public static class Core
 
 	public static SettingsMenu SettingsMenu { get; set; }
 
+	internal static SettingsButton SettingsButton { get; private set; }
+
 	public static PluginListMenu PluginListMenu { get; set; }
 
 	internal static PluginHandler PluginHandler;
@@ -73,6 +75,7 @@ public static class Core
 
 		SettingsMenu = new(Settings);
 		SettingsMenuOptions.Register(SettingsMenu);
+		SettingsButton = new SettingsButton();
 		PluginHandler = new PluginHandler();
 		PluginHandler.LoadPlugins();
 		PluginListMenu = new PluginListMenu();

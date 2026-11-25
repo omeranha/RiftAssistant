@@ -521,6 +521,7 @@ internal class Overlay
 				}
 				lobbyHeroesModule?.Update();
 				ModuleStatTracker?.Draw();
+				Core.SettingsButton.Draw();
 				Core.SettingsMenu.Draw();
 				cursorHintModule?.Draw();
 				if (Core.PluginHandler.Reloading) {
