@@ -1,429 +1,320 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using SharpDX.DirectWrite;
 
 namespace RiftAssistant.Modules;
 
-sealed class StatColumn
+internal sealed class ModuleStatTracker : Module
 {
-	public bool Enabled;
-	public string Header;
+	private static readonly TimeSpan CellRefreshInterval = TimeSpan.FromMilliseconds(250);
 
-	public RenderFont HeaderFont;
-	public RenderBrush HeaderBrush;
+	private static readonly ColumnDefinition[] AllColumns = [
+		new("experience", "/h", c => c.Experience, t => t.GainedExperience, t => t.GainedExperiencePerHourPlay, ValueFormat.LongNumber, ValueFormat.LongNumber, Accent.Experience),
+		new("gold pickup", "/h", c => c.GoldPickup, t => t.GainedGold, t => t.GainedGoldPerHour, ValueFormat.LongNumber, ValueFormat.LongNumber),
+		new("gold drop", "/h", c => c.GoldDrop, t => t.DropGold, t => t.DropGoldPerHour, ValueFormat.LongNumber, ValueFormat.LongNumber),
+		new("all kills", "/h", c => c.KillTotal, t => t.MonsterKill, t => t.MonsterKillPerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("elite kills", "/h", c => c.KillElite, t => t.EliteKill, t => t.EliteKillPerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal, Accent.Elite),
+		new("all items", "/h", c => c.DropAll, t => t.DropAll, t => t.DropAllPerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("white", "/h", c => c.DropWhite, t => t.DropWhite, t => t.DropWhitePerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("magic", "/h", c => c.DropMagic, t => t.DropMagic, t => t.DropMagicPerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("rare", "/h", c => c.DropRare, t => t.DropRare, t => t.DropRarePerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("legendary", "/h", c => c.DropLegendary, t => t.DropLegendary, t => t.DropLegendaryPerHour, ValueFormat.NormalNumber, ValueFormat.NormalNumber, Accent.Legendary),
+		new("b.shard", "/h", c => c.DropBloodShard, t => t.DropBloodShard, t => t.DropBloodShardPerHour, ValueFormat.NormalNumberNoDecimal, ValueFormat.NormalNumberNoDecimal),
+		new("death", "/h", c => c.Death, t => t.Death, t => t.DeathPerHour, ValueFormat.NormalNumber, ValueFormat.NormalNumber),
+		new("damage (all)", "/s", c => c.DamageDealtAll, t => t.DamageDealtAll, t => t.DamageDealtAllPerSecond, ValueFormat.LongNumber, ValueFormat.LongNumber),
+		new("damage (crit)", "/s", c => c.DamageDealtCrit, t => t.DamageDealtCrit, t => t.DamageDealtCritPerSecond, ValueFormat.LongNumber, ValueFormat.LongNumber),
+		new("damage taken", "/s", c => c.DamageTaken, t => t.DamageTaken, t => t.DamageTakenPerSecond, ValueFormat.LongNumber, ValueFormat.LongNumber),
+		new("healing", "/s", c => c.Healing, t => t.Healing, t => t.HealingPerSecond, ValueFormat.LongNumber, ValueFormat.LongNumber)
+	];
 
-	public Func<StatTracker, string> TotalValue;
-	public Func<StatTracker, string> RateValue = static _ => string.Empty;
-}
+	private readonly RenderBrush panelFill = new(192, 0, 0, 0, 0f);
+	private readonly RenderBrush panelBorder = new(255, 16, 16, 16, 3f);
+	private readonly RenderBrush cellBorder = new(255, 0, 0, 0, 1f);
+	private readonly RenderBrush hoverFill = new(255, 255, 255, 255, 0f);
+	private readonly RenderBrush experienceFill = new(220, 107, 157, 255, 0f);
+	private readonly RenderBrush eliteFill = new(220, 255, 148, 20, 0f);
+	private readonly RenderBrush legendaryFill = new(220, 211, 120, 67, 0f);
+	private readonly RenderBrush cellFill = new(220, 230, 230, 230, 0f);
+	private readonly RenderBrush timeFill = new(220, 87, 87, 87, 0f);
 
-internal class ModuleStatTracker : Module
-{
-	private readonly RenderBrush class219_0 = new RenderBrush(192, 0, 0, 0, 0f);
+	private readonly RenderFont totalTitleFont = new(255, 180, 255, 180, "arial", true, false, 7f, Alignment.Left, false, false);
+	private readonly RenderFont titleFont = new(255, 180, 255, 180, "Arial", false, false, 6f, Alignment.Left, false, false);
+	private readonly RenderFont blackText = new(255, 0, 0, 0, "Arial", false, false, 6f, Alignment.Left, false, false);
+	private readonly RenderFont boldBlackText = new(255, 0, 0, 0, "Arial", true, false, 6f, Alignment.Left, false, false);
+	private readonly RenderFont whiteText = new(255, 255, 255, 255, "Arial", false, false, 6f, Alignment.Left, false, false);
 
-	private readonly RenderBrush class219_1 = new RenderBrush(255, 16, 16, 16, 3f);
-
-	private readonly RenderBrush class219_2 = new RenderBrush(255, 0, 0, 0, 1f);
-
-	private readonly RenderBrush class219_3 = new RenderBrush(255, 0, 64, 0, 3f);
-
-	private readonly RenderBrush class219_4 = new RenderBrush(255, 255, 255, 255, 0f);
-
-	private readonly RenderBrush class219_5 = new RenderBrush(220, 107, 157, 255, 0f);
-
-	private readonly RenderBrush class219_6 = new RenderBrush(220, 255, 148, 20, 0f);
-
-	private readonly RenderBrush class219_7 = new RenderBrush(220, 211, 120, 67, 0f);
-
-	private readonly RenderBrush class219_8 = new RenderBrush(220, 230, 230, 230, 0f);
-
-	private readonly RenderBrush class219_9 = new RenderBrush(220, 87, 87, 87, 0f);
-
-	private readonly RenderFont class221_0 = new RenderFont(255, 180, 255, 180, "arial", true, false, 7f, Alignment.Left, false, false);
-
-	private readonly RenderFont class221_1 = new RenderFont(255, 180, 255, 180, "Arial", false, false, 6f, Alignment.Left, false, false);
-
-	private readonly RenderFont blackText = new RenderFont(255, 0, 0, 0, "Arial", false, false, 6f, Alignment.Left, false, false);
-
-	private readonly RenderFont class221_3 = new RenderFont(255, 0, 0, 0, "Arial", true, false, 6f, Alignment.Left, false, false);
-
-	private readonly RenderFont whiteText = new RenderFont(255, 255, 255, 255, "Arial", false, false, 6f, Alignment.Left, false, false);
-
-	private readonly bool showExperience;
-
-	private readonly bool showGoldPickup;
-
-	private readonly bool showTotalKills;
-
-	private readonly bool showEliteKills;
-
-	private readonly bool ShowDropAll;
-
-	private readonly bool dropWhite;
-
-	private readonly bool dropMagic;
-
-	private readonly bool dropRare;
-
-	private readonly bool dropLegendary;
-
-	private readonly bool dropBloodShard;
-
-	private readonly bool death;
-
-	private readonly bool showDamageDealt;
-
-	private readonly bool showDamageTaken;
-
-	private readonly bool showHealing;
-
-	private readonly float widthScale = 100f;
-
+	private readonly float widthScale;
+	private readonly ColumnDefinition[] columns;
 	private readonly List<StatTracker> trackers = [];
+	private readonly Dictionary<StatTracker, RowCells> rows = [];
+	private readonly int[] columnWidths;
 
-	private readonly List<StatColumn> columns = [];
-
+	private long lastCellRefresh;
+	private int refreshGeneration;
 	private int currentColumnX;
-
 	private int currentRowY;
-
 	private int cellPadding;
 
-	private int[] columnWidths;
-
-	public ModuleStatTracker(StatTrackerSettings statTracker) : base(statTracker.Enabled) {
+	public ModuleStatTracker(StatTrackerSettings settings) : base(settings.Enabled)
+	{
 		Show = false;
-		SetTransparentComponents(class219_0, class219_1, class219_2, class219_3, class219_4, class219_5, class219_6, class219_7, class219_8, class219_9, class221_0, class221_1, blackText, class221_3, whiteText);
-		widthScale = statTracker.ScaleWidth / 100f;
-
-		showExperience = statTracker.Columns.Experience;
-		showGoldPickup = statTracker.Columns.GoldPickup;
-		showTotalKills = statTracker.Columns.KillTotal;
-		showEliteKills = statTracker.Columns.KillElite;
-		ShowDropAll = statTracker.Columns.DropAll;
-		dropWhite = statTracker.Columns.DropWhite;
-		dropMagic = statTracker.Columns.DropMagic;
-		dropRare = statTracker.Columns.DropRare;
-		dropLegendary = statTracker.Columns.DropLegendary;
-		dropBloodShard = statTracker.Columns.DropBloodShard;
-		death = statTracker.Columns.Death;
-		showDamageDealt = statTracker.Columns.DamageDealtAll;
-		showDamageTaken = statTracker.Columns.DamageTaken;
-		showHealing = statTracker.Columns.Healing;
-
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.Experience,
-			Header = "Experience",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.GoldPickup,
-			Header = "Gold Pickup",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.KillTotal,
-			Header = "Total Kills",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.KillElite,
-			Header = "Elite Kills",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropAll,
-			Header = "Drop All",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropWhite,
-			Header = "Drop White",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropMagic,
-			Header = "Drop Magic",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropRare,
-			Header = "Drop Rare",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropLegendary,
-			Header = "Drop Legendary",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DropBloodShard,
-			Header = "Drop Blood Shard",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.Death,
-			Header = "Death",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DamageDealtAll,
-			Header = "Damage Dealt",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.DamageTaken,
-			Header = "Damage Taken",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
-		columns.Add(new StatColumn {
-			Enabled = statTracker.Columns.Healing,
-			Header = "Healing",
-			HeaderFont = whiteText,
-			HeaderBrush = class219_7,
-			TotalValue = t => Formatting.ValueToString(
-		t.DropLegendary,
-		ValueFormat.NormalNumber)
-		});
+		SetTransparentComponents(panelFill, panelBorder, cellBorder, hoverFill, experienceFill, eliteFill, legendaryFill, cellFill, timeFill, totalTitleFont, titleFont, blackText, boldBlackText, whiteText);
+		widthScale = settings.ScaleWidth / 100f;
+		columns = [.. Array.FindAll(AllColumns, column => column.IsEnabled(settings.Columns))];
+		columnWidths = new int[2 + columns.Length * 2];
 	}
 
 	public override void Dispose()
 	{
-		Overlay.Instance.DisposeRenders(class219_0, class219_1, class219_2, class219_3, class221_0, class221_1, blackText, class221_3, class219_4);
-		Overlay.Instance.DisposeRenders(class219_5, class219_6, class219_7, class219_8, class219_9, whiteText);
+		Overlay.Instance.DisposeRenders(panelFill, panelBorder, cellBorder, hoverFill, totalTitleFont, titleFont, blackText, boldBlackText);
+		Overlay.Instance.DisposeRenders(experienceFill, eliteFill, legendaryFill, cellFill, timeFill, whiteText);
 		base.Dispose();
-	}
-
-
-	private void SetupTrackers()
-	{
-		trackers.Clear();
-		if (CoreCollector.IsGameReady) {
-			trackers.Add(CoreCollector.AccountTotal);
-			trackers.Add(CoreCollector.AccountYesterday);
-			trackers.Add(CoreCollector.AccountToday);
-			trackers.Add(CoreCollector.CurrentHeroTotal);
-			trackers.Add(CoreCollector.CurrentHeroYesterday);
-			trackers.Add(CoreCollector.CurrentHeroToday);
-			trackers.Add(CoreCollector.Session);
-			trackers.Add(CoreCollector.SessionAlwaysRunning);
-			if (CoreCollector.RunTracker != null) {
-				trackers.Add(CoreCollector.RunTracker.RunStatTracker);
-				for (int i = 0; i < CoreCollector.RunTracker.VisitedAreas.Count; i++) {
-					AreaTracker areaTracker = CoreCollector.RunTracker.VisitedAreas[i];
-					if (!areaTracker.SnoArea.IsTown) {
-						StatTracker class340_ = areaTracker.AreaStats;
-						class340_.Title = areaTracker.AreaNameLocalized;
-						class340_.SnoArea = areaTracker.SnoArea;
-						trackers.Add(class340_);
-						if (areaTracker.AreaTotalStats != null) {
-							class340_ = areaTracker.AreaTotalStats;
-							class340_.Title = "TOTAL - " + areaTracker.AreaNameLocalized;
-							class340_.SnoArea = areaTracker.SnoArea;
-							trackers.Add(class340_);
-						}
-					}
-				}
-			}
-		} else {
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_0);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_1);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_2);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_3);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_4);
-			trackers.Add(CoreCollector.Session);
-			trackers.Add(CoreCollector.SessionAlwaysRunning);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_5);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_6);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_7);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_8);
-			trackers.Add(Overlay.Instance.lobbyHeroesModule.class340_9);
-		}
 	}
 
 	public void Draw()
 	{
-		if (CoreCollector.IsLoading) {
-			Show = false;
+		if (CoreCollector.IsLoading) Show = false;
+
+		var lobby = Overlay.Instance.lobbyHeroesModule;
+		bool wasShown = Show;
+		if (lobby?.ihero_0 != null) Show = true;
+		bool visible = vmethod_0(bool_4: true);
+		Show = wasShown;
+		if (!visible) return;
+		if (!CoreCollector.IsGameReady && lobby != null && lobby.ihero_0 == null) return;
+
+		CollectTrackers();
+		bool refreshCells = Stopwatch.GetElapsedTime(lastCellRefresh) >= CellRefreshInterval;
+		if (refreshCells) {
+			lastCellRefresh = Stopwatch.GetTimestamp();
+			refreshGeneration++;
 		}
 
-		int enabledColumns = 0;
-		foreach (var column in columns) {
-			if (column.Enabled)
-				enabledColumns++;
+		var window = GameWindowManager.Window;
+		int windowWidth = window.Size.Width;
+		int windowHeight = window.Size.Height;
+		int top = Round(windowHeight * (CoreCollector.IsGameReady ? 0.021f : 0.098f));
+		int left = Round(Math.Max(0f, (windowWidth - windowHeight * 4f / 3f * widthScale) / 2f));
+		int padding = Round(windowHeight * 0.01f);
+		int headerHeight = Round(windowHeight * 0.02f);
+		int unitHeight = Round(windowHeight * 0.02f);
+		int rowHeight = Round(windowHeight * 0.016f);
+		cellPadding = Round(windowHeight * 0.003f);
+
+		float contentHeight = headerHeight + unitHeight + rowHeight * trackers.Count;
+		float panelX = left + 0.5f;
+		float panelY = top + 0.5f;
+		float panelWidth = Round(windowWidth - left * 2);
+		float panelHeight = Round(Math.Min(padding * 2 + contentHeight, windowHeight - top * 2));
+		int contentX = Round(panelX + padding);
+		int contentY = Round(panelY + padding);
+		int titleWidth = Round(windowHeight * 0.18f);
+		float tableWidth = panelWidth - padding * 2 - titleWidth;
+		float rowWidth = titleWidth + tableWidth;
+		int tableX = contentX + titleWidth;
+
+		int unit = Round((float)Math.Floor(tableWidth / (columnWidths.Length + 1f)));
+		columnWidths[0] = Round((float)Math.Floor(unit * 1.4f));
+		columnWidths[1] = Round((float)Math.Floor(unit * 1.6f));
+		for (int i = 2; i < columnWidths.Length; i++) {
+			columnWidths[i] = Round(unit * (i % 2 == 0 ? 1.1f : 0.9f));
 		}
 
-		int num = 2 + enabledColumns * 2;
-		if (columnWidths == null || columnWidths.Length != num) {
-			columnWidths = new int[num];
-		}
-		bool show = Show;
-		if (Overlay.Instance.lobbyHeroesModule != null && Overlay.Instance.lobbyHeroesModule.ihero_0 != null) {
-			Show = true;
-		}
-		if (!vmethod_0(bool_4: true)) {
-			Show = show;
-			return;
-		}
-		Show = show;
-		if (!CoreCollector.IsGameReady && Overlay.Instance.lobbyHeroesModule != null && Overlay.Instance.lobbyHeroesModule.ihero_0 == null) {
-			return;
+		panelFill.DrawRectangle(panelX, panelY, panelWidth, panelHeight);
+		panelBorder.DrawRectangle(panelX, panelY, panelWidth, panelHeight);
+
+		currentColumnX = tableX;
+		currentRowY = contentY;
+		DrawCell(0, whiteText, "time", headerHeight, Alignment.Center, 2, timeFill);
+		for (int i = 0; i < columns.Length; i++) {
+			var accent = columns[i].Accent;
+			DrawCell(2 + i * 2, accent == Accent.None ? boldBlackText : whiteText, columns[i].Header, headerHeight, Alignment.Center, 2, AccentFill(accent));
 		}
 
-		SetupTrackers();
-		int num2 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * (CoreCollector.IsGameReady ? 0.021f : 0.098f));
-		int num3 = Convert.ToInt32(Math.Max(0f, ((float)GameWindowManager.Window.Size.Width - (float)GameWindowManager.Window.Size.Height * 4f / 3f * widthScale) / 2f));
-		int num4 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * 0.01f);
-		int num5 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * 0.02f);
-		int num6 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * 0.02f);
-		int num7 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * ((trackers.Count < 30) ? 0.016f : 0.016f));
-		cellPadding = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * 0.003f);
-		float num8 = num5 + num6 + num7 * trackers.Count;
-		float num9 = (float)Convert.ToInt32(num3) + 0.5f;
-		float num10 = (float)Convert.ToInt32(num2) + 0.5f;
-		float num11 = Convert.ToInt32(GameWindowManager.Window.Size.Width - num3 * 2);
-		float h = Convert.ToInt32(Math.Min((float)(num4 * 2) + num8, GameWindowManager.Window.Size.Height - num2 * 2));
-		int num12 = Convert.ToInt32(num9 + (float)num4);
-		int num13 = Convert.ToInt32(num10 + (float)num4);
-		int num14 = Convert.ToInt32((float)GameWindowManager.Window.Size.Height * 0.18f);
-		float num15 = num11 - (float)(num4 * 2) - (float)num14;
-		float num16 = (float)num14 + num15;
-		int num17 = num12 + num14;
-		int num18 = Convert.ToInt32(Math.Floor(num15 / ((float)num + 1f)));
-		columnWidths[0] = Convert.ToInt32(Math.Floor((float)num18 * 1.4f));
-		columnWidths[1] = Convert.ToInt32(Math.Floor((float)num18 * 1.6f));
-		for (int j = 2; j < num; j++) {
-			columnWidths[j] = ((j % 2 == 0) ? Convert.ToInt32((float)num18 * 1.1f) : Convert.ToInt32((float)num18 * 0.9f));
+		currentColumnX = tableX;
+		currentRowY += headerHeight;
+		DrawCell(0, boldBlackText, "in town", unitHeight, Alignment.Right, 1, null);
+		DrawCell(1, whiteText, "play", unitHeight, Alignment.Right, 1, timeFill);
+		for (int i = 0; i < columns.Length; i++) {
+			var accent = columns[i].Accent;
+			DrawCell(2 + i * 2, boldBlackText, "sum", unitHeight, Alignment.Right, 1, null);
+			DrawCell(3 + i * 2, accent == Accent.None ? boldBlackText : whiteText, columns[i].RateUnit, unitHeight, Alignment.Right, 1, AccentFill(accent));
 		}
-		class219_0.DrawRectangle(num9, num10, num11, h);
-		class219_1.DrawRectangle(num9, num10, num11, h);
-		currentColumnX = num17;
-		currentRowY = num13;
-		int num19 = 0;
-		num19 = 0 + 1;
-		DrawCell(0 * 2, whiteText, "time", num5, null, Alignment.Center, 2, class219_9);
 
-		currentColumnX = num17;
-		currentRowY += num5;
-		num19 = 0;
-		num19 = 0 + 1;
-		DrawCell(0, class221_3, "in town", num6, null, Alignment.Right, 1, null);
-		num19 = 1 + 1;
-		DrawCell(1, whiteText, "play", num6, null, Alignment.Right, 1, class219_9);
+		currentRowY += unitHeight;
+		foreach (var tracker in trackers) {
+			var cells = GetCells(tracker, refreshCells);
+			var rowTitleFont = tracker.Title is "ACCOUNT TOTAL" or "HERO TOTAL" ? totalTitleFont : titleFont;
+			var titleLayout = rowTitleFont.GetTextLayout(tracker.Title);
+			rowTitleFont.DrawText(titleLayout, tableX - titleLayout.Metrics.Width - cellPadding, currentRowY + (rowHeight - titleLayout.Metrics.Height) / 2f);
 
-		foreach (var column in columns) {
-			if (!column.Enabled) continue;
-			DrawCell(num19++ * 2, column.HeaderFont, column.Header, num5, null, Alignment.Center, 2, column.HeaderBrush);
-			DrawCell(num19++ * 2, class221_3, null, num5, null, Alignment.Center, 2, null);
-		}
-		currentRowY += num6;
-		for (int k = 0; k < trackers.Count; k++) {
-			StatTracker statTracker = trackers[k];
-			RenderFont renderFont = ((statTracker.Title == "ACCOUNT TOTAL" || statTracker.Title == "HERO TOTAL") ? class221_0 : class221_1);
-			TextLayout textLayout = renderFont.GetTextLayout(statTracker.Title);
-			renderFont.DrawText(textLayout, (float)num17 - textLayout.Metrics.Width - (float)cellPadding, (float)currentRowY + ((float)num7 - textLayout.Metrics.Height) / 2f);
-			currentColumnX = num17;
-			RenderBrush class219_ = null;
-			if (GameWindowManager.Window.CursorX >= num12 && (float)GameWindowManager.Window.CursorX <= (float)num12 + num16 && GameWindowManager.Window.CursorY >= currentRowY && GameWindowManager.Window.CursorY < currentRowY + num7) {
-				class219_ = class219_4;
+			bool hovered = window.CursorX >= contentX && window.CursorX <= contentX + rowWidth && window.CursorY >= currentRowY && window.CursorY < currentRowY + rowHeight;
+			var rowFill = hovered ? hoverFill : cellFill;
+
+			currentColumnX = tableX;
+			DrawCell(0, blackText, tracker.SnoArea != null ? "" : tracker.AlwaysRunning ? "-" : cells.TownTime, rowHeight, Alignment.Right, 1, rowFill);
+			DrawCell(1, whiteText, cells.PlayTime, rowHeight, Alignment.Right, 1, timeFill);
+			for (int i = 0; i < columns.Length; i++) {
+				var accentFill = AccentFill(columns[i].Accent);
+				DrawCell(2 + i * 2, blackText, cells.Totals[i], rowHeight, Alignment.Right, 1, rowFill);
+				DrawCell(3 + i * 2, accentFill != null ? whiteText : blackText, cells.Rates[i], rowHeight, Alignment.Right, 1, accentFill ?? rowFill);
 			}
-			num19 = 0;
-			if (statTracker.SnoArea != null) {
-				DrawCell(num19++, blackText, "", num7, class219_, Alignment.Right, 1, null);
-			} else {
-				DrawCell(num19++, blackText, statTracker.AlwaysRunning ? "-" : statTracker.FormatTownTime(), num7, class219_, Alignment.Right, 1, null);
-			}
-			DrawCell(num19++, whiteText, statTracker.FormatPlayTime(), num7, class219_, Alignment.Right, 1, class219_9);
 
-			foreach (var column in columns) {
-				if (!column.Enabled) continue;
+			currentRowY += rowHeight;
+		}
 
-				DrawCell(num19++, column.HeaderFont, column.TotalValue(statTracker), num7, class219_, Alignment.Right, 1, null);
-				DrawCell(num19++, column.HeaderFont, column.RateValue(statTracker), num7, class219_, Alignment.Right, 1, null);
-			}
-			currentRowY += num7;
+		if (refreshCells) DropStaleRows();
+	}
+
+	private static int Round(float value) => Convert.ToInt32(value);
+
+	private RenderBrush AccentFill(Accent accent)
+	{
+		return accent switch {
+			Accent.Experience => experienceFill,
+			Accent.Elite => eliteFill,
+			Accent.Legendary => legendaryFill,
+			_ => null
+		};
+	}
+
+	private RowCells GetCells(StatTracker tracker, bool refresh)
+	{
+		if (!rows.TryGetValue(tracker, out var cells)) {
+			cells = new RowCells(columns.Length);
+			rows[tracker] = cells;
+			refresh = true;
+		}
+
+		cells.Generation = refreshGeneration;
+		if (refresh) cells.Refresh(tracker, columns);
+		return cells;
+	}
+
+	private void DropStaleRows()
+	{
+		List<StatTracker> stale = null;
+		foreach (var pair in rows) {
+			if (pair.Value.Generation != refreshGeneration) (stale ??= []).Add(pair.Key);
+		}
+
+		if (stale == null) return;
+
+		foreach (var tracker in stale) {
+			rows.Remove(tracker);
 		}
 	}
 
-	private void DrawCell(int columnIndex, RenderFont font, string header, float height, RenderBrush hoverBrush, Alignment alignment, int columnSpan, RenderBrush overrideBrush)
+	private void CollectTrackers()
+	{
+		trackers.Clear();
+		if (CoreCollector.IsGameReady) {
+			AddTracker(CoreCollector.AccountTotal);
+			AddTracker(CoreCollector.AccountYesterday);
+			AddTracker(CoreCollector.AccountToday);
+			AddTracker(CoreCollector.CurrentHeroTotal);
+			AddTracker(CoreCollector.CurrentHeroYesterday);
+			AddTracker(CoreCollector.CurrentHeroToday);
+			AddTracker(CoreCollector.Session);
+			AddTracker(CoreCollector.SessionAlwaysRunning);
+			var run = CoreCollector.RunTracker;
+			if (run == null) return;
+
+			AddTracker(run.RunStatTracker);
+			foreach (var area in run.VisitedAreas) {
+				if (area.SnoArea.IsTown) continue;
+
+				area.AreaStats.Title = area.AreaNameLocalized;
+				area.AreaStats.SnoArea = area.SnoArea;
+				AddTracker(area.AreaStats);
+				if (area.AreaTotalStats == null) continue;
+
+				area.AreaTotalStats.Title = "TOTAL - " + area.AreaNameLocalized;
+				area.AreaTotalStats.SnoArea = area.SnoArea;
+				AddTracker(area.AreaTotalStats);
+			}
+
+			return;
+		}
+
+		var lobby = Overlay.Instance.lobbyHeroesModule;
+		AddTracker(lobby.class340_0);
+		AddTracker(lobby.class340_1);
+		AddTracker(lobby.class340_2);
+		AddTracker(lobby.class340_3);
+		AddTracker(lobby.class340_4);
+		AddTracker(CoreCollector.Session);
+		AddTracker(CoreCollector.SessionAlwaysRunning);
+		AddTracker(lobby.class340_5);
+		AddTracker(lobby.class340_6);
+		AddTracker(lobby.class340_7);
+		AddTracker(lobby.class340_8);
+		AddTracker(lobby.class340_9);
+	}
+
+	private void AddTracker(StatTracker tracker)
+	{
+		if (tracker != null) trackers.Add(tracker);
+	}
+
+	private void DrawCell(int columnIndex, RenderFont font, string text, float height, Alignment alignment, int columnSpan, RenderBrush fill)
 	{
 		int width = columnWidths[columnIndex];
 		while (--columnSpan > 0) {
 			width += columnWidths[++columnIndex];
 		}
 
-		var layout = font.GetTextLayout(header);
+		var layout = font.GetTextLayout(text);
 		float x = currentColumnX + 0.5f;
 		float y = currentRowY + 0.5f;
-		(hoverBrush ?? class219_8).DrawRectangle(x, y, width, height);
+		(fill ?? cellFill).DrawRectangle(x, y, width, height);
 
-		float textX;
-		float textY = currentRowY + (height - layout.Metrics.Height) * 0.5f;
-		switch (alignment) {
-			case Alignment.Left:
-				textX = x + cellPadding;
-				break;
-			case Alignment.Right:
-				textX = x + width - layout.Metrics.Width - cellPadding;
-				break;
-			default:
-				textX = x + (width - layout.Metrics.Width) * 0.5f;
-				break;
-		}
-
-		font.DrawText(layout, textX, textY);
-		class219_2.DrawRectangle(x, y, width, height);
+		float textX = alignment switch {
+			Alignment.Left => x + cellPadding,
+			Alignment.Right => x + width - layout.Metrics.Width - cellPadding,
+			_ => x + (width - layout.Metrics.Width) * 0.5f
+		};
+		font.DrawText(layout, textX, currentRowY + (height - layout.Metrics.Height) * 0.5f);
+		cellBorder.DrawRectangle(x, y, width, height);
 		currentColumnX += width;
+	}
+
+	private enum Accent
+	{
+		None,
+		Experience,
+		Elite,
+		Legendary
+	}
+
+	private sealed record ColumnDefinition(
+		string Header,
+		string RateUnit,
+		Func<StatColumns, bool> IsEnabled,
+		Func<StatTracker, double> Total,
+		Func<StatTracker, double> Rate,
+		ValueFormat TotalFormat,
+		ValueFormat RateFormat,
+		Accent Accent = Accent.None
+	);
+
+	private sealed class RowCells(int columnCount)
+	{
+		public readonly string[] Totals = new string[columnCount];
+		public readonly string[] Rates = new string[columnCount];
+		public string TownTime = "";
+		public string PlayTime = "";
+		public int Generation;
+
+		public void Refresh(StatTracker tracker, ColumnDefinition[] columns)
+		{
+			TownTime = tracker.FormatTownTime();
+			PlayTime = tracker.FormatPlayTime();
+			for (int i = 0; i < columns.Length; i++) {
+				Totals[i] = Formatting.ValueToString(columns[i].Total(tracker), columns[i].TotalFormat);
+				Rates[i] = Formatting.ValueToString(columns[i].Rate(tracker), columns[i].RateFormat);
+			}
+		}
 	}
 }

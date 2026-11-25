@@ -212,6 +212,7 @@ public static class Core
 	{
 		while (running) {
 			SettingsManager.Tick();
+			StatTrackerAutosave.Tick();
 			if (!GameWindowManager.Update()) {
 				Thread.Sleep((int)OverlayFrameInterval);
 				continue;
@@ -240,6 +241,7 @@ public static class Core
 			item.Save();
 		}
 
+		StatTrackerStorage.Flush();
 		CoreCollector.ResetGameState();
 	}
 

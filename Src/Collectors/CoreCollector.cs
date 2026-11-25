@@ -258,8 +258,8 @@ internal static class CoreCollector
 		UiElements.SetupUiElements();
 		LocalPlayer = new Player(0);
 		GameWindowManager.Update();
-		Session = new StatTracker("session", false, "SESSION", (string)null);
-		SessionAlwaysRunning = new StatTracker("session_abs", true, "SESSION (abs)", (string)null) {
+		Session = new StatTracker("session", false, "SESSION");
+		SessionAlwaysRunning = new StatTracker("session_abs", true, "SESSION (abs)") {
 			AlwaysRunning = true
 		};
 		D3Memory = new D3Memory();
@@ -279,6 +279,8 @@ internal static class CoreCollector
 		}
 	}
 
+	private static DateTime trackerDay;
+
 	private static void ResetStatTrackers(bool bool_7, bool bool_8)
 	{
 		if (bool_7) {
@@ -292,18 +294,19 @@ internal static class CoreCollector
 		object obj;
 		if (bool_8) {
 			DateTime now = DateTime.Now;
-			AccountTotal = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total");
-			AccountYesterday = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			AccountToday = new StatTracker(BattleTag, bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentHeroTotal = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total");
-			CurrentHeroYesterday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentHeroToday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentAccountTotalOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: true, "ACCOUNT TOTAL", "total_" + Unknown);
-			CurrentAccountYesterdayOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentAccountTodayOnCurrentDifficulty = new StatTracker(BattleTag, bool_1: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentHeroTotalOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "HERO TOTAL", "total_" + Unknown);
-			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			trackerDay = now.Date;
+			AccountTotal = new StatTracker(BattleTag, startRunning: true, "ACCOUNT TOTAL", "total");
+			AccountYesterday = new StatTracker(BattleTag, startRunning: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			AccountToday = new StatTracker(BattleTag, startRunning: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTotal = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "HERO TOTAL", "total");
+			CurrentHeroYesterday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: false, "yesterday", "total_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroToday = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "today", "total_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentAccountTotalOnCurrentDifficulty = new StatTracker(BattleTag, startRunning: true, "ACCOUNT TOTAL", "total_" + Unknown);
+			CurrentAccountYesterdayOnCurrentDifficulty = new StatTracker(BattleTag, startRunning: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentAccountTodayOnCurrentDifficulty = new StatTracker(BattleTag, startRunning: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTotalOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "HERO TOTAL", "total_" + Unknown);
+			CurrentHeroYesterdayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: false, "yesterday", "total_" + Unknown.ToString() + "_" + now.AddDays(-1.0).ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+			CurrentHeroTodayOnCurrentDifficulty = new StatTracker(LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "today", "total_" + Unknown.ToString() + "_" + now.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
 			SnoArea snoArea = LocalPlayer.SnoArea;
 			if (snoArea == null) {
 				obj = null;
@@ -627,6 +630,10 @@ internal static class CoreCollector
 				if (!IsLoading && snoArea != null && (LastSnoArea == null || (LastSnoArea != snoArea && LastSnoArea.NameLocalized != snoArea.NameLocalized))) {
 					LastSnoArea = snoArea;
 					OnFalseNewArea?.Invoke(null, LastSnoArea);
+					ResetStatTrackers(bool_7: true, bool_8: true);
+				}
+				// The today trackers are named after the day they were created, so a session running past midnight must start new ones.
+				if (!IsLoading && snoArea != null && RunTracker != null && DateTime.Now.Date != trackerDay) {
 					ResetStatTrackers(bool_7: true, bool_8: true);
 				}
 				UpdateSpecialArea();

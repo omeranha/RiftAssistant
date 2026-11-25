@@ -35,11 +35,11 @@ internal class AreaTracker
 		StartTime = DateTime.Now;
 		StartGameTick = CoreCollector.D3Memory.GameTick;
 
-		AreaStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), true, "AREA", (string)null);
-		AreaTotalStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "AREA TOTAL", "areatotal_" + areaSnoString) {
+		AreaStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), true, "AREA");
+		AreaTotalStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "AREA TOTAL", "areatotal_" + areaSnoString) {
 			SnoArea = snoArea
 		};
-		AreaTotalDifficultyStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), bool_1: true, "AREA TOTAL", "areatotal_" + runTracker.GameDifficulty.ToString() + "_" + areaSnoString) {
+		AreaTotalDifficultyStats = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), startRunning: true, "AREA TOTAL", "areatotal_" + runTracker.GameDifficulty.ToString() + "_" + areaSnoString) {
 			SnoArea = snoArea
 		};
 	}

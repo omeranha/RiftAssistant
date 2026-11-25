@@ -45,7 +45,7 @@ internal class RunTracker
 		StartGameTick = CoreCollector.D3Memory.GameTick;
 		HeroCollectorValue = CoreCollector.HeroCollector.Int32_0;
 		GameServerIp = CoreCollector.GameServerIP;
-		RunStatTracker = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), true, "RUN", (string)null);
+		RunStatTracker = new StatTracker(CoreCollector.LocalPlayer.HeroId.ToString("D", CultureInfo.InvariantCulture), true, "RUN");
 		IsHardcore = CoreCollector.LocalPlayer.HeroIsHardcore;
 		HeroId = CoreCollector.LocalPlayer.HeroId;
 		PlayerValue = ((CoreCollector.LocalPlayer as Player).Seasonal ? (CoreCollector.LocalPlayer as Player).Season : 0);

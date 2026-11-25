@@ -67,7 +67,7 @@ Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the 
 | `settings/hotkeys.json` | Hotkey bindings |
 | `settings/item_filter_sc.json` | Softcore item filter rules |
 | `settings/item_filter_hc.json` | Hardcore item filter rules |
-| `stat_tracker/` | Saved stat tracker sessions |
+| `stat_tracker/` | Stat tracker totals (account, hero, today and per area) as JSON, saved every minute, on zone changes, at midnight and on exit |
 | `screenshots/` | Screenshots taken by plugins |
 | `cache/` | Compiled plugin cache |
 | `logs/` | `info.txt` and `exceptions.txt`, cleared on each start |

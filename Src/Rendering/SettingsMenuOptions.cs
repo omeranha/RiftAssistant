@@ -70,6 +70,7 @@ internal static class SettingsMenuOptions
 		AddSection("Stat tracker columns", [
 			Toggle("Experience", s => s.Overlay.StatTracker.Columns.Experience, (s, v) => s.Overlay.StatTracker.Columns.Experience = v),
 			Toggle("Gold picked up", s => s.Overlay.StatTracker.Columns.GoldPickup, (s, v) => s.Overlay.StatTracker.Columns.GoldPickup = v),
+			Toggle("Gold dropped", s => s.Overlay.StatTracker.Columns.GoldDrop, (s, v) => s.Overlay.StatTracker.Columns.GoldDrop = v),
 			Toggle("Kills", s => s.Overlay.StatTracker.Columns.KillTotal, (s, v) => s.Overlay.StatTracker.Columns.KillTotal = v),
 			Toggle("Elite kills", s => s.Overlay.StatTracker.Columns.KillElite, (s, v) => s.Overlay.StatTracker.Columns.KillElite = v),
 			Toggle("Drops: all", s => s.Overlay.StatTracker.Columns.DropAll, (s, v) => s.Overlay.StatTracker.Columns.DropAll = v),
@@ -80,6 +81,7 @@ internal static class SettingsMenuOptions
 			Toggle("Drops: blood shards", s => s.Overlay.StatTracker.Columns.DropBloodShard, (s, v) => s.Overlay.StatTracker.Columns.DropBloodShard = v),
 			Toggle("Deaths", s => s.Overlay.StatTracker.Columns.Death, (s, v) => s.Overlay.StatTracker.Columns.Death = v),
 			Toggle("Damage dealt", s => s.Overlay.StatTracker.Columns.DamageDealtAll, (s, v) => s.Overlay.StatTracker.Columns.DamageDealtAll = v),
+			Toggle("Crit damage dealt", s => s.Overlay.StatTracker.Columns.DamageDealtCrit, (s, v) => s.Overlay.StatTracker.Columns.DamageDealtCrit = v),
 			Toggle("Damage taken", s => s.Overlay.StatTracker.Columns.DamageTaken, (s, v) => s.Overlay.StatTracker.Columns.DamageTaken = v),
 			Toggle("Healing", s => s.Overlay.StatTracker.Columns.Healing, (s, v) => s.Overlay.StatTracker.Columns.Healing = v)
 		]);
