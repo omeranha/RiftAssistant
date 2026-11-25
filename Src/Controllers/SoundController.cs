@@ -7,7 +7,7 @@ using System.Speech.Synthesis;
 
 namespace RiftAssistant.Controllers;
 
-public class SoundController
+public partial class SoundController
 {
 	private SpeechSynthesizer synthesizer;
 	private int appliedVolume = -1;
@@ -83,6 +83,6 @@ public class SoundController
 		appliedVolume = volume;
 	}
 
-	[DllImport("winmm.dll")]
-	private static extern int waveOutSetVolume(IntPtr deviceHandle, uint volume);
+	[LibraryImport("winmm.dll")]
+	private static partial int waveOutSetVolume(IntPtr deviceHandle, uint volume);
 }

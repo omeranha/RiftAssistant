@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace RiftAssistant.Input;
 
-internal static class MouseBlocker
+internal static partial class MouseBlocker
 {
 	private const int WH_MOUSE_LL = 14;
 	private const int WM_LBUTTONDOWN = 0x0201;
@@ -118,16 +118,16 @@ internal static class MouseBlocker
 		public IntPtr dwExtraInfo;
 	}
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
+	[LibraryImport("user32.dll", EntryPoint = "SetWindowsHookExW", SetLastError = true)]
+	private static partial IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+	[LibraryImport("user32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]
-	private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+	private static partial bool UnhookWindowsHookEx(IntPtr hhk);
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+	[LibraryImport("user32.dll", SetLastError = true)]
+	private static partial IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
-	[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr GetModuleHandle(string lpModuleName);
+	[LibraryImport("kernel32.dll", EntryPoint = "GetModuleHandleW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+	private static partial IntPtr GetModuleHandle(string lpModuleName);
 }

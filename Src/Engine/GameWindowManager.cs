@@ -9,7 +9,7 @@ using System.Text;
 
 namespace RiftAssistant.Engine;
 
-internal static class GameWindowManager
+internal static partial class GameWindowManager
 {
 	public static Window Window = new();
 	public static Process Process;
@@ -38,7 +38,7 @@ internal static class GameWindowManager
 		GetWindowThreadProcessId(GetForegroundWindow(), out uint fgPid);
 		Window.IsForeground = fgPid == Window.ProcessId;
 
-		Point clientPoint = default;
+		ScreenPoint clientPoint = default;
 		ClientToScreen(Window.Handle, ref clientPoint);
 		GetClientRect(Window.Handle, out RECT clientRect);
 
@@ -191,31 +191,42 @@ internal static class GameWindowManager
 		return terminator >= 0 ? encoding.GetString(bytes, 0, terminator) : encoding.GetString(bytes);
 	}
 
-	[DllImport("kernel32.dll", SetLastError = true)]
-	private static extern unsafe bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, void* lpBuffer, int nSize, out IntPtr lpNumberOfBytesRead);
-
-	[DllImport("kernel32.dll")]
-	private static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
-
-	[DllImport("kernel32.dll", SetLastError = true)]
+	[LibraryImport("kernel32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]
-	private static extern bool CloseHandle(IntPtr handle);
+	private static unsafe partial bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, void* lpBuffer, int nSize, out IntPtr lpNumberOfBytesRead);
 
-	[DllImport("user32.dll")]
-	private static extern bool GetClientRect(IntPtr handle, out RECT rect);
+	[LibraryImport("kernel32.dll")]
+	private static partial IntPtr OpenProcess(uint processAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int processId);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr GetForegroundWindow();
+	[LibraryImport("kernel32.dll", SetLastError = true)]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool CloseHandle(IntPtr handle);
 
-	[DllImport("user32.dll")]
-	private static extern bool ClientToScreen(IntPtr hwnd, ref Point point);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool GetClientRect(IntPtr handle, out RECT rect);
 
-	[DllImport("user32.dll", SetLastError = true)]
-	private static extern IntPtr FindWindow(string className, string windowName);
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr GetForegroundWindow();
 
-	[DllImport("user32.dll", SetLastError = true)]
-	private static extern IntPtr GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool ClientToScreen(IntPtr hwnd, ref ScreenPoint point);
 
-	[DllImport("user32.dll")]
-	private static extern bool IsWindow(IntPtr hWnd);
+	[StructLayout(LayoutKind.Sequential)]
+	private struct ScreenPoint
+	{
+		public int X;
+		public int Y;
+	}
+
+	[LibraryImport("user32.dll", EntryPoint = "FindWindowW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+	private static partial IntPtr FindWindow(string className, string windowName);
+
+	[LibraryImport("user32.dll", SetLastError = true)]
+	private static partial IntPtr GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool IsWindow(IntPtr hWnd);
 }

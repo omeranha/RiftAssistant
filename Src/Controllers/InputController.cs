@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace RiftAssistant.Controllers;
 
-public class InputController
+public partial class InputController
 {
 	private const uint InputMouse = 0;
 	private const uint InputKeyboard = 1;
@@ -128,15 +128,17 @@ public class InputController
 		public int Y;
 	}
 
-	[DllImport("user32.dll")]
-	private static extern uint SendInput(uint inputCount, Input[] inputs, int size);
+	[LibraryImport("user32.dll")]
+	private static partial uint SendInput(uint inputCount, Input[] inputs, int size);
 
-	[DllImport("user32.dll")]
-	private static extern short GetAsyncKeyState(int key);
+	[LibraryImport("user32.dll")]
+	private static partial short GetAsyncKeyState(int key);
 
-	[DllImport("user32.dll")]
-	private static extern bool GetCursorPos(out NativePoint point);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool GetCursorPos(out NativePoint point);
 
-	[DllImport("user32.dll")]
-	private static extern bool SetCursorPos(int x, int y);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool SetCursorPos(int x, int y);
 }

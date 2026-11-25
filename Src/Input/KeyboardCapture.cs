@@ -10,7 +10,7 @@ namespace RiftAssistant.Input;
 
 internal readonly record struct CapturedKey(Vk Key, char Character, bool Shift, bool Ctrl, bool Alt);
 
-internal static class KeyboardCapture
+internal static partial class KeyboardCapture
 {
 	private const int WH_KEYBOARD_LL = 13;
 	private const int WM_KEYDOWN = 0x0100;
@@ -129,7 +129,7 @@ internal static class KeyboardCapture
 		return new CapturedKey((Vk)vk, ToCharacter(vk, scanCode, shift, ctrl, alt), shift, ctrl, alt);
 	}
 
-	private static char ToCharacter(int vk, uint scanCode, bool shift, bool ctrl, bool alt)
+	private static unsafe char ToCharacter(int vk, uint scanCode, bool shift, bool ctrl, bool alt)
 	{
 		if (ctrl || alt) return '\0';
 
@@ -137,10 +137,10 @@ internal static class KeyboardCapture
 		if (shift) state[0x10] = 0x80;
 		if ((GetKeyState(0x14) & 1) != 0) state[0x14] = 1;
 
-		var buffer = new StringBuilder(4);
+		char* buffer = stackalloc char[4];
 		var layout = GetKeyboardLayout(GetWindowThreadProcessId(GetForegroundWindow(), out _));
 		// Flag 0x4 keeps the keyboard state untouched so dead keys do not alter the game's next character.
-		int count = ToUnicodeEx((uint)vk, scanCode, state, buffer, buffer.Capacity, 0x4, layout);
+		int count = ToUnicodeEx((uint)vk, scanCode, state, buffer, 4, 0x4, layout);
 		return count == 1 && !char.IsControl(buffer[0]) ? buffer[0] : '\0';
 	}
 
@@ -166,34 +166,34 @@ internal static class KeyboardCapture
 		public IntPtr dwExtraInfo;
 	}
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+	[LibraryImport("user32.dll", EntryPoint = "SetWindowsHookExW", SetLastError = true)]
+	private static partial IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+	[LibraryImport("user32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]
-	private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+	private static partial bool UnhookWindowsHookEx(IntPtr hhk);
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+	[LibraryImport("user32.dll", SetLastError = true)]
+	private static partial IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
-	[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-	private static extern IntPtr GetModuleHandle(string lpModuleName);
+	[LibraryImport("kernel32.dll", EntryPoint = "GetModuleHandleW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+	private static partial IntPtr GetModuleHandle(string lpModuleName);
 
-	[DllImport("user32.dll")]
-	private static extern short GetAsyncKeyState(int vKey);
+	[LibraryImport("user32.dll")]
+	private static partial short GetAsyncKeyState(int vKey);
 
-	[DllImport("user32.dll")]
-	private static extern short GetKeyState(int nVirtKey);
+	[LibraryImport("user32.dll")]
+	private static partial short GetKeyState(int nVirtKey);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr GetForegroundWindow();
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr GetForegroundWindow();
 
-	[DllImport("user32.dll")]
-	private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+	[LibraryImport("user32.dll")]
+	private static partial uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr GetKeyboardLayout(uint idThread);
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr GetKeyboardLayout(uint idThread);
 
-	[DllImport("user32.dll", CharSet = CharSet.Unicode)]
-	private static extern int ToUnicodeEx(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeConst = 4)] StringBuilder pwszBuff, int cchBuff, uint wFlags, IntPtr dwhkl);
+	[LibraryImport("user32.dll")]
+	private static unsafe partial int ToUnicodeEx(uint wVirtKey, uint wScanCode, byte[] lpKeyState, char* pwszBuff, int cchBuff, uint wFlags, IntPtr dwhkl);
 }

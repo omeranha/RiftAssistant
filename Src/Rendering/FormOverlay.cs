@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace RiftAssistant.Rendering;
 
-internal class FormOverlay : Form
+internal partial class FormOverlay : Form
 {
 	protected override CreateParams CreateParams
 	{
@@ -50,12 +50,8 @@ internal class FormOverlay : Form
 	[DllImport("dwmapi.dll")]
 	private static extern void DwmExtendFrameIntoClientArea(IntPtr handle, ref int[] margins);
 
-	[DllImport("user32.dll")]
-	static extern int GetWindowLong(IntPtr hwnd, int index);
 
-	[DllImport("user32.dll")]
-	private static extern int SetWindowLong(IntPtr handle, int index, int newLong);
-
-	[DllImport("user32.dll", EntryPoint = "SetLayeredWindowAttributes")]
-	private static extern bool SetLayeredWindowAttributes(IntPtr hwnd, int key, byte alpha, int flags);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool SetLayeredWindowAttributes(IntPtr hwnd, int key, byte alpha, int flags);
 }

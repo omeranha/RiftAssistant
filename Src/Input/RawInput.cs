@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace RiftAssistant.Input;
 
-internal static unsafe class RawInput
+internal static unsafe partial class RawInput
 {
 	private const int WM_INPUT = 0x00FF;
 
@@ -59,14 +59,16 @@ internal static unsafe class RawInput
 	{
 		threadId = GetCurrentThreadId();
 
+		const string className = "RawInputWindow";
+		IntPtr classNamePointer = Marshal.StringToHGlobalUni(className);
 		WNDCLASSEX wc = new() {
 			cbSize = (uint)Marshal.SizeOf<WNDCLASSEX>(),
 			lpfnWndProc = Marshal.GetFunctionPointerForDelegate(_wndProc),
-			lpszClassName = "RawInputWindow"
+			lpszClassName = classNamePointer
 		};
 
 		RegisterClassEx(ref wc);
-		hwnd = CreateWindowEx(0, wc.lpszClassName, "", 0, 0, 0, 0, 0, HWND_MESSAGE, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+		hwnd = CreateWindowEx(0, className, "", 0, 0, 0, 0, 0, HWND_MESSAGE, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
 		RegisterRawDevices(hwnd);
 		while (GetMessage(out MSG msg, IntPtr.Zero, 0, 0) != 0) {
 			TranslateMessage(ref msg);
@@ -182,8 +184,8 @@ internal static unsafe class RawInput
 		public IntPtr hIcon;
 		public IntPtr hCursor;
 		public IntPtr hbrBackground;
-		public string lpszMenuName;
-		public string lpszClassName;
+		public IntPtr lpszMenuName;
+		public IntPtr lpszClassName;
 		public IntPtr hIconSm;
 	}
 
@@ -279,35 +281,37 @@ internal static unsafe class RawInput
 		public uint ExtraInformation;
 	}
 
-	[DllImport("user32.dll", SetLastError = true)]
-	private static extern ushort RegisterClassEx(ref WNDCLASSEX lpwcx);
+	[LibraryImport("user32.dll", EntryPoint = "RegisterClassExW", SetLastError = true)]
+	private static partial ushort RegisterClassEx(ref WNDCLASSEX lpwcx);
 
-	[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-	private static extern IntPtr CreateWindowEx(int exStyle, string className, string windowName, int style, int x, int y, int width, int height, IntPtr parent, IntPtr menu, IntPtr instance, IntPtr param);
+	[LibraryImport("user32.dll", EntryPoint = "CreateWindowExW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+	private static partial IntPtr CreateWindowEx(int exStyle, string className, string windowName, int style, int x, int y, int width, int height, IntPtr parent, IntPtr menu, IntPtr instance, IntPtr param);
 
-	[DllImport("user32.dll")]
-	private static extern bool RegisterRawInputDevices(RAWINPUTDEVICE* devices, uint numDevices, uint size);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool RegisterRawInputDevices(RAWINPUTDEVICE* devices, uint numDevices, uint size);
 
-	[DllImport("user32.dll")]
-	private static extern uint GetRawInputData(IntPtr hRawInput, uint command, IntPtr data, ref uint size, uint headerSize);
+	[LibraryImport("user32.dll")]
+	private static partial uint GetRawInputData(IntPtr hRawInput, uint command, IntPtr data, ref uint size, uint headerSize);
 
-	[DllImport("user32.dll")]
-	private static extern sbyte GetMessage(out MSG msg, IntPtr hwnd, uint min, uint max);
+	[LibraryImport("user32.dll", EntryPoint = "GetMessageW")]
+	private static partial sbyte GetMessage(out MSG msg, IntPtr hwnd, uint min, uint max);
 
-	[DllImport("user32.dll")]
-	private static extern bool TranslateMessage(ref MSG msg);
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool TranslateMessage(ref MSG msg);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr DispatchMessage(ref MSG msg);
+	[LibraryImport("user32.dll", EntryPoint = "DispatchMessageW")]
+	private static partial IntPtr DispatchMessage(ref MSG msg);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr DefWindowProc(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
+	[LibraryImport("user32.dll", EntryPoint = "DefWindowProcW")]
+	private static partial IntPtr DefWindowProc(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-	[DllImport("kernel32.dll")]
-	private static extern uint GetCurrentThreadId();
+	[LibraryImport("kernel32.dll")]
+	private static partial uint GetCurrentThreadId();
 
-	[DllImport("user32.dll", SetLastError = true)]
-	private static extern uint GetAsyncKeyState(int vKey);
+	[LibraryImport("user32.dll", SetLastError = true)]
+	private static partial uint GetAsyncKeyState(int vKey);
 
 	private static bool IsKeyDown(Vk vk) => (GetAsyncKeyState((int)vk) & 0x8000) != 0;
 }

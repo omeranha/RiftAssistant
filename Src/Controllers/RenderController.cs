@@ -7,7 +7,7 @@ using SharpDX.Direct2D1;
 
 namespace RiftAssistant.Controllers;
 
-public class RenderController
+public partial class RenderController
 {
 	private bool isRenderEnabled = true;
 
@@ -234,30 +234,33 @@ public class RenderController
 		}
 	}
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr GetWindowRect(IntPtr handle, ref RECT rect);
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr GetWindowRect(IntPtr handle, ref RECT rect);
 
-	[DllImport("gdi32.dll")]
-	private static extern bool BitBlt(IntPtr memDC, int int_2, int int_3, int width, int height, IntPtr windowDC, int int_6, int int_7, int int_8);
+	[LibraryImport("gdi32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool BitBlt(IntPtr memDC, int int_2, int int_3, int width, int height, IntPtr windowDC, int int_6, int int_7, int int_8);
 
-	[DllImport("gdi32.dll")]
-	private static extern IntPtr CreateCompatibleBitmap(IntPtr windowDC, int width, int height);
+	[LibraryImport("gdi32.dll")]
+	private static partial IntPtr CreateCompatibleBitmap(IntPtr windowDC, int width, int height);
 
-	[DllImport("gdi32.dll")]
-	private static extern IntPtr CreateCompatibleDC(IntPtr windowDC);
+	[LibraryImport("gdi32.dll")]
+	private static partial IntPtr CreateCompatibleDC(IntPtr windowDC);
 
-	[DllImport("gdi32.dll")]
-	private static extern bool DeleteDC(IntPtr memDC);
+	[LibraryImport("gdi32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool DeleteDC(IntPtr memDC);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr GetWindowDC(IntPtr handle);
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr GetWindowDC(IntPtr handle);
 
-	[DllImport("user32.dll")]
-	private static extern IntPtr ReleaseDC(IntPtr handle, IntPtr windowDC);
+	[LibraryImport("user32.dll")]
+	private static partial IntPtr ReleaseDC(IntPtr handle, IntPtr windowDC);
 
-	[DllImport("gdi32.dll")]
-	private static extern bool DeleteObject(IntPtr hBitmap);
+	[LibraryImport("gdi32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	private static partial bool DeleteObject(IntPtr hBitmap);
 
-	[DllImport("gdi32.dll")]
-	private static extern IntPtr SelectObject(IntPtr memDC, IntPtr intptr_1);
+	[LibraryImport("gdi32.dll")]
+	private static partial IntPtr SelectObject(IntPtr memDC, IntPtr intptr_1);
 }
