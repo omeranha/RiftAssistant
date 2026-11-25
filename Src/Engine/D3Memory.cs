@@ -11,7 +11,7 @@ internal class D3Memory
 
 	private int int_44;
 
-	private Stopwatch stopwatch_0 = new();
+	private Stopwatch stopwatch = new();
 
 	internal ExpandableContainer ACDContainer;
 
@@ -228,17 +228,17 @@ internal class D3Memory
 			GameDifficulty = (GameDifficulty)GameWindowManager.Read<int>(ObjectManagerStorageAddress + Offset_Storage_GameDifficulty);
 			int num5 = GameWindowManager.Read<int>(ObjectManagerStorageAddress + Offset_Storage_GameTick);
 			if (GameState_Paused_Value == 0) {
-				if (int_44 == num5 && stopwatch_0 != null) {
-					GameTick = num5 + (int)Math.Floor((double)stopwatch_0.ElapsedMilliseconds * 60.0 / 1000.0);
+				if (int_44 == num5 && stopwatch != null) {
+					GameTick = num5 + (int)Math.Floor((double)stopwatch.ElapsedMilliseconds * 60.0 / 1000.0);
 				} else {
-					stopwatch_0.Restart();
+					stopwatch.Restart();
 					GameTick = num5;
 				}
 				int_44 = num5;
 			} else {
 				GameTick = num5;
 				int_44 = num5;
-				stopwatch_0.Restart();
+				stopwatch.Restart();
 			}
 			int num6 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Free);
 			int num7 = GameWindowManager.Read<int>(CoreCollector.DAF.PlayerAddress + Offset_CircularBuffer_Head);

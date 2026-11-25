@@ -14,11 +14,11 @@ public class PlayerArmorySet(Player player, int int_1)
 
 	public string Name { get; set; }
 
-	public uint PotionAnnId => ArmorySet.struct26_0.PotionAnnId;
+	public uint PotionAnnId => ArmorySet.armoryPotion.PotionAnnId;
 
 	public List<uint> itemAnnIds = new List<uint>();
 
-	public SnoItem PotionSno => SnoData.Items.GetBySno(ArmorySet.struct26_0.uint_1);
+	public SnoItem PotionSno => SnoData.Items.GetBySno(ArmorySet.armoryPotion.sno);
 
 	public SnoItem CubeSnoItem1 => SnoData.Items.GetBySno(ArmorySet.uint_4);
 
@@ -28,31 +28,31 @@ public class PlayerArmorySet(Player player, int int_1)
 
 	public SnoItem CubeSnoItem4 => SnoData.Items.GetBySno(ArmorySet.uint_7);
 
-	public SnoPower LeftSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_0.uint_0);
+	public SnoPower LeftSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill.sno);
 
-	public byte LeftSkillRune => (byte)ArmorySet.struct27_0.uint_1;
+	public byte LeftSkillRune => (byte)ArmorySet.armorySkill.uint_1;
 
-	public SnoPower RightSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_1.uint_0);
+	public SnoPower RightSkillSnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill1.sno);
 
-	public byte RightSkillRune => (byte)ArmorySet.struct27_1.uint_1;
+	public byte RightSkillRune => (byte)ArmorySet.armorySkill1.uint_1;
 
-	public SnoPower Skill1SnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_2.uint_0);
+	public SnoPower Skill1SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill2.sno);
 
-	public byte Skill1Rune => (byte)ArmorySet.struct27_2.uint_1;
+	public byte Skill1Rune => (byte)ArmorySet.armorySkill2.uint_1;
 
-	public SnoPower Skill2SnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_3.uint_0);
+	public SnoPower Skill2SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill3.sno);
 
-	public byte Skill2Rune => (byte)ArmorySet.struct27_3.uint_1;
+	public byte Skill2Rune => (byte)ArmorySet.armorySkill3.uint_1;
 
-	public SnoPower Skill3SnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_4.uint_0);
+	public SnoPower Skill3SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill4.sno);
 
-	public byte Skill3Rune => (byte)ArmorySet.struct27_4.uint_1;
+	public byte Skill3Rune => (byte)ArmorySet.armorySkill4.uint_1;
 
-	public SnoPower Skill4SnoPower => SnoData.Powers.GetBySno(ArmorySet.struct27_5.uint_0);
+	public SnoPower Skill4SnoPower => SnoData.Powers.GetBySno(ArmorySet.armorySkill5.sno);
 
-	public byte Skill4Rune => (byte)ArmorySet.struct27_5.uint_1;
+	public byte Skill4Rune => (byte)ArmorySet.armorySkill5.uint_1;
 
-	public SnoPower PassiveSnoPower1 => SnoData.Powers.GetBySno(ArmorySet.uint_0);
+	public SnoPower PassiveSnoPower1 => SnoData.Powers.GetBySno(ArmorySet.sno);
 
 	public SnoPower PassiveSnoPower2 => SnoData.Powers.GetBySno(ArmorySet.uint_1);
 

@@ -10,13 +10,13 @@ public class UiElement
 {
 	public long long_0;
 
-	public readonly ulong ulong_0;
+	public readonly ulong hashPath;
 
-	internal readonly int int_0;
+	internal readonly int hash;
 
-	internal UiElement iuiElement_0;
+	internal UiElement uiElement0;
 
-	internal UiElement iuiElement_1;
+	internal UiElement uiElement1;
 
 	public int Bucket = -1;
 
@@ -66,21 +66,21 @@ public class UiElement
 
 	public UiElement ReplacementWhenNotVisible { get; internal set; }
 
-	public UiElement(string path2, UiElement iuiElement_3 = null, UiElement iuiElement_4 = null)
+	public UiElement(string path2, UiElement inGameBottomHudUiElement = null, UiElement requiredHidden = null)
 	{
 		Path = path2;
-		ulong_0 = HashPath(path2.ToLower(CultureInfo.InvariantCulture));
-		int_0 = (int)ulong_0;
+		hashPath = HashPath(path2.ToLower(CultureInfo.InvariantCulture));
+		hash = (int)hashPath;
 		rectangle = default(RectangleF);
-		iuiElement_0 = iuiElement_3;
-		iuiElement_1 = iuiElement_4;
+		uiElement0 = inGameBottomHudUiElement;
+		uiElement1 = requiredHidden;
 	}
 
-	private static ulong HashPath(string string_1)
+	private static ulong HashPath(string toLower)
 	{
 		ulong num = 14695981039346656037uL;
-		for (int i = 0; i < string_1.Length; i++) {
-			num ^= (byte)string_1[i];
+		for (int i = 0; i < toLower.Length; i++) {
+			num ^= (byte)toLower[i];
 			num *= 1099511628211L;
 		}
 		return num;

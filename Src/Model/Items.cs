@@ -11,13 +11,13 @@ internal sealed class Items
 {
 	private readonly Dictionary<uint, SnoItem> all = new Dictionary<uint, SnoItem>(3000);
 
-	private readonly Dictionary<uint, SnoItemType> dictionary_1 = new Dictionary<uint, SnoItemType>(200);
+	private readonly Dictionary<uint, SnoItemType> snoItemTypesByKey = new Dictionary<uint, SnoItemType>(200);
 
-	private readonly Dictionary<string, SnoItemType> dictionary_2 = new Dictionary<string, SnoItemType>(200);
+	private readonly Dictionary<string, SnoItemType> snoItemTypesByKey2 = new Dictionary<string, SnoItemType>(200);
 
-	private readonly Dictionary<uint, SnoItemAffix> dictionary_3 = new Dictionary<uint, SnoItemAffix>(6000);
+	private readonly Dictionary<uint, SnoItemAffix> snoItemAffixesByKey = new Dictionary<uint, SnoItemAffix>(6000);
 
-	private readonly Dictionary<uint, SnoItemAffixGroup> dictionary_4 = new Dictionary<uint, SnoItemAffixGroup>(500);
+	private readonly Dictionary<uint, SnoItemAffixGroup> snoItemAffixGroupsByKey = new Dictionary<uint, SnoItemAffixGroup>(500);
 
 	public IEnumerable<SnoItem> All => all.Values;
 
@@ -29,19 +29,19 @@ internal sealed class Items
 
 	public SnoItemType GetSnoItemType(uint sno)
 	{
-		dictionary_1.TryGetValue(sno, out var value);
+		snoItemTypesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public SnoItemAffix GetSnoItemAffix(uint sno)
 	{
-		dictionary_3.TryGetValue(sno, out var value);
+		snoItemAffixesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public SnoItemAffixGroup GetSnoItemAffixGroup(uint sno)
 	{
-		dictionary_4.TryGetValue(sno, out var value);
+		snoItemAffixGroupsByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -63,8 +63,8 @@ internal sealed class Items
 				uint num2 = dataReader.ReadUInt32();
 				SnoItemType SnoItemType_ = ((num2 == 0) ? null : GetSnoItemType(num2));
 				SnoItemType value = new SnoItemType(num, text, stringByCode, stringByCodeEnglish, SnoItemType_);
-				dictionary_1.Add(num, value);
-				dictionary_2.Add(text, value);
+				snoItemTypesByKey.Add(num, value);
+				snoItemTypesByKey2.Add(text, value);
 			}
 		}
 		using (DataReader dataReader2 = new DataReader(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_item_affixes.bin"))))
@@ -86,7 +86,7 @@ internal sealed class Items
 					if (snoItemAffixGroup == null)
 					{
 						snoItemAffixGroup = new SnoItemAffixGroup(num4);
-						dictionary_4.Add(num4, snoItemAffixGroup);
+						snoItemAffixGroupsByKey.Add(num4, snoItemAffixGroup);
 					}
 				}
 				if (num5 != 0)
@@ -95,13 +95,13 @@ internal sealed class Items
 					if (snoItemAffixGroup2 == null)
 					{
 						snoItemAffixGroup2 = new SnoItemAffixGroup(num5);
-						dictionary_4.Add(num5, snoItemAffixGroup2);
+						snoItemAffixGroupsByKey.Add(num5, snoItemAffixGroup2);
 					}
 				}
 				HeroClass heroClass_ = (HeroClass)dataReader2.ReadUInt32();
 				bool bool_ = dataReader2.ReadBoolean();
 				SnoItemAffix snoItemAffix = new SnoItemAffix(num3, stringByCode2, stringByCodeEnglish2, uint_, snoItemAffixGroup, snoItemAffixGroup2, heroClass_, bool_);
-				dictionary_3.Add(num3, snoItemAffix);
+				snoItemAffixesByKey.Add(num3, snoItemAffix);
 				snoItemAffixGroup?.AddAffix(snoItemAffix);
 				snoItemAffixGroup2?.AddAffix(snoItemAffix);
 				byte b = dataReader2.ReadByte();
@@ -111,8 +111,8 @@ internal sealed class Items
 					AcdAttribute iattribute_ = SnoData.Attributes.ByIndex[dataReader2.ReadPackedInt32()];
 					uint uint_2 = dataReader2.ReadUInt32();
 					float float_ = dataReader2.ReadSingle();
-					float float_2 = dataReader2.ReadSingle();
-					array[i] = new SnoItemMod(iattribute_, uint_2, float_, float_2, snoItemAffix);
+					float single = dataReader2.ReadSingle();
+					array[i] = new SnoItemMod(iattribute_, uint_2, float_, single, snoItemAffix);
 				}
 				SnoItemMod[] mods = array;
 				snoItemAffix.Mods = mods;
@@ -149,7 +149,7 @@ internal sealed class Items
 			uint uint_3 = uint.Parse(array3[0], CultureInfo.InvariantCulture);
 			ActorSnoEnum actorSnoEnum = (ActorSnoEnum)uint.Parse(array3[1], CultureInfo.InvariantCulture);
 			int int_ = int.Parse(array3[2], CultureInfo.InvariantCulture);
-			dictionary_2.TryGetValue(array3[3], out var value2);
+			snoItemTypesByKey2.TryGetValue(array3[3], out var value2);
 			uint uint_4 = uint.Parse(array3[4], CultureInfo.InvariantCulture);
 			uint uint_5 = uint.Parse(array3[5], CultureInfo.InvariantCulture);
 			uint uint_6 = uint.Parse(array3[6], CultureInfo.InvariantCulture);
@@ -167,7 +167,7 @@ internal sealed class Items
 				text4 = text4.Replace("’", "'");
 			}
 			string string_ = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._items, text3) ?? text3;
-			string string_2 = array3[17].ToLower(CultureInfo.InvariantCulture);
+			string toLower = array3[17].ToLower(CultureInfo.InvariantCulture);
 			ItemLocation itemLocation_ = ((array3[18] != "-" && array3[18] != "") ? ((ItemLocation)Enum.Parse(typeof(ItemLocation), array3[18], ignoreCase: true)) : ItemLocation.Floor);
 			ItemLocation itemLocation = ((array3[19] != "-" && array3[19] != "") ? ((ItemLocation)Enum.Parse(typeof(ItemLocation), array3[19], ignoreCase: true)) : ItemLocation.Floor);
 			string[] array4 = array3[20].ToLower(CultureInfo.InvariantCulture).Split('|');
@@ -188,10 +188,10 @@ internal sealed class Items
 			SnoActor snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 			if (snoActor == null)
 			{
-				snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-" + text3, "dummyactor-" + text3, "dummyactor-" + text3);
-				SnoData.Actors.dictionary_0.Add(actorSnoEnum, snoActor);
+				snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, isStatic: false, "dummyactor-" + text3, "dummyactor-" + text3, "dummyactor-" + text3);
+				SnoData.Actors.snoActorsByActorSnoEnum.Add(actorSnoEnum, snoActor);
 			}
-			SnoItem snoItem = new SnoItem(uint_3, uint_4, uint_5, snoActor, uint_6, uint_7, int_, value2, int_2, int_3, int_4, int_5, int_6, int_7, text3, text4, string_, string_2, array4, itemLocation_, itemLocation, int_8, int_9, int_10, int_11, int_12, int_13, int_14, itemCraftQuality_);
+			SnoItem snoItem = new SnoItem(uint_3, uint_4, uint_5, snoActor, uint_6, uint_7, int_, value2, int_2, int_3, int_4, int_5, int_6, int_7, text3, text4, string_, toLower, array4, itemLocation_, itemLocation, int_8, int_9, int_10, int_11, int_12, int_13, int_14, itemCraftQuality_);
 			all.Add(snoItem.Sno, snoItem);
 			if (num8 > 0)
 			{
@@ -284,11 +284,11 @@ internal sealed class Items
 			for (int l = 0; l < num10; l++)
 			{
 				int index = dataReader3.ReadPackedInt32();
-				AcdAttribute iattribute_2 = SnoData.Attributes.ByIndex[index];
+				AcdAttribute byIndex = SnoData.Attributes.ByIndex[index];
 				uint uint_9 = dataReader3.ReadUInt32();
 				float float_5 = dataReader3.ReadSingle();
 				float float_6 = dataReader3.ReadSingle();
-				array5[l] = new SnoItemMod(iattribute_2, uint_9, float_5, float_6, null);
+				array5[l] = new SnoItemMod(byIndex, uint_9, float_5, float_6, null);
 			}
 			SnoSocketedEffect item = new SnoSocketedEffect(GetSnoItemType(sno3), array5);
 			bySno.SocketedEffects.Add(item);

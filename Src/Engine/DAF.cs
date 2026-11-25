@@ -11,7 +11,7 @@ internal class DAF
 
 	private readonly Dictionary<string, Func<bool>> blockValidateFuncs = [];
 
-	private r_PlayerData struct32_0;
+	private r_PlayerData playerData;
 
 	public long ObjectManagerAddress { get; private set; }
 
@@ -62,11 +62,11 @@ internal class DAF
 		ObjectManagerAddress = 0L;
 	}
 
-	public uint DetermineCryptoKey_ActorACDID(IEnumerable<uint> ienumerable_0, IEnumerable<uint> ienumerable_1)
+	public uint DetermineCryptoKey_ActorACDID(IEnumerable<uint> ienumerable_0, IEnumerable<uint> collection)
 	{
 		Dictionary<uint, bool> dictionary = new Dictionary<uint, bool>();
 		List<uint> list_ = ienumerable_0.ToList();
-		HashSet<uint> hashSet = new HashSet<uint>(ienumerable_1);
+		HashSet<uint> hashSet = new HashSet<uint>(collection);
 		foreach (uint item in ienumerable_0) {
 			foreach (uint item2 in hashSet) {
 				uint num = item ^ item2;
@@ -81,11 +81,11 @@ internal class DAF
 		return dictionary.FirstOrDefault((KeyValuePair<uint, bool> keyValuePair_0) => keyValuePair_0.Value).Key;
 	}
 
-	private static bool CrossReferenceActorsWithACDs(List<uint> list_0, HashSet<uint> hashSet_0, uint uint_8)
+	private static bool CrossReferenceActorsWithACDs(List<uint> list_0, HashSet<uint> hashSet, uint uint_8)
 	{
 		foreach (uint item in list_0) {
 			uint num = item ^ uint_8;
-			if (num != uint.MaxValue && num != 0 && !hashSet_0.Contains(num)) {
+			if (num != uint.MaxValue && num != 0 && !hashSet.Contains(num)) {
 				return false;
 			}
 		}
@@ -189,8 +189,8 @@ internal class DAF
 				return false;
 			}
 			long num2 = long_0 + D3Memory.Offset_PlayerDataManager_Elements + Constants.PlayerData_SizeOf * localPlayerIndex;
-			struct32_0 = GameWindowManager.Read<r_PlayerData>(num2, size: Constants.PlayerData_SizeOf);
-			return (struct32_0.UsedKanaiItemSno1 == uint.MaxValue || SnoData.Items.SnoExits(struct32_0.UsedKanaiItemSno1)) && (struct32_0.UsedKanaiItemSno2 == uint.MaxValue || SnoData.Items.SnoExits(struct32_0.UsedKanaiItemSno2)) && (struct32_0.UsedKanaiItemSno3 == uint.MaxValue || SnoData.Items.SnoExits(struct32_0.UsedKanaiItemSno3));
+			playerData = GameWindowManager.Read<r_PlayerData>(num2, size: Constants.PlayerData_SizeOf);
+			return (playerData.UsedKanaiItemSno1 == uint.MaxValue || SnoData.Items.SnoExits(playerData.UsedKanaiItemSno1)) && (playerData.UsedKanaiItemSno2 == uint.MaxValue || SnoData.Items.SnoExits(playerData.UsedKanaiItemSno2)) && (playerData.UsedKanaiItemSno3 == uint.MaxValue || SnoData.Items.SnoExits(playerData.UsedKanaiItemSno3));
 		}).FirstOrDefault();
 		if (num != 0L) {
 			if (num != PlayerDataManagerAddress) {
@@ -227,12 +227,12 @@ internal class DAF
 	private bool ScanObjectManager()
 	{
 		int int_ = AlignedSize(D3Memory.ObjectManager_SizeOf, 32);
-		int int_2 = AlignedSize(304, 32);
+		int alignedSize = AlignedSize(304, 32);
 		IEnumerable<long> mainBlocksWithSize = localHeapCache.GetMainBlocksWithSize(int_);
 		long num = mainBlocksWithSize.Where(delegate (long long_0) {
 			long long_1 = localHeapCache.ReadInt64(long_0, D3Memory.Offset_ObjectManager_Worlds);
 			int sizeOfBlock = localHeapCache.GetSizeOfBlock(long_1);
-			if (sizeOfBlock == 0 || !localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, int_2)) {
+			if (sizeOfBlock == 0 || !localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, alignedSize)) {
 				return false;
 			}
 			int num2 = localHeapCache.ReadInt32(long_1, 256L);
@@ -363,16 +363,16 @@ internal class DAF
 	private void ScanTrickleManager()
 	{
 		int int_ = AlignedSize(16, 32);
-		int int_2 = AlignedSize(48, 32);
+		int alignedSize = AlignedSize(48, 32);
 		long num = localHeapCache.GetSmallBlocksWithSize_OrPlus0x20(int_).Where(delegate (long long_0) {
 			long long_1 = localHeapCache.ReadInt64(long_0, AddressList.Offset_Trickle_Block0);
 			int sizeOfBlock = localHeapCache.GetSizeOfBlock(long_1);
-			if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, int_2) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
+			if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, alignedSize) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
 				long long_2 = localHeapCache.ReadInt64(long_0, AddressList.Offset_Trickle_Ptr8);
 				if (localHeapCache.GetSizeOfBlock(long_2) != 0) {
 					long_1 = localHeapCache.ReadInt64(long_2, AddressList.Offset_Trickle_Ptr24);
 					sizeOfBlock = localHeapCache.GetSizeOfBlock(long_1);
-					if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, int_2) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
+					if (sizeOfBlock != 0 && localHeapCache.IsBlockSizeEqual_OrPlus0x20(sizeOfBlock, alignedSize) && localHeapCache.ReadUInt32(long_1, 40L) == CoreCollector.Magic_600DF00D) {
 						return true;
 					}
 				}

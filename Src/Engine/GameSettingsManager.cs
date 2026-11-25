@@ -32,8 +32,8 @@ internal class GameSettingsManager
 		IsBackgroundFpsEnabled = frameRateSettings.BackgroundLimitEnabled;
 
 		videoSettings = GameWindowManager.Read<VideoSettings>(AddressList.VideoSettingsAddress, true);
-		IsFullscreen = videoSettings.bool_1;
-		WindowMode = ((videoSettings.int_12 == 0) ? WindowMode.Windowed : videoSettings.windowMode_0);
+		IsFullscreen = videoSettings.isFullscreen;
+		WindowMode = ((videoSettings.int_12 == 0) ? WindowMode.Windowed : videoSettings.windowMode);
 
 		Core.Controller?.Sound.Update(GameWindowManager.Read<SoundSettings>(AddressList.SoundSettingsAddress, true));
 

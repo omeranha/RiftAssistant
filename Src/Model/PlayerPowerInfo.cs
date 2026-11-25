@@ -5,25 +5,25 @@ namespace RiftAssistant.Model;
 
 public class PlayerPowerInfo
 {
-	private readonly Player class310_0;
+	private readonly Player player0;
 
-	private Skill iplayerSkill_0;
+	private Skill skill0;
 
-	public Skill HealthPotionSkill => iplayerSkill_0 ?? (iplayerSkill_0 = new Skill(class310_0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
+	public Skill HealthPotionSkill => skill0 ?? (skill0 = new Skill(player0, SnoData.Powers.GetBySno(30211u), byte.MaxValue, ActionKey.Heal));
 
-	public IEnumerable<Skill> CurrentSkills => class310_0.SkillSlots.Where((Skill skill) => skill?.CurrentSnoPower != null);
+	public IEnumerable<Skill> CurrentSkills => player0.SkillSlots.Where((Skill skill) => skill?.CurrentSnoPower != null);
 
-	public IEnumerable<Skill> UsedSkills => class310_0.SkillSlots.Where((Skill skill) => skill != null);
+	public IEnumerable<Skill> UsedSkills => player0.SkillSlots.Where((Skill skill) => skill != null);
 
-	public IEnumerable<SnoPower> UsedPassives => class310_0.UsedPassives;
+	public IEnumerable<SnoPower> UsedPassives => player0.UsedPassives;
 
-	public Skill[] SkillSlots => class310_0.SkillSlots;
+	public Skill[] SkillSlots => player0.SkillSlots;
 
-	public SnoPower[] PassiveSlots => class310_0.SnoPower_0;
+	public SnoPower[] PassiveSlots => player0.SnoPowers0;
 
-	public bool SkillOverrideActive => class310_0.SkillOverrideActive;
+	public bool SkillOverrideActive => player0.SkillOverrideActive;
 
-	public IEnumerable<Buff> AllBuffs => class310_0.powerSno2buff.Values;
+	public IEnumerable<Buff> AllBuffs => player0.powerSno2buff.Values;
 
 	public bool Frozen { get; set; }
 
@@ -63,7 +63,7 @@ public class PlayerPowerInfo
 
 	public PlayerPowerInfo(Player player)
 	{
-		class310_0 = player;
+		player0 = player;
 		UsedBarbarianPowers = new BarbarianPowerInfo(player);
 		UsedCrusaderPowers = new CrusaderPowerInfo(player);
 		UsedDemonHunterPowers = new DemonHunterPowerInfo(player);
@@ -85,7 +85,7 @@ public class PlayerPowerInfo
 		{
 			return HealthPotionSkill;
 		}
-		Skill[] class386_ = class310_0.SkillSlots;
+		Skill[] class386_ = player0.SkillSlots;
 		int num = 0;
 		Skill skill;
 		while (true)
@@ -107,19 +107,19 @@ public class PlayerPowerInfo
 
 	public Buff GetBuff(string code)
 	{
-		class310_0.dictionary_1.TryGetValue(code, out var value);
+		player0.buffsByKey.TryGetValue(code, out var value);
 		return value;
 	}
 
 	public Buff GetBuff(uint sno)
 	{
-		class310_0.powerSno2buff.TryGetValue(sno, out var value);
+		player0.powerSno2buff.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public bool BuffIsActive(uint sno)
 	{
-		if (!class310_0.powerSno2buff.TryGetValue(sno, out var value))
+		if (!player0.powerSno2buff.TryGetValue(sno, out var value))
 		{
 			return false;
 		}
@@ -128,7 +128,7 @@ public class PlayerPowerInfo
 
 	public bool BuffIsActive(uint sno, int iconIndex)
 	{
-		if (!class310_0.powerSno2buff.TryGetValue(sno, out var value))
+		if (!player0.powerSno2buff.TryGetValue(sno, out var value))
 		{
 			return false;
 		}

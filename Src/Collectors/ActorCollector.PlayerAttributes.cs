@@ -12,10 +12,10 @@ internal partial class ActorCollector
 			return;
 		}
 		List<Skill> list = player.SkillSlots.Where((Skill skill) => skill != null).Concat(new Skill[1] { player.Powers.HealthPotionSkill as Skill }).ToList();
-		player.list_3.Clear();
+		player.skills.Clear();
 		foreach (Skill item2 in list) {
 			if (item2.IsOnCooldown) {
-				player.list_3.Add(item2);
+				player.skills.Add(item2);
 			}
 			item2.IsOnCooldown = false;
 			item2.CooldownStartTick = 0;
@@ -43,9 +43,9 @@ internal partial class ActorCollector
 		int num10 = 0;
 		player.SkillOverrideActive = false;
 		bool flag2 = false;
-		int count = player.list_0.Count;
+		int count = player.attributeEntries.Count;
 		for (int num11 = 0; num11 < count; num11++) {
-			r_AttributeEntry r_AttributeEntry2 = player.list_0[num11];
+			r_AttributeEntry r_AttributeEntry2 = player.attributeEntries[num11];
 			try {
 				int num12 = (int)(r_AttributeEntry2.uint_0 & 0xFFF);
 				if (num12 <= 0 || num12 >= SnoData.Attributes.ByIndex.Count) {
@@ -53,7 +53,7 @@ internal partial class ActorCollector
 				}
 				uint num13 = r_AttributeEntry2.uint_0 >> 12;
 				AcdAttribute acdAttribute = SnoData.Attributes.ByIndex[num12];
-				int num14 = r_AttributeEntry2.int_0;
+				int num14 = r_AttributeEntry2.quantity;
 				float num15 = ((acdAttribute.ValueType == AttributeValueType._float) ? (*(float*)(&num14)) : ((float)num14));
 				if (float.IsNaN(num15)) {
 					num15 = 0f;
@@ -1166,7 +1166,7 @@ internal partial class ActorCollector
 		player.BonusPoolRemaining = (long)(((ulong)num7 << 32) + num8);
 		foreach (Skill item5 in list) {
 			item5.IsOnCooldown = item5.CooldownStartTick > 0 && item5.CooldownStartTick <= CoreCollector.D3Memory.GameTick && item5.CooldownFinishTick > CoreCollector.D3Memory.GameTick;
-			if (item5.IsOnCooldown && !player.list_3.Contains(item5) && item5.CurrentSnoPower != null) {
+			if (item5.IsOnCooldown && !player.skills.Contains(item5) && item5.CurrentSnoPower != null) {
 				try {
 					CoreCollector.OnCooldown?.Invoke(player, item5);
 				} catch (Exception exception_) {
@@ -1174,8 +1174,8 @@ internal partial class ActorCollector
 				}
 			}
 		}
-		for (int num29 = 0; num29 < player.list_3.Count; num29++) {
-			Skill playerSkill = player.list_3[num29];
+		for (int num29 = 0; num29 < player.skills.Count; num29++) {
+			Skill playerSkill = player.skills[num29];
 			if (!playerSkill.IsOnCooldown && playerSkill.CurrentSnoPower != null) {
 				try {
 					CoreCollector.OnTrueCooldown?.Invoke(player, playerSkill);
@@ -1210,56 +1210,56 @@ internal partial class ActorCollector
 		player.float_6 = player.Defense.LifeOnHit * player.Offense.AttackSpeed + player.Defense.LifeRegen;
 	}
 
-	internal static void SetBuffIconCount(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffIconCount(Player player, uint sno, int iconCounts, int int_5, ref bool bool_4)
 	{
-		Buff buff = player.Powers.GetBuff(uint_0) as Buff;
+		Buff buff = player.Powers.GetBuff(sno) as Buff;
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}
 			buff = new Buff(player, bySno);
-			player.powerSno2buff.Add(uint_0, buff);
-			player.dictionary_1[bySno.Code] = buff;
+			player.powerSno2buff.Add(sno, buff);
+			player.buffsByKey[bySno.Code] = buff;
 			bool_4 = true;
 		}
-		buff.IconCounts[int_5] = int_4;
-		if (int_4 > 0) {
+		buff.IconCounts[int_5] = iconCounts;
+		if (iconCounts > 0) {
 			buff.Active = true;
 			buff.FirstActive.Start();
 			buff.LastActive.Restart();
 		}
 	}
 
-	internal static void SetBuffTimeElapsed(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffTimeElapsed(Player player, uint sno, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(CoreCollector.D3Memory.GameTick - int_4) / 60.0) : 0.0);
-		Buff buff = player.Powers.GetBuff(uint_0);
+		Buff buff = player.Powers.GetBuff(sno);
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}
 			buff = new Buff(player, bySno);
-			player.powerSno2buff.Add(uint_0, buff);
-			player.dictionary_1[bySno.Code] = buff;
+			player.powerSno2buff.Add(sno, buff);
+			player.buffsByKey[bySno.Code] = buff;
 			bool_4 = true;
 		}
 		buff.TimeElapsedSeconds[int_5] = num;
 	}
 
-	internal static void SetBuffTimeLeft(Player player, uint uint_0, int int_4, int int_5, ref bool bool_4)
+	internal static void SetBuffTimeLeft(Player player, uint sno, int int_4, int int_5, ref bool bool_4)
 	{
 		double num = ((int_4 > 0) ? ((double)(int_4 - CoreCollector.D3Memory.GameTick) / 60.0) : 0.0);
-		Buff buff = player.Powers.GetBuff(uint_0);
+		Buff buff = player.Powers.GetBuff(sno);
 		if (buff == null) {
-			SnoPower bySno = SnoData.Powers.GetBySno(uint_0);
+			SnoPower bySno = SnoData.Powers.GetBySno(sno);
 			if (bySno == null) {
 				return;
 			}
 			buff = new Buff(player, bySno);
-			player.powerSno2buff.Add(uint_0, buff);
-			player.dictionary_1[bySno.Code] = buff;
+			player.powerSno2buff.Add(sno, buff);
+			player.buffsByKey[bySno.Code] = buff;
 			bool_4 = true;
 		}
 		buff.TimeLeftSeconds[int_5] = num;

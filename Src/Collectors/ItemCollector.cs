@@ -24,7 +24,7 @@ internal class ItemCollector
 
 	public readonly List<Item> list_1 = new List<Item>();
 
-	public WorldCoordinate iworldCoordinate_0;
+	public WorldCoordinate floorCoordinate;
 
 	public Item Item_0;
 
@@ -50,7 +50,7 @@ internal class ItemCollector
 
 	private readonly List<Item> list_4 = new List<Item>();
 
-	private readonly List<Item> list_5 = new List<Item>();
+	private readonly List<Item> second = new List<Item>();
 
 	private readonly Dictionary<uint, Item> changedItems = new Dictionary<uint, Item>();
 
@@ -76,7 +76,7 @@ internal class ItemCollector
 		Item_2 = null;
 		ItemsInStash.Clear();
 		list_1.Clear();
-		iworldCoordinate_0 = null;
+		floorCoordinate = null;
 		Item_0 = null;
 		CentralXyDistanceToMe = 0.0;
 		ZDistanceToMeAbsolute = 0.0;
@@ -95,7 +95,7 @@ internal class ItemCollector
 			refreshTimer.Restart();
 		}
 		list_4.Clear();
-		list_5.Clear();
+		second.Clear();
 		changedItems.Clear();
 		bool_0 = false;
 		for (int i = 0; i <= CoreCollector.D3Memory.ACDContainer.MaxIndex; i++) {
@@ -197,12 +197,12 @@ internal class ItemCollector
 			item.SocketHostAcdId = struct7_.SocketHostAcdId;
 			if (flag2 && uInt32_ != item.SocketHostAcdId) {
 				Items.TryGetValue(uInt32_, out var item2);
-				if (item2 != null && !list_5.Contains(item2)) {
-					list_5.Add(item2 as Item);
+				if (item2 != null && !second.Contains(item2)) {
+					second.Add(item2 as Item);
 				}
 				Items.TryGetValue(item.SocketHostAcdId, out var item3);
-				if (item3 != null && !list_5.Contains(item3)) {
-					list_5.Add(item3 as Item);
+				if (item3 != null && !second.Contains(item3)) {
+					second.Add(item3 as Item);
 				}
 			}
 			Items[acdId] = item;
@@ -293,14 +293,14 @@ internal class ItemCollector
 			}
 		}
 		foreach (Item item5 in list_1.Where((Item item4) => item4.Quality == ItemQuality.Legendary && item4.SnoItem.Sno != 2603730171u)) {
-			if (iworldCoordinate_0 == null || item5.CentralXyDistanceToMe < CentralXyDistanceToMe) {
-				iworldCoordinate_0 = item5.FloorCoordinate;
+			if (floorCoordinate == null || item5.CentralXyDistanceToMe < CentralXyDistanceToMe) {
+				floorCoordinate = item5.FloorCoordinate;
 				CentralXyDistanceToMe = item5.CentralXyDistanceToMe;
 				ZDistanceToMeAbsolute = item5.ZDistanceToMeAbsolute;
 				Item_0 = item5;
 			}
 		}
-		foreach (Item item6 in list_4.Concat(list_5)) {
+		foreach (Item item6 in list_4.Concat(second)) {
 			changedItems[item6.AcdId] = item6;
 		}
 		if (changedItems.Count > 0) {
@@ -318,9 +318,9 @@ internal class ItemCollector
 		}
 	}
 
-	private bool ReadItem(r_ACD acd, Item item, SnoItem isnoItem_0, bool bool_1)
+	private bool ReadItem(r_ACD acd, Item item, SnoItem snoItem, bool bool_1)
 	{
-		if (!ReadItemStats(item, isnoItem_0)) {
+		if (!ReadItemStats(item, snoItem)) {
 			Logger.LogException("can't read item stats");
 			return false;
 		}
@@ -331,13 +331,13 @@ internal class ItemCollector
 				string text2 = null;
 				if (acd.rare_item_prefix_or_suffix == 0) {
 					text = SnoData.Strings.GetStringByIndex(acd.rare_item_stringlist_id, acd.rare_item_stringlist_index);
-					if (isnoItem_0.SuffixStringSno != 0) {
-						text2 = SnoData.Strings.GetStringByIndex(isnoItem_0.SuffixStringSno, acd.rare_item_otherlist_index);
+					if (snoItem.SuffixStringSno != 0) {
+						text2 = SnoData.Strings.GetStringByIndex(snoItem.SuffixStringSno, acd.rare_item_otherlist_index);
 					}
 				} else {
 					text2 = SnoData.Strings.GetStringByIndex(acd.rare_item_stringlist_id, acd.rare_item_stringlist_index);
-					if (isnoItem_0.PrefixStringSno != 0) {
-						text = SnoData.Strings.GetStringByIndex(isnoItem_0.PrefixStringSno, acd.rare_item_otherlist_index);
+					if (snoItem.PrefixStringSno != 0) {
+						text = SnoData.Strings.GetStringByIndex(snoItem.PrefixStringSno, acd.rare_item_otherlist_index);
 					}
 				}
 				item.RareName = (text + " " + text2).Trim();
@@ -349,7 +349,7 @@ internal class ItemCollector
 					snoItemAffix = SnoData.Items.GetSnoItemAffix(snoItemAffix.BaseAffixId);
 				}
 				if (snoItemAffix != null && snoItemAffix.NameLocalized != null) {
-					item.RareName = (snoItemAffix.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (isnoItem_0.NameLocalized + " " + snoItemAffix.NameLocalized) : (snoItemAffix.NameLocalized + " " + isnoItem_0.NameLocalized));
+					item.RareName = (snoItemAffix.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (snoItem.NameLocalized + " " + snoItemAffix.NameLocalized) : (snoItemAffix.NameLocalized + " " + snoItem.NameLocalized));
 				} else {
 					Trace.WriteLine("???");
 				}
@@ -364,7 +364,7 @@ internal class ItemCollector
 					snoItemAffix3 = SnoData.Items.GetSnoItemAffix(snoItemAffix3.BaseAffixId);
 				}
 				if (snoItemAffix2 != null && snoItemAffix3 != null && snoItemAffix2.NameLocalized != null && snoItemAffix3.NameLocalized != null) {
-					item.RareName = (snoItemAffix3.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (snoItemAffix2.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix3.NameLocalized) : (snoItemAffix3.NameLocalized + " " + isnoItem_0.NameLocalized + " " + snoItemAffix2.NameLocalized));
+					item.RareName = (snoItemAffix3.NameEnglish.StartsWith("of", ignoreCase: false, CultureInfo.InvariantCulture) ? (snoItemAffix2.NameLocalized + " " + snoItem.NameLocalized + " " + snoItemAffix3.NameLocalized) : (snoItemAffix3.NameLocalized + " " + snoItem.NameLocalized + " " + snoItemAffix2.NameLocalized));
 				} else {
 					Trace.WriteLine("???");
 				}
@@ -376,14 +376,14 @@ internal class ItemCollector
 		return true;
 	}
 
-	private bool ReadItemStats(Item item2, SnoItem isnoItem_0)
+	private bool ReadItemStats(Item item2, SnoItem snoItem)
 	{
 		if (item2 == null) {
 			return false;
 		}
 		item2.StatList2.Clear();
-		item2.AddStat(new ItemStat("name", isnoItem_0.NameLocalized));
-		item2.AddStat(new ItemStat("ilvl", isnoItem_0.Level, isnoItem_0.Level));
+		item2.AddStat(new ItemStat("name", snoItem.NameLocalized));
+		item2.AddStat(new ItemStat("ilvl", snoItem.Level, snoItem.Level));
 		double num = -1.0;
 		double num2 = -1.0;
 		double num3 = -1.0;
@@ -412,13 +412,13 @@ internal class ItemCollector
 			}
 			uint uint_0 = r_AttributeEntry2.uint_0 >> 12;
 			bool flag = false;
-			foreach (AttributeProcessor item in acdAttribute.Processors.Where((AttributeProcessor iattributeProcessor_0) => iattributeProcessor_0.Modifier == uint.MaxValue || iattributeProcessor_0.Modifier == uint_0)) {
+			foreach (AttributeProcessor item in acdAttribute.Processors.Where((AttributeProcessor attributeProcessor) => attributeProcessor.Modifier == uint.MaxValue || attributeProcessor.Modifier == uint_0)) {
 				flag = true;
-				double val2 = ((acdAttribute.ValueType == AttributeValueType._int) ? ((double)r_AttributeEntry2.int_0) : ((double)r_AttributeEntry2.float_0));
+				double val2 = ((acdAttribute.ValueType == AttributeValueType._int) ? ((double)r_AttributeEntry2.quantity) : ((double)r_AttributeEntry2.float_0));
 				double num11 = Math.Min(2147483647.0, Math.Max(-2147483648.0, val2));
-				item2.AddStat(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.int_0));
+				item2.AddStat(new ItemStat(acdAttribute, uint_0, num11, r_AttributeEntry2.quantity));
 				if (acdAttribute.ValueType == AttributeValueType._int) {
-					int val3 = item.ProcessInt(r_AttributeEntry2.int_0);
+					int val3 = item.ProcessInt(r_AttributeEntry2.quantity);
 					val2 = Math.Min(int.MaxValue, Math.Max(int.MinValue, val3));
 					item2.AddStat(new ItemStat(item, val2, val3));
 				} else {
@@ -441,7 +441,7 @@ internal class ItemCollector
 						num = val2;
 						break;
 					case "quantity_lo":
-						item2.Quantity = r_AttributeEntry2.int_0;
+						item2.Quantity = r_AttributeEntry2.quantity;
 						break;
 					case "offh_dmg_add":
 						num5 = val2;
@@ -470,20 +470,20 @@ internal class ItemCollector
 			}
 			if (!flag) {
 				if (acdAttribute.ValueType == AttributeValueType._int) {
-					item2.AddStat(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.int_0, r_AttributeEntry2.int_0));
+					item2.AddStat(new ItemStat(acdAttribute, uint_0, r_AttributeEntry2.quantity, r_AttributeEntry2.quantity));
 				} else {
 					float num13 = Math.Min(2.1474836E+09f, Math.Max(-2.1474836E+09f, r_AttributeEntry2.float_0));
 					item2.AddStat(new ItemStat(acdAttribute, uint_0, num13));
 				}
 				switch (acdAttribute.Code) {
 					case "EnchantedAffixCount":
-						item2.EnchantedAffixCounter = r_AttributeEntry2.int_0;
+						item2.EnchantedAffixCounter = r_AttributeEntry2.quantity;
 						break;
 					case "EnchantedAffixNew":
-						item2.EnchantedAffixNew = (uint)r_AttributeEntry2.int_0;
+						item2.EnchantedAffixNew = (uint)r_AttributeEntry2.quantity;
 						break;
 					case "EnchantedAffixOld":
-						item2.EnchantedAffixOriginal = (uint)r_AttributeEntry2.int_0;
+						item2.EnchantedAffixOriginal = (uint)r_AttributeEntry2.quantity;
 						break;
 				}
 			}

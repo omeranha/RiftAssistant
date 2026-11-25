@@ -201,17 +201,17 @@ internal partial class UiElements
 
 	public UiElement EventtextRegionTitle;
 
-	public UiElement[] class341_96;
+	public UiElement[] uiElements;
 
 	public UiElement ItemsListContent;
 
-	public UiElement class341_98;
+	public UiElement durabilityIndicator;
 
-	public UiElement class341_99;
+	public UiElement buttonReviveAtCorpse;
 
-	public UiElement class341_100;
+	public UiElement buttonReviveAtCheckpoint;
 
-	public UiElement class341_101;
+	public UiElement buttonReviveInTown;
 
 	public UiElement ButtonAcceptResurrection;
 
@@ -237,11 +237,11 @@ internal partial class UiElements
 
 	public UiElement AcceptParagonPointsButton;
 
-	public UiElement class341_114;
+	public UiElement closeButton;
 
-	public UiElement class341_115;
+	public UiElement inGameTeleportToPlayer;
 
-	public UiElement class341_116;
+	public UiElement acceptButton;
 
 	public UiElement confirmationMessage;
 
@@ -249,11 +249,11 @@ internal partial class UiElements
 
 	public UiElement confirmationCancel;
 
-	public UiElement class341_120;
+	public UiElement upgradeButton;
 
-	public UiElement class341_121;
+	public UiElement nephalemRiftButton;
 
-	public UiElement class341_122;
+	public UiElement greaterRiftButton;
 
 	public UiElement RiftTierLevelCombo;
 
@@ -267,11 +267,11 @@ internal partial class UiElements
 
 	public UiElement BuffBarExtendedBuffsUiElement;
 
-	public UiElement class341_129;
+	public UiElement craftButton;
 
-	public UiElement class341_130;
+	public UiElement craftarmorDialogCraftButton;
 
-	public UiElement class341_131;
+	public UiElement craftweaponsDialogCraftButton;
 
 	public UiElement salvageButton;
 
@@ -283,27 +283,27 @@ internal partial class UiElements
 
 	public UiElement salvageRare;
 
-	public UiElement class341_137;
+	public UiElement upgradeButton1;
 
 	public UiElement class341_138;
 
 	public UiElement Subdlg;
 
-	public UiElement class341_140;
+	public UiElement buttonOk;
 
-	public UiElement class341_141;
+	public UiElement overlayContainer;
 
-	public UiElement class341_142;
+	public UiElement selectQuestButton;
 
 	public UiElement GamePotion;
 
-	public UiElement[] class341_144 = new UiElement[6];
+	public UiElement[] uiElements144 = new UiElement[6];
 
-	public UiElement[] class341_145 = new UiElement[4];
+	public UiElement[] uiElements145 = new UiElement[4];
 
-	public UiElement[] class341_146 = new UiElement[4];
+	public UiElement[] uiElements146 = new UiElement[4];
 
-	public UiElement[] class341_147 = new UiElement[4];
+	public UiElement[] uiElements147 = new UiElement[4];
 
 	public UiElement BattleNetProfileMainLayoutRootOverlayContainer;
 
@@ -447,7 +447,7 @@ internal partial class UiElements
 
 	private static void RefreshConditional(UiElement element)
 	{
-		if (!IsVisible(element.iuiElement_0) || !IsVisible(element.iuiElement_1)) {
+		if (!IsVisible(element.uiElement0) || !IsVisible(element.uiElement1)) {
 			Hide(element);
 			return;
 		}
@@ -508,7 +508,7 @@ internal partial class UiElements
 	{
 		all.Add(element.Path, element);
 
-		if (element.iuiElement_0 == null && element.iuiElement_1 == null) {
+		if (element.uiElement0 == null && element.uiElement1 == null) {
 			rootElements.Add(element.Path, element);
 		} else {
 			conditionalElements.Add(element.Path, element);
@@ -578,7 +578,7 @@ internal partial class UiElements
 			return;
 
 		if ((uint)element.Bucket >= bucketCount)
-			element.Bucket = ComputeBucket(element.int_0, uiHash);
+			element.Bucket = ComputeBucket(element.hash, uiHash);
 
 		if ((uint)element.Bucket >= bucketCount)
 			return;
@@ -588,11 +588,11 @@ internal partial class UiElements
 
 		while (current != 0 && depth++ < MaxChainDepth) {
 			nodeBuffer = GameWindowManager.Read<HashNode>(current);
-			if (nodeBuffer.Key == element.ulong_0) {
+			if (nodeBuffer.Key == element.hashPath) {
 				element.long_0 = nodeBuffer.Value;
 				element.Class75_0 = GameWindowManager.Read<UiElementData>(element.long_0);
 
-				if (element.Class75_0.Id == element.ulong_0) {
+				if (element.Class75_0.Id == element.hashPath) {
 					ApplyResolved(element);
 					return;
 				}

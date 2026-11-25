@@ -12,7 +12,7 @@ public class TrackerController
 		{
 			if (!CoreCollector.IsGameReady)
 			{
-				return Overlay.Instance.lobbyHeroesModule.class340_0;
+				return Overlay.Instance.lobbyHeroesModule.currentAccountTotal;
 			}
 			return CoreCollector.AccountTotal;
 		}
@@ -24,7 +24,7 @@ public class TrackerController
 		{
 			if (!CoreCollector.IsGameReady)
 			{
-				return Overlay.Instance.lobbyHeroesModule.class340_1;
+				return Overlay.Instance.lobbyHeroesModule.currentAccountLastMonth;
 			}
 			return null;
 		}
@@ -36,7 +36,7 @@ public class TrackerController
 		{
 			if (!CoreCollector.IsGameReady)
 			{
-				return Overlay.Instance.lobbyHeroesModule.class340_2;
+				return Overlay.Instance.lobbyHeroesModule.currentAccountLastWeek;
 			}
 			return null;
 		}
@@ -48,7 +48,7 @@ public class TrackerController
 		{
 			if (!CoreCollector.IsGameReady)
 			{
-				return Overlay.Instance.lobbyHeroesModule.class340_3;
+				return Overlay.Instance.lobbyHeroesModule.currentAccountYesterday;
 			}
 			return CoreCollector.AccountYesterday;
 		}
@@ -60,7 +60,7 @@ public class TrackerController
 		{
 			if (!CoreCollector.IsGameReady)
 			{
-				return Overlay.Instance.lobbyHeroesModule.class340_4;
+				return Overlay.Instance.lobbyHeroesModule.currentAccountToday;
 			}
 			return CoreCollector.AccountToday;
 		}

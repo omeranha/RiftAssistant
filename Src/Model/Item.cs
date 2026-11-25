@@ -199,10 +199,10 @@ public class Item : Actor
 
 	public int SocketCount => GetStatInt("sock");
 
-	public Item(uint acdId2, uint annId2, SnoItem isnoItem_1)
-		: base(acdId2, annId2, isnoItem_1.SnoActor)
+	public Item(uint acdId2, uint annId2, SnoItem snoItem)
+		: base(acdId2, annId2, snoItem.SnoActor)
 	{
-		SnoItem = isnoItem_1;
+		SnoItem = snoItem;
 	}
 
 	public SnoSocketedEffect GetSocketedEffect()
@@ -265,9 +265,9 @@ public class Item : Actor
 		return StatList2.GetValueOrDefault("Set_Item_Count#" + setId.ToString("D", CultureInfo.InvariantCulture))?.IntegerValue.Value ?? 0;
 	}
 
-	public void AddStat(ItemStat iitemStat_0)
+	public void AddStat(ItemStat itemStat)
 	{
-		StatList2[iitemStat_0.Id] = iitemStat_0;
+		StatList2[itemStat.Id] = itemStat;
 	}
 
 	public int GetStatInt(string string_2, int int_5 = 0)

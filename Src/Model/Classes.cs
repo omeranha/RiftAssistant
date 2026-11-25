@@ -26,13 +26,13 @@ internal sealed class Classes
 
 	public readonly FollowerClass FollowerEnchantress;
 
-	private readonly Dictionary<ActorSnoEnum, FollowerClass> dictionary_0 = new Dictionary<ActorSnoEnum, FollowerClass>();
+	private readonly Dictionary<ActorSnoEnum, FollowerClass> followerClassesByActorSnoEnum = new Dictionary<ActorSnoEnum, FollowerClass>();
 
-	private readonly Dictionary<ActorSnoEnum, HeroClassDefinition> dictionary_1 = new Dictionary<ActorSnoEnum, HeroClassDefinition>();
+	private readonly Dictionary<ActorSnoEnum, HeroClassDefinition> heroClassDefinitionsByActorSnoEnum = new Dictionary<ActorSnoEnum, HeroClassDefinition>();
 
 	public HeroClassDefinition GetHeroClassBySno(ActorSnoEnum sno)
 	{
-		dictionary_1.TryGetValue(sno, out var value);
+		heroClassDefinitionsByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -44,7 +44,7 @@ internal sealed class Classes
 
 	public FollowerClass GetFollowerClass(ActorSnoEnum sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		followerClassesByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -69,19 +69,19 @@ internal sealed class Classes
 		FollowerEnchantress = AddFollowerClass("enchantress", "Enchantress", ActorSnoEnum._hireling_enchantress, FollowerClassEnum.Enchantress);
 	}
 
-	private HeroClassDefinition AddHeroClass(HeroClass heroClass, string string_0, string string_1, bool bool_0, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_2, string string_3)
+	private HeroClassDefinition AddHeroClass(HeroClass heroClass, string string_0, string code, bool bool_0, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_2, string string_3)
 	{
-		string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bnet_classes, string_1);
-		HeroClassDefinition heroClassDefinition = new HeroClassDefinition(heroClass, string_0, string_1, stringByCode, bool_0, actorSnoEnum, actorSnoEnum2, string_2, string_3);
-		dictionary_1.Add(actorSnoEnum, heroClassDefinition);
-		dictionary_1.Add(actorSnoEnum2, heroClassDefinition);
+		string stringByCode = SnoData.Strings.GetStringByCode(StringListSnoEnum._bnet_classes, code);
+		HeroClassDefinition heroClassDefinition = new HeroClassDefinition(heroClass, string_0, code, stringByCode, bool_0, actorSnoEnum, actorSnoEnum2, string_2, string_3);
+		heroClassDefinitionsByActorSnoEnum.Add(actorSnoEnum, heroClassDefinition);
+		heroClassDefinitionsByActorSnoEnum.Add(actorSnoEnum2, heroClassDefinition);
 		return heroClassDefinition;
 	}
 
 	private FollowerClass AddFollowerClass(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
 	{
 		FollowerClass followerClass = new FollowerClass(string_0, string_1, actorSnoEnum, followerClassEnum);
-		dictionary_0.Add(actorSnoEnum, followerClass);
+		followerClassesByActorSnoEnum.Add(actorSnoEnum, followerClass);
 		return followerClass;
 	}
 }

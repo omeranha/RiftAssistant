@@ -10,7 +10,7 @@ internal sealed class Attributes
 
 	private readonly Dictionary<string, AcdAttribute> all = new Dictionary<string, AcdAttribute>();
 
-	private readonly Dictionary<string, AttributeProcessor> dictionary_1 = new Dictionary<string, AttributeProcessor>();
+	private readonly Dictionary<string, AttributeProcessor> attributeProcessorsByKey = new Dictionary<string, AttributeProcessor>();
 
 	public AttributeMap Map { get; }
 
@@ -29,7 +29,7 @@ internal sealed class Attributes
 
 	public AttributeProcessor GetAttributeProcessor(string code)
 	{
-		dictionary_1.TryGetValue(code, out var value);
+		attributeProcessorsByKey.TryGetValue(code, out var value);
 		return value;
 	}
 
@@ -132,17 +132,17 @@ internal sealed class Attributes
 			}
 		}
 		Map = new AttributeMap(this);
-		dictionary_1.Add("groups", new AttributeProcessor(0, "groups", null, 0u, 0.0, 0));
-		dictionary_1.Add("name", new AttributeProcessor(1, "name", null, 0u, 0.0, 0));
-		dictionary_1.Add("name_int", new AttributeProcessor(2, "name_int", null, 0u, 0.0, 0));
-		dictionary_1.Add("ilvl", new AttributeProcessor(3, "ilvl", null, 0u, 0.0, 0));
-		dictionary_1.Add("dps", new AttributeProcessor(4, "dps", null, 0u, 0.0, 0));
-		dictionary_1.Add("main_stat", new AttributeProcessor(5, "main_stat", null, 0u, 0.0, 0));
-		dictionary_1.Add("main_stat_vita", new AttributeProcessor(6, "main_stat_vita", null, 0u, 0.0, 0));
-		dictionary_1.Add("allres_armor", new AttributeProcessor(7, "allres_armor", null, 0u, 0.0, 0));
-		dictionary_1.Add("allres_anyres", new AttributeProcessor(8, "allres_anyres", null, 0u, 0.0, 0));
-		dictionary_1.Add("cubed", new AttributeProcessor(9, "cubed", null, 0u, 0.0, 0));
-		dictionary_1.Add("can_cubed", new AttributeProcessor(10, "can_cubed", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("groups", new AttributeProcessor(0, "groups", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("name", new AttributeProcessor(1, "name", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("name_int", new AttributeProcessor(2, "name_int", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("ilvl", new AttributeProcessor(3, "ilvl", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("dps", new AttributeProcessor(4, "dps", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("main_stat", new AttributeProcessor(5, "main_stat", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("main_stat_vita", new AttributeProcessor(6, "main_stat_vita", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("allres_armor", new AttributeProcessor(7, "allres_armor", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("allres_anyres", new AttributeProcessor(8, "allres_anyres", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("cubed", new AttributeProcessor(9, "cubed", null, 0u, 0.0, 0));
+		attributeProcessorsByKey.Add("can_cubed", new AttributeProcessor(10, "can_cubed", null, 0u, 0.0, 0));
 		AddProcessor(9, "str", "Strength_Item", uint.MaxValue, null, 0);
 		AddProcessor(10, "dex", "Dexterity_Item", uint.MaxValue, null, 0);
 		AddProcessor(11, "int", "Intelligence_Item", uint.MaxValue, null, 0);
@@ -240,13 +240,13 @@ internal sealed class Attributes
 		AddProcessor(103, "bound_to_acdid", "Item_Bound_To_ACD", uint.MaxValue, null, 0);
 	}
 
-	private void AddProcessor(byte byte_0, string string_0, string string_1, uint maxValue, double? nullable_0, int int_0)
+	private void AddProcessor(byte byte_0, string string_0, string code, uint maxValue, double? nullable_0, int int_0)
 	{
-		AcdAttribute attributeByCode = GetAttributeByCode(string_1);
+		AcdAttribute attributeByCode = GetAttributeByCode(code);
 		if (attributeByCode != null)
 		{
 			AttributeProcessor attributeProcessor = new AttributeProcessor(byte_0, string_0, attributeByCode, maxValue, nullable_0, int_0);
-			dictionary_1.Add(attributeProcessor.Code, attributeProcessor);
+			attributeProcessorsByKey.Add(attributeProcessor.Code, attributeProcessor);
 			attributeByCode.AddProcessor(attributeProcessor);
 		}
 	}

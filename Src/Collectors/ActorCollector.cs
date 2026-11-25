@@ -10,9 +10,9 @@ internal partial class ActorCollector
 {
 	private readonly Dictionary<uint, Actor> actorsByAcdId = new Dictionary<uint, Actor>(1000);
 
-	public Stopwatch stopwatch_0 = new();
+	public Stopwatch stopwatch = new();
 
-	private Stopwatch stopwatch_1 = new();
+	private Stopwatch stopwatch1 = new();
 
 	public FollowerClass CurrentFollower;
 
@@ -62,7 +62,7 @@ internal partial class ActorCollector
 
 	public List<IClickableActor> Doors { get; } = new List<IClickableActor>();
 
-	public TownBanner[] ITownBanner_0 { get; } = new TownBanner[4];
+	public TownBanner[] TownBanners { get; } = new TownBanner[4];
 
 	public Actor IActor_1 { get; private set; }
 
@@ -101,8 +101,8 @@ internal partial class ActorCollector
 		Shrines.Clear();
 		Doors.Clear();
 		HeadStones.Clear();
-		for (int i = 0; i < ITownBanner_0.Length; i++) {
-			ITownBanner_0[i] = null;
+		for (int i = 0; i < TownBanners.Length; i++) {
+			TownBanners[i] = null;
 		}
 		CurrentFollower = null;
 		IActor_1 = null;
@@ -112,9 +112,9 @@ internal partial class ActorCollector
 
 	internal unsafe bool Collect()
 	{
-		bool flag = stopwatch_1.Elapsed.TotalMilliseconds >= 100.0;
+		bool flag = stopwatch1.Elapsed.TotalMilliseconds >= 100.0;
 		if (flag) {
-			stopwatch_1.Restart();
+			stopwatch1.Restart();
 		}
 		ResetCollections(bool_4: false);
 		Int32_1 = 0;
@@ -173,7 +173,7 @@ internal partial class ActorCollector
 					if (CoreCollector.LocalPlayer.SnoArea != null) {
 						SnoMonster snoMonster = monster.SnoMonster;
 						if (snoMonster != null && snoMonster.Priority == MonsterPriority.keywarden) {
-							stopwatch_0.Restart();
+							stopwatch.Restart();
 							Act = CoreCollector.LocalPlayer.SnoArea.Act;
 							Boolean_0[CoreCollector.LocalPlayer.SnoArea.Act - 1] = true;
 						}
@@ -238,11 +238,11 @@ internal partial class ActorCollector
 				uint sSceneID_Encrypted;
 				uint sWorldID_Encrypted;
 				if (snoActor.Kind == ActorKind.Player) {
-					if (!(Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player iplayer_0) => iplayer_0.AcdId == acdid) is Player player)) {
+					if (!(Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player0) => player0.AcdId == acdid) is Player player)) {
 						continue;
 					}
-					player.list_0.Clear();
-					CoreCollector.ACDCollector.ReadAttributeEntries(player.list_0);
+					player.attributeEntries.Clear();
+					CoreCollector.ACDCollector.ReadAttributeEntries(player.attributeEntries);
 					if (player.AcdId == uint.MaxValue) {
 						player.ResetActor();
 						break;
@@ -315,8 +315,8 @@ internal partial class ActorCollector
 					actor2.SummonerAcdDynamicId = num10;
 					actor2.Untargetable = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Untargetable, 1048575u, 0.0) == 1.0;
 					actor2.Boolean_0 = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__gizmo_disabled_by_script, 1048575u, 0.0) == 1.0;
-					actor2.list_0.Clear();
-					CoreCollector.ACDCollector.ReadAttributeEntries(actor2.list_0);
+					actor2.attributeEntries.Clear();
+					CoreCollector.ACDCollector.ReadAttributeEntries(actor2.attributeEntries);
 					if (num9) {
 						actor2.CollisionCoordinate.Set(ptr->CollisionX, ptr->CollisionY, ptr->CollisionZ);
 						actor2.FloorCoordinate.Set(ptr->BottomX, ptr->BottomY, ptr->BottomZ);
@@ -358,7 +358,7 @@ internal partial class ActorCollector
 						if (CoreCollector.LocalPlayer.SnoArea != null) {
 							SnoMonster snoMonster3 = monster2.SnoMonster;
 							if (snoMonster3 != null && snoMonster3.Priority == MonsterPriority.keywarden) {
-								stopwatch_0.Restart();
+								stopwatch.Restart();
 								Act = CoreCollector.LocalPlayer.SnoArea.Act;
 								Boolean_0[CoreCollector.LocalPlayer.SnoArea.Act - 1] = true;
 							}
@@ -388,8 +388,8 @@ internal partial class ActorCollector
 					IActor_0 = monster2;
 				}
 				ReadMonsterAffixes(struct7_, monster2);
-				monster2.list_0.Clear();
-				CoreCollector.ACDCollector.ReadAttributeEntries(monster2.list_0);
+				monster2.attributeEntries.Clear();
+				CoreCollector.ACDCollector.ReadAttributeEntries(monster2.attributeEntries);
 				if (num11 < monster2.CurHealth) {
 					num5 += monster2.CurHealth - num11;
 				}
@@ -481,7 +481,7 @@ internal partial class ActorCollector
 			}
 			item7.MonstersAlive2.Clear();
 		}
-		Monsters.Sort((Monster imonster_0, Monster imonster_1) => -((int)imonster_0.Rarity).CompareTo((int)imonster_1.Rarity));
+		Monsters.Sort((Monster monster0, Monster monster1) => -((int)monster0.Rarity).CompareTo((int)monster1.Rarity));
 		foreach (Monster monster3 in Monsters) {
 			if (monster3.Pack != null) {
 				(monster3.Pack as MonsterPack)?.MonstersUnknown2.Remove(monster3.MaxHealth);
@@ -501,8 +501,8 @@ internal partial class ActorCollector
 					if (monster3.SummonerAcdDynamicId != 0) {
 						continue;
 					}
-					string string_0 = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
-					MonsterPack monsterPack2 = MonsterPacks.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_1 == string_0 && imonsterPack_0.MinionSnoMonster == monster3.SnoMonster) as MonsterPack;
+					string concat = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
+					MonsterPack monsterPack2 = MonsterPacks.Find((MonsterPack monsterPack) => (monsterPack as MonsterPack)?.String_1 == concat && monsterPack.MinionSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack2 == null) {
 						foreach (MonsterPack item9 in MonsterPacks) {
 							bool flag5 = true;
@@ -520,7 +520,7 @@ internal partial class ActorCollector
 						if (monsterPack2 == null) {
 							continue;
 						}
-						monsterPack2.String_1 = string_0;
+						monsterPack2.String_1 = concat;
 						monsterPack2.MinionSnoMonster = monster3.SnoMonster;
 					}
 					monsterPack2.MonstersUnknown2.Remove(monster3.MaxHealth);
@@ -533,7 +533,7 @@ internal partial class ActorCollector
 					monster3.Pack = monsterPack2;
 				} else {
 					string string_1 = string.Concat(monster3.AffixSnoList.Select((SnoMonsterAffix snoMonsterAffix) => snoMonsterAffix.NameLocalized));
-					MonsterPack monsterPack4 = MonsterPacks.Find((MonsterPack imonsterPack_0) => (imonsterPack_0 as MonsterPack)?.String_0 == string_1 && imonsterPack_0.LeadSnoMonster == monster3.SnoMonster) as MonsterPack;
+					MonsterPack monsterPack4 = MonsterPacks.Find((MonsterPack monsterPack0) => (monsterPack0 as MonsterPack)?.String_0 == string_1 && monsterPack0.LeadSnoMonster == monster3.SnoMonster) as MonsterPack;
 					if (monsterPack4 == null) {
 						monsterPack4 = new MonsterPack {
 							AffixSnoList2 = monster3.AffixSnoList.ToList(),
@@ -561,7 +561,7 @@ internal partial class ActorCollector
 			}
 		}
 		MonsterHitpointDecrease.Add(num5);
-		foreach (Actor item11 in AllActors.Where((Actor iactor_0) => iactor_0.SnoActor.Kind == ActorKind.QuestActivate && iactor_0.SummonerId != 0)) {
+		foreach (Actor item11 in AllActors.Where((Actor actor0) => actor0.SnoActor.Kind == ActorKind.QuestActivate && actor0.SummonerId != 0)) {
 			foreach (Monster item12 in AliveMonsters) {
 				if (item12.SummonerAcdDynamicId == item11.SummonerId) {
 					(item12 as Monster).IsQuestMonster = true;

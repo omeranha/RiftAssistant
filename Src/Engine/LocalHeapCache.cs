@@ -184,14 +184,14 @@ internal class LocalHeapCache
 		yield break;
 	}
 
-	public IEnumerable<long> GetSmallBlocksWithSize_OrPlus0x20(int int_1)
+	public IEnumerable<long> GetSmallBlocksWithSize_OrPlus0x20(int alignedSize)
 	{
-		foreach (long addr in GetSmallBlocksWithSize(int_1))
+		foreach (long addr in GetSmallBlocksWithSize(alignedSize))
 		{
 			yield return addr;
 		}
 		
-		foreach (long addr in GetSmallBlocksWithSize(int_1 + 32))
+		foreach (long addr in GetSmallBlocksWithSize(alignedSize + 32))
 		{
 			yield return addr;
 		}
@@ -209,12 +209,12 @@ internal class LocalHeapCache
 		}
 	}
 
-	public int GetSizeOfBlock(long long_2)
+	public int GetSizeOfBlock(long realmAddress)
 	{
 		// Linear search through pre-allocated array
 		for (int i = 0; i < blockEntriesCount; i++)
 		{
-			if (blockEntries[i].Address == long_2)
+			if (blockEntries[i].Address == realmAddress)
 			{
 				return blockEntries[i].Size;
 			}
@@ -235,30 +235,30 @@ internal class LocalHeapCache
 		return GameWindowManager.Read<int>(address + offsetGameStateValidation3);
 	}
 
-	public uint ReadUInt32(long long_2, long long_3)
+	public uint ReadUInt32(long playerDataManagerAddress, long long_3)
 	{
-		if (smallblocksnode_data != null && long_2 >= smallblocksnode_address && long_2 <= smallblocksnode_address + smallblocksnode_size)
+		if (smallblocksnode_data != null && playerDataManagerAddress >= smallblocksnode_address && playerDataManagerAddress <= smallblocksnode_address + smallblocksnode_size)
 		{
-			long num = long_2 - smallblocksnode_address + long_3;
+			long num = playerDataManagerAddress - smallblocksnode_address + long_3;
 			if (num % 8 == 0L)
 			{
 				return (uint)smallblocksnode_data[num / 8];
 			}
 		}
-		return GameWindowManager.Read<uint>(long_2 + long_3);
+		return GameWindowManager.Read<uint>(playerDataManagerAddress + long_3);
 	}
 
-	public long ReadInt64(long long_2, long long_3)
+	public long ReadInt64(long gameStateAddress, long long_3)
 	{
-		if (smallblocksnode_data != null && long_2 >= smallblocksnode_address && long_2 <= smallblocksnode_address + smallblocksnode_size)
+		if (smallblocksnode_data != null && gameStateAddress >= smallblocksnode_address && gameStateAddress <= smallblocksnode_address + smallblocksnode_size)
 		{
-			long num = long_2 - smallblocksnode_address + long_3;
+			long num = gameStateAddress - smallblocksnode_address + long_3;
 			if (num % 8 == 0L)
 			{
 				return smallblocksnode_data[num / 8];
 			}
 		}
-		return GameWindowManager.Read<long>(long_2 + long_3);
+		return GameWindowManager.Read<long>(gameStateAddress + long_3);
 	}
 
 	public long[] ReadBlockPointers(long address, int size)
@@ -281,18 +281,18 @@ internal class LocalHeapCache
 		return GameWindowManager.ReadBytes(long_2 + int_2, int_1);
 	}
 
-	public bool IsBlockSizeEqual_OrPlus0x20(int int_1, int int_2)
+	public bool IsBlockSizeEqual_OrPlus0x20(int sizeOfBlock, int int_2)
 	{
-		if (int_1 != int_2)
+		if (sizeOfBlock != int_2)
 		{
-			return int_1 == int_2 + 32;
+			return sizeOfBlock == int_2 + 32;
 		}
 		return true;
 	}
 
-	public bool VerifyBlock(long long_2, int blockSize)
+	public bool VerifyBlock(long realmAddress, int blockSize)
 	{
-		uint num = GameWindowManager.Read<uint>(long_2 - 8);
+		uint num = GameWindowManager.Read<uint>(realmAddress - 8);
 		if (blockSize == (int)(num >> 1))
 		{
 			return (num & 1) == 1;

@@ -52,7 +52,7 @@ public class GameController
 
 	public Player[] Players => [.. CoreCollector.PlayerCollector.PlayersInGame];
 
-	public HeadStone[] HeadStones => [.. CoreCollector.ActorCollector.HeadStones.Where((HeadStone iheadStone_0) => iheadStone_0.Player != null)];
+	public HeadStone[] HeadStones => [.. CoreCollector.ActorCollector.HeadStones.Where((HeadStone headStone) => headStone.Player != null)];
 
 	public int NumberOfPlayersInGame => CoreCollector.PlayerCollector.NumberOfPlayersInGame;
 

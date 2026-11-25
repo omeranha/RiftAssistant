@@ -10,9 +10,9 @@ internal static class SnoData
 
 	public static readonly uint[] GeneralTagMapEntriesScriptFormulas = new uint[100];
 
-	private static readonly Dictionary<uint, TextureIndexEntry> dictionary_0 = [];
+	private static readonly Dictionary<uint, TextureIndexEntry> textureIndexEntriesByKey = [];
 
-	private static readonly Dictionary<ulong, TextureIndexEntry> dictionary_1 = [];
+	private static readonly Dictionary<ulong, TextureIndexEntry> textureIndexEntriesByKey1 = [];
 
 	public static Strings Strings { get; private set; }
 
@@ -40,7 +40,7 @@ internal static class SnoData
 
 	public static TextureIndexEntry? GetTextureIndexEntry(uint key)
 	{
-		if (dictionary_0.TryGetValue(key, out var value))
+		if (textureIndexEntriesByKey.TryGetValue(key, out var value))
 		{
 			return value;
 		}
@@ -49,7 +49,7 @@ internal static class SnoData
 
 	public static TextureIndexEntry? GetTextureIndexEntryBySnoIdWithAnimState(ulong key)
 	{
-		if (dictionary_1.TryGetValue(key, out var value))
+		if (textureIndexEntriesByKey1.TryGetValue(key, out var value))
 		{
 			return value;
 		}
@@ -94,8 +94,8 @@ internal static class SnoData
 				W = w,
 				H = h
 			};
-			dictionary_0.TryAdd(num, value);
-			dictionary_1.Add(key, value);
+			textureIndexEntriesByKey.TryAdd(num, value);
+			textureIndexEntriesByKey1.Add(key, value);
 		}
 	}
 
@@ -114,9 +114,9 @@ internal static class SnoData
 		}
 	}
 
-	internal static string ReplaceNewlines(string stringByCode, string string_1 = "<br>")
+	internal static string ReplaceNewlines(string stringByCode, string newValue = "<br>")
 	{
-		return stringByCode?.Replace("\n", string_1);
+		return stringByCode?.Replace("\n", newValue);
 	}
 
 }

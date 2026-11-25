@@ -211,7 +211,7 @@ public struct r_ArmoryPotion
 	public uint PotionAnnId;
 
 	[FieldOffset(16)]
-	public uint uint_1;
+	public uint sno;
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
@@ -226,67 +226,67 @@ public struct r_ArmorySet
 	}
 
 	[FieldOffset(0)]
-	public r_ArmoryItem struct25_0;
+	public r_ArmoryItem armoryItem;
 
 	[FieldOffset(48)]
-	public r_ArmoryItem struct25_1;
+	public r_ArmoryItem armoryItem1;
 
 	[FieldOffset(96)]
-	public r_ArmoryItem struct25_2;
+	public r_ArmoryItem armoryItem2;
 
 	[FieldOffset(144)]
-	public r_ArmoryItem struct25_3;
+	public r_ArmoryItem armoryItem3;
 
 	[FieldOffset(192)]
-	public r_ArmoryItem struct25_4;
+	public r_ArmoryItem armoryItem4;
 
 	[FieldOffset(240)]
-	public r_ArmoryItem struct25_5;
+	public r_ArmoryItem armoryItem5;
 
 	[FieldOffset(288)]
-	public r_ArmoryItem struct25_6;
+	public r_ArmoryItem armoryItem6;
 
 	[FieldOffset(336)]
-	public r_ArmoryItem struct25_7;
+	public r_ArmoryItem armoryItem7;
 
 	[FieldOffset(384)]
-	public r_ArmoryItem struct25_8;
+	public r_ArmoryItem armoryItem8;
 
 	[FieldOffset(432)]
-	public r_ArmoryItem struct25_9;
+	public r_ArmoryItem armoryItem9;
 
 	[FieldOffset(480)]
-	public r_ArmoryItem struct25_10;
+	public r_ArmoryItem armoryItem10;
 
 	[FieldOffset(528)]
-	public r_ArmoryItem struct25_11;
+	public r_ArmoryItem armoryItem11;
 
 	[FieldOffset(576)]
-	public r_ArmoryItem struct25_12;
+	public r_ArmoryItem armoryItem12;
 
 	[FieldOffset(624)]
-	public r_ArmoryPotion struct26_0;
+	public r_ArmoryPotion armoryPotion;
 
 	[FieldOffset(648)]
-	public r_ArmorySkill struct27_0;
+	public r_ArmorySkill armorySkill;
 
 	[FieldOffset(656)]
-	public r_ArmorySkill struct27_1;
+	public r_ArmorySkill armorySkill1;
 
 	[FieldOffset(664)]
-	public r_ArmorySkill struct27_2;
+	public r_ArmorySkill armorySkill2;
 
 	[FieldOffset(672)]
-	public r_ArmorySkill struct27_3;
+	public r_ArmorySkill armorySkill3;
 
 	[FieldOffset(680)]
-	public r_ArmorySkill struct27_4;
+	public r_ArmorySkill armorySkill4;
 
 	[FieldOffset(688)]
-	public r_ArmorySkill struct27_5;
+	public r_ArmorySkill armorySkill5;
 
 	[FieldOffset(696)]
-	public uint uint_0;
+	public uint sno;
 
 	[FieldOffset(700)]
 	public uint uint_1;
@@ -317,7 +317,7 @@ public struct r_ArmorySet
 public struct r_ArmorySkill
 {
 	[FieldOffset(0)]
-	public uint uint_0;
+	public uint sno;
 
 	[FieldOffset(4)]
 	public uint uint_1;
@@ -333,14 +333,14 @@ internal struct r_AttributeEntry
 	public uint uint_0;
 
 	[FieldOffset(12)]
-	public int int_0;
+	public int quantity;
 
 	[FieldOffset(12)]
 	public float float_0;
 
 	public const int int_1 = 16;
 
-	public static readonly r_AttributeEntry struct8_0;
+	public static readonly r_AttributeEntry attributeEntry;
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
@@ -501,31 +501,31 @@ internal struct r_Hero
 	public uint uint_1;
 
 	[FieldOffset(264)]
-	public int int_0;
+	public int level;
 
 	[FieldOffset(268)]
-	public int int_1;
+	public int paragonLevel;
 
 	[FieldOffset(292)]
 	public int season;
 
 	[FieldOffset(336)]
-	public int int_3;
+	public int flags;
 
 	[FieldOffset(360)]
-	public uint uint_2;
+	public uint sno;
 
 	[FieldOffset(364)]
-	public uint uint_3;
+	public uint stepId;
 
 	[FieldOffset(368)]
-	public int int_4;
+	public int playedSeconds;
 
 	[FieldOffset(376)]
 	public long long_4;
 
 	[FieldOffset(384)]
-	public long long_5;
+	public long lastPlayed;
 
 	public const int SizeOf = 392;
 }
@@ -553,10 +553,10 @@ internal struct r_Map
 internal struct r_Marker
 {
 	[FieldOffset(0)]
-	public r_WorldPlace struct37_0;
+	public r_WorldPlace worldPlace;
 
 	[FieldOffset(16)]
-	public r_Texture struct15_0;
+	public r_Texture texture;
 
 	[FieldOffset(24)]
 	public uint uint_0;
@@ -568,7 +568,7 @@ internal struct r_Marker
 	public uint uint_2;
 
 	[FieldOffset(36)]
-	public uint uint_3;
+	public uint sno;
 
 	[FieldOffset(72)]
 	public uint uint_4;
@@ -592,7 +592,7 @@ internal struct r_MarkerEntry
 	public uint uint_0;
 
 	[FieldOffset(12)]
-	public r_Marker struct17_0;
+	public r_Marker marker0;
 
 	public const int int_0 = 88;
 }
@@ -655,22 +655,22 @@ internal struct r_PlayerData
 	public int IsInGameFlag;
 
 	[FieldOffset(4940)]
-	public r_ActiveSkillSavedData struct30_0;
+	public r_ActiveSkillSavedData activeSkillSavedData;
 
 	[FieldOffset(4956)]
-	public r_ActiveSkillSavedData struct30_1;
+	public r_ActiveSkillSavedData activeSkillSavedData1;
 
 	[FieldOffset(4972)]
-	public r_ActiveSkillSavedData struct30_2;
+	public r_ActiveSkillSavedData activeSkillSavedData2;
 
 	[FieldOffset(4988)]
-	public r_ActiveSkillSavedData struct30_3;
+	public r_ActiveSkillSavedData activeSkillSavedData3;
 
 	[FieldOffset(5004)]
-	public r_ActiveSkillSavedData struct30_4;
+	public r_ActiveSkillSavedData activeSkillSavedData4;
 
 	[FieldOffset(5020)]
-	public r_ActiveSkillSavedData struct30_5;
+	public r_ActiveSkillSavedData activeSkillSavedData5;
 
 	[FieldOffset(5036)]
 	public unsafe fixed uint struct33_0[4];
@@ -760,34 +760,34 @@ internal struct r_PlayerData
 	public unsafe fixed sbyte struct35_0[13];
 
 	[FieldOffset(46984)]
-	public r_ArmorySet struct28_0;
+	public r_ArmorySet armorySet;
 
 	[FieldOffset(47776)]
-	public r_ArmorySet struct28_1;
+	public r_ArmorySet armorySet1;
 
 	[FieldOffset(48568)]
-	public r_ArmorySet struct28_2;
+	public r_ArmorySet armorySet2;
 
 	[FieldOffset(49360)]
-	public r_ArmorySet struct28_3;
+	public r_ArmorySet armorySet3;
 
 	[FieldOffset(50152)]
-	public r_ArmorySet struct28_4;
+	public r_ArmorySet armorySet4;
 
 	[FieldOffset(50944)]
-	public r_ArmorySet struct28_5;
+	public r_ArmorySet armorySet5;
 
 	[FieldOffset(51736)]
-	public r_ArmorySet struct28_6;
+	public r_ArmorySet armorySet6;
 
 	[FieldOffset(52528)]
-	public r_ArmorySet struct28_7;
+	public r_ArmorySet armorySet7;
 
 	[FieldOffset(53320)]
-	public r_ArmorySet struct28_8;
+	public r_ArmorySet armorySet8;
 
 	[FieldOffset(54112)]
-	public r_ArmorySet struct28_9;
+	public r_ArmorySet armorySet9;
 
 	[FieldOffset(54908)]
 	public float LifePercentage;
@@ -812,7 +812,7 @@ internal struct r_Quest
 	public uint uint_0;
 
 	[FieldOffset(4)]
-	public int int_0;
+	public int createdOn;
 
 	[FieldOffset(8)]
 	public uint uint_1;
@@ -824,13 +824,13 @@ internal struct r_Quest
 	public uint uint_3;
 
 	[FieldOffset(20)]
-	public float float_0;
+	public float progress;
 
 	[FieldOffset(24)]
 	public int int_1;
 
 	[FieldOffset(28)]
-	public uint uint_4;
+	public uint questStepId;
 
 	[FieldOffset(32)]
 	public uint uint_5;
@@ -839,7 +839,7 @@ internal struct r_Quest
 	public uint uint_6;
 
 	[FieldOffset(40)]
-	public int int_2;
+	public int counter;
 
 	[FieldOffset(44)]
 	public uint uint_7;
@@ -1010,10 +1010,10 @@ internal struct r_Scene
 internal struct r_SceneRevealInfo
 {
 	[FieldOffset(0)]
-	public uint uint_0;
+	public uint sno;
 
 	[FieldOffset(4)]
-	public uint uint_1;
+	public uint sSceneID;
 
 	[FieldOffset(8)]
 	public uint uint_2;
@@ -1022,16 +1022,16 @@ internal struct r_SceneRevealInfo
 	public uint uint_3;
 
 	[FieldOffset(16)]
-	public float float_0;
+	public float meshMinX;
 
 	[FieldOffset(20)]
-	public float float_1;
+	public float meshMinY;
 
 	[FieldOffset(24)]
-	public float float_2;
+	public float meshMaxX;
 
 	[FieldOffset(28)]
-	public float float_3;
+	public float meshMaxY;
 
 	[FieldOffset(32)]
 	public uint uint_4;

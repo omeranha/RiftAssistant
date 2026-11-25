@@ -5,9 +5,9 @@ namespace RiftAssistant.Model;
 
 public class Actor
 {
-	internal List<r_AttributeEntry> list_0 = new List<r_AttributeEntry>();
+	internal List<r_AttributeEntry> attributeEntries = new List<r_AttributeEntry>();
 
-	private readonly ScreenCoordinate ScreenCoordinate_0;
+	private readonly ScreenCoordinate ScreenCoordinate0;
 
 	private bool bool_0;
 
@@ -83,9 +83,9 @@ public class Actor
 		{
 			if (!bool_0)
 			{
-				CollisionCoordinate.SetScreenCoordinate(ScreenCoordinate_0, raw: true);
+				CollisionCoordinate.SetScreenCoordinate(ScreenCoordinate0, raw: true);
 			}
-			return ScreenCoordinate_0;
+			return ScreenCoordinate0;
 		}
 	}
 
@@ -96,7 +96,7 @@ public class Actor
 		SnoActor = snoActor2;
 		CollisionCoordinate = Window.CreateWorldCoordinate(0f, 0f, 0f);
 		FloorCoordinate = Window.CreateWorldCoordinate(0f, 0f, 0f);
-		ScreenCoordinate_0 = Window.CreateScreenCoordinate(0f, 0f);
+		ScreenCoordinate0 = Window.CreateScreenCoordinate(0f, 0f);
 	}
 
 	public void SetPosition(float positionX, float positionY, float positionZ)
@@ -134,19 +134,19 @@ public class Actor
 		return SnoActor.Code;
 	}
 
-	public void SetAcdId(uint uint_7)
+	public void SetAcdId(uint acdId)
 	{
-		AcdId = uint_7;
+		AcdId = acdId;
 	}
 
 	public double GetAttributeValue(AcdAttribute attribute, uint modifier, double defaultValue = -1.0)
 	{
 		uint id = attribute.GetId(modifier);
-		foreach (r_AttributeEntry item in list_0)
+		foreach (r_AttributeEntry item in attributeEntries)
 		{
 			if (item.uint_0 == id)
 			{
-				return (attribute.ValueType == AttributeValueType._int) ? ((float)item.int_0) : item.float_0;
+				return (attribute.ValueType == AttributeValueType._int) ? ((float)item.quantity) : item.float_0;
 			}
 		}
 		return defaultValue;
@@ -155,11 +155,11 @@ public class Actor
 	public int GetAttributeValueAsInt(AcdAttribute attribute, uint modifier, int defaultValue = int.MaxValue)
 	{
 		uint id = attribute.GetId(modifier);
-		foreach (r_AttributeEntry item in list_0)
+		foreach (r_AttributeEntry item in attributeEntries)
 		{
 			if (item.uint_0 == id)
 			{
-				return item.int_0;
+				return item.quantity;
 			}
 		}
 		return defaultValue;
@@ -168,11 +168,11 @@ public class Actor
 	public uint GetAttributeValueAsUInt(AcdAttribute attribute, uint modifier, uint defaultValue = uint.MaxValue)
 	{
 		uint id = attribute.GetId(modifier);
-		foreach (r_AttributeEntry item in list_0)
+		foreach (r_AttributeEntry item in attributeEntries)
 		{
 			if (item.uint_0 == id)
 			{
-				return (uint)item.int_0;
+				return (uint)item.quantity;
 			}
 		}
 		return defaultValue;

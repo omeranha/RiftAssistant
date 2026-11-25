@@ -79,7 +79,7 @@ public sealed class SnoItem
 	{
 		get {
 			if (Mods != null) {
-				SnoItemMod snoItemMod = Array.Find(Mods, (SnoItemMod isnoItemMod_0) => isnoItemMod_0.Attribute?.Code == "Item_Power_Passive");
+				SnoItemMod snoItemMod = Array.Find(Mods, (SnoItemMod snoItemMod0) => snoItemMod0.Attribute?.Code == "Item_Power_Passive");
 				if (snoItemMod != null) {
 					return SnoData.Powers.GetBySno(snoItemMod.Modifier);
 				}
@@ -90,36 +90,36 @@ public sealed class SnoItem
 
 	public bool IsEthereal => Code.StartsWith("P71_Ethereal");
 
-	internal SnoItem(uint uint_5, uint uint_6, uint uint_7, SnoActor snoActor2, uint uint_8, uint uint_9, int int_14, SnoItemType snoItemType2, int int_15, int int_16, int int_17, int int_18, int int_19, int int_20, string string_5, string string_6, string string_7, string string_8, string[] string_9, ItemLocation itemLocation, ItemLocation itemLocation2, int int_21, int int_22, int int_23, int int_24, int int_25, int int_26, int int_27, ItemCraftQuality itemCraftQuality)
+	internal SnoItem(uint sno, uint baseItemSno, uint setItemBonusesSno, SnoActor snoActor2, uint prefixStringSno, uint suffixStringSno, int level, SnoItemType snoItemType2, int stackSize, int goldPrice, int unsocketPrice, int requiredLevel, int itemWidth, int itemHeight, string code, string nameLocalized, string nameEnglish, string mainGroupCode, string[] groupCodes, ItemLocation itemLocation, ItemLocation itemLocation2, int dropWeight, int dropSmartDemonHunter, int dropSmartBarbarian, int dropSmartWizard, int dropSmartWitchDoctor, int dropSmartMonk, int dropSmartCrusader, ItemCraftQuality itemCraftQuality)
 	{
-		Sno = uint_5;
-		BaseItemSno = uint_6;
-		SetItemBonusesSno = uint_7;
+		Sno = sno;
+		BaseItemSno = baseItemSno;
+		SetItemBonusesSno = setItemBonusesSno;
 		SnoActor = snoActor2;
-		PrefixStringSno = uint_8;
-		SuffixStringSno = uint_9;
-		Level = int_14;
-		ItemWidth = int_19;
-		ItemHeight = int_20;
-		Code = string_5;
-		NameLocalized = string_6;
-		NameEnglish = string_7;
-		MainGroupCode = string_8;
-		GroupCodes = string_9;
+		PrefixStringSno = prefixStringSno;
+		SuffixStringSno = suffixStringSno;
+		Level = level;
+		ItemWidth = itemWidth;
+		ItemHeight = itemHeight;
+		Code = code;
+		NameLocalized = nameLocalized;
+		NameEnglish = nameEnglish;
+		MainGroupCode = mainGroupCode;
+		GroupCodes = groupCodes;
 		SnoItemType = snoItemType2;
-		StackSize = int_15;
-		GoldPrice = int_16;
-		UnsocketPrice = int_17;
-		RequiredLevel = int_18;
+		StackSize = stackSize;
+		GoldPrice = goldPrice;
+		UnsocketPrice = unsocketPrice;
+		RequiredLevel = requiredLevel;
 		UsedLocation1 = itemLocation;
 		UsedLocation2 = itemLocation2;
-		DropWeight = int_21;
-		DropSmartDemonHunter = int_22;
-		DropSmartBarbarian = int_23;
-		DropSmartWizard = int_24;
-		DropSmartWitchDoctor = int_25;
-		DropSmartMonk = int_26;
-		DropSmartCrusader = int_27;
+		DropWeight = dropWeight;
+		DropSmartDemonHunter = dropSmartDemonHunter;
+		DropSmartBarbarian = dropSmartBarbarian;
+		DropSmartWizard = dropSmartWizard;
+		DropSmartWitchDoctor = dropSmartWitchDoctor;
+		DropSmartMonk = dropSmartMonk;
+		DropSmartCrusader = dropSmartCrusader;
 		CraftQuality = itemCraftQuality;
 		Kind = ItemKind.loot;
 		switch (Sno) {

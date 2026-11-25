@@ -8,7 +8,7 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 
 	private T pendingValue;
 
-	private Stopwatch stopwatch_0;
+	private Stopwatch stopwatch0;
 
 	public int DelayMs { get; set; } = int_1;
 
@@ -24,10 +24,10 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 
 	private T GetValue()
 	{
-		Stopwatch stopwatch = stopwatch_0;
-		if (stopwatch != null && IsRunning(stopwatch) && GetElapsedMilliseconds(stopwatch_0) >= DelayMs) {
+		Stopwatch stopwatch = stopwatch0;
+		if (stopwatch != null && IsRunning(stopwatch) && GetElapsedMilliseconds(stopwatch0) >= DelayMs) {
 			currentValue = pendingValue;
-			StopTimer(stopwatch_0);
+			StopTimer(stopwatch0);
 		}
 		return currentValue;
 	}
@@ -35,10 +35,10 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 	private void SetValue(T gparam_2)
 	{
 		if (!pendingValue.Equals(gparam_2)) {
-			if (stopwatch_0 == null) {
-				stopwatch_0 = StartNewTimer();
+			if (stopwatch0 == null) {
+				stopwatch0 = StartNewTimer();
 			} else {
-				RestartTimer(stopwatch_0);
+				RestartTimer(stopwatch0);
 			}
 			pendingValue = gparam_2;
 		}
@@ -48,7 +48,7 @@ internal class DebouncedValue<T>(T gparam_2, int int_1 = 1000)
 	{
 		currentValue = gparam_2;
 		pendingValue = gparam_2;
-		Stopwatch stopwatch = stopwatch_0;
+		Stopwatch stopwatch = stopwatch0;
 		if (stopwatch != null) {
 			StopTimer(stopwatch);
 		}

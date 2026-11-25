@@ -151,7 +151,7 @@ internal static class Custom
 
 internal class Map
 {
-	public readonly int int_0;
+	public readonly int maxIndex;
 
 	private long long_1;
 
@@ -161,9 +161,9 @@ internal class Map
 
 	public bool bool_0;
 
-	private r_Map[] struct16_0 = new r_Map[1];
+	private r_Map[] maps = new r_Map[1];
 
-	public readonly Allocator class351_0;
+	public readonly Allocator allocator;
 
 	public long Int64_0 { get; private set; }
 
@@ -171,35 +171,35 @@ internal class Map
 
 	public Map(int int_3, bool bool_1 = true)
 	{
-		int_0 = int_3;
+		maxIndex = int_3;
 		if (bool_1)
 		{
-			class351_0 = new Allocator(int_3, "EntryAllocator");
+			allocator = new Allocator(int_3, "EntryAllocator");
 		}
 	}
 
-	public void SetAddress(long long_3)
+	public void SetAddress(long primaryAreaPtr)
 	{
-		Int64_0 = long_3;
-		bool_0 = long_3 != 0;
-		long_1 = long_3 + 28;
+		Int64_0 = primaryAreaPtr;
+		bool_0 = primaryAreaPtr != 0;
+		long_1 = primaryAreaPtr + 28;
 		if (bool_0)
 		{
-			struct16_0[0] = GameWindowManager.Read<r_Map>(long_3);
-			MaxIndex = struct16_0[0].MaxIndex;
-			mask = struct16_0[0].Mask;
-			if (MaxIndex < -1 || MaxIndex > int_0)
+			maps[0] = GameWindowManager.Read<r_Map>(primaryAreaPtr);
+			MaxIndex = maps[0].MaxIndex;
+			mask = maps[0].Mask;
+			if (MaxIndex < -1 || MaxIndex > maxIndex)
 			{
-				MaxIndex = int_0;
+				MaxIndex = maxIndex;
 			}
 		}
 		else
 		{
 			MaxIndex = -1;
 		}
-		if (class351_0 != null)
+		if (allocator != null)
 		{
-			class351_0.Snapshot(struct16_0[0].PtrBucketAllocator);
+			allocator.Snapshot(maps[0].PtrBucketAllocator);
 			return;
 		}
 		if (long_2 == null || long_2.Length < MaxIndex + 1 || MaxIndex == 0)
@@ -224,11 +224,11 @@ internal class Map
 	}
 }
 
-public class Quest(SnoQuest isnoQuest_1)
+public class Quest(SnoQuest quest)
 {
-	private readonly Stopwatch iwatch_2 = new();
+	private readonly Stopwatch stopwatch = new();
 
-	public SnoQuest SnoQuest { get; set; } = isnoQuest_1;
+	public SnoQuest SnoQuest { get; set; } = quest;
 
 	public int CreatedOn { get; set; }
 
@@ -262,8 +262,8 @@ public class Quest(SnoQuest isnoQuest_1)
 			flag = true;
 		}
 		if (flag) {
-			iwatch_2.Start();
-			if (iwatch_2.ElapsedMilliseconds > 2000) {
+			stopwatch.Start();
+			if (stopwatch.ElapsedMilliseconds > 2000) {
 				return true;
 			}
 		}
@@ -301,13 +301,13 @@ public class Scene
 
 	public uint UInt32_0 { get; set; }
 
-	public Scene(SnoScene isnoScene_1, SnoArea isnoArea_1, uint worldSno, uint sSceneID, uint uint_6, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
+	public Scene(SnoScene snoScene, SnoArea snoArea, uint worldSno, uint sSceneID, uint sceneId, float meshMinX, float meshMinY, float meshMaxX, float meshMaxY, float meshMaxZ)
 	{
-		SnoScene = isnoScene_1;
-		SnoArea = isnoArea_1;
+		SnoScene = snoScene;
+		SnoArea = snoArea;
 		WorldSno = worldSno;
 		NavMeshId = sSceneID;
-		SceneId = uint_6;
+		SceneId = sceneId;
 		PosX = meshMinX;
 		PosY = meshMinY;
 		MaxX = meshMaxX;
@@ -374,11 +374,11 @@ internal sealed class Scenes
 
 internal sealed class Worlds
 {
-	private readonly Dictionary<uint, SnoWorld> dictionary_0 = new Dictionary<uint, SnoWorld>(500);
+	private readonly Dictionary<uint, SnoWorld> snoWorldsByKey = new Dictionary<uint, SnoWorld>(500);
 
 	public SnoWorld GetWorld(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		snoWorldsByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -397,7 +397,7 @@ internal sealed class Worlds
 			string[] array2 = text.Split('\t');
 			uint num2 = uint.Parse(array2[0], CultureInfo.InvariantCulture);
 			SnoWorld snoWorld = new SnoWorld(num2);
-			dictionary_0.Add(num2, snoWorld);
+			snoWorldsByKey.Add(num2, snoWorld);
 			for (int i = 1; i < array2.Length; i++)
 			{
 				uint sno = uint.Parse(array2[i], CultureInfo.InvariantCulture);

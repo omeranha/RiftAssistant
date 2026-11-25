@@ -17,13 +17,13 @@ internal class ModulePortraitPlayerStats : Module
 
 	private readonly RenderFont renderFont = new(255, 255, 255, 255, "Arial", false, false, 7f, Alignment.Center, true, false);
 
-	private readonly RenderBrush class219_0;
+	private readonly RenderBrush renderBrush;
 
-	private readonly RenderBrush class219_1;
+	private readonly RenderBrush renderBrush1;
 
-	private readonly RenderBrush class219_2;
+	private readonly RenderBrush renderBrush2;
 
-	private readonly RenderBrush class219_3 = new RenderBrush(192, 0, 0, 0, 0f);
+	private readonly RenderBrush renderBrush3 = new RenderBrush(192, 0, 0, 0, 0f);
 
 	public ModulePortraitPlayerStats(Settings settings) : base(true)
 	{
@@ -32,11 +32,11 @@ internal class ModulePortraitPlayerStats : Module
 		showRunDPS = settings.Overlay.PortraitPlayerStats.ShowRunDPS;
 		showTotalDPS = settings.Overlay.PortraitPlayerStats.ShowTotalDPS;
 		showInfo = settings.Overlay.PortraitPlayerStats.ShowInfo;
-		class219_0 = new RenderBrush(255, 0, 0, 0, 0f);
+		renderBrush = new RenderBrush(255, 0, 0, 0, 0f);
 		ehp = settings.Overlay.PortraitPlayerStats.EHP;
-		class219_1 = new RenderBrush(160, 0, 170, 0, 0f);
-		class219_2 = new RenderBrush(160, 100, 100, 100, 0f);
-		SetTransparentComponents(class219_0, class219_3, class219_2, class219_1, renderFont);
+		renderBrush1 = new RenderBrush(160, 0, 170, 0, 0f);
+		renderBrush2 = new RenderBrush(160, 100, 100, 100, 0f);
+		SetTransparentComponents(renderBrush, renderBrush3, renderBrush2, renderBrush1, renderFont);
 	}
 
 	public void Update()
@@ -49,7 +49,7 @@ internal class ModulePortraitPlayerStats : Module
 			return;
 		}
 		int num = 0;
-		UiElement uiElement = CoreCollector.UiElements.class341_145[0];
+		UiElement uiElement = CoreCollector.UiElements.uiElements145[0];
 		if ((float)GameWindowManager.Window.CursorX >= uiElement.rectangle.Left && (float)GameWindowManager.Window.CursorX <= uiElement.rectangle.Right && (float)GameWindowManager.Window.CursorY >= uiElement.rectangle.Top && (float)GameWindowManager.Window.CursorY <= uiElement.rectangle.Bottom) {
 			DrawStats();
 		}
@@ -66,7 +66,7 @@ internal class ModulePortraitPlayerStats : Module
 				num++;
 			}
 			int num3 = ((!item2.IsMe) ? num : 0);
-			UiElement uiElement2 = CoreCollector.UiElements.class341_145[num3];
+			UiElement uiElement2 = CoreCollector.UiElements.uiElements145[num3];
 			if (ehp && CoreCollector.PlayerCollector.NumberOfPlayersInGame > 1) {
 				float num4 = uiElement2.rectangle.Width * 0.05f;
 				float num5 = uiElement2.rectangle.Height * 0.73f;
@@ -75,9 +75,9 @@ internal class ModulePortraitPlayerStats : Module
 				left -= num4 + 2f;
 				left -= num4 + 2f;
 				if (ehp && item2.HasValidActor) {
-					class219_2.DrawRectangle(left, num6, num4, num5);
+					renderBrush2.DrawRectangle(left, num6, num4, num5);
 					float num7 = num5 / ehpMax * item2.Defense.EhpMax;
-					class219_1.DrawRectangle(left, num6 + num5 - num7, num4, num7);
+					renderBrush1.DrawRectangle(left, num6 + num5 - num7, num4, num7);
 				}
 			}
 			if ((showTotalDPS || showRunDPS || showRealDPS) && item2.IsMe) {
@@ -133,7 +133,7 @@ internal class ModulePortraitPlayerStats : Module
 				TextLayout textLayout2 = renderFont.GetTextLayout(text);
 				float num10 = uiElement2.rectangle.Right + 2f + 1f;
 				float num11 = uiElement2.rectangle.Top + uiElement2.rectangle.Height * 0.71f;
-				class219_0.DrawRectangle(num10 - 3f, num11 - 2f, textLayout2.Metrics.Width + 6f, textLayout2.Metrics.Height + 5f);
+				renderBrush.DrawRectangle(num10 - 3f, num11 - 2f, textLayout2.Metrics.Width + 6f, textLayout2.Metrics.Height + 5f);
 				renderFont.DrawText(textLayout2, num10, num11);
 			}
 		}
@@ -195,7 +195,7 @@ internal class ModulePortraitPlayerStats : Module
 		float num11 = (float)GameWindowManager.Window.Size.Height * 0.03f;
 		float num12 = num10;
 		float y = num11;
-		class219_3.DrawRectangle(num12, y, num6, num7);
+		renderBrush3.DrawRectangle(num12, y, num6, num7);
 		num12 += num3;
 		for (int k = 0; k < array.GetLength(1); k++) {
 			float num13 = 0f;
@@ -223,7 +223,7 @@ internal class ModulePortraitPlayerStats : Module
 
 	public new virtual void Dispose()
 	{
-		Overlay.Instance.DisposeRenders(renderFont, class219_0, class219_3, renderFont, class219_2, class219_1);
+		Overlay.Instance.DisposeRenders(renderFont, renderBrush, renderBrush3, renderFont, renderBrush2, renderBrush1);
 		base.Dispose();
 	}
 }

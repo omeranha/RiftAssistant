@@ -24,9 +24,9 @@ public sealed class AcdAttribute
 
 	public bool OrderIndexPrimary { get; internal set; } = true;
 
-	internal AcdAttribute(string string_1, uint uint_1, AttributeValueType attributeValueType, Dictionary<uint, string> dictionary_2)
+	internal AcdAttribute(string code, uint uint_1, AttributeValueType attributeValueType, Dictionary<uint, string> dictionary_2)
 	{
-		Code = string_1;
+		Code = code;
 		Index = uint_1;
 		ValueType = attributeValueType;
 		dictionary_0 = dictionary_2;
@@ -93,14 +93,14 @@ public sealed class AttributeProcessor
 
 	public int RoundDecimals { get; }
 
-	internal AttributeProcessor(byte byte_1, string string_1, AcdAttribute iattribute_1, uint maxValue, double? nullable_1, int int_1)
+	internal AttributeProcessor(byte compactId, string code, AcdAttribute attribute, uint maxValue, double? multiplier, int roundDecimals)
 	{
-		CompactId = byte_1;
-		Code = string_1;
-		Attribute = iattribute_1;
+		CompactId = compactId;
+		Code = code;
+		Attribute = attribute;
 		Modifier = maxValue;
-		Multiplier = nullable_1;
-		RoundDecimals = int_1;
+		Multiplier = multiplier;
+		RoundDecimals = roundDecimals;
 	}
 
 	public double ProcessDouble(double dv)
@@ -169,9 +169,9 @@ internal sealed class FollowerClass
 
 	public FollowerClassEnum ClassEnum { get; }
 
-	public FollowerClass(string string_0, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
+	public FollowerClass(string code, string string_1, ActorSnoEnum actorSnoEnum, FollowerClassEnum followerClassEnum)
 	{
-		Code = string_0;
+		Code = code;
 		Name = string_1;
 		ActorSno = actorSnoEnum;
 		ClassEnum = followerClassEnum;
@@ -250,17 +250,17 @@ public sealed class HeroClassDefinition
 
 	public string SecondaryResourceName { get; }
 
-	internal HeroClassDefinition(HeroClass heroClass2, string string_5, string string_6, string stringByCode, bool bool_1, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string string_8, string string_9)
+	internal HeroClassDefinition(HeroClass heroClass2, string code, string fullCode, string stringByCode, bool isRanged, ActorSnoEnum actorSnoEnum, ActorSnoEnum actorSnoEnum2, string primaryResourceName, string secondaryResourceName)
 	{
 		HeroClass = heroClass2;
-		Code = string_5;
-		FullCode = string_6;
+		Code = code;
+		FullCode = fullCode;
 		Name = stringByCode;
-		IsRanged = bool_1;
+		IsRanged = isRanged;
 		MaleActorSno = actorSnoEnum;
 		FemaleActorSno = actorSnoEnum2;
-		PrimaryResourceName = string_8;
-		SecondaryResourceName = string_9;
+		PrimaryResourceName = primaryResourceName;
+		SecondaryResourceName = secondaryResourceName;
 	}
 }
 
@@ -453,12 +453,12 @@ public sealed class NavCell
 
 	public float MaxY { get; }
 
-	internal NavCell(float float_4, float float_5, float float_6, float float_7)
+	internal NavCell(float minX, float minY, float maxX, float maxY)
 	{
-		MinX = float_4;
-		MinY = float_5;
-		MaxX = float_6;
-		MaxY = float_7;
+		MinX = minX;
+		MinY = minY;
+		MaxX = maxX;
+		MaxY = maxY;
 	}
 }
 
@@ -491,9 +491,9 @@ public class SceneHint
 
 	public WorldCoordinate FloorCoordinate { get; set; }
 
-	public SceneHint(string string_1)
+	public SceneHint(string hint)
 	{
-		Hint = string_1;
+		Hint = hint;
 	}
 }
 
@@ -506,11 +506,11 @@ internal sealed class SkillEffectRule
 
 	public float Radius { get; }
 
-	internal SkillEffectRule(SkillEffectType skillEffectType, SnoActor actor, float float_1)
+	internal SkillEffectRule(SkillEffectType skillEffectType, SnoActor actor, float radius)
 	{
 		Type = skillEffectType;
 		SnoActor = actor;
-		Radius = float_1;
+		Radius = radius;
 	}
 }
 
@@ -527,9 +527,9 @@ public class SnoAct
 
 	public List<SnoActWaypoint> Waypoints { get; } = new List<SnoActWaypoint>();
 
-	internal SnoAct(uint uint_1, int int_1)
+	internal SnoAct(uint sno, int int_1)
 	{
-		Sno = uint_1;
+		Sno = sno;
 		Index = int_1;
 	}
 }
@@ -553,13 +553,13 @@ public sealed class SnoActor
 
 	public uint[] TextureMap { get; set; }
 
-	internal SnoActor(ActorSnoEnum actorSnoEnum, ActorType invalid, ActorKind none, bool bool_1, string string_3, string stringByCode, string stringByCodeEnglish)
+	internal SnoActor(ActorSnoEnum actorSnoEnum, ActorType invalid, ActorKind none, bool isStatic, string code, string stringByCode, string stringByCodeEnglish)
 	{
 		Sno = actorSnoEnum;
 		Kind = none;
 		Type = invalid;
-		IsStatic = bool_1;
-		Code = string_3;
+		IsStatic = isStatic;
+		Code = code;
 		NameLocalized = stringByCode;
 		NameEnglish = stringByCodeEnglish;
 	}
@@ -571,10 +571,10 @@ public sealed class SnoActWaypoint
 
 	public uint AreaSno;
 
-	internal SnoActWaypoint(uint uint_0, uint uint_1)
+	internal SnoActWaypoint(uint worldSno, uint areaSno)
 	{
-		WorldSno = uint_0;
-		AreaSno = uint_1;
+		WorldSno = worldSno;
+		AreaSno = areaSno;
 	}
 }
 
@@ -605,18 +605,18 @@ public class SnoArea
 
 	public SnoArea HostSnoArea => null;
 
-	internal SnoArea(uint uint_2, string string_4, int int_1, string string_5, string string_6, AreaType areaType, bool bool_2, string string_7, bool bool_3, uint uint_3)
+	internal SnoArea(uint sno, string code, int act, string nameLocalized, string nameEnglish, AreaType areaType, bool isRandom, string areaGroupInWorld, bool isTown, uint hostAreaSno)
 	{
-		Sno = uint_2;
-		Code = string_4;
-		Act = int_1;
-		NameLocalized = string_5;
-		NameEnglish = string_6;
+		Sno = sno;
+		Code = code;
+		Act = act;
+		NameLocalized = nameLocalized;
+		NameEnglish = nameEnglish;
 		Type = areaType;
-		IsRandom = bool_2;
-		AreaGroupInWorld = string_7;
-		IsTown = bool_3;
-		HostAreaSno = uint_3;
+		IsRandom = isRandom;
+		AreaGroupInWorld = areaGroupInWorld;
+		IsTown = isTown;
+		HostAreaSno = hostAreaSno;
 	}
 }
 
@@ -705,16 +705,16 @@ public class SnoItemAffix
 
 	public bool Minor { get; set; }
 
-	internal SnoItemAffix(uint uint_2, string stringByCode2, string stringByCodeEnglish2, uint uint_3, SnoItemAffixGroup isnoItemAffixGroup_2, SnoItemAffixGroup isnoItemAffixGroup_3, HeroClass heroClass2, bool bool_1)
+	internal SnoItemAffix(uint uint_2, string stringByCode2, string stringByCodeEnglish2, uint baseAffixId, SnoItemAffixGroup snoItemAffixGroup, SnoItemAffixGroup snoItemAffixGroup3, HeroClass heroClass2, bool minor)
 	{
 		Id = uint_2;
 		NameLocalized = stringByCode2;
 		NameEnglish = stringByCodeEnglish2;
-		BaseAffixId = uint_3;
-		SnoAffixGroup1 = isnoItemAffixGroup_2;
-		SnoAffixGroup2 = isnoItemAffixGroup_3;
+		BaseAffixId = baseAffixId;
+		SnoAffixGroup1 = snoItemAffixGroup;
+		SnoAffixGroup2 = snoItemAffixGroup3;
 		HeroClass = heroClass2;
-		Minor = bool_1;
+		Minor = minor;
 	}
 
 	public override string ToString()
@@ -763,10 +763,10 @@ public class SnoItemAffixGroupLink
 
 	public int Flag { get; }
 
-	internal SnoItemAffixGroupLink(SnoItemAffixGroup isnoItemAffixGroup_1, int int_2, int int_3)
+	internal SnoItemAffixGroupLink(SnoItemAffixGroup isnoItemAffixGroup_1, int level, int int_3)
 	{
 		Group = isnoItemAffixGroup_1;
-		Level = int_2;
+		Level = level;
 		Flag = int_3;
 	}
 
@@ -789,13 +789,13 @@ public class SnoItemMod
 
 	public SnoItemAffix Affix { get; }
 
-	internal SnoItemMod(AcdAttribute iattribute_1, uint uint_1, float float_2, float float_3, SnoItemAffix isnoItemAffix_1)
+	internal SnoItemMod(AcdAttribute attribute, uint modifier, float float_2, float float_3, SnoItemAffix affix)
 	{
-		Attribute = iattribute_1;
-		Modifier = uint_1;
+		Attribute = attribute;
+		Modifier = modifier;
 		Min = float_2;
 		Max = float_3;
-		Affix = isnoItemAffix_1;
+		Affix = affix;
 	}
 
 	public override string ToString()
@@ -817,10 +817,10 @@ public sealed class SnoItemType
 
 	public SnoItemType ParentSnoType { get; set; }
 
-	internal SnoItemType(uint uint_1, string string_3, string stringByCode, string stringByCodeEnglish, SnoItemType snoItemType)
+	internal SnoItemType(uint uint_1, string code, string stringByCode, string stringByCodeEnglish, SnoItemType snoItemType)
 	{
 		Id = uint_1;
-		Code = string_3;
+		Code = code;
 		NameLocalized = stringByCode;
 		NameEnglish = stringByCodeEnglish;
 		ParentSnoType = snoItemType;
@@ -851,16 +851,16 @@ public sealed class SnoMonster
 
 	public float RiftProgression { get; }
 
-	internal SnoMonster(SnoActor snoActor2, uint uint_1, string string_3, string stringById, string stringByIdEnglish, MonsterPriority monsterPriority, bool bool_1, float float_1)
+	internal SnoMonster(SnoActor snoActor2, uint sno, string code, string stringById, string stringByIdEnglish, MonsterPriority monsterPriority, bool isUnique, float riftProgression)
 	{
 		SnoActor = snoActor2;
-		Sno = uint_1;
-		Code = string_3;
+		Sno = sno;
+		Code = code;
 		NameLocalized = stringById;
 		NameEnglish = stringByIdEnglish;
 		Priority = monsterPriority;
-		IsUnique = bool_1;
-		RiftProgression = float_1;
+		IsUnique = isUnique;
+		RiftProgression = riftProgression;
 	}
 }
 
@@ -932,28 +932,28 @@ public sealed class SnoQuest
 		return value;
 	}
 
-	internal SnoQuest(string string_7, uint uint_1, SnoAct isnoAct_1, string stringByCode, string stringByCodeEnglish, string stringByCode2, string stringByCodeEnglish2, QuestType questType, QuestEventType questEventType, int int_1, string stringByCode3, string stringByCodeEnglish3, BountyAct bountyAct2, BountyType bountyType2, SnoArea isnoArea_1)
+	internal SnoQuest(string code, uint sno, SnoAct snoAct, string stringByCode, string stringByCodeEnglish, string stringByCode2, string stringByCodeEnglish2, QuestType questType, QuestEventType questEventType, int unassignedStepId, string stringByCode3, string stringByCodeEnglish3, BountyAct bountyAct2, BountyType bountyType2, SnoArea bountySnoArea)
 	{
-		Code = string_7;
-		Sno = uint_1;
-		SnoAct = isnoAct_1;
+		Code = code;
+		Sno = sno;
+		SnoAct = snoAct;
 		NameLocalized = stringByCode;
 		NameEnglish = stringByCodeEnglish;
 		DescriptionLocalized = stringByCode2;
 		DescriptionEnglish = stringByCodeEnglish2;
 		BountyAct = bountyAct2;
 		BountyType = bountyType2;
-		BountySnoArea = isnoArea_1;
+		BountySnoArea = bountySnoArea;
 		Type = questType;
 		EventType = questEventType;
-		UnassignedStepId = int_1;
+		UnassignedStepId = unassignedStepId;
 		UnassignedStepBnetTitleLocalized = stringByCode3;
 		UnassignedStepBnetTitleEnglish = stringByCodeEnglish3;
 	}
 
-	internal void AddStep(SnoQuestStep isnoQuestStep_0)
+	internal void AddStep(SnoQuestStep snoQuestStep)
 	{
-		steps.Add(isnoQuestStep_0.Id, isnoQuestStep_0);
+		steps.Add(snoQuestStep.Id, snoQuestStep);
 	}
 }
 
@@ -976,9 +976,9 @@ public class SnoQuestStep
 
 	public string BnetTextEnglish { get; }
 
-	internal SnoQuestStep(SnoQuest isnoQuest_1, uint uint_1, string stringByCode4, string stringByCodeEnglish4, string stringByCode5, string stringByCodeEnglish5, string stringByCode6, string stringByCodeEnglish6)
+	internal SnoQuestStep(SnoQuest snoQuest, uint uint_1, string stringByCode4, string stringByCodeEnglish4, string stringByCode5, string stringByCodeEnglish5, string stringByCode6, string stringByCodeEnglish6)
 	{
-		SnoQuest = isnoQuest_1;
+		SnoQuest = snoQuest;
 		Id = uint_1;
 		SplashLocalized = stringByCode4;
 		SplashEnglish = stringByCodeEnglish4;
@@ -1075,16 +1075,16 @@ public class SnoScene
 
 	private static Stream Stream_1 => fileStream2 ?? (fileStream2 = new FileStream(Path.Combine(Program.AppDir, "data", "scene_square.bin"), FileMode.Open, FileAccess.Read, FileShare.Read));
 
-	internal SnoScene(uint uint_1, int int_0, int int_1, int int_2, int int_3, int int_4, int int_5, string string_1)
+	internal SnoScene(uint sno, int navCellBinPosition, int navCellSavedCount, int navSquareW, int navSquareH, int navSquareSavedCount, int navSquareBinPosition, string code)
 	{
-		Sno = uint_1;
-		Code = string_1;
-		NavCellBinPosition = int_0;
-		NavCellSavedCount = int_1;
-		NavSquareW = int_2;
-		NavSquareH = int_3;
-		NavSquareSavedCount = int_4;
-		NavSquareBinPosition = int_5;
+		Sno = sno;
+		Code = code;
+		NavCellBinPosition = navCellBinPosition;
+		NavCellSavedCount = navCellSavedCount;
+		NavSquareW = navSquareW;
+		NavSquareH = navSquareH;
+		NavSquareSavedCount = navSquareSavedCount;
+		NavSquareBinPosition = navSquareBinPosition;
 	}
 
 	public void LoadNavCells()
@@ -1097,13 +1097,13 @@ public class SnoScene
 			for (int i = 0; i < NavCellSavedCount; i++)
 			{
 				float float_ = dataReader.ReadSingle();
-				float float_2 = dataReader.ReadSingle();
+				float single = dataReader.ReadSingle();
 				dataReader.ReadSingle();
 				float float_3 = dataReader.ReadSingle();
 				float float_4 = dataReader.ReadSingle();
 				dataReader.ReadSingle();
 				dataReader.ReadUInt32();
-				NavCells[i] = new NavCell(float_, float_2, float_3, float_4);
+				NavCells[i] = new NavCell(float_, single, float_3, float_4);
 			}
 		}
 	}
@@ -1150,10 +1150,10 @@ public class SnoSocketedEffect
 
 	public SnoItemMod[] Mods { get; }
 
-	internal SnoSocketedEffect(SnoItemType snoItemType2, SnoItemMod[] isnoItemMod_1)
+	internal SnoSocketedEffect(SnoItemType snoItemType2, SnoItemMod[] mods)
 	{
 		SnoItemType = snoItemType2;
-		Mods = isnoItemMod_1;
+		Mods = mods;
 	}
 }
 
@@ -1166,9 +1166,9 @@ public sealed class SnoWorld
 
 	public List<SnoArea> SnoAreas { get; } = new List<SnoArea>();
 
-	internal SnoWorld(uint uint_1)
+	internal SnoWorld(uint sno)
 	{
-		Sno = uint_1;
+		Sno = sno;
 	}
 }
 
@@ -1191,16 +1191,16 @@ public class SnoWorldSceneInfo
 
 	public string CalculatedPosId { get; }
 
-	internal SnoWorldSceneInfo(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
+	internal SnoWorldSceneInfo(float posX, float posY, float maxX, float maxY, SnoArea snoArea)
 	{
-		PosX = float_6;
-		PosY = float_7;
-		MaxX = float_8;
-		MaxY = float_9;
+		PosX = posX;
+		PosY = posY;
+		MaxX = maxX;
+		MaxY = maxY;
 		W = MaxX - PosX;
 		H = MaxY - PosY;
-		SnoArea = isnoArea_1;
-		if (isnoArea_1.SnoWorld.Sno == 332336)
+		SnoArea = snoArea;
+		if (snoArea.SnoWorld.Sno == 332336)
 		{
 			PosX = PosX - 2580f;
 			PosY = PosY - 2280f;
@@ -1214,8 +1214,8 @@ public sealed class SnoWorldSceneInfoRandom : SnoWorldSceneInfo
 
 	public List<SnoScene> SnoScenes { get; } = new List<SnoScene>();
 
-	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1)
-		: base(float_6, float_7, float_8, float_9, isnoArea_1)
+	internal SnoWorldSceneInfoRandom(float float_6, float float_7, float float_8, float float_9, SnoArea snoArea)
+		: base(float_6, float_7, float_8, float_9, snoArea)
 	{
 	}
 }
@@ -1225,10 +1225,10 @@ public sealed class SnoWorldSceneInfoStatic : SnoWorldSceneInfo
 
 	public SnoScene SnoScene { get; }
 
-	internal SnoWorldSceneInfoStatic(float float_6, float float_7, float float_8, float float_9, SnoArea isnoArea_1, SnoScene isnoScene_1)
-		: base(float_6, float_7, float_8, float_9, isnoArea_1)
+	internal SnoWorldSceneInfoStatic(float float_6, float float_7, float float_8, float float_9, SnoArea snoArea, SnoScene snoScene)
+		: base(float_6, float_7, float_8, float_9, snoArea)
 	{
-		SnoScene = isnoScene_1;
+		SnoScene = snoScene;
 	}
 }
 

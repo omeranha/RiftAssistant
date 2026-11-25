@@ -5,11 +5,11 @@ namespace RiftAssistant.Engine;
 
 internal class QuestManager
 {
-	private readonly Allocator class351_0 = new Allocator(512, "rQuestAllocator");
+	private readonly Allocator allocator = new Allocator(512, "rQuestAllocator");
 
-	private r_Quest[] struct20_0;
+	private r_Quest[] quests;
 
-	private readonly Dictionary<uint, Quest> class112_0 = new Dictionary<uint, Quest>();
+	private readonly Dictionary<uint, Quest> questsByKey = new Dictionary<uint, Quest>();
 
 	public readonly Dictionary<uint, Quest> Quests = new Dictionary<uint, Quest>();
 
@@ -19,24 +19,24 @@ internal class QuestManager
 	{
 		Quests.Clear();
 		Bounties.Clear();
-		class351_0.Snapshot(CoreCollector.D3Memory.QuestManagerAddress);
-		int totalElementCount = class351_0.GetTotalElementCount();
+		allocator.Snapshot(CoreCollector.D3Memory.QuestManagerAddress);
+		int totalElementCount = allocator.GetTotalElementCount();
 		if (totalElementCount <= 0) {
 			return;
 		}
-		if (struct20_0 == null || struct20_0.Length != totalElementCount) {
-			struct20_0 = new r_Quest[totalElementCount];
+		if (quests == null || quests.Length != totalElementCount) {
+			quests = new r_Quest[totalElementCount];
 		}
 		int num = 0;
-		for (int i = 0; i < class351_0.RawBlocks.Count; i++) {
-			r_Block r_Block2 = class351_0.RawBlocks[i];
+		for (int i = 0; i < allocator.RawBlocks.Count; i++) {
+			r_Block r_Block2 = allocator.RawBlocks[i];
 			if (r_Block2.ElementCount > 0) {
-				GameWindowManager.ReadIntoArray(r_Block2.ArrayStart, struct20_0, num, r_Block2.ElementCount);
+				GameWindowManager.ReadIntoArray(r_Block2.ArrayStart, quests, num, r_Block2.ElementCount);
 			}
 			num += r_Block2.ElementCount;
 		}
 		for (int j = 0; j < totalElementCount; j++) {
-			ReadQuest(ref struct20_0[j]);
+			ReadQuest(ref quests[j]);
 		}
 	}
 
@@ -44,7 +44,7 @@ internal class QuestManager
 	{
 		Quests.Clear();
 		Bounties.Clear();
-		class112_0.Clear();
+		questsByKey.Clear();
 	}
 
 	private void ReadQuest(ref r_Quest quest2)
@@ -58,17 +58,17 @@ internal class QuestManager
 			return;
 		}
 		try {
-			Quest quest3 = class112_0.GetValueOrDefault(uint_);
+			Quest quest3 = questsByKey.GetValueOrDefault(uint_);
 			if (quest3 == null) {
 				quest3 = new Quest(quest);
-				class112_0[uint_] = quest3;
+				questsByKey[uint_] = quest3;
 			}
-			quest3.CreatedOn = quest2.int_0;
-			quest3.QuestStepId = quest2.uint_4;
-			quest3.QuestStep = quest.GetStep(quest2.uint_4);
+			quest3.CreatedOn = quest2.createdOn;
+			quest3.QuestStepId = quest2.questStepId;
+			quest3.QuestStep = quest.GetStep(quest2.questStepId);
 			quest3.State = (QuestState)quest2.int_1;
-			quest3.Progress = quest2.float_0;
-			quest3.Counter = quest2.int_2;
+			quest3.Progress = quest2.progress;
+			quest3.Counter = quest2.counter;
 			switch (quest3.State) {
 				case QuestState.none:
 					quest3.CompletedOn.Reset();

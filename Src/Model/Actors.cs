@@ -7,27 +7,27 @@ namespace RiftAssistant.Model;
 
 internal sealed class Actors
 {
-	internal readonly Dictionary<ActorSnoEnum, SnoActor> dictionary_0 = new Dictionary<ActorSnoEnum, SnoActor>(5000);
+	internal readonly Dictionary<ActorSnoEnum, SnoActor> snoActorsByActorSnoEnum = new Dictionary<ActorSnoEnum, SnoActor>(5000);
 
-	private readonly Dictionary<ActorSnoEnum, SkillEffectRule> dictionary_1 = new Dictionary<ActorSnoEnum, SkillEffectRule>();
+	private readonly Dictionary<ActorSnoEnum, SkillEffectRule> skillEffectRulesByActorSnoEnum = new Dictionary<ActorSnoEnum, SkillEffectRule>();
 
-	private readonly Dictionary<ActorSnoEnum, ActorShrineTypeInfo> dictionary_2 = new Dictionary<ActorSnoEnum, ActorShrineTypeInfo>();
+	private readonly Dictionary<ActorSnoEnum, ActorShrineTypeInfo> actorShrineTypeInfosByActorSnoEnum = new Dictionary<ActorSnoEnum, ActorShrineTypeInfo>();
 
 	public SnoActor GetActor(ActorSnoEnum sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		snoActorsByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public SkillEffectRule GetSkillEffectRule(ActorSnoEnum sno)
 	{
-		dictionary_1.TryGetValue(sno, out var value);
+		skillEffectRulesByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public ActorShrineTypeInfo GetActorShrineTypeInfo(ActorSnoEnum sno)
 	{
-		dictionary_2.TryGetValue(sno, out var value);
+		actorShrineTypeInfosByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -46,7 +46,7 @@ internal sealed class Actors
 				ActorType actorType_ = ((array2.Length > 4) ? ((ActorType)Enum.Parse(typeof(ActorType), array2[4], ignoreCase: true)) : ActorType.Invalid);
 				string stringByCode = SnoData.Strings.GetStringByCode(text2);
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(text2);
-				dictionary_0.Add(actorSnoEnum, new SnoActor(actorSnoEnum, actorType_, actorKind_, bool_, text2, stringByCode, stringByCodeEnglish));
+				snoActorsByActorSnoEnum.Add(actorSnoEnum, new SnoActor(actorSnoEnum, actorType_, actorKind_, bool_, text2, stringByCode, stringByCodeEnglish));
 			}
 		}
 		using (DataReader dataReader = new(File.ReadAllBytes(Path.Combine(Program.AppDir, "data", "gamebalance_actor_inventory_index.bin"))))
@@ -162,12 +162,12 @@ internal sealed class Actors
 	private void AddSkillEffectRule(SkillEffectType skillEffectType, ActorSnoEnum actorSnoEnum, float float_0)
 	{
 		SkillEffectRule value = new SkillEffectRule(skillEffectType, GetActor(actorSnoEnum), float_0);
-		dictionary_1.Add(actorSnoEnum, value);
+		skillEffectRulesByActorSnoEnum.Add(actorSnoEnum, value);
 	}
 
 	private void AddShrineType(ShrineType shrineType, ActorSnoEnum actorSnoEnum)
 	{
 		ActorShrineTypeInfo value = new ActorShrineTypeInfo(shrineType, GetActor(actorSnoEnum));
-		dictionary_2.Add(actorSnoEnum, value);
+		actorShrineTypeInfosByActorSnoEnum.Add(actorSnoEnum, value);
 	}
 }

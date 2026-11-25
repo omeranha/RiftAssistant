@@ -18,7 +18,7 @@ internal static class CoreCollector
 
 	public static bool IsGameReady { get; private set; }
 
-	public static readonly Stopwatch stopwatch_0 = new();
+	public static readonly Stopwatch stopwatch0 = new();
 
 	public static Stopwatch stopwatch_1 { get; private set; } = new();
 
@@ -423,7 +423,7 @@ internal static class CoreCollector
 
 				SceneCollector.GenerateSceneHints();
 				SnoArea snoArea = LocalPlayer.SnoArea;
-				bool flag3 = !IsGameReady && stopwatch_0.ElapsedMilliseconds >= 3000;
+				bool flag3 = !IsGameReady && stopwatch0.ElapsedMilliseconds >= 3000;
 				if (int_0 != HeroCollector.Int32_0) {
 					if (int_0 != 0) {
 						flag3 = true;
@@ -471,7 +471,7 @@ internal static class CoreCollector
 					} catch (Exception exception5) {
 						Logger.LogException(exception5.ToString());
 					}
-					ActorCollector.stopwatch_0 = null;
+					ActorCollector.stopwatch = null;
 					ActorCollector.Act = 0;
 					try {
 						OnNewArea?.Invoke(null, EventArgs.Empty);
@@ -512,18 +512,18 @@ internal static class CoreCollector
 				ClearGameServerContext();
 				return;
 			}
-			stopwatch_0.Restart();
+			stopwatch0.Restart();
 			stopwatch_1.Restart();
 			try {
 				ItemCollector.Collect();
 			} catch (Exception exception7) {
 				Logger.LogException(exception7.ToString());
 			}
-			Player[] iPlayer_2 = PlayerCollector.PlayerSlots;
-			for (int j = 0; j < iPlayer_2.Length; j++) {
-				Player player3 = (Player)iPlayer_2[j];
+			Player[] playerSlots = PlayerCollector.PlayerSlots;
+			for (int j = 0; j < playerSlots.Length; j++) {
+				Player player3 = (Player)playerSlots[j];
 				if (player3.IsDeadSafeCheck && player3.CoordinateKnown) {
-					HeadStone headStone = ActorCollector.HeadStones.Find((HeadStone iheadStone_0) => iheadStone_0.PlayerActorAnnId == player3.AnnId) as HeadStone;
+					HeadStone headStone = ActorCollector.HeadStones.Find((HeadStone headStone0) => headStone0.PlayerActorAnnId == player3.AnnId) as HeadStone;
 					if (headStone != null) {
 						player3.HeadStone = headStone;
 					}
@@ -604,7 +604,7 @@ internal static class CoreCollector
 		}
 	}
 
-	public unsafe static PointF EvaluatePowerFormula(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player iplayer_1 = null)
+	public unsafe static PointF EvaluatePowerFormula(byte[] formulaData, int int_1, int int_2, SnoPower snoPower = null, Player player = null)
 	{
 		if (int_2 == 0) {
 			return new PointF(0f, 0f);
@@ -685,8 +685,8 @@ internal static class CoreCollector
 								case 0: {
 										float num7 = 0f;
 										AcdAttribute acdAttribute = SnoData.Attributes.ByIndex[index2];
-										if (acdAttribute != null && iplayer_1 != null) {
-											ACDCollector.SetIndexFromAcdId(iplayer_1.AcdId);
+										if (acdAttribute != null && player != null) {
+											ACDCollector.SetIndexFromAcdId(player.AcdId);
 											uint uint_ = 1048575u;
 											if (acdAttribute.Code.StartsWith("Rune_")) {
 												uint_ = snoPower.Sno;

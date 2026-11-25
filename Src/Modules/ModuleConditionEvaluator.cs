@@ -53,38 +53,38 @@ internal class ModuleConditionEvaluator
 	{
 		bool shouldBeVisible = EvaluateVisibility(module, isParentVisible);
 
-		if (module.itransparent_0 != null) {
+		if (module.transparents != null) {
 			if (!shouldBeVisible) {
-				if (module.float_0 >= 1f) {
+				if (module.opacity >= 1f) {
 					module.long_0 = CoreCollector.CurrentRealTimeTicks + (module.int_1 - 1) * 10000;
 				}
-			} else if (module.float_0 <= 0f) {
+			} else if (module.opacity <= 0f) {
 				module.long_0 = CoreCollector.CurrentRealTimeTicks + (module.int_0 - 1) * 10000;
 			}
 
 			if (!shouldBeVisible) {
-				if (!(module.float_0 <= 0f) && module.bool_1) {
-					module.float_0 = (float)(module.long_0 - CoreCollector.CurrentRealTimeTicks) / 10000f / (float)module.int_1;
-					for (int i = 0; i < module.itransparent_0.Length; i++) {
-						module.itransparent_0[i].Opacity = module.float_0;
+				if (!(module.opacity <= 0f) && module.bool_1) {
+					module.opacity = (float)(module.long_0 - CoreCollector.CurrentRealTimeTicks) / 10000f / (float)module.int_1;
+					for (int i = 0; i < module.transparents.Length; i++) {
+						module.transparents[i].Opacity = module.opacity;
 					}
 					return true;
 				}
-				module.float_0 = 0f;
+				module.opacity = 0f;
 				return false;
 			}
 
-			if (module.float_0 >= 1f && !module.bool_2) {
-				module.float_0 = 1f;
-				for (int j = 0; j < module.itransparent_0.Length; j++) {
-					module.itransparent_0[j].Opacity = module.float_0;
+			if (module.opacity >= 1f && !module.bool_2) {
+				module.opacity = 1f;
+				for (int j = 0; j < module.transparents.Length; j++) {
+					module.transparents[j].Opacity = module.opacity;
 				}
 				return true;
 			}
 
-			module.float_0 = ((module.long_0 > CoreCollector.CurrentRealTimeTicks) ? (1f - (float)(module.long_0 - CoreCollector.CurrentRealTimeTicks) / 10000f / (float)module.int_0) : 1f);
-			for (int k = 0; k < module.itransparent_0.Length; k++) {
-				module.itransparent_0[k].Opacity = module.float_0;
+			module.opacity = ((module.long_0 > CoreCollector.CurrentRealTimeTicks) ? (1f - (float)(module.long_0 - CoreCollector.CurrentRealTimeTicks) / 10000f / (float)module.int_0) : 1f);
+			for (int k = 0; k < module.transparents.Length; k++) {
+				module.transparents[k].Opacity = module.opacity;
 			}
 		}
 

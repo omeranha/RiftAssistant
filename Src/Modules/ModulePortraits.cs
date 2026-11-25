@@ -18,27 +18,27 @@ internal class ModulePortraits : Module
 				num++;
 			}
 			int num2 = ((!item.IsMe) ? num : 0);
-			UiElement uiElement = CoreCollector.UiElements.class341_145[num2];
+			UiElement uiElement = CoreCollector.UiElements.uiElements145[num2];
 			Texture itexture_ = TextureManager.GetTextureById(uiElement.TextureSno);
-			UiElement uiElement2 = CoreCollector.UiElements.class341_146[num2];
-			Texture itexture_2 = TextureManager.GetTextureById(uiElement2.TextureSno);
-			UiElement uiElement3 = CoreCollector.UiElements.class341_147[num2];
-			Texture itexture_3 = TextureManager.GetTextureById(uiElement3.TextureSno);
+			UiElement uiElement2 = CoreCollector.UiElements.uiElements146[num2];
+			Texture textureById = TextureManager.GetTextureById(uiElement2.TextureSno);
+			UiElement uiElement3 = CoreCollector.UiElements.uiElements147[num2];
+			Texture texture3 = TextureManager.GetTextureById(uiElement3.TextureSno);
 			float num3 = (float)GameWindowManager.Window.Size.Height * 0.0085f;
-			DrawPortrait(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, itexture_2, itexture_3);
+			DrawPortrait(num3 * 1.85f + (float)GameWindowManager.Window.Size.Height * 0.12f * (float)num2, num3, itexture_, textureById, texture3);
 		}
 	}
 
-	private void DrawPortrait(float float_1, float float_2, Texture itexture_0, Texture itexture_1, Texture itexture_2)
+	private void DrawPortrait(float float_1, float float_2, Texture texture, Texture texture1, Texture texture2)
 	{
 		float num = (float)GameWindowManager.Window.Size.Height * 0.143f;
-		float num2 = itexture_0.Width / itexture_0.Height * num;
+		float num2 = texture.Width / texture.Height * num;
 		float num3 = num * 0.75f;
-		float num4 = itexture_2.Width / itexture_2.Height * num3;
-		itexture_2.Draw(float_1 + (num2 - num4) * 0.5f, float_2 + (num - num3) * 0.9f, num4, num3);
+		float num4 = texture2.Width / texture2.Height * num3;
+		texture2.Draw(float_1 + (num2 - num4) * 0.5f, float_2 + (num - num3) * 0.9f, num4, num3);
 		float num5 = num * 0.3f;
-		float num6 = itexture_1.Width / itexture_1.Height * num5;
-		itexture_1.Draw(float_1 + (num2 - num6) * 0.52f, float_2 + (num - num5) * 0.49f, num6, num5);
-		itexture_0.Draw(float_1, float_2, num2, num);
+		float num6 = texture1.Width / texture1.Height * num5;
+		texture1.Draw(float_1 + (num2 - num6) * 0.52f, float_2 + (num - num5) * 0.49f, num6, num5);
+		texture.Draw(float_1, float_2, num2, num);
 	}
 }

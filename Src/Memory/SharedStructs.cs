@@ -273,7 +273,7 @@ internal struct VideoSettings
 	public int int_2;
 
 	[FieldOffset(16)]
-	public WindowMode windowMode_0;
+	public WindowMode windowMode;
 
 	[FieldOffset(20)]
 	public int int_3;
@@ -321,7 +321,7 @@ internal struct VideoSettings
 	public int int_16;
 
 	[FieldOffset(80)]
-	public bool bool_1;
+	public bool isFullscreen;
 
 	[FieldOffset(84)]
 	public bool bool_2;

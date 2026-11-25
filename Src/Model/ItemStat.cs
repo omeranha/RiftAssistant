@@ -18,37 +18,37 @@ public class ItemStat
 
 	public string StringValue { get; set; }
 
-	public ItemStat(AcdAttribute iattribute_1, uint uint_1, double double_1)
+	public ItemStat(AcdAttribute attribute, uint modifier, double doubleValue)
 	{
 		Processor = null;
-		Attribute = iattribute_1;
-		Modifier = uint_1;
-		DoubleValue = double_1;
+		Attribute = attribute;
+		Modifier = modifier;
+		DoubleValue = doubleValue;
 		Id = Attribute.Code + "#" + Modifier.ToString("D", CultureInfo.InvariantCulture);
 	}
 
-	public ItemStat(AcdAttribute iattribute_1, uint uint_1, double double_1, int int_0)
+	public ItemStat(AcdAttribute attribute, uint modifier, double doubleValue, int integerValue)
 	{
 		Processor = null;
-		Attribute = iattribute_1;
-		Modifier = uint_1;
-		DoubleValue = double_1;
-		IntegerValue = int_0;
+		Attribute = attribute;
+		Modifier = modifier;
+		DoubleValue = doubleValue;
+		IntegerValue = integerValue;
 		Id = Attribute.Code + "#" + Modifier.ToString("D", CultureInfo.InvariantCulture);
 	}
 
-	public ItemStat(string string_2, double double_1)
+	public ItemStat(string code, double doubleValue)
 	{
-		Processor = SnoData.Attributes.GetAttributeProcessor(string_2);
+		Processor = SnoData.Attributes.GetAttributeProcessor(code);
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
-		DoubleValue = double_1;
+		DoubleValue = doubleValue;
 	}
 
-	public ItemStat(string string_2, double level, int level2)
+	public ItemStat(string code, double level, int level2)
 	{
-		Processor = SnoData.Attributes.GetAttributeProcessor(string_2);
+		Processor = SnoData.Attributes.GetAttributeProcessor(code);
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
@@ -56,9 +56,9 @@ public class ItemStat
 		IntegerValue = level2;
 	}
 
-	public ItemStat(string string_2, string nameLocalized)
+	public ItemStat(string code, string nameLocalized)
 	{
-		Processor = SnoData.Attributes.GetAttributeProcessor(string_2);
+		Processor = SnoData.Attributes.GetAttributeProcessor(code);
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
@@ -67,13 +67,13 @@ public class ItemStat
 		IntegerValue = null;
 	}
 
-	public ItemStat(AttributeProcessor iattributeProcessor_1, double double_1, int int_0)
+	public ItemStat(AttributeProcessor processor, double doubleValue, int integerValue)
 	{
-		Processor = iattributeProcessor_1;
+		Processor = processor;
 		Id = Processor.Code;
 		Attribute = Processor.Attribute;
 		Modifier = Processor.Modifier;
-		DoubleValue = double_1;
-		IntegerValue = int_0;
+		DoubleValue = doubleValue;
+		IntegerValue = integerValue;
 	}
 }

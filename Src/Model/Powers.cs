@@ -8,7 +8,7 @@ namespace RiftAssistant.Model;
 internal sealed class Powers
 {
 
-	private readonly Dictionary<uint, SnoPower> dictionary_0 = [];
+	private readonly Dictionary<uint, SnoPower> snoPowersByKey = [];
 
 	private readonly Dictionary<string, SnoPower> all = [];
 
@@ -32,9 +32,9 @@ internal sealed class Powers
 
 	private readonly List<float[]> list_0 = [];
 
-	private static readonly int[] int_0 = new int[6];
+	private static readonly int[] iconIndexes = new int[6];
 
-	private readonly int int_1 = "TAG_POWER_BUFF_".Length;
+	private readonly int startIndex = "TAG_POWER_BUFF_".Length;
 
 	public byte[] FormulaData { get; }
 
@@ -42,7 +42,7 @@ internal sealed class Powers
 
 	public SnoPower GetBySno(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		snoPowersByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
@@ -268,11 +268,11 @@ internal sealed class Powers
 		if (!SnoData.GeneralTagMapEntries.TryGetValue(key, out var value))
 			throw new KeyNotFoundException($"Key {key} not found.");
 
-		int endIndex = value.IndexOf('_', int_1);
+		int endIndex = value.IndexOf('_', startIndex);
 		if (endIndex < 0)
 			throw new FormatException($"Invalid format: {value}");
 
-		var slice = value[int_1..endIndex];
+		var slice = value[startIndex..endIndex];
 
 		if (!int.TryParse(slice, out var result))
 			throw new FormatException($"Invalid number: {slice}");
@@ -293,7 +293,7 @@ internal sealed class Powers
 			SnoData.ReplaceNewlines(SnoData.Strings.GetStringByCodeEnglish(code));
 
 		var power = new SnoPower(snoId, code, name, category, localizedDesc, englishDesc);
-		dictionary_0[snoId] = power;
+		snoPowersByKey[snoId] = power;
 		all[code] = power;
 
 		var runeLetters = new[] { "A", "B", "C", "D", "E" };
@@ -309,7 +309,7 @@ internal sealed class Powers
 		}
 
 		if (!hasAnyRune) {
-			power.IconIndexes = int_0;
+			power.IconIndexes = iconIndexes;
 			return power;
 		}
 

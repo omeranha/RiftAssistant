@@ -7,13 +7,13 @@ namespace RiftAssistant.Collectors;
 
 internal class SceneCollector
 {
-	private readonly Dictionary<uint, Dictionary<uint, Scene>> dictionary_0 = new Dictionary<uint, Dictionary<uint, Scene>>();
+	private readonly Dictionary<uint, Dictionary<uint, Scene>> scenesByKeysByKey = new Dictionary<uint, Dictionary<uint, Scene>>();
 
 	private readonly Dictionary<uint, uint> dictionary_1 = new Dictionary<uint, uint>();
 
 	public List<SceneHint> SceneHints = new List<SceneHint>();
 
-	private readonly Allocator class351_0 = new Allocator(8192, "SceneRevealInfoAllocator");
+	private readonly Allocator allocator = new Allocator(8192, "SceneRevealInfoAllocator");
 
 	private readonly AllocationCache<r_SceneRevealInfo> class352_0 = new AllocationCache<r_SceneRevealInfo>(88);
 
@@ -23,7 +23,7 @@ internal class SceneCollector
 
 	public IEnumerable<Scene> GetScenes(uint worldId)
 	{
-		if (dictionary_0.TryGetValue(worldId, out var value))
+		if (scenesByKeysByKey.TryGetValue(worldId, out var value))
 		{
 			return value.Values;
 		}
@@ -32,16 +32,16 @@ internal class SceneCollector
 
 	public Scene GetScene(uint worldId, uint sSceneIDEncrypted)
 	{
-		if (dictionary_0.TryGetValue(worldId, out var value) && value.TryGetValue(sSceneIDEncrypted, out var value2))
+		if (scenesByKeysByKey.TryGetValue(worldId, out var value) && value.TryGetValue(sSceneIDEncrypted, out var value2))
 		{
 			return value2;
 		}
 		return null;
 	}
 
-	public uint GetWorldSno(uint uint_0)
+	public uint GetWorldSno(uint worldId)
 	{
-		if (dictionary_1.TryGetValue(uint_0, out var value))
+		if (dictionary_1.TryGetValue(worldId, out var value))
 		{
 			return value;
 		}
@@ -89,7 +89,7 @@ internal class SceneCollector
 			{
 				continue;
 			}
-			if (dictionary_0.TryGetValue(r_Scene2.SWorldID, out var value) && value != null)
+			if (scenesByKeysByKey.TryGetValue(r_Scene2.SWorldID, out var value) && value != null)
 			{
 				if (value.TryGetValue(r_Scene2.SSceneID, out var value2) && value2 != null)
 				{
@@ -115,7 +115,7 @@ internal class SceneCollector
 			else
 			{
 				value = new Dictionary<uint, Scene>();
-				dictionary_0.Add(r_Scene2.SWorldID, value);
+				scenesByKeysByKey.Add(r_Scene2.SWorldID, value);
 			}
 			SnoScene scene = SnoData.Scenes.GetScene(r_Scene2.SceneSno);
 			if (scene != null)
@@ -128,21 +128,21 @@ internal class SceneCollector
 		if (CoreCollector.DAF.LevelAreaAddress != 0L)
 		{
 			long address = CoreCollector.DAF.LevelAreaAddress + 32 + 32;
-			class351_0.Snapshot(address);
-			if (class351_0.RawAllocator.ElementSize == 88)
+			allocator.Snapshot(address);
+			if (allocator.RawAllocator.ElementSize == 88)
 			{
-				class352_0.Snapshot(class351_0);
+				class352_0.Snapshot(allocator);
 				foreach (r_SceneRevealInfo item in class352_0.GetItems())
 				{
-					if (item.uint_1 == uint.MaxValue || item.uint_3 == uint.MaxValue)
+					if (item.sSceneID == uint.MaxValue || item.uint_3 == uint.MaxValue)
 					{
 						continue;
 					}
-					if (dictionary_0.TryGetValue(item.uint_2, out var value4) && value4 != null)
+					if (scenesByKeysByKey.TryGetValue(item.uint_2, out var value4) && value4 != null)
 					{
-						if (value4.TryGetValue(item.uint_1, out var value5) && value5 != null && (value5.PosX != item.float_0 || value5.PosY != item.float_1 || value5.SnoScene.Sno != item.uint_0))
+						if (value4.TryGetValue(item.sSceneID, out var value5) && value5 != null && (value5.PosX != item.meshMinX || value5.PosY != item.meshMinY || value5.SnoScene.Sno != item.sno))
 						{
-							value4.Remove(item.uint_1);
+							value4.Remove(item.sSceneID);
 							value5 = null;
 						}
 						if (value5 != null)
@@ -153,14 +153,14 @@ internal class SceneCollector
 					else
 					{
 						value4 = new Dictionary<uint, Scene>();
-						dictionary_0.Add(item.uint_2, value4);
+						scenesByKeysByKey.Add(item.uint_2, value4);
 					}
-					SnoScene scene2 = SnoData.Scenes.GetScene(item.uint_0);
+					SnoScene scene2 = SnoData.Scenes.GetScene(item.sno);
 					if (scene2 != null)
 					{
 						uint worldSno = GetWorldSno(item.uint_2);
-						Scene value6 = new Scene(scene2, null, worldSno, item.uint_1, 0u, item.float_0, item.float_1, item.float_2, item.float_3, 0f);
-						value4.Add(item.uint_1, value6);
+						Scene value6 = new Scene(scene2, null, worldSno, item.sSceneID, 0u, item.meshMinX, item.meshMinY, item.meshMaxX, item.meshMaxY, 0f);
+						value4.Add(item.sSceneID, value6);
 					}
 				}
 			}
@@ -170,7 +170,7 @@ internal class SceneCollector
 
 	public void Clear()
 	{
-		dictionary_0.Clear();
+		scenesByKeysByKey.Clear();
 		dictionary_1.Clear();
 	}
 

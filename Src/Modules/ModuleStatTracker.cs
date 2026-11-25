@@ -78,11 +78,11 @@ internal sealed class ModuleStatTracker : Module
 
 		var lobby = Overlay.Instance.lobbyHeroesModule;
 		bool wasShown = Show;
-		if (lobby?.ihero_0 != null) Show = true;
+		if (lobby?.hero0 != null) Show = true;
 		bool visible = vmethod_0(bool_4: true);
 		Show = wasShown;
 		if (!visible) return;
-		if (!CoreCollector.IsGameReady && lobby != null && lobby.ihero_0 == null) return;
+		if (!CoreCollector.IsGameReady && lobby != null && lobby.hero0 == null) return;
 
 		CollectTrackers();
 		bool refreshCells = Stopwatch.GetElapsedTime(lastCellRefresh) >= CellRefreshInterval;
@@ -239,18 +239,18 @@ internal sealed class ModuleStatTracker : Module
 		}
 
 		var lobby = Overlay.Instance.lobbyHeroesModule;
-		AddTracker(lobby.class340_0);
-		AddTracker(lobby.class340_1);
-		AddTracker(lobby.class340_2);
-		AddTracker(lobby.class340_3);
-		AddTracker(lobby.class340_4);
+		AddTracker(lobby.currentAccountTotal);
+		AddTracker(lobby.currentAccountLastMonth);
+		AddTracker(lobby.currentAccountLastWeek);
+		AddTracker(lobby.currentAccountYesterday);
+		AddTracker(lobby.currentAccountToday);
 		AddTracker(CoreCollector.Session);
 		AddTracker(CoreCollector.SessionAlwaysRunning);
-		AddTracker(lobby.class340_5);
-		AddTracker(lobby.class340_6);
-		AddTracker(lobby.class340_7);
-		AddTracker(lobby.class340_8);
-		AddTracker(lobby.class340_9);
+		AddTracker(lobby.tracker);
+		AddTracker(lobby.statTracker6);
+		AddTracker(lobby.statTracker7);
+		AddTracker(lobby.statTracker8);
+		AddTracker(lobby.statTracker9);
 	}
 
 	private void AddTracker(StatTracker tracker)

@@ -39,11 +39,11 @@ internal class Door(uint acdid, uint annId2, SnoActor snoActor2) : MapObject(acd
 {
 }
 
-public class HeadStone(uint acdid, uint annId3, SnoActor actor, uint annId2, Player iplayer_1) : Actor(acdid, annId3, actor)
+public class HeadStone(uint acdid, uint annId3, SnoActor actor, uint annId2, Player player) : Actor(acdid, annId3, actor)
 {
 	public uint PlayerActorAnnId { get; set; } = annId2;
 
-	public Player Player { get; set; } = iplayer_1;
+	public Player Player { get; set; } = player;
 }
 
 public class MapObject : Actor, IClickableActor
@@ -275,9 +275,9 @@ internal class MonsterObstacle : Monster
 	}
 }
 
-public class Portal(uint uint_8, uint uint_9, SnoActor snoActor2, SnoArea isnoArea_1, uint uint_10) : Actor(uint_8, uint_9, snoActor2)
+public class Portal(uint acdid, uint annId, SnoActor snoActor2, SnoArea snoArea, uint uint_10) : Actor(acdid, annId, snoActor2)
 {
-	public SnoArea TargetArea { get; set; } = isnoArea_1;
+	public SnoArea TargetArea { get; set; } = snoArea;
 
 	public uint TargetWorldId { get; set; } = uint_10;
 

@@ -143,9 +143,9 @@ internal partial class ActorCollector
 						case GizmoType.Door:
 							return new Door(acdid, annId, snoActor);
 						case GizmoType.Headstone: {
-								uint uint_3 = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
-								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uint_3);
-								return new HeadStone(acdid, annId, snoActor, uint_3, iplayer_);
+								uint uIntAttribute = CoreCollector.ACDCollector.ReadUIntAttribute(SnoData.Attributes.Map.Attribute__headstone_player_ann, 1048575u, 0u);
+								Player iplayer_ = Array.Find(CoreCollector.PlayerCollector.PlayerSlots, (Player player) => player.IsInGame && player.AnnId == uIntAttribute);
+								return new HeadStone(acdid, annId, snoActor, uIntAttribute, iplayer_);
 							}
 						default:
 							if (snoActor.Kind == ActorKind.DeadBody) {
@@ -258,7 +258,7 @@ internal partial class ActorCollector
 		}
 		if (actor is TownBanner) {
 			TownBanner townBanner = actor as TownBanner;
-			ITownBanner_0[townBanner.Index] = townBanner;
+			TownBanners[townBanner.Index] = townBanner;
 			townBanner.Usable = CoreCollector.ACDCollector.ReadDoubleAttribute(SnoData.Attributes.Map.Attribute__Banner_Usable, 1048575u, 0.0) == 1.0;
 		}
 		if (actor is HeadStone) {

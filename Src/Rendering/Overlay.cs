@@ -83,33 +83,33 @@ internal class Overlay
 
 	public RenderFont font2;
 
-	public RenderFont class221_2;
+	public RenderFont renderFont;
 
-	public RenderFont class221_3;
+	public RenderFont renderFont3;
 
-	public RenderFont class221_4;
+	public RenderFont renderFont4;
 
-	public RenderFont class221_5;
+	public RenderFont renderFont5;
 
-	public RenderFont class221_6;
+	public RenderFont renderFont6;
 
-	public RenderFont class221_7;
+	public RenderFont renderFont7;
 
 	public RenderFont font4;
 
 	public RenderFont font3;
 
-	public RenderFont class221_10;
+	public RenderFont renderFont10;
 
-	public RenderFont class221_11;
+	public RenderFont renderFont11;
 
 	public RenderFont StatusMessage;
 
-	public RenderFont class221_13;
+	public RenderFont renderFont13;
 
-	public RenderFont class221_14;
+	public RenderFont renderFont14;
 
-	public RenderFont class221_15;
+	public RenderFont renderFont15;
 
 
 	public readonly List<UiElement> clipElements = [];
@@ -228,12 +228,12 @@ internal class Overlay
 		}
 	}
 
-	public void BeginClip(float float_9 = 1f)
+	public void BeginClip(float opacity = 1f)
 	{
 		Layer layer = new Layer(renderTarget, new Size2F(GameWindowManager.Window.Size.Width, GameWindowManager.Window.Size.Height));
 		LayerParameters layerParameters = new LayerParameters {
 			ContentBounds = new SharpDX.RectangleF(0f, 0f, GameWindowManager.Window.Size.Width, GameWindowManager.Window.Size.Height),
-			Opacity = float_9
+			Opacity = opacity
 		};
 		renderTarget.PushLayer(ref layerParameters, layer);
 		clipLayer = layer;
@@ -293,10 +293,10 @@ internal class Overlay
 		return result;
 	}
 
-	public void DisposeRenders(params IDisposable[] idisposable_0)
+	public void DisposeRenders(params IDisposable[] barBackground)
 	{
-		for (int i = 0; i < idisposable_0.Length; i++) {
-			idisposable_0[i]?.Dispose();
+		for (int i = 0; i < barBackground.Length; i++) {
+			barBackground[i]?.Dispose();
 		}
 	}
 
@@ -397,27 +397,27 @@ internal class Overlay
 
 	internal void RecreateSharedFonts()
 	{
-		DisposeRenders(font1, font2, class221_2, class221_3, class221_4, class221_7, font4, font3, class221_5, class221_6, class221_10, class221_11, StatusMessage, class221_14, class221_15, class221_13);
+		DisposeRenders(font1, font2, renderFont, renderFont3, renderFont4, renderFont7, font4, font3, renderFont5, renderFont6, renderFont10, renderFont11, StatusMessage, renderFont14, renderFont15, renderFont13);
 		font1 = new RenderFont(192, 184, 164, 164, "Arial", true, false, 8f, Alignment.Left, false, true);
 		font2 = new RenderFont(192, 184, 124, 0, "Arial", true, false, 8f, Alignment.Left, false, true);
-		class221_2 = new RenderFont(192, 160, 160, 160, "Arial", true, false, 7f, Alignment.Left, false, true);
-		class221_3 = new RenderFont(192, 100, 160, 100, "Arial", true, false, 6f, Alignment.Left, false, true);
-		class221_4 = new RenderFont(160, 255, 128, 128, "Arial", true, false, 8f, Alignment.Left, false, true);
-		class221_7 = new RenderFont(160, 255, 200, 255, "Arial", true, false, 8f, Alignment.Left, false, true);
+		renderFont = new RenderFont(192, 160, 160, 160, "Arial", true, false, 7f, Alignment.Left, false, true);
+		renderFont3 = new RenderFont(192, 100, 160, 100, "Arial", true, false, 6f, Alignment.Left, false, true);
+		renderFont4 = new RenderFont(160, 255, 128, 128, "Arial", true, false, 8f, Alignment.Left, false, true);
+		renderFont7 = new RenderFont(160, 255, 200, 255, "Arial", true, false, 8f, Alignment.Left, false, true);
 		font4 = new RenderFont(160, 255, 64, 64, "Arial", true, false, 8f, Alignment.Left, false, true);
 		font3 = new RenderFont(160, 128, 128, 128, "Arial", true, false, 8f, Alignment.Left, false, true);
-		class221_5 = new RenderFont(255, 255, 255, 0, "Arial", true, false, 7f, Alignment.Left, false, true) {
+		renderFont5 = new RenderFont(255, 255, 255, 0, "Arial", true, false, 7f, Alignment.Left, false, true) {
 			HeavyShadow = true
 		};
-		class221_6 = new RenderFont(255, 255, 100, 100, "Arial", true, false, 7f, Alignment.Left, false, true) {
+		renderFont6 = new RenderFont(255, 255, 100, 100, "Arial", true, false, 7f, Alignment.Left, false, true) {
 			HeavyShadow = true
 		};
-		class221_10 = new RenderFont(128, 255, 255, 255, "Arial", false, false, 8f, Alignment.Left, false, true);
-		class221_11 = new RenderFont(192, 64, 160, 64, "Arial", true, false, 8f, Alignment.Left, false, true);
+		renderFont10 = new RenderFont(128, 255, 255, 255, "Arial", false, false, 8f, Alignment.Left, false, true);
+		renderFont11 = new RenderFont(192, 64, 160, 64, "Arial", true, false, 8f, Alignment.Left, false, true);
 		StatusMessage = new RenderFont(255, 255, 255, 255, "Arial", true, false, 8f, Alignment.Left, false, true);
-		class221_14 = new RenderFont(220, 192, 192, 255, "courier new", false, false, 5f, Alignment.Left, false, false);
-		class221_15 = new RenderFont(220, 192, 192, 255, "courier new", false, false, 7f, Alignment.Left, false, false);
-		class221_13 = new RenderFont(160, 150, 255, 150, "Arial", false, false, 8f, Alignment.Left, false, true);
+		renderFont14 = new RenderFont(220, 192, 192, 255, "courier new", false, false, 5f, Alignment.Left, false, false);
+		renderFont15 = new RenderFont(220, 192, 192, 255, "courier new", false, false, 7f, Alignment.Left, false, false);
+		renderFont13 = new RenderFont(160, 150, 255, 150, "Arial", false, false, 8f, Alignment.Left, false, true);
 	}
 
 	internal void ApplySettings(Settings settings)

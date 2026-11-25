@@ -55,7 +55,7 @@ internal class RunTracker
 		UpdateCurrentArea(initialArea);
 	}
 
-	internal void UpdateCurrentArea(SnoArea isnoArea_0)
+	internal void UpdateCurrentArea(SnoArea snoArea)
 	{
 		if (CurrentArea != null) {
 			CurrentArea.AreaStats.Stop();
@@ -63,13 +63,13 @@ internal class RunTracker
 		}
 		AreaTracker areaTracker = null;
 		for (int i = 0; i < VisitedAreas.Count; i++) {
-			if (VisitedAreas[i].SnoArea.NameLocalized == isnoArea_0.NameLocalized) {
+			if (VisitedAreas[i].SnoArea.NameLocalized == snoArea.NameLocalized) {
 				areaTracker = VisitedAreas[i];
 				break;
 			}
 		}
 		if (areaTracker == null) {
-			areaTracker = new AreaTracker(this, isnoArea_0, isnoArea_0.NameLocalized, isnoArea_0.Sno.ToString("D", CultureInfo.InvariantCulture));
+			areaTracker = new AreaTracker(this, snoArea, snoArea.NameLocalized, snoArea.Sno.ToString("D", CultureInfo.InvariantCulture));
 			VisitedAreas.Add(areaTracker);
 		}
 		CurrentArea = areaTracker;

@@ -158,9 +158,9 @@ internal class Allocator
 
 	public readonly int MaxAllowedBlockCount;
 
-	public Allocator(int int_1, string string_1)
+	public Allocator(int maxAllowedBlockCount, string string_1)
 	{
-		MaxAllowedBlockCount = int_1;
+		MaxAllowedBlockCount = maxAllowedBlockCount;
 		Name = string_1;
 	}
 
@@ -224,10 +224,10 @@ internal class ExpandableContainer
 
 	public int BlockCount { get; private set; }
 
-	public ExpandableContainer(short short_2, int int_3)
+	public ExpandableContainer(short short_2, int itemSize)
 	{
 		_maxAllowedIndex = short_2;
-		ItemSize = int_3;
+		ItemSize = itemSize;
 	}
 
 	public void Snapshot(long long_1)

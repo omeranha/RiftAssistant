@@ -6,11 +6,11 @@ internal abstract class Module : IDisposable
 {
 	public bool Show = true;
 
-	public readonly ModuleConditionEvaluator class200_0;
+	public readonly ModuleConditionEvaluator moduleConditionEvaluator;
 
-	public float float_0;
+	public float opacity;
 
-	public ITransparent[] itransparent_0;
+	public ITransparent[] transparents;
 
 	public bool bool_1 = true;
 
@@ -29,7 +29,7 @@ internal abstract class Module : IDisposable
 	{
 		Overlay.Instance.modules.Add(this);
 		Show = enabled;
-		class200_0 = new ModuleConditionEvaluator(conditions);
+		moduleConditionEvaluator = new ModuleConditionEvaluator(conditions);
 	}
 
 	public virtual void Dispose()
@@ -37,19 +37,19 @@ internal abstract class Module : IDisposable
 		Overlay.Instance.modules.Remove(this);
 	}
 
-	protected void SetTransparentComponents(params ITransparent[] itransparent_1)
+	protected void SetTransparentComponents(params ITransparent[] backgroundBrush)
 	{
 		int num = 0;
-		for (int i = 0; i < itransparent_1.Length; i++) {
-			if (itransparent_1[i] != null) {
+		for (int i = 0; i < backgroundBrush.Length; i++) {
+			if (backgroundBrush[i] != null) {
 				num++;
 			}
 		}
-		itransparent_0 = new ITransparent[num];
+		transparents = new ITransparent[num];
 		num = 0;
-		for (int j = 0; j < itransparent_1.Length; j++) {
-			if (itransparent_1[j] != null) {
-				itransparent_0[num] = itransparent_1[j];
+		for (int j = 0; j < backgroundBrush.Length; j++) {
+			if (backgroundBrush[j] != null) {
+				transparents[num] = backgroundBrush[j];
 				num++;
 			}
 		}
@@ -57,6 +57,6 @@ internal abstract class Module : IDisposable
 
 	public virtual bool vmethod_0(bool bool_4)
 	{
-		return class200_0.UpdateVisibilityAndOpacity(this, bool_4);
+		return moduleConditionEvaluator.UpdateVisibilityAndOpacity(this, bool_4);
 	}
 }

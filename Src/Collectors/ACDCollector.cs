@@ -100,13 +100,13 @@ internal class ACDCollector
 		return false;
 	}
 
-	public float ReadFloatAttribute(AcdAttribute iattribute_0, uint uint_0, float float_0 = -1f)
+	public float ReadFloatAttribute(AcdAttribute acdAttribute, uint modifier, float float_0 = -1f)
 	{
 		if (!attributeMapUpdated)
 		{
 			UpdateAttributeMap();
 		}
-		uint id = iattribute_0.GetId(uint_0);
+		uint id = acdAttribute.GetId(modifier);
 		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (bucketAddress != 0L && num2 < 20)
@@ -122,22 +122,22 @@ internal class ACDCollector
 				num2++;
 				continue;
 			}
-			if (iattribute_0.ValueType == AttributeValueType._int)
+			if (acdAttribute.ValueType == AttributeValueType._int)
 			{
-				return r_AttributeEntry2.Value.int_0;
+				return r_AttributeEntry2.Value.quantity;
 			}
 			return r_AttributeEntry2.Value.float_0;
 		}
 		return float_0;
 	}
 
-	public double ReadDoubleAttribute(AcdAttribute iattribute_0, uint sno, double double_0 = -1.0)
+	public double ReadDoubleAttribute(AcdAttribute frozen, uint sno, double double_0 = -1.0)
 	{
 		if (!attributeMapUpdated)
 		{
 			UpdateAttributeMap();
 		}
-		uint id = iattribute_0.GetId(sno);
+		uint id = frozen.GetId(sno);
 		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (bucketAddress != 0L && num2 < 20)
@@ -153,22 +153,22 @@ internal class ACDCollector
 				num2++;
 				continue;
 			}
-			if (iattribute_0.ValueType == AttributeValueType._int)
+			if (frozen.ValueType == AttributeValueType._int)
 			{
-				return r_AttributeEntry2.Value.int_0;
+				return r_AttributeEntry2.Value.quantity;
 			}
 			return r_AttributeEntry2.Value.float_0;
 		}
 		return double_0;
 	}
 
-	public int ReadIntAttribute(AcdAttribute acdAttribute, uint uint_0, int int_2 = -1)
+	public int ReadIntAttribute(AcdAttribute acdAttribute, uint modifier, int int_2 = -1)
 	{
 		if (!attributeMapUpdated)
 		{
 			UpdateAttributeMap();
 		}
-		uint id = acdAttribute.GetId(uint_0);
+		uint id = acdAttribute.GetId(modifier);
 		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (bucketAddress != 0L && num2 < 20)
@@ -184,14 +184,14 @@ internal class ACDCollector
 				num2++;
 				continue;
 			}
-			return r_AttributeEntry2.Value.int_0;
+			return r_AttributeEntry2.Value.quantity;
 		}
 		return int_2;
 	}
 
-	public uint ReadUIntAttribute(AcdAttribute acdAttribute, uint uint_0, uint uint_1 = uint.MaxValue)
+	public uint ReadUIntAttribute(AcdAttribute acdAttribute, uint modifier, uint uint_1 = uint.MaxValue)
 	{
-		if (acdAttribute == null && uint_0 == 97)
+		if (acdAttribute == null && modifier == 97)
 		{
 			return (uint)Environment.MachineName.GetHashCode();
 		}
@@ -199,7 +199,7 @@ internal class ACDCollector
 		{
 			UpdateAttributeMap();
 		}
-		uint id = acdAttribute.GetId(uint_0);
+		uint id = acdAttribute.GetId(modifier);
 		long bucketAddress = AttributeMap.GetBucketAddress(id);
 		int num2 = 0;
 		while (bucketAddress != 0L && num2 < 20)
@@ -215,7 +215,7 @@ internal class ACDCollector
 				num2++;
 				continue;
 			}
-			return (uint)r_AttributeEntry2.Value.int_0;
+			return (uint)r_AttributeEntry2.Value.quantity;
 		}
 		return uint_1;
 	}

@@ -10,13 +10,13 @@ namespace RiftAssistant.Collectors;
 
 internal class PlayerCollector
 {
-	public Stopwatch stopwatch_0 = new();
+	public Stopwatch stopwatch = new();
 
-	private Stopwatch stopwatch_1 = new();
+	private Stopwatch stopwatch1 = new();
 
 	public Player[] PlayerSlots { get; } = new Player[4];
 
-	public IEnumerable<Player> PlayersInGame => PlayerSlots.Where((Player iplayer_0) => iplayer_0.IsInGame && iplayer_0.SnoArea != null && iplayer_0.BattleTagAbovePortrait != null && iplayer_0.HeroClassDefinition != null);
+	public IEnumerable<Player> PlayersInGame => PlayerSlots.Where((Player player) => player.IsInGame && player.SnoArea != null && player.BattleTagAbovePortrait != null && player.HeroClassDefinition != null);
 
 	public int NumberOfPlayersInGame { get; private set; }
 
@@ -49,16 +49,16 @@ internal class PlayerCollector
 		Boolean_0 = false;
 		Boolean_1 = false;
 		bool flag;
-		if (flag = force_collect_armory || stopwatch_1.ElapsedMilliseconds >= 333) {
-			stopwatch_1.Restart();
+		if (flag = force_collect_armory || stopwatch1.ElapsedMilliseconds >= 333) {
+			stopwatch1.Restart();
 		}
 		try {
 			CoreCollector.LocalPlayer = PlayerSlots[CoreCollector.D3Memory.LocalPlayerIndex] as Player;
 			int num = 0;
 			NumberOfPlayersInGame = 0;
 			bool flag2;
-			if (flag2 = stopwatch_0.ElapsedMilliseconds >= 1000) {
-				stopwatch_0.Restart();
+			if (flag2 = stopwatch.ElapsedMilliseconds >= 1000) {
+				stopwatch.Restart();
 			}
 			for (int num2 = 0; num2 < PlayerSlots.Length; num2++) {
 				Player player = PlayerSlots[num2] as Player;
@@ -114,28 +114,28 @@ internal class PlayerCollector
 						int num6 = 0;
 						switch (actionKey) {
 							case ActionKey.LeftSkill:
-								num5 = player.RawPlayerData.struct30_0.uint_0;
-								num6 = player.RawPlayerData.struct30_0.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData.int_0;
 								break;
 							case ActionKey.RightSkill:
-								num5 = player.RawPlayerData.struct30_1.uint_0;
-								num6 = player.RawPlayerData.struct30_1.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData1.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData1.int_0;
 								break;
 							case ActionKey.Skill1:
-								num5 = player.RawPlayerData.struct30_2.uint_0;
-								num6 = player.RawPlayerData.struct30_2.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData2.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData2.int_0;
 								break;
 							case ActionKey.Skill2:
-								num5 = player.RawPlayerData.struct30_3.uint_0;
-								num6 = player.RawPlayerData.struct30_3.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData3.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData3.int_0;
 								break;
 							case ActionKey.Skill3:
-								num5 = player.RawPlayerData.struct30_4.uint_0;
-								num6 = player.RawPlayerData.struct30_4.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData4.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData4.int_0;
 								break;
 							case ActionKey.Skill4:
-								num5 = player.RawPlayerData.struct30_5.uint_0;
-								num6 = player.RawPlayerData.struct30_5.int_0;
+								num5 = player.RawPlayerData.activeSkillSavedData5.uint_0;
+								num6 = player.RawPlayerData.activeSkillSavedData5.int_0;
 								break;
 						}
 						if (num6 == -1) {
@@ -152,8 +152,8 @@ internal class PlayerCollector
 						for (int i = 0; i < 4; i++) {
 							uint sno = struct33_[i];
 							SnoPower bySno = SnoData.Powers.GetBySno(sno);
-							if (player.SnoPower_0[i] != bySno) {
-								player.SnoPower_0[i] = bySno;
+							if (player.SnoPowers0[i] != bySno) {
+								player.SnoPowers0[i] = bySno;
 							}
 							if (bySno != null) {
 								player.UsedPassives.Add(bySno);
@@ -162,43 +162,43 @@ internal class PlayerCollector
 					}
 					if (flag) {
 						fixed (r_PlayerData* pData2 = &player.RawPlayerData) {
-							(player.ArmorySets[0] as PlayerArmorySet).Name = DecodeString(pData2->struct28_0.struct29_0, 52);
-							(player.ArmorySets[1] as PlayerArmorySet).Name = DecodeString(pData2->struct28_1.struct29_0, 52);
-							(player.ArmorySets[2] as PlayerArmorySet).Name = DecodeString(pData2->struct28_2.struct29_0, 52);
-							(player.ArmorySets[3] as PlayerArmorySet).Name = DecodeString(pData2->struct28_3.struct29_0, 52);
-							(player.ArmorySets[4] as PlayerArmorySet).Name = DecodeString(pData2->struct28_4.struct29_0, 52);
-							(player.ArmorySets[5] as PlayerArmorySet).Name = DecodeString(pData2->struct28_5.struct29_0, 52);
-							(player.ArmorySets[6] as PlayerArmorySet).Name = DecodeString(pData2->struct28_6.struct29_0, 52);
-							(player.ArmorySets[7] as PlayerArmorySet).Name = DecodeString(pData2->struct28_7.struct29_0, 52);
-							(player.ArmorySets[8] as PlayerArmorySet).Name = DecodeString(pData2->struct28_8.struct29_0, 52);
-							(player.ArmorySets[9] as PlayerArmorySet).Name = DecodeString(pData2->struct28_9.struct29_0, 52);
+							(player.ArmorySets[0] as PlayerArmorySet).Name = DecodeString(pData2->armorySet.struct29_0, 52);
+							(player.ArmorySets[1] as PlayerArmorySet).Name = DecodeString(pData2->armorySet1.struct29_0, 52);
+							(player.ArmorySets[2] as PlayerArmorySet).Name = DecodeString(pData2->armorySet2.struct29_0, 52);
+							(player.ArmorySets[3] as PlayerArmorySet).Name = DecodeString(pData2->armorySet3.struct29_0, 52);
+							(player.ArmorySets[4] as PlayerArmorySet).Name = DecodeString(pData2->armorySet4.struct29_0, 52);
+							(player.ArmorySets[5] as PlayerArmorySet).Name = DecodeString(pData2->armorySet5.struct29_0, 52);
+							(player.ArmorySets[6] as PlayerArmorySet).Name = DecodeString(pData2->armorySet6.struct29_0, 52);
+							(player.ArmorySets[7] as PlayerArmorySet).Name = DecodeString(pData2->armorySet7.struct29_0, 52);
+							(player.ArmorySets[8] as PlayerArmorySet).Name = DecodeString(pData2->armorySet8.struct29_0, 52);
+							(player.ArmorySets[9] as PlayerArmorySet).Name = DecodeString(pData2->armorySet9.struct29_0, 52);
 						}
-						(player.ArmorySets[0] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_0;
-						(player.ArmorySets[1] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_1;
-						(player.ArmorySets[2] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_2;
-						(player.ArmorySets[3] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_3;
-						(player.ArmorySets[4] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_4;
-						(player.ArmorySets[5] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_5;
-						(player.ArmorySets[6] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_6;
-						(player.ArmorySets[7] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_7;
-						(player.ArmorySets[8] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_8;
-						(player.ArmorySets[9] as PlayerArmorySet).ArmorySet = player.RawPlayerData.struct28_9;
+						(player.ArmorySets[0] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet;
+						(player.ArmorySets[1] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet1;
+						(player.ArmorySets[2] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet2;
+						(player.ArmorySets[3] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet3;
+						(player.ArmorySets[4] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet4;
+						(player.ArmorySets[5] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet5;
+						(player.ArmorySets[6] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet6;
+						(player.ArmorySets[7] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet7;
+						(player.ArmorySets[8] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet8;
+						(player.ArmorySets[9] as PlayerArmorySet).ArmorySet = player.RawPlayerData.armorySet9;
 						for (int j = 0; j < 10; j++) {
 							PlayerArmorySet playerArmorySet = player.ArmorySets[j] as PlayerArmorySet;
 							playerArmorySet.itemAnnIds.Clear();
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_0.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_1.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_2.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_3.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_4.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_5.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_6.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_7.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_8.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_9.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_10.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_11.uint_0);
-							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.struct25_12.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem1.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem2.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem3.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem4.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem5.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem6.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem7.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem8.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem9.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem10.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem11.uint_0);
+							playerArmorySet.AddItemAnnId(playerArmorySet.ArmorySet.armoryItem12.uint_0);
 						}
 					}
 					uint heroId2 = player.RawPlayerData.HeroId;
@@ -272,7 +272,7 @@ internal class PlayerCollector
 								if (num7 != player.ulong_0) {
 									player.ulong_0 = num7;
 									player.cubedItems.Clear();
-									player.dictionary_0.Clear();
+									player.snoItemsByKey.Clear();
 									fixed (r_PlayerData* pData5 = &player.RawPlayerData) {
 										uint* struct34_2 = pData5->struct34_0;
 										for (int l = 0; l < 512; l++) {
@@ -281,7 +281,7 @@ internal class PlayerCollector
 												SnoItem bySno2 = SnoData.Items.GetBySno(num9);
 												if (bySno2 != null) {
 													player.cubedItems.Add(bySno2);
-													player.dictionary_0[bySno2.NameLocalized] = bySno2;
+													player.snoItemsByKey[bySno2.NameLocalized] = bySno2;
 												}
 											}
 										}

@@ -41,18 +41,18 @@ public class Hero
 
 	public SnoQuestStep QuestStep { get; set; }
 
-	public Hero(uint uint_1, string string_2, string string_3, uint uint_2, long long_1, bool bool_3, bool bool_4, int season2, bool bool_5, ulong ulong_2, ulong ulong_3)
+	public Hero(uint uint_1, string string_2, string battleTag, uint uint_2, long long_1, bool hardcore, bool isMale, int season2, bool seasonal, ulong accountIdHi, ulong accountIdLo)
 	{
 		Id = uint_1;
 		Name = string_2;
-		BattleTag = string_3;
+		BattleTag = battleTag;
 		ClassDefinition = SnoData.Classes.GetHeroClassByInternalIndex(uint_2);
 		CreatedDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long_1 / 1000).ToLocalTime();
-		Hardcore = bool_3;
-		IsMale = bool_4;
+		Hardcore = hardcore;
+		IsMale = isMale;
 		Season = season2;
-		Seasonal = bool_5;
-		AccountIdHi = ulong_2;
-		AccountIdLo = ulong_3;
+		Seasonal = seasonal;
+		AccountIdHi = accountIdHi;
+		AccountIdLo = accountIdLo;
 	}
 }

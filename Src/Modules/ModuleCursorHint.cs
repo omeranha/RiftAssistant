@@ -7,7 +7,7 @@ internal class ModuleCursorHint : Module
 {
 	public readonly RenderBrush backgroundBrush = new RenderBrush(192, 0, 0, 0, 0f);
 
-	public static readonly RenderFont class221_0 = new RenderFont(255, 255, 255, 255, "Arial", false, false, 7f, Alignment.Center, true, false);
+	public static readonly RenderFont renderFont = new RenderFont(255, 255, 255, 255, "Arial", false, false, 7f, Alignment.Center, true, false);
 
 	private string hint;
 
@@ -20,14 +20,14 @@ internal class ModuleCursorHint : Module
 	public ModuleCursorHint() : base(true)
 	{
 		bool_1 = false;
-		SetTransparentComponents(backgroundBrush, class221_0, class221_0);
+		SetTransparentComponents(backgroundBrush, renderFont, renderFont);
 	}
 
 	protected void Dispose(bool disposing)
 	{
 		if (disposing) {
 			backgroundBrush?.Dispose();
-			class221_0?.Dispose();
+			renderFont?.Dispose();
 		}
 		base.Dispose();
 	}
@@ -54,10 +54,10 @@ internal class ModuleCursorHint : Module
 		if (hint != null) {
 			cachedHint = hint;
 		}
-		class221_0.MaxWidth = ((maxWidth == -1) ? 10000 : maxWidth);
-		class221_0.WordWrap = maxWidth != -1;
+		renderFont.MaxWidth = ((maxWidth == -1) ? 10000 : maxWidth);
+		renderFont.WordWrap = maxWidth != -1;
 		int num = GameWindowManager.Window.Size.Height / 200;
-		TextLayout textLayout = class221_0.GetTextLayout(cachedHint);
+		TextLayout textLayout = renderFont.GetTextLayout(cachedHint);
 		int num2 = Convert.ToInt32(textLayout.Metrics.Width + (float)(num * 4));
 		int num3 = Convert.ToInt32(textLayout.Metrics.Height + (float)(num * 2));
 		float num4 = (float)Math.Max(0, Math.Min(GameWindowManager.Window.CursorX - num2, GameWindowManager.Window.Size.Width - num2)) + 0.5f;
@@ -75,6 +75,6 @@ internal class ModuleCursorHint : Module
 			}
 		}
 		backgroundBrush.DrawRectangle(num4, num5, num2, num3);
-		class221_0.DrawText(textLayout, num4 + (float)(num * 2), num5 + (float)num);
+		renderFont.DrawText(textLayout, num4 + (float)(num * 2), num5 + (float)num);
 	}
 }

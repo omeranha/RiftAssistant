@@ -15,7 +15,7 @@ public class Player : Actor
 
 	internal List<SnoItem> cubedItems = new List<SnoItem>();
 
-	internal Dictionary<string, SnoItem> dictionary_0 = new Dictionary<string, SnoItem>();
+	internal Dictionary<string, SnoItem> snoItemsByKey = new Dictionary<string, SnoItem>();
 
 	internal ulong ulong_0;
 
@@ -23,11 +23,11 @@ public class Player : Actor
 
 	internal readonly Skill[] SkillSlots = new Skill[6];
 
-	internal readonly SnoPower[] SnoPower_0 = new SnoPower[4];
+	internal readonly SnoPower[] SnoPowers0 = new SnoPower[4];
 
 	internal readonly List<SnoPower> UsedPassives = new List<SnoPower>();
 
-	internal readonly Stopwatch iwatch_1 = new();
+	internal readonly Stopwatch stopwatch = new();
 
 	internal bool bool_14;
 
@@ -37,9 +37,9 @@ public class Player : Actor
 
 	internal long ParagonTotalExp2;
 
-	internal List<Skill> list_3 = new List<Skill>(30);
+	internal List<Skill> skills = new List<Skill>(30);
 
-	internal readonly Dictionary<string, Buff> dictionary_1 = new Dictionary<string, Buff>(30);
+	internal readonly Dictionary<string, Buff> buffsByKey = new Dictionary<string, Buff>(30);
 
 	internal readonly Dictionary<uint, Buff> powerSno2buff = new Dictionary<uint, Buff>(30);
 
@@ -201,7 +201,7 @@ public class Player : Actor
 		}
 	}
 
-	public UiElement PortraitUiElement => CoreCollector.UiElements.class341_145[PortraitIndex];
+	public UiElement PortraitUiElement => CoreCollector.UiElements.uiElements145[PortraitIndex];
 
 	public Player(int int_14) : base(0u, 0u, null)
 	{
@@ -350,9 +350,9 @@ public class Player : Actor
 		LoopingAnimationEndTick = 0;
 		InGreaterRift = false;
 		InGreaterRiftRank = 0u;
-		if (iwatch_1.ElapsedMilliseconds > 2000)
+		if (stopwatch.ElapsedMilliseconds > 2000)
 		{
-			iwatch_1.Restart();
+			stopwatch.Restart();
 			foreach (Buff value in powerSno2buff.Values)
 			{
 				Array.Clear(value.TimeElapsedSeconds, 0, value.TimeElapsedSeconds.Length);
@@ -386,7 +386,7 @@ public class Player : Actor
 
 	public bool IsCubed(SnoItem snoItem)
 	{
-		return dictionary_0.ContainsKey(snoItem.NameLocalized);
+		return snoItemsByKey.ContainsKey(snoItem.NameLocalized);
 	}
 
 	public int GetSetItemCount(uint setId)

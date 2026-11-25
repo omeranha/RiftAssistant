@@ -21,9 +21,9 @@ public class Buff
 
 	public double[] TimeLeftSeconds { get; } = new double[32];
 
-	public Buff(Player iplayer_1, SnoPower bySno)
+	public Buff(Player player, SnoPower bySno)
 	{
-		Player = iplayer_1;
+		Player = player;
 		SnoPower = bySno;
 	}
 }

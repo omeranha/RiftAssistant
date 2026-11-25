@@ -8,29 +8,29 @@ namespace RiftAssistant.Model;
 internal sealed class Monsters
 {
 
-	private readonly Dictionary<uint, SnoMonsterAffix> dictionary_0 = new Dictionary<uint, SnoMonsterAffix>(100);
+	private readonly Dictionary<uint, SnoMonsterAffix> snoMonsterAffixesByKey = new Dictionary<uint, SnoMonsterAffix>(100);
 
-	private readonly Dictionary<ActorSnoEnum, SnoMonster> dictionary_1 = new Dictionary<ActorSnoEnum, SnoMonster>(3000);
+	private readonly Dictionary<ActorSnoEnum, SnoMonster> snoMonstersByActorSnoEnum = new Dictionary<ActorSnoEnum, SnoMonster>(3000);
 
-	private readonly Dictionary<uint, SnoMonster> dictionary_2 = new Dictionary<uint, SnoMonster>(3000);
+	private readonly Dictionary<uint, SnoMonster> snoMonstersByKey = new Dictionary<uint, SnoMonster>(3000);
 
 	public SnoMonster SnoMonsterObstacle { get; }
 
 	public SnoMonster GetMonster(ActorSnoEnum sno)
 	{
-		dictionary_1.TryGetValue(sno, out var value);
+		snoMonstersByActorSnoEnum.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public SnoMonsterAffix GetMonsterAffix(uint sno)
 	{
-		dictionary_0.TryGetValue(sno, out var value);
+		snoMonsterAffixesByKey.TryGetValue(sno, out var value);
 		return value;
 	}
 
 	public SnoMonster GetMonsterByStringId(uint stringId)
 	{
-		dictionary_2.TryGetValue(stringId, out var value);
+		snoMonstersByKey.TryGetValue(stringId, out var value);
 		return value;
 	}
 
@@ -48,7 +48,7 @@ internal sealed class Monsters
 				string stringByCodeEnglish = SnoData.Strings.GetStringByCodeEnglish(StringListSnoEnum._monsteraffixnames, code);
 				if (Enum.IsDefined(typeof(MonsterAffix), num))
 				{
-					dictionary_0.Add(num, new SnoMonsterAffix(num, (MonsterAffix)num, stringByCode, stringByCodeEnglish));
+					snoMonsterAffixesByKey.Add(num, new SnoMonsterAffix(num, (MonsterAffix)num, stringByCode, stringByCodeEnglish));
 				}
 			}
 		}
@@ -74,16 +74,16 @@ internal sealed class Monsters
 				SnoActor snoActor = SnoData.Actors.GetActor(actorSnoEnum);
 				if (snoActor == null)
 				{
-					snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-" + text2, "dummyactor-" + text2, "dummyactor-" + text2);
-					SnoData.Actors.dictionary_0.Add(actorSnoEnum, snoActor);
+					snoActor = new SnoActor(actorSnoEnum, ActorType.Invalid, ActorKind.None, isStatic: false, "dummyactor-" + text2, "dummyactor-" + text2, "dummyactor-" + text2);
+					SnoData.Actors.snoActorsByActorSnoEnum.Add(actorSnoEnum, snoActor);
 				}
 				bool bool_ = text2.IndexOf("unique", StringComparison.InvariantCultureIgnoreCase) > -1 || monsterPriority == MonsterPriority.boss || monsterPriority == MonsterPriority.keywarden;
 				SnoMonster value = new SnoMonster(snoActor, num2, text2, stringById, stringByIdEnglish, monsterPriority, bool_, float_);
-				dictionary_1.Add(actorSnoEnum, value);
-				dictionary_2[num3] = value;
+				snoMonstersByActorSnoEnum.Add(actorSnoEnum, value);
+				snoMonstersByKey[num3] = value;
 			}
 		}
-		SnoActor snoActor_ = new SnoActor((ActorSnoEnum)0u, ActorType.Invalid, ActorKind.None, bool_1: false, "dummyactor-monster-obstacle", "dummyactor-monster-obstacle", "dummyactor-monster-obstacle");
-		SnoMonsterObstacle = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, bool_1: false, 0f);
+		SnoActor snoActor_ = new SnoActor((ActorSnoEnum)0u, ActorType.Invalid, ActorKind.None, isStatic: false, "dummyactor-monster-obstacle", "dummyactor-monster-obstacle", "dummyactor-monster-obstacle");
+		SnoMonsterObstacle = new SnoMonster(snoActor_, 0u, "obstacle", "obstacle", "obstacle", MonsterPriority.low, isUnique: false, 0f);
 	}
 }

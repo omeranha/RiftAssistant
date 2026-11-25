@@ -68,8 +68,8 @@ public partial class RenderController
 			List<string> list = new List<string>(30);
 			CoreCollector.UiElements.BuffIconWrapper.CollectChildPaths(string_, list);
 			for (int i = 0; i < list.Count; i++) {
-				string string_2 = list[i];
-				yield return CoreCollector.UiElements.CreateTemporary(string_2);
+				string path = list[i];
+				yield return CoreCollector.UiElements.CreateTemporary(path);
 			}
 		}
 	}
@@ -118,21 +118,21 @@ public partial class RenderController
 		UiElement uiElement = null;
 		switch (path) {
 			case "*portrait-p3":
-				uiElement = CoreCollector.UiElements.class341_145[3];
+				uiElement = CoreCollector.UiElements.uiElements145[3];
 				break;
 			case "*portrait-p2":
-				uiElement = CoreCollector.UiElements.class341_145[2];
+				uiElement = CoreCollector.UiElements.uiElements145[2];
 				break;
 			case "*portrait-p1":
-				uiElement = CoreCollector.UiElements.class341_145[1];
+				uiElement = CoreCollector.UiElements.uiElements145[1];
 				break;
 			case "*portrait-p0":
-				uiElement = CoreCollector.UiElements.class341_145[0];
+				uiElement = CoreCollector.UiElements.uiElements145[0];
 				break;
 			case "*portrait-bottom": {
-					uiElement = CoreCollector.UiElements.class341_145[0];
-					for (int i = 0; i < CoreCollector.UiElements.class341_145.Length && CoreCollector.UiElements.class341_145[i].Visible; i++) {
-						uiElement = CoreCollector.UiElements.class341_145[i];
+					uiElement = CoreCollector.UiElements.uiElements145[0];
+					for (int i = 0; i < CoreCollector.UiElements.uiElements145.Length && CoreCollector.UiElements.uiElements145[i].Visible; i++) {
+						uiElement = CoreCollector.UiElements.uiElements145[i];
 					}
 					break;
 				}
@@ -157,8 +157,8 @@ public partial class RenderController
 		if (key == ActionKey.Heal) {
 			return CoreCollector.UiElements.GamePotion;
 		}
-		if (key >= ActionKey.LeftSkill && (int)key < CoreCollector.UiElements.class341_144.Length) {
-			return CoreCollector.UiElements.class341_144[(int)key];
+		if (key >= ActionKey.LeftSkill && (int)key < CoreCollector.UiElements.uiElements144.Length) {
+			return CoreCollector.UiElements.uiElements144[(int)key];
 		}
 		return null;
 	}
@@ -262,5 +262,5 @@ public partial class RenderController
 	private static partial bool DeleteObject(IntPtr hBitmap);
 
 	[LibraryImport("gdi32.dll")]
-	private static partial IntPtr SelectObject(IntPtr memDC, IntPtr intptr_1);
+	private static partial IntPtr SelectObject(IntPtr memDC, IntPtr hBitmap);
 }

@@ -100,22 +100,22 @@ internal class HeroCollector
 					return;
 				}
 				string string_ = GameWindowManager.ReadString(hero2.long_2, 64, Encoding.UTF8, true);
-				bool bool_ = (hero2.int_3 & 1) == 1;
-				bool bool_2 = (hero2.int_3 & 2) == 0;
+				bool bool_ = (hero2.flags & 1) == 1;
+				bool bool_2 = (hero2.flags & 2) == 0;
 				bool bool_3 = hero2.season > 0 && hero2.season == Constants.CurrentSeasonNumber;
 				hero = new Hero(uint_, text, string_, hero2.uint_1, hero2.long_4, bool_, bool_2, hero2.season, bool_3, hero2.ulong_1, hero2.ulong_2);
 				heroList.Add(uint_, hero);
 			}
-			hero.PlayedSeconds = hero2.int_4;
-			hero.Flags = hero2.int_3;
-			hero.Level = hero2.int_0;
-			hero.ParagonLevel = hero2.int_1;
-			if (hero.LastPlayed != hero2.long_5)
+			hero.PlayedSeconds = hero2.playedSeconds;
+			hero.Flags = hero2.flags;
+			hero.Level = hero2.level;
+			hero.ParagonLevel = hero2.paragonLevel;
+			if (hero.LastPlayed != hero2.lastPlayed)
 			{
-				hero.LastPlayed = hero2.long_5;
-				hero.LastPlayedDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(hero2.long_5 / 1000).ToLocalTime();
+				hero.LastPlayed = hero2.lastPlayed;
+				hero.LastPlayedDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(hero2.lastPlayed / 1000).ToLocalTime();
 			}
-			hero.QuestStep = SnoData.Quests.GetQuest(hero2.uint_2)?.GetStep(hero2.uint_3);
+			hero.QuestStep = SnoData.Quests.GetQuest(hero2.sno)?.GetStep(hero2.stepId);
 		}
 		catch (Exception)
 		{

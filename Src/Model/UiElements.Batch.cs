@@ -51,7 +51,7 @@ internal partial class UiElements
 	{
 		if (candidates.Count == 0) return false;
 
-		return Depends(element.iuiElement_0, candidates) || Depends(element.iuiElement_1, candidates);
+		return Depends(element.uiElement0, candidates) || Depends(element.uiElement1, candidates);
 	}
 
 	private static bool Depends(UiElement dependency, HashSet<UiElement> candidates)
@@ -63,7 +63,7 @@ internal partial class UiElements
 	{
 		var eligible = new List<UiElement>(wave.Count);
 		foreach (var element in wave) {
-			if (!IsVisible(element.iuiElement_0) || !IsVisible(element.iuiElement_1)) {
+			if (!IsVisible(element.uiElement0) || !IsVisible(element.uiElement1)) {
 				Hide(element);
 			} else {
 				eligible.Add(element);
@@ -82,7 +82,7 @@ internal partial class UiElements
 		var active = new List<int>(elements.Count);
 		for (int i = 0; i < elements.Count; i++) {
 			var element = elements[i];
-			if ((uint)element.Bucket >= bucketCount) element.Bucket = ComputeBucket(element.int_0, uiHash);
+			if ((uint)element.Bucket >= bucketCount) element.Bucket = ComputeBucket(element.hash, uiHash);
 			if ((uint)element.Bucket >= bucketCount) continue;
 
 			current[i] = buckets[element.Bucket];
@@ -109,7 +109,7 @@ internal partial class UiElements
 			var matches = new List<int>();
 			for (int k = 0; k < active.Count; k++) {
 				var element = elements[active[k]];
-				if (nodes[k].Key != element.ulong_0) continue;
+				if (nodes[k].Key != element.hashPath) continue;
 
 				element.long_0 = nodes[k].Value;
 				matches.Add(k);
@@ -127,7 +127,7 @@ internal partial class UiElements
 				for (int m = 0; m < matches.Count; m++) {
 					var element = elements[active[matches[m]]];
 					element.Class75_0 = data[m];
-					if (element.Class75_0.Id != element.ulong_0) continue;
+					if (element.Class75_0.Id != element.hashPath) continue;
 
 					ApplyResolved(element);
 					resolved.Add(active[matches[m]]);

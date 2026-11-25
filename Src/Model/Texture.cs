@@ -19,10 +19,10 @@ public class Texture : ITransparent
 
 	public float Opacity { get; set; }
 
-	public Texture(Lazy<Bitmap> lazy_1, int int_0, int int_1, int int_2, int int_3)
+	public Texture(Lazy<Bitmap> lazy_1, int left, int top, int width, int height)
 	{
 		bitmap = lazy_1;
-		rectF = new RawRectangleF(int_0, int_1, int_0 + int_2, int_1 + int_3);
+		rectF = new RawRectangleF(left, top, left + width, top + height);
 		Opacity = 1f;
 	}
 
