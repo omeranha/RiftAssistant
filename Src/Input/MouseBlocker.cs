@@ -19,7 +19,7 @@ internal static partial class MouseBlocker
 
 	private static readonly ConcurrentDictionary<MouseButtons, bool> blockedButtons = new();
 
-	private static LowLevelMouseProc _proc = HookCallback;
+	private static readonly LowLevelMouseProc _proc = HookCallback;
 	private static IntPtr _hookID = IntPtr.Zero;
 	private static Thread _hookThread;
 	private static uint hookThreadId;

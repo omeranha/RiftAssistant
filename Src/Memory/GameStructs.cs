@@ -1144,8 +1144,6 @@ internal struct r_Waypoint
 
 	[FieldOffset(40)]
 	public int int_1;
-
-	public static int Size = 44;
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]

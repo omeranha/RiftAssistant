@@ -25,7 +25,7 @@ public static class Core
 
 	public static PluginListMenu PluginListMenu { get; set; }
 
-	internal static PluginHandler PluginHandler;
+	internal static PluginHandler PluginHandler { get; private set; }
 
 	private static readonly CancellationTokenSource shutdown = new();
 

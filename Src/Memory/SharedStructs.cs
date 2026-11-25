@@ -46,8 +46,6 @@ internal struct FrameRateSettings
 
 	[FieldOffset(4)]
 	public bool BackgroundLimitEnabled;
-
-	public static int Size = 8;
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]

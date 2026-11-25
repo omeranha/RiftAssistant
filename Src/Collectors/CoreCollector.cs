@@ -14,71 +14,67 @@ internal static class CoreCollector
 {
 	public static readonly uint Magic_600DF00D;
 
-	public static bool CanReadMemory;
+	public static bool GameStateValid { get; private set; }
 
-	public static bool bool_1;
+	public static bool IsGameReady { get; private set; }
 
-	public static bool GameStateValid;
+	public static readonly Stopwatch stopwatch_0 = new();
 
-	public static bool IsGameReady;
+	public static Stopwatch stopwatch_1 { get; private set; } = new();
 
-	public static Stopwatch stopwatch_0 = new();
-
-	public static Stopwatch stopwatch_1 = new();
-
-	public static long CurrentRealTimeTicks;
+	public static long CurrentRealTimeTicks { get; private set; }
 
 	public static Player LocalPlayer;
 
-	public static bool IsLoading;
+	public static bool IsLoading { get; private set; }
 
-	public static bool IsInTown;
+	public static bool IsInTown { get; private set; }
 
 	public static string BattleTag;
 
-	public static GameDifficulty Unknown;
+	public static GameDifficulty Unknown { get; private set; }
 
 	private static int int_0;
 
 	private static SnoArea LastSnoArea;
 
-	public static SpecialArea CurrentSpecialArea;
+	public static SpecialArea CurrentSpecialArea { get; private set; }
 
-	public static string GameServerIP;
+	public static string GameServerIP { get; private set; }
 
-	public static D3Memory D3Memory;
+	public static readonly D3Memory D3Memory;
 
-	public static List<StatTracker> Trackers = [];
+	public static readonly List<StatTracker> Trackers = [];
 
-	public static StatTracker Session;
+	public static readonly StatTracker Session;
 
-	public static StatTracker SessionAlwaysRunning;
+	public static readonly StatTracker SessionAlwaysRunning;
 
-	public static StatTracker AccountTotal;
+	public static StatTracker AccountTotal { get; private set; }
 
-	public static StatTracker AccountYesterday;
+	public static StatTracker AccountYesterday { get; private set; }
 
-	public static StatTracker AccountToday;
+	public static StatTracker AccountToday { get; private set; }
 
-	public static StatTracker CurrentHeroTotal;
+	public static StatTracker CurrentHeroTotal { get; private set; }
 
-	public static StatTracker CurrentHeroYesterday;
+	public static StatTracker CurrentHeroYesterday { get; private set; }
 
-	public static StatTracker CurrentHeroToday;
+	public static StatTracker CurrentHeroToday { get; private set; }
 
-	public static StatTracker CurrentAccountTotalOnCurrentDifficulty;
+	public static StatTracker CurrentAccountTotalOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentAccountYesterdayOnCurrentDifficulty;
+	public static StatTracker CurrentAccountYesterdayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentAccountTodayOnCurrentDifficulty;
+	public static StatTracker CurrentAccountTodayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroTotalOnCurrentDifficulty;
+	public static StatTracker CurrentHeroTotalOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroYesterdayOnCurrentDifficulty;
+	public static StatTracker CurrentHeroYesterdayOnCurrentDifficulty { get; private set; }
 
-	public static StatTracker CurrentHeroTodayOnCurrentDifficulty;
+	public static StatTracker CurrentHeroTodayOnCurrentDifficulty { get; private set; }
 
-	public static RunTracker RunTracker;
+	public static RunTracker RunTracker { get; private set; }
 
 	public static Controller Controller { get; set; }
 
@@ -118,10 +114,10 @@ internal static class CoreCollector
 
 	public static WaypointManager WaypointManager { get; } = new();
 
-	public static Portal[] portalsSnapshot;
-	public static IClickableActor[] NormalChestsSnapshot;
-	public static IClickableActor[] ResplendentChestsSnapshot;
-	public static Actor[] actorsSnapshot;
+	public static Portal[] portalsSnapshot { get; private set; }
+	public static IClickableActor[] NormalChestsSnapshot { get; private set; }
+	public static IClickableActor[] ResplendentChestsSnapshot { get; private set; }
+	public static Actor[] actorsSnapshot { get; private set; }
 
 	static CoreCollector()
 	{
@@ -232,7 +228,6 @@ internal static class CoreCollector
 
 	internal static void ClearGameServerContext()
 	{
-		bool_1 = true;
 		IsGameReady = false;
 		int_0 = 0;
 		if (!D3Memory.ObjectManager_GameState_HasValue) {
@@ -293,7 +288,6 @@ internal static class CoreCollector
 
 			if (!memoryValid) {
 				GameStateValid = false;
-				CanReadMemory = false;
 				D3Memory.CommandLineArgs = null;
 				D3Memory.isOnPTR = null;
 				D3Memory.ServerGateway = null;
@@ -302,7 +296,6 @@ internal static class CoreCollector
 				return;
 			}
 
-			CanReadMemory = true;
 			try {
 				HeroCollector.Collect();
 				UiElements.Refresh(memoryValid);
@@ -430,7 +423,6 @@ internal static class CoreCollector
 
 				SceneCollector.GenerateSceneHints();
 				SnoArea snoArea = LocalPlayer.SnoArea;
-				bool_1 = false;
 				bool flag3 = !IsGameReady && stopwatch_0.ElapsedMilliseconds >= 3000;
 				if (int_0 != HeroCollector.Int32_0) {
 					if (int_0 != 0) {

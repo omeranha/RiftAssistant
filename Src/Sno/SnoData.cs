@@ -14,29 +14,29 @@ internal static class SnoData
 
 	private static readonly Dictionary<ulong, TextureIndexEntry> dictionary_1 = [];
 
-	public static Strings Strings;
+	public static Strings Strings { get; private set; }
 
-	public static Attributes Attributes;
+	public static Attributes Attributes { get; private set; }
 
-	public static Areas Areas;
+	public static Areas Areas { get; private set; }
 
-	public static Actors Actors;
+	public static Actors Actors { get; private set; }
 
-	public static Monsters Monsters;
+	public static Monsters Monsters { get; private set; }
 
-	public static Classes Classes;
+	public static Classes Classes { get; private set; }
 
-	public static Powers Powers;
+	public static Powers Powers { get; private set; }
 
-	public static Items Items;
+	public static Items Items { get; private set; }
 
-	public static Experience Experience;
+	public static Experience Experience { get; private set; }
 
-	public static Worlds Worlds;
+	public static Worlds Worlds { get; private set; }
 
-	public static Quests Quests;
+	public static Quests Quests { get; private set; }
 
-	public static Scenes Scenes;
+	public static Scenes Scenes { get; private set; }
 
 	public static TextureIndexEntry? GetTextureIndexEntry(uint key)
 	{

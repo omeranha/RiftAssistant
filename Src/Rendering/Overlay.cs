@@ -37,7 +37,7 @@ internal class Overlay
 
 	private Layer clipLayer;
 
-	public static Overlay Instance;
+	public static Overlay Instance { get; private set; }
 
 	internal readonly PerSecCounter RenderCounter = new();
 

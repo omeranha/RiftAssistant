@@ -11,10 +11,10 @@ namespace RiftAssistant.Engine;
 
 internal static partial class GameWindowManager
 {
-	public static Window Window = new();
-	public static Process Process;
-	public static IntPtr ProcessHandle = IntPtr.Zero;
-	public static IntPtr MainModuleHandle = IntPtr.Zero;
+	public static readonly Window Window = new();
+	public static Process Process { get; private set; }
+	public static IntPtr ProcessHandle { get; private set; } = IntPtr.Zero;
+	public static IntPtr MainModuleHandle { get; private set; } = IntPtr.Zero;
 
 	internal static bool Update()
 	{
