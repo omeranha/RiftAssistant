@@ -17,6 +17,7 @@ internal static class MenuStyle
 	public static readonly RenderFont Font = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Left, false, false);
 	public static readonly RenderFont CenterFont = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Center, false, false);
 	public static readonly RenderFont HintFont = new(255, 160, 160, 160, "Arial", false, false, 7f, Alignment.Left, false, false);
+	public static readonly RenderFont HeadingFont = new(255, 255, 255, 255, "Arial", true, false, 9f, Alignment.Left, false, false);
 	public static readonly RenderBrush Fill = new(255, 64, 64, 64, 0f);
 	public static readonly RenderBrush ActiveFill = new(255, 40, 70, 110, 0f);
 	public static readonly RenderBrush HoverFill = new(255, 90, 90, 90, 0f);
@@ -299,6 +300,39 @@ internal sealed class MenuHint(Func<string> text) : MenuRow
 	public override bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
 	{
 		return false;
+	}
+}
+
+internal sealed class MenuHeading(string text) : MenuRow
+{
+	public MenuHeading(string text, int height) : this(text)
+	{
+		Bounds = new RectangleF(0, 0, MenuStyle.RowWidth, height);
+	}
+
+	protected override void DrawRow(float x, float y)
+	{
+		var layout = MenuStyle.HeadingFont.GetTextLayout(text);
+		float textY = y + Bounds.Height - layout.Metrics.Height - 4;
+		MenuStyle.HeadingFont.DrawText(layout, x, textY);
+		MenuStyle.Outline.DrawLine(x, y + Bounds.Height - 1, x + Bounds.Width, y + Bounds.Height - 1);
+	}
+
+	public override bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
+	{
+		return false;
+	}
+}
+
+internal sealed class SettingsHeading(string name) : ICompactMenuOption
+{
+	private readonly IUIComponent[] components = [new MenuHeading(name, 30)];
+
+	public string Name { get; } = name;
+
+	public IReadOnlyList<IUIComponent> GetComponents()
+	{
+		return components;
 	}
 }
 

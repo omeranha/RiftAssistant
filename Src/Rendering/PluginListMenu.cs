@@ -65,29 +65,39 @@ public class PluginListMenu()
 
 	public void Save()
 	{
-		using FileStream fs = File.Create(pluginSettings);
-		using var writer = new Utf8JsonWriter(fs, new JsonWriterOptions {
-			Indented = true
-		});
+		try {
+			Directory.CreateDirectory(Path.GetDirectoryName(pluginSettings)!);
+			string temporaryPath = pluginSettings + ".tmp";
+			using (FileStream fs = File.Create(temporaryPath))
+			using (var writer = new Utf8JsonWriter(fs, new JsonWriterOptions { Indented = true })) {
+				writer.WriteStartObject();
+				foreach (var checkbox in pluginCheckboxes) {
+					writer.WriteBoolean(checkbox.Label, checkbox.IsChecked);
+				}
+				writer.WriteEndObject();
+			}
 
-		writer.WriteStartObject();
-		foreach (var checkbox in pluginCheckboxes) {
-			writer.WriteBoolean(checkbox.Label, checkbox.IsChecked);
+			File.Move(temporaryPath, pluginSettings, true);
+		} catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) {
+			Logger.LogException($"[plugins] could not save {Path.GetFileName(pluginSettings)}: {ex.Message}");
 		}
-		writer.WriteEndObject();
 	}
 
 	public void LoadEnabledPlugins()
 	{
 		if (!File.Exists(pluginSettings)) return;
 
-		string json = File.ReadAllText(pluginSettings);
-		using JsonDocument doc = JsonDocument.Parse(json);
-		foreach (var checkbox in pluginCheckboxes) {
-			if (doc.RootElement.TryGetProperty(checkbox.Label, out var property)) {
+		try {
+			using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(pluginSettings));
+			foreach (var checkbox in pluginCheckboxes) {
+				if (!doc.RootElement.TryGetProperty(checkbox.Label, out var property) || property.ValueKind is not (JsonValueKind.True or JsonValueKind.False)) continue;
+
 				checkbox.IsChecked = property.GetBoolean();
-				Core.PluginHandler.Plugins.Find(p => p.GetType().Name == checkbox.Label).Enabled = checkbox.IsChecked;
+				var plugin = Core.PluginHandler.Plugins.Find(p => p.GetType().Name == checkbox.Label);
+				if (plugin != null) plugin.Enabled = checkbox.IsChecked;
 			}
+		} catch (Exception ex) when (ex is JsonException or IOException or UnauthorizedAccessException) {
+			Logger.LogException($"[plugins] could not read {Path.GetFileName(pluginSettings)}, the plugins keep their default state: {ex.Message}");
 		}
 	}
 

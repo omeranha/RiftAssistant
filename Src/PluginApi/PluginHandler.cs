@@ -93,6 +93,7 @@ internal class PluginHandler
 			if (reloading) {
 				Reloading = true;
 				Core.SettingsMenu.MenuOptions.Clear();
+				SettingsMenuOptions.ClearPluginSections();
 			}
 
 			UnloadPlugins();
@@ -327,12 +328,19 @@ internal class PluginHandler
 
 		try {
 			plugin.Load();
-			return plugin;
 		} catch (Exception ex) {
 			Logger.Info($"[ERROR] loading plugin {name} {ex.Message}");
 			Logger.LogException($"[Plugin: {name}] {ex}");
 			return null;
 		}
+
+		try {
+			PluginSettingsBinder.Attach(plugin);
+		} catch (Exception ex) {
+			Logger.LogException($"[Plugin: {name}] settings could not be attached: {ex}");
+		}
+
+		return plugin;
 	}
 
 	private void UnloadPlugins()

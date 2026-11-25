@@ -55,6 +55,11 @@ public class Controller
 
 	public SettingsMenu SettingsMenu => Core.SettingsMenu;
 
+	public Plugins.IPluginSettings GetPluginSettings(IPlugin plugin)
+	{
+		return RiftAssistant.PluginHost.PluginSettingsStore.For(plugin.GetType().Name);
+	}
+
 	public Controller()
 	{
 		gameController = new GameController();

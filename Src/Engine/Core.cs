@@ -1,4 +1,4 @@
-﻿#nullable enable annotations
+#nullable enable annotations
 #nullable disable warnings
 using System;
 using System.Collections.Generic;
@@ -221,6 +221,7 @@ public static class Core
 	{
 		while (!shutdown.IsCancellationRequested) {
 			SettingsManager.Tick();
+			PluginSettingsStore.Tick();
 			StatTrackerAutosave.Tick();
 			if (!GameWindowManager.Update()) {
 				HideOverlay();
@@ -274,6 +275,7 @@ public static class Core
 	internal static void Shutdown()
 	{
 		RunShutdownStep(SettingsManager.Flush);
+		RunShutdownStep(PluginSettingsStore.Flush);
 		RunShutdownStep(Clear);
 		RunShutdownStep(KeyboardCapture.Stop);
 		RunShutdownStep(MouseBlocker.Stop);
@@ -302,4 +304,3 @@ public static class Core
 		return result;
 	}
 }
-

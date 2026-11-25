@@ -8,6 +8,7 @@ public class SettingsMenu
 {
 	private bool showMenu;
 	private readonly List<IMenuOption> builtInOptions = [];
+	private readonly SettingsHeading pluginsHeading = new("Plugins settings");
 
 	public bool ShowMenu
 	{
@@ -64,6 +65,11 @@ public class SettingsMenu
 		layoutNeedsUpdate = true;
 	}
 
+	public void AddSection(string name, IEnumerable<IUIComponent> components)
+	{
+		SettingsMenuOptions.AddPluginSection(name, components);
+	}
+
 	internal void AddBuiltInOption(IMenuOption option)
 	{
 		builtInOptions.Add(option);
@@ -75,7 +81,7 @@ public class SettingsMenu
 		layoutNeedsUpdate = true;
 	}
 
-	private IEnumerable<IMenuOption> AllOptions => [.. builtInOptions, .. MenuOptions];
+	private IEnumerable<IMenuOption> AllOptions => MenuOptions.Count > 0 ? [.. builtInOptions, pluginsHeading, .. MenuOptions] : [.. builtInOptions];
 
 	public void RecalculateLayout()
 	{
@@ -170,6 +176,7 @@ public class SettingsMenu
 		RecalculateLayout();
 		background.DrawRectangle(new RectangleF(X, Y, Width, Height));
 
+		showPluginsButton.Label = Core.PluginListMenu.ShowPluginList ? "Hide Plugins" : "Show Plugins";
 		closeButton.Draw((int)(X + Width - closeButton.Bounds.Width - 5), Y + 5);
 		showPluginsButton.Draw((int)(X + Width - showPluginsButton.Bounds.Width - 5), Y + 30);
 		reloadPluginsButton.Draw((int)(X + Width - reloadPluginsButton.Bounds.Width - 5), Y + 55);
@@ -246,9 +253,23 @@ public class MenuCheckbox(string label, bool initialState, int width = 200, int 
 
 internal class MenuButton : IUIComponent
 {
+	private readonly int overriddenWidth;
+	private readonly int overriddenHeight;
+	private string label;
+
 	public RectangleF Bounds { get; set; }
-	public string Label { get; set; }
 	public Action OnClick { get; set; } = null!;
+
+	public string Label
+	{
+		get => label;
+		set {
+			if (label == value) return;
+
+			label = value;
+			Measure();
+		}
+	}
 
 	private readonly RenderFont font = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Center, false, false);
 	private readonly RenderBrush borderBrush = new(255, 128, 128, 128, 0f);
@@ -256,7 +277,14 @@ internal class MenuButton : IUIComponent
 
 	public MenuButton(string label, int overriddenWidth = 0, int overriddenHeight = 0)
 	{
-		Label = label;
+		this.label = label;
+		this.overriddenWidth = overriddenWidth;
+		this.overriddenHeight = overriddenHeight;
+		Measure();
+	}
+
+	private void Measure()
+	{
 		if (overriddenWidth == 0 || overriddenHeight == 0) {
 			var autoLayout = font.GetTextLayout(label);
 			float calculatedWidth = overriddenWidth > 0 ? overriddenWidth : autoLayout.Metrics.Width + 12f;

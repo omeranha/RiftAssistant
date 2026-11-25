@@ -69,6 +69,20 @@ Original handlers keep their names. Differences:
 - `IMouseClickBlocker.MouseClickShouldBeBlocked(MouseButtons, x, y)`: return true to swallow a click. `x` and `y` are relative to the game window. A blocked press also blocks its release. The handler runs on the mouse hook thread and must return quickly.
 - `IItemKeepDecisionHandler.CalculateItemKeepDecision(Item, ItemKeepDecision previous)`: adjust the item filter result. Handlers are chained in plugin order.
 
+## Plugin settings
+
+A public `bool`, `int`, `string` or enum property with a getter and a setter becomes a setting when it has `[PluginSetting("Label")]`. After `Load()` the saved value replaces the property's value, and the plugin gets a collapsible button in the settings menu, under the **Plugins settings** heading and titled with the plugin name (`InventoryAndStashPlugin` becomes `Inventory And Stash`), where the value can be changed. Changes apply to the running plugin at once and are saved to `settings/plugin_settings.json` half a second later, keyed by the plugin class name and the property name. For `int` properties `Min`, `Max` and `Step` (default 0, 100 and 1) set the stepper range, and a saved value outside it is clamped.
+
+```csharp
+[PluginSetting("Mark items to keep")]
+public bool LooksGoodDisplayEnabled { get; set; }
+
+[PluginSetting("Opacity (%)", Min = 10, Max = 100, Step = 10)]
+public int Opacity { get; set; } = 80;
+```
+
+A plugin that builds its own menu components can show them in its own collapsible button with `Assistant.SettingsMenu.AddSection(name, components)`, and read and write values itself with `Assistant.GetPluginSettings(this)`, which returns an `IPluginSettings` (`GetBool`, `GetInt`, `GetString` with a default, and `Set`). `AutoCastSkills` uses it for its skill checkboxes. Which plugins are enabled is stored separately in `settings/plugins_states.json` and is changed with the **Show Plugins** list in the settings menu.
+
 ## Item keep decision
 
 `Item.KeepDecision` is `LooksGood`, `Irrelevant` or `DefinitelyBad`. It is computed once when an item is first seen and again when it gets identified.

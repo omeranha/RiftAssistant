@@ -20,6 +20,7 @@ internal static class SettingsMenuOptions
 	};
 
 	private static readonly List<SettingsSection> Sections = [];
+	private static readonly List<SettingsSection> PluginSections = [];
 	private static SettingsMenu menu;
 	private static long resetArmedAt = -1;
 	private static string hotkeyMessage = "";
@@ -116,10 +117,22 @@ internal static class SettingsMenuOptions
 		menu.AddBuiltInOption(section);
 	}
 
+	internal static void AddPluginSection(string name, IEnumerable<IUIComponent> items)
+	{
+		var section = new SettingsSection(name, items, ToggleSection);
+		PluginSections.Add(section);
+		menu.AddOption(section);
+	}
+
+	internal static void ClearPluginSections()
+	{
+		PluginSections.Clear();
+	}
+
 	private static void ToggleSection(SettingsSection section)
 	{
 		bool expand = !section.Expanded;
-		foreach (var other in Sections) {
+		foreach (var other in Sections.Concat(PluginSections)) {
 			other.Expanded = false;
 		}
 

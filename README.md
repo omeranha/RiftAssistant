@@ -65,6 +65,8 @@ Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the 
 | --- | --- |
 | `settings/settings.json` | Language, overlay options, FPS, batched memory reads, inventory lock area |
 | `settings/hotkeys.json` | Hotkey bindings |
+| `settings/plugins_states.json` | Which plugins are enabled (the **Show Plugins** list in the settings menu) |
+| `settings/plugin_settings.json` | Values of plugin settings, such as which skills `AutoCastSkills` casts |
 | `settings/item_filter_sc.json` | Softcore item filter rules |
 | `settings/item_filter_hc.json` | Hardcore item filter rules |
 | `stat_tracker/` | Stat tracker totals (account, hero, today and per area) as JSON, saved every minute, on zone changes, at midnight and on exit |
