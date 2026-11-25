@@ -58,8 +58,12 @@ internal static class MouseBlocker
 
 	private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
 	{
-		if (nCode >= 0 && TryGetButton((int)wParam, out var button, out bool isDown) && ShouldBlock(lParam, button, isDown)) {
-			return (IntPtr)1;
+		try {
+			if (nCode >= 0 && TryGetButton((int)wParam, out var button, out bool isDown) && ShouldBlock(lParam, button, isDown)) {
+				return (IntPtr)1;
+			}
+		} catch (Exception ex) {
+			Logger.LogException(ex.ToString());
 		}
 
 		return CallNextHookEx(_hookID, nCode, wParam, lParam);

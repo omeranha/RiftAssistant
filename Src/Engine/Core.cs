@@ -32,8 +32,6 @@ public static class Core
 	public static void Init()
 	{
 		RawInput.Start();
-		RawInput.MouseEvent += e => PluginHandler.DispatchKeyEvent(e);
-		RawInput.KeyboardEvent += OnKeyboardEvent;
 		MouseBlocker.Start();
 		KeyboardCapture.Start();
 		SettingsManager.Load();
@@ -80,6 +78,10 @@ public static class Core
 		PluginHandler.LoadPlugins();
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
+
+		// The handlers use the plugin host, menu and overlay, so they must not run before those exist.
+		RawInput.MouseEvent += e => PluginHandler.DispatchKeyEvent(e);
+		RawInput.KeyboardEvent += OnKeyboardEvent;
 		CoreCollector.Update();
 	}
 

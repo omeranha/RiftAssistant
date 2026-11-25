@@ -99,7 +99,11 @@ internal static unsafe class RawInput
 
 	private static IntPtr WndProcImpl(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam) 
 	{
-		if (msg == WM_INPUT) ProcessRawInput(lParam);
+		try {
+			if (msg == WM_INPUT) ProcessRawInput(lParam);
+		} catch (Exception ex) {
+			Logger.LogException(ex.ToString());
+		}
 
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}

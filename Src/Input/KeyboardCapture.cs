@@ -86,7 +86,12 @@ internal static class KeyboardCapture
 
 	private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
 	{
-		if (nCode >= 0 && ShouldSwallow((int)wParam, Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam))) return (IntPtr)1;
+		try {
+			if (nCode >= 0 && ShouldSwallow((int)wParam, Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam))) return (IntPtr)1;
+		} catch (Exception ex) {
+			End();
+			Logger.LogException(ex.ToString());
+		}
 
 		return CallNextHookEx(hookId, nCode, wParam, lParam);
 	}
