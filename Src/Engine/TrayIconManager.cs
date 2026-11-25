@@ -7,9 +7,12 @@ namespace RiftAssistant.Engine;
 internal static class TrayIconManager
 {
 	private static NotifyIcon trayIcon;
+	private static Control dispatcher;
 
 	public static void Initialize()
 	{
+		dispatcher = new Control();
+		_ = dispatcher.Handle;
 		Assembly assembly = Assembly.GetExecutingAssembly();
 		using Stream stream = assembly.GetManifestResourceStream("RiftAssistant.rift_assistant.ico");
 		trayIcon = new NotifyIcon {
@@ -31,7 +34,6 @@ internal static class TrayIconManager
 
 		menu.Items.Add("Exit", null, (_, _) => {
 			trayIcon.Visible = false;
-			Application.ExitThread();
 			Core.Exit();
 		});
 
@@ -46,10 +48,19 @@ internal static class TrayIconManager
 
 		trayIcon.Visible = false;
 		trayIcon.Dispose();
+		dispatcher?.Dispose();
 	}
 
-	public static void Hide()
+	public static void Close()
 	{
-		trayIcon?.Visible = false;
+		Control target = dispatcher;
+		if (target == null || !target.IsHandleCreated) {
+			return;
+		}
+
+		target.BeginInvoke(() => {
+			trayIcon.Visible = false;
+			Application.ExitThread();
+		});
 	}
 }

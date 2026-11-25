@@ -15,6 +15,8 @@ internal static class Program
 	public static readonly string ScreenshotFolder = Path.Combine(UserDataFolder, "screenshots");
 	public static readonly string CacheFolder = Path.Combine(UserDataFolder, "cache");
 
+	private static readonly TimeSpan TrayJoinTimeout = TimeSpan.FromMilliseconds(500);
+
 	private static Thread trayThread;
 
 	[STAThread]
@@ -32,6 +34,8 @@ internal static class Program
 			StartTray();
 			Core.Init();
 			Core.MainLoop();
+			Core.Shutdown();
+			trayThread?.Join(TrayJoinTimeout);
 		} catch (StartupException ex) {
 			Logger.LogException(ex.ToString());
 			MessageBox.Show($"{ex.Message}\n\nLogs: {LogFolder}", "RiftAssistant cannot start", MessageBoxButtons.OK, MessageBoxIcon.Error);

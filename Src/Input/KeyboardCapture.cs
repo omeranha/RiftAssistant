@@ -29,6 +29,7 @@ internal static partial class KeyboardCapture
 	private static long endedAt = -1;
 	private static IntPtr hookId = IntPtr.Zero;
 	private static Thread hookThread;
+	private static uint hookThreadId;
 
 	public static bool IsActive => handler != null;
 
@@ -40,15 +41,26 @@ internal static partial class KeyboardCapture
 		if (hookThread != null) return;
 
 		hookThread = new Thread(() => {
+			hookThreadId = NativeThread.CurrentId();
 			hookId = SetHook();
 			Application.Run();
 			UnhookWindowsHookEx(hookId);
+			hookId = IntPtr.Zero;
 		}) {
 			IsBackground = true,
 			Name = "KeyboardCaptureThread"
 		};
 		hookThread.SetApartmentState(ApartmentState.STA);
 		hookThread.Start();
+	}
+
+	public static void Stop()
+	{
+		if (hookThread == null) return;
+
+		NativeThread.RequestQuit(hookThreadId);
+		hookThread.Join(NativeThread.JoinTimeout);
+		hookThread = null;
 	}
 
 	public static bool IsCurrent(int id)

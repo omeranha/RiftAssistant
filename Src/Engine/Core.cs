@@ -27,7 +27,7 @@ public static class Core
 
 	internal static PluginHandler PluginHandler;
 
-	private static bool running = true;
+	private static readonly CancellationTokenSource shutdown = new();
 
 	public static void Init()
 	{
@@ -76,6 +76,8 @@ public static class Core
 		SettingsButton = new SettingsButton();
 		PluginHandler = new PluginHandler();
 		PluginHandler.LoadPlugins();
+		if (shutdown.IsCancellationRequested) return;
+
 		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
 
@@ -215,11 +217,11 @@ public static class Core
 
 	public static void MainLoop()
 	{
-		while (running) {
+		while (!shutdown.IsCancellationRequested) {
 			SettingsManager.Tick();
 			StatTrackerAutosave.Tick();
 			if (!GameWindowManager.Update()) {
-				Thread.Sleep((int)OverlayFrameInterval);
+				Delay((int)OverlayFrameInterval);
 				continue;
 			}
 
@@ -235,8 +237,13 @@ public static class Core
 				overlay.Update();
 			}
 
-			Thread.Sleep((int)OverlayFrameInterval);
+			Delay((int)OverlayFrameInterval);
 		}
+	}
+
+	internal static bool Delay(int milliseconds)
+	{
+		return !shutdown.Token.WaitHandle.WaitOne(milliseconds);
 	}
 
 	internal static void Clear()
@@ -252,13 +259,26 @@ public static class Core
 
 	internal static void Exit()
 	{
-		running = false;
-		SettingsManager.Flush();
-		Clear();
-		TrayIconManager.Hide();
-		Application.ExitThread();
-		TrayIconManager.Dispose();
-		Environment.Exit(0);
+		shutdown.Cancel();
+	}
+
+	internal static void Shutdown()
+	{
+		RunShutdownStep(SettingsManager.Flush);
+		RunShutdownStep(Clear);
+		RunShutdownStep(KeyboardCapture.Stop);
+		RunShutdownStep(MouseBlocker.Stop);
+		RunShutdownStep(RawInput.Stop);
+		RunShutdownStep(TrayIconManager.Close);
+	}
+
+	private static void RunShutdownStep(Action step)
+	{
+		try {
+			step();
+		} catch (Exception ex) {
+			Logger.LogException(ex.ToString());
+		}
 	}
 
 	public static T Measure<T>(string name, Func<T> func)

@@ -319,15 +319,14 @@ internal static class CoreCollector
 			}
 
 			if (GameSettingsManager.WindowMode == WindowMode.FullScreen) {
-				Thread.Sleep(500);
+				Core.Delay(500);
 				GameSettingsManager.Refresh();
 				if (GameSettingsManager.WindowMode == WindowMode.FullScreen) {
 					string text = "Unable to draw the overlay content if Diablo 3 is running in 'fullscreen' mode. Only 'fullscreen windowed' and 'windowed' modes are supported.\n\nTerminating...";
 					Logger.LogException(text);
 					MessageBox.Show(text, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 					Core.Exit();
-					Application.Exit();
-					Environment.Exit(0);
+					return;
 				}
 			}
 

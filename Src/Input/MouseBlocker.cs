@@ -22,14 +22,17 @@ internal static partial class MouseBlocker
 	private static LowLevelMouseProc _proc = HookCallback;
 	private static IntPtr _hookID = IntPtr.Zero;
 	private static Thread _hookThread;
+	private static uint hookThreadId;
 
 	public static void Start()
 	{
 		if (_hookThread != null) return;
 		_hookThread = new Thread(() => {
+			hookThreadId = NativeThread.CurrentId();
 			_hookID = SetHook(_proc);
 			Application.Run();
 			UnhookWindowsHookEx(_hookID);
+			_hookID = IntPtr.Zero;
 		}) {
 			IsBackground = true,
 			Name = "MouseBlockerThread"
@@ -40,10 +43,11 @@ internal static partial class MouseBlocker
 
 	public static void Stop()
 	{
-		if (_hookID != IntPtr.Zero) {
-			UnhookWindowsHookEx(_hookID);
-			_hookID = IntPtr.Zero;
-		}
+		if (_hookThread == null) return;
+
+		NativeThread.RequestQuit(hookThreadId);
+		_hookThread.Join(NativeThread.JoinTimeout);
+		_hookThread = null;
 	}
 
 	private static IntPtr SetHook(LowLevelMouseProc proc)

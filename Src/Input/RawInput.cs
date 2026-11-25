@@ -55,6 +55,15 @@ internal static unsafe partial class RawInput
 		thread.Start();
 	}
 
+	public static void Stop()
+	{
+		if (thread == null) return;
+
+		NativeThread.RequestQuit(threadId);
+		thread.Join(NativeThread.JoinTimeout);
+		thread = null;
+	}
+
 	private static void MessageLoop()
 	{
 		threadId = GetCurrentThreadId();

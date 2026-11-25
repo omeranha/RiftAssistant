@@ -250,8 +250,6 @@ internal class SceneMapRenderer
 			} catch (OutOfMemoryException) {
 				MessageBox.Show("Not enough memory to draw the overlay. Please make sure enough virtual memory is enabled in Windows settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 				Core.Exit();
-				Application.Exit();
-				Environment.Exit(0);
 			} catch (Exception ex) {
 				Logger.LogException(ex.ToString());
 			}
