@@ -71,7 +71,7 @@ Original handlers keep their names. Differences:
 
 ## Plugin settings
 
-A public `bool`, `int`, `string` or enum property with a getter and a setter becomes a setting when it has `[PluginSetting("Label")]`. After `Load()` the saved value replaces the property's value, and the plugin gets a collapsible button in the settings menu, under the **Plugins settings** heading and titled with the plugin name (`InventoryAndStashPlugin` becomes `Inventory And Stash`), where the value can be changed. Changes apply to the running plugin at once and are saved to `settings/plugin_settings.json` half a second later, keyed by the plugin class name and the property name. For `int` properties `Min`, `Max` and `Step` (default 0, 100 and 1) set the stepper range, and a saved value outside it is clamped.
+A public `bool`, `int`, `string` or enum property with a getter and a setter becomes a setting when it has `[PluginSetting("Label")]`. After `Load()` the saved value replaces the property's value, and the plugin gets an entry on the **Plugin settings** page of the settings menu, titled with the plugin name (`InventoryAndStashPlugin` becomes `Inventory And Stash`), where the value can be changed. Changes apply to the running plugin at once and are saved to `settings/plugin_settings.json` half a second later, keyed by the plugin class name and the property name. For `int` properties `Min`, `Max` and `Step` (default 0, 100 and 1) set the stepper range, and a saved value outside it is clamped. `Group` puts a heading above the property and the ones after it that share the group. An enum marked `[Flags]` is shown as one toggle per member (the member with value 0 is left out) and saved as text such as `Skill1, Skill2`, and a saved value with undefined bits is ignored.
 
 ```csharp
 [PluginSetting("Mark items to keep")]
@@ -79,20 +79,23 @@ public bool LooksGoodDisplayEnabled { get; set; }
 
 [PluginSetting("Opacity (%)", Min = 10, Max = 100, Step = 10)]
 public int Opacity { get; set; } = 80;
+
+[PluginSetting("Wizard", Group = "Skills to auto cast, per class")]
+public CastSlots Wizard { get; set; } = CastSlots.Skill1 | CastSlots.Skill2;
 ```
 
-A plugin that builds its own menu components can show them in its own collapsible button with `Assistant.SettingsMenu.AddSection(name, components)`, and read and write values itself with `Assistant.GetPluginSettings(this)`, which returns an `IPluginSettings` (`GetBool`, `GetInt`, `GetString` with a default, and `Set`). `AutoCastSkills` uses it for its skill checkboxes. Which plugins are enabled is stored separately in `settings/plugins_states.json` and is changed with the **Show Plugins** list in the settings menu.
+A plugin that builds its own menu components can show them in its own entry on the **Plugin settings** page with `Assistant.SettingsMenu.AddSection(name, components)`, and read and write values itself with `Assistant.GetPluginSettings(this)`, which returns an `IPluginSettings` (`GetBool`, `GetInt`, `GetString` with a default, and `Set`). Which plugins are enabled is stored separately in `settings/plugins_states.json` and is changed in the **Plugins** window of the settings menu.
 
 ## Item keep decision
 
 `Item.KeepDecision` is `LooksGood`, `Irrelevant` or `DefinitelyBad`. It is computed once when an item is first seen and again when it gets identified.
 
 1. Unidentified items and the Demonic Trebuchet key are `LooksGood`.
-2. Otherwise the first matching rule in `settings/item_filter_sc.json` (softcore) or `settings/item_filter_hc.json` (hardcore) decides. A missing file is created from the defaults built into the executable. The file format is described in `config/item_filter_readme.txt`.
+2. Otherwise the first matching filter from the item filter menu (opened from the settings menu) (saved in `settings/item_filters.json`, checked in the order shown there) decides. A filter's result is `LooksGood` (keep) or `DefinitelyBad` (sell). There are no built-in filters.
 3. No matching rule gives `Irrelevant`.
 4. `IItemKeepDecisionHandler` plugins adjust the result.
 
-Item filter files are reloaded together with the plugins and also when they change on disk while the program runs (checked once per second), and every item is re-evaluated. Known limitation: the `cubed` and `can_cubed` conditions are not supported and never match.
+Every item is re-evaluated when a filter changes and when the plugins are reloaded. Items are matched by their English name.
 
 ## Inventory lock
 
