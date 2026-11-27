@@ -13,6 +13,8 @@ namespace RiftAssistant.Engine;
 
 public static class Core
 {
+	private const int WaitingForGameInterval = 500;
+
 	private static float OverlayFrameInterval => 1000f / Settings.OverlayFps;
 
 	public static Settings Settings => SettingsManager.Current;
@@ -225,7 +227,7 @@ public static class Core
 			StatTrackerAutosave.Tick();
 			if (!GameWindowManager.Update()) {
 				HideOverlay();
-				Delay((int)OverlayFrameInterval);
+				Delay(WaitingForGameInterval);
 				continue;
 			}
 

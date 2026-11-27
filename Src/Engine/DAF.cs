@@ -62,6 +62,21 @@ internal class DAF
 		ObjectManagerAddress = 0L;
 	}
 
+	public void Reset()
+	{
+		blockValidateFuncs.Clear();
+		ObjectManagerAddress = 0L;
+		AcdManagerAddress = 0L;
+		AcdManager_ACDs_Offset = 0L;
+		PlayerDataManagerAddress = 0L;
+		PlayerAddress = 0L;
+		LevelAreaAddress = 0L;
+		TrickleManagerAddress = 0L;
+		BattleNetClientAddress = 0L;
+		GameStateAddress = 0L;
+		RealmAddress = 0L;
+	}
+
 	public uint DetermineCryptoKey_ActorACDID(IEnumerable<uint> ienumerable_0, IEnumerable<uint> collection)
 	{
 		Dictionary<uint, bool> dictionary = new Dictionary<uint, bool>();

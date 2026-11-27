@@ -3,6 +3,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Diagnostics;
@@ -18,23 +19,28 @@ internal static partial class GameWindowManager
 	public static IntPtr ProcessHandle { get; private set; } = IntPtr.Zero;
 	public static IntPtr MainModuleHandle { get; private set; } = IntPtr.Zero;
 
+	private const string GameProcessName = "Diablo III64";
+	private const string GameWindowClass = "D3 Main Window Class";
+	private const uint ProcessVmRead = 0x0010;
+	private const int ErrorAccessDenied = 5;
+	private const ushort DosSignature = 0x5A4D;
+	private const long AttachRetryMilliseconds = 1000;
+
+	private static long nextAttachAttempt;
+	private static IntPtr unusableWindow = IntPtr.Zero;
+	private static IntPtr attachFailureLoggedFor = IntPtr.Zero;
+
 	internal static bool Update()
 	{
-		if (Window.Handle == IntPtr.Zero || !IsWindow(Window.Handle)) {
-			Window.Handle = FindWindow("D3 Main Window Class", null);
-			if (Window.Handle == IntPtr.Zero) {
-				Window.Handle = FindWindow(null, Window.WindowTitle);
-			}
+		if (Window.Handle != IntPtr.Zero && !IsWindow(Window.Handle)) {
+			LoseGame();
+		}
 
-			if (Window.Handle == IntPtr.Zero) {
-				Window.Offset = Point.Empty;
-				Window.IsForeground = false;
-				Window.ProcessId = 0;
-				return false;
-			}
-
-			GetWindowThreadProcessId(Window.Handle, out uint pid);
-			Window.ProcessId = pid;
+		if (Window.Handle == IntPtr.Zero && !TryFindGameWindow()) {
+			Window.Offset = Point.Empty;
+			Window.IsForeground = false;
+			Window.ProcessId = 0;
+			return false;
 		}
 
 		GetWindowThreadProcessId(GetForegroundWindow(), out uint fgPid);
@@ -76,45 +82,126 @@ internal static partial class GameWindowManager
 		return true;
 	}
 
-	public static bool OpenProcess()
+	private static bool TryFindGameWindow()
 	{
-		Process[] processesByName = Process.GetProcessesByName("Diablo III64");
-		if (processesByName != null && processesByName.Length != 0) {
-			try {
-				Process = processesByName[0];
-				if (Process != null && !Process.HasExited) {
-					ProcessHandle = OpenProcess(0x0010, false, Process.Id);
-					MainModuleHandle = Process.MainModule.BaseAddress;
-				}
-				return true;
-			} catch (Exception) {
-				Process = null;
-				ProcessHandle = IntPtr.Zero;
-				MainModuleHandle = IntPtr.Zero;
-			}
+		IntPtr handle = FindWindow(GameWindowClass, null);
+		if (handle == IntPtr.Zero) {
+			handle = FindWindow(null, Window.WindowTitle);
 		}
-		return false;
+
+		if (handle == IntPtr.Zero) return false;
+
+		GetWindowThreadProcessId(handle, out uint pid);
+		if (!IsGameProcess(pid)) return false;
+
+		Window.Handle = handle;
+		Window.ProcessId = pid;
+		return true;
+	}
+
+	private static bool IsGameProcess(uint processId)
+	{
+		try {
+			using Process candidate = Process.GetProcessById((int)processId);
+			return string.Equals(candidate.ProcessName, GameProcessName, StringComparison.OrdinalIgnoreCase);
+		} catch (Exception) {
+			return false;
+		}
+	}
+
+	private static void LoseGame()
+	{
+		Window.Handle = IntPtr.Zero;
+		Window.ProcessId = 0;
+		unusableWindow = IntPtr.Zero;
+		attachFailureLoggedFor = IntPtr.Zero;
+		nextAttachAttempt = 0;
+		CloseProcess();
+		CoreCollector.ResetGameConnection();
+	}
+
+	private static void AbandonWindow(string reason)
+	{
+		Logger.Info($"[ERROR] {reason}; waiting for the game window to close");
+		unusableWindow = Window.Handle;
+		CloseProcess();
+		CoreCollector.ResetGameConnection();
+	}
+
+	private static bool TryAttach()
+	{
+		Process? process = null;
+		IntPtr handle = IntPtr.Zero;
+		try {
+			process = Process.GetProcessById((int)Window.ProcessId);
+			IntPtr moduleBase = process.MainModule!.BaseAddress;
+			handle = OpenProcess(ProcessVmRead, false, process.Id);
+			if (handle == IntPtr.Zero) {
+				throw new Win32Exception(Marshal.GetLastPInvokeError());
+			}
+
+			Process = process;
+			ProcessHandle = handle;
+			MainModuleHandle = moduleBase;
+			Logger.Info($"Attached to {GameProcessName} (pid {process.Id})");
+			return true;
+		} catch (Exception ex) {
+			if (handle != IntPtr.Zero) CloseHandle(handle);
+			process?.Dispose();
+
+			bool permanent = ex is Win32Exception win32 && win32.NativeErrorCode == ErrorAccessDenied;
+			if (permanent) {
+				AbandonWindow("cannot open the game process (access denied, try running both as the same user or as administrator)");
+			} else if (attachFailureLoggedFor != Window.Handle) {
+				attachFailureLoggedFor = Window.Handle;
+				Logger.Info($"[ERROR] cannot open the game process yet, retrying: {ex.Message}");
+			}
+
+			return false;
+		}
 	}
 
 	public static void CloseProcess()
 	{
-		if (Process != null) {
-			Process = null;
+		Process?.Dispose();
+		Process = null;
+		if (ProcessHandle != IntPtr.Zero) {
 			CloseHandle(ProcessHandle);
-			ProcessHandle = IntPtr.Zero;
-			MainModuleHandle = IntPtr.Zero;
+		}
+
+		ProcessHandle = IntPtr.Zero;
+		MainModuleHandle = IntPtr.Zero;
+	}
+
+	private static unsafe bool IsProcessReadable()
+	{
+		try {
+			if (Process == null || Process.HasExited) return false;
+
+			ushort signature = 0;
+			return ReadProcessMemory(ProcessHandle, MainModuleHandle, &signature, sizeof(ushort), out _) && signature == DosSignature;
+		} catch (Exception) {
+			return false;
 		}
 	}
 
 	public static bool IsProcessValid()
 	{
-		if (Process != null && !Process.HasExited) {
-			return true;
-		}
-		CloseProcess();
-		return OpenProcess();
-	}
+		if (Window.Handle == IntPtr.Zero || Window.Handle == unusableWindow) return false;
 
+		if (Process != null) {
+			if (IsProcessReadable()) return true;
+
+			AbandonWindow("the game memory is no longer readable");
+			return false;
+		}
+
+		long now = Environment.TickCount64;
+		if (now < nextAttachAttempt) return false;
+
+		nextAttachAttempt = now + AttachRetryMilliseconds;
+		return TryAttach();
+	}
 	private static long readCalls;
 
 	public static long TakeReadCalls()
@@ -197,7 +284,7 @@ internal static partial class GameWindowManager
 	[return: MarshalAs(UnmanagedType.Bool)]
 	private static unsafe partial bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, void* lpBuffer, int nSize, out IntPtr lpNumberOfBytesRead);
 
-	[LibraryImport("kernel32.dll")]
+	[LibraryImport("kernel32.dll", SetLastError = true)]
 	private static partial IntPtr OpenProcess(uint processAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int processId);
 
 	[LibraryImport("kernel32.dll", SetLastError = true)]

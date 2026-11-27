@@ -38,6 +38,14 @@ internal static class CoreCollector
 
 	private static int int_0;
 
+	private const long ScanRetryMilliseconds = 1000;
+
+	private static long nextScanAttempt;
+
+	private static string? lastScanError;
+
+	private static bool hasConnected;
+
 	private static SnoArea? LastSnoArea;
 
 	public static SpecialArea CurrentSpecialArea { get; private set; }
@@ -228,16 +236,39 @@ internal static class CoreCollector
 		Trackers.Clear();
 	}
 
+	internal static void ResetGameConnection()
+	{
+		if (!hasConnected) return;
+
+		hasConnected = false;
+		GameStateValid = false;
+		IsLoading = false;
+		BattleTag = null;
+		nextScanAttempt = 0;
+		lastScanError = null;
+		D3Memory.Reset();
+		DAF?.Reset();
+		HeroCollector.ClearHeroes();
+		FloatingNumberManager.Clear(LocalPlayer as Player);
+		ClearGameServerContext(leftGame: true);
+		StatTrackerStorage.Flush();
+	}
+
 	internal static void ClearGameServerContext()
+	{
+		Stopwatch stopwatch = stopwatch_1;
+		ClearGameServerContext(stopwatch != null && stopwatch.ElapsedMilliseconds >= 2000 && !D3Memory.ObjectManager_GameState_HasValue);
+	}
+
+	private static void ClearGameServerContext(bool leftGame)
 	{
 		IsGameReady = false;
 		int_0 = 0;
 		if (!D3Memory.ObjectManager_GameState_HasValue) {
 			ClearAllCaches();
 		}
-		Stopwatch stopwatch = stopwatch_1;
-		bool bool_;
-		if (bool_ = stopwatch != null && stopwatch.ElapsedMilliseconds >= 2000 && !D3Memory.ObjectManager_GameState_HasValue) {
+		bool bool_ = leftGame;
+		if (bool_) {
 			stopwatch_1 = new();
 			ResetStatTrackers(bool_7: true, bool_8: false);
 			GameServerIP = null;
@@ -274,16 +305,25 @@ internal static class CoreCollector
 				DAF ??= new DAF();
 				bool needsScan = DAF.ObjectManagerAddress == 0 || DAF.IsScanRequired();
 
-				if (needsScan) {
+				if (needsScan && Environment.TickCount64 >= nextScanAttempt) {
 					try {
 						DAF.Scan();
 					} catch (Exception ex) {
 						DAF.ClearObjectManagerAddr();
-						Logger.Info("[ERROR] force daf scan due to exception: " + ex.Message);
+						if (ex.Message != lastScanError) {
+							lastScanError = ex.Message;
+							Logger.Info("[ERROR] force daf scan due to exception: " + ex.Message);
+						}
+					}
+
+					if (DAF.ObjectManagerAddress == 0) {
+						nextScanAttempt = Environment.TickCount64 + ScanRetryMilliseconds;
 					}
 				}
 
 				if (memoryValid = DAF.ObjectManagerAddress != 0) {
+					hasConnected = true;
+					lastScanError = null;
 					D3Memory.Update();
 				}
 			}

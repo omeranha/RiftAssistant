@@ -166,6 +166,35 @@ internal class D3Memory
 		FloatingNumberAllocator = new Allocator(8192, "rFloatingNumberAllocator");
 	}
 
+	public void Reset()
+	{
+		CommandLineArgs = null;
+		isOnPTR = null;
+		ServerGateway = null;
+		ObjectManager_GameState_HasValue = false;
+		GameState_Value_IsChallengeRiftGame = false;
+		GameState_LoadingScreenEnabled_Value = 0;
+		GameState_Paused_Value = 0;
+		GameState_RiftProgressAccumulated_Value = 0f;
+		CurrentTimedEventStartTick = 0;
+		CurrentTimedEventEndTick = 0;
+		CurrentTimedEventEndTickMod = 0;
+		IsUiHidden = false;
+		RenderTick = 0;
+		GameTick = 1;
+		GameDifficulty = GameDifficulty.unknown;
+		ObjectManagerStorageAddress = 0;
+		UIManagerAddress = 0;
+		QuestManagerAddress = 0;
+		WaypointManagerAddress = 0;
+		SelectedActor1_AcdId = 0;
+		SelectedActor2_AcdId = 0;
+		int_44 = 0;
+		int_45 = -1;
+		int_46 = -1;
+		stopwatch.Reset();
+	}
+
 	public string ReadGameServerIP()
 	{
 		string text = GameWindowManager.ReadString(CoreCollector.DAF.ObjectManagerAddress + Offset_ObjectManager_GameServerAddress, 128, Encoding.ASCII, true);
