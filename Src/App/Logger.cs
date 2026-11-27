@@ -70,7 +70,7 @@ public static class Logger
 	{
 		try {
 			string path = Path.Combine(Program.LogFolder, "paragon.txt");
-			string line = $"{DateTime.Now:yyyy.MM.dd HH:mm:ss} - {Core.Controller.BattleTag} with {Core.Controller.Game.Me.HeroName} reached paragon level {Core.Controller.Game.Me.CurrentLevelParagon}";
+			string line = $"{DateTime.Now:yyyy.MM.dd HH:mm:ss} - {Core.Controller.BattleTag} with {Core.Controller.Game.LocalPlayer.HeroName} reached paragon level {Core.Controller.Game.LocalPlayer.CurrentLevelParagon}";
 			File.AppendAllText(path, line + Environment.NewLine);
 		} catch (Exception e) {
 			MessageBox.Show($"Failed to write paragon log file.\n{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

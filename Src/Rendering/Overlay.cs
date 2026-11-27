@@ -494,7 +494,7 @@ internal class Overlay
 			BeforeRender?.Invoke(this, EventArgs.Empty);
 			if (Core.Controller.Render.IsRenderEnabled) {
 				bool flag4 = CoreCollector.UiElements.Cutscene.Visible || CoreCollector.UiElements.ScriptedSequence.Visible;
-				bool flag5 = Core.Controller.Game.Me.SnoArea != null && Core.Controller.Game.Me.SnoArea.Type != AreaType.Normal;
+				bool flag5 = Core.Controller.Game.LocalPlayer.SnoArea != null && Core.Controller.Game.LocalPlayer.SnoArea.Type != AreaType.Normal;
 				bool boolean_ = CoreCollector.D3Memory.GameState_Value_IsChallengeRiftGame;
 				bool num = CoreCollector.IsGameReady && CoreCollector.LocalPlayer.FloorCoordinate.IsValid;
 				bool flag6 = CoreCollector.UiElements.GamemenuBkgrnd.Visible || CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible;

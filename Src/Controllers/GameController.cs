@@ -44,7 +44,7 @@ public class GameController
 
 	public int CurrentAct => (CoreCollector.LocalPlayer?.SnoArea?.Act).GetValueOrDefault();
 
-	public Player Me => CoreCollector.LocalPlayer;
+	public Player LocalPlayer => CoreCollector.LocalPlayer;
 
 	public Quest[] Quests => [.. CoreCollector.QuestManager.Quests.Values];
 

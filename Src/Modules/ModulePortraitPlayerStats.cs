@@ -41,7 +41,7 @@ internal class ModulePortraitPlayerStats : Module
 
 	public void Update()
 	{
-		bool flag = Core.Controller.Game.Me.SnoArea != null && Overlay.Instance.ActiveMapMode != MapMode.Map && !CoreCollector.D3Memory.IsUiHidden;
+		bool flag = Core.Controller.Game.LocalPlayer.SnoArea != null && Overlay.Instance.ActiveMapMode != MapMode.Map && !CoreCollector.D3Memory.IsUiHidden;
 		if (Overlay.Instance.ActiveMapMode == MapMode.WaypointMap || Overlay.Instance.ActiveMapMode == MapMode.ActMap) {
 			flag = false;
 		}
@@ -109,7 +109,7 @@ internal class ModulePortraitPlayerStats : Module
 			}
 			string? text = null;
 			if (!item2.HasValidActor) {
-				if (item2.SnoArea != Core.Controller.Game.Me.SnoArea) {
+				if (item2.SnoArea != Core.Controller.Game.LocalPlayer.SnoArea) {
 					if (item2.SnoArea != null) {
 						text = "[" + item2.SnoArea.NameLocalized + "]";
 					}
@@ -125,7 +125,7 @@ internal class ModulePortraitPlayerStats : Module
 			}
 			if (item2.IsDeadSafeCheck) {
 				text = "dead";
-				if (item2.SnoArea != null && item2.SnoArea != Core.Controller.Game.Me.SnoArea) {
+				if (item2.SnoArea != null && item2.SnoArea != Core.Controller.Game.LocalPlayer.SnoArea) {
 					text = text + " [" + item2.SnoArea.NameLocalized + "]";
 				}
 			}
