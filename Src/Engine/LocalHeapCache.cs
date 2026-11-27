@@ -143,6 +143,8 @@ internal class LocalHeapCache
 			}
 			num2++;
 		}
+
+		SortBlockEntries();
 	}
 
 	private int FindOrCreateSmallBlockGroup(int size)
@@ -211,15 +213,34 @@ internal class LocalHeapCache
 
 	public int GetSizeOfBlock(long realmAddress)
 	{
-		// Linear search through pre-allocated array
-		for (int i = 0; i < blockEntriesCount; i++)
+		int low = 0;
+		int high = blockEntriesCount;
+		while (low < high)
 		{
-			if (blockEntries[i].Address == realmAddress)
+			int middle = low + (high - low) / 2;
+			if (blockEntries[middle].Address < realmAddress)
 			{
-				return blockEntries[i].Size;
+				low = middle + 1;
+			}
+			else
+			{
+				high = middle;
 			}
 		}
-		return 0;
+
+		return low < blockEntriesCount && blockEntries[low].Address == realmAddress ? blockEntries[low].Size : 0;
+	}
+
+	// The scans look up hundreds of thousands of addresses, so the entries must be ordered for the binary search in GetSizeOfBlock.
+	private void SortBlockEntries()
+	{
+		for (int i = 1; i < blockEntriesCount; i++)
+		{
+			if (blockEntries[i - 1].Address <= blockEntries[i].Address) continue;
+
+			Array.Sort(blockEntries, 0, blockEntriesCount, Comparer<BlockEntry>.Create((first, second) => first.Address.CompareTo(second.Address)));
+			return;
+		}
 	}
 
 	public int ReadInt32(long address, long offsetGameStateValidation3)
