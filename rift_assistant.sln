@@ -1,9 +1,13 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.5.11723.231
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAssistant", "RiftAssistant.csproj", "{553A7D89-62CF-4573-B8E4-1294FAC7323D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{07D57EEB-2F50-60C4-C011-FE4FA775C9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "plugins\Plugins.csproj", "{E11BC08C-4046-4FD1-9A73-489182EE17CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +31,24 @@ Global
 		{553A7D89-62CF-4573-B8E4-1294FAC7323D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{553A7D89-62CF-4573-B8E4-1294FAC7323D}.Release|x86.ActiveCfg = Release|Any CPU
 		{553A7D89-62CF-4573-B8E4-1294FAC7323D}.Release|x86.Build.0 = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|x64.Build.0 = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Debug|x86.Build.0 = Debug|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|x64.ActiveCfg = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|x64.Build.0 = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E11BC08C-4046-4FD1-9A73-489182EE17CE} = {07D57EEB-2F50-60C4-C011-FE4FA775C9A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A383F1A-D6B5-4812-A65C-CFD6DD709BC4}

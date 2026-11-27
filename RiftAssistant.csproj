@@ -25,7 +25,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="plugins\**" />
-		<Content Include="plugins\**\*.cs" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="plugins\**\*.cs" Exclude="plugins\bin\**;plugins\obj\**" CopyToOutputDirectory="PreserveNewest" />
 		<Content Include="Src\PluginApi\PLUGIN_API.md" Link="plugins\PLUGIN_API.md" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PlatformTarget>x64</PlatformTarget>
+		<AssemblyName>RiftAssistant.PluginsDev</AssemblyName>
+		<RootNamespace>Plugins</RootNamespace>
+		<UseWindowsForms>true</UseWindowsForms>
+		<LangVersion>preview</LangVersion>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\RiftAssistant.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Using Include="RiftAssistant" />
+		<Using Include="RiftAssistant.Collectors" />
+		<Using Include="RiftAssistant.Controllers" />
+		<Using Include="RiftAssistant.Engine" />
+		<Using Include="RiftAssistant.Input" />
+		<Using Include="RiftAssistant.Memory" />
+		<Using Include="RiftAssistant.Model" />
+		<Using Include="RiftAssistant.Modules" />
+		<Using Include="RiftAssistant.PluginHost" />
+		<Using Include="RiftAssistant.Rendering" />
+		<Using Include="RiftAssistant.Sno" />
+		<Using Include="RiftAssistant.Tracking" />
+		<Using Include="Plugins" />
+	</ItemGroup>
+</Project>

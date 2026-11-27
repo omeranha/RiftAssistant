@@ -29,6 +29,10 @@ public class Example : BasePlugin, IInGameTopPainter
 
 `BasePlugin` (in `plugins/BasePlugin`) implements `IPlugin`, exposes `Assistant` (the `Controller`), `Enabled`, `Order` and `ValueToString`.
 
+## Editor support
+`plugins/Plugins.csproj` exists only for the editor. It compiles every plugin file against the application project, so completion, go to definition and error squiggles work for the plugin API. Open `rift_assistant.sln` (Visual Studio, Rider) or the repository folder (VS Code with the C# extension) and edit the files under `plugins/`. Building the project is also a quick way to check that the plugins compile before reloading them.
+The global usings in `Plugins.csproj` mirror `PluginGlobalUsings` in `PluginHandler.cs`. When one list changes, change the other. The editor project can report warnings that the runtime compile does not, and the application ignores its output: plugins are still compiled from the source files at startup.
+
 ## Controller (`Assistant`)
 
 | Member | Purpose |

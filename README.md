@@ -1,6 +1,6 @@
 # RiftAssistant
 
-A Diablo III overlay for Windows. It reads the game's memory, draws on top of the game window with Direct2D, and runs plugins that you can edit and reload while the game is running.
+A Diablo 3 (Diablo III) overlay for Windows. It reads the game's memory, draws on top of the game window with Direct2D, and runs plugins that you can edit and reload while the game is running.
 
 ## Features
 
@@ -84,7 +84,7 @@ Your settings and data live in `%LOCALAPPDATA%\RiftAssistant`, so replacing the 
 | `cache/` | Compiled plugin cache |
 | `logs/` | `info.txt` and `exceptions.txt`, cleared on each start |
 
-The plugin sources are in the `plugins` folder of the repository. A build copies them next to the executable, where they are loaded at startup.
+The plugin sources are in the `plugins` folder of the repository. A build copies them next to the executable, where they are loaded at startup. `plugins/Plugins.csproj` gives the editor completion for the plugin API; see `Src/PluginApi/PLUGIN_API.md`.
 
 Changes to `settings.json` are picked up within a second while the program runs. A `settings.json` with errors is logged and the previous values stay active. A `item_filters.json` that cannot be read is kept as `item_filters.json.invalid` and the filters start empty.
 
