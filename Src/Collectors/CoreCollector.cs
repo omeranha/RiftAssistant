@@ -316,7 +316,7 @@ internal static class CoreCollector
 						}
 					}
 
-					if (DAF.ObjectManagerAddress == 0) {
+					if (DAF.ObjectManagerAddress == 0 || DAF.HasMissingStructures()) {
 						nextScanAttempt = Environment.TickCount64 + ScanRetryMilliseconds;
 					}
 				}

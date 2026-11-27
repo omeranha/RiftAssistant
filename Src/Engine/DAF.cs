@@ -11,7 +11,19 @@ internal class DAF
 
 	private readonly Dictionary<string, Func<bool>> blockValidateFuncs = [];
 
+	private const int MaxIncompleteScans = 20;
+
+	private const long LobbyRetryMilliseconds = 5000;
+
 	private r_PlayerData playerData;
+
+	private int incompleteScans;
+
+	private long nextLobbyScan;
+
+	private bool battleNetClientMissingLogged;
+
+	private bool realmMissingLogged;
 
 	public long ObjectManagerAddress { get; private set; }
 
@@ -64,6 +76,8 @@ internal class DAF
 
 	public void Reset()
 	{
+		incompleteScans = 0;
+		nextLobbyScan = 0;
 		blockValidateFuncs.Clear();
 		ObjectManagerAddress = 0L;
 		AcdManagerAddress = 0L;
@@ -115,7 +129,22 @@ internal class DAF
 				num++;
 			}
 		}
-		return num > 0;
+		return num > 0 || HasMissingStructures();
+	}
+
+	private bool HasInGameStructures => AcdManagerAddress != 0 && PlayerAddress != 0 && PlayerDataManagerAddress != 0 && LevelAreaAddress != 0;
+
+	// A scan made on the login screen or in the lobby cannot find what only exists later, and no block check would fail to ask for another one.
+	public bool HasMissingStructures()
+	{
+		if (ObjectManagerAddress == 0) return false;
+
+		if (GameWindowManager.Read<int>(ObjectManagerAddress + D3Memory.Offset_ObjectManager_InGameFlag) != 0) {
+			return !HasInGameStructures && incompleteScans < MaxIncompleteScans;
+		}
+
+		incompleteScans = 0;
+		return BattleNetClientAddress == 0 && Environment.TickCount64 >= nextLobbyScan;
 	}
 
 	public void Scan()
@@ -129,7 +158,8 @@ internal class DAF
 		if (!ScanObjectManager()) return;
 
 		int num = GameWindowManager.Read<int>(ObjectManagerAddress + D3Memory.Offset_ObjectManager_InGameFlag);
-		if (num != 0) {
+		bool inGame = num != 0;
+		if (inGame) {
 			ScanLevelArea();
 		} else {
 			LevelAreaAddress = 0L;
@@ -143,6 +173,28 @@ internal class DAF
 		ScanGameState();
 		ScanRealm();
 		localHeapCache.ClearSmallBlocksCache();
+		TrackMissingStructures(inGame);
+	}
+
+	private void TrackMissingStructures(bool inGame)
+	{
+		nextLobbyScan = Environment.TickCount64 + LobbyRetryMilliseconds;
+		if (!inGame) {
+			incompleteScans = 0;
+		} else if (HasInGameStructures) {
+			incompleteScans = 0;
+		} else {
+			incompleteScans++;
+			Logger.Info($"[daf] in-game structures missing, scan {incompleteScans} of {MaxIncompleteScans}: acd={AcdManagerAddress != 0} player={PlayerAddress != 0} playerData={PlayerDataManagerAddress != 0} levelArea={LevelAreaAddress != 0}");
+		}
+
+		if (BattleNetClientAddress == 0 && !battleNetClientMissingLogged) {
+			battleNetClientMissingLogged = true;
+			Logger.Info("[daf] Battle.net client not found yet, looking again every 5 seconds");
+		} else if (BattleNetClientAddress != 0 && battleNetClientMissingLogged) {
+			battleNetClientMissingLogged = false;
+			Logger.Info("[daf] Battle.net client found");
+		}
 	}
 
 	private void ScanRealm()
@@ -153,12 +205,16 @@ internal class DAF
 			if (num != RealmAddress) {
 				RealmAddress = num;
 			}
+			realmMissingLogged = false;
 			int blockSize = localHeapCache.GetSizeOfBlock(RealmAddress);
 			blockValidateFuncs["RealmAddress"] = () => IsRealmAddress(RealmAddress) && localHeapCache.VerifyBlock(RealmAddress, blockSize);
 			return;
 		}
 		RealmAddress = 0L;
-		Logger.Info("[ERROR] can't find realm.");
+		if (!realmMissingLogged) {
+			realmMissingLogged = true;
+			Logger.Info("[ERROR] can't find realm.");
+		}
 	}
 
 	private bool IsRealmAddress(long realmAddress)
