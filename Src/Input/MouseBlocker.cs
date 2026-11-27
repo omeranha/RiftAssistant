@@ -18,6 +18,7 @@ internal static partial class MouseBlocker
 	private const int WM_RBUTTONUP = 0x0205;
 	private const int WM_MBUTTONDOWN = 0x0207;
 	private const int WM_MBUTTONUP = 0x0208;
+	private const int WM_MOUSEWHEEL = 0x020A;
 
 	private static readonly ConcurrentDictionary<MouseButtons, bool> blockedButtons = new();
 
@@ -65,6 +66,7 @@ internal static partial class MouseBlocker
 	private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
 	{
 		try {
+			if (nCode >= 0 && (int)wParam == WM_MOUSEWHEEL && ShouldBlockWheel(lParam)) return (IntPtr)1;
 			if (nCode >= 0 && TryGetButton((int)wParam, out var button, out bool isDown) && ShouldBlock(lParam, button, isDown)) {
 				return (IntPtr)1;
 			}
@@ -88,6 +90,16 @@ internal static partial class MouseBlocker
 		};
 
 		return button != MouseButtons.None;
+	}
+
+	private static bool ShouldBlockWheel(IntPtr lParam)
+	{
+		if (Overlay.Instance == null || GameWindowManager.Window.Handle == IntPtr.Zero || Overlay.Instance.State == OverlayDisplayState.Hidden || !GameWindowManager.Window.IsForeground) return false;
+		if (Core.SettingsMenu == null || !Core.SettingsMenu.ShowMenu) return false;
+
+		var data = Marshal.PtrToStructure<MSLLHOOKSTRUCT>(lParam);
+		var window = GameWindowManager.Window;
+		return Core.SettingsMenu.HandleWheel(data.pt.x - window.Offset.X, data.pt.y - window.Offset.Y, unchecked((short)(data.mouseData >> 16)));
 	}
 
 	private static bool ShouldBlock(IntPtr lParam, MouseButtons button, bool isDown)
