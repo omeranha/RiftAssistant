@@ -25,8 +25,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="plugins\**" />
-		<Content Include="plugins\**\*.cs" Exclude="plugins\bin\**;plugins\obj\**" CopyToOutputDirectory="PreserveNewest" />
-		<Content Include="Src\PluginApi\PLUGIN_API.md" Link="plugins\PLUGIN_API.md" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="plugins\**\*.cs" Exclude="plugins\bin\**;plugins\obj\**" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+		<Content Include="Src\PluginApi\PLUGIN_API.md" Link="plugins\PLUGIN_API.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
