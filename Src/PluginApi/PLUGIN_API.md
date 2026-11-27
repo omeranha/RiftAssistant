@@ -1,6 +1,6 @@
 # Plugin API
 
-Plugins are `.cs` files in the `plugins` folder next to the executable. The plugin sources are distributed with releases and are not part of the repository. They are compiled with Roslyn at startup (cached by source hash) and can be reloaded at runtime. A compile error is logged to `logs/exceptions.txt` in `%LOCALAPPDATA%\RiftAssistant`. Settings files such as `settings/settings.json` live in that folder too.
+Plugins are `.cs` files in the `plugins` folder next to the executable. The plugin sources are in the `plugins` folder of the repository and are copied next to the executable on build. They are compiled with Roslyn at startup (cached by source hash) and can be reloaded at runtime. A compile error is logged to `logs/exceptions.txt` in `%LOCALAPPDATA%\RiftAssistant`. Settings files such as `settings/settings.json` live in that folder too.
 
 Differences from the original TurboHUD plugin API are listed at the end.
 
@@ -9,9 +9,9 @@ Differences from the original TurboHUD plugin API are listed at the end.
 ```csharp
 namespace Plugins.Default;
 
-public class ExamplePlugin : BasePlugin, IInGameTopPainter
+public class Example : BasePlugin, IInGameTopPainter
 {
-	public ExamplePlugin()
+	public Example()
 	{
 		Enabled = true;
 	}
@@ -33,7 +33,7 @@ public class ExamplePlugin : BasePlugin, IInGameTopPainter
 
 | Member | Purpose |
 |---|---|
-| `Game` | Game state: `Me`, `Items`, `Actors`, `Monsters`, areas, quests |
+| `Game` | Game state: `LocalPlayer`, `Items`, `Actors`, `Monsters`, areas, quests |
 | `Render` | UI elements, fonts, brushes, screenshots (`ScreenshotToFile`) |
 | `Texture`, `Sno`, `SceneReveal`, `Tracker`, `Inventory` | As in the original |
 | `Window` | Game window offset, size and foreground state |
@@ -48,7 +48,7 @@ public class ExamplePlugin : BasePlugin, IInGameTopPainter
 - `RenderPerfCounter`: `LastValue` is milliseconds of render time per second, `LastCount` is frames per second. Render time is measured up to `Present`, so vsync wait is excluded.
 - `MemoryReadPerfCounter`: `LastValue` is game memory read calls per second.
 - `MonsterHitpointDecreasePerfCounter`: `LastValue` is monster hitpoints removed per second.
-- `GetPluginCounters(plugin)`: time spent in each handler of a plugin, keyed by handler interface name. Used by `DebugPlugin`.
+- `GetPluginCounters(plugin)`: time spent in each handler of a plugin, keyed by handler interface name. Used by the `Debug` plugin.
 
 ### `Assistant.Sound`
 
@@ -71,7 +71,7 @@ Original handlers keep their names. Differences:
 
 ## Plugin settings
 
-A public `bool`, `int`, `string` or enum property with a getter and a setter becomes a setting when it has `[PluginSetting("Label")]`. After `Load()` the saved value replaces the property's value, and the plugin gets an entry on the **Plugin settings** page of the settings menu, titled with the plugin name (`InventoryAndStashPlugin` becomes `Inventory And Stash`), where the value can be changed. Changes apply to the running plugin at once and are saved to `settings/plugin_settings.json` half a second later, keyed by the plugin class name and the property name. For `int` properties `Min`, `Max` and `Step` (default 0, 100 and 1) set the stepper range, and a saved value outside it is clamped. `Group` puts a heading above the property and the ones after it that share the group. An enum marked `[Flags]` is shown as one toggle per member (the member with value 0 is left out) and saved as text such as `Skill1, Skill2`, and a saved value with undefined bits is ignored.
+A public `bool`, `int`, `string` or enum property with a getter and a setter becomes a setting when it has `[PluginSetting("Label")]`. After `Load()` the saved value replaces the property's value, and the plugin gets an entry on the **Plugin settings** page of the settings menu, titled with the plugin name (`InventoryAndStash` becomes `Inventory And Stash`), where the value can be changed. Changes apply to the running plugin at once and are saved to `settings/plugin_settings.json` half a second later, keyed by the plugin class name and the property name. For `int` properties `Min`, `Max` and `Step` (default 0, 100 and 1) set the stepper range, and a saved value outside it is clamped. `Group` puts a heading above the property and the ones after it that share the group. An enum marked `[Flags]` is shown as one toggle per member (the member with value 0 is left out) and saved as text such as `Skill1, Skill2`, and a saved value with undefined bits is ignored.
 
 ```csharp
 [PluginSetting("Mark items to keep")]
@@ -130,7 +130,7 @@ Every item is re-evaluated when a filter changes and when the plugins are reload
 
 ## Plugin set status
 
-All plugin sources from TurboHUD 1.4.3.0 (`Default` and `Enhanced`) compile against this API, apart from two that were rewritten for the new input and logging model: `BountyTablePlugin` (Vk-based key handling) and `ParagonCapturePlugin` (`Logger` and `ScreenshotToFile`).
+All plugin sources from TurboHUD 1.4.3.0 (`Default` and `Enhanced`) compile against this API, apart from two that were rewritten for the new input and logging model: `BountyTable` (Vk-based key handling) and `ParagonCapture` (`Logger` and `ScreenshotToFile`).
 
 ## Public API surface
 
