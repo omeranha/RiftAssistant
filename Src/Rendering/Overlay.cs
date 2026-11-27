@@ -43,6 +43,8 @@ internal class Overlay
 
 	private ID2D1Layer? clipLayer;
 
+	private int lastPaintGate = -1;
+
 	public static Overlay Instance { get; private set; }
 
 	internal readonly PerSecCounter RenderCounter = new();
@@ -504,6 +506,7 @@ internal class Overlay
 				bool boolean_ = CoreCollector.D3Memory.GameState_Value_IsChallengeRiftGame;
 				bool num = CoreCollector.IsGameReady && CoreCollector.LocalPlayer.FloorCoordinate.IsValid;
 				bool flag6 = CoreCollector.UiElements.GamemenuBkgrnd.Visible || CoreCollector.UiElements.GameOptionsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.BattleNetAchievementsMainLayoutRootOverlayContainer.Visible || CoreCollector.UiElements.GuildFinderMainLayoutRootOverlayContainer.Visible;
+				LogPaintGate(CoreCollector.IsGameReady, num, flag4, flag5, flag6);
 				if (num && !flag4 && !flag5 && !flag6) {
 					if (!CoreCollector.UiElements.InventoryMainUiElement.Visible && !boolean_) {
 						BeginClip();
@@ -554,6 +557,16 @@ internal class Overlay
 			RecoverRenderTarget();
 		}
 		return true;
+	}
+
+	private void LogPaintGate(bool gameReady, bool playerPositionValid, bool cutscene, bool nonNormalArea, bool gameMenuOpen)
+	{
+		int state = (gameReady ? 1 : 0) | (playerPositionValid ? 2 : 0) | (cutscene ? 4 : 0) | (nonNormalArea ? 8 : 0) | (gameMenuOpen ? 16 : 0);
+		if (state == lastPaintGate) return;
+
+		lastPaintGate = state;
+		bool painting = gameReady && playerPositionValid && !cutscene && !nonNormalArea && !gameMenuOpen;
+		Logger.Info($"[overlay] plugin painting {(painting ? "on" : "off")}: gameReady={gameReady} playerPositionValid={playerPositionValid} cutscene={cutscene} nonNormalArea={nonNormalArea} gameMenuOpen={gameMenuOpen}");
 	}
 
 	private void RecoverRenderTarget()
