@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-using SharpDX.Direct2D1;
+using AntialiasMode = Vortice.Direct2D1.AntialiasMode;
 
 namespace RiftAssistant.Controllers;
 
@@ -167,7 +167,7 @@ public partial class RenderController
 
 	public PathGeometry CreateGeometry()
 	{
-		return new PathGeometry(Overlay.Instance.direct2DFactory);
+		return new PathGeometry();
 	}
 
 	public void GetMinimapCoordinates(float x, float y, out float mapX, out float mapY)

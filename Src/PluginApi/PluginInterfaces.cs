@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
-using SharpDX;
-using SharpDX.Direct2D1;
-using SharpDX.DirectWrite;
+using RectangleF = System.Drawing.RectangleF;
+using RiftAssistant.Rendering;
 
 namespace Plugins;
 
@@ -16,7 +15,7 @@ public interface IBrush : ITransparent
 {
 	float StrokeWidth { get; set; }
 
-	StrokeStyle StrokeStyle { get; }
+	DashStyle DashStyle { get; }
 
 	float ScaledStrokeWidth { get; }
 
@@ -32,8 +31,6 @@ public interface IBrush : ITransparent
 
 	void DrawRectangle(System.Drawing.RectangleF rectangle);
 
-	void DrawRectangle(SharpDX.RectangleF rectangle);
-
 	void DrawRectangle(float x, float y, float w, float h);
 
 	void DrawRectangleGridFit(float x, float y, float w, float h);
@@ -44,7 +41,7 @@ public interface IBrush : ITransparent
 
 	void DrawWorldPlus(float radius, float x, float y, float z);
 
-	void DrawGeometry(Geometry geometry);
+	void DrawGeometry(PathGeometry geometry);
 }
 
 public interface IChatLineChangedHandler : IPlugin

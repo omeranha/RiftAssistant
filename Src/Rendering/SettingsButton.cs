@@ -1,7 +1,8 @@
 using System;
 using System.Drawing.Drawing2D;
-using SharpDX;
-using SharpDX.Direct2D1;
+using RectangleF = System.Drawing.RectangleF;
+using Vortice;
+using Vortice.Direct2D1;
 
 namespace RiftAssistant.Rendering;
 
@@ -9,8 +10,8 @@ internal sealed class SettingsButton
 {
 	private const int IconPadding = 2;
 
-	private SharpDX.Direct2D1.Bitmap? iconBitmap;
-	private RenderTarget? iconRenderTarget;
+	private ID2D1Bitmap? iconBitmap;
+	private ID2D1RenderTarget? iconRenderTarget;
 	private int iconSize;
 	private bool iconFailed;
 
@@ -32,7 +33,7 @@ internal sealed class SettingsButton
 		if (icon != null) {
 			float left = bounds.Left + (bounds.Width - size) / 2f;
 			float top = bounds.Top + IconPadding;
-			Overlay.Instance.renderTarget?.DrawBitmap(icon, new RectangleF(left, top, size, size), 1f, BitmapInterpolationMode.Linear);
+			Overlay.Instance.renderTarget?.DrawBitmap(icon, new RawRectF(left, top, left + size, top + size), 1f, BitmapInterpolationMode.Linear, null);
 			return;
 		}
 
@@ -57,7 +58,7 @@ internal sealed class SettingsButton
 		return new RectangleF(size.Width - height - margin, size.Height - height - margin, height, height);
 	}
 
-	private SharpDX.Direct2D1.Bitmap? GetIcon(int size)
+	private ID2D1Bitmap? GetIcon(int size)
 	{
 		var renderTarget = Overlay.Instance.renderTarget;
 		if (iconFailed || renderTarget == null || size < 1) return null;

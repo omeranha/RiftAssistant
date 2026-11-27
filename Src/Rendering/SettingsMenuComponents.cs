@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SharpDX;
+using RectangleF = System.Drawing.RectangleF;
 
 namespace RiftAssistant.Rendering;
 

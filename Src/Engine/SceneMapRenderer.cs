@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using SharpDX;
-using SharpDX.Direct2D1;
+using System.Numerics;
+using Vortice.Direct2D1;
 
 namespace RiftAssistant.Engine;
 
@@ -32,7 +32,7 @@ internal class SceneMapRenderer
 
 	private int maxBitmapSize = -1;
 
-	private SharpDX.Direct2D1.Bitmap[,]? mapTextureChunks;
+	private ID2D1Bitmap[,]? mapTextureChunks;
 
 	private uint lastWorldId = uint.MaxValue;
 
@@ -221,7 +221,7 @@ internal class SceneMapRenderer
 			lastRenderMaxY = maxY;
 
 			if (maxBitmapSize == -1) {
-				maxBitmapSize = Overlay.Instance.renderTarget.MaximumBitmapSize;
+				maxBitmapSize = (int)Overlay.Instance.renderTarget.MaximumBitmapSize;
 				int fallbackSize = 1024;
 				if (maxBitmapSize < 1024) {
 					Logger.LogException("Direct2D warning: MaximumBitmapSize=" + maxBitmapSize.ToString("D", CultureInfo.InvariantCulture) + ", automatically increasing the texture size to " + fallbackSize.ToString("D", CultureInfo.InvariantCulture));
@@ -233,7 +233,7 @@ internal class SceneMapRenderer
 			int chunksY = Convert.ToInt32(Math.Ceiling((double)giantMapBitmap.Height / (double)maxBitmapSize));
 
 			try {
-				mapTextureChunks = new SharpDX.Direct2D1.Bitmap[chunksX, chunksY];
+				mapTextureChunks = new ID2D1Bitmap[chunksX, chunksY];
 				if (chunksX <= 1 && chunksY <= 1) {
 					mapTextureChunks[0, 0] = Overlay.Instance.ToDirect2DBitmap(giantMapBitmap);
 				} else {
@@ -327,19 +327,19 @@ internal class SceneMapRenderer
 
 		mapOpacity = mapOpacity * ((overlay.ActiveMapMode == MapMode.Map) ? Core.Controller.SceneReveal.MapOpacity : Core.Controller.SceneReveal.MinimapOpacity);
 		Matrix3x2 priorTransform = renderTarget.Transform;
-		Matrix3x2 isoRotationInfo = Matrix3x2.Rotation(-(float)Math.PI / 4f);
-		Matrix3x2 panTranslation = Matrix3x2.Translation(overlay.mapCenterX, overlay.mapCenterY);
+		Matrix3x2 isoRotationInfo = Matrix3x2.CreateRotation(-(float)Math.PI / 4f);
+		Matrix3x2 panTranslation = Matrix3x2.CreateTranslation(overlay.mapCenterX, overlay.mapCenterY);
 
 		for (int y = 0; y < mapTextureChunks.GetLength(1); y++) {
 			for (int x = 0; x < mapTextureChunks.GetLength(0); x++) {
 				float currentZoom = GetScaledZoomFactor();
 				if (scaleFactor == 1f) {
-					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
+					Matrix3x2 blockTranslation = Matrix3x2.CreateTranslation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
 					renderTarget.Transform = blockTranslation * isoRotationInfo * panTranslation;
 					renderTarget.DrawBitmap(mapTextureChunks[x, y], mapOpacity, BitmapInterpolationMode.Linear);
 				} else {
-					Matrix3x2 blockTranslation = Matrix3x2.Translation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
-					Matrix3x2 resolutionScale = Matrix3x2.Scaling(1f / scaleFactor);
+					Matrix3x2 blockTranslation = Matrix3x2.CreateTranslation((playerX - maxX + overlay.MinimapOffsetX) * currentZoom + (float)(x * maxBitmapSize), (0f - (playerY - minY + overlay.MinimapOffsetY)) * currentZoom + (float)(y * maxBitmapSize));
+					Matrix3x2 resolutionScale = Matrix3x2.CreateScale(1f / scaleFactor);
 					renderTarget.Transform = blockTranslation * isoRotationInfo * resolutionScale * panTranslation;
 					renderTarget.DrawBitmap(mapTextureChunks[x, y], mapOpacity, BitmapInterpolationMode.Linear);
 				}

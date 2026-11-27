@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using SharpDX;
+using RectangleF = System.Drawing.RectangleF;
 
 namespace RiftAssistant.Rendering;
 

@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using SharpDX;
-using SharpDX.Direct2D1;
-using SharpDX.Direct3D;
-using SharpDX.Direct3D11;
-using SharpDX.DirectWrite;
-using SharpDX.DXGI;
-using SharpDX.Mathematics.Interop;
+using System.Numerics;
+using SharpGen.Runtime;
+using Vortice;
+using Vortice.Direct2D1;
+using Vortice.Direct3D;
+using Vortice.Direct3D11;
+using Vortice.DirectWrite;
+using Vortice.DXGI;
+using Vortice.Mathematics;
 
 using MapMode = RiftAssistant.Model.MapMode;
 
@@ -23,21 +25,23 @@ internal class Overlay
 
 	private float statusY;
 
+	private static readonly Color4 Transparent = new(0f, 0f, 0f, 0f);
+
 	private Matrix3x2 matrix3x2_0;
 
-	public SharpDX.Direct3D11.Device device;
+	public ID3D11Device device;
 
-	public SwapChain swapChain;
+	public IDXGISwapChain swapChain;
 
-	public Surface? surface;
+	public IDXGISurface? surface;
 
-	internal RenderTarget? renderTarget;
+	internal ID2D1RenderTarget? renderTarget;
 
 	public SwapChainDescription swapChainDescription;
 
 	public RenderTargetProperties renderTargetProperties;
 
-	private Layer? clipLayer;
+	private ID2D1Layer? clipLayer;
 
 	public static Overlay Instance { get; private set; }
 
@@ -45,9 +49,9 @@ internal class Overlay
 
 	public readonly Form Frm;
 
-	public readonly SharpDX.Direct2D1.Factory direct2DFactory;
+	public readonly ID2D1Factory direct2DFactory;
 
-	public readonly SharpDX.DirectWrite.Factory directWriteFactory;
+	public readonly IDWriteFactory directWriteFactory;
 
 	public OverlayDisplayState State = OverlayDisplayState.Normal;
 
@@ -154,9 +158,9 @@ internal class Overlay
 
 	public void DrawRotatedMap()
 	{
-		RawMatrix3x2 transform = renderTarget.Transform;
-		Matrix3x2 matrix3x = Matrix3x2.Rotation(-(float)Math.PI / 4f);
-		Matrix3x2 matrix3x2 = Matrix3x2.Translation(mapCenterX, mapCenterY);
+		Matrix3x2 transform = renderTarget.Transform;
+		Matrix3x2 matrix3x = Matrix3x2.CreateRotation(-(float)Math.PI / 4f);
+		Matrix3x2 matrix3x2 = Matrix3x2.CreateTranslation(mapCenterX, mapCenterY);
 		matrix3x2_0 = transform * matrix3x * matrix3x2;
 		renderTarget.Transform = matrix3x2_0;
 		try {
@@ -172,18 +176,18 @@ internal class Overlay
 		}
 		if (ActiveMapMode == MapMode.Minimap) {
 			if (Core.Controller.SceneReveal.MinimapClip) {
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(0f, 0f, mapCenterX - mapSize / 2f, GameWindowManager.Window.Size.Height), AntialiasMode.PerPrimitive);
-				renderTarget.Clear(SharpDX.Color.Transparent);
+				PushClip(0f, 0f, mapCenterX - mapSize / 2f, GameWindowManager.Window.Size.Height);
+				renderTarget.Clear(Transparent);
 				renderTarget.PopAxisAlignedClip();
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX - mapSize / 2f, 0f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), mapCenterY - mapSize / 2f), AntialiasMode.PerPrimitive);
-				renderTarget.Clear(SharpDX.Color.Transparent);
+				PushClip(mapCenterX - mapSize / 2f, 0f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), mapCenterY - mapSize / 2f);
+				renderTarget.Clear(Transparent);
 				renderTarget.PopAxisAlignedClip();
-				renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX - mapSize / 2f, mapCenterY + mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), (float)GameWindowManager.Window.Size.Height - (mapCenterY + mapSize / 2f)), AntialiasMode.PerPrimitive);
-				renderTarget.Clear(SharpDX.Color.Transparent);
+				PushClip(mapCenterX - mapSize / 2f, mapCenterY + mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX - mapSize / 2f), (float)GameWindowManager.Window.Size.Height - (mapCenterY + mapSize / 2f));
+				renderTarget.Clear(Transparent);
 				renderTarget.PopAxisAlignedClip();
 			}
-			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(mapCenterX + mapSize / 2f, mapCenterY - mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX + mapSize / 2f), mapSize), AntialiasMode.PerPrimitive);
-			renderTarget.Clear(SharpDX.Color.Transparent);
+			PushClip(mapCenterX + mapSize / 2f, mapCenterY - mapSize / 2f, (float)GameWindowManager.Window.Size.Width - (mapCenterX + mapSize / 2f), mapSize);
+			renderTarget.Clear(Transparent);
 			renderTarget.PopAxisAlignedClip();
 		}
 	}
@@ -202,11 +206,10 @@ internal class Overlay
 
 	private void CreateRenderTarget()
 	{
-		surface = Surface.FromSwapChain(swapChain, 0);
-		renderTarget = new RenderTarget(direct2DFactory, surface, renderTargetProperties) {
-			AntialiasMode = AntialiasMode.PerPrimitive,
-			TextAntialiasMode = SharpDX.Direct2D1.TextAntialiasMode.Grayscale
-		};
+		surface = swapChain.GetBuffer<IDXGISurface>(0);
+		renderTarget = direct2DFactory.CreateDxgiSurfaceRenderTarget(surface, renderTargetProperties);
+		renderTarget.AntialiasMode = AntialiasMode.PerPrimitive;
+		renderTarget.TextAntialiasMode = Vortice.Direct2D1.TextAntialiasMode.Grayscale;
 	}
 
 	private void form_0_SizeChanged(object? sender, EventArgs e)
@@ -230,14 +233,20 @@ internal class Overlay
 		}
 	}
 
+	private void PushClip(float x, float y, float width, float height)
+	{
+		renderTarget.PushAxisAlignedClip(new RawRectF(x, y, x + width, y + height), AntialiasMode.PerPrimitive);
+	}
+
 	public void BeginClip(float opacity = 1f)
 	{
-		Layer layer = new Layer(renderTarget, new Size2F(GameWindowManager.Window.Size.Width, GameWindowManager.Window.Size.Height));
-		LayerParameters layerParameters = new LayerParameters {
-			ContentBounds = new SharpDX.RectangleF(0f, 0f, GameWindowManager.Window.Size.Width, GameWindowManager.Window.Size.Height),
+		var size = GameWindowManager.Window.Size;
+		var layer = renderTarget.CreateLayer(new Size(size.Width, size.Height));
+		var layerParameters = new LayerParameters {
+			ContentBounds = new RawRectF(0f, 0f, size.Width, size.Height),
 			Opacity = opacity
 		};
-		renderTarget.PushLayer(ref layerParameters, layer);
+		renderTarget.PushLayer(layerParameters, layer);
 		clipLayer = layer;
 	}
 
@@ -274,23 +283,20 @@ internal class Overlay
 			if (uiElement == CoreCollector.UiElements.InventoryMainUiElement || uiElement == CoreCollector.UiElements.StashMainUiElement || uiElement == CoreCollector.UiElements.FollowerMainUiElement || uiElement == CoreCollector.UiElements.ShopDialogMainPagePanel || uiElement == CoreCollector.UiElements.VendorDialogMainPagePanel) {
 				height = CoreCollector.UiElements.InGameBottomHudUiElement.rectangle.Top;
 			}
-			renderTarget.PushAxisAlignedClip(new SharpDX.RectangleF(uiElement.rectangle.Left, uiElement.rectangle.Top, uiElement.rectangle.Width, height), AntialiasMode.PerPrimitive);
-			renderTarget.Clear(SharpDX.Color.Transparent);
+			PushClip(uiElement.rectangle.Left, uiElement.rectangle.Top, uiElement.rectangle.Width, height);
+			renderTarget.Clear(Transparent);
 			renderTarget.PopAxisAlignedClip();
 		}
 	}
 
-	public SharpDX.Direct2D1.Bitmap ToDirect2DBitmap(System.Drawing.Bitmap? bitmap, bool bool_0 = false)
+	public ID2D1Bitmap ToDirect2DBitmap(System.Drawing.Bitmap? bitmap, bool bool_0 = false)
 	{
 		if (bool_0) {
 			bitmap.MakeTransparent(System.Drawing.Color.Black);
 		}
 		BitmapData bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-		using DataStream dataStream = new DataStream(bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, canRead: true, canWrite: false);
-		BitmapProperties bitmapProperties = new BitmapProperties {
-			PixelFormat = new SharpDX.Direct2D1.PixelFormat(Format.B8G8R8A8_UNorm, SharpDX.Direct2D1.AlphaMode.Premultiplied)
-		};
-		SharpDX.Direct2D1.Bitmap result = new SharpDX.Direct2D1.Bitmap(renderTarget, new Size2(bitmap.Width, bitmap.Height), dataStream, bitmapData.Stride, bitmapProperties);
+		var bitmapProperties = new BitmapProperties(new Vortice.DCommon.PixelFormat(Format.B8G8R8A8_UNorm, Vortice.DCommon.AlphaMode.Premultiplied));
+		var result = renderTarget.CreateBitmap(new SizeI(bitmap.Width, bitmap.Height), bitmapData.Scan0, (uint)bitmapData.Stride, bitmapProperties);
 		bitmap.UnlockBits(bitmapData);
 		return result;
 	}
@@ -308,33 +314,33 @@ internal class Overlay
 		Frm = new FormOverlay();
 		Frm.SetBounds(0, 0, 0, 0);
 		Frm.SizeChanged += form_0_SizeChanged;
-		direct2DFactory = new SharpDX.Direct2D1.Factory();
-		directWriteFactory = new SharpDX.DirectWrite.Factory();
+		direct2DFactory = D2D1.D2D1CreateFactory<ID2D1Factory>();
+		directWriteFactory = DWrite.DWriteCreateFactory<IDWriteFactory>();
 		swapChainDescription = new SwapChainDescription {
 			BufferCount = 2,
-			ModeDescription = new ModeDescription(0, 0, new Rational(60, 1), Format.R8G8B8A8_UNorm),
-			IsWindowed = true,
-			OutputHandle = Frm.Handle,
+			BufferDescription = new ModeDescription { Width = 0, Height = 0, RefreshRate = new Rational(60, 1), Format = Format.R8G8B8A8_UNorm },
+			Windowed = true,
+			OutputWindow = Frm.Handle,
 			SampleDescription = new SampleDescription(1, 0),
 			SwapEffect = SwapEffect.Discard,
-			Usage = Usage.RenderTargetOutput,
+			BufferUsage = Usage.RenderTargetOutput,
 			Flags = SwapChainFlags.None
 		};
-		renderTargetProperties = new RenderTargetProperties {
-			DpiX = 96f,
-			DpiY = 96f,
-			MinLevel = SharpDX.Direct2D1.FeatureLevel.Level_10,
-			PixelFormat = new SharpDX.Direct2D1.PixelFormat(Format.R8G8B8A8_UNorm, SharpDX.Direct2D1.AlphaMode.Premultiplied),
-			Type = RenderTargetType.Hardware,
-			Usage = RenderTargetUsage.None
-		};
-		SharpDX.Direct3D.FeatureLevel featureLevel = SharpDX.Direct3D.FeatureLevel.Level_9_1;
+		renderTargetProperties = new RenderTargetProperties(
+			RenderTargetType.Hardware,
+			new Vortice.DCommon.PixelFormat(Format.R8G8B8A8_UNorm, Vortice.DCommon.AlphaMode.Premultiplied),
+			96f,
+			96f,
+			RenderTargetUsage.None,
+			Vortice.Direct2D1.FeatureLevel.Level_10);
+		var featureLevel = Vortice.Direct3D.FeatureLevel.Level_9_1;
 		try {
-			featureLevel = SharpDX.Direct3D11.Device.GetSupportedFeatureLevel();
+			featureLevel = D3D11.GetSupportedFeatureLevel();
 		} catch (Exception ex) {
 			Logger.Info($"Error occurred while querying supported feature level: {ex.Message}");
 		}
-		SharpDX.Direct3D11.Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[1] { featureLevel }, swapChainDescription, out device, out swapChain);
+		D3D11.D3D11CreateDeviceAndSwapChain(null, DriverType.Hardware, DeviceCreationFlags.BgraSupport, [featureLevel], swapChainDescription, out swapChain, out device, out _, out var immediateContext).CheckError();
+		immediateContext.Dispose();
 		CreateRenderTarget();
 		method_12();
 	}
@@ -489,7 +495,7 @@ internal class Overlay
 			mapHalfSize = mapSize / 2f;
 			RenderCounter.StartMeasure();
 			renderTarget.BeginDraw();
-			renderTarget.Clear(SharpDX.Color.Transparent);
+			renderTarget.Clear(Transparent);
 			cursorHintModule.SetHint(null, null);
 			BeforeRender?.Invoke(this, EventArgs.Empty);
 			if (Core.Controller.Render.IsRenderEnabled) {
@@ -533,14 +539,14 @@ internal class Overlay
 				}
 				ResetStatusDrawPosition();
 			}
-			renderTarget.EndDraw();
+			renderTarget.EndDraw().CheckError();
 			RenderCounter.EndMeasure();
-			swapChain.Present(1, PresentFlags.None);
+			swapChain.Present(1, PresentFlags.None).CheckError();
 			if (fontCleanupTimer.ElapsedMilliseconds >= 1000) {
 				fontCleanupTimer.Restart();
 				CleanupFontCache();
 			}
-		} catch (SharpDXException exception_) {
+		} catch (SharpGenException exception_) {
 			Logger.LogException(exception_.ToString());
 			form_0_SizeChanged(null, EventArgs.Empty);
 		} catch (Exception exception) {
@@ -555,14 +561,14 @@ internal class Overlay
 		if (clipLayer != null) {
 			try {
 				EndClip();
-			} catch (SharpDXException) {
+			} catch (SharpGenException) {
 				clipLayer = null;
 			}
 		}
 
 		try {
 			renderTarget.EndDraw();
-		} catch (SharpDXException) {
+		} catch (SharpGenException) {
 		}
 	}
 

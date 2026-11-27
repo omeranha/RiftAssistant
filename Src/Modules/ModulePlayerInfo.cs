@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using SharpDX;
-using SharpDX.Direct2D1;
+using System.Numerics;
+using RectangleF = System.Drawing.RectangleF;
 
 namespace RiftAssistant.Modules;
 
@@ -12,7 +12,7 @@ internal class ModulePlayerInfo : Module
 {
 	private readonly Dictionary<string, Vector2[]> pointCache = [];
 
-	private readonly Dictionary<string, Geometry> geometryCache = [];
+	private readonly Dictionary<string, PathGeometry> geometryCache = [];
 
 	private readonly RenderBrush healthFill = new(255, 255, 50, 50, 5);
 
@@ -60,7 +60,7 @@ internal class ModulePlayerInfo : Module
 	{
 		Overlay.Instance.DisposeRenders(barBackground, arcaneFill, disciplineFill, hatredFill, furyFill, manaFill, spiritFill, healthFill, cooldownFill);
 		pointCache.Clear();
-		foreach (Geometry item in geometryCache.Values) {
+		foreach (PathGeometry item in geometryCache.Values) {
 			item.Dispose();
 		}
 		geometryCache.Clear();
@@ -140,7 +140,7 @@ internal class ModulePlayerInfo : Module
 		}
 	}
 
-	private Geometry GetArcGeometry(Player player, float float_1, int int_2, float float_2, float float_3, bool bool_9, int int_3, bool bool_10)
+	private PathGeometry GetArcGeometry(Player player, float float_1, int int_2, float float_2, float float_3, bool bool_9, int int_3, bool bool_10)
 	{
 		string gparam_ = float_1.ToString(CultureInfo.InvariantCulture) + "_" + int_2.ToString(CultureInfo.InvariantCulture) + "_" + float_2.ToString(CultureInfo.InvariantCulture) + "_" + float_3.ToString(CultureInfo.InvariantCulture) + "_" + bool_9.ToString(CultureInfo.InvariantCulture) + "_" + int_3.ToString(CultureInfo.InvariantCulture) + "\t" + bool_10.ToString(CultureInfo.InvariantCulture);
 		geometryCache.TryGetValue(gparam_, out var geometry);
@@ -159,7 +159,7 @@ internal class ModulePlayerInfo : Module
 			}
 			pointCache[gparam_2] = array;
 		}
-		PathGeometry pathGeometry = new PathGeometry(Overlay.Instance.direct2DFactory);
+		PathGeometry pathGeometry = new PathGeometry();
 		using (GeometrySink geometrySink = pathGeometry.Open()) {
 			if (bool_10) {
 				for (int j = int_3; j <= int_2; j++) {
@@ -197,11 +197,11 @@ internal class ModulePlayerInfo : Module
 		try {
 			int num = ((resourceCurPri > 0f) ? Convert.ToInt32(Math.Max(0.0, Math.Min(2147483647.0, Math.Min(int_2, Math.Floor(resourceCurPri / resourceMaxPri * (float)int_2))))) : 0);
 			if (num < int_2 - 1) {
-				Geometry geometry = GetArcGeometry(player, float_1, int_2, float_2, float_3, bool_9, num, bool_10: true);
+				PathGeometry geometry = GetArcGeometry(player, float_1, int_2, float_2, float_3, bool_9, num, bool_10: true);
 				barBackground2.DrawGeometry(geometry);
 			}
 			if (num > 0) {
-				Geometry geometry2 = GetArcGeometry(player, float_1, int_2, float_2, float_3, bool_9, num, bool_10: false);
+				PathGeometry geometry2 = GetArcGeometry(player, float_1, int_2, float_2, float_3, bool_9, num, bool_10: false);
 				renderBrush.DrawGeometry(geometry2);
 			}
 		} catch (Exception e) {

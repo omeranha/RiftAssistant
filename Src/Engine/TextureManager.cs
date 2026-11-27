@@ -11,13 +11,13 @@ namespace RiftAssistant.Engine;
 
 internal static class TextureManager
 {
-	private static readonly Dictionary<long, SharpDX.Direct2D1.Bitmap> atlasPositionToBitmap = [];
+	private static readonly Dictionary<long, Vortice.Direct2D1.ID2D1Bitmap> atlasPositionToBitmap = [];
 
 	private static readonly Dictionary<uint, Texture> textureIdToTexture = [];
 
 	private static readonly Dictionary<uint, string> sceneSnoToMinimapPath = [];
 
-	private static readonly Dictionary<uint, SharpDX.Direct2D1.Bitmap> sceneSnoToMinimapBitmap = [];
+	private static readonly Dictionary<uint, Vortice.Direct2D1.ID2D1Bitmap> sceneSnoToMinimapBitmap = [];
 
 	private static readonly Dictionary<uint, long> sceneSnoToLastAccessTicks = [];
 
@@ -75,13 +75,13 @@ internal static class TextureManager
 		switch (textureId) {
 			case 2078949389u: {
 					Bitmap? buffFrame = AppResources.BuffFrame;
-					Texture texture = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
+					Texture texture = new(new Lazy<Vortice.Direct2D1.ID2D1Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(buffFrame, bool_0: true)), 0, 0, buffFrame.Width, buffFrame.Height);
 					textureIdToTexture[textureId] = texture;
 					return texture;
 				}
 			case 948845718u: {
 					Bitmap? debuffFrame = AppResources.DebuffFrame;
-					Texture texture2 = new(new Lazy<SharpDX.Direct2D1.Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
+					Texture texture2 = new(new Lazy<Vortice.Direct2D1.ID2D1Bitmap>(() => Overlay.Instance.ToDirect2DBitmap(debuffFrame, bool_0: true)), 0, 0, debuffFrame.Width, debuffFrame.Height);
 					textureIdToTexture[textureId] = texture2;
 					return texture2;
 				}
@@ -91,8 +91,8 @@ internal static class TextureManager
 						textureIdToTexture[textureId] = null;
 						return null;
 					}
-					atlasTex = new Texture(new Lazy<SharpDX.Direct2D1.Bitmap>(delegate {
-						if (!atlasPositionToBitmap.TryGetValue(textureIndexEntry.Value.AtlasPosition, out SharpDX.Direct2D1.Bitmap bitmap) || bitmap == null) {
+					atlasTex = new Texture(new Lazy<Vortice.Direct2D1.ID2D1Bitmap>(delegate {
+						if (!atlasPositionToBitmap.TryGetValue(textureIndexEntry.Value.AtlasPosition, out Vortice.Direct2D1.ID2D1Bitmap bitmap) || bitmap == null) {
 							Bitmap bitmap2 = (Bitmap)Image.FromStream(new MemoryStream(ResourceData.ReadBlob(textureIndexEntry.Value.AtlasPosition)));
 							bitmap = Overlay.Instance.ToDirect2DBitmap(bitmap2);
 							atlasPositionToBitmap[textureIndexEntry.Value.AtlasPosition] = bitmap;
@@ -117,7 +117,7 @@ internal static class TextureManager
 		return GetTextureById(textureIndexEntryBySnoIdWithAnimState.Value.Id);
 	}
 
-	public static SharpDX.Direct2D1.Bitmap? GetSceneMinimapBitmap(SnoScene scene)
+	public static Vortice.Direct2D1.ID2D1Bitmap? GetSceneMinimapBitmap(SnoScene scene)
 	{
 		string text = sceneSnoToMinimapPath[scene.Sno];
 		if (string.IsNullOrEmpty(text)) {
@@ -132,7 +132,7 @@ internal static class TextureManager
 			sceneSnoToMinimapPath[scene.Sno] = text;
 			Bitmap bitmap = new(text);
 			bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-			SharpDX.Direct2D1.Bitmap gparam_ = Overlay.Instance.ToDirect2DBitmap(bitmap);
+			Vortice.Direct2D1.ID2D1Bitmap gparam_ = Overlay.Instance.ToDirect2DBitmap(bitmap);
 			sceneSnoToMinimapBitmap[scene.Sno] = gparam_;
 		}
 		sceneSnoToLastAccessTicks[scene.Sno] = CoreCollector.CurrentRealTimeTicks;
@@ -142,7 +142,7 @@ internal static class TextureManager
 	public static void CleanupCaches(long maxAgeTicks)
 	{
 		List<uint> list = [];
-		foreach (KeyValuePair<uint, SharpDX.Direct2D1.Bitmap> item in (IEnumerable<KeyValuePair<uint, SharpDX.Direct2D1.Bitmap>>)sceneSnoToMinimapBitmap) {
+		foreach (KeyValuePair<uint, Vortice.Direct2D1.ID2D1Bitmap> item in (IEnumerable<KeyValuePair<uint, Vortice.Direct2D1.ID2D1Bitmap>>)sceneSnoToMinimapBitmap) {
 			long num = sceneSnoToLastAccessTicks[item.Key];
 			if (maxAgeTicks == -1 || maxAgeTicks - num > 200000000) {
 				item.Value.Dispose();

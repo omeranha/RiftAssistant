@@ -2,9 +2,11 @@
 #nullable disable warnings
 using System;
 using System.Collections.Generic;
-using SharpDX;
-using SharpDX.Direct2D1;
-using SharpDX.DirectWrite;
+using System.Numerics;
+using Vortice;
+using Vortice.Direct2D1;
+using Vortice.DirectWrite;
+using Vortice.Mathematics;
 
 namespace RiftAssistant.Rendering;
 
@@ -13,14 +15,14 @@ public class RenderFont : ITransparent, IFont, IDisposable
 	internal class TextLayoutCacheEntry(RenderFont font, string? text)
 	{
 		public readonly RenderFont Font = font;
-		public TextLayout Layout = new(Overlay.Instance.directWriteFactory, text, font.GetTextFormat(), font.MaxWidth, font.MaxHeight);
+		public TextLayout Layout = new(Overlay.Instance.directWriteFactory.CreateTextLayout(text ?? "", font.GetTextFormat(), font.MaxWidth, font.MaxHeight));
 		public long LastAccessTicks;
 	}
 
-	private readonly Lazy<SolidColorBrush> brush;
-	private Lazy<SolidColorBrush> shadowBrush;
+	private readonly Lazy<ID2D1SolidColorBrush> brush;
+	private Lazy<ID2D1SolidColorBrush> shadowBrush;
 
-	public TextFormat TextFormat { get; private set; }
+	internal IDWriteTextFormat TextFormat { get; private set; }
 
 	public float baseFontSize;
 
@@ -78,12 +80,12 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		baseFontSize = fontSize;
 		float scaledSize = GetScaledFontSize();
 		Alignment = alignment;
-		RecreateTextFormat(fontFamily, isBold ? FontWeight.Bold : FontWeight.Normal, isItalic ? SharpDX.DirectWrite.FontStyle.Italic : SharpDX.DirectWrite.FontStyle.Normal, scaledSize, wordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap);
+		RecreateTextFormat(fontFamily, isBold ? FontWeight.Bold : FontWeight.Normal, isItalic ? Vortice.DirectWrite.FontStyle.Italic : Vortice.DirectWrite.FontStyle.Normal, scaledSize, wordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap);
 
 		var dxColor = new Color4(red / 255f, green / 255f, blue / 255f, alpha / 255f);
-		brush = new Lazy<SolidColorBrush>(() => new SolidColorBrush(Overlay.Instance.renderTarget, dxColor));
+		brush = new Lazy<ID2D1SolidColorBrush>(() => Overlay.Instance.renderTarget.CreateSolidColorBrush(dxColor));
 		if (enableShadow) {
-			shadowBrush = new Lazy<SolidColorBrush>(() => new SolidColorBrush(Overlay.Instance.renderTarget, new Color4(0f, 0f, 0f, 32f / 51f)));
+			shadowBrush = new Lazy<ID2D1SolidColorBrush>(() => Overlay.Instance.renderTarget.CreateSolidColorBrush(new Color4(0f, 0f, 0f, 32f / 51f)));
 		}
 	}
 
@@ -101,7 +103,7 @@ public class RenderFont : ITransparent, IFont, IDisposable
 
 	public void SetShadowBrush(int alpha, int red, int green, int blue, bool heavy = false)
 	{
-		shadowBrush = new Lazy<SolidColorBrush>(() => new SolidColorBrush(Overlay.Instance.renderTarget, new Color4(red / 255f, green / 255f, blue / 255f, alpha / 255f)));
+		shadowBrush = new Lazy<ID2D1SolidColorBrush>(() => Overlay.Instance.renderTarget.CreateSolidColorBrush(new Color4(red / 255f, green / 255f, blue / 255f, alpha / 255f)));
 		HeavyShadow = heavy;
 	}
 
@@ -111,13 +113,13 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		return Math.Max(num, 6f);
 	}
 
-	private TextFormat? GetTextFormat()
+	private IDWriteTextFormat? GetTextFormat()
 	{
 		float scaledSize = GetScaledFontSize();
 		if (TextFormat == null || TextFormat.FontSize != scaledSize) {
 			var familyName = TextFormat?.FontFamilyName ?? "Arial";
 			var weight = TextFormat?.FontWeight ?? FontWeight.Normal;
-			var style = TextFormat?.FontStyle ?? SharpDX.DirectWrite.FontStyle.Normal;
+			var style = TextFormat?.FontStyle ?? Vortice.DirectWrite.FontStyle.Normal;
 			var wrapping = TextFormat?.WordWrapping ?? (WordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap);
 
 			RecreateTextFormat(familyName, weight, style, scaledSize, wrapping);
@@ -125,10 +127,10 @@ public class RenderFont : ITransparent, IFont, IDisposable
 		return TextFormat;
 	}
 
-	private void RecreateTextFormat(string familyName, FontWeight weight, SharpDX.DirectWrite.FontStyle style, float fontSize, WordWrapping wrapping)
+	private void RecreateTextFormat(string familyName, FontWeight weight, Vortice.DirectWrite.FontStyle style, float fontSize, WordWrapping wrapping)
 	{
 		TextFormat?.Dispose();
-		TextFormat = new TextFormat(Overlay.Instance.directWriteFactory, familyName, weight, style, fontSize);
+		TextFormat = Overlay.Instance.directWriteFactory.CreateTextFormat(familyName, weight, style, fontSize);
 		if (TextFormat.WordWrapping != wrapping) {
 			TextFormat.WordWrapping = wrapping;
 		}
@@ -156,8 +158,6 @@ public class RenderFont : ITransparent, IFont, IDisposable
 
 	public TextLayout RetrieveTextLayout(string? text, bool useCache = true)
 	{
-		WordWrapping expectedWrapping = WordWrap ? WordWrapping.Wrap : WordWrapping.NoWrap;
-
 		if (useCache) {
 			if (text != null && TextCache.TryGetValue(text, out var list) && list != null) {
 				for (int i = 0; i < list.Count; i++) {
@@ -184,16 +184,12 @@ public class RenderFont : ITransparent, IFont, IDisposable
 			list.Add(entry);
 			entry.LastAccessTicks = CoreCollector.CurrentRealTimeTicks;
 
-			if (entry.Layout.WordWrapping != expectedWrapping) {
-				entry.Layout.WordWrapping = expectedWrapping;
-			}
+			entry.Layout.SetWordWrap(WordWrap);
 			return entry.Layout;
 		}
 
-		var textLayout = new TextLayout(Overlay.Instance.directWriteFactory, text, GetTextFormat(), MaxWidth, MaxHeight);
-		if (textLayout.WordWrapping != expectedWrapping) {
-			textLayout.WordWrapping = expectedWrapping;
-		}
+		var textLayout = new TextLayout(Overlay.Instance.directWriteFactory.CreateTextLayout(text ?? "", GetTextFormat(), MaxWidth, MaxHeight));
+		textLayout.SetWordWrap(WordWrap);
 		return textLayout;
 	}
 
@@ -208,34 +204,34 @@ public class RenderFont : ITransparent, IFont, IDisposable
 			TextLayout textLayout = GetTextLayout(text);
 			if (shadowBrush != null) {
 				if (HeavyShadow) {
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y - 1f), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y + 1f), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y - 1f), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y - 1f), textLayout, shadowBrush.Value);
-					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y + 1f), textLayout, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y - 1f), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y + 1f), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y - 1f), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y - 1f), textLayout.Native, shadowBrush.Value);
+					Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y + 1f), textLayout.Native, shadowBrush.Value);
 				}
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y + 1f), textLayout, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y + 1f), textLayout.Native, shadowBrush.Value);
 			}
-			Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y), textLayout, brush.Value);
+			Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y), textLayout.Native, brush.Value);
 			return;
 		}
 
-		TextFormat? textFormat = GetTextFormat();
+		var textFormat = GetTextFormat();
 		if (shadowBrush != null) {
 			if (HeavyShadow) {
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x - 1f, y, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x + 1f, y, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x, y - 1f, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x, y + 1f, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x - 1f, y - 1f, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x + 1f, y - 1f, 2000f, 50f), shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x - 1f, y + 1f, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x - 1f, y, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x + 1f, y, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x, y - 1f, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x, y + 1f, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x - 1f, y - 1f, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x + 1f, y - 1f, 2000f, 50f), shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x - 1f, y + 1f, 2000f, 50f), shadowBrush.Value);
 			}
-			Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x + 1f, y + 1f, 2000f, 50f), shadowBrush.Value);
+			Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x + 1f, y + 1f, 2000f, 50f), shadowBrush.Value);
 		}
-		Overlay.Instance.renderTarget.DrawText(text, textFormat, new SharpDX.RectangleF(x, y, 2000f, 50f), brush.Value);
+		Overlay.Instance.renderTarget.DrawText(text, textFormat, new Rect(x, y, 2000f, 50f), brush.Value);
 	}
 
 	public void DrawText(TextLayout textLayout, ScreenCoordinate coordinate)
@@ -247,17 +243,17 @@ public class RenderFont : ITransparent, IFont, IDisposable
 	{
 		if (shadowBrush != null) {
 			if (HeavyShadow) {
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y - 1f), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y + 1f), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y - 1f), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y - 1f), textLayout, shadowBrush.Value);
-				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y + 1f), textLayout, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y - 1f), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y + 1f), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y - 1f), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y - 1f), textLayout.Native, shadowBrush.Value);
+				Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x - 1f, y + 1f), textLayout.Native, shadowBrush.Value);
 			}
-			Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y + 1f), textLayout, shadowBrush.Value);
+			Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x + 1f, y + 1f), textLayout.Native, shadowBrush.Value);
 		}
-		Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y), textLayout, brush.Value);
+		Overlay.Instance.renderTarget.DrawTextLayout(new Vector2(x, y), textLayout.Native, brush.Value);
 	}
 
 	internal static void CleanupCache(bool forceClearAll)

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using SharpDX;
-using SharpDX.Direct2D1;
-using SharpDX.Mathematics.Interop;
+using RectangleF = System.Drawing.RectangleF;
+using Vortice;
+using Vortice.Direct2D1;
 
 namespace RiftAssistant.Rendering;
 
@@ -181,7 +181,7 @@ internal abstract class MenuWindow
 		var target = Overlay.Instance.renderTarget;
 		if (target == null) return;
 		var viewport = new RectangleF(x + ContentLeft, y + viewportTop, contentWidth, viewportHeight);
-		target.PushAxisAlignedClip(new RawRectangleF(viewport.Left, viewport.Top, viewport.Right, viewport.Bottom), AntialiasMode.Aliased);
+		target.PushAxisAlignedClip(new RawRectF(viewport.Left, viewport.Top, viewport.Right, viewport.Bottom), AntialiasMode.Aliased);
 		try {
 			foreach (var row in scrollRows) {
 				float top = row.Bounds.Top - scroll;

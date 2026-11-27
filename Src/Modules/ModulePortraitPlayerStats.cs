@@ -1,5 +1,4 @@
 using System;
-using SharpDX.DirectWrite;
 
 namespace RiftAssistant.Modules;
 

@@ -107,7 +107,9 @@ Every item is re-evaluated when a filter changes and when the plugins are reload
 
 ## Stat trackers
 
-`Assistant.Tracker` (`Session`, `CurrentAccountToday`, ...) and `Assistant.Game` (`CurrentHeroToday`, `CurrentHeroTotalOnCurrentDifficulty`, ...) return `IStatTracker`, as in the original API. The interface is read-only: counters, times, and the per-hour and per-second rates. Plugins cannot change, reset or save a tracker, and the tracker class itself is internal. The values are stored in `stat_tracker/` and the "today" trackers start fresh at midnight.
+`Assistant.Tracker` (`Session`, `CurrentAccountToday`, ...) and `Assistant.Game` (`CurrentHeroToday`, `CurrentHeroTotalOnCurrentDifficulty`, ...) return `IStatTracker`, as in the original API. The interface is read-only: counters, times, and the per-hour and per-second rates. Plugins cannot change, reset or save a tracker, and the tracker class itself is internal.
+
+The graphics library (Vortice.Windows) is not part of the plugin API. The overlay is drawn through `IBrush`, `IFont` and `Texture`, and the few graphics types plugins need are listed in the table above. The values are stored in `stat_tracker/` and the "today" trackers start fresh at midnight.
 
 ## Differences from the original API
 
@@ -123,6 +125,11 @@ Every item is re-evaluated when a filter changes and when the plugins are reload
 | `Assistant.TextLog`, `Assistant.Time` | `Logger` (global) and `DateTime` |
 | `Assistant.Render.CaptureScreenToFile(folder, name)` | `Assistant.Render.ScreenshotToFile(name)` |
 | `IPlugin.Load(IController)` | `IPlugin.Load()`; `BasePlugin` forwards to `Load(Controller)` |
+| `SharpDX.RectangleF`, `SharpDX.Vector2` | `System.Drawing.RectangleF`, `System.Numerics.Vector2`. `RectangleF` has no `Center`, use `X + Width / 2` and `Y + Height / 2` |
+| `SharpDX.Direct2D1.DashStyle`, `CapStyle`, `FigureBegin`, `FigureEnd` | The enums of the same names in `RiftAssistant.Rendering`, which need no `using` |
+| `IBrush.StrokeStyle` | `IBrush.DashStyle` |
+| Direct2D `PathGeometry` and its sink | `RiftAssistant.Rendering.PathGeometry` and `GeometrySink`, with `BeginFigure`, `AddLine`, `EndFigure` and `Close` |
+| DirectWrite `TextLayout` | `RiftAssistant.Rendering.TextLayout`, with `Metrics.Width` and `Metrics.Height`; dispose it only when it comes from `GetTextLayoutManualDispose` |
 | `BasePlugin.ValueToString` implementation in plugins | Delegates to `Formatting.ValueToString` |
 
 ## Porting an original plugin
@@ -139,3 +146,5 @@ All plugin sources from TurboHUD 1.4.3.0 (`Default` and `Enhanced`) compile agai
 ## Public API surface
 
 Plugins are compiled against the public types of the application assembly. Only types a plugin can reach (the game model, the SNO data types, enums, the controllers and the interfaces in `Plugins`) are public; everything else is internal.
+
+The graphics library (Vortice.Windows) is not part of the plugin API. The overlay is drawn through `IBrush`, `IFont` and `Texture`, and the few graphics types plugins need are listed in the table above.

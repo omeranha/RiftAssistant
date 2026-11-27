@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using SharpDX;
-using SharpDX.DirectWrite;
+using RectangleF = System.Drawing.RectangleF;
 
 namespace RiftAssistant.Modules;
 
