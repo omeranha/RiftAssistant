@@ -27,7 +27,7 @@ public static class Core
 
 	internal static SettingsButton SettingsButton { get; private set; }
 
-	public static PluginListMenu PluginListMenu { get; set; }
+	internal static PluginListMenu PluginListMenu => SettingsMenu.PluginList;
 
 	internal static PluginHandler PluginHandler { get; private set; }
 
@@ -76,13 +76,11 @@ public static class Core
 		Overlay.Instance.InitializeModulesFromConfig(Settings);
 
 		SettingsMenu = new();
-		SettingsMenuOptions.Register(SettingsMenu);
 		SettingsButton = new SettingsButton();
 		PluginHandler = new PluginHandler();
 		PluginHandler.LoadPlugins();
 		if (shutdown.IsCancellationRequested) return;
 
-		PluginListMenu = new PluginListMenu();
 		PluginListMenu.Reload();
 
 		// The handlers use the plugin host, menu and overlay, so they must not run before those exist.

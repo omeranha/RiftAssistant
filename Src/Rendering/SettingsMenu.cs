@@ -1,203 +1,202 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using SharpDX;
 
 namespace RiftAssistant.Rendering;
 
+internal sealed class PluginSection(string name, Func<IReadOnlyList<IUIComponent>> components)
+{
+	public string Name { get; } = name;
+
+	public IReadOnlyList<IUIComponent> Components => components();
+}
+
 public class SettingsMenu
 {
-	private bool showMenu;
-	private readonly List<IMenuOption> builtInOptions = [];
-	private readonly SettingsHeading pluginsHeading = new("Plugins settings");
+	public const int X = 100;
+
+	private readonly Lock pluginGate = new();
+	private readonly SettingsWindow window;
+	private readonly MenuWindow[] sideWindows;
+	private volatile PluginSection[] pluginSections = [];
+
+	internal SettingsMenu()
+	{
+		ItemFilterMenu = new ItemFilterMenu();
+		PluginList = new PluginListMenu();
+		sideWindows = [ItemFilterMenu, PluginList];
+		window = new SettingsWindow(this, SettingsMenuOptions.CreatePages());
+	}
 
 	public bool ShowMenu
 	{
-		get => showMenu;
-		set {
-			showMenu = value;
-			if (!value) KeyboardCapture.End();
-		}
+		get => window.Visible;
+		set => window.Visible = value;
 	}
 
-	private readonly RenderBrush background = new(200, 0, 0, 0, 0f);
+	internal ItemFilterMenu ItemFilterMenu { get; }
 
-	private bool layoutNeedsUpdate = true;
+	internal PluginListMenu PluginList { get; }
 
-	public int Width { get; private set; } = 300;
-	public int Height { get; private set; } = 100;
-
-	public readonly int X = 100;
-	public readonly int Y = 150;
-
-	public readonly RenderFont titleFont = new(255, 255, 255, 255, "Arial", false, false, 12f, Alignment.Left, false, false);
-	public readonly RenderFont optionsNameFont = new(255, 255, 255, 255, "Arial", false, false, 9f, Alignment.Left, false, false);
-	public readonly RenderFont defaultFont = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Left, false, false);
-
-	public List<IMenuOption> MenuOptions = [];
-
-	private MenuButton closeButton;
-	private MenuButton showPluginsButton;
-	private MenuButton reloadPluginsButton;
-
-	private const int ROW_PADDING = 15;
-
-	public SettingsMenu()
-	{
-		closeButton = new MenuButton("X") {
-			OnClick = () => ShowMenu = false
-		};
-
-		showPluginsButton = new MenuButton("Show Plugins") {
-			OnClick = () => Core.PluginListMenu.ShowPluginList = !Core.PluginListMenu.ShowPluginList
-		};
-
-		reloadPluginsButton = new MenuButton("Reload Plugins") {
-			OnClick = () => {
-				Core.PluginHandler.LoadPlugins(true);
-				Core.PluginListMenu.Reload();
-			}
-		};
-	}
+	internal PluginSection[] PluginSections => pluginSections;
 
 	public void AddOption(IMenuOption option)
 	{
-		MenuOptions.Add(option);
-		layoutNeedsUpdate = true;
+		AddPluginSection(new PluginSection(option.Name, option.GetComponents));
 	}
 
 	public void AddSection(string name, IEnumerable<IUIComponent> components)
 	{
-		SettingsMenuOptions.AddPluginSection(name, components);
+		var list = components.ToArray();
+		AddPluginSection(new PluginSection(name, () => list));
 	}
 
-	internal void AddBuiltInOption(IMenuOption option)
+	internal void ClearPluginSections()
 	{
-		builtInOptions.Add(option);
-		layoutNeedsUpdate = true;
-	}
-
-	internal void InvalidateLayout()
-	{
-		layoutNeedsUpdate = true;
-	}
-
-	private IEnumerable<IMenuOption> AllOptions => MenuOptions.Count > 0 ? [.. builtInOptions, pluginsHeading, .. MenuOptions] : [.. builtInOptions];
-
-	public void RecalculateLayout()
-	{
-		if (!layoutNeedsUpdate) return;
-		layoutNeedsUpdate = false;
-
-		int currentYOffset = 85;
-		int maxWidth = 300;
-		foreach (var option in AllOptions) {
-			int currentXOffset = 10;
-			bool compact = option is ICompactMenuOption;
-
-			currentYOffset += compact ? 0 : ROW_PADDING;
-
-			foreach (var component in option.GetComponents()) {
-				component.Bounds = new RectangleF(currentXOffset, currentYOffset, component.Bounds.Width,component.Bounds.Height);
-
-				maxWidth = (int)Math.Max(maxWidth, currentXOffset + component.Bounds.Width + 20);
-				currentYOffset += (int)(component.Bounds.Height + 5);
-			}
-
-			currentYOffset += compact ? 2 : 15;
+		lock (pluginGate) {
+			pluginSections = [];
 		}
 
-		Width = maxWidth;
-		Height = currentYOffset + 10;
+		window.Refresh();
 	}
 
-	public bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
+	internal void ToggleSideWindow(MenuWindow side)
+	{
+		bool open = !side.Visible;
+		foreach (var other in sideWindows) {
+			other.Visible = false;
+		}
+
+		side.Visible = open;
+	}
+
+	internal bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
+	{
+		if (!ShowMenu) return false;
+		if (!isMouseClicked) return false;
+
+		KeyboardCapture.End();
+		if (window.HandleInput(mouseX, mouseY, true)) return true;
+
+		foreach (var side in sideWindows) {
+			if (side.HandleInput(mouseX, mouseY, true)) return true;
+		}
+
+		return false;
+	}
+
+	internal bool HandleWheel(int mouseX, int mouseY, int delta)
 	{
 		if (!ShowMenu) return false;
 
-		RecalculateLayout();
-		bool inputHandled = false;
-
-		if ((mouseX >= X && mouseX <= X + Width && mouseY >= Y && mouseY <= Y + Height) || (Core.PluginListMenu.ShowPluginList && Core.PluginListMenu.pluginMenuBackgroundRect.Contains(mouseX, mouseY))) {
-			inputHandled = true;
-		}
-
-		if (isMouseClicked) {
-			KeyboardCapture.End();
-
-			float closeX = X + Width - closeButton.Bounds.Width - 5;
-			float closeY = Y + 5;
-			if (mouseX >= closeX && mouseX <= closeX + closeButton.Bounds.Width &&
-				mouseY >= closeY && mouseY <= closeY + closeButton.Bounds.Height) {
-				return closeButton.HandleInput(mouseX, mouseY, isMouseClicked);
-			}
-
-			float showPluginsX = X + Width - showPluginsButton.Bounds.Width - 5;
-			float showPluginsY = Y + 25;
-			if (mouseX >= showPluginsX && mouseX <= showPluginsX + showPluginsButton.Bounds.Width &&
-				mouseY >= showPluginsY && mouseY <= showPluginsY + showPluginsButton.Bounds.Height) {
-				return showPluginsButton.HandleInput(mouseX, mouseY, isMouseClicked);
-			}
-
-			float reloadPluginsX = X + Width - reloadPluginsButton.Bounds.Width - 5;
-			float reloadPluginsY = Y + 45;
-			if (mouseX >= reloadPluginsX && mouseX <= reloadPluginsX + reloadPluginsButton.Bounds.Width &&
-				mouseY >= reloadPluginsY && mouseY <= reloadPluginsY + reloadPluginsButton.Bounds.Height) {
-				return reloadPluginsButton.HandleInput(mouseX, mouseY, isMouseClicked);
-			}
-
-			if (Core.PluginListMenu.HandleInput(mouseX, mouseY, isMouseClicked)) return true;
-
-			foreach (var option in AllOptions) {
-				foreach (var component in option.GetComponents()) {
-
-					float worldX = X + component.Bounds.Left;
-					float worldY = Y + component.Bounds.Top;
-					if (mouseX >= worldX && mouseX <= worldX + component.Bounds.Width &&
-						mouseY >= worldY && mouseY <= worldY + component.Bounds.Height) {
-						if (component.HandleInput(mouseX, mouseY, isMouseClicked)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		return inputHandled && isMouseClicked;
+		return window.HandleWheel(mouseX, mouseY, delta) || sideWindows.Any(side => side.HandleWheel(mouseX, mouseY, delta));
 	}
 
-	public void Draw()
+	internal void Draw()
 	{
-		if (!ShowMenu) return;
+		if (!ShowMenu) {
+			foreach (var side in sideWindows) {
+				side.Visible = false;
+			}
+
+			return;
+		}
 
 		if (CoreCollector.IsLoading) {
 			ShowMenu = false;
+			return;
 		}
 
-		RecalculateLayout();
-		background.DrawRectangle(new RectangleF(X, Y, Width, Height));
+		int windowHeight = GameWindowManager.Window.Size.Height;
+		int y = windowHeight > 0 ? Math.Clamp(windowHeight - window.Height - 10, 10, 150) : 150;
+		window.Draw(X, y);
+		foreach (var side in sideWindows) {
+			side.Draw(X + window.Width + 10, y);
+		}
 
-		showPluginsButton.Label = Core.PluginListMenu.ShowPluginList ? "Hide Plugins" : "Show Plugins";
-		closeButton.Draw((int)(X + Width - closeButton.Bounds.Width - 5), Y + 5);
-		showPluginsButton.Draw((int)(X + Width - showPluginsButton.Bounds.Width - 5), Y + 30);
-		reloadPluginsButton.Draw((int)(X + Width - reloadPluginsButton.Bounds.Width - 5), Y + 55);
-
-		titleFont.DrawText("Settings", X + 10, Y + 10);
 		KeyboardCapture.EndIfStale();
-		foreach (var option in AllOptions) {
-			var components = option.GetComponents();
-			if (components.Count > 0 && option is not ICompactMenuOption) {
-				float categoryY = Y + components[0].Bounds.Top - ROW_PADDING;
-				defaultFont.DrawText(option.Name, X + 10, categoryY);
-			}
+	}
 
-			foreach (var comp in components) {
-				comp.Draw(X, Y);
-			}
+	private void AddPluginSection(PluginSection section)
+	{
+		lock (pluginGate) {
+			pluginSections = [.. pluginSections, section];
 		}
 
-		if (Core.PluginListMenu.ShowPluginList) {
-			Core.PluginListMenu.DrawPluginList(X + Width + 10, Y);
+		window.Refresh();
+	}
+}
+
+internal sealed class SettingsWindow : MenuWindow
+{
+	private readonly SettingsMenu owner;
+	private readonly IReadOnlyList<SettingsPage> pages;
+
+	private int pageIndex;
+	private PluginSection? expandedSection;
+
+	public SettingsWindow(SettingsMenu owner, IReadOnlyList<SettingsPage> pages) : base(390, 140, 380, 380)
+	{
+		this.owner = owner;
+		this.pages = pages;
+	}
+
+	protected override string Title => "Settings";
+
+	protected override string Subtitle => pageIndex < pages.Count ? pages[pageIndex].Name : "Plugin settings";
+
+	public void Refresh()
+	{
+		Invalidate();
+	}
+
+	protected override void BuildSidebar(List<IUIComponent> rows)
+	{
+		for (int i = 0; i < pages.Count; i++) {
+			int index = i;
+			rows.Add(new NavRow(pages[i].Name, pages[i].Accent, () => pageIndex == index, () => SelectPage(index)));
 		}
+
+		rows.Add(new NavRow("Plugin settings", MenuColor.Positive, () => pageIndex == pages.Count, () => SelectPage(pages.Count)));
+		rows.Add(new MenuHeading("Menus", 22));
+		rows.Add(new NavRow("Item filter", ItemFilterPalette.Legendary, () => owner.ItemFilterMenu.Visible, () => owner.ToggleSideWindow(owner.ItemFilterMenu), ">"));
+		rows.Add(new NavRow("Plugins", new MenuColor(240, 120, 200), () => owner.PluginList.Visible, () => owner.ToggleSideWindow(owner.PluginList), ">"));
+	}
+
+	protected override void BuildContent(List<IUIComponent> rows)
+	{
+		if (pageIndex < pages.Count) {
+			rows.AddRange(pages[pageIndex].Rows);
+			return;
+		}
+
+		var sections = owner.PluginSections;
+		if (sections.Length == 0) {
+			rows.Add(new MenuHint("No plugin has settings."));
+			rows.Add(new MenuHint("A plugin property marked [PluginSetting] shows up here."));
+			return;
+		}
+
+		foreach (var section in sections) {
+			var current = section;
+			rows.Add(new SectionHeaderRow(current.Name, () => current == expandedSection, () => ToggleSection(current), MenuColor.Positive));
+			if (current == expandedSection) rows.AddRange(current.Components);
+		}
+	}
+
+	private void SelectPage(int index)
+	{
+		KeyboardCapture.End();
+		pageIndex = index;
+		ScrollToTop();
+	}
+
+	private void ToggleSection(PluginSection section)
+	{
+		expandedSection = expandedSection == section ? null : section;
+		Invalidate();
 	}
 }
 
@@ -248,74 +247,5 @@ public class MenuCheckbox(string label, bool initialState, int width = 200, int 
 		IsChecked = !IsChecked;
 		OnToggled?.Invoke(IsChecked);
 		return true;
-	}
-}
-
-internal class MenuButton : IUIComponent
-{
-	private readonly int overriddenWidth;
-	private readonly int overriddenHeight;
-	private string label;
-
-	public RectangleF Bounds { get; set; }
-	public Action OnClick { get; set; } = null!;
-
-	public string Label
-	{
-		get => label;
-		set {
-			if (label == value) return;
-
-			label = value;
-			Measure();
-		}
-	}
-
-	private readonly RenderFont font = new(255, 255, 255, 255, "Arial", false, false, 8f, Alignment.Center, false, false);
-	private readonly RenderBrush borderBrush = new(255, 128, 128, 128, 0f);
-	private readonly RenderBrush fillBrush = new(255, 64, 64, 64, 1f);
-
-	public MenuButton(string label, int overriddenWidth = 0, int overriddenHeight = 0)
-	{
-		this.label = label;
-		this.overriddenWidth = overriddenWidth;
-		this.overriddenHeight = overriddenHeight;
-		Measure();
-	}
-
-	private void Measure()
-	{
-		if (overriddenWidth == 0 || overriddenHeight == 0) {
-			var autoLayout = font.GetTextLayout(label);
-			float calculatedWidth = overriddenWidth > 0 ? overriddenWidth : autoLayout.Metrics.Width + 12f;
-			float calculatedHeight = overriddenHeight > 0 ? overriddenHeight : autoLayout.Metrics.Height + 6f;
-
-			Bounds = new RectangleF(0, 0, calculatedWidth, calculatedHeight);
-		} else {
-			Bounds = new RectangleF(0, 0, overriddenWidth, overriddenHeight);
-		}
-	}
-
-	public void Draw(int menuX, int menuY)
-	{
-		float worldX = menuX + Bounds.Left;
-		float worldY = menuY + Bounds.Top;
-
-		fillBrush.DrawRectangle(new RectangleF(worldX, worldY, Bounds.Width, Bounds.Height));
-		borderBrush.DrawRectangle(new RectangleF(worldX, worldY, Bounds.Width, Bounds.Height));
-
-		var layout = font.GetTextLayout(Label);
-		float textX = worldX + (Bounds.Width / 2f) - (layout.Metrics.Width / 2f);
-		float textY = worldY + (Bounds.Height / 2f) - (layout.Metrics.Height / 2f);
-		font.DrawText(layout, textX, textY);
-	}
-
-	public bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
-	{
-		if (isMouseClicked) {
-			OnClick?.Invoke();
-			return true;
-		}
-		return false;
 	}
 }

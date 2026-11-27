@@ -92,8 +92,7 @@ internal class PluginHandler
 		lock (pluginLock) {
 			if (reloading) {
 				Reloading = true;
-				Core.SettingsMenu.MenuOptions.Clear();
-				SettingsMenuOptions.ClearPluginSections();
+				Core.SettingsMenu.ClearPluginSections();
 			}
 
 			UnloadPlugins();

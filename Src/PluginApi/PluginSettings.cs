@@ -12,6 +12,8 @@ public sealed class PluginSettingAttribute(string label) : Attribute
 	public int Max { get; set; } = 100;
 
 	public int Step { get; set; } = 1;
+
+	public string? Group { get; set; }
 }
 
 public interface IPluginSettings

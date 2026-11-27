@@ -1,66 +1,104 @@
-#nullable enable annotations
-#nullable disable warnings
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using SharpDX;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RiftAssistant.Rendering;
 
-public class PluginListMenu()
+internal sealed class PluginListMenu : MenuWindow
 {
+	private static readonly string[] StateLabels = ["All", "On", "Off"];
+
 	private readonly string pluginSettings = Path.Combine(Program.SettingsFolder, "plugins_states.json");
+	private readonly MenuSearchBox searchBox;
 
-	public bool ShowPluginList { get; set; } = false;
+	private volatile PluginEntry[] entries = [];
+	private string query = "";
+	private int stateTab;
+	private int enabledCount = -1;
+	private int reloading;
 
-	private readonly RenderBrush pluginsBackground = new(200, 0, 0, 0, 0f);
+	private sealed record PluginEntry(string Name, string DisplayName, IPlugin Plugin);
 
-	public List<MenuCheckbox> pluginCheckboxes = [];
-
-	public RectangleF pluginMenuBackgroundRect;
-
-	private int x;
-	private int y;
-
-	public void DrawPluginList(int x, int y)
+	public PluginListMenu() : base(360, 0, 0, 400)
 	{
-		if (!ShowPluginList || pluginCheckboxes.Count == 0)
-			return;
-
-		this.x = x;
-		this.y = y;
-		int itemsPerColumn = 20;
-		int itemHeight = 25;
-		int maxColumns = 4;
-		int columnWidth = pluginCheckboxes.Max(x => x.Label.Length * 8);
-		int rowCount = Math.Min(pluginCheckboxes.Count, itemsPerColumn);
-		int columnCount = Math.Min((int)Math.Ceiling(pluginCheckboxes.Count / (float)itemsPerColumn), maxColumns);
-		float backgroundWidth = (columnCount * columnWidth) + 10;
-		float backgroundHeight = (rowCount * itemHeight) + 40;
-		pluginMenuBackgroundRect = new RectangleF(x, y, backgroundWidth, backgroundHeight);
-		pluginsBackground.DrawRectangle(pluginMenuBackgroundRect);
-		for (int i = 0; i < pluginCheckboxes.Count; i++) {
-			int column = i / itemsPerColumn;
-			int row = i % itemsPerColumn;
-			if (column >= maxColumns) break;
-
-			pluginCheckboxes[i].Bounds = new RectangleF(10 + (column * columnWidth), 20 + (row * itemHeight), columnWidth, itemHeight);
-			pluginCheckboxes[i].Draw(x, y);
-		}
+		searchBox = new MenuSearchBox("Search", () => query, value => {
+			query = value;
+			ScrollToTop();
+		});
 	}
 
-	public bool HandleInput(int mouseX, int mouseY, bool isMouseClicked)
-	{
-		if (!ShowPluginList || !isMouseClicked) return false;
+	protected override string Title => "Plugins";
 
-		foreach (var checkbox in pluginCheckboxes) {
-			RectangleF clickRect = checkbox.GetBoxRect(x, y);
-			if (clickRect.Contains(mouseX, mouseY)) return checkbox.HandleInput(mouseX, mouseY, true);
+	protected override string Subtitle => entries.Length == 0 ? "none loaded" : $"{entries.Count(entry => entry.Plugin.Enabled)}/{entries.Length} enabled";
+
+	protected override bool NeedsRebuild => enabledCount != entries.Count(entry => entry.Plugin.Enabled);
+
+	protected override void OnVisibleChanged(bool isVisible)
+	{
+		if (!isVisible) return;
+
+		query = "";
+		stateTab = 0;
+		searchBox.StartEditing();
+	}
+
+	protected override void BuildPinned(List<IUIComponent> rows)
+	{
+		rows.Add(searchBox);
+		rows.Add(new MenuTabRow(StateLabels, () => stateTab, index => {
+			stateTab = index;
+			ScrollToTop();
+		}));
+		rows.Add(new MenuActionButton(() => reloading == 1 ? "Reloading plugins..." : "Reload plugins", ReloadPlugins, MenuColor.Gold));
+	}
+
+	protected override void BuildContent(List<IUIComponent> rows)
+	{
+		var snapshot = entries;
+		enabledCount = snapshot.Count(entry => entry.Plugin.Enabled);
+		var words = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+		bool any = false;
+		foreach (var entry in snapshot) {
+			bool enabled = entry.Plugin.Enabled;
+			if ((stateTab == 1 && !enabled) || (stateTab == 2 && enabled)) continue;
+			if (!words.All(word => entry.DisplayName.Contains(word, StringComparison.OrdinalIgnoreCase) || entry.Name.Contains(word, StringComparison.OrdinalIgnoreCase))) continue;
+
+			var current = entry;
+			rows.Add(new SettingToggleRow(current.DisplayName, () => current.Plugin.Enabled, value => {
+				current.Plugin.Enabled = value;
+				Save();
+			}));
+			any = true;
 		}
 
-		return false;
+		if (!any) rows.Add(new MenuHint(snapshot.Length == 0 ? "No plugins are loaded." : "No plugins match."));
+	}
+
+	public void ReloadPlugins()
+	{
+		if (Interlocked.Exchange(ref reloading, 1) == 1) return;
+
+		Task.Run(() => {
+			try {
+				Core.PluginHandler.LoadPlugins(true);
+				Reload();
+			} catch (Exception ex) {
+				Logger.LogException($"[plugins] reload failed: {ex}");
+			} finally {
+				reloading = 0;
+			}
+		});
+	}
+
+	public void Reload()
+	{
+		entries = [.. Core.PluginHandler.Plugins.Select(plugin => new PluginEntry(plugin.GetType().Name, PluginSettingsBinder.DisplayName(plugin.GetType().Name), plugin)).OrderBy(entry => entry.DisplayName, StringComparer.OrdinalIgnoreCase)];
+		LoadEnabledPlugins();
+		Invalidate();
 	}
 
 	public void Save()
@@ -71,9 +109,10 @@ public class PluginListMenu()
 			using (FileStream fs = File.Create(temporaryPath))
 			using (var writer = new Utf8JsonWriter(fs, new JsonWriterOptions { Indented = true })) {
 				writer.WriteStartObject();
-				foreach (var checkbox in pluginCheckboxes) {
-					writer.WriteBoolean(checkbox.Label, checkbox.IsChecked);
+				foreach (var entry in entries) {
+					writer.WriteBoolean(entry.Name, entry.Plugin.Enabled);
 				}
+
 				writer.WriteEndObject();
 			}
 
@@ -83,35 +122,17 @@ public class PluginListMenu()
 		}
 	}
 
-	public void LoadEnabledPlugins()
+	private void LoadEnabledPlugins()
 	{
 		if (!File.Exists(pluginSettings)) return;
 
 		try {
 			using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(pluginSettings));
-			foreach (var checkbox in pluginCheckboxes) {
-				if (!doc.RootElement.TryGetProperty(checkbox.Label, out var property) || property.ValueKind is not (JsonValueKind.True or JsonValueKind.False)) continue;
-
-				checkbox.IsChecked = property.GetBoolean();
-				var plugin = Core.PluginHandler.Plugins.Find(p => p.GetType().Name == checkbox.Label);
-				if (plugin != null) plugin.Enabled = checkbox.IsChecked;
+			foreach (var entry in entries) {
+				if (doc.RootElement.TryGetProperty(entry.Name, out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False) entry.Plugin.Enabled = property.GetBoolean();
 			}
 		} catch (Exception ex) when (ex is JsonException or IOException or UnauthorizedAccessException) {
 			Logger.LogException($"[plugins] could not read {Path.GetFileName(pluginSettings)}, the plugins keep their default state: {ex.Message}");
 		}
-	}
-
-	public void Reload()
-	{
-		pluginCheckboxes.Clear();
-		foreach (var plugin in Core.PluginHandler.Plugins) {
-			pluginCheckboxes.Add(new MenuCheckbox(plugin.GetType().Name, plugin.Enabled) {
-				OnToggled = (isChecked) => {
-					plugin.Enabled = isChecked;
-					Save();
-				}
-			});
-		}
-		LoadEnabledPlugins();
 	}
 }

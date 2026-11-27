@@ -27,10 +27,7 @@ internal static class TrayIconManager
 	{
 		var menu = new ContextMenuStrip();
 
-		menu.Items.Add("Reload Plugins", null, (_, _) => {
-			Core.PluginHandler.LoadPlugins(true);
-			Core.PluginListMenu.Reload();
-		});
+		menu.Items.Add("Reload Plugins", null, (_, _) => Core.PluginListMenu.ReloadPlugins());
 
 		menu.Items.Add("Exit", null, (_, _) => {
 			trayIcon.Visible = false;

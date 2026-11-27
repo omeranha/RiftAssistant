@@ -520,6 +520,7 @@ internal class Overlay
 				}
 				lobbyHeroesModule?.Update();
 				ModuleStatTracker?.Draw();
+				MenuStyle.BeginFrame();
 				Core.SettingsButton.Draw();
 				Core.SettingsMenu.Draw();
 				cursorHintModule?.Draw();
