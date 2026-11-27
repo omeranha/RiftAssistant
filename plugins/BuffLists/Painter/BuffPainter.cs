@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
-using SharpDX;
-using SharpDX.Direct2D1;
+using System.Numerics;
 
 namespace Plugins.Default;
 
@@ -136,13 +136,14 @@ public class BuffPainter : ITransparentCollection, ITransparent
 			var startAngle = 0;
 			TimeLeftClockBrush.Opacity = 1 - (float)(0.3f / (timeLeft + elapsed) * elapsed);
 			var rad = rect.Width * 0.45f;
+			var center = new Vector2(rect.X + rect.Width / 2f, rect.Y + rect.Height / 2f);
 			using (var pg = Assistant.Render.CreateGeometry()) {
 				using (var gs = pg.Open()) {
-					gs.BeginFigure(rect.Center, FigureBegin.Filled);
+					gs.BeginFigure(center, FigureBegin.Filled);
 					for (var angle = startAngle; angle <= endAngle; angle++) {
 						var mx = rad * (float)Math.Cos((angle - 90) * Math.PI / 180.0f);
 						var my = rad * (float)Math.Sin((angle - 90) * Math.PI / 180.0f);
-						var vec = new Vector2(rect.Center.X + mx, rect.Center.Y + my);
+						var vec = new Vector2(center.X + mx, center.Y + my);
 						gs.AddLine(vec);
 					}
 

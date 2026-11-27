@@ -68,7 +68,7 @@ public class GroundLabelDecoratorPainter : BasePlugin, IInGameWorldPainter
 					y = Math.Max(screenBorderPadding, Math.Min(y, groundRect.Bottom - screenBorderPadding - h));
 				}
 
-				var rect = new SharpDX.RectangleF(x + regLabel.Decorator.OffsetX, y + regLabel.Decorator.OffsetY - padding, w, h);
+				var rect = new System.Drawing.RectangleF(x + regLabel.Decorator.OffsetX, y + regLabel.Decorator.OffsetY - padding, w, h);
 
 				regLabel.Decorator.BackgroundTexture1?.Draw(rect, regLabel.Decorator.BackgroundTextureOpacity1);
 

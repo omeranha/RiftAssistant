@@ -18,7 +18,7 @@ public class ExplosiveMonster : BasePlugin, IInGameWorldPainter
 
 		FastMummyDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 255, 50, 50, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 255, 50, 50, 3, DashStyle.Dash),
 				Radius = 5,
 			}
 			);
@@ -26,7 +26,7 @@ public class ExplosiveMonster : BasePlugin, IInGameWorldPainter
 		// timers does not work for grotesque because it has no death actor with creation ticks and the original monster's creation tick is not the same as the time he died
 		GrotesqueDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, DashStyle.Dash),
 				Radius = 20f,
 			}
 			);

@@ -33,7 +33,7 @@ public class StandardMonster : BasePlugin, IInGameWorldPainter
 			}
 			);
 
-		var invisibleGroundBrush = Assistant.Render.CreateBrush(128, 255, 170, 255, 3, SharpDX.Direct2D1.DashStyle.Dash);
+		var invisibleGroundBrush = Assistant.Render.CreateBrush(128, 255, 170, 255, 3, DashStyle.Dash);
 		InvisibleDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
 				Brush = invisibleGroundBrush,

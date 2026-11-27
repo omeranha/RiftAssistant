@@ -24,7 +24,7 @@ public class EliteMonsterSkill : BasePlugin, IInGameWorldPainter
 
 		FrozenBallDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, DashStyle.Dash),
 				Radius = 15.8f,
 			},
 			new GroundLabelDecorator(Assistant) {
@@ -40,13 +40,13 @@ public class EliteMonsterSkill : BasePlugin, IInGameWorldPainter
 			);
 		MoltenDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, DashStyle.Dash),
 				Radius = 13f,
 			}
 			);
 		MoltenExplosionDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, DashStyle.Dash),
 				Radius = 13f,
 			},
 			new GroundLabelDecorator(Assistant) {
@@ -62,7 +62,7 @@ public class EliteMonsterSkill : BasePlugin, IInGameWorldPainter
 			);
 		DesecratorDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(160, 255, 50, 50, 3, DashStyle.Dash),
 				Radius = 8f,
 			}
 			);
@@ -72,31 +72,31 @@ public class EliteMonsterSkill : BasePlugin, IInGameWorldPainter
 				Radius = 16f,
 			},
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, DashStyle.Dash),
 				Radius = 16f,
 			}
 			);
 		PlaguedDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 160, 255, 160, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 160, 255, 160, 3, DashStyle.Dash),
 				Radius = 12f,
 			}
 			);
 		GhomDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 160, 255, 160, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 160, 255, 160, 3, DashStyle.Dash),
 				Radius = 20f,
 			}
 			);
 		ArcaneDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 255, 60, 255, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 255, 60, 255, 3, DashStyle.Dash),
 				Radius = 6f,
 			}
 			);
 		ArcaneSpawnDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 255, 60, 255, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 255, 60, 255, 3, DashStyle.Dash),
 				Radius = 6f,
 			},
 			new GroundLabelDecorator(Assistant) {
@@ -112,7 +112,7 @@ public class EliteMonsterSkill : BasePlugin, IInGameWorldPainter
 			);
 		FrozenPulseDecorator = new WorldDecoratorCollection(
 			new GroundCircleDecorator(Assistant) {
-				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, SharpDX.Direct2D1.DashStyle.Dash),
+				Brush = Assistant.Render.CreateBrush(128, 200, 200, 255, 3, DashStyle.Dash),
 				Radius = 14f,
 			}
 			);

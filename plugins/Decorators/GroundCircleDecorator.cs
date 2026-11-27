@@ -44,7 +44,7 @@ public class GroundCircleDecorator : IWorldDecoratorWithRadius
 		}
 
 		if (HasShadow) {
-			if (Brush.StrokeStyle.DashStyle == SharpDX.Direct2D1.DashStyle.Solid) {
+			if (Brush.DashStyle == DashStyle.Solid) {
 				_shadowBrush.StrokeWidth = Brush.StrokeWidth >= 0 ? Brush.StrokeWidth + 1 : Brush.StrokeWidth - 1;
 				_shadowBrush.DrawWorldEllipse(radius, -1, coord);
 			}

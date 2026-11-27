@@ -49,7 +49,7 @@ public class InventoryMaterialCount : BasePlugin, IInGameTopPainter
 	{
 		var uiInv = Assistant.Inventory.InventoryMainUiElement;
 
-		var rect = new SharpDX.RectangleF(uiInv.Rectangle.Left - 1, barY, uiInv.Rectangle.Width + 2, uiInv.Rectangle.Width * BarHeightRatio);
+		var rect = new System.Drawing.RectangleF(uiInv.Rectangle.Left - 1, barY, uiInv.Rectangle.Width + 2, uiInv.Rectangle.Width * BarHeightRatio);
 		_backgroundBrush.DrawRectangle(rect.X, rect.Y, rect.Width, rect.Height);
 
 		var itemCountList = new long[itemsToDisplay.Length];

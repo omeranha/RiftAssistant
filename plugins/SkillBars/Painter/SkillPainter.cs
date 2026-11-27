@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using SharpDX;
-using System.Diagnostics;
 
 namespace Plugins.Default;
 

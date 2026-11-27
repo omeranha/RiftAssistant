@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using SharpDX;
-using SharpDX.Direct2D1;
+using System.Numerics;
 
 namespace Plugins.Default;
 
