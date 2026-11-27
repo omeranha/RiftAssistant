@@ -463,11 +463,10 @@ internal class ItemCollector
 					case "int":
 					case "str":
 					case "dex":
-						// no specific logic performed for these in the original code, but they were explicitly checked.
+						if (num6 == -1.0 || val2 > num6) {
+							num6 = val2;
+						}
 						break;
-				}
-				if (num6 == -1.0 || val2 > num6) {
-					num6 = val2;
 				}
 			}
 			if (!flag) {
