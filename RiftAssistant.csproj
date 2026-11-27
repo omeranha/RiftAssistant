@@ -24,9 +24,6 @@
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="config\item_filter_default.json" />
-		<None Update="config\**" CopyToOutputDirectory="PreserveNewest" />
-		<EmbeddedResource Include="config\item_filter_default.json" LogicalName="item_filter_default.json" />
 		<Compile Remove="plugins\**" />
 	</ItemGroup>
 	<ItemGroup>

@@ -278,6 +278,7 @@ public static class Core
 	{
 		RunShutdownStep(SettingsManager.Flush);
 		RunShutdownStep(PluginSettingsStore.Flush);
+		RunShutdownStep(ItemFilterStore.Flush);
 		RunShutdownStep(Clear);
 		RunShutdownStep(KeyboardCapture.Stop);
 		RunShutdownStep(MouseBlocker.Stop);
